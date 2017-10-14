@@ -11,11 +11,8 @@ public class GameMediaVO implements Serializable {
 	private static final long serialVersionUID = 4235190591600435986L;
 
 	private Integer gameID;
-
 	private GamesVO gamesVO;
-
 	private Integer mediaID;
-
 	private String mediasName;
 	private String gameVideo;
 	private Blob gamePhoto;
