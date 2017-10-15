@@ -70,17 +70,35 @@ public class SeasonService {
 			map.put("seasonName", sVO.getSeasonName());
 			map.put("seasonBeginDate", sVO.getSeasonBeginDate());
 			map.put("seasonEndDate", sVO.getSeasonEndDate());
-			
+
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			map.put("signUpBegin", (sVO.getSignUpBegin() != null) ? sdf.format(sVO.getSignUpBegin()) : " ");
 			map.put("signUpEnd", (sVO.getSignUpEnd() != null) ? sdf.format(sVO.getSignUpEnd()) : " ");
+
 			list.add((HashMap<String, Object>) map);
 		}
 
 		return list;
 	}
 
-	public SeasonVO findBySeasonID(Integer seasonID) {
-		return dao.getOneByID(seasonID);
+	public Map<String, Object> findBySeasonID(Integer seasonID) {
+
+		// 取得DAO回傳的原始資料
+		SeasonVO sVO = dao.findBySeasonID(seasonID);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map = new HashMap<String, Object>();
+		map.put("seasonID", sVO.getSeasonID());
+		map.put("seasonName", sVO.getSeasonName());
+		map.put("seasonBeginDate", sVO.getSeasonBeginDate());
+		map.put("seasonEndDate", sVO.getSeasonEndDate());
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		map.put("signUpBegin", (sVO.getSignUpBegin() != null) ? sdf.format(sVO.getSignUpBegin()) : " ");
+		map.put("signUpEnd", (sVO.getSignUpEnd() != null) ? sdf.format(sVO.getSignUpEnd()) : " ");
+		map.put("groupsSet", sVO.getGroupsSet());
+		
+		return map;
 	}
 }

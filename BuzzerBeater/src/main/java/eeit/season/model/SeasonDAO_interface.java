@@ -11,5 +11,5 @@ public interface SeasonDAO_interface {
 
 	public Set<SeasonVO> getAll();
 	
-	public SeasonVO getOneByID(Integer seasonID);
+	public SeasonVO findBySeasonID(Integer seasonID);
 }

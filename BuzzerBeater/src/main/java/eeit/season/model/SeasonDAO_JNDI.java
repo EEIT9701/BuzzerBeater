@@ -32,7 +32,7 @@ public class SeasonDAO_JNDI implements SeasonDAO_interface {
 	private static final String GET_ONE_BY_ID = "SELECT seasonID, seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, descriptions FROM season WHERE seasonID=?";
 
 	@Override
-	public SeasonVO getOneByID(Integer SeasonID) {
+	public SeasonVO findBySeasonID(Integer SeasonID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

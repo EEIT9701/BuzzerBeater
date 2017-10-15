@@ -20,7 +20,7 @@
 			<column name="SeasonID" />
 		</many-to-one>
 		
-		<set name="gamesSet" table="Games" lazy="false" cascade="all" inverse="false" order-by="gameID asc">
+		<set name="gamesSet" table="Games" lazy="false" cascade="all" inverse="true" order-by="gameID asc">
 			<key>
 				<column name="GroupID" />
 			</key>

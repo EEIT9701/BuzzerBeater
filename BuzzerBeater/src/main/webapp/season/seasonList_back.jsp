@@ -51,7 +51,7 @@
 			        			<td>
 			        				<form action="<%=request.getContextPath() %>/Season.do" method="post">
 			        					<input type="submit" value="修改">
-			        					<input type="hidden" name="action" value="UPDATE_SEASON">
+			        					<input type="hidden" name="action" value="GET_ONE_TO_UPDATE">
 			        					<input type="hidden" name="seasonID" value="${sVO.seasonID}">
 			        				</form>
 			        			</td>

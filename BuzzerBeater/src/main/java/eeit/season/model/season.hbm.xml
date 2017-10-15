@@ -16,7 +16,7 @@
 		<property name="signUpEnd" column="signUpEnd" />
 		<property name="descriptions" column="descriptions" />
 
-		<set name="groupsSet" table="Groups" lazy="false" cascade="all"  inverse="false"  order-by="groupID asc">			
+		<set name="groupsSet" table="Groups" lazy="false" cascade="all"  inverse="true"  order-by="groupID asc">			
 			<key>
 				<column name="SeasonID" />
 			</key>

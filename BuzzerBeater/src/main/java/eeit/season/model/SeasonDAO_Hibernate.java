@@ -14,7 +14,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 	private static final String GET_ALL_SEASON = "from SeasonVO order by seasonID";
 
 	@Override
-	public SeasonVO getOneByID(Integer seasonID) {
+	public SeasonVO findBySeasonID(Integer seasonID) {
 		SeasonVO sVO = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
@@ -97,7 +97,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 
 		/****************** getOneByID ******************/
 
-		 SeasonVO sVO3 = dao.getOneByID(1001);
+		 SeasonVO sVO3 = dao.findBySeasonID(1001);
 		 Set<GroupsVO> set = sVO3.getGroupsSet();
 		 
 		 for(GroupsVO g:set){

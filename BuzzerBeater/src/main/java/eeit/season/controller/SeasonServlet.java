@@ -38,6 +38,16 @@ public class SeasonServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		System.out.println("action: " + action);
 
+		/************************************************************/
+		/* GET_ALL_SEASON 以JSON格式取得所有賽季						*/
+		/* ADD_SEASON 新增賽季										*/
+		/* UPDATE_SEASON 更新賽季									*/
+		/* GET_ONE_TO_UPDATE 前往更新頁面								*/
+		/* GET_GROUPS 前往該賽季的分組頁面								*/
+		/*                                                          */
+		/************************************************************/
+		
+		
 		// GET_ALL_SEASON ****************************************************
 		if ("GET_ALL_SEASON".equals(action)) {
 
@@ -70,11 +80,12 @@ public class SeasonServlet extends HttpServlet {
 
 			try {
 
+				// 取值以及錯誤處理
 				String seasonName = request.getParameter("seasonName");
 				if (seasonName == null || seasonName.trim().length() == 0) {
 					errorMsgs.add("請輸入賽季名稱");
 				} else if (!seasonName.trim().matches("^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,20}$")) {
-					errorMsgs.add("賽季名稱只能是中、英文字母、數字和  , 且長度必需在2到10之間");
+					errorMsgs.add("賽季名稱只能是中、英文字母、和數字 , 且長度必需在2到10之間");
 				}
 
 				Date seasonBeginDate = null;
@@ -115,6 +126,7 @@ public class SeasonServlet extends HttpServlet {
 
 				String descriptions = request.getParameter("descriptions").trim();
 
+				// 放入VO
 				SeasonVO sVO = new SeasonVO();
 				sVO.setSeasonName(seasonName);
 				sVO.setSeasonBeginDate(seasonBeginDate);
@@ -136,6 +148,7 @@ public class SeasonServlet extends HttpServlet {
 					successView.forward(request, response);
 
 				} else {
+					// 錯誤訊息轉交
 					request.setAttribute("sVO", sVO);
 					RequestDispatcher failureView = request.getRequestDispatcher("/season/addSeason.jsp");
 					failureView.forward(request, response);
@@ -151,19 +164,19 @@ public class SeasonServlet extends HttpServlet {
 			return;
 		}
 
-		// UPDATESEASON ****************************************************
+		// UPDATE_SEASON ****************************************************
 		if ("UPDATE_SEASON".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-
+				// 取值以及錯誤處理
 				String seasonName = request.getParameter("seasonName");
 				if (seasonName == null || seasonName.trim().length() == 0) {
 					errorMsgs.add("請輸入賽季名稱");
 				} else if (!seasonName.trim().matches("^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,20}$")) {
-					errorMsgs.add("賽季名稱只能是中、英文字母、數字和  , 且長度必需在2到10之間");
+					errorMsgs.add("賽季名稱只能是中、英文字母、和數字 , 且長度必需在2到10之間");
 				}
 
 				Date seasonBeginDate = null;
@@ -214,21 +227,23 @@ public class SeasonServlet extends HttpServlet {
 				sVO.setDescriptions(descriptions);
 				sVO.setSeasonID(seasonID);
 
-				if (!errorMsgs.isEmpty()) {
+				if (errorMsgs.isEmpty()) {
+					// 呼叫永續層
+					SeasonService sSvc = new SeasonService();
+					sSvc.updateSeason(seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, seasonID,
+							descriptions);
+
+					// 處理完成，準備轉交
+					RequestDispatcher successView = request.getRequestDispatcher("/season/seasonList_back.jsp");
+					successView.forward(request, response);
+
+				} else {
+
 					request.setAttribute("sVO", sVO);
 					RequestDispatcher failureView = request.getRequestDispatcher("/season/addSeason.jsp");
 					failureView.forward(request, response);
-					return;
+
 				}
-
-				// 呼叫永續層
-				SeasonService sSvc = new SeasonService();
-				sSvc.updateSeason(seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, seasonID,
-						descriptions);
-
-				// 處理完成，準備轉交
-				RequestDispatcher successView = request.getRequestDispatcher("/season/seasonList.jsp");
-				successView.forward(request, response);
 
 				// 其他可能的錯誤處理
 			} catch (Exception e) {
@@ -240,28 +255,47 @@ public class SeasonServlet extends HttpServlet {
 			return;
 		}
 
-		// GETONEFORUPDATE ***********************************************
-		if ("GET_ONE_FOR_UPDATE".equals(action)) {
-			
+		// GET_ONE_TO_UPDATE ***********************************************
+		if ("GET_ONE_TO_UPDATE".equals(action)) {
+			try {
+				Integer seasonID = Integer.parseInt(request.getParameter("seasonID"));
+
+				// 呼叫永續層
+				SeasonService sSvc = new SeasonService();
+				request.setAttribute("seasonVO", sSvc.findBySeasonID(seasonID));
+
+				// 轉交
+				RequestDispatcher successView = request.getRequestDispatcher("/season/updateSeason.jsp");
+				successView.forward(request, response);
+
+				// 其他可能的錯誤處理
+			} catch (Exception e) {
+				RequestDispatcher failureView = request.getRequestDispatcher("/season/seasonList_back.jsp");
+				failureView.forward(request, response);
+			}
 		}
 
 		// DELETE_SEASON ****************************************************
 		if ("DELETE_SEASON".equals(action)) {
+
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
+
 			// 取得Service的實例
 			SeasonService sSvc = new SeasonService();
 
 			try {
+				// 呼叫永續層
 				Integer seasonID = new Integer(request.getParameter("seasonID"));
 				Integer result = sSvc.deleteSeason(seasonID);
 
 				if (result == 0) {
-					errorMsgs.add("");
+					errorMsgs.add("刪除失敗");
 				}
 
 				RequestDispatcher successView = request.getRequestDispatcher("/season/seasonList_back.jsp");
 				successView.forward(request, response);
+
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = request.getRequestDispatcher("/season/seasonList_back.jsp");
@@ -269,13 +303,12 @@ public class SeasonServlet extends HttpServlet {
 			}
 		}
 
-		
 		// GET_GROUPS*********************************************************
 		if ("GET_GROUPS".equals(action)) {
 			Integer seasonID = Integer.parseInt(request.getParameter("seasonID"));
 			SeasonService sSvc = new SeasonService();
 			request.setAttribute("seasonVO", sSvc.findBySeasonID(seasonID));
-			
+
 			RequestDispatcher successView = request.getRequestDispatcher("/groups/groupList.jsp");
 			successView.forward(request, response);
 		}
