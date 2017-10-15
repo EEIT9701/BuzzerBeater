@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="eeit.games.model.GamesVO" table="Games">
+
+		<id name="gameID" column="gameID">
+			<generator class="identity" />
+		</id>
+
+		<property name="locationID" column="locationID" />
+		<property name="teamAID" column="teamAID" />
+		<property name="teamAScore" column="teamAScore" />
+		<property name="teamBID" column="teamBID" />
+		<property name="teamBScore" column="teamBScore" />
+		<property name="winnerID" column="winnerID" />
+		<property name="gameBeginDate" column="gameBeginDate" />
+		<property name="gameEndDate" column="gameEndDate" />
+
+		<many-to-one name="groupsVO" class="eeit.groups.model.GroupsVO" lazy="false">
+			<column name="GroupID" />
+		</many-to-one>
+		
+	</class>
+</hibernate-mapping>
+
