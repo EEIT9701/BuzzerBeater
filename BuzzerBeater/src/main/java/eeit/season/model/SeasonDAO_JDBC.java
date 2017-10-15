@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -261,12 +260,12 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 
 		/****************** insert ******************/
 
-		SeasonVO sVO1 = new SeasonVO();
-		sVO1.setSeasonName("第十六季例行賽");
-		sVO1.setSeasonBeginDate(null);
-		sVO1.setSignUpBegin(Timestamp.valueOf("2017-10-10 18:00:00"));
-		sVO1.setDescriptions("...");
-		dao.insert(sVO1);
+//		SeasonVO sVO1 = new SeasonVO();
+//		sVO1.setSeasonName("第十六季例行賽");
+//		sVO1.setSeasonBeginDate(null);
+//		sVO1.setSignUpBegin(Timestamp.valueOf("2017-10-10 18:00:00"));
+//		sVO1.setDescriptions("...");
+//		dao.insert(sVO1);
 
 		/****************** update ******************/
 
