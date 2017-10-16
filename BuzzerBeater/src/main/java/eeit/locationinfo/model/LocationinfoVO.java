@@ -8,7 +8,7 @@ import java.util.Set;
 import eeit.games.model.GamesVO;
 
 public class LocationinfoVO implements Serializable {
-	private static final long serialVersionUID = -4613477403462010759L;
+	private static final long serialVersionUID = -461347740362010759L;
 
 	private Integer locationID;// PK
 

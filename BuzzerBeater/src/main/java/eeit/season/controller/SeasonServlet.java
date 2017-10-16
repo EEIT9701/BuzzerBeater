@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -60,10 +61,10 @@ public class SeasonServlet extends HttpServlet {
 			SeasonService sSvc = new SeasonService();
 
 			// 取得Service回傳的資料
-			List<HashMap<String, Object>> set = sSvc.getAll();
+			Set<HashMap<String, Object>> seasonList = sSvc.getAll();
 
 			// 轉換為JSON格式
-			String jsonString = JSONValue.toJSONString(set);
+			String jsonString = JSONValue.toJSONString(seasonList);
 
 			// 經由Response送往瀏覽器
 			PrintWriter out = response.getWriter();

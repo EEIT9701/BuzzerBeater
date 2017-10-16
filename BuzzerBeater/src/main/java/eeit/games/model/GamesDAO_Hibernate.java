@@ -79,14 +79,14 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 
 		GamesDAO_Hibernate dao = new GamesDAO_Hibernate();
 		
-		dao.delete(4001);
+//		dao.delete(4001);
 
 		Set<GamesVO> set = dao.getAll();
 		for (GamesVO gvo : set) {
 			System.out.print(gvo.getGameID() + ", ");
 			System.out.print(gvo.getGroupsVO().getGroupID() + ", ");
 			System.out.print(gvo.getGroupsVO().getGroupName() + ", ");
-			System.out.print(gvo.getLocationID() + ", ");
+			System.out.print(gvo.getLocationinfoVO().getLocationName() + ", ");
 			System.out.println();
 		}
 	}

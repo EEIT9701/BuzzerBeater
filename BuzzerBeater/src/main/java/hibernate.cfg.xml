@@ -47,7 +47,6 @@
 		<mapping resource="eeit/groups/model/groups.hbm.xml" />
 		<mapping resource="eeit/locationinfo/model/locationinfo.hbm.xml" />
 		<mapping resource="eeit/personaldata/model/personaldata.hbm.xml" />
-		
 		<mapping resource="eeit/playergroups/model/playergroups.hbm.xml" />
 		<mapping resource="eeit/players/model/players.hbm.xml" />
 		<mapping resource="eeit/season/model/season.hbm.xml" />

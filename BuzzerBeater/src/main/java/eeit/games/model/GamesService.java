@@ -21,7 +21,7 @@ public class GamesService {
 		GamesVO gVO = new GamesVO();
 		
 		gVO.getGroupsVO().setGroupID(groupID);
-		gVO.setLocationID(locationID);
+		gVO.getLocationinfoVO().setLocationID(locationID);
 		gVO.setTeamAID(teamAID);
 		gVO.setTeamAScore(teamAScore);
 		gVO.setTeamBID(teamBID);
@@ -39,7 +39,7 @@ public class GamesService {
 		GamesVO gVO = new GamesVO();
 		
 		gVO.getGroupsVO().setGroupID(groupID);
-		gVO.setLocationID(locationID);
+		gVO.getLocationinfoVO().setLocationID(locationID);
 		gVO.setTeamAID(teamAID);
 		gVO.setTeamAScore(teamAScore);
 		gVO.setTeamBID(teamBID);

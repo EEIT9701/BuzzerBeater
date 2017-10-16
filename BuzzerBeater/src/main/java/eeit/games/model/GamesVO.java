@@ -18,12 +18,14 @@ public class GamesVO implements Serializable {
 	private Integer gameID;// ID
 
 	private GroupsVO groupsVO; // replace groupID
-//	private LocationinfoVO locationinfoVO;// replace loactionID
-	private Integer locationID;
-//	private TeamsVO teamAVO;// replace teamAID
+	private LocationinfoVO locationinfoVO;// replace loactionID
+
+	// private Integer locationID;
+
+	// private TeamsVO teamAVO;// replace teamAID
 	private Integer teamAID;
 	private Integer teamBID;
-//	private TeamsVO teamBVO;// replace teamBID
+	// private TeamsVO teamBVO;// replace teamBID
 
 	private Set<GameMediaVO> gameMediaSet = new LinkedHashSet<GameMediaVO>();
 	private Set<PersonalDataVO> personalDataSet = new LinkedHashSet<PersonalDataVO>();
@@ -46,11 +48,11 @@ public class GamesVO implements Serializable {
 	public void setGroupsVO(GroupsVO groupsVO) {
 		this.groupsVO = groupsVO;
 	}
-	public Integer getLocationID() {
-		return locationID;
+	public LocationinfoVO getLocationinfoVO() {
+		return locationinfoVO;
 	}
-	public void setLocationID(Integer locationID) {
-		this.locationID = locationID;
+	public void setLocationinfoVO(LocationinfoVO locationinfoVO) {
+		this.locationinfoVO = locationinfoVO;
 	}
 	public Integer getTeamAID() {
 		return teamAID;

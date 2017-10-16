@@ -5,7 +5,7 @@
 
 <%
 	SeasonService dao = new SeasonService();
-	Set<HashMap<String,Object>> set = dao.getAll();
+	List<HashMap<String,Object>> set = dao.getAll();
 	pageContext.setAttribute("set", set);
 %>
 
@@ -48,10 +48,19 @@
 			        			<td>${sVO.seasonEndDate}</td>
 			        			<td>${sVO.signUpBegin}</td>
 			        			<td>${sVO.signUpEnd}</td>
+			        			
 			        		</tr>
 			        	</c:forEach>
+			        	<tr>
+			        	<c:forEach var="s" items="${set}">
+			        	<c:forEach var="gset" items="${s.groupsSet}">
+			        			<td>${gset.groupName}</td>
+			        	</c:forEach>
+			        	</c:forEach>
+			        	</tr>
 			        </tbody>
 			    </table>
+			    
 		    </div>
 	    </div>
 	    
