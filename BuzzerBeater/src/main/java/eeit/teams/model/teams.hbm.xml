@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="eeit.teams.model.TeamsVO" table="Teams">
+
+		<id name="teamID" column="teamID">
+			<generator class="identity" />
+		</id>
+
+		<many-to-one name="playersVO" class="eeit.players.model.PlayersVO" lazy="false">
+			<column name="captainID" />
+		</many-to-one>
+
+		<many-to-one name="locationinfoVO" class="eeit.locationinfo.model.LocationinfoVO" lazy="proxy">
+			<column name="locationID" />
+		</many-to-one>
+
+		<property name="captainEmail" column="captainEmail" />
+		<property name="captainPhone" column="captainPhone" />
+		<property name="teamName" column="teamName" />
+		<property name="coachName" column="coachName" />
+		<property name="bossName" column="bossName" />
+		<property name="teamBadge" column="teamBadge" />
+		<property name="totalWin" column="totalWin" />
+		<property name="totalLose" column="totalLose" />
+		<property name="winRate" column="winRate" />
+		<property name="remarks" column="remarks" />
+
+	</class>
+</hibernate-mapping>
+
