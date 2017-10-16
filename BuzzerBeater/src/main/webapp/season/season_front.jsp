@@ -1,17 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="eeit.season.model.*"%>
-<%@ page import="java.util.*"%>
-
-<%
-	SeasonService dao = new SeasonService();
-<<<<<<< HEAD
-	List<HashMap<String,Object>> set = dao.getAll();
-=======
-	Set<HashMap<String,Object>> set = dao.getAll();
->>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
-	pageContext.setAttribute("set", set);
-%>
 
 <!DOCTYPE html>
     <html>
@@ -29,22 +16,29 @@
     <body>
 	    <jsp:include page="/header.jsp" />
 	
-		<div class="container">
-			<div class="col-md-12">
-		        <h2>賽季列表</h2>
-
-		        <table class="table table-bordered" id="seasonList">
-		            <thead>
-			            <tr>
-			                <td>賽季名稱</td>
-			                <td>賽季開始日期</td>
-			                <td>賽季結束日期</td>
-			                <td>報名開始日期</td>
-			                <td>報名結束日期</td>
-			            </tr>
-			        </thead>
-			
-			        <tbody>
+	 <div class="container">
+        <div class="jumbotron">
+            <!--表格(開始)-->
+            <!--****************-->
+            <!-- 第一列(開始) -->
+            <!--****************-->
+            <div class="row">
+                <!--第一列-左邊表格-格式_.col-md-8-->
+                <div class="賽季">
+                                                       賽季
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>賽季名稱</th>
+                                <th>賽季開始時間</th>
+                                <th>賽季結束時間</th>
+                                <th>報名開始時間</th>
+                                <th>報名截止時間</th>
+                                <th>狀態</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
 			        	<c:forEach var="sVO" items="${set}">
 			        		<tr>
 			        			<td><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
@@ -58,9 +52,13 @@
 			    </table>
 		    </div>
 	    </div>
-	    
-	    
+
+                    </table>
+                    <!--</div>-->
+                </div>
 	    <jsp:include page="/footer.jsp" />
+
+
     </body>
 
     </html>

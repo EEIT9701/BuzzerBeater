@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class memberInfoServlet
  */
-@WebServlet("/memberInfoServlet")
-public class memberInfoServlet extends HttpServlet {
+@WebServlet("/MemberInfo.do")
+public class MemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		

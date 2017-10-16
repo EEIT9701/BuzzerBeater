@@ -8,7 +8,11 @@ import java.util.Set;
 import eeit.games.model.GamesVO;
 
 public class LocationinfoVO implements Serializable {
+<<<<<<< HEAD
+	private static final long serialVersionUID = -4613477403462010759L;
+=======
 	private static final long serialVersionUID = -461347740362010759L;
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 
 	private Integer locationID;// PK
 

@@ -79,6 +79,16 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 
 		GamesDAO_Hibernate dao = new GamesDAO_Hibernate();
 		
+<<<<<<< HEAD
+		dao.delete(4001);
+
+		Set<GamesVO> set = dao.getAll();
+		for (GamesVO gvo : set) {
+			System.out.print(gvo.getGameID() + ", ");
+			System.out.print(gvo.getGroupsVO().getGroupID() + ", ");
+			System.out.print(gvo.getGroupsVO().getGroupName() + ", ");
+			System.out.print(gvo.getLocationID() + ", ");
+=======
 //		dao.delete(4001);
 
 		Set<GamesVO> set = dao.getAll();
@@ -87,6 +97,7 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 			System.out.print(gvo.getGroupsVO().getGroupID() + ", ");
 			System.out.print(gvo.getGroupsVO().getGroupName() + ", ");
 			System.out.print(gvo.getLocationinfoVO().getLocationName() + ", ");
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 			System.out.println();
 		}
 	}

@@ -1,19 +1,25 @@
 package eeit.gamemedia.controller;
 
-import java.io.*;
-import java.sql.Blob;
+import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import eeit.gamemedia.model.*;
+import eeit.gamemedia.model.GameMediaService;
+import eeit.gamemedia.model.GameMediaVO;
 
 
 
 
-
+@WebServlet("/GameMedia.do")
 public class GameMediaServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
