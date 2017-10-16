@@ -3,51 +3,15 @@ package eeit.playergroups.model;
 import java.io.Serializable;
 
 import eeit.groups.model.GroupsVO;
+import eeit.players.model.PlayersVO;
 import eeit.season.model.SeasonVO;
 
-
 public class PlayerGroupsVO implements Serializable {
-
 	private static final long serialVersionUID = -310982995736374426L;
 
-
-	private Integer playerGroupsID;
-	
-	private Integer seasonID;
-	private Integer groupID;
-	private Integer playerID;
-
-
-	private SeasonVO seasonVO;
-
-
-	private GroupsVO groupsVO;
-
-	// private PlayerVO playerVO;
-
-	public Integer getSeasonID() {
-		return seasonID;
-	}
-
-	public void setSeasonID(Integer seasonID) {
-		this.seasonID = seasonID;
-	}
-
-	public Integer getGroupID() {
-		return groupID;
-	}
-
-	public void setGroupID(Integer groupID) {
-		this.groupID = groupID;
-	}
-
-	public Integer getPlayerID() {
-		return playerID;
-	}
-
-	public void setPlayerID(Integer playerID) {
-		this.playerID = playerID;
-	}
+	private SeasonVO seasonVO; // replace seasonID
+	private GroupsVO groupsVO; // replace groupID
+	private PlayersVO playersVO; // replace playerID
 
 	public SeasonVO getSeasonVO() {
 		return seasonVO;
@@ -65,12 +29,12 @@ public class PlayerGroupsVO implements Serializable {
 		this.groupsVO = groupsVO;
 	}
 
-	public Integer getPlayerGroupsID() {
-		return playerGroupsID;
+	public PlayersVO getPlayersVO() {
+		return playersVO;
 	}
 
-	public void setPlayerGroupsID(Integer playerGroupsID) {
-		this.playerGroupsID = playerGroupsID;
+	public void setPlayersVO(PlayersVO playersVO) {
+		this.playersVO = playersVO;
 	}
 
 }

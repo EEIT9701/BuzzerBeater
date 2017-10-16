@@ -3,9 +3,9 @@ package eeit.players.model;
 import java.util.Set;
 
 public interface PlayerDAO_interface {
-	public void insert(PlayerVO playerVO);
-	public void update(PlayerVO playerVO);
+	public void insert(PlayersVO playerVO);
+	public void update(PlayersVO playerVO);
 	public void delete(Integer playerID);
-	public Set<PlayerVO> findByPlayerName(String playerName);
-	public Set<PlayerVO> getAll();
+	public Set<PlayersVO> findByPlayerName(String playerName);
+	public Set<PlayersVO> getAll();
 }

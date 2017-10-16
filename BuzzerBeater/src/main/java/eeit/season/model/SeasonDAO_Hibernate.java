@@ -97,13 +97,13 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 
 		/****************** getOneByID ******************/
 
-		 SeasonVO sVO3 = dao.findBySeasonID(1001);
-		 Set<GroupsVO> set = sVO3.getGroupsSet();
-		 
-		 for(GroupsVO g:set){
-			 System.out.print(sVO3.getSeasonName()+", ");
-			 System.out.println(g.getGroupName()+", ");
-		 }
+//		 SeasonVO sVO3 = dao.findBySeasonID(1001);
+//		 Set<GroupsVO> set = sVO3.getGroupsSet();
+//		 
+//		 for(GroupsVO g:set){
+//			 System.out.print(sVO3.getSeasonName()+", ");
+//			 System.out.println(g.getGroupName()+", ");
+//		 }
 
 		/****************** insert ******************/
 
@@ -128,17 +128,17 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 
 		/****************** getAll ******************/
 
-//		Set<SeasonVO> set = dao.getAll();
-//		for (SeasonVO sVO : set) {
-//			System.out.print(sVO.getSeasonID() + ", ");
-//			System.out.print(sVO.getSeasonName() + ", ");
-//			System.out.print(sVO.getSeasonBeginDate() + ", ");
-//			System.out.print(sVO.getSeasonEndDate() + ", ");
-//			System.out.print(sVO.getSignUpBegin() + ", ");
-//			System.out.print(sVO.getSignUpEnd() + ", ");
-//			System.out.print(sVO.getDescriptions());
-//			System.out.println();
-//		}
+		Set<SeasonVO> set = dao.getAll();
+		for (SeasonVO sVO : set) {
+			System.out.print(sVO.getSeasonID() + ", ");
+			System.out.print(sVO.getSeasonName() + ", ");
+			System.out.print(sVO.getSeasonBeginDate() + ", ");
+			System.out.print(sVO.getSeasonEndDate() + ", ");
+			System.out.print(sVO.getSignUpBegin() + ", ");
+			System.out.print(sVO.getSignUpEnd() + ", ");
+			System.out.print(sVO.getDescriptions());
+			System.out.println();
+		}
 
 	}
 

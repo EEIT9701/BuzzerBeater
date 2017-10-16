@@ -9,19 +9,46 @@
 			<generator class="identity" />
 		</id>
 
-		<property name="locationID" column="locationID" />
-		<property name="teamAID" column="teamAID" />
+		<many-to-one name="groupsVO" class="eeit.groups.model.GroupsVO"	lazy="false">
+			<column name="groupID" />
+		</many-to-one>
+
+		<many-to-one name="locationinfoVO" class="eeit.locationinfo.model.LocationinfoVO" lazy="proxy">
+			<column name="locationID" />
+		</many-to-one>
+		
+		<many-to-one name="teamAVO" class="eeit.teams.model.TeamsVO" lazy="false">
+			<column name="teamAID" />
+		</many-to-one>
+		
+		<many-to-one name="teamBVO" class="eeit.teams.model.TeamsVO" lazy="false">
+			<column name="teamBID" />
+		</many-to-one>
+		
+		
+
+		<set name="gameMediaSet" table="GameMedia" lazy="false" cascade="all" inverse="true">
+			<key>
+				<column name="gameID" />
+			</key>
+			<one-to-many class="eeit.gamemedia.model.GameMediaVO" />
+		</set>
+		
+		<set name="personalDataSet" table="PersonalData" lazy="false" cascade="all" inverse="true">
+			<key>
+				<column name="gameID" />
+			</key>
+			<one-to-many class="eeit.personaldata.model.PersonalDataVO" />
+		</set>
+		
+		
 		<property name="teamAScore" column="teamAScore" />
-		<property name="teamBID" column="teamBID" />
 		<property name="teamBScore" column="teamBScore" />
 		<property name="winnerID" column="winnerID" />
 		<property name="gameBeginDate" column="gameBeginDate" />
 		<property name="gameEndDate" column="gameEndDate" />
 
-		<many-to-one name="groupsVO" class="eeit.groups.model.GroupsVO" lazy="false">
-			<column name="GroupID" />
-		</many-to-one>
-		
+
 	</class>
 </hibernate-mapping>
 

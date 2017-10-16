@@ -10,9 +10,10 @@ public class GameMediaVO implements Serializable {
 
 	private static final long serialVersionUID = 4235190591600435986L;
 
-	private Integer gameID;
-	private GamesVO gamesVO;
-	private Integer mediaID;
+	private Integer mediaID;// ID
+
+	private GamesVO gamesVO;// replace gameID
+
 	private String mediasName;
 	private String gameVideo;
 	private Blob gamePhoto;
@@ -20,14 +21,6 @@ public class GameMediaVO implements Serializable {
 	private Timestamp mediaDate;
 	private String descriptions;
 	private String tag;
-
-	public Integer getGameID() {
-		return gameID;
-	}
-
-	public void setGameID(Integer gameID) {
-		this.gameID = gameID;
-	}
 
 	public GamesVO getGamesVO() {
 		return gamesVO;

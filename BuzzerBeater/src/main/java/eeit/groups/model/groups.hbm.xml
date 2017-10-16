@@ -8,6 +8,31 @@
 		<id name="groupID" column="groupID">
 			<generator class="identity" />
 		</id>
+		
+		<many-to-one name="seasonVO" class="eeit.season.model.SeasonVO" lazy="false">
+			<column name="SeasonID" />
+		</many-to-one>
+
+		<set name="groupRegSet" table="GroupRegistration" lazy="false" cascade="all" inverse="true">
+			<key>
+				<column name="groupID" />
+			</key>
+			<one-to-many class="eeit.groupreg.model.GroupRegVO" />
+		</set>
+		
+		<set name="playerGroupsSet" table="PlayerGroup" lazy="false" cascade="all" inverse="true">
+			<key>
+				<column name="groupID" />
+			</key>
+			<one-to-many class="eeit.playergroups.model.PlayerGroupsVO" />
+		</set>
+		
+		<set name="gamesSet" table="Games" lazy="false" cascade="all" inverse="true">
+			<key>
+				<column name="groupID" />
+			</key>
+			<one-to-many class="eeit.games.model.GamesVO" />
+		</set>
 
 		<property name="groupName" column="groupName" />
 		<property name="maxTeams" column="maxTeams" />
@@ -16,16 +41,6 @@
 		<property name="maxPlayers" column="maxPlayers" />
 		<property name="minPlayers" column="minPlayers" />
 
-		<many-to-one name="seasonVO" class="eeit.season.model.SeasonVO" lazy="false">
-			<column name="SeasonID" />
-		</many-to-one>
-		
-		<set name="gamesSet" table="Games" lazy="false" cascade="all" inverse="true" order-by="gameID asc">
-			<key>
-				<column name="GroupID" />
-			</key>
-			<one-to-many class="eeit.games.model.GamesVO" />
-		</set>
 
 	</class>
 </hibernate-mapping>

@@ -2,26 +2,35 @@ package eeit.games.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import eeit.gamemedia.model.GameMediaVO;
 import eeit.groups.model.GroupsVO;
+import eeit.locationinfo.model.LocationinfoVO;
+import eeit.personaldata.model.PersonalDataVO;
+import eeit.teams.model.TeamsVO;
 
 public class GamesVO implements Serializable {
 
 	private static final long serialVersionUID = 380702720062527758L;
 
-	private Integer gameID;
+	private Integer gameID;// ID
 
-	private GroupsVO groupsVO;
+	private GroupsVO groupsVO; // replace groupID
+	private LocationinfoVO locationinfoVO;// replace loactionID
+	private TeamsVO teamAVO;// replace teamAID
+	private TeamsVO teamBVO;// replace teamBID
 
-	private Integer locationID;
-	private Integer teamAID;
+	private Set<GameMediaVO> gameMediaSet = new LinkedHashSet<GameMediaVO>();
+	private Set<PersonalDataVO> personalDataSet = new LinkedHashSet<PersonalDataVO>();
+	private Set<TeamsVO> teamsSet = new LinkedHashSet<TeamsVO>();
+
 	private Integer teamAScore;
-	private Integer teamBID;
 	private Integer teamBScore;
 	private Integer winnerID;
 	private Timestamp gameBeginDate;
 	private Timestamp gameEndDate;
-
 
 	public Integer getGameID() {
 		return gameID;
@@ -39,20 +48,52 @@ public class GamesVO implements Serializable {
 		this.groupsVO = groupsVO;
 	}
 
-	public Integer getLocationID() {
-		return locationID;
+	public LocationinfoVO getLocationinfoVO() {
+		return locationinfoVO;
 	}
 
-	public void setLocationID(Integer locationID) {
-		this.locationID = locationID;
+	public void setLocationinfoVO(LocationinfoVO locationinfoVO) {
+		this.locationinfoVO = locationinfoVO;
 	}
 
-	public Integer getTeamAID() {
-		return teamAID;
+	public TeamsVO getTeamAVO() {
+		return teamAVO;
 	}
 
-	public void setTeamAID(Integer teamAID) {
-		this.teamAID = teamAID;
+	public void setTeamAVO(TeamsVO teamAVO) {
+		this.teamAVO = teamAVO;
+	}
+
+	public TeamsVO getTeamBVO() {
+		return teamBVO;
+	}
+
+	public void setTeamBVO(TeamsVO teamBVO) {
+		this.teamBVO = teamBVO;
+	}
+
+	public Set<GameMediaVO> getGameMediaSet() {
+		return gameMediaSet;
+	}
+
+	public void setGameMediaSet(Set<GameMediaVO> gameMediaSet) {
+		this.gameMediaSet = gameMediaSet;
+	}
+
+	public Set<PersonalDataVO> getPersonalDataSet() {
+		return personalDataSet;
+	}
+
+	public void setPersonalDataSet(Set<PersonalDataVO> personalDataSet) {
+		this.personalDataSet = personalDataSet;
+	}
+
+	public Set<TeamsVO> getTeamsSet() {
+		return teamsSet;
+	}
+
+	public void setTeamsSet(Set<TeamsVO> teamsSet) {
+		this.teamsSet = teamsSet;
 	}
 
 	public Integer getTeamAScore() {
@@ -61,14 +102,6 @@ public class GamesVO implements Serializable {
 
 	public void setTeamAScore(Integer teamAScore) {
 		this.teamAScore = teamAScore;
-	}
-
-	public Integer getTeamBID() {
-		return teamBID;
-	}
-
-	public void setTeamBID(Integer teamBID) {
-		this.teamBID = teamBID;
 	}
 
 	public Integer getTeamBScore() {

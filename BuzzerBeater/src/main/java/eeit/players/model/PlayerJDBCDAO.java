@@ -28,7 +28,7 @@ public class PlayerJDBCDAO implements PlayerDAO_interface {
 	
 	//新增method
 	@Override
-	public void insert(PlayerVO playerVO) {
+	public void insert(PlayersVO playerVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -68,7 +68,7 @@ public class PlayerJDBCDAO implements PlayerDAO_interface {
 	}
 
 	@Override
-	public void update(PlayerVO playerVO) {
+	public void update(PlayersVO playerVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -146,9 +146,9 @@ public class PlayerJDBCDAO implements PlayerDAO_interface {
 	}
 
 	@Override
-	public Set<PlayerVO> findByPlayerName(String playerName) {
-		Set<PlayerVO> set = new LinkedHashSet<PlayerVO>();
-		PlayerVO playerVO = null;
+	public Set<PlayersVO> findByPlayerName(String playerName) {
+		Set<PlayersVO> set = new LinkedHashSet<PlayersVO>();
+		PlayersVO playerVO = null;
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -162,7 +162,7 @@ public class PlayerJDBCDAO implements PlayerDAO_interface {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				playerVO = new PlayerVO();
+				playerVO = new PlayersVO();
 				playerVO.setPlayerID(rs.getInt("playerID"));
 				playerVO.setPlayerName(rs.getString("playerName"));
 				playerVO.setId(rs.getString("id"));
@@ -200,9 +200,9 @@ public class PlayerJDBCDAO implements PlayerDAO_interface {
 	}
 
 	@Override
-	public Set<PlayerVO> getAll() {
-		Set<PlayerVO> set = new LinkedHashSet<PlayerVO>();
-		PlayerVO playerVO = null;
+	public Set<PlayersVO> getAll() {
+		Set<PlayersVO> set = new LinkedHashSet<PlayersVO>();
+		PlayersVO playerVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -215,7 +215,7 @@ public class PlayerJDBCDAO implements PlayerDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				playerVO = new PlayerVO();
+				playerVO = new PlayersVO();
 				playerVO.setPlayerID(rs.getInt("playerID"));
 				playerVO.setPlayerName(rs.getString("playerName"));
 				playerVO.setId(rs.getString("id"));
@@ -279,8 +279,8 @@ public class PlayerJDBCDAO implements PlayerDAO_interface {
 		dao.delete(70005);
 //
 //		// 查詢
-		Set<PlayerVO> set1 = dao.findByPlayerName("蔣淯安");
-		for (PlayerVO aPlayer1 : set1) {
+		Set<PlayersVO> set1 = dao.findByPlayerName("蔣淯安");
+		for (PlayersVO aPlayer1 : set1) {
 			System.out.print(aPlayer1.getPlayerID() + ",");
 			System.out.print(aPlayer1.getPlayerName() + ",");
 			System.out.print(aPlayer1.getId() + ",");

@@ -185,11 +185,11 @@ GO
  )
  GO
 
- insert into Games values('2001','101','3001','80','3002','75','3001','2018-01-20 10:00','2018-01-20 12:00');
- insert into Games values('2001','101','3002','78','3003','75','3002','2018-01-21 10:00','2018-01-21 12:00');
- insert into Games values('2001','101','3004','82','3002','55','3004','2018-01-22 10:00','2018-01-22 12:00');
- insert into Games values('2001','101','3003','90','3002','77','3003','2018-01-23 10:00','2018-01-23 12:00');
- insert into Games values('2001','101','3001','80','3002','55','3001','2018-01-24 10:00','2018-01-24 12:00');
+ insert into Games values('2001','102','3001','80','3002','75','3001','2018-01-20 10:00','2018-01-20 12:00');
+ insert into Games values('2001','102','3002','78','3003','75','3002','2018-01-21 10:00','2018-01-21 12:00');
+ insert into Games values('2001','103','3004','82','3002','55','3004','2018-01-22 10:00','2018-01-22 12:00');
+ insert into Games values('2001','104','3003','90','3002','77','3003','2018-01-23 10:00','2018-01-23 12:00');
+ insert into Games values('2001','102','3001','80','3002','55','3001','2018-01-24 10:00','2018-01-24 12:00');
 
  select * from Games
  GO
@@ -204,6 +204,8 @@ GO
   teamStat                     int,                                      --球隊報名狀態
   registerDate                 datetime,                                 --球隊報名時間
   paymentNumber                char(5),                                  --繳費後五碼
+
+    CONSTRAINT group_reg_pk PRIMARY KEY (teamID, groupID)
  )
 GO  
 
@@ -228,6 +230,8 @@ create table TeamComposition        --球隊構成表
   playerRole                 varchar(2),                          --位置
   joinTeamDate               smalldatetime,                       --加入球隊時間
   leaveTeamDate              smalldatetime,                       --離開球隊時間
+
+  CONSTRAINT team_composition_pk PRIMARY KEY (teamID, playerID)
 ) 
 GO
 
@@ -354,11 +358,13 @@ GO
 
 create table PlayerGroups      --球員分組表
 (
- playerGroupsID int,                                  --分組表ID
- seasonID             int,                                  --賽季ID
+ seasonID             int references Season(seasonID),                                  --賽季ID
  groupID              int references Groups(groupID ),	    --分組ID 
  playerID             int references Players(playerID ),    --球員ID
+
+ CONSTRAINT player_groups_pk PRIMARY KEY (seasonID, groupID,playerID)
 )
+
 
 select * from PlayerGroups
 GO

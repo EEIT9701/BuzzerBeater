@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import eeit.players.model.PlayerService;
-import eeit.players.model.PlayerVO;
+import eeit.players.model.PlayersVO;
 @WebServlet("/PlayerServlet")
 public class PlayerSevrlet extends HttpServlet {
 	
@@ -37,7 +37,7 @@ public class PlayerSevrlet extends HttpServlet {
 			
 			/***************************2.開始查詢資料****************************************/
 			
-			Set<PlayerVO> playerVO = playerSvc.getOnePlayer(playerName);
+			Set<PlayersVO> playerVO = playerSvc.getOnePlayer(playerName);
 			
 			/***************************3.查詢完成,準備轉交(Send the Success view)************/
 //			 req.setAttribute("listOnePlayer", playerVO);        // 資料庫取出的empVO物件,存入req
@@ -56,7 +56,7 @@ public class PlayerSevrlet extends HttpServlet {
 			String playerName = req.getParameter("playerName");
 			
 			
-			Set<PlayerVO> playerVO = playerSvc.getOnePlayer(playerName);
+			Set<PlayersVO> playerVO = playerSvc.getOnePlayer(playerName);
 			
 			req.setAttribute("playerVO", playerVO);
 			
