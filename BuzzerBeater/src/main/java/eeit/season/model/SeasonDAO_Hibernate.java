@@ -137,6 +137,10 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 			System.out.print(sVO.getSignUpBegin() + ", ");
 			System.out.print(sVO.getSignUpEnd() + ", ");
 			System.out.print(sVO.getDescriptions());
+			Set<GroupsVO> gVO = sVO.getGroupsSet();
+			for(GroupsVO v:gVO){
+				System.out.print(v.getGroupID());
+			}
 			System.out.println();
 		}
 

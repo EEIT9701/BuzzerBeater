@@ -136,31 +136,30 @@ public class GroupsDAO_Hibernate implements GroupsDAO_interface {
 		// dao.update(gVO3);
 
 		// *****getAll*****
-		// Set<GroupsVO> set1 = dao.getAll();
-		// for (GroupsVO gVO : set1) {
-		// System.out.print(gVO.getGroupID() + ", ");
-		// System.out.print(gVO.getSeasonVO().getSeasonID() + ", ");
-		// System.out.print(gVO.getSeasonVO().getSeasonName() + ", ");
-		// System.out.print(gVO.getGroupName() + ", ");
-		// System.out.print(gVO.getMaxTeams() + ", ");
-		// System.out.print(gVO.getMinTeams() + ", ");
-		// System.out.print(gVO.getCurrentTeams() + ", ");
-		// System.out.print(gVO.getMaxPlayers() + ", ");
-		// System.out.print(gVO.getMinPlayers());
-		// System.out.println();
-		// }
+		 Set<GroupsVO> set1 = dao.getAll();
+		 for (GroupsVO gVO : set1) {
+		 System.out.print(gVO.getGroupID() + ", ");
+		 System.out.print(gVO.getSeasonVO().getSeasonID() + ", ");
+		 System.out.print(gVO.getSeasonVO().getSeasonName() + ", ");
+		 System.out.print(gVO.getGroupName() + ", ");
+		 System.out.print(gVO.getMaxTeams() + ", ");
+		 System.out.print(gVO.getMinTeams() + ", ");
+		 System.out.print(gVO.getCurrentTeams() + ", ");
+		 System.out.print(gVO.getMaxPlayers() + ", ");
+		 System.out.print(gVO.getMinPlayers());
+		 System.out.println();
+		 }
 
 
 		// *****findByGroupID*****
-		GroupsVO gVO = dao.findByGroupID(2001);
-		Set<GamesVO> gSet = gVO.getGamesSet();
-
-		for (GamesVO g : gSet) {
-			System.out.print(g.getGameID() + ", ");
-			System.out.print(gVO.getGroupID() + ", ");
-			System.out.print(g.getLocationID () + ", ");
-			System.out.println();
-		}
+//		GroupsVO gVO = dao.findByGroupID(2001);
+//		Set<GamesVO> gSet = gVO.getGamesSet();
+//
+//		for (GamesVO g : gSet) {
+//			System.out.print(g.getGameID() + ", ");
+//			System.out.print(gVO.getGroupID() + ", ");
+//			System.out.println();
+//		}
 
 	}
 
