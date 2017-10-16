@@ -27,7 +27,7 @@
 						class="form-control" id="Name" name="playerName"
 						placeholder="請輸入球員名稱">
 				</div>
-				<button type="submit" class="btn btn-warning">搜尋</button>
+				<input type="submit" class="btn btn-warning" value="搜尋">
 				<input type="hidden" name="action" value="getOne_For_Display">
 			</form>
 			<!--表格(開始)-->

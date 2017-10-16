@@ -6,8 +6,8 @@
     <title>EEIT97-第一組</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <style>
