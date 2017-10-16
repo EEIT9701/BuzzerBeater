@@ -3,17 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="eeit.season.model.*"%>
 <%@ page import="eeit.groups.model.*"%>
+<%@ page import="eeit.gamemedia.model.*"%>
 <%@ page import="java.util.*"%>
 <%
-// 	SeasonService seasonSvc = new SeasonService();
-// 	List<HashMap<String, Object>> list = seasonSvc.getAll();
-	SeasonDAO_Hibernate dao = new SeasonDAO_Hibernate();
-	Set<SeasonVO> list = dao.getAll();
+	SeasonService seasonSvc = new SeasonService();
+	Set<HashMap<String, Object>> list = seasonSvc.getAll();
+// 	SeasonDAO_Hibernate dao = new SeasonDAO_Hibernate();
+// 	Set<SeasonVO> list = dao.getAll();
 	request.setAttribute("list", list);
 
 	SeasonVO seasonVO = new SeasonVO();
 	Set<GroupsVO> groupSet = seasonVO.getGroupsSet();
 	request.setAttribute("groupSet", groupSet);
+	
+	GameMediaDAO_JNDI gameMediaVO = new GameMediaDAO_JNDI();
+	List<GameMediaVO> media = gameMediaVO.getAll();
+	request.setAttribute("gameMediaVO", media);
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -47,6 +52,19 @@
 #search-button {
 	margin-left: 0px;
 	padding-left: 0px;
+	height:10px;
+}
+#myModalLabel{
+	width:200px
+}
+#table{
+	table-layout: fixed;
+}
+#uploadButton{
+	margin:5px;
+}
+#cancelButton{
+	margin:5px
 }
 </style>
 
@@ -116,17 +134,51 @@
 					<input type="button" value="go">
 				</div>
 			</div>
-			<div class="row"></div>
+			</br>
+			<div class="row">
+				<table class="table table-bordered" id="table">
+  					<span class="text-left"><h3>影音管理</h3></span>
+  						<thead>
+    						<tr>
+      							<th>分組</th>
+      							<th>賽事</th>
+      							<th>上傳日期</th>
+      							<th>標題</th>
+      							<th>標籤</th>
+      							<th></th>
+    						</tr>
+  						</thead>
+  						<tbody>
+  							<c:forEach var="gameMediaVO" items="${gameMediaVO}">
+  								<tr align='center' valign='middle'>
+      								<td>${gameMediaVO.gamesVO.gameID}</td>
+      								<td>${gameMediaVO.gamesVO.gameID}</td>
+      								<td>${gameMediaVO.mediaDate}</td>
+      								<td>${gameMediaVO.mediasName}</td>
+      								<td>${gameMediaVO.tag}</td>
+      								<td></td>
+    							</tr>
+  							</c:forEach>
+  						</tbody>
+				</table>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-offset-8 col-md-5">
+					<button class="btn btn-sm" id="uploadButton">選擇檔案</button>
+					<button class="btn btn-sm" id="cancelButton">取消</button>
+				</div>
+			</div>		
+			
+			
 		</div>
 	</div>
 	<!--主文(結束)-->
 
-	<jsp:include page="/footer.jsp" />
-	<script>
-		// 		$(function() {
-		// 			$(".btn btn-primary dropdown-toggle").toggle();
-		// 		});
-	</script>
+<jsp:include page="/footer.jsp" />
+<script>
+
+</script>
 
 
 </body>

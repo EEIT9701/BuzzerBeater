@@ -191,7 +191,7 @@ public class GameMediaServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/emp/update_emp_input.jsp");
+						.getRequestDispatcher("/gamemedia/video.jsp");
 				failureView.forward(req, res);
 			}
 		}
