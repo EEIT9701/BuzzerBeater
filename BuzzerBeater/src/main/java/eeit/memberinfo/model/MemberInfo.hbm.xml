@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="eeit.memberinfo.model.MemberInfoVO" table="MemberInfo">
+	
+	<id name="memberID" column="memberID">
+	 
+	 <generator class="identity" />
+	
+	</id>
+	
+	<property name="acc" column="acc" />
+	<property name="name" column="name" />
+	<property name="auth" column="auth" />
+	<property name="registerTime" column="registerTime" />
+	<property name="teamID" column="teamID" />
+	
+	
+
+	</class>
+</hibernate-mapping>
