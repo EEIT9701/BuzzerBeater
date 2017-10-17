@@ -53,9 +53,9 @@
 			        		<tr>
 			        			<td>${gamesSet.gameBeginDate}</td>
 			        			<td>${gamesSet.gameEndDate}</td>
-			        			<td>${gamesSet.locationID}</td>
-			        			<td>${gamesSet.teamAID}</td>
-			        			<td>${gamesSet.teamBID}</td>
+			        			<td>${gamesSet.locationinfoVO.locationName}</td>
+			        			<td>${gamesSet.teamAVO.teamName}</td>
+			        			<td>${gamesSet.teamBVO.teamName}</td>
 			        		</tr>
 			        	</c:forEach>			        	
 			        </tbody>

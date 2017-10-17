@@ -22,10 +22,10 @@ public class GamesVO implements Serializable {
 
 	// private Integer locationID;
 
-	// private TeamsVO teamAVO;// replace teamAID
-	private Integer teamAID;
-	private Integer teamBID;
-	// private TeamsVO teamBVO;// replace teamBID
+	 private TeamsVO teamAVO;// replace teamAID
+//	private Integer teamAID;
+//	private Integer teamBID;
+	 private TeamsVO teamBVO;// replace teamBID
 
 	private Set<GameMediaVO> gameMediaSet = new LinkedHashSet<GameMediaVO>();
 	private Set<PersonalDataVO> personalDataSet = new LinkedHashSet<PersonalDataVO>();
@@ -36,6 +36,8 @@ public class GamesVO implements Serializable {
 	private Integer winnerID;
 	private Timestamp gameBeginDate;
 	private Timestamp gameEndDate;
+	
+	
 	public Integer getGameID() {
 		return gameID;
 	}
@@ -54,17 +56,17 @@ public class GamesVO implements Serializable {
 	public void setLocationinfoVO(LocationinfoVO locationinfoVO) {
 		this.locationinfoVO = locationinfoVO;
 	}
-	public Integer getTeamAID() {
-		return teamAID;
+	public TeamsVO getTeamAVO() {
+		return teamAVO;
 	}
-	public void setTeamAID(Integer teamAID) {
-		this.teamAID = teamAID;
+	public void setTeamAVO(TeamsVO teamAVO) {
+		this.teamAVO = teamAVO;
 	}
-	public Integer getTeamBID() {
-		return teamBID;
+	public TeamsVO getTeamBVO() {
+		return teamBVO;
 	}
-	public void setTeamBID(Integer teamBID) {
-		this.teamBID = teamBID;
+	public void setTeamBVO(TeamsVO teamBVO) {
+		this.teamBVO = teamBVO;
 	}
 	public Set<GameMediaVO> getGameMediaSet() {
 		return gameMediaSet;
@@ -114,5 +116,7 @@ public class GamesVO implements Serializable {
 	public void setGameEndDate(Timestamp gameEndDate) {
 		this.gameEndDate = gameEndDate;
 	}
+	
+	
 
 }

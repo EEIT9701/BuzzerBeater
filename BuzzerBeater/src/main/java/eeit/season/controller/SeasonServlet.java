@@ -37,18 +37,18 @@ public class SeasonServlet extends HttpServlet {
 
 		// 取得請求參數"action"，此為自行設定的回傳參數，判斷將要執行的動作
 		String action = request.getParameter("action");
-		System.out.println("action: " + action);
+
+		System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
 
 		/************************************************************/
-		/* GET_ALL_SEASON 以JSON格式取得所有賽季						*/
-		/* ADD_SEASON 新增賽季										*/
-		/* UPDATE_SEASON 更新賽季									*/
-		/* GET_ONE_TO_UPDATE 前往更新頁面								*/
-		/* GET_GROUPS 前往該賽季的分組頁面								*/
-		/*                                                          */
+		// GET_ALL_SEASON 以JSON格式取得所有賽季
+		// ADD_SEASON 新增賽季
+		// UPDATE_SEASON 更新賽季
+		// GET_ONE_TO_UPDATE 前往更新頁面
+		// GET_GROUPS 前往該賽季的分組頁面
+		//
 		/************************************************************/
-		
-		
+
 		// GET_ALL_SEASON ****************************************************
 		if ("GET_ALL_SEASON".equals(action)) {
 
