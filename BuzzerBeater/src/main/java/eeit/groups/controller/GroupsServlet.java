@@ -122,7 +122,7 @@ public class GroupsServlet extends HttpServlet {
 					GroupsService gSvc = new GroupsService();
 					gSvc.addGroups(season_ID, group_Name, max_Teams, min_Teams, max_Players, min_Players);
 				}
-				
+
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 
@@ -136,15 +136,30 @@ public class GroupsServlet extends HttpServlet {
 				out.println(jsonString);
 			}
 		}
-		
-		if("GET_GAMES".equals(action)){
+
+		if ("GET_GAMES".equals(action)) {
 			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
 			GroupsService gSvc = new GroupsService();
-			
+
 			request.setAttribute("groupsVO", gSvc.findByGroupID(groupID));
 			RequestDispatcher successView = request.getRequestDispatcher("/games/gameList.jsp");
 			successView.forward(request, response);
+
+		}
+
+		//根據隊伍數量計算所需比賽場數
+		if ("ALGORITHM_COUNT".equals(action)) {
+			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
+			GroupsService gSvc = new GroupsService();
+			GroupsVO gVO = gSvc.findByGroupID(groupID);
+
+			int teamsCount = gVO.getGroupRegSet().size();
+			int result = (teamsCount * (teamsCount - 1)) / 2; //Round-robin tournament 循環賽
 			
+			request.setAttribute("teamsCount", teamsCount);
+			request.setAttribute("result", result);
+			RequestDispatcher view = request.getRequestDispatcher("groups/algorithm_test.jsp");
+			view.forward(request, response);
 		}
 
 	}
