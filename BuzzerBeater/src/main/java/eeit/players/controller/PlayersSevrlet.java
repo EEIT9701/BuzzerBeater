@@ -37,12 +37,12 @@ public class PlayersSevrlet extends HttpServlet {
 			
 			/***************************2.開始查詢資料****************************************/
 			
-			Set<PlayersVO> playerVO = playerSvc.getOnePlayer(playerName);
+			Set<PlayersVO> playersVO = playerSvc.getOnePlayer(playerName);
 			
 			/***************************3.查詢完成,準備轉交(Send the Success view)************/
 //			 req.setAttribute("listOnePlayer", playerVO);        // 資料庫取出的empVO物件,存入req
 			
-			 req.setAttribute("listOnePlayer", playerVO);
+			 req.setAttribute("listOnePlayer", playersVO);
 			 String url = "/players/listOnePlayer.jsp";
 			 RequestDispatcher successView = req.getRequestDispatcher(url);
 			 successView.forward(req, resp);
@@ -56,9 +56,9 @@ public class PlayersSevrlet extends HttpServlet {
 			String playerName = req.getParameter("playerName");
 			
 			
-			Set<PlayersVO> playerVO = playerSvc.getOnePlayer(playerName);
+			Set<PlayersVO> playersVO = playerSvc.getOnePlayer(playerName);
 			
-			req.setAttribute("playerVO", playerVO);
+			req.setAttribute("playersVO", playersVO);
 			
 			String url = "/players/updatePlayer.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -72,7 +72,7 @@ public class PlayersSevrlet extends HttpServlet {
 //			if(playerName == null||playerName.trim().length() == 0){
 //				errorMsgs.add("球員姓名不可為空白");
 //			}
-			String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
+//			String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
 //			if(!playerName.trim().matches(nameReg)){
 //				errorMsgs.add("球員姓名必須為中、英文字母，且長度必需在2到10之間");
 //			}
@@ -116,8 +116,9 @@ public class PlayersSevrlet extends HttpServlet {
 //				successView.forward(req, resp);
 //			}
 			
-			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality);
-			String url = "/players/listAllPlayer.jsp";
+			PlayersVO playersVO = playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality);
+			req.setAttribute("playersVO", playersVO);
+			String url = "/players/listOnePlayer.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
 		}

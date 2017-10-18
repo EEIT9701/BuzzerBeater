@@ -51,26 +51,26 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="playerVO" items="${playerSvc.allPlayer}">
+							<c:forEach var="playersVO" items="${playerSvc.allPlayer}">
 								<tr align='center' valign='middle'>
-									<td>${playerVO.playerID}</td>
-									<td>${playerVO.playerName}</td>
-									<td>${playerVO.id}</td>
-									<td>${playerVO.height}</td>
-									<td>${playerVO.weights}</td>
-									<td>${playerVO.birthday}</td>
-									<td>${playerVO.nationality}</td>
+									<td>${playersVO.playerID}</td>
+									<td>${playersVO.playerName}</td>
+									<td>${playersVO.id}</td>
+									<td>${playersVO.height}</td>
+									<td>${playersVO.weights}</td>
+									<td>${playersVO.birthday}</td>
+									<td>${playersVO.nationality}</td>
 									<td>
 										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
                                                 <button type="submit" class="btn btn-info">修改</button> <input type="hidden"
-                                                name="playerName" value="${playerVO.playerName}"> 
+                                                name="playerName" value="${playersVO.playerName}"> 
                                                 <input type="hidden" name="action" value="getOne_For_Update">
 										</Form>
 									</td>
 									<td>
 										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
                                                 <button type="submit" class="btn btn-danger">刪除</button> <input type="hidden"
-												name="playerID" value="${playerVO.playerID}"> <input
+												name="playerID" value="${playersVO.playerID}"> <input
 												type="hidden" name="action" value="delete">
 										</Form>
 									</td>

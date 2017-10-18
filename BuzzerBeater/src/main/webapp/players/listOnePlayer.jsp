@@ -51,15 +51,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="playerVO" items="${listOnePlayer}">
+							<c:forEach var="playersVO" items="${listOnePlayer}">
 								<tr align='center' valign='middle'>
-									<td>${playerVO.playerID}</td>
-									<td>${playerVO.playerName}</td>
-									<td>${playerVO.id}</td>
-									<td>${playerVO.height}</td>
-									<td>${playerVO.weights}</td>
-									<td>${playerVO.birthday}</td>
-									<td>${playerVO.nationality}</td>
+									<td>${playersVO.playerID}</td>
+									<td>${playersVO.playerName}</td>
+									<td>${playersVO.id}</td>
+									<td>${playersVO.height}</td>
+									<td>${playersVO.weights}</td>
+									<td>${playersVO.birthday}</td>
+									<td>${playersVO.nationality}</td>
 									<td>
 										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
                                                 <button type="submit" class="btn btn-info">修改</button> <input type="hidden"
