@@ -80,8 +80,10 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
+			
 			Query query = session.createQuery(GET_ALL_SEASON);
 			set = new LinkedHashSet<SeasonVO>(query.list());
+			
 			session.getTransaction().commit();
 
 		} catch (RuntimeException ex) {

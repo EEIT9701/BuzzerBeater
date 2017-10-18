@@ -9,17 +9,9 @@ import eeit.season.model.SeasonVO;
 public class PlayerGroupsVO implements Serializable {
 	private static final long serialVersionUID = -310982995736374426L;
 
-	private SeasonVO seasonVO; // replace seasonID
-	private GroupsVO groupsVO; // replace groupID
-	private PlayersVO playersVO; // replace playerID
+	private GroupsVO groupsVO; // replace groupID // CPK
+	private PlayersVO playersVO; // replace playerID // CPK
 
-	public SeasonVO getSeasonVO() {
-		return seasonVO;
-	}
-
-	public void setSeasonVO(SeasonVO seasonVO) {
-		this.seasonVO = seasonVO;
-	}
 
 	public GroupsVO getGroupsVO() {
 		return groupsVO;

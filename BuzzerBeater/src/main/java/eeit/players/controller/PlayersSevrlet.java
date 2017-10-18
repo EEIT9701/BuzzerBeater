@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import eeit.players.model.PlayerService;
 import eeit.players.model.PlayersVO;
-@WebServlet("/PlayerServlet")
-public class PlayerSevrlet extends HttpServlet {
+@WebServlet("/Players.do")
+public class PlayersSevrlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

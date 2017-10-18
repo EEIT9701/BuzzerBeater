@@ -1,4 +1,4 @@
-package eeit.games.controller;
+package eeit.playergroups.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GamesServlet
+ * Servlet implementation class PlayerGroupsServlet
  */
-@WebServlet("/Games.do")
-public class GamesServlet extends HttpServlet {
+@WebServlet("/PlayerGroups.do")
+public class PlayerGroupsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GamesServlet() {
+    public PlayerGroupsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

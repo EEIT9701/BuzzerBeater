@@ -6,10 +6,6 @@
 	<class name="eeit.playergroups.model.PlayerGroupsVO" table="PlayerGroups">
 
 		<composite-id>
-			<key-many-to-one name="seasonVO" class="eeit.season.model.SeasonVO" lazy="false">
-				<column name="seasonID" />
-			</key-many-to-one>
-			
 			<key-many-to-one name="groupsVO" class="eeit.groups.model.GroupsVO" lazy="false">
 				<column name="groupID" />
 			</key-many-to-one>
@@ -17,10 +13,8 @@
 			<key-many-to-one name="playersVO" class="eeit.players.model.PlayersVO" lazy="false">
 				<column name="playerID" />
 			</key-many-to-one>
-
-			
 		</composite-id>
-
+		
 	</class>
 </hibernate-mapping>
 

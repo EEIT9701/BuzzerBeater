@@ -1,10 +1,16 @@
 package eeit.personaldata.model;
 
-import java.util.List;
+import java.util.Set;
 
 public interface PersonalDataDAO_interface {
-   public List<PersonalDataVO> getAll(); 
 	
+	public Set<PersonalDataVO> getAll();
+
+	public PersonalDataVO findByPersonalDataID(Integer PersonalDataID);
 	
+	public void insert(PersonalDataVO personalDataVO);
 	
+	public void update(PersonalDataVO personalDataVO);
+	
+	public void delete(Integer PersonalDataID);
 }

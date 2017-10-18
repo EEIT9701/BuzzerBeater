@@ -9,19 +9,19 @@
 			<generator class="identity"/>
 		</id>
 
+		<set name="groupsSet" table="Groups" lazy="false" cascade="all"  inverse="true"  order-by="groupID asc">			
+			<key>
+				<column name="seasonID" />
+			</key>
+			<one-to-many class="eeit.groups.model.GroupsVO" />
+		</set>
+		
 		<property name="seasonName" column="seasonName" />
 		<property name="seasonBeginDate" column="seasonBeginDate" />
 		<property name="seasonEndDate" column="seasonEndDate" />
 		<property name="signUpBegin" column="signUpBegin" />
 		<property name="signUpEnd" column="signUpEnd" />
 		<property name="descriptions" column="descriptions" />
-
-		<set name="groupsSet" table="Groups" lazy="false" cascade="all"  inverse="true"  order-by="groupID asc">			
-			<key>
-				<column name="SeasonID" />
-			</key>
-			<one-to-many class="eeit.groups.model.GroupsVO" />
-		</set>
 
 	</class>
 </hibernate-mapping>

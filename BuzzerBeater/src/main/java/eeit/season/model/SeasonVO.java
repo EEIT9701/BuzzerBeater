@@ -10,20 +10,18 @@ import eeit.groups.model.GroupsVO;
 
 
 public class SeasonVO implements Serializable {
-
 	private static final long serialVersionUID = 8996605635038786569L;
 
-	private Integer seasonID;
+	private Integer seasonID; //PK
+	
+	private Set<GroupsVO> groupsSet = new LinkedHashSet<GroupsVO>();
+
 	private String seasonName;
 	private Date seasonBeginDate;
 	private Date seasonEndDate;
 	private Timestamp signUpBegin;
 	private Timestamp signUpEnd;
 	private String descriptions;
-
-	private Set<GroupsVO> groupsSet = new LinkedHashSet<GroupsVO>();
-
-
 
 	public Integer getSeasonID() {
 		return seasonID;

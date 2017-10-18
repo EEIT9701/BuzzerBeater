@@ -9,11 +9,11 @@ import eeit.teams.model.TeamsVO;
 public class PersonalDataVO implements Serializable {
 	private static final long serialVersionUID = -3568919358550845202L;
 
-	private PlayersVO playersVO;// replace playerID
-	private GamesVO gamesVO;// replace gameID
+	private PlayersVO playersVO;// replace playerID // CPK
+	private GamesVO gamesVO;// replace gameID // CPK
 	private TeamsVO teamsVO;// replace teamID
 
-	private String quarters;
+	private String quarters;// CPK
 	private Integer quarterTime;
 	private Integer twoPoint;
 	private Integer twoPointShot;
