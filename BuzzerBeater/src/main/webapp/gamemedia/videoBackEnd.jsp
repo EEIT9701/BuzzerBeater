@@ -66,6 +66,17 @@
 #cancelButton{
 	margin:5px
 }
+#tabletopic{
+	margin-left:3px
+}
+#thead{
+	font-weight:bold;
+}
+#upload{
+	height:5px;
+	padding:17px;
+	line-height:1px;
+}
 </style>
 
 
@@ -135,17 +146,18 @@
 				</div>
 			</div>
 			</br>
+			<div id="tabletopic"><h3>影音管理</h3></div>
 			<div class="row">
 				<table class="table table-bordered" id="table">
-  					<span class="text-left"><h3>影音管理</h3></span>
   						<thead>
-    						<tr>
-      							<th>分組</th>
-      							<th>賽事</th>
-      							<th>上傳日期</th>
-      							<th>標題</th>
-      							<th>標籤</th>
-      							<th></th>
+    						<tr align='center' valign='middle' id="thead">
+      							<td>分組</td>
+      							<td>賽事</td>
+      							<td>上傳日期</td>
+      							<td>標題</td>
+      							<td>備註</td>
+      							<td>標籤</td>
+      							<td></td>
     						</tr>
   						</thead>
   						<tbody>
@@ -155,8 +167,12 @@
       								<td>${gameMediaVO.gamesVO.gameID}</td>
       								<td>${gameMediaVO.mediaDate}</td>
       								<td>${gameMediaVO.mediasName}</td>
+      								<td>${gameMediaVO.descriptions}</td>
       								<td>${gameMediaVO.tag}</td>
-      								<td></td>
+      								<td>
+      									<input type="button" value="修改">
+										<input type="button" value="刪除">
+      								</td>
     							</tr>
   							</c:forEach>
   						</tbody>
@@ -164,11 +180,61 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-md-offset-8 col-md-5">
-					<button class="btn btn-sm" id="uploadButton">選擇檔案</button>
-					<button class="btn btn-sm" id="cancelButton">取消</button>
-				</div>
-			</div>		
+				<div class="col-md-3"><h3>影片上傳</h3></div>
+			</div>
+			<div class="row">
+				<button class="btn btn-sm" id="uploadButton"  data-toggle="modal" data-target="#myModal">選擇檔案</button>
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+    					<div class="modal-dialog">
+        					<div class="modal-content">
+            					<div class="modal-header">
+                					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                					<h4 class="modal-title" id="myModalLabel">檔案上傳</h4>
+            					</div>
+            				<div class="modal-body">
+            					<div class="row">
+  									<div class="col-md-12">
+    									<div class="input-group">
+      										<span class="input-group-btn">
+        										<button class="btn btn-default" type="button" id="upload">選擇檔案</button>
+      										</span>
+      										<input type="text" class="form-control">
+   										</div><!-- /input-group -->
+									</div><!-- /.row -->
+            					</div>
+            					</br>
+            					<div class="input-group">
+            						<span class="input-group-addon">標題</span>
+            							<input type="text" class="form-control">
+        						</div>
+        						</br>
+        						<div class="input-group">
+            						<span class="input-group-addon">備註</span>
+            							<input type="text" class="form-control">
+        						</div>
+        						</br>
+        						<div class="input-group">
+            						<span class="input-group-addon">標籤</span>
+            							<input type="text" class="form-control" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣">
+        						</div>
+        						<div class="row">
+        							<div class="col-md-offset-3">
+            							<video controls>
+            								<source src="D:/001.mp4" type="video/mp4">
+            							</video>
+            						</div>
+        						</div>
+        						
+            				</div>
+            				<div class="modal-footer">
+                				<button type="button" class="btn btn-default" data-dismiss="modal">確認上傳</button>
+                				<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+            				</div>
+        					</div>
+    					</div>
+					</div>
+			</div>
+					
 			
 			
 		</div>
