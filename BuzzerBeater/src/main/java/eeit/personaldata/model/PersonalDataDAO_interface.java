@@ -1,14 +1,6 @@
 package eeit.personaldata.model;
 
-<<<<<<< HEAD
-import java.util.List;
 
-public interface PersonalDataDAO_interface {
-   public List<PersonalDataVO> getAll(); 
-	
-	
-	
-=======
 import java.util.Set;
 
 public interface PersonalDataDAO_interface {
@@ -22,5 +14,4 @@ public interface PersonalDataDAO_interface {
 	public void update(PersonalDataVO personalDataVO);
 	
 	public void delete(Integer PersonalDataID);
->>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 }

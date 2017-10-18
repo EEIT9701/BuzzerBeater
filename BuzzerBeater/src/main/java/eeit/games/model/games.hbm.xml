@@ -13,24 +13,6 @@
 			<column name="groupID" />
 		</many-to-one>
 
-<<<<<<< HEAD
-<!-- 		<many-to-one name="locationinfoVO" class="eeit.locationinfo.model.LocationinfoVO" lazy="false"> -->
-<!-- 			<column name="locationID" /> -->
-<!-- 		</many-to-one> -->
-<property name="locationID" column="locationID" />
-
-		
-<!-- 		<many-to-one name="teamAVO" class="eeit.teams.model.TeamsVO" lazy="false"> -->
-<!-- 			<column name="teamAID" /> -->
-<!-- 		</many-to-one> -->
-		
-<!-- 		<many-to-one name="teamBVO" class="eeit.teams.model.TeamsVO" lazy="false"> -->
-<!-- 			<column name="teamBID" /> -->
-<!-- 		</many-to-one> -->
-		
-		<property name="teamAID" column="teamAID" />
-		<property name="teamBID" column="teamBID" />
-=======
 		<many-to-one name="locationinfoVO" class="eeit.locationinfo.model.LocationinfoVO" lazy="false">
 			<column name="locationID" />
 		</many-to-one>
@@ -42,8 +24,6 @@
 		<many-to-one name="teamBVO" class="eeit.teams.model.TeamsVO" lazy="false">
 			<column name="teamBID" />
 		</many-to-one>
->>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
-		
 
 		<set name="gameMediaSet" table="GameMedia" lazy="false" cascade="all" inverse="true">
 			<key>

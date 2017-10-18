@@ -10,11 +10,7 @@
 		</id>
 		
 		<many-to-one name="seasonVO" class="eeit.season.model.SeasonVO" lazy="false">
-<<<<<<< HEAD
-			<column name="SeasonID" />
-=======
 			<column name="seasonID" />
->>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 		</many-to-one>
 
 		<set name="groupRegSet" table="GroupRegistration" lazy="false" cascade="all" inverse="true">

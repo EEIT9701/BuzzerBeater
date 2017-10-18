@@ -80,22 +80,15 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-<<<<<<< HEAD
-			Query query = session.createQuery(GET_ALL_SEASON);
-			set = new LinkedHashSet<SeasonVO>(query.list());
-=======
-			
-			Query query = session.createQuery(GET_ALL_SEASON);
-			set = new LinkedHashSet<SeasonVO>(query.list());
-			
->>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
-			session.getTransaction().commit();
 
+			Query query = session.createQuery(GET_ALL_SEASON);
+			set = new LinkedHashSet<SeasonVO>(query.list());
+			
+			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-
 		return set;
 	}
 

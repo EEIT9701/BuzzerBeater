@@ -10,22 +10,6 @@ import eeit.groups.model.GroupsVO;
 
 
 public class SeasonVO implements Serializable {
-<<<<<<< HEAD
-
-	private static final long serialVersionUID = 8996605635038786569L;
-
-	private Integer seasonID;
-	private String seasonName;
-	private Date seasonBeginDate;
-	private Date seasonEndDate;
-	private Timestamp signUpBegin;
-	private Timestamp signUpEnd;
-	private String descriptions;
-
-	private Set<GroupsVO> groupsSet = new LinkedHashSet<GroupsVO>();
-
-
-=======
 	private static final long serialVersionUID = 8996605635038786569L;
 
 	private Integer seasonID; //PK
@@ -38,7 +22,6 @@ public class SeasonVO implements Serializable {
 	private Timestamp signUpBegin;
 	private Timestamp signUpEnd;
 	private String descriptions;
->>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 
 	public Integer getSeasonID() {
 		return seasonID;
