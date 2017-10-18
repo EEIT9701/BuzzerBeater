@@ -30,7 +30,7 @@ public class GlobalService implements Filter {
 		HttpServletResponse reponse = (HttpServletResponse) resp;
 		
 		String action = request.getParameter("action");
-		System.out.println("[Project Info] " + request.getServletContext() + "? action= " + action);
+		System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
 		
 		chain.doFilter(request, reponse);
 	}
