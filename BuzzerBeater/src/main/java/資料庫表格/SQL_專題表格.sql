@@ -185,11 +185,11 @@ GO
  )
  GO
 
- insert into Games values('2001','102','3001','80','3002','75','3001','2018-01-20 10:00','2018-01-20 12:00');
- insert into Games values('2001','102','3002','78','3003','75','3002','2018-01-21 10:00','2018-01-21 12:00');
- insert into Games values('2001','103','3004','82','3002','55','3004','2018-01-22 10:00','2018-01-22 12:00');
- insert into Games values('2001','104','3003','90','3002','77','3003','2018-01-23 10:00','2018-01-23 12:00');
- insert into Games values('2001','102','3001','80','3002','55','3001','2018-01-24 10:00','2018-01-24 12:00');
+ insert into Games values('2001','101','3001','80','3002','75','3001','2018-01-20 10:00','2018-01-20 12:00');
+ insert into Games values('2001','101','3002','78','3003','75','3002','2018-01-21 10:00','2018-01-21 12:00');
+ insert into Games values('2001','101','3004','82','3002','55','3004','2018-01-22 10:00','2018-01-22 12:00');
+ insert into Games values('2001','101','3003','90','3002','77','3003','2018-01-23 10:00','2018-01-23 12:00');
+ insert into Games values('2001','101','3001','80','3002','55','3001','2018-01-24 10:00','2018-01-24 12:00');
 
  select * from Games
  GO
@@ -205,17 +205,17 @@ GO
   registerDate                 datetime,                                 --球隊報名時間
   paymentNumber                char(5),                                  --繳費後五碼
 
-    CONSTRAINT group_reg_pk PRIMARY KEY (teamID, groupID)
+   CONSTRAINT GroupReg_CPK PRIMARY KEY (teamID, groupID)
  )
 GO  
 
-insert into GroupRegistration values('3001','2001','1','2017-06-06 11:58','');
-insert into GroupRegistration values('3002','2001','1','2017-07-08 12:55','');
-insert into GroupRegistration values('3003','2001','1','2017-08-08 10:25','');
-insert into GroupRegistration values('3004','2001','1','2017-08-06 08:58','');
-insert into GroupRegistration values('3005','2001','1','2017-07-06 10:00','');
-insert into GroupRegistration values('3002','2002','1','2017-05-06 11:22','');
-insert into GroupRegistration values('3004','2002','1','2017-06-06 11:52','');
+insert into GroupRegistration values('3001','2001','1','2017-06-06 11:58','45789');
+insert into GroupRegistration values('3002','2001','1','2017-07-08 12:55','12345');
+insert into GroupRegistration values('3003','2001','1','2017-08-08 10:25','54458');
+insert into GroupRegistration values('3004','2001','1','2017-08-06 08:58','45684');
+insert into GroupRegistration values('3005','2001','1','2017-07-06 10:00','12345');
+insert into GroupRegistration values('3002','2002','1','2017-05-06 11:22','14789');
+insert into GroupRegistration values('3004','2002','1','2017-06-06 11:52','12366');
 
 select * from GroupRegistration
 GO
@@ -231,7 +231,7 @@ create table TeamComposition        --球隊構成表
   joinTeamDate               smalldatetime,                       --加入球隊時間
   leaveTeamDate              smalldatetime,                       --離開球隊時間
 
-  CONSTRAINT team_composition_pk PRIMARY KEY (teamID, playerID)
+  CONSTRAINT TeamComposition_CPK PRIMARY KEY (teamID, playerID)
 ) 
 GO
 
@@ -296,6 +296,8 @@ create table PersonalData    --個人比賽數據
   blocks              INT,                --阻攻
   turnover            INT,                --失誤
   startingPlayer      TINYINT             --是否先發
+
+  CONSTRAINT PersonalData_CPK PRIMARY KEY (playerID, gameID,quarters)
 ) 
 GO
 
@@ -307,7 +309,6 @@ insert into PersonalData values ('70002','4001','3001','3','600','8','8','2','2'
 insert into PersonalData values ('70003','4002','3001','2','352','5','8','2','2','1','2','3','6','2','1','0','1','1');
 insert into PersonalData values ('70003','4002','3001','3','250','0','3','2','2','1','2','3','6','2','1','0','1','1');
 insert into PersonalData values ('70004','4002','3001','2','600','0','2','2','2','1','2','3','6','2','1','0','1','1');
-insert into PersonalData values ('70004','4002','3001','4','388','2','4','2','2','1','2','3','6','2','1','0','1','1');
 insert into PersonalData values ('70004','4002','3001','4','550','1','4','2','2','1','2','3','6','2','1','0','1','1');
 
 select * from PersonalData
@@ -358,13 +359,11 @@ GO
 
 create table PlayerGroups      --球員分組表
 (
- seasonID             int references Season(seasonID),                                  --賽季ID
  groupID              int references Groups(groupID ),	    --分組ID 
  playerID             int references Players(playerID ),    --球員ID
 
- CONSTRAINT player_groups_pk PRIMARY KEY (seasonID, groupID,playerID)
+ CONSTRAINT PlayerGroups_CPK PRIMARY KEY (groupID, playerID)
 )
-
 
 select * from PlayerGroups
 GO

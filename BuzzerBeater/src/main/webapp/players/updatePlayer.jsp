@@ -22,7 +22,7 @@
 </c:if>
 
 <c:forEach var = "playerVO" items = "${playerVO}" >
-  <Form method="post" action="<%=request.getContextPath() %>/PlayerServlet">
+  <Form method="post" action="<%=request.getContextPath() %>/Players.do">
   <input type="hidden" name="action" value="update">
   <input type="hidden" name="playerID" value="${playerVO.playerID}">
             <table border="0">

@@ -66,54 +66,55 @@ public class PlayersSevrlet extends HttpServlet {
 			
 		}
 		if("update".equals(action)){
-			Set<String> errorMsgs = new LinkedHashSet<String>();
+//			Set<String> errorMsgs = new LinkedHashSet<String>();
 			Integer playerID = new Integer(req.getParameter("playerID"));
 			String playerName = req.getParameter("playerName");
-			if(playerName == null||playerName.trim().length() == 0){
-				errorMsgs.add("球員姓名不可為空白");
-			}
+//			if(playerName == null||playerName.trim().length() == 0){
+//				errorMsgs.add("球員姓名不可為空白");
+//			}
 			String nameReg = "^[(\u4e00-\u9fa5)(a-zA-Z)]{2,10}$";
-			if(!playerName.trim().matches(nameReg)){
-				errorMsgs.add("球員姓名必須為中、英文字母，且長度必需在2到10之間");
-			}
+//			if(!playerName.trim().matches(nameReg)){
+//				errorMsgs.add("球員姓名必須為中、英文字母，且長度必需在2到10之間");
+//			}
 			
 			String id = req.getParameter("id");
-			if(id == null||id.trim().length() == 0){
-				errorMsgs.add("身分證ID不可為空白");
-			}
-			String idReg = "^[A-Z]{1}\\d{9}$";
-			if(!id.trim().matches(idReg)){
-				errorMsgs.add("身分證第一碼必須為英為字母，後九碼必須為數字");
-			}
-			Integer height = null;
-			try{
-			height = (req.getParameter("height").trim()==null)?null:new Integer(req.getParameter("height").trim());
-			}catch(NumberFormatException e) {
-				errorMsgs.add("身高請填數字.");
-			}
-			if(height>=300||height<=100){
-				errorMsgs.add("請填入正確身高");
-			}
+//			if(id == null||id.trim().length() == 0){
+//				errorMsgs.add("身分證ID不可為空白");
+//			}
+//			String idReg = "^[A-Z]{1}\\d{9}$";
+//			if(!id.trim().matches(idReg)){
+//				errorMsgs.add("身分證第一碼必須為英為字母，後九碼必須為數字");
+//			}
+			Integer height = new Integer(req.getParameter("height")) ;
+//			Integer height = null;
+//			try{
+//			height = (req.getParameter("height").trim()==null)?null:new Integer(req.getParameter("height").trim());
+//			}catch(NumberFormatException e) {
+//				errorMsgs.add("身高請填數字.");
+//			}
+//			if(height>=300||height<=100){
+//				errorMsgs.add("請填入正確身高");
+//			}
 			
 			
-			
-			Integer weights = null;
-			try{
-				weights = (req.getParameter("weights").trim() == null)?null:new Integer(req.getParameter("weights").trim());
-			}catch(NumberFormatException e){
-				errorMsgs.add("體重請填數字.");
-			}
-			if(weights>=200||weights<=30){
-				errorMsgs.add("請填入正確體重");
-			}
+			Integer weights = new Integer(req.getParameter("weights"));
+//			Integer weights = null;
+//			try{
+//				weights = (req.getParameter("weights").trim() == null)?null:new Integer(req.getParameter("weights").trim());
+//			}catch(NumberFormatException e){
+//				errorMsgs.add("體重請填數字.");
+//			}
+//			if(weights>=200||weights<=30){
+//				errorMsgs.add("請填入正確體重");
+//			}
 			Date birthday = Date.valueOf(req.getParameter("birthday"));
 			String nationality= req.getParameter("nationality");
-			if(!errorMsgs.isEmpty()){
-				req.setAttribute("errorMsgs", errorMsgs);
-				String url = "/players/updatePlayer.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, resp);
-			}
+//			if(!errorMsgs.isEmpty()){
+//				req.setAttribute("errorMsgs", errorMsgs);
+//				String url = "/players/updatePlayer.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url);
+//				successView.forward(req, resp);
+//			}
 			
 			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality);
 			String url = "/players/listAllPlayer.jsp";

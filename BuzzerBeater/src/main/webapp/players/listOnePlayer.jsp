@@ -21,7 +21,7 @@
 	<!--主文(開始)-->
 	<div class="container">
 		<div class="jumbotron">
-			<form class="form-inline" method="post" action="<%=request.getContextPath() %>/PlayerServlet">
+			<form class="form-inline" method="post" action="<%=request.getContextPath() %>/Players.do">
 				<div class="form-group">
 					<label for="Name">姓名</label> <input type="text"
 						class="form-control" id="Name" name="playerName"
@@ -61,14 +61,14 @@
 									<td>${playerVO.birthday}</td>
 									<td>${playerVO.nationality}</td>
 									<td>
-										<Form method="post" action="PlayerServlet">
+										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
                                                 <button type="submit" class="btn btn-info">修改</button> <input type="hidden"
                                                 name="playerName" value="${playerVO.playerName}"> 
                                                 <input type="hidden" name="action" value="getOne_For_Update">
 										</Form>
 									</td>
 									<td>
-										<Form method="post" action="PlayerServlet">
+										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
                                                 <button type="submit" class="btn btn-danger">刪除</button> <input type="hidden"
 												name="playerID" value="${playerVO.playerID}"> <input
 												type="hidden" name="action" value="delete">
