@@ -13,6 +13,7 @@
 			<key-many-to-one name="gamesVO" class="eeit.games.model.GamesVO" lazy="false">
 				<column name="gameID" />
 			</key-many-to-one>
+<<<<<<< HEAD
 		</composite-id>
 		
 		<many-to-one name="teamsVO" class="eeit.teams.model.TeamsVO" lazy="false">
@@ -20,6 +21,18 @@
 		</many-to-one>
 		
 		<property name="quarters" column="quarters" />
+=======
+			
+			<key-property name="quarters">
+				<column name="quarters"/>
+			</key-property>
+		</composite-id>
+		
+		<many-to-one name="teamsVO" class="eeit.teams.model.TeamsVO" lazy="false">
+			<column name="teamID" />
+		</many-to-one>
+		
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 		<property name="quarterTime" column="quarterTime" />
 		<property name="twoPoint" column="twoPoint" />
 		<property name="twoPointShot" column="twoPointShot" />

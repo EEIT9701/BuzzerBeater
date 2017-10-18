@@ -21,6 +21,7 @@
 	</font>
 </c:if>
 
+<<<<<<< HEAD
 <c:forEach var = "playerVO" items = "${playerVO}" >
   <Form method="post" action="<%=request.getContextPath() %>/PlayerServlet">
   <input type="hidden" name="action" value="update">
@@ -54,6 +55,41 @@
         <tr>
             <td>國籍:</td>
             <td><input type="text" name="nationality" size="30" value="${playerVO.nationality}"></td>
+=======
+<c:forEach var = "playersVO" items = "${playersVO}" >
+  <Form method="post" action="<%=request.getContextPath() %>/Players.do">
+  <input type="hidden" name="action" value="update">
+  <input type="hidden" name="playerID" value="${playersVO.playerID}">
+            <table border="0">
+        <tr>
+            <td>球員編號:</td>
+            <td>${playersVO.playerID}</td>
+            
+        </tr>
+        <tr>
+            <td>球員姓名:</td>
+            <td><input type="text" name="playerName" size="30" value="${playersVO.playerName}"></td>
+        </tr>
+        <tr>
+            <td>身分證ID:</td>
+            <td><input type="text" name="id" size="30" value="${playersVO.id}"></td>
+        </tr>
+        <tr>
+            <td>身高:</td>
+            <td><input type="text" name="height" size="30" value="${playersVO.height}"></td>
+        </tr>
+        <tr>
+            <td>體重:</td>
+            <td><input type="text" name="weights" size="30" value="${playersVO.weights}"></td>
+        </tr>
+        <tr>
+            <td>生日:</td>
+            <td><input type="text" name="birthday" size="30" value="${playersVO.birthday}"></td>
+        </tr>
+        <tr>
+            <td>國籍:</td>
+            <td><input type="text" name="nationality" size="30" value="${playersVO.nationality}"></td>
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
         </tr>
     </table> 
        <input type="submit" value="送出">    

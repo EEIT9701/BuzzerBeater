@@ -21,6 +21,7 @@
 	<!--主文(開始)-->
 	<div class="container">
 		<div class="jumbotron">
+<<<<<<< HEAD
 			<form class="form-inline" method="post" action="<%=request.getContextPath() %>/PlayerServlet">
 				<div class="form-group">
 					<label for="Name">姓名</label> <input type="text"
@@ -69,6 +70,56 @@
 									</td>
 									<td>
 										<Form method="post" action="PlayerServlet">
+=======
+			<form class="form-inline" method="post" action="<%=request.getContextPath() %>/Players.do">
+				<div class="form-group">
+					<label for="Name">姓名</label> <input type="text"
+						class="form-control" id="Name" name="playerName"
+						placeholder="請輸入球員名稱">
+				</div>
+				<button type="submit" class="btn btn-warning">搜尋</button>
+				<input type="hidden" name="action" value="getOne_For_Display">
+			</form>
+			<!--表格(開始)-->
+			<!--****************-->
+			<!-- 第一列(開始) -->
+			<!--****************-->
+			<div class="row">
+				<!--第一列-左邊表格-格式_.col-md-8-->
+				<div class="col-md-12">
+
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>球員編號</th>
+								<th>球員姓名</th>
+								<th>身分證ID</th>
+								<th>身高</th>
+								<th>體重</th>
+								<th>生日</th>
+								<th>國籍</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="playersVO" items="${listOnePlayer}">
+								<tr align='center' valign='middle'>
+									<td>${playersVO.playerID}</td>
+									<td>${playersVO.playerName}</td>
+									<td>${playersVO.id}</td>
+									<td>${playersVO.height}</td>
+									<td>${playersVO.weights}</td>
+									<td>${playersVO.birthday}</td>
+									<td>${playersVO.nationality}</td>
+									<td>
+										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
+                                                <button type="submit" class="btn btn-info">修改</button> <input type="hidden"
+                                                name="playerName" value="${playerVO.playerName}"> 
+                                                <input type="hidden" name="action" value="getOne_For_Update">
+										</Form>
+									</td>
+									<td>
+										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
                                                 <button type="submit" class="btn btn-danger">刪除</button> <input type="hidden"
 												name="playerID" value="${playerVO.playerID}"> <input
 												type="hidden" name="action" value="delete">

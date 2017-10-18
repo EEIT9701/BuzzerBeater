@@ -43,7 +43,11 @@ public class GamesDAO_JDBC implements GamesDAO_interface {
 				groupsVO.setGroupID(rs.getInt("groupID"));
 
 				gVO.setGroupsVO(groupsVO);
+<<<<<<< HEAD
 				gVO.setLocationID(rs.getInt("locationID"));
+=======
+				gVO.getLocationinfoVO().setLocationID(rs.getInt("locationID"));
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 				gVO.setTeamAID(rs.getInt("teamAID"));
 				gVO.setTeamAScore(rs.getInt("teamAScore"));
 				gVO.setTeamBID(rs.getInt("teamBID"));

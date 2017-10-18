@@ -5,7 +5,11 @@
 
 <%
 	SeasonService dao = new SeasonService();
+<<<<<<< HEAD
 	List<HashMap<String,Object>> set = dao.getAll();
+=======
+	Set<HashMap<String,Object>> set = dao.getAll();
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 	pageContext.setAttribute("set", set);
 %>
 

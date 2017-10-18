@@ -9,11 +9,19 @@ import eeit.teams.model.TeamsVO;
 public class PersonalDataVO implements Serializable {
 	private static final long serialVersionUID = -3568919358550845202L;
 
+<<<<<<< HEAD
 	private PlayersVO playersVO;// replace playerID
 	private GamesVO gamesVO;// replace gameID
 	private TeamsVO teamsVO;// replace teamID
 
 	private String quarters;
+=======
+	private PlayersVO playersVO;// replace playerID // CPK
+	private GamesVO gamesVO;// replace gameID // CPK
+	private TeamsVO teamsVO;// replace teamID
+
+	private String quarters;// CPK
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 	private Integer quarterTime;
 	private Integer twoPoint;
 	private Integer twoPointShot;
