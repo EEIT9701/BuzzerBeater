@@ -37,6 +37,21 @@
                                 <th>狀態</th>
                             </tr>
                         </thead>
+                        
+                        <tbody>
+			        	<c:forEach var="sVO" items="${set}">
+			        		<tr>
+			        			<td><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
+			        			<td>${sVO.seasonBeginDate}</td>
+			        			<td>${sVO.seasonEndDate}</td>
+			        			<td>${sVO.signUpBegin}</td>
+			        			<td>${sVO.signUpEnd}</td>
+			        		</tr>
+			        	</c:forEach>
+			        </tbody>
+			    </table>
+		    </div>
+	    </div>
 
                     </table>
                     <!--</div>-->
