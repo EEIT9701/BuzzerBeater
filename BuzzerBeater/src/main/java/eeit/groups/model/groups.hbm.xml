@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="eeit.groups.model.GroupsVO" table="Groups">
+
+		<id name="groupID" column="groupID">
+			<generator class="identity" />
+		</id>
+		
+		<many-to-one name="seasonVO" class="eeit.season.model.SeasonVO" lazy="false">
+			<column name="seasonID" />
+		</many-to-one>
+
+		<set name="groupRegSet" table="GroupRegistration" lazy="false" cascade="all" inverse="true">
+			<key>
+				<column name="groupID" />
+			</key>
+			<one-to-many class="eeit.groupreg.model.GroupRegVO" />
+		</set>
+		
+		<set name="playerGroupsSet" table="PlayerGroup" lazy="false" cascade="all" inverse="true">
+			<key>
+				<column name="groupID" />
+			</key>
+			<one-to-many class="eeit.playergroups.model.PlayerGroupsVO" />
+		</set>
+		
+		<set name="gamesSet" table="Games" lazy="false" cascade="all" inverse="true">
+			<key>
+				<column name="groupID" />
+			</key>
+			<one-to-many class="eeit.games.model.GamesVO" />
+		</set>
+
+		<property name="groupName" column="groupName" />
+		<property name="maxTeams" column="maxTeams" />
+		<property name="minTeams" column="minTeams" />
+		<property name="currentTeams" column="currentTeams" />
+		<property name="maxPlayers" column="maxPlayers" />
+		<property name="minPlayers" column="minPlayers" />
+
+
+	</class>
+</hibernate-mapping>
+

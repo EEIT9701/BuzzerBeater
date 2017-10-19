@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="eeit.personaldata.model.PersonalDataVO" table="PersonalData">
+
+		<composite-id>
+			<key-many-to-one name="playersVO" class="eeit.players.model.PlayersVO"	lazy="false">
+				<column name="playerID" />
+			</key-many-to-one>
+	
+			<key-many-to-one name="gamesVO" class="eeit.games.model.GamesVO" lazy="false">
+				<column name="gameID" />
+			</key-many-to-one>
+			
+			<key-property name="quarters">
+				<column name="quarters"/>
+			</key-property>
+		</composite-id>
+		
+		<many-to-one name="teamsVO" class="eeit.teams.model.TeamsVO" lazy="false">
+			<column name="teamID" />
+		</many-to-one>
+		
+		<property name="quarterTime" column="quarterTime" />
+		<property name="twoPoint" column="twoPoint" />
+		<property name="twoPointShot" column="twoPointShot" />
+		<property name="threePoint" column="threePoint" />
+		<property name="threePointShot" column="threePointShot" />
+		<property name="fg" column="fg" />
+		<property name="fgShot" column="fgShot" />
+		<property name="offReb" column="offReb" />
+		<property name="defReb" column="defReb" />
+		<property name="assist" column="assist" />
+		<property name="steal" column="steal" />
+		<property name="blocks" column="blocks" />
+		<property name="turnover" column="turnover" />
+		<property name="startingPlayer" column="startingPlayer" />
+
+
+	</class>
+</hibernate-mapping>
+

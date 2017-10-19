@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="eeit.season.model.SeasonVO" table="Season">
+
+		<id name="seasonID" column="seasonID">
+			<generator class="identity"/>
+		</id>
+
+		<set name="groupsSet" table="Groups" lazy="false" cascade="all"  inverse="true"  order-by="groupID asc">			
+			<key>
+				<column name="seasonID" />
+			</key>
+			<one-to-many class="eeit.groups.model.GroupsVO" />
+		</set>
+		
+		<property name="seasonName" column="seasonName" />
+		<property name="seasonBeginDate" column="seasonBeginDate" />
+		<property name="seasonEndDate" column="seasonEndDate" />
+		<property name="signUpBegin" column="signUpBegin" />
+		<property name="signUpEnd" column="signUpEnd" />
+		<property name="descriptions" column="descriptions" />
+
+	</class>
+</hibernate-mapping>
+

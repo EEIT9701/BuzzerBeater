@@ -1,0 +1,303 @@
+package eeit.gamemedia.model;
+
+import java.sql.*;
+import java.util.*;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+
+public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
+	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static final String INSERT_STMT =
+		      "INSERT INTO GameMedia (gameID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String GET_ALL_STMT =
+		      "SELECT * FROM GameMedia order by game_ID";
+	private static final String GET_ONE_STMT =
+		      "SELECT gameID,mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag FROM GameMedia where gameID = ?";
+	private static final String DELETE =
+		      "DELETE FROM GameMedia where mediaID = ?";
+	private static final String UPDATE =
+		      "UPDATE GameMedia set gameID=?,mediasName=?, gameVideo=?, gamePhoto=?, mediaType=?, mediaDate=?, descriptions=?, tag=? where gameID = ?";
+
+	
+	
+	@Override
+	public void insert(GameMediaVO gameMediaVO) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+
+		try {
+
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(INSERT_STMT);
+
+			pstmt.setInt(1, gameMediaVO.getGameID());
+			pstmt.setString(2, gameMediaVO.getMediasName());
+			pstmt.setString(3, gameMediaVO.getGameVideo());
+			pstmt.setBlob(4, gameMediaVO.getGamePhoto());
+			pstmt.setString(5, gameMediaVO.getMediaType());
+			pstmt.setTimestamp(6, gameMediaVO.getMediaDate());
+			pstmt.setString(7, gameMediaVO.getDescriptions());
+			pstmt.setString(8, gameMediaVO.getTag());
+
+			pstmt.executeUpdate();
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void update(GameMediaVO gameMediaVO) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(UPDATE);
+
+			pstmt.setInt(1, gameMediaVO.getGameID());
+			pstmt.setString(2, gameMediaVO.getMediasName());
+			pstmt.setString(3, gameMediaVO.getGameVideo());
+			pstmt.setBlob(4, gameMediaVO.getGamePhoto());
+			pstmt.setString(5, gameMediaVO.getMediaType());
+			pstmt.setTimestamp(6, gameMediaVO.getMediaDate());
+			pstmt.setString(7, gameMediaVO.getDescriptions());
+			pstmt.setString(8, gameMediaVO.getTag());
+			pstmt.setInt(9, gameMediaVO.getMediaID());
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void delete(Integer gameMediaVO) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(DELETE);
+
+			pstmt.setInt(1, gameMediaVO);
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
+
+	@Override
+	public GameMediaVO findByPrimaryKey(Integer mediaID) {
+		GameMediaVO gameMediaVO = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(GET_ONE_STMT);
+
+			pstmt.setInt(1, mediaID);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo 也稱為 Domain objects
+				gameMediaVO = new GameMediaVO();
+				gameMediaVO.setGameID(rs.getInt("gameID"));
+				gameMediaVO.setMediaID(rs.getInt("mediaID"));
+				gameMediaVO.setMediasName(rs.getString("mediasName"));
+				gameMediaVO.setGameVideo(rs.getString("gameVedio"));
+				gameMediaVO.setGamePhoto(rs.getBlob("gamePhoto"));
+				gameMediaVO.setMediaType(rs.getString("mediaType"));
+				gameMediaVO.setMediaDate(rs.getTimestamp("mediaDate"));
+				gameMediaVO.setDescriptions(rs.getString("descriptions"));
+				gameMediaVO.setTag(rs.getString("tag"));
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return gameMediaVO;
+	}
+
+	@Override
+	public List<GameMediaVO> getAll() {
+		List<GameMediaVO> list = new ArrayList<GameMediaVO>();
+		GameMediaVO gameMediaVO = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{
+			//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn=ds.getConnection();
+			pstmt = conn.prepareStatement(GET_ALL_STMT);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				gameMediaVO = new GameMediaVO();
+				gameMediaVO.setGameID(rs.getInt(1));
+				gameMediaVO.setMediaID(rs.getInt(2));
+				gameMediaVO.setMediasName(rs.getString(3));
+				gameMediaVO.setGameVideo(rs.getString(4));
+				gameMediaVO.setGamePhoto(rs.getBlob(5));
+				gameMediaVO.setMediaType(rs.getString(6));
+				gameMediaVO.setMediaDate(rs.getTimestamp(7));
+				gameMediaVO.setDescriptions(rs.getString(8));
+				gameMediaVO.setTag(rs.getString(9));
+				list.add(gameMediaVO);
+			}
+			
+			// Handle any driver errors
+					} catch (SQLException se) {
+						throw new RuntimeException("A database error occured. "
+								+ se.getMessage());
+						// Clean up JDBC resources
+					} finally {
+						if (pstmt != null) {
+							try {
+								pstmt.close();
+							} catch (SQLException se) {
+								se.printStackTrace(System.err);
+							}
+						}
+						if (conn != null) {
+							try {
+								conn.close();
+							} catch (Exception e) {
+								e.printStackTrace(System.err);
+							}
+						}
+					}
+		return list;
+	}
+	
+	public static void main(String[] args) {
+		GameMediaDAO_JNDI dao = new GameMediaDAO_JNDI();
+
+		List<GameMediaVO> list = null;
+		
+		list = dao.getAll();
+		System.out.println(list);
+		for (GameMediaVO media : list) {
+			
+			System.out.print(media.getGameID() + ",");
+			System.out.print(media.getMediaID() + ",");
+			System.out.print(media.getMediasName() + ",");
+			System.out.print(media.getGameVideo() + ",");
+			System.out.print(media.getGamePhoto() + ",");
+			System.out.print(media.getMediaType() + ",");
+			System.out.print(media.getMediaDate() + ",");
+			System.out.print(media.getDescriptions() + ",");
+			System.out.print(media.getTag());
+			System.out.println();
+		}
+		
+		
+	}
+	
+}

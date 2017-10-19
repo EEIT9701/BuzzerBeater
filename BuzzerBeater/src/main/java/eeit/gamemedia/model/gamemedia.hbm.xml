@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="eeit.gamemedia.model.GameMediaVO" table="GameMedia">
+
+		<id name="mediaID" column="mediaID">
+			<generator class="identity"/>
+		</id>
+		
+		<many-to-one name="gamesVO" class="eeit.games.model.GamesVO" lazy="false">
+			<column name="gameID" />
+		</many-to-one>
+
+		<property name="mediasName" column="mediasName" />
+		<property name="gameVideo" column="gameVideo" />
+		<property name="gamePhoto" column="gamePhoto" />
+		<property name="mediaType" column="mediaType" />
+		<property name="mediaDate" column="mediaDate" />
+		<property name="descriptions" column="descriptions" />
+		<property name="tag" column="tag" />
+
+		
+	</class>
+</hibernate-mapping>
+
