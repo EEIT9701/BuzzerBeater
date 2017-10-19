@@ -18,7 +18,11 @@
 		
 		<property name="locationName" column="locationName" />
 		<property name="locationAddr" column="locationAddr" />
+<<<<<<< HEAD
 		<property name="locationPhoto" column="locationPhoto" />
+=======
+<!-- 		<property name="locationPhoto" column="locationPhoto" /> -->
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 
 	</class>
 </hibernate-mapping>

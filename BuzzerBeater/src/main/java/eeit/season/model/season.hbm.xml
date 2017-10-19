@@ -8,7 +8,11 @@
 		<id name="seasonID" column="seasonID">
 			<generator class="identity"/>
 		</id>
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 		<set name="groupsSet" table="Groups" lazy="false" cascade="all"  inverse="true"  order-by="groupID asc">			
 			<key>
 				<column name="seasonID" />

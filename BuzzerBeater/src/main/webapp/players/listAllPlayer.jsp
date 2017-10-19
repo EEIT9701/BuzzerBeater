@@ -48,6 +48,7 @@
 								<th>體重</th>
 								<th>生日</th>
 								<th>國籍</th>
+<<<<<<< HEAD
 							</tr>
 						</thead>
 						<tbody>
@@ -71,6 +72,33 @@
 										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
                                                 <button type="submit" class="btn btn-danger">刪除</button> <input type="hidden"
 												name="playerID" value="${playerVO.playerID}"> <input
+=======
+							
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="playersVO" items="${playerSvc.allPlayer}">
+								<tr align='center' valign='middle'>
+									<td>${playersVO.playerID}</td>
+									<td>${playersVO.playerName}</td>
+									<td>${playersVO.id}</td>
+									<td>${playersVO.height}</td>
+									<td>${playersVO.weights}</td>
+									<td>${playersVO.birthday}</td>
+									<td>${playersVO.nationality}</td>
+                                    <td><img src="${playersPhoto}"></td>
+									<td>
+										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
+                                                <button type="submit" class="btn btn-info">修改</button> <input type="hidden"
+                                                name="playerName" value="${playersVO.playerName}"> 
+                                                <input type="hidden" name="action" value="getOne_For_Update">
+										</Form>
+									</td>
+									<td>
+										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
+                                                <button type="submit" class="btn btn-danger">刪除</button> <input type="hidden"
+												name="playerID" value="${playersVO.playerID}"> <input
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 												type="hidden" name="action" value="delete">
 										</Form>
 									</td>

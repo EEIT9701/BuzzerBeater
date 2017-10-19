@@ -1,5 +1,9 @@
 package eeit.personaldata.model;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 import java.util.Set;
 
 public interface PersonalDataDAO_interface {

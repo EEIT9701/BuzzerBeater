@@ -77,8 +77,12 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 
 	public static void main(String[] args) {
 
+<<<<<<< HEAD
 		GamesDAO_Hibernate dao = new GamesDAO_Hibernate();
 		
+=======
+		GamesDAO_Hibernate dao = new GamesDAO_Hibernate();
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 //		dao.delete(4001);
 
 		Set<GamesVO> set = dao.getAll();

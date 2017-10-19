@@ -48,6 +48,7 @@
 								<th>體重</th>
 								<th>生日</th>
 								<th>國籍</th>
+<<<<<<< HEAD
 							</tr>
 						</thead>
 						<tbody>
@@ -64,6 +65,27 @@
 										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
                                                 <button type="submit" class="btn btn-info">修改</button> <input type="hidden"
                                                 name="playerName" value="${playerVO.playerName}"> 
+=======
+								<th>照片</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="playersVO" items="${playersVO}">
+								<tr align='center' valign='middle'>
+									<td>${playersVO.playerID}</td>
+									<td>${playersVO.playerName}</td>
+									<td>${playersVO.id}</td>
+									<td>${playersVO.height}</td>
+									<td>${playersVO.weights}</td>
+									<td>${playersVO.birthday}</td>
+									<td>${playersVO.nationality}</td>
+									
+									<td><img src="${playersPhoto}"></td>
+									<td>
+										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
+                                                <button type="submit" class="btn btn-info">修改</button> <input type="hidden"
+                                                name="playerName" value="${playersVO.playerName}"> 
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
                                                 <input type="hidden" name="action" value="getOne_For_Update">
 										</Form>
 									</td>

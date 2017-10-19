@@ -197,7 +197,11 @@ public class GameMediaServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
+<<<<<<< HEAD
 						.getRequestDispatcher("/emp/update_emp_input.jsp");
+=======
+						.getRequestDispatcher("/gamemedia/video.jsp");
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 				failureView.forward(req, res);
 			}
 		}

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -39,6 +40,39 @@ public class SeasonServlet extends HttpServlet {
 		String action = request.getParameter("action");
 
 		System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
+=======
+
+import java.util.Set;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import eeit.season.model.SeasonService;
+import eeit.season.model.SeasonVO;
+import net.minidev.json.JSONValue;
+
+@WebServlet("/Season.do")
+public class SeasonServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// 設定Request的編碼為"UTF-8"，必須在取得請求參數前設定才有用
+		request.setCharacterEncoding("UTF-8");
+
+		// 取得請求參數"action"，此為自行設定的回傳參數，判斷將要執行的動作
+		String action = request.getParameter("action");
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 
 		/************************************************************/
 		// GET_ALL_SEASON 以JSON格式取得所有賽季

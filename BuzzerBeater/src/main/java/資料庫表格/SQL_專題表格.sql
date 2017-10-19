@@ -74,6 +74,7 @@ create table Groups			--分組
   weights         int,                                            --體重
   birthday        date,                                           --生日
   nationality     varchar(30),                                    --國籍
+<<<<<<< HEAD
   photo           image                                           --照片
 )
 GO 
@@ -185,6 +186,120 @@ GO
  )
  GO
 
+=======
+  photo           varbinary(MAX)                                  --照片
+)
+GO 
+
+ insert into Players values ('林書緯','A122968632','210','90','1987-07-28','taiwan',0x1234);
+ insert into Players values ('戴維斯','A126139660','200','69','1985-03-01','taiwan',0x1234);
+ insert into Players values ('李維哲','A127805471','190','84','1993-09-05','taiwan',0x1234);
+ insert into Players values ('李秉鴻','A125677552','182','78','1991-05-20','taiwan',0x1234);
+ insert into Players values ('陳世念','A124525651','204','87','1982-11-14','taiwan',0x1234);
+ insert into Players values ('陳子威','A127770997','197','94','1983-04-05','taiwan',0x1234);
+ insert into Players values ('蘇翊傑','A124178380','194','82','1985-09-11','taiwan',0x1234);
+ insert into Players values ('周儀翔','A124987511','181','84','1992-09-11','taiwan',0x1234);
+ insert into Players values ('蔡文誠','A126588446','184','69','1995-05-22','taiwan',0x1234);
+ insert into Players values ('李維哲','A124435847','202','68','1995-01-07','taiwan',0x1234);
+ insert into Players values ('呂政儒','A124178380','194','82','1985-09-11','taiwan',0x1234);
+ insert into Players values ('周士淵','A121734759','200','84','1982-05-04','taiwan',0x1234);
+ insert into Players values ('林金榜','A126897658','199','83','1989-12-14','taiwan',0x1234);
+ insert into Players values ('蔣淯安','A123199735','199','73','1988-06-22','taiwan',0x1234);
+ insert into Players values ('林宜輝','A126337429','195','69','1993-11-24','taiwan',0x1234);
+ insert into Players values ('于煥亞','A125746649','205','79','1994-09-04','taiwan',0x1234);
+ insert into Players values ('簡偉儒','A125411371','187','84','1994-02-04','taiwan',0x1234);
+ insert into Players values ('周柏臣','A122755235','194','71','1989-10-13','taiwan',0x1234);
+ insert into Players values ('宋宇軒','A122583115','189','86','1991-08-14','taiwan',0x1234);
+ insert into Players values ('張博勝','A121693866','183','88','1995-09-28','taiwan',0x1234);
+ insert into Players values ('林韋翰','A126417438','187','89','1984-12-16','taiwan',0x1234);
+ insert into Players values ('李愷諺','A121395548','207','65','1981-04-06','taiwan',0x1234);
+ insert into Players values ('周伯勳','A129695227','208','80','1990-10-19','taiwan',0x1234);
+ insert into Players values ('陳順詳','A122939189','187','84','1989-02-09','taiwan',0x1234);
+ insert into Players values ('張伯維','A127195327','194','77','1985-12-05','taiwan',0x1234);
+ insert into Players values ('陳堅恩','A129859494','185','91','1983-08-23','taiwan',0x1234);
+ insert into Players values ('施顏宗','A123624169','188','77','1985-01-25','taiwan',0x1234);
+ insert into Players values ('施晉堯','A127854445','207','85','1982-01-20','taiwan',0x1234);
+ insert into Players values ('朱億宗','A126277964','182','67','1994-04-12','taiwan',0x1234);
+ insert into Players values ('洪志善','A121214688','196','78','1982-06-10','taiwan',0x1234);
+ insert into Players values ('胡凱翔','A127224877','198','75','1987-09-17','taiwan',0x1234);
+ insert into Players values ('劉韋辰','A128219458','189','81','1988-05-01','taiwan',0x1234);
+ insert into Players values ('郭少傑','A127695785','210','67','1983-11-19','taiwan',0x1234);
+ insert into Players values ('王泰傑','A124525225','186','81','1985-02-17','taiwan',0x1234);
+ insert into Players values ('李啟瑋','A128364473','191','77','1984-09-24','taiwan',0x1234);
+
+ select * from Players
+ GO
+
+ ---------------------------------------------------------------------------------------------------------------
+ 
+create table LocationInfo     --場地資訊
+(
+  locationID             int primary key IDENTITY (101,1),  --場地ID
+  locationName           nvarchar(50),						--場地名稱
+  locationAddr           nvarchar(100),						--地址
+  --locationPhoto          image,								--場地圖片
+)
+GO
+
+insert into LocationInfo values ('新竹市立體育館','新竹市公園路295號');
+insert into LocationInfo values ('桃園市立體育館','桃園市桃園區三民路一段一號');
+insert into LocationInfo values ('高雄市鳳山體育館','高雄市鳳山區體育路65號');
+insert into LocationInfo values ('新北市政府體育處樹林場區','新北市樹林區水源街81號');
+
+select * from LocationInfo
+GO
+
+---------------------------------------------------------------------------------------------------------------
+
+ create table Teams			--球隊
+(
+  teamID                  int primary key IDENTITY (3001,1),        --球隊ID
+  captainID               int references Players(playerID ),        --隊長ID
+  captainEmail            varchar(30),                              --隊長Email
+  captainPhone            varchar(20),                              --隊長連絡電話
+  locationID              int,	                                    --主場ID
+  teamName                nvarchar(10),                             --球隊名稱
+  coachName               nvarchar(10),                             --總教練
+  bossName                nvarchar(10),                             --老闆
+  teamBadge               image,                                    --隊徽
+  totalWin                int,                                      --總勝場數
+  totalLose               int,                                      --總敗場數
+  winRate                 float,                                    --勝率
+  remarks                 nvarchar(200),                            --備註
+)
+GO
+
+insert into Teams values('70001','adfs156@gmail.com','0910123456','104','富邦勇士','顏行書','富邦育樂股份有限公司','','17','13','56.6','');
+insert into Teams values('70002','agfsdg43@gmail.com','0910987564','102','台灣啤酒','周俊三','台灣菸酒公司','','30','8','60.54','');
+insert into Teams values('70003','gndf65ndnvb@ymail.com','0910125568','','臺灣銀行','韋陳明','臺灣銀行','','20','25','78.56','');
+insert into Teams values('70004','gnddn40684@ymail.com','0910216508','103','金門酒廠','楊哲宜','金門酒廠','','25','28','87.87','');
+insert into Teams values('70005','gfsdhsd0890@gmail.com','0910123256','','裕隆納智捷','魏永泰','裕隆汽車','','37','32','43.38','');
+insert into Teams values('70006','gfsdhsd0890@gmail.com','0910123256','','桃園璞園建築','麥班達','璞園建築','','14','16','46.66','');
+insert into Teams values('70007','gfsdhsd0890@gmail.com','0910123256','','臺北達欣工程','邱大宗','達欣工程','','21','9','70.00','');
+
+select * from Teams
+GO
+
+---------------------------------------------------------------------------------------------------------------
+
+
+ create table Games			--賽事
+(
+  gameID                       int primary key IDENTITY (4001,1),                  --賽事ID
+  groupID                      int  references Groups(groupID ),	               --分組ID  
+  locationID                   int  references LocationInfo(locationID ),          --比賽地點
+  teamAID                      int  references Teams(teamID ),					   --A隊ID
+  teamAScore                   int,                                                --A隊得分
+  teamBID                      int  references Teams(teamID ),					   --B隊ID
+  teamBScore                   int,                                                --B隊得分
+  winnerID                     int,                                                --獲勝隊伍ID
+  gameBeginDate                datetime,                                           --賽事開始時間
+  gameEndDate                  datetime,                                           --賽事結束時間
+ )
+ GO
+
+
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
  insert into Games values('2001','101','3001','80','3002','75','3001','2018-01-20 10:00','2018-01-20 12:00');
  insert into Games values('2001','101','3002','78','3003','75','3002','2018-01-21 10:00','2018-01-21 12:00');
  insert into Games values('2001','101','3004','82','3002','55','3004','2018-01-22 10:00','2018-01-22 12:00');

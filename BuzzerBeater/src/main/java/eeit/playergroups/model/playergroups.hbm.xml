@@ -6,6 +6,10 @@
 	<class name="eeit.playergroups.model.PlayerGroupsVO" table="PlayerGroups">
 
 		<composite-id>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 			<key-many-to-one name="groupsVO" class="eeit.groups.model.GroupsVO" lazy="false">
 				<column name="groupID" />
 			</key-many-to-one>

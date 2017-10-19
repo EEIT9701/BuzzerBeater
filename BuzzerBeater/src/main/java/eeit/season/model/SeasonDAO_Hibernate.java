@@ -80,6 +80,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
+<<<<<<< HEAD
 			
 			Query query = session.createQuery(GET_ALL_SEASON);
 			set = new LinkedHashSet<SeasonVO>(query.list());
@@ -91,6 +92,17 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 			throw ex;
 		}
 
+=======
+
+			Query query = session.createQuery(GET_ALL_SEASON);
+			set = new LinkedHashSet<SeasonVO>(query.list());
+			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 		return set;
 	}
 

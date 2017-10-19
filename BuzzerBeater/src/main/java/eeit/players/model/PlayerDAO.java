@@ -1,5 +1,6 @@
 package eeit.players.model;
 
+<<<<<<< HEAD
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -84,6 +85,96 @@ public class PlayerDAO implements PlayerDAO_interface {
 			pstmt.setDate(5, playerVO.getBirthday());
 			pstmt.setString(6, playerVO.getNationality());
 			pstmt.setInt(7, playerVO.getPlayerID());
+=======
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+public class PlayerDAO implements PlayerDAO_interface {
+	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
+		private static DataSource ds = null;
+		static {
+			try {
+				Context ctx = new InitialContext();
+				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+		}
+	
+	//宣告sql指令。
+	private static final String INSERT_STMT = "INSERT INTO Players (PlayerName,ID,Height,Weights,Birthday,Nationality) VALUES(?,?,?,?,?,?)";
+	private static final String UPDATE_STMT = "UPDATE Players SET PlayerName=?, ID=?, Height=?, Weights=?, Birthday=?, Nationality=? where PlayerID = ?";
+	private static final String DELETE_STMT = "DELETE FROM Players where PlayerID = ?";
+	private static final String GET_ONE_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality FROM Players where PlayerName = ?";
+	private static final String GET_ALL_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality FROM Players";
+	
+	//新增method
+	@Override
+	public void insert(PlayersVO playerVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_STMT);
+			pstmt.setString(1, playerVO.getPlayerName());
+			pstmt.setString(2, playerVO.getId());
+			pstmt.setInt(3, playerVO.getHeight());
+			pstmt.setInt(4, playerVO.getWeights());
+			pstmt.setDate(5, playerVO.getBirthday());
+			pstmt.setString(6, playerVO.getNationality());
+			pstmt.executeUpdate();
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void update(PlayersVO playerVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = ds.getConnection();
+			
+			pstmt = con.prepareStatement(UPDATE_STMT);
+			pstmt.setString(1, playerVO.getPlayerName());
+			pstmt.setString(2, playerVO.getId());
+			pstmt.setInt(3, playerVO.getHeight());
+			pstmt.setInt(4, playerVO.getWeights());
+			pstmt.setDate(5, playerVO.getBirthday());
+			pstmt.setString(6, playerVO.getNationality());
+			pstmt.setInt(7, playerVO.getPlayerID());
+			pstmt.setBytes(8, playerVO.getPhoto());
+>>>>>>> branch 'master' of https://github.com/EEIT9701/BuzzerBeater.git
 			pstmt.executeUpdate();
 			
 		} catch (SQLException se) {
