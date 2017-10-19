@@ -16,7 +16,6 @@ public class LocationinfoVO implements Serializable {
 
 	private String locationName;
 	private String locationAddr;
-	private Blob locationPhoto;
 
 	public Integer getLocationID() {
 		return locationID;
@@ -50,12 +49,5 @@ public class LocationinfoVO implements Serializable {
 		this.locationAddr = locationAddr;
 	}
 
-	public Blob getLocationPhoto() {
-		return locationPhoto;
-	}
-
-	public void setLocationPhoto(Blob locationPhoto) {
-		this.locationPhoto = locationPhoto;
-	}
 
 }

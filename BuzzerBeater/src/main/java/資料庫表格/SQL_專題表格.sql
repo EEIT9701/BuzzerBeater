@@ -122,16 +122,16 @@ GO
 create table LocationInfo     --場地資訊
 (
   locationID             int primary key IDENTITY (101,1),  --場地ID
-  locationName           nvarchar(20),						--場地名稱
-  locationAddr           nvarchar(50),						--地址
-  locationPhoto          image,								--場地圖片
+  locationName           nvarchar(50),						--場地名稱
+  locationAddr           nvarchar(100),						--地址
+  --locationPhoto          image,								--場地圖片
 )
 GO
 
-insert into LocationInfo values ('新竹市立體育館','新竹市公園路295號',0x0000);
-insert into LocationInfo values ('桃園市立體育館','桃園市桃園區三民路一段一號',0x1234);
-insert into LocationInfo values ('高雄市鳳山體育館','高雄市鳳山區體育路65號',0x4589646);
-insert into LocationInfo values ('新北市政府體育處樹林場區','新北市樹林區水源街81號',0x4984);
+insert into LocationInfo values ('新竹市立體育館','新竹市公園路295號');
+insert into LocationInfo values ('桃園市立體育館','桃園市桃園區三民路一段一號');
+insert into LocationInfo values ('高雄市鳳山體育館','高雄市鳳山區體育路65號');
+insert into LocationInfo values ('新北市政府體育處樹林場區','新北市樹林區水源街81號');
 
 select * from LocationInfo
 GO

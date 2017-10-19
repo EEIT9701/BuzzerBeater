@@ -20,9 +20,6 @@ public class GlobalService implements Filter {
     }
 
 	@Override
-	public void destroy() { }
-
-	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
 		
@@ -36,10 +33,10 @@ public class GlobalService implements Filter {
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {
-		
-	}
+	public void init(FilterConfig arg0) throws ServletException { }
 
+	@Override
+	public void destroy() { }
 	
 
 }
