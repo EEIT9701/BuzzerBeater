@@ -15,7 +15,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class MemberInfoDAO implements MemberInfoDAO_interface {
+public class MemberInfoDAO_hibernate implements MemberInfoDAO_interface {
 
 //	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 //	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=BasketBallDB";
