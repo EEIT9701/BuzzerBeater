@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -37,8 +38,6 @@ public class SeasonServlet extends HttpServlet {
 
 		// 取得請求參數"action"，此為自行設定的回傳參數，判斷將要執行的動作
 		String action = request.getParameter("action");
-
-		System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
 
 		/************************************************************/
 		// GET_ALL_SEASON 以JSON格式取得所有賽季

@@ -21,6 +21,7 @@
 	</font>
 </c:if>
 
+
 <c:forEach var = "playersVO" items = "${playersVO}" >
   <Form method="post" action="<%=request.getContextPath() %>/Players.do" enctype="multipart/form-data">
   <input type="hidden" name="action" value="update">

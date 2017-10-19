@@ -11,11 +11,10 @@ public class GameMediaService {
 	public GameMediaService(){
 		dao = new GameMediaDAO_JNDI();
 	}
-	public GameMediaVO insertGameMedia(Integer gameID,Integer mediaID,String mediasName,String gameVideo,Blob gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag ){
+	public GameMediaVO insertGameMedia(Integer mediaID,String mediasName,String gameVideo,Blob gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag ){
 		
 		GameMediaVO gameMediaVO = new GameMediaVO();
-		
-		gameMediaVO.setGameID(gameID);
+				
 		gameMediaVO.setMediaID(mediaID);
 		gameMediaVO.setMediasName(mediasName);
 		gameMediaVO.setGameVideo(gameVideo);
@@ -29,10 +28,9 @@ public class GameMediaService {
 		return gameMediaVO;
 	}
 	
-	public GameMediaVO updateGameMedia(Integer gameID,Integer mediaID,String mediasName,String gameVideo,Blob gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag){
+	public GameMediaVO updateGameMedia(Integer mediaID,String mediasName,String gameVideo,Blob gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag){
 		GameMediaVO gameMediaVO = new GameMediaVO();
 		
-		gameMediaVO.setGameID(gameID);
 		gameMediaVO.setMediaID(mediaID);
 		gameMediaVO.setMediasName(mediasName);
 		gameMediaVO.setGameVideo(gameVideo);

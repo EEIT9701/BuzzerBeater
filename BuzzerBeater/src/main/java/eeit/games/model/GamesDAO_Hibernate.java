@@ -78,7 +78,6 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 	public static void main(String[] args) {
 
 		GamesDAO_Hibernate dao = new GamesDAO_Hibernate();
-		
 //		dao.delete(4001);
 
 		Set<GamesVO> set = dao.getAll();

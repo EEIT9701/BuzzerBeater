@@ -24,7 +24,6 @@
 		<many-to-one name="teamBVO" class="eeit.teams.model.TeamsVO" lazy="false">
 			<column name="teamBID" />
 		</many-to-one>
-		
 
 		<set name="gameMediaSet" table="GameMedia" lazy="false" cascade="all" inverse="true">
 			<key>

@@ -8,7 +8,7 @@ import eeit.teams.model.TeamsVO;
 
 public class GroupRegVO implements Serializable {
 	private static final long serialVersionUID = 4552206536523610995L;
-
+	
 	private TeamsVO teamsVO;//replace teamID // CPK
 	private GroupsVO groupsVO; //replace groupID // CPK
 

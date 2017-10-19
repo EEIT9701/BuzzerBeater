@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import eeit.games.model.GamesVO;
+
 
 public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 	
@@ -24,7 +26,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 	private static final String INSERT_STMT =
 		      "INSERT INTO GameMedia (gameID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT =
-		      "SELECT * FROM GameMedia order by game_ID";
+		      "SELECT * FROM GameMedia order by gameID";
 	private static final String GET_ONE_STMT =
 		      "SELECT gameID,mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag FROM GameMedia where gameID = ?";
 	private static final String DELETE =
@@ -45,7 +47,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, gameMediaVO.getGameID());
+			pstmt.setInt(1, gameMediaVO.getGamesVO().getGameID());
 			pstmt.setString(2, gameMediaVO.getMediasName());
 			pstmt.setString(3, gameMediaVO.getGameVideo());
 			pstmt.setBlob(4, gameMediaVO.getGamePhoto());
@@ -89,7 +91,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, gameMediaVO.getGameID());
+			pstmt.setInt(1, gameMediaVO.getGamesVO().getGameID());
 			pstmt.setString(2, gameMediaVO.getMediasName());
 			pstmt.setString(3, gameMediaVO.getGameVideo());
 			pstmt.setBlob(4, gameMediaVO.getGamePhoto());
@@ -181,7 +183,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 			while (rs.next()) {
 				// empVo 也稱為 Domain objects
 				gameMediaVO = new GameMediaVO();
-				gameMediaVO.setGameID(rs.getInt("gameID"));
+				gameMediaVO.getGamesVO().setGameID(rs.getInt("gameID"));
 				gameMediaVO.setMediaID(rs.getInt("mediaID"));
 				gameMediaVO.setMediasName(rs.getString("mediasName"));
 				gameMediaVO.setGameVideo(rs.getString("gameVedio"));
@@ -240,15 +242,18 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 			
 			while(rs.next()){
 				gameMediaVO = new GameMediaVO();
-				gameMediaVO.setGameID(rs.getInt(1));
-				gameMediaVO.setMediaID(rs.getInt(2));
-				gameMediaVO.setMediasName(rs.getString(3));
-				gameMediaVO.setGameVideo(rs.getString(4));
-				gameMediaVO.setGamePhoto(rs.getBlob(5));
-				gameMediaVO.setMediaType(rs.getString(6));
-				gameMediaVO.setMediaDate(rs.getTimestamp(7));
-				gameMediaVO.setDescriptions(rs.getString(8));
-				gameMediaVO.setTag(rs.getString(9));
+				GamesVO game = new GamesVO();
+				game.setGameID(rs.getInt("gameID"));
+				gameMediaVO.setGamesVO(game);
+				
+				gameMediaVO.setMediaID(rs.getInt("mediaID"));
+				gameMediaVO.setMediasName(rs.getString("mediasName"));
+				gameMediaVO.setGameVideo(rs.getString("gameVideo"));
+				gameMediaVO.setGamePhoto(rs.getBlob("gamePhoto"));
+				gameMediaVO.setMediaType(rs.getString("mediaType"));
+				gameMediaVO.setMediaDate(rs.getTimestamp("mediaDate"));
+				gameMediaVO.setDescriptions(rs.getString("descriptions"));
+				gameMediaVO.setTag(rs.getString("tag"));
 				list.add(gameMediaVO);
 			}
 			
@@ -285,7 +290,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 		System.out.println(list);
 		for (GameMediaVO media : list) {
 			
-			System.out.print(media.getGameID() + ",");
+			System.out.print(media.getGamesVO() + ",");
 			System.out.print(media.getMediaID() + ",");
 			System.out.print(media.getMediasName() + ",");
 			System.out.print(media.getGameVideo() + ",");

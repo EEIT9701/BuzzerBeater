@@ -13,6 +13,7 @@ public class LocationinfoDAO_Hibernate implements LocationinfoDAO_interface {
 
 	private static final String GET_ALL_STMT = "FROM LocationinfoVO ORDER BY locationID";
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Set<LocationinfoVO> getAll() {
 		Set<LocationinfoVO> set = new LinkedHashSet<LocationinfoVO>();
@@ -32,12 +33,88 @@ public class LocationinfoDAO_Hibernate implements LocationinfoDAO_interface {
 		return set;
 	}
 
+	@Override
+	public LocationinfoVO findByID(Integer locationID) {
+		LocationinfoVO locVO = null;
+
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			locVO = (LocationinfoVO) session.get(LocationinfoVO.class, locationID);
+
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return locVO;
+	}
+
+	@Override
+	public void insert(LocationinfoVO locationinfoVO) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(locationinfoVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+
+	}
+
+	@Override
+	public void update(LocationinfoVO locationinfoVO) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(locationinfoVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+
+	}
+
+	@Override
+	public void delete(Integer locationinfoID) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			LocationinfoVO locationinfoVO = (LocationinfoVO) session.get(LocationinfoVO.class, locationinfoID);
+			session.delete(locationinfoVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+
+	}
+
 	public static void main(String[] args) {
 		LocationinfoDAO_Hibernate dao = new LocationinfoDAO_Hibernate();
-		Set<LocationinfoVO> set = dao.getAll();
 
+		// dao.delete(101);
+
+		// LocationinfoVO locVO = dao.findByID(101);
+		// System.out.print(locVO.getLocationName()+", ");
+		// System.out.print(locVO.getLocationAddr()+", ");
+		// System.out.println();
+
+		 LocationinfoVO locVO = new LocationinfoVO();
+		 locVO.setLocationID(101);
+		 locVO.setLocationName("修改");
+		 locVO.setLocationAddr("修改");
+		 dao.update(locVO);
+		//
+
+		Set<LocationinfoVO> set = dao.getAll();
 		for (LocationinfoVO lVO : set) {
-			System.out.print(lVO.getLocationID() + ": ");
+			System.out.print(lVO.getLocationName() + ": ");
+			System.out.print(lVO.getLocationAddr() + ": ");
+			System.out.print(lVO.getLocationID() + ", gameID: ");
 			for (GamesVO gvo : lVO.getGamesSet()) {
 				System.out.print(gvo.getGameID() + ", ");
 			}

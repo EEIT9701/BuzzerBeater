@@ -8,7 +8,7 @@ import java.util.Set;
 import eeit.games.model.GamesVO;
 
 public class LocationinfoVO implements Serializable {
-	private static final long serialVersionUID = -461347740362010759L;
+	private static final long serialVersionUID = -4613477403462010759L;
 
 	private Integer locationID;// PK
 
@@ -16,7 +16,6 @@ public class LocationinfoVO implements Serializable {
 
 	private String locationName;
 	private String locationAddr;
-	private Blob locationPhoto;
 
 	public Integer getLocationID() {
 		return locationID;
@@ -50,12 +49,5 @@ public class LocationinfoVO implements Serializable {
 		this.locationAddr = locationAddr;
 	}
 
-	public Blob getLocationPhoto() {
-		return locationPhoto;
-	}
-
-	public void setLocationPhoto(Blob locationPhoto) {
-		this.locationPhoto = locationPhoto;
-	}
 
 }

@@ -1,5 +1,6 @@
 package eeit.personaldata.model;
 
+
 import java.util.Set;
 
 public interface PersonalDataDAO_interface {

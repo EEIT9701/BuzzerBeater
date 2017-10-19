@@ -44,9 +44,9 @@ public class GamesDAO_JDBC implements GamesDAO_interface {
 
 				gVO.setGroupsVO(groupsVO);
 				gVO.getLocationinfoVO().setLocationID(rs.getInt("locationID"));
-				gVO.setTeamAID(rs.getInt("teamAID"));
+				gVO.getTeamAVO().setTeamID(rs.getInt("teamAID"));
 				gVO.setTeamAScore(rs.getInt("teamAScore"));
-				gVO.setTeamBID(rs.getInt("teamBID"));
+				gVO.getTeamBVO().setTeamID(rs.getInt("teamBID"));
 				gVO.setTeamBScore(rs.getInt("teamBScore"));
 				gVO.setWinnerID(rs.getInt("winnerID"));
 				gVO.setGameBeginDate(rs.getTimestamp("gameBeginDate"));

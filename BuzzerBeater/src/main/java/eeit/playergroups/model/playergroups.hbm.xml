@@ -6,6 +6,7 @@
 	<class name="eeit.playergroups.model.PlayerGroupsVO" table="PlayerGroups">
 
 		<composite-id>
+
 			<key-many-to-one name="groupsVO" class="eeit.groups.model.GroupsVO" lazy="false">
 				<column name="groupID" />
 			</key-many-to-one>
