@@ -74,7 +74,7 @@ create table Groups			--分組
   weights         int,                                            --體重
   birthday        date,                                           --生日
   nationality     varchar(30),                                    --國籍
-  photo           image                                           --照片
+  photo           varbinary(MAX)                                  --照片
 )
 GO 
 

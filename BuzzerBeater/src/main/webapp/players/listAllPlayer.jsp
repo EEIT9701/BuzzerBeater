@@ -48,6 +48,7 @@
 								<th>體重</th>
 								<th>生日</th>
 								<th>國籍</th>
+							
 							</tr>
 						</thead>
 						<tbody>
@@ -60,6 +61,7 @@
 									<td>${playersVO.weights}</td>
 									<td>${playersVO.birthday}</td>
 									<td>${playersVO.nationality}</td>
+                                    <td><img src="${playersPhoto}"></td>
 									<td>
 										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
                                                 <button type="submit" class="btn btn-info">修改</button> <input type="hidden"

@@ -1,20 +1,32 @@
 package eeit.players.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.hibernate.engine.jdbc.BinaryStream;
 
 import eeit.players.model.PlayerService;
 import eeit.players.model.PlayersVO;
+
+
 @WebServlet("/Players.do")
+@MultipartConfig
 public class PlayersSevrlet extends HttpServlet {
 	
 	@Override
@@ -42,7 +54,7 @@ public class PlayersSevrlet extends HttpServlet {
 			/***************************3.查詢完成,準備轉交(Send the Success view)************/
 //			 req.setAttribute("listOnePlayer", playerVO);        // 資料庫取出的empVO物件,存入req
 			
-			 req.setAttribute("listOnePlayer", playersVO);
+			 req.setAttribute("playersVO", playersVO);
 			 String url = "/players/listOnePlayer.jsp";
 			 RequestDispatcher successView = req.getRequestDispatcher(url);
 			 successView.forward(req, resp);
@@ -115,8 +127,24 @@ public class PlayersSevrlet extends HttpServlet {
 //				RequestDispatcher successView = req.getRequestDispatcher(url);
 //				successView.forward(req, resp);
 //			}
+			 ByteArrayOutputStream swapStream = new ByteArrayOutputStream();  
+		        byte[] buff = new byte[100];  
+		        
+		        InputStream inStream = req.getPart("photo").getInputStream();
+		        int rc = 0;
+		        while ((rc = inStream.read(buff, 0, 100)) > 0) {  
+		            swapStream.write(buff, 0, rc);  
+		        }  
+		        byte[] photo = swapStream.toByteArray();
 			
-			PlayersVO playersVO = playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality);
+			
+			
+			
+			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality,photo);
+			Set<PlayersVO> playersVO = playerSvc.getOnePlayer(playerName);
+		
+			ByteArrayInputStream in = new ByteArrayInputStream(photo);
+			
 			req.setAttribute("playersVO", playersVO);
 			String url = "/players/listOnePlayer.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);

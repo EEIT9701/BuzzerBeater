@@ -1,5 +1,7 @@
 package eeit.players.model;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -76,6 +78,7 @@ public class PlayerDAO implements PlayerDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 			con = ds.getConnection();
+			
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setString(1, playerVO.getPlayerName());
 			pstmt.setString(2, playerVO.getId());
@@ -84,6 +87,7 @@ public class PlayerDAO implements PlayerDAO_interface {
 			pstmt.setDate(5, playerVO.getBirthday());
 			pstmt.setString(6, playerVO.getNationality());
 			pstmt.setInt(7, playerVO.getPlayerID());
+			pstmt.setBytes(8, playerVO.getPhoto());
 			pstmt.executeUpdate();
 			
 		} catch (SQLException se) {

@@ -22,7 +22,7 @@
 </c:if>
 
 <c:forEach var = "playersVO" items = "${playersVO}" >
-  <Form method="post" action="<%=request.getContextPath() %>/Players.do">
+  <Form method="post" action="<%=request.getContextPath() %>/Players.do" enctype="multipart/form-data">
   <input type="hidden" name="action" value="update">
   <input type="hidden" name="playerID" value="${playersVO.playerID}">
             <table border="0">
@@ -55,6 +55,12 @@
             <td>國籍:</td>
             <td><input type="text" name="nationality" size="30" value="${playersVO.nationality}"></td>
         </tr>
+   
+        <tr>
+        <td>照片:</td>
+        <td><Input Type="file" size="40"  style="width: 480px;"  name="${playersVO.photo}" ></td>
+      </tr>
+     
     </table> 
        <input type="submit" value="送出">    
        </Form>
