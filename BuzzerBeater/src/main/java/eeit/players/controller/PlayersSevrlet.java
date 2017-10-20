@@ -127,15 +127,7 @@ public class PlayersSevrlet extends HttpServlet {
 //				RequestDispatcher successView = req.getRequestDispatcher(url);
 //				successView.forward(req, resp);
 //			}
-			 ByteArrayOutputStream swapStream = new ByteArrayOutputStream();  
-		        byte[] buff = new byte[100];  
-		        
-		        InputStream inStream = req.getPart("photo").getInputStream();
-		        int rc = 0;
-		        while ((rc = inStream.read(buff, 0, 100)) > 0) {  
-		            swapStream.write(buff, 0, rc);  
-		        }  
-		        byte[] photo = swapStream.toByteArray();
+			Part photo = req.getPart("photo");
 			
 			
 			
@@ -143,7 +135,6 @@ public class PlayersSevrlet extends HttpServlet {
 			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality,photo);
 			Set<PlayersVO> playersVO = playerSvc.getOnePlayer(playerName);
 		
-			ByteArrayInputStream in = new ByteArrayInputStream(photo);
 			
 			req.setAttribute("playersVO", playersVO);
 			String url = "/players/listOnePlayer.jsp";

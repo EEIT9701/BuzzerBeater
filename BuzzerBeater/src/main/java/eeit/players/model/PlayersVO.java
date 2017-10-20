@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.servlet.http.Part;
+
 import org.hibernate.engine.jdbc.BinaryStream;
 
 import eeit.personaldata.model.PersonalDataVO;
@@ -27,21 +29,15 @@ public class PlayersVO implements java.io.Serializable {
 	private Integer weights;// Double weights
 	private Date birthday;
 	private String nationality;
-	private byte[] photo;
+	private Part photo;
 
-
-	public byte[] getPhoto() {
+	public Part getPhoto() {
 		return photo;
 	}
 
-
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(Part photo) {
 		this.photo = photo;
 	}
-
-
-	
-
 
 	public Integer getPlayerID() {
 		return playerID;

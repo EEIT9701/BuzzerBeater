@@ -2,6 +2,7 @@ package eeit.players.model;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -87,12 +88,15 @@ public class PlayerDAO implements PlayerDAO_interface {
 			pstmt.setDate(5, playerVO.getBirthday());
 			pstmt.setString(6, playerVO.getNationality());
 			pstmt.setInt(7, playerVO.getPlayerID());
-			pstmt.setBytes(8, playerVO.getPhoto());
+			pstmt.setBinaryStream(8, playerVO.getPhoto().getInputStream(), playerVO.getPhoto().getSize());
 			pstmt.executeUpdate();
 			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null) {
 				try {

@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.servlet.http.Part;
+
 import org.hibernate.engine.jdbc.BinaryStream;
 
 public class PlayerService {
@@ -25,7 +27,7 @@ public class PlayerService {
 		dao.insert(playerVO);
 		return playerVO;
 	}
-	public PlayersVO updatePlayer(Integer playerID,String playerName,String id,Integer height,Integer weights,Date birthday,String nationality,byte[] photo){
+	public PlayersVO updatePlayer(Integer playerID,String playerName,String id,Integer height,Integer weights,Date birthday,String nationality,Part photo){
 		PlayersVO playerVO = new PlayersVO();
 		playerVO.setPlayerID(playerID);
 		playerVO.setPlayerName(playerName);
