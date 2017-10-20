@@ -5,7 +5,7 @@
 
 <%
 	SeasonService dao = new SeasonService();
-	List<HashMap<String,Object>> set = dao.getAll();
+	Set<HashMap<String,Object>> set = dao.getAll();
 	pageContext.setAttribute("set", set);
 %>
 

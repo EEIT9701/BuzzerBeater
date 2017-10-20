@@ -1,5 +1,6 @@
 package eeit.season.model;
 
+import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -107,12 +108,23 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 
 		/****************** insert ******************/
 
-//		 SeasonVO sVO1 = new SeasonVO();
-//		 sVO1.setSeasonName("第十六季例行賽");
-//		 sVO1.setSeasonBeginDate(null);
-//		 sVO1.setSignUpBegin(Timestamp.valueOf("2017-10-10 18:00:00"));
-//		 sVO1.setDescriptions("...");
-//		 dao.insert(sVO1);
+		 SeasonVO sVO1 = new SeasonVO();
+		 sVO1.setSeasonName("第十六季例行賽");
+		 sVO1.setSeasonBeginDate(null);
+		 sVO1.setSignUpBegin(Timestamp.valueOf("2017-10-10 18:00:00"));
+		 sVO1.setDescriptions("...");
+		 
+		 GroupsVO gVO1 = new GroupsVO();
+		 gVO1.setGroupName("新增1");
+		 gVO1.setMaxPlayers(3);
+		 GroupsVO gVO2 = new GroupsVO();
+		 gVO2.setGroupName("新增2");
+		 gVO2.setMaxPlayers(3);
+		 Set<GroupsVO> gSet = new LinkedHashSet<GroupsVO>();
+		 gSet.add(gVO1);
+		 gSet.add(gVO2);
+		 sVO1.setGroupsSet(gSet);
+		 dao.insert(sVO1);
 
 		/****************** update ******************/
 

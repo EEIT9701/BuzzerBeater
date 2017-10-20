@@ -6,7 +6,6 @@ import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import eeit.games.model.GamesVO;
 import hibernate.util.HibernateUtil;
 
 public class GroupsDAO_Hibernate implements GroupsDAO_interface {
