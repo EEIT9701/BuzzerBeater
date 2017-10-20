@@ -16,7 +16,7 @@ public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=BasketBallDB";
 	              
 	String user = "sa";
-	String password = "P@ssw0rd";
+	String password = "P@ssw0rd000";
 
 	private static final String INSERT_STMT = "INSERT INTO MemberInfo (acc,name,auth,registerTime) VALUES (?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM MemberInfo order by memberID";
