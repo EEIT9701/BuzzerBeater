@@ -49,5 +49,4 @@ public class LocationinfoVO implements Serializable {
 		this.locationAddr = locationAddr;
 	}
 
-
 }

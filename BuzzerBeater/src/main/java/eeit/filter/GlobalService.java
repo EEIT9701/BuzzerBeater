@@ -26,6 +26,8 @@ public class GlobalService implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse reponse = (HttpServletResponse) resp;
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		String action = request.getParameter("action");
 		System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
 		

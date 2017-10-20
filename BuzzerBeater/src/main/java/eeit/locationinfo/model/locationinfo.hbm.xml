@@ -18,7 +18,6 @@
 		
 		<property name="locationName" column="locationName" />
 		<property name="locationAddr" column="locationAddr" />
-<!-- 		<property name="locationPhoto" column="locationPhoto" /> -->
 
 	</class>
 </hibernate-mapping>

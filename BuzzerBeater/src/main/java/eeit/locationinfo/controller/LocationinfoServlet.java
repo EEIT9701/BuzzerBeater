@@ -47,7 +47,7 @@ public class LocationinfoServlet extends HttpServlet {
 			LocationinfoService locSvc = new LocationinfoService();
 			locSvc.delete(locationID);
 			
-			RequestDispatcher view = request.getRequestDispatcher("/location/location_back.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/location/locationList_back.jsp");
 			view.forward(request, response);
 		}
 		
@@ -61,7 +61,7 @@ public class LocationinfoServlet extends HttpServlet {
 			LocationinfoService locSvc = new LocationinfoService();
 			locSvc.update(locationID, locationName, locationAddr);
 			
-			RequestDispatcher view = request.getRequestDispatcher("/location/location_back.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/location/locationList_back.jsp");
 			view.forward(request, response);
 		}
 	}
