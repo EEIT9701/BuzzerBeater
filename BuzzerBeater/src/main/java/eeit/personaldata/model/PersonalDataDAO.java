@@ -12,6 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import eeit.games.model.GamesVO;
+import eeit.players.model.PlayersVO;
+
 public class PersonalDataDAO implements PersonalDataDAO_interface {
     private static DataSource ds=null;
 	static{
@@ -24,8 +27,9 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 		} 
 	}
 	
-	private static final String GETALL="SELECT playerID,gameID,teamID,quarters,quarterTime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,startingPlayer from personaldata order by playerID";
-	
+	//private static final String GETALL="SELECT playerID,gameID,teamID,quarters,quarterTime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,startingPlayer from personaldata order by playerID";
+	//private static final String GETALL="SELECT ROW_NUMBER() OVER(ORDER BY points DESC) AS ranking,* FROM personaldata";
+	private static final String GETALL="SELECT * from personaldata order by points";
 	
 	@Override
 	public List<PersonalDataVO> getAll() {
@@ -43,11 +47,19 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
         	rs=pstmt.executeQuery();
 			while (rs.next()){
 				personalDataVO=new PersonalDataVO();
-				personalDataVO.setPlayerID(rs.getInt("playerID"));
-				personalDataVO.setGameID(rs.getInt("gameID"));
+			//	personalDataVO.setRanking(rs.getInt("ranking"));
+				
+				PlayersVO playersVO = new PlayersVO();
+				playersVO.setPlayerID(rs.getInt("playerID"));
+				personalDataVO.setPlayersVO(playersVO);
+				
+				GamesVO gamesVO = new GamesVO();
+				gamesVO.setGameID(rs.getInt("gameID"));
+				personalDataVO.setGamesVO(gamesVO);
+				
 				personalDataVO.setTeamID(rs.getInt("teamID"));
-				personalDataVO.setQuarters(rs.getString("quarters"));
-				personalDataVO.setQuarterTime(rs.getInt("quarterTime"));
+			//	personalDataVO.setQuarters(rs.getString("quarters"));
+				personalDataVO.setGameTime(rs.getString("gameTime"));
 				personalDataVO.setTwoPoint(rs.getInt("twoPoint"));
 				personalDataVO.setTwoPointShot(rs.getInt("twoPoint"));
 				personalDataVO.setThreePoint(rs.getInt("threePoint"));
@@ -60,6 +72,8 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 				personalDataVO.setSteal(rs.getInt("steal"));
 				personalDataVO.setBlocks(rs.getInt("blocks"));
 				personalDataVO.setTurnover(rs.getInt("turnover"));
+				personalDataVO.setPersonalFouls(rs.getInt("personalFouls"));
+				personalDataVO.setPoints(rs.getInt("points"));
 				personalDataVO.setStartingPlayer(rs.getInt("startingPlayer"));
 				list.add(personalDataVO);	
 			}
