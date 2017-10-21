@@ -10,13 +10,24 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=BasketBallDB";
-	              
-	String user = "sa";
-	String password = "P@ssw0rd000";
+public class MemberInfoJNDIDAO implements MemberInfoDAO_interface {
+
+	private static DataSource ds = null;
+	static{
+		 try{
+			Context ctx = new InitialContext();
+				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/testDB");
+		 }catch(NamingException ne){
+			 ne.printStackTrace();
+		 }
+
+	}
+	
 
 	private static final String INSERT_STMT = "INSERT INTO MemberInfo (acc,name,auth,registerTime) VALUES (?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM MemberInfo order by memberID";
@@ -30,8 +41,8 @@ public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
 		 PreparedStatement stmt = null;
 		
 		 try{
-		 Class.forName(driver);
-		 conn = DriverManager.getConnection(url, user, password);
+		 
+		 conn = ds.getConnection();
 		 stmt = conn.prepareStatement(INSERT_STMT);
 		 
 		 stmt.setString(1, memberInfoVO.getAcc());
@@ -39,9 +50,6 @@ public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
 		 stmt.setString(3, memberInfoVO.getAuth() );
 		 stmt.setTimestamp(4, memberInfoVO.getRegisterTime() );
 		 stmt.executeUpdate();
-		
-		 }catch(ClassNotFoundException cvfe){
-		 cvfe.printStackTrace();
 		
 		 }catch(SQLException sqle){
 		 sqle.printStackTrace();
@@ -72,8 +80,8 @@ public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
 		 PreparedStatement stmt = null;
 		
 		 try{
-		 Class.forName(driver);
-		 conn = DriverManager.getConnection(url, user, password);
+		 
+		 conn = ds.getConnection();
 		 stmt = conn.prepareStatement("UPDATE");
 		 
 		 stmt.setString(1, memberInfoVO.getAcc());
@@ -84,9 +92,6 @@ public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
 		 stmt.executeUpdate();
 		 
 		 
-		 }catch(ClassNotFoundException cvfe){
-		 cvfe.printStackTrace();
-		
 		 }catch(SQLException sqle){
 		 sqle.printStackTrace();
 		 }
@@ -99,16 +104,13 @@ public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
 		PreparedStatement stmt = null;
 
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, user, password);
+			
+			conn = ds.getConnection();
 			stmt = conn.prepareStatement(DELETE);
 			stmt.setInt(1, memberID);
 			stmt.executeUpdate();
 
-		} catch (ClassNotFoundException cvfe) {
-			cvfe.printStackTrace();
-
-		} catch (SQLException sqle) {
+		}catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}finally{
 			 if(stmt!= null){
@@ -141,8 +143,8 @@ public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
 		ResultSet rs = null;
 
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, user, password);
+			
+			conn = ds.getConnection();
 			stmt = conn.prepareStatement(GET_ONE_STMT);
 			stmt.setInt(1, memberID);
 			rs = stmt.executeQuery();
@@ -157,10 +159,7 @@ public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
 				memberInfoVO.setTeamID(rs.getInt("teamID"));
 			}
 
-		} catch (ClassNotFoundException cvfe) {
-			cvfe.printStackTrace();
-
-		} catch (SQLException sqle) {
+		}catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}finally{
 			 if(rs != null){
@@ -203,8 +202,8 @@ public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
 		PreparedStatement stmt = null;
 
 		try {
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, user, password);
+			
+			conn = ds.getConnection();
 			stmt = conn.prepareStatement(GET_ALL_STMT);
 			rs = stmt.executeQuery();
 
@@ -219,10 +218,7 @@ public class MemberInfoJDBCDAO implements MemberInfoDAO_interface {
 				list.add(memberInfoVO);
 			}
 
-		} catch (ClassNotFoundException cvfe) {
-			cvfe.printStackTrace();
-
-		} catch (SQLException sqle) {
+		}catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}finally{
 			 if(rs != null){

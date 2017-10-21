@@ -1,12 +1,14 @@
 package eeit.memberinfo.model;
 
+import java.sql.Timestamp;
+
 public class MemberInfoVO {
 	private Integer memberID;
 	private String acc;
 	private String name;
 	private String auth;
 	
-	private String registerTime;
+	private Timestamp registerTime;
 	private Integer teamID;
 	
 	public Integer getMemberID() {
@@ -33,10 +35,10 @@ public class MemberInfoVO {
 	public void setAuth(String auth) {
 		this.auth = auth;
 	}
-	public String getRegisterTime() {
+	public Timestamp getRegisterTime() {
 		return registerTime;
 	}
-	public void setRegisterTime(String registerTime) {
+	public void setRegisterTime(Timestamp registerTime) {
 		this.registerTime = registerTime;
 	}
 	public Integer getTeamID() {

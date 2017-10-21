@@ -1,14 +1,36 @@
 package eeit.memberinfo.model;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import org.hibernate.*;
+
 import hibernate.util.HibernateUtil;
 
-public class MemberInfoDAO implements MemberInfoDAO_interface {
+
+public class MemberInfoHibernateDAO implements MemberInfoDAO_interface {
 	private static final String GET_ALL_STMT = "FROM MemberInfoVO order by memberID";
-	
-	@Override
+	// private static final String GET_ALL_STMT = "SELECT * FROM MemberInfo
+	// order by memberID";
+	// private static final String GET_ONE_STMT = "SELECT * FROM MemberInfo
+	// where memberID = ?";
+	// private static final String DELETE = "DELETE FROM MemberInfo where
+	// memberID = ?";
+	//
+	// private static final String UPDATE = "UPDATE MemberInfo set name=?,
+	// auth=?, registerTime=? where memberID = ?";
+
 	public void insert(MemberInfoVO memberInfoVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
@@ -23,7 +45,8 @@ public class MemberInfoDAO implements MemberInfoDAO_interface {
 		}
 	}
 
-    @Override
+	//
+	// @Override
 	public void update(MemberInfoVO memberInfoVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
@@ -92,8 +115,8 @@ public class MemberInfoDAO implements MemberInfoDAO_interface {
 		return list;
 	}
 
-//	public static void main(String[] args) {
-//		MemberInfoDAO dao = new MemberInfoDAO();
+	public static void main(String[] args) {
+		MemberInfoHibernateDAO dao = new MemberInfoHibernateDAO();
 //		/*************** insert ***************/
 //		MemberInfoVO memberInfoVO = new MemberInfoVO();
 //		memberInfoVO.setAcc("javaeeit97201701@gmail.com");
@@ -125,16 +148,16 @@ public class MemberInfoDAO implements MemberInfoDAO_interface {
 		// System.out.println(memberInfoVO.getMemberID());
 
 		/*************** getALL ***************/
-//		List<MemberInfoVO> list = dao.getAll();
-//		for (MemberInfoVO aMemberInfoVO : list) {
-//			System.out.print(aMemberInfoVO.getMemberID() + "\t");
-//			System.out.print(aMemberInfoVO.getAcc() + "\t");
-//			System.out.print(aMemberInfoVO.getName() + "\t");
-//			System.out.print(aMemberInfoVO.getAuth() + "\t");
-//			System.out.print(aMemberInfoVO.getRegisterTime() + "\t");
-//			System.out.print(aMemberInfoVO.getTeamID());
-//			System.out.println();
-//		}
-//
-//	}
+		List<MemberInfoVO> list = dao.getAll();
+		for (MemberInfoVO aMemberInfoVO : list) {
+			System.out.print(aMemberInfoVO.getMemberID() + "\t");
+			System.out.print(aMemberInfoVO.getAcc() + "\t");
+			System.out.print(aMemberInfoVO.getName() + "\t");
+			System.out.print(aMemberInfoVO.getAuth() + "\t");
+			System.out.print(aMemberInfoVO.getRegisterTime() + "\t");
+			System.out.print(aMemberInfoVO.getTeamID());
+			System.out.println();
+		}
+
+	}
 }
