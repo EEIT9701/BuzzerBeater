@@ -4,6 +4,8 @@ import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.List;
 
+import eeit.games.model.GamesVO;
+
 
 public class GameMediaService {
 	private GameMediaDAO_Interface dao;
@@ -11,11 +13,12 @@ public class GameMediaService {
 	public GameMediaService(){
 		dao = new GameMediaDAO_JNDI();
 	}
-	public GameMediaVO insertGameMedia(Integer mediaID,String mediasName,String gameVideo,Blob gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag ){
+	public GameMediaVO insertGameMedia(Integer gameID,String mediasName,String gameVideo,Blob gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag ){
 		
 		GameMediaVO gameMediaVO = new GameMediaVO();
+		GamesVO gamesVO = new GamesVO();
 				
-		gameMediaVO.setMediaID(mediaID);
+		gamesVO.setGameID(gameID);
 		gameMediaVO.setMediasName(mediasName);
 		gameMediaVO.setGameVideo(gameVideo);
 		gameMediaVO.setGamePhoto(gamePhoto);
@@ -28,10 +31,11 @@ public class GameMediaService {
 		return gameMediaVO;
 	}
 	
-	public GameMediaVO updateGameMedia(Integer mediaID,String mediasName,String gameVideo,Blob gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag){
+	public GameMediaVO updateGameMedia(Integer gameID,Integer mediaID,String mediasName,String gameVideo,Blob gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag){
 		GameMediaVO gameMediaVO = new GameMediaVO();
+		GamesVO gamesVO = new GamesVO();
 		
-		gameMediaVO.setMediaID(mediaID);
+		gamesVO.setGameID(gameID);
 		gameMediaVO.setMediasName(mediasName);
 		gameMediaVO.setGameVideo(gameVideo);
 		gameMediaVO.setGamePhoto(gamePhoto);
@@ -39,6 +43,7 @@ public class GameMediaService {
 		gameMediaVO.setMediaDate(mediaDate);
 		gameMediaVO.setDescriptions(descriptions);
 		gameMediaVO.setTag(tag);
+		gameMediaVO.setMediaID(mediaID);
 		
 		dao.update(gameMediaVO);
 		return gameMediaVO;	
@@ -54,4 +59,5 @@ public class GameMediaService {
 	public List<GameMediaVO> getAll() {
 		return dao.getAll();
 	}
+	
 }

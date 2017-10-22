@@ -77,6 +77,12 @@
 	padding:17px;
 	line-height:1px;
 }
+#video{
+	width:400px;
+	padding-top:20px;
+	padding-left:0px;
+	padding-right:100px;
+}
 </style>
 
 
@@ -153,7 +159,7 @@
     						<tr align='center' valign='middle' id="thead">
       							<td>分組</td>
       							<td>賽事</td>
-      							<td>上傳日期</td>
+      							<td>最後上傳/修改時間</td>
       							<td>標題</td>
       							<td>備註</td>
       							<td>標籤</td>
@@ -164,7 +170,7 @@
   							<c:forEach var="gameMediaVO" items="${gameMediaVO}">
   								<tr align='center' valign='middle'>
       								<td>${gameMediaVO.gamesVO.gameID}</td>
-      								<td>${gameMediaVO.gamesVO.gameID}</td>
+      								<td>${gameMediaVO.mediaID}</td>
       								<td>${gameMediaVO.mediaDate}</td>
       								<td>${gameMediaVO.mediasName}</td>
       								<td>${gameMediaVO.descriptions}</td>
@@ -194,13 +200,9 @@
             				<div class="modal-body">
             					<div class="row">
   									<div class="col-md-12">
-    									<div class="input-group">
-      										<span class="input-group-btn">
-        										<button class="btn btn-default" type="button" id="upload">選擇檔案</button>
-      										</span>
-      										<input type="text" class="form-control">
-   										</div><!-- /input-group -->
-									</div><!-- /.row -->
+    									<label class="control-label">選擇檔案</label>
+      										<input type="file" class="file">
+									</div>
             					</div>
             					</br>
             					<div class="input-group">
@@ -219,8 +221,8 @@
         						</div>
         						<div class="row">
         							<div class="col-md-offset-3">
-            							<video controls>
-            								<source src="D:/001.mp4" type="video/mp4">
+            							<video controls id="video">
+            								<source src="<%=request.getContextPath()%>/videos/${gameMediaVO[0].gameVideo}" type="video/mp4">
             							</video>
             						</div>
         						</div>

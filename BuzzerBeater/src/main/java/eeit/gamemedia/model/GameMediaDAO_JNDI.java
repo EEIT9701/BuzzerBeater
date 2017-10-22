@@ -32,7 +32,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 	private static final String DELETE =
 		      "DELETE FROM GameMedia where mediaID = ?";
 	private static final String UPDATE =
-		      "UPDATE GameMedia set gameID=?,mediasName=?, gameVideo=?, gamePhoto=?, mediaType=?, mediaDate=?, descriptions=?, tag=? where gameID = ?";
+		      "UPDATE GameMedia set gameID=?,mediasName=?, gameVideo=?, gamePhoto=?, mediaType=?, mediaDate=?, descriptions=?, tag=? where mediaID = ?";
 
 	
 	
