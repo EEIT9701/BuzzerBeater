@@ -2,9 +2,17 @@ package eeit.locationinfo.model;
 
 import java.util.Set;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class LocationinfoService {
 
-	LocationinfoDAO_Hibernate dao = new LocationinfoDAO_Hibernate();
+	private LocationinfoDAO_interface dao = null;
+
+	public LocationinfoService() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
+		dao = (LocationinfoDAO_interface) context.getBean("LocationinfoDAO");
+	}
 
 	public Set<LocationinfoVO> getAll() {
 		return dao.getAll();
@@ -14,18 +22,22 @@ public class LocationinfoService {
 		return dao.findByID(locationID);
 	}
 
-	public void insert(String locationName, String locationAddr) {
+	public void insert(String locationName, String locationAddr, String locationMark, String locationPhoto) {
 		LocationinfoVO locVO = new LocationinfoVO();
 		locVO.setLocationName(locationName);
 		locVO.setLocationAddr(locationAddr);
-		dao.update(locVO);
+		locVO.setLocationPhoto(locationPhoto);
+		dao.insert(locVO);
 	}
 
-	public void update(Integer locationID, String locationName, String locationAddr) {
+	public void update(Integer locationID, String locationName, String locationAddr, String locationMark,
+			String locationPhoto) {
+		
 		LocationinfoVO locVO = new LocationinfoVO();
 		locVO.setLocationID(locationID);
 		locVO.setLocationName(locationName);
 		locVO.setLocationAddr(locationAddr);
+		locVO.setLocationPhoto(locationPhoto);
 		dao.update(locVO);
 	}
 

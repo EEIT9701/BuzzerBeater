@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 此處使用JNDI連線池 -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:/comp/env/jdbc/TestDB" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+		destroy-method="destroy">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>eeit/gamemedia/model/gamemedia.hbm.xml</value>
+				<value>eeit/games/model/games.hbm.xml</value>
+				<value>eeit/groupreg/model/groupreg.hbm.xml</value>
+				<value>eeit/groups/model/groups.hbm.xml</value>
+				<value>eeit/locationinfo/model/locationinfo.hbm.xml</value>
+				<value>eeit/personaldata/model/personaldata.hbm.xml</value>
+				<value>eeit/playergroups/model/playergroups.hbm.xml</value>
+				<value>eeit/players/model/players.hbm.xml</value>
+				<value>eeit/season/model/season.hbm.xml</value>
+				<value>eeit/teamcomposition/model/teamcomposition.hbm.xml</value>
+				<value>eeit/teams/model/teams.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+				<prop key="hibernate.transaction.coordinator_class">jdbc</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- 對應至所屬DAO -->
+	<bean id="GameMediaDAO" class="eeit.gamemedia.model.GameMediaDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="GamesDAO" class="eeit.games.model.GamesDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="GroupRegDAO" class="eeit.groupreg.model.GroupRegDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="GroupsDAO" class="eeit.groups.model.GroupsDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="LocationinfoDAO" class="eeit.locationinfo.model.LocationinfoDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="PersonalDataDAO" class="eeit.personaldata.model.PersonalDataDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="PlayerGroupsDAO" class="eeit.playergroups.model.PlayerGroupsDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="PlayersDAO" class="eeit.players.model.PlayersDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="SeasonDAO" class="eeit.season.model.SeasonDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="TeamCompositionDAO" class="eeit.teamcomposition.model.TeamCompositionDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="TeamsDAO" class="eeit.teams.model.TeamsDAO_HibernateTemplate">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<!-- 對應至所屬DAO(END) -->
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+</beans>
