@@ -4,10 +4,12 @@
 <%@ page import="java.util.*"%>
 
 <%
-	SeasonService dao = new SeasonService();
-	Set<HashMap<String, Object>> set = dao.getAll();
-	pageContext.setAttribute("set", set);
+// 	SeasonService dao = new SeasonService();
+// 	Set<HashMap<String, Object>> set = dao.getAll();
+// 	pageContext.setAttribute("set", set);
 %>
+
+<jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
 
 <!DOCTYPE html>
     <html>
@@ -41,7 +43,7 @@
 			        </thead>
 			
 			        <tbody>
-			        	<c:forEach var="sVO" items="${set}">
+			        	<c:forEach var="sVO" items="${seasonSvc.all}">
 			        		<tr>
 			        			<td><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
 			        			<td>${sVO.seasonBeginDate}</td>

@@ -2,17 +2,10 @@ package eeit.locationinfo.model;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.Base64;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.sql.rowset.serial.SerialBlob;
-import javax.sql.rowset.serial.SerialException;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.context.ApplicationContext;
@@ -77,31 +70,28 @@ public class LocationinfoDAO_HibernateTemplate implements LocationinfoDAO_interf
 		// System.out.print(locVO.getLocationAddr()+", ");
 		// System.out.println();
 
-//		LocationinfoVO locVO = new LocationinfoVO();
-//		locVO.setLocationID(101);
-//		locVO.setLocationName("修改");
-//		locVO.setLocationAddr("修改");
-//		dao.update(locVO);
+		// LocationinfoVO locVO = new LocationinfoVO();
+		// locVO.setLocationID(101);
+		// locVO.setLocationName("修改");
+		// locVO.setLocationAddr("修改");
+		// dao.update(locVO);
 
-		
-		//新增
+		// 新增
 		LocationinfoVO locVO = new LocationinfoVO();
 		locVO.setLocationName("圖片測試");
 		locVO.setLocationAddr("addr");
 		locVO.setLocationMark("mark");
 
-		File file = new File("C:/Users/Night/Downloads/tomcat.gif");
+		File file = new File("C:/Users/Student/Downloads/tomcat.gif");
 		FileInputStream fis = new FileInputStream(file);
 		byte[] bt = IOUtils.toByteArray(fis);
 		Base64.Encoder encoder = Base64.getEncoder();
 		String encodedText = encoder.encodeToString(bt);
-		
+
 		locVO.setLocationPhoto(encodedText);
 		dao.insert(locVO);
-		
-		
-		
-		//查詢全部
+
+		// 查詢全部
 		Set<LocationinfoVO> set = dao.getAll();
 		for (LocationinfoVO lVO : set) {
 			System.out.print(lVO.getLocationName() + ": ");

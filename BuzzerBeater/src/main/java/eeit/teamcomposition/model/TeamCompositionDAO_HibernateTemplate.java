@@ -4,9 +4,14 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import eeit.players.model.PlayerDAO_interface;
+import eeit.players.model.PlayersVO;
 
 @Transactional(readOnly = true)
 public class TeamCompositionDAO_HibernateTemplate implements TeamCompositionDAO_interface {
@@ -55,6 +60,19 @@ public class TeamCompositionDAO_HibernateTemplate implements TeamCompositionDAO_
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public TeamCompositionVO findByPlayerID(Integer playerID) {
 		return (TeamCompositionVO) hibernateTemplate.get(TeamCompositionVO.class, playerID);
+	}
+	
+	public static void main(String[] args){
+		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
+		TeamCompositionDAO_interface dao = (TeamCompositionDAO_interface) context.getBean("TeamCompositionDAO");
+		
+		Set<TeamCompositionVO> set = dao.getAll();
+		for(TeamCompositionVO vo : set ){
+			System.out.print(vo.getPlayerRole()+", ");
+			System.out.print(vo.getPlayerNo()+", ");
+			System.out.println();
+			
+		}
 	}
 
 }
