@@ -31,6 +31,7 @@
     }
     </style>
     <link rel="stylesheet" type="text/css" href="../css/datatables.min.css"/>
+    <jsp:include page="/header_css.jsp" />
 </head>
 <body>
 
@@ -124,7 +125,7 @@
 		    <tr align='center' valign='middle'>
 
 	  <td>${personalDataVO.teamID}</td> 
-      <td>${personalDataVO.quarters}</td>
+      <td>${personalDataVO.teamID}</td>
       <td>${personalDataVO.twoPoint}</td>
       <td>${personalDataVO.twoPointShot}</td>
       <td>${personalDataVO.threePoint}</td>
