@@ -1,14 +1,8 @@
 package eeit.players.model;
 
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import javax.servlet.http.Part;
-
-import org.hibernate.engine.jdbc.BinaryStream;
 
 import eeit.personaldata.model.PersonalDataVO;
 import eeit.playergroups.model.PlayerGroupsVO;
@@ -29,13 +23,13 @@ public class PlayersVO implements java.io.Serializable {
 	private Integer weights;// Double weights
 	private Date birthday;
 	private String nationality;
-	private Part photo;
+	private String photo;
 
-	public Part getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(Part photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 

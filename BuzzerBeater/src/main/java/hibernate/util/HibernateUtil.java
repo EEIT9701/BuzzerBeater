@@ -6,29 +6,48 @@
 package hibernate.util;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
 
 	private static final SessionFactory sessionFactory;
 
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
 	static {
-
-		Configuration cfg = new Configuration().configure();
-		ServiceRegistry reg = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
-
+		// 註冊服務
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
 		try {
-			sessionFactory = cfg.buildSessionFactory(reg);
+			// 創建SessionFactory
+			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Throwable ex) {
+			// The registry would be destroyed by the SessionFactory, but we had
+			// trouble building the SessionFactory
+			// so destroy it manually.
+			StandardServiceRegistryBuilder.destroy(registry);
 			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
 
-	public static SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
+	// Hibernate 4.3.11.Final版本
+
+	// static {
+	//
+	// Configuration cfg = new Configuration().configure();
+	// ServiceRegistry reg = new
+	// StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
+	//
+	// try {
+	// sessionFactory = cfg.buildSessionFactory(reg);
+	// } catch (Throwable ex) {
+	// System.err.println("Initial SessionFactory creation failed." + ex);
+	// throw new ExceptionInInitializerError(ex);
+	// }
+	// }
 
 }
