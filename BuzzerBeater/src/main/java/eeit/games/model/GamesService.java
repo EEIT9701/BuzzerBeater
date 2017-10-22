@@ -3,12 +3,19 @@ package eeit.games.model;
 import java.sql.Timestamp;
 import java.util.Set;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import eeit.season.model.SeasonDAO_interface;
+
 public class GamesService {
 
 	private GamesDAO_interface dao;
 
 	public GamesService() {
-		dao = new GamesDAO_Hibernate();
+//		dao = new GamesDAO_Hibernate();
+		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
+		dao = (GamesDAO_interface) context.getBean("GamesDAO");
 	}
 
 	public Set<GamesVO> getAll() {

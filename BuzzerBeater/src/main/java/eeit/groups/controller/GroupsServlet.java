@@ -13,9 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONValue;
+
 import eeit.groups.model.GroupsService;
 import eeit.groups.model.GroupsVO;
-import net.minidev.json.JSONValue;
 
 @WebServlet("/Groups.do")
 public class GroupsServlet extends HttpServlet {

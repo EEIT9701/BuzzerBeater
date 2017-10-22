@@ -8,13 +8,11 @@
         
     	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
-    	
+    	    	
         <title>Season</title>
     </head>
 
     <body>
-	    <jsp:include page="/header.jsp" />
 	
 		<div class="container">
 			<div class="col-md-12">
@@ -37,9 +35,8 @@
 			    </table>
 		    </div>
 	    </div>
-	    <jsp:include page="/footer.jsp" />
 
-        <script src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+		<script src="<%=request.getContextPath() %>/js/jquery-1.12.3.min.js"></script>
         <script>
             $(document).ready(function() {
 
@@ -53,8 +50,10 @@
                             'action': 'GET_ALL_SEASON'
                         },
                         function(datas) {
+                        	console.log(datas);
+                        	
                             var frag = $(document.createDocumentFragment());
-                            $.each(datas, function(idx, season) {
+                            $.each(datas.datas, function(idx, season) {
                                 var cell1 = $('<td></td>').text(season.seasonName);
                                 //三元運算子 (條件式) ? (if true) : (if false)
                                 var cell2 = (season.seasonBeginDate == null) ? $('<td></td>').text("") : $('<td></td>').text(season.seasonBeginDate);

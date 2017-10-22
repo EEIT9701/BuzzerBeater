@@ -11,7 +11,10 @@
   	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
    	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
    	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
-   	
+   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		    	
+    <jsp:include page="/header_css.jsp" />
+    
     <title>修改賽季</title>
 </head>
 
@@ -73,5 +76,5 @@
 	    
 	<jsp:include page="/footer.jsp" />
 </body>
-
+<jsp:include page="/footer_css.jsp" />
 </html>
