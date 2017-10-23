@@ -16,9 +16,9 @@ public class SeasonService {
 	private SeasonDAO_interface dao;
 
 	public SeasonService() {
-//		dao = new SeasonDAO_Hibernate();
-		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
-		dao = (SeasonDAO_interface) context.getBean("SeasonDAO");
+		dao = new SeasonDAO_Hibernate();
+//		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
+//		dao = (SeasonDAO_interface) context.getBean("SeasonDAO");
 	}
 
 	public SeasonVO addSeason(String seasonName, Date seasonBeginDate, Date seasonEndDate, Timestamp signUpBegin,
