@@ -57,10 +57,10 @@
 			        </tbody>
 			    </table>
 		    </div>
+	    	<jsp:include page="/footer.jsp" />
 	    </div>
 	    
 	    
-	    <jsp:include page="/footer.jsp" />
 	    <jsp:include page="/footer_css.jsp" />
     </body>
 
