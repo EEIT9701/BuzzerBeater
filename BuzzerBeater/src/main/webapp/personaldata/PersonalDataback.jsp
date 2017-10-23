@@ -23,11 +23,7 @@
     <style>
     #st1{
      padding:30px;
-     background-color:#1E90FF;  
-      
-    }
-    #st2{
-   
+     background-color:#1E90FF;       
     }
     </style>
     <link rel="stylesheet" type="text/css" href="../css/datatables.min.css"/>
@@ -46,7 +42,7 @@
                 <!--第一列-左邊表格-格式_.col-md-8-->
                 <div class="col-md-12">
                                                             
-              <li><a href="index.jsp"> 首頁<!--這行的href輸入超連結頁面--></a>/球隊數據排名</li>                                                             
+              <li><a href="index.jsp"> 首頁<!--這行的href輸入超連結頁面--></a>/球員數據排名</li>                                                             
               <br>
           <br> 
           <div id=st1>
@@ -64,7 +60,7 @@
      <option label="少年組" value="object:9">季後賽</option>
     </select>
         
- <!--            球員數據                                                
+             <!--球員數據                                                
      <select>
      <option label="得分" value="object:7" selected="selected">季前熱身賽</option>       
      <option label="籃板" value="object:8">例行賽</option>
@@ -76,11 +72,10 @@
      <option label="投籃" value="object:8">例行賽</option>
      <option label="三分" value="object:8">例行賽</option>
     </select>
-  -->        
-     <select>
-     <option label="平均" ></option>       
-     <option label="總合" value="object:8">例行賽</option>
-    </select>
+    -->
+   
+     
+    
     <input type="submit" value="確定">    
      
          </div>   
@@ -97,34 +92,41 @@
                 <div class="col-md-12">
              
                     <div class="col-md-12">
-                        <table class="table table-bordered" id="table">
+                        <table class="table table-bordered" id="example">
                           <thead>
                                 <tr>
-                                  
-                                    <th>球隊 </th>
-                                    <th>比賽次數  </th> 
-                                    <th>二分命中 </th>
-                                    <th>二分出手數  </th>
-                                    <th>三分命中  </th>
-                                    <th>三分出手數  </th>
-                                    <th>罰球命中  </th>
-                                    <th>罰球出手數  </th>
-                                    <th>進攻籃板  </th>
-                                    <th>防守籃板  </th>
-                                    <th>助攻  </th> 
-                                    <th>抄截  </th>
-                                    <th>阻攻  </th>
-                                    <th>犯規 </th> 
-                                    <th>得分 </th>
-                                    <th>失誤  </th> 
+                                                
+                                    <th>背號 </th>
+      <th>球員 </th>
+      <th>球隊 </th>
+      <th>出場時間  </th>
+      <th>二分命中 </th>
+      <th>二分出手數  </th>
+      <th>三分命中  </th>
+      <th>三分出手數  </th>
+      <th>罰球命中  </th>
+      <th>罰球出手數  </th>
+      <th>進攻籃板  </th>
+      <th>防守籃板  </th>
+      <th>助攻  </th> 
+      <th>抄截  </th>
+      <th>阻攻  </th>
+      <th>失誤  </th>
+      <th>犯規 </th> 
+      <th>得分 </th>
+      <th>是否先發 </th>  
+       <th> </th>
+      <th> </th>
                                 </tr>
-                         </thead>
-                         <tbody>
+                </thead>     
+                <tbody>     
             <c:forEach var="personalDataVO" items="${list}" >
 		    <tr align='center' valign='middle'>
 
-	  <td>${personalDataVO.teamID}</td> 
-      <td>${personalDataVO.teamID}</td>
+	  <td>${personalDataVO.playersVO.playerID}</td>
+      <td>${personalDataVO.gamesVO.gameID}</td>
+      <td>${personalDataVO.playersVO.playerName}</td>     
+      <td>${playersVO.playerName}</td>
       <td>${personalDataVO.twoPoint}</td>
       <td>${personalDataVO.twoPointShot}</td>
       <td>${personalDataVO.threePoint}</td>
@@ -137,12 +139,24 @@
       <td>${personalDataVO.steal}</td>
       <td>${personalDataVO.blocks}</td>
       <td>${personalDataVO.turnover}</td>
-      <td>${personalDataVO.points}</td> 
       <td>${personalDataVO.personalFouls}</td>
-  
+      <td>${personalDataVO.points}</td>
+      <td>${personalDataVO.startingPlayer}</td>  
+      <td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/player.do">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="playerID" value="${playerVO.playerID}">
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/player.do">
+			    <input type="submit" value="刪除">
+			    <input type="hidden" name="playerID" value="${playerVO.playerID}">
+			    <input type="hidden" name="action"value="delete"></FORM>
+			</td>            
                      </tr>  
-                        </c:forEach>
-                           </tbody>  
+                        </c:forEach>  
+                     </tbody>
                         </table>
                     </div>
                 </div>          
@@ -151,13 +165,14 @@
       
     <!--主文(結束)-->
 
+  
 
 <script type="text/javascript" src="../js/datatables.min.js"></script>
 <script>
 $(document).ready(function(){
-    $('#table').DataTable();
-}); 
-</script> 
+    $('#example').DataTable();
+});
+</script>     
 <jsp:include page="/footer.jsp" />  
 </body>
 </html>
