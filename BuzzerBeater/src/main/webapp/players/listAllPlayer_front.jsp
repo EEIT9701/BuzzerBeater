@@ -83,19 +83,19 @@
 										<tr align='center' valign='middle'>
 											<td></td>
 											<!--球員照片-->
-											<td></td>
+											<td>${playersVO.playerName}</td>
 											<!--球員姓名-->
 											<td></td>
 											<!--分組-->
 											<td></td>
 											<!--球隊-->
-											<td></td>
+											<td>${playersVO.height}</td>
 											<!--身高-->
-											<td></td>
+											<td>${playersVO.weights}</td>
 											<!--體重-->
-											<td></td>
+											<td>${playersVO.birthday}</td>
 											<!--生日-->
-											<td></td>
+											<td>${playersVO.nationality}</td>
 											<!--國籍-->
 										</tr>
 
