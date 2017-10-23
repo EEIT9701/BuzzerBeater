@@ -4,18 +4,21 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-
-
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SeasonService {
 
 	private SeasonDAO_interface dao;
 
 	public SeasonService() {
-		dao = new SeasonDAO_Hibernate();
+//		dao = new SeasonDAO_Hibernate();
+		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
+		dao = (SeasonDAO_interface) context.getBean("SeasonDAO");
 	}
 
 	public SeasonVO addSeason(String seasonName, Date seasonBeginDate, Date seasonEndDate, Timestamp signUpBegin,

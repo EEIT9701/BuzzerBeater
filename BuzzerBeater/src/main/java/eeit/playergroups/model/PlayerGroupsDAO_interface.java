@@ -9,5 +9,5 @@ interface PlayerGroupsDAO_interface {
 	public void insert(PlayerGroupsVO playerGroupsVO);
 
 	public void update(PlayerGroupsVO playerGroupsVO);
-
+	
 }

@@ -13,8 +13,6 @@ public class PersonalDataVO implements Serializable {
 	private GamesVO gamesVO;// replace gameID // CPK
 	private TeamsVO teamsVO;// replace teamID
 
-	private String quarters;// CPK
-	private Integer quarterTime;
 	private Integer twoPoint;
 	private Integer twoPointShot;
 	private Integer threePoint;

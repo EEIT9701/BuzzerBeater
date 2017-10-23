@@ -65,146 +65,146 @@ create table Groups			--分組
   playerID        int primary key IDENTITY (70001,1),             --球員ID
   playerName      nvarchar(20),                                   --球員姓名
   id              varchar(20),                                    --身分證字號
-  height          smallint,                                       --身高
-  weights         int,                                            --體重
+  height          float,                                       --身高
+  weights         float,                                            --體重
   birthday        date,                                           --生日
   nationality     varchar(30),                                    --國籍
-  photo           image                                           --照片
+  photo           varchar(max),                                           --照片
 )
 GO 
 
-insert into Players values ('Matt Barnes','A122968632','201 ','103 ','1980/3/9','us',0x1234);
-insert into Players values ('Ian Clark','A122968633','191 ','79 ','1991/3/7','us',0x1235);
-insert into Players values ('Stephen Curry','A122968634','191 ','86 ','1988/3/14','us',0x1236);
-insert into Players values ('Kevin Durant','A122968635','206 ','109 ','1988/9/29','us',0x1237);
-insert into Players values ('Draymond Green','A122968636','201 ','104 ','1990/3/4','us',0x1238);
-insert into Players values ('Andre Iguodala','A122968637','198 ','98 ','1984/1/28','us',0x1239);
-insert into Players values ('Damian Jones','A122968638','213 ','111 ','1995/6/30','us',0x1240);
-insert into Players values ('Shaun Livingston','A122968639','201 ','87 ','1985/9/11','us',0x1241);
-insert into Players values ('Kevon Looney','A122968640','206 ','100 ','1996/2/6','us',0x1242);
-insert into Players values ('James Michael McAdoo','A122968641','206 ','104 ','1993/1/4','us',0x1243);
-insert into Players values ('Patrick McCaw','A122968642','201 ','84 ','1995/10/25','us',0x1244);
-insert into Players values ('JaVale McGee','A122968643','213 ','123 ','1988/1/19','us',0x1245);
-insert into Players values ('Zaza Pachulia','A122968644','211 ','123 ','1984/2/10','ge',0x1246);
-insert into Players values ('Klay Thompson','A122968645','201 ','98 ','1990/2/8','us',0x1247);
-insert into Players values ('Anderson Varejao','A122968646','208 ','124 ','1982/9/28','br',0x1248);
-insert into Players values ('Briante Weber','A122968647','188 ','75 ','1992/12/29','us',0x1249);
-insert into Players values ('David West','A122968648','206 ','114 ','1980/8/29','us',0x1250);
-insert into Players values ('LaMarcus Aldridge','A122968649','211 ','118 ','1985/7/19','us',0x1251);
-insert into Players values ('Kyle Anderson','A122968650','206 ','104 ','1993/9/20','us',0x1252);
-insert into Players values ('Joel Anthony','A122968651','206 ','111 ','1982/8/9','ca',0x1253);
-insert into Players values ('Davis Bertans','A122968652','208 ','95 ','1992/11/12','lv',0x1254);
-insert into Players values ('Dewayne Dedmon','A122968653','213 ','111 ','1989/8/12','us',0x1255);
-insert into Players values ('Bryn Forbes','A122968654','191 ','86 ','1993/7/23','us',0x1256);
-insert into Players values ('Pau Gasol','A122968655','213 ','114 ','1980/7/6','es',0x1257);
-insert into Players values ('Manu Ginobili','A122968656','198 ','93 ','1977/7/28','ar',0x1258);
-insert into Players values ('Danny Green','A122968657','198 ','98 ','1987/6/22','us',0x1259);
-insert into Players values ('Nicolas Laprovittola','A122968658','193 ','82 ','1990/1/31','ar',0x1260);
-insert into Players values ('David Lee','A122968659','206 ','111 ','1983/4/29','us',0x1261);
-insert into Players values ('Kawhi Leonard','A122968660','201 ','104 ','1991/6/29','us',0x1262);
-insert into Players values ('Patty Mills','A122968661','183 ','84 ','1988/8/11','au',0x1263);
-insert into Players values ('Dejounte Murray','A122968662','196 ','77 ','1996/9/19','us',0x1264);
-insert into Players values ('Tony Parker','A122968663','188 ','84 ','1982/5/17','be',0x1265);
-insert into Players values ('Jonathon Simmons','A122968664','198 ','89 ','1989/9/14','us',0x1266);
-insert into Players values ('Ryan Anderson','A122968665','208 ','109 ','1988/5/6','us',0x1267);
-insert into Players values ('Trevor Ariza','A122968666','203 ','98 ','1985/6/30','us',0x1268);
-insert into Players values ('Patrick Beverley','A122968667','185 ','84 ','1988/7/12','us',0x1269);
-insert into Players values ('Corey Brewer','A122968668','206 ','84 ','1986/3/5','us',0x1270);
-insert into Players values ('Bobby Brown','A122968669','188 ','79 ','1984/9/24','us',0x1271);
-insert into Players values ('Clint Capela','A122968670','208 ','109 ','1994/5/18','ch',0x1272);
-insert into Players values ('Sam Dekker','A122968671','206 ','104 ','1994/5/6','us',0x1273);
-insert into Players values ('Tyler Ennis','A122968672','191 ','88 ','1994/8/24','ca',0x1274);
-insert into Players values ('Eric Gordon','A122968673','193 ','98 ','1988/12/25','us',0x1275);
-insert into Players values ('James Harden','A122968674','196 ','100 ','1989/8/26','us',0x1276);
-insert into Players values ('Montrezl Harrell','A122968675','203 ','109 ','1994/1/26','us',0x1277);
-insert into Players values ('Nene Hilario','A122968676','211 ','114 ','1982/9/13','br',0x1278);
-insert into Players values ('K.J. McDaniels','A122968677','198 ','93 ','1993/2/9','us',0x1279);
-insert into Players values ('Chinanu Onuaku','A122968678','208 ','111 ','1996/11/1','us',0x1280);
-insert into Players values ('Isaiah Taylor','A122968679','191 ','77 ','1994/7/11','us',0x1281);
-insert into Players values ('Lou Williams','A122968680','185 ','79 ','1986/10/27','us',0x1282);
-insert into Players values ('Troy Williams','A122968681','201 ','99 ','1994/12/30','us',0x1283);
-insert into Players values ('Kyle Wiltjer','A122968682','208 ','109 ','1992/10/20','us',0x1284);
-insert into Players values ('Alan Anderson','A122968683','198 ','100 ','1982/10/16','us',0x1285);
-insert into Players values ('Brandon Bass','A122968684','203 ','114 ','1985/4/30','us',0x1286);
-insert into Players values ('Jamal Crawford','A122968685','196 ','91 ','1980/3/20','us',0x1287);
-insert into Players values ('Raymond Felton','A122968686','185 ','93 ','1984/6/26','us',0x1288);
-insert into Players values ('Blake Griffin','A122968687','208 ','114 ','1989/3/16','us',0x1289);
-insert into Players values ('Brice Johnson','A122968688','208 ','104 ','1994/6/27','us',0x1290);
-insert into Players values ('Wesley Johnson','A122968689','201 ','98 ','1987/7/11','us',0x1291);
-insert into Players values ('DeAndre Jordan','A122968690','211 ','120 ','1988/7/21','us',0x1292);
-insert into Players values ('Luc Mbah a Moute','A122968691','203 ','104 ','1986/9/9','cm',0x1293);
-insert into Players values ('Chris Paul','A122968692','183 ','79 ','1985/5/6','us',0x1294);
-insert into Players values ('Paul Pierce','A122968693','201 ','107 ','1977/10/13','us',0x1295);
-insert into Players values ('J.J. Redick','A122968694','193 ','86 ','1984/6/24','us',0x1296);
-insert into Players values ('Austin Rivers','A122968695','193 ','91 ','1992/8/1','us',0x1297);
-insert into Players values ('Marreese Speights','A122968696','208 ','116 ','1987/8/4','us',0x1298);
-insert into Players values ('Diamond Stone','A122968697','211 ','116 ','1997/2/10','us',0x1299);
-insert into Players values ('Joel Bolomboy','A122968698','206 ','107 ','1994/1/28','ua',0x1300);
-insert into Players values ('Alec Burks','A122968699','198 ','97 ','1991/7/20','us',0x1301);
-insert into Players values ('Boris Diaw','A122968700','203 ','114 ','1982/4/16','fr',0x1302);
-insert into Players values ('Dante Exum','A122968701','198 ','86 ','1995/7/13','au',0x1303);
-insert into Players values ('Derrick Favors','A122968702','208 ','120 ','1991/7/15','us',0x1304);
-insert into Players values ('Rudy Gobert','A122968703','216 ','111 ','1992/6/26','fr',0x1305);
-insert into Players values ('Gordon Hayward','A122968704','203 ','103 ','1990/3/23','us',0x1306);
-insert into Players values ('George Hill','A122968705','191 ','85 ','1986/5/4','us',0x1307);
-insert into Players values ('Rodney Hood','A122968706','203 ','94 ','1992/10/20','us',0x1308);
-insert into Players values ('Joe Ingles','A122968707','203 ','103 ','1987/10/2','au',0x1309);
-insert into Players values ('Joe Johnson','A122968708','201 ','109 ','1981/6/29','us',0x1310);
-insert into Players values ('Trey Lyles','A122968709','208 ','106 ','1995/11/5','ca',0x1311);
-insert into Players values ('Shelvin Mack','A122968710','191 ','92 ','1990/4/22','us',0x1312);
-insert into Players values ('Raul Neto','A122968711','185 ','81 ','1992/5/19','br',0x1313);
-insert into Players values ('Jeff Withey','A122968712','213 ','105 ','1990/3/7','us',0x1314);
-insert into Players values ('Alex Abrines','A122968713','198 ','86 ','1993/8/1','es',0x1315);
-insert into Players values ('Steven Adams','A122968714','213 ','116 ','1993/7/20','nz',0x1316);
-insert into Players values ('Semaj Christon','A122968715','191 ','86 ','1992/11/1','us',0x1317);
-insert into Players values ('Norris Cole','A122968716','188 ','79 ','1988/10/13','us',0x1318);
-insert into Players values ('Nick Collison','A122968717','208 ','116 ','1980/10/26','us',0x1319);
-insert into Players values ('Taj Gibson','A122968718','206 ','102 ','1985/6/24','us',0x1320);
-insert into Players values ('Jerami Grant','A122968719','203 ','95 ','1994/3/12','us',0x1321);
-insert into Players values ('Josh Huestis','A122968720','201 ','104 ','1991/12/19','us',0x1322);
-insert into Players values ('Ersan Ilyasova','A122968721','208 ','107 ','1987/5/15','tr',0x1323);
-insert into Players values ('Enes Kanter','A122968722','211 ','111 ','1992/5/20','ch',0x1324);
-insert into Players values ('Joffrey Lauvergne','A122968723','211 ','100 ','1991/9/30','fr',0x1325);
-insert into Players values ('Doug McDermott','A122968724','203 ','102 ','1992/1/3','us',0x1326);
-insert into Players values ('Anthony Morrow','A122968725','196 ','95 ','1985/9/27','us',0x1327);
-insert into Players values ('Victor Oladipo','A122968726','193 ','95 ','1992/5/4','us',0x1328);
-insert into Players values ('Cameron Payne','A122968727','191 ','84 ','1994/8/8','us',0x1329);
-insert into Players values ('Andre Roberson','A122968728','201 ','95 ','1991/12/4','us',0x1330);
-insert into Players values ('Domantas Sabonis','A122968729','211 ','109 ','1996/5/3','us',0x1331);
-insert into Players values ('Kyle Singler','A122968730','203 ','104 ','1988/5/4','us',0x1332);
-insert into Players values ('Russell Westbrook','A122968731','191 ','91 ','1988/11/12','us',0x1333);
-insert into Players values ('Tony Allen','A122968732','193 ','97 ','1982/1/11','us',0x1334);
-insert into Players values ('Wade Baldwin','A122968733','193 ','92 ','1996/3/29','us',0x1335);
-insert into Players values ('Vince Carter','A122968734','198 ','100 ','1977/1/26','us',0x1336);
-insert into Players values ('Mike Conley','A122968735','185 ','79 ','1987/10/11','us',0x1337);
-insert into Players values ('Troy Daniels','A122968736','193 ','93 ','1991/7/15','us',0x1338);
-insert into Players values ('Deyonta Davis','A122968737','211 ','108 ','1996/12/2','us',0x1339);
-insert into Players values ('Toney Douglas','A122968738','188 ','89 ','1986/3/16','us',0x1340);
-insert into Players values ('James Ennis','A122968739','201 ','95 ','1990/7/1','us',0x1341);
-insert into Players values ('Marc Gasol','A122968740','216 ','116 ','1985/1/29','es',0x1342);
-insert into Players values ('JaMychal Green','A122968741','206 ','103 ','1990/6/21','us',0x1343);
-insert into Players values ('Andrew Harrison','A122968742','198 ','97 ','1994/10/28','us',0x1344);
-insert into Players values ('Jarell Martin','A122968743','208 ','109 ','1994/5/24','us',0x1345);
-insert into Players values ('Chandler Parsons','A122968744','208 ','104 ','1988/10/25','us',0x1346);
-insert into Players values ('Zach Randolph','A122968745','206 ','118 ','1981/7/16','us',0x1347);
-insert into Players values ('Wayne Selden','A122968746','196 ','104 ','1994/9/30','us',0x1348);
-insert into Players values ('Troy Williams','A122968747','201 ','99 ','1994/12/30','us',0x1349);
-insert into Players values ('Brandan Wright','A122968748','208 ','95 ','1987/10/5','us',0x1350);
-insert into Players values ('Al-Farouq Aminu','A122968749','206 ','100 ','1990/9/21','us',0x1351);
-insert into Players values ('Pat Connaughton','A122968750','196 ','94 ','1993/1/6','us',0x1352);
-insert into Players values ('Allen Crabbe','A122968751','198 ','95 ','1992/4/9','us',0x1353);
-insert into Players values ('Ed Davis','A122968752','208 ','109 ','1989/6/5','us',0x1354);
-insert into Players values ('Maurice Harkless','A122968753','206 ','98 ','1993/5/11','us',0x1355);
-insert into Players values ('Jake Layman','A122968754','206 ','95 ','1994/3/7','us',0x1356);
-insert into Players values ('Meyers Leonard','A122968755','216 ','111 ','1992/2/27','us',0x1357);
-insert into Players values ('Damian Lillard','A122968756','191 ','89 ','1990/7/15','us',0x1358);
-insert into Players values ('C.J. McCollum','A122968757','191 ','86 ','1991/9/19','us',0x1359);
-insert into Players values ('Shabazz Napier','A122968758','185 ','79 ','1991/7/14','us',0x1360);
-insert into Players values ('Jusuf Nurkic','A122968759','213 ','127 ','1994/8/23','ba',0x1361);
-insert into Players values ('Mason Plumlee','A122968760','211 ','111 ','1990/3/5','us',0x1362);
-insert into Players values ('Tim Quarterman','A122968761','198 ','89 ','1994/10/27','us',0x1363);
-insert into Players values ('Evan Turner','A122968762','201 ','100 ','1988/10/27','us',0x1364);
-insert into Players values ('Noah Vonleh','A122968763','208 ','109 ','1995/8/24','us',0x1365);
+insert into Players values ('Matt Barnes','A122968632','201 ','103 ','1980/3/9','us',null);
+insert into Players values ('Ian Clark','A122968633','191 ','79 ','1991/3/7','us',null);
+insert into Players values ('Stephen Curry','A122968634','191 ','86 ','1988/3/14','us',null);
+insert into Players values ('Kevin Durant','A122968635','206 ','109 ','1988/9/29','us',null);
+insert into Players values ('Draymond Green','A122968636','201 ','104 ','1990/3/4','us',null);
+insert into Players values ('Andre Iguodala','A122968637','198 ','98 ','1984/1/28','us',null);
+insert into Players values ('Damian Jones','A122968638','213 ','111 ','1995/6/30','us',null);
+insert into Players values ('Shaun Livingston','A122968639','201 ','87 ','1985/9/11','us',null);
+insert into Players values ('Kevon Looney','A122968640','206 ','100 ','1996/2/6','us',null);
+insert into Players values ('James Michael McAdoo','A122968641','206 ','104 ','1993/1/4','us',null);
+insert into Players values ('Patrick McCaw','A122968642','201 ','84 ','1995/10/25','us',null);
+insert into Players values ('JaVale McGee','A122968643','213 ','123 ','1988/1/19','us',null);
+insert into Players values ('Zaza Pachulia','A122968644','211 ','123 ','1984/2/10','ge',null);
+insert into Players values ('Klay Thompson','A122968645','201 ','98 ','1990/2/8','us',null);
+insert into Players values ('Anderson Varejao','A122968646','208 ','124 ','1982/9/28','br',null);
+insert into Players values ('Briante Weber','A122968647','188 ','75 ','1992/12/29','us',null);
+insert into Players values ('David West','A122968648','206 ','114 ','1980/8/29','us',null);
+insert into Players values ('LaMarcus Aldridge','A122968649','211 ','118 ','1985/7/19','us',null);
+insert into Players values ('Kyle Anderson','A122968650','206 ','104 ','1993/9/20','us',null);
+insert into Players values ('Joel Anthony','A122968651','206 ','111 ','1982/8/9','ca',null);
+insert into Players values ('Davis Bertans','A122968652','208 ','95 ','1992/11/12','lv',null);
+insert into Players values ('Dewayne Dedmon','A122968653','213 ','111 ','1989/8/12','us',null);
+insert into Players values ('Bryn Forbes','A122968654','191 ','86 ','1993/7/23','us',null);
+insert into Players values ('Pau Gasol','A122968655','213 ','114 ','1980/7/6','es',null);
+insert into Players values ('Manu Ginobili','A122968656','198 ','93 ','1977/7/28','ar',null);
+insert into Players values ('Danny Green','A122968657','198 ','98 ','1987/6/22','us',null);
+insert into Players values ('Nicolas Laprovittola','A122968658','193 ','82 ','1990/1/31','ar',null);
+insert into Players values ('David Lee','A122968659','206 ','111 ','1983/4/29','us',null);
+insert into Players values ('Kawhi Leonard','A122968660','201 ','104 ','1991/6/29','us',null);
+insert into Players values ('Patty Mills','A122968661','183 ','84 ','1988/8/11','au',null);
+insert into Players values ('Dejounte Murray','A122968662','196 ','77 ','1996/9/19','us',null);
+insert into Players values ('Tony Parker','A122968663','188 ','84 ','1982/5/17','be',null);
+insert into Players values ('Jonathon Simmons','A122968664','198 ','89 ','1989/9/14','us',null);
+insert into Players values ('Ryan Anderson','A122968665','208 ','109 ','1988/5/6','us',null);
+insert into Players values ('Trevor Ariza','A122968666','203 ','98 ','1985/6/30','us',null);
+insert into Players values ('Patrick Beverley','A122968667','185 ','84 ','1988/7/12','us',null);
+insert into Players values ('Corey Brewer','A122968668','206 ','84 ','1986/3/5','us',null);
+insert into Players values ('Bobby Brown','A122968669','188 ','79 ','1984/9/24','us',null);
+insert into Players values ('Clint Capela','A122968670','208 ','109 ','1994/5/18','ch',null);
+insert into Players values ('Sam Dekker','A122968671','206 ','104 ','1994/5/6','us',null);
+insert into Players values ('Tyler Ennis','A122968672','191 ','88 ','1994/8/24','ca',null);
+insert into Players values ('Eric Gordon','A122968673','193 ','98 ','1988/12/25','us',null);
+insert into Players values ('James Harden','A122968674','196 ','100 ','1989/8/26','us',null);
+insert into Players values ('Montrezl Harrell','A122968675','203 ','109 ','1994/1/26','us',null);
+insert into Players values ('Nene Hilario','A122968676','211 ','114 ','1982/9/13','br',null);
+insert into Players values ('K.J. McDaniels','A122968677','198 ','93 ','1993/2/9','us',null);
+insert into Players values ('Chinanu Onuaku','A122968678','208 ','111 ','1996/11/1','us',null);
+insert into Players values ('Isaiah Taylor','A122968679','191 ','77 ','1994/7/11','us',null);
+insert into Players values ('Lou Williams','A122968680','185 ','79 ','1986/10/27','us',null);
+insert into Players values ('Troy Williams','A122968681','201 ','99 ','1994/12/30','us',null);
+insert into Players values ('Kyle Wiltjer','A122968682','208 ','109 ','1992/10/20','us',null);
+insert into Players values ('Alan Anderson','A122968683','198 ','100 ','1982/10/16','us',null);
+insert into Players values ('Brandon Bass','A122968684','203 ','114 ','1985/4/30','us',null);
+insert into Players values ('Jamal Crawford','A122968685','196 ','91 ','1980/3/20','us',null);
+insert into Players values ('Raymond Felton','A122968686','185 ','93 ','1984/6/26','us',null);
+insert into Players values ('Blake Griffin','A122968687','208 ','114 ','1989/3/16','us',null);
+insert into Players values ('Brice Johnson','A122968688','208 ','104 ','1994/6/27','us',null);
+insert into Players values ('Wesley Johnson','A122968689','201 ','98 ','1987/7/11','us',null);
+insert into Players values ('DeAndre Jordan','A122968690','211 ','120 ','1988/7/21','us',null);
+insert into Players values ('Luc Mbah a Moute','A122968691','203 ','104 ','1986/9/9','cm',null);
+insert into Players values ('Chris Paul','A122968692','183 ','79 ','1985/5/6','us',null);
+insert into Players values ('Paul Pierce','A122968693','201 ','107 ','1977/10/13','us',null);
+insert into Players values ('J.J. Redick','A122968694','193 ','86 ','1984/6/24','us',null);
+insert into Players values ('Austin Rivers','A122968695','193 ','91 ','1992/8/1','us',null);
+insert into Players values ('Marreese Speights','A122968696','208 ','116 ','1987/8/4','us',null);
+insert into Players values ('Diamond Stone','A122968697','211 ','116 ','1997/2/10','us',null);
+insert into Players values ('Joel Bolomboy','A122968698','206 ','107 ','1994/1/28','ua',null);
+insert into Players values ('Alec Burks','A122968699','198 ','97 ','1991/7/20','us',null);
+insert into Players values ('Boris Diaw','A122968700','203 ','114 ','1982/4/16','fr',null);
+insert into Players values ('Dante Exum','A122968701','198 ','86 ','1995/7/13','au',null);
+insert into Players values ('Derrick Favors','A122968702','208 ','120 ','1991/7/15','us',null);
+insert into Players values ('Rudy Gobert','A122968703','216 ','111 ','1992/6/26','fr',null);
+insert into Players values ('Gordon Hayward','A122968704','203 ','103 ','1990/3/23','us',null);
+insert into Players values ('George Hill','A122968705','191 ','85 ','1986/5/4','us',null);
+insert into Players values ('Rodney Hood','A122968706','203 ','94 ','1992/10/20','us',null);
+insert into Players values ('Joe Ingles','A122968707','203 ','103 ','1987/10/2','au',null);
+insert into Players values ('Joe Johnson','A122968708','201 ','109 ','1981/6/29','us',null);
+insert into Players values ('Trey Lyles','A122968709','208 ','106 ','1995/11/5','ca',null);
+insert into Players values ('Shelvin Mack','A122968710','191 ','92 ','1990/4/22','us',null);
+insert into Players values ('Raul Neto','A122968711','185 ','81 ','1992/5/19','br',null);
+insert into Players values ('Jeff Withey','A122968712','213 ','105 ','1990/3/7','us',null);
+insert into Players values ('Alex Abrines','A122968713','198 ','86 ','1993/8/1','es',null);
+insert into Players values ('Steven Adams','A122968714','213 ','116 ','1993/7/20','nz',null);
+insert into Players values ('Semaj Christon','A122968715','191 ','86 ','1992/11/1','us',null);
+insert into Players values ('Norris Cole','A122968716','188 ','79 ','1988/10/13','us',null);
+insert into Players values ('Nick Collison','A122968717','208 ','116 ','1980/10/26','us',null);
+insert into Players values ('Taj Gibson','A122968718','206 ','102 ','1985/6/24','us',null);
+insert into Players values ('Jerami Grant','A122968719','203 ','95 ','1994/3/12','us',null);
+insert into Players values ('Josh Huestis','A122968720','201 ','104 ','1991/12/19','us',null);
+insert into Players values ('Ersan Ilyasova','A122968721','208 ','107 ','1987/5/15','tr',null);
+insert into Players values ('Enes Kanter','A122968722','211 ','111 ','1992/5/20','ch',null);
+insert into Players values ('Joffrey Lauvergne','A122968723','211 ','100 ','1991/9/30','fr',null);
+insert into Players values ('Doug McDermott','A122968724','203 ','102 ','1992/1/3','us',null);
+insert into Players values ('Anthony Morrow','A122968725','196 ','95 ','1985/9/27','us',null);
+insert into Players values ('Victor Oladipo','A122968726','193 ','95 ','1992/5/4','us',null);
+insert into Players values ('Cameron Payne','A122968727','191 ','84 ','1994/8/8','us',null);
+insert into Players values ('Andre Roberson','A122968728','201 ','95 ','1991/12/4','us',null);
+insert into Players values ('Domantas Sabonis','A122968729','211 ','109 ','1996/5/3','us',null);
+insert into Players values ('Kyle Singler','A122968730','203 ','104 ','1988/5/4','us',null);
+insert into Players values ('Russell Westbrook','A122968731','191 ','91 ','1988/11/12','us',null);
+insert into Players values ('Tony Allen','A122968732','193 ','97 ','1982/1/11','us',null);
+insert into Players values ('Wade Baldwin','A122968733','193 ','92 ','1996/3/29','us',null);
+insert into Players values ('Vince Carter','A122968734','198 ','100 ','1977/1/26','us',null);
+insert into Players values ('Mike Conley','A122968735','185 ','79 ','1987/10/11','us',null);
+insert into Players values ('Troy Daniels','A122968736','193 ','93 ','1991/7/15','us',null);
+insert into Players values ('Deyonta Davis','A122968737','211 ','108 ','1996/12/2','us',null);
+insert into Players values ('Toney Douglas','A122968738','188 ','89 ','1986/3/16','us',null);
+insert into Players values ('James Ennis','A122968739','201 ','95 ','1990/7/1','us',null);
+insert into Players values ('Marc Gasol','A122968740','216 ','116 ','1985/1/29','es',null);
+insert into Players values ('JaMychal Green','A122968741','206 ','103 ','1990/6/21','us',null);
+insert into Players values ('Andrew Harrison','A122968742','198 ','97 ','1994/10/28','us',null);
+insert into Players values ('Jarell Martin','A122968743','208 ','109 ','1994/5/24','us',null);
+insert into Players values ('Chandler Parsons','A122968744','208 ','104 ','1988/10/25','us',null);
+insert into Players values ('Zach Randolph','A122968745','206 ','118 ','1981/7/16','us',null);
+insert into Players values ('Wayne Selden','A122968746','196 ','104 ','1994/9/30','us',null);
+insert into Players values ('Troy Williams','A122968747','201 ','99 ','1994/12/30','us',null);
+insert into Players values ('Brandan Wright','A122968748','208 ','95 ','1987/10/5','us',null);
+insert into Players values ('Al-Farouq Aminu','A122968749','206 ','100 ','1990/9/21','us',null);
+insert into Players values ('Pat Connaughton','A122968750','196 ','94 ','1993/1/6','us',null);
+insert into Players values ('Allen Crabbe','A122968751','198 ','95 ','1992/4/9','us',null);
+insert into Players values ('Ed Davis','A122968752','208 ','109 ','1989/6/5','us',null);
+insert into Players values ('Maurice Harkless','A122968753','206 ','98 ','1993/5/11','us',null);
+insert into Players values ('Jake Layman','A122968754','206 ','95 ','1994/3/7','us',null);
+insert into Players values ('Meyers Leonard','A122968755','216 ','111 ','1992/2/27','us',null);
+insert into Players values ('Damian Lillard','A122968756','191 ','89 ','1990/7/15','us',null);
+insert into Players values ('C.J. McCollum','A122968757','191 ','86 ','1991/9/19','us',null);
+insert into Players values ('Shabazz Napier','A122968758','185 ','79 ','1991/7/14','us',null);
+insert into Players values ('Jusuf Nurkic','A122968759','213 ','127 ','1994/8/23','ba',null);
+insert into Players values ('Mason Plumlee','A122968760','211 ','111 ','1990/3/5','us',null);
+insert into Players values ('Tim Quarterman','A122968761','198 ','89 ','1994/10/27','us',null);
+insert into Players values ('Evan Turner','A122968762','201 ','100 ','1988/10/27','us',null);
+insert into Players values ('Noah Vonleh','A122968763','208 ','109 ','1995/8/24','us',null);
  
  select * from Players 
  GO
@@ -412,8 +412,6 @@ create table PersonalData    --個人比賽數據
   playerID            int references Players(playerID),   --球員ID
   gameID              int references Games(gameID),       --賽事ID
   teamID              int  references Teams(teamID),      --球隊ID
-  --quarters            char,               --節數
-  --quarterTime         INT,                --單節出場時間 (單位:秒)
   gameTime			  char(10),               --出場時間 (單位: 分:秒)
   twoPoint            INT,                --兩分命中數
   twoPointShot        INT,                --兩分出手數
@@ -602,7 +600,7 @@ gameID					int  references Games(gameID ),        --賽事ID
 mediaID                 int  primary key IDENTITY (6001,1),    --影音編號
 mediasName              nvarchar(20),                          --影音名稱
 gameVideo			    varchar(200),                          --賽事影片(連結)
-gamePhoto			    Image,                                 --賽事照片
+gamePhoto			    varchar(max),                                 --賽事照片
 mediaType               varchar(10),                           --檔案類型
 mediaDate               datetime,                              --日期
 descriptions            nvarchar(200),                         --描述

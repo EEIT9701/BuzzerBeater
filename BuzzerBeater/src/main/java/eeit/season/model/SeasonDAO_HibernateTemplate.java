@@ -2,109 +2,74 @@ package eeit.season.model;
 
 import java.sql.Timestamp;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import eeit.groups.model.GroupsVO;
-import hibernate.util.HibernateUtil;
 
-public class SeasonDAO_Hibernate implements SeasonDAO_interface {
+@Transactional(readOnly = true)
+public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
+	private HibernateTemplate hibernateTemplate;
+
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
 
 	private static final String GET_ALL_SEASON = "from SeasonVO order by seasonID";
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public SeasonVO findBySeasonID(Integer seasonID) {
-		SeasonVO sVO = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			sVO = (SeasonVO) session.get(SeasonVO.class, seasonID);
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return sVO;
+		return (SeasonVO) hibernateTemplate.get(SeasonVO.class, seasonID);
 	}
 
 	@Override
 	public void insert(SeasonVO seasonVO) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			session.saveOrUpdate(seasonVO);
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-
+		hibernateTemplate.save(seasonVO);
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void update(SeasonVO seasonVO) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			session.saveOrUpdate(seasonVO);
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
+		hibernateTemplate.update(seasonVO);
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Integer delete(Integer seasonID) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			
-			SeasonVO seasonVO = (SeasonVO) session.get(SeasonVO.class, seasonID);
-			session.delete(seasonVO);
-			
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
+		SeasonVO seasonVO = (SeasonVO) hibernateTemplate.get(SeasonVO.class, seasonID);
+		hibernateTemplate.delete(seasonVO);
 		return null;
 	}
 
-
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<SeasonVO> getAll() {
-		Set<SeasonVO> set = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-
-			Query query = session.createQuery(GET_ALL_SEASON);
-			set = new LinkedHashSet<SeasonVO>(query.list());
-			
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return set;
+		Object obj = hibernateTemplate.find(GET_ALL_SEASON);
+		return new LinkedHashSet<SeasonVO>((List<SeasonVO>) obj);
 	}
 
 	public static void main(String args[]) {
-		SeasonDAO_Hibernate dao = new SeasonDAO_Hibernate();
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
+		SeasonDAO_interface dao = (SeasonDAO_interface) context.getBean("SeasonDAO");
 
 		/****************** getOneByID ******************/
 
-//		 SeasonVO sVO3 = dao.findBySeasonID(1001);
-//		 Set<GroupsVO> set = sVO3.getGroupsSet();
-//		 
-//		 for(GroupsVO g:set){
-//			 System.out.print(sVO3.getSeasonName()+", ");
-//			 System.out.println(g.getGroupName()+", ");
-//		 }
+		// SeasonVO sVO3 = dao.findBySeasonID(1001);
+		// Set<GroupsVO> set = sVO3.getGroupsSet();
+		//
+		// for(GroupsVO g:set){
+		// System.out.print(sVO3.getSeasonName()+", ");
+		// System.out.println(g.getGroupName()+", ");
+		// }
 
 		/****************** insert ******************/
 
@@ -113,7 +78,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 //		 sVO1.setSeasonBeginDate(null);
 //		 sVO1.setSignUpBegin(Timestamp.valueOf("2017-10-10 18:00:00"));
 //		 sVO1.setDescriptions("...");
-//		 
+//		
 //		 GroupsVO gVO1 = new GroupsVO();
 //		 gVO1.setGroupName("新增1");
 //		 gVO1.setMaxPlayers(3);
@@ -136,7 +101,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 
 		/****************** delete ******************/
 
-		dao.delete(1001);
+//		 dao.delete(1001);
 
 		/****************** getAll ******************/
 
@@ -150,7 +115,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 			System.out.print(sVO.getSignUpEnd() + ", ");
 			System.out.print(sVO.getDescriptions());
 			Set<GroupsVO> gVO = sVO.getGroupsSet();
-			for(GroupsVO v:gVO){
+			for (GroupsVO v : gVO) {
 				System.out.print(v.getGroupID());
 			}
 			System.out.println();

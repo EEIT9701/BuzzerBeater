@@ -16,7 +16,7 @@ public class GameMediaVO implements Serializable {
 
 	private String mediasName;
 	private String gameVideo;
-	private Blob gamePhoto;
+	private String gamePhoto;
 	private String mediaType;
 	private Timestamp mediaDate;
 	private String descriptions;
@@ -54,11 +54,11 @@ public class GameMediaVO implements Serializable {
 		this.gameVideo = gameVideo;
 	}
 
-	public Blob getGamePhoto() {
+	public String getGamePhoto() {
 		return gamePhoto;
 	}
 
-	public void setGamePhoto(Blob gamePhoto) {
+	public void setGamePhoto(String gamePhoto) {
 		this.gamePhoto = gamePhoto;
 	}
 
