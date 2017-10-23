@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>EEIT97-第一組</title>
@@ -25,25 +23,14 @@
 <body>
 
 <jsp:include page="/header.jsp" />
-
+<jsp:useBean id="gameMediaSvc"  scope="page" class="eeit.gamemedia.model.GameMediaService" />
     <!--主文(開始)-->
     <div class="container">
         <div class="jumbotron">
             <div class="row">
 				<div class="col-md-3">
-					<h2>檢視影片資料</h2>
+					<h2>影片內容修改</h2>
 				</div>
-			</div>
-			<div>
-				<c:if test="${not empty errorMsgs}">
-					<font color='red'>請修正以下錯誤:
-						<ul>
-							<c:forEach var="message" items="${errorMsgs}">
-								<li>${message}</li>
-							</c:forEach>
-						</ul>
-					</font>
-				</c:if>
 			</div>
 			<div class="row">
 				<table class="table table-bordered" id="table">
@@ -57,7 +44,7 @@
       						<td>標籤</td>
       						<td></td>
     					</tr>
-  					<thead>
+  					</thead>
   					<tbody>
   						<tr align='center' valign='middle' id='data'>
   							<td>${gameMediaVO.gamesVO.gameID}</td>
@@ -67,7 +54,15 @@
       						<td>${gameMediaVO.descriptions}</td>
       						<td>${gameMediaVO.tag}</td>
       						<td>
-     							<input type="button" value="修改" id="check">
+      							<form>
+      								<input type="submit" value="確定" id="check">
+      								<input type="hidden" name="action" value="Update">
+      								<input type="hidden" name="" value="Update">
+      							</form>
+      							<form>
+      								<input type="button" value="取消" id="cancel">
+      							</form>
+      							
       						</td>
   						</tr>
   					</tbody>

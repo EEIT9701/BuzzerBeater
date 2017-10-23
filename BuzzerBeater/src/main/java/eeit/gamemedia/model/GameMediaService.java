@@ -1,6 +1,5 @@
 package eeit.gamemedia.model;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class GameMediaService {
 	public GameMediaService(){
 		dao = new GameMediaDAO_JNDI();
 	}
-	public GameMediaVO insertGameMedia(Integer gameID,String mediasName,String gameVideo,Blob gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag ){
+	public GameMediaVO insertGameMedia(Integer gameID,String mediasName,String gameVideo,String gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag ){
 		
 		GameMediaVO gameMediaVO = new GameMediaVO();
 		GamesVO gamesVO = new GamesVO();
@@ -31,7 +30,7 @@ public class GameMediaService {
 		return gameMediaVO;
 	}
 	
-	public GameMediaVO updateGameMedia(Integer gameID,Integer mediaID,String mediasName,String gameVideo,Blob gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag){
+	public GameMediaVO updateGameMedia(Integer gameID,Integer mediaID,String mediasName,String gameVideo,String gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag){
 		GameMediaVO gameMediaVO = new GameMediaVO();
 		GamesVO gamesVO = new GamesVO();
 		
