@@ -5,21 +5,19 @@
 
     <head>
         <title>EEIT97-第一組</title>
-        <<meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
-            <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-            <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-            <!--滑鼠移入，顯示表格(jquery設定"2-1")-->
-            <link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
-            <style>
-                img {
-                    width: 250px;
-                    height: 250px;
-                    margin: auto;
-                }
-            </style>
-            <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <jsp:include page="/header_css.jsp" />
+        <!--滑鼠移入，顯示表格(jquery設定"2-1")-->
+        <link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
+        <style>
+            #img1 {
+                width: 250px;
+                height: 250px;
+                margin: auto;
+            }
+        </style>
+        <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     </head>
 
     <body>
@@ -34,7 +32,7 @@
                     <!--第二列-左邊表格-格式_.col-md-4-->
                     <div class="col-md-4">
                         <div class="col-md-12">
-                            <img alt="" src="<%=request.getContextPath() %>\teams\500px-Golden.png">
+                            <img id="img1" alt="" src="<%=request.getContextPath() %>\teams\500px-Golden.png">
                             <!--球員照片-->
                         </div>
                     </div>
@@ -166,35 +164,37 @@
                                 </table>
                             </div>
                             <div id="tabs-3">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>比賽時間</th>
-                                                <th>比賽地點</th>
-                                                <th>對戰隊伍</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-    
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>比賽時間</th>
+                                            <th>比賽地點</th>
+                                            <th>對戰隊伍</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <!--滑鼠移入，顯示表格(結束)-->
 
 
 
 
+                        <jsp:include page="/footer.jsp" />
+
                     </div>
                 </div>
                 <!--主文(結束)-->
 
-                <jsp:include page="/footer.jsp" />
+                <jsp:include page="/footer_css.jsp" />
                 <!--滑鼠移入，顯示表格(jquery設定"2-2")-->
                 <script src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
                 <script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>

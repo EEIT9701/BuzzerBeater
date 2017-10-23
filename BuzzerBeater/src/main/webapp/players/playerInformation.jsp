@@ -5,21 +5,19 @@
 
     <head>
         <title>EEIT97-第一組</title>
-        <<meta name="viewport" content="width=device-width, initial-scale=1">
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
-            <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-            <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-            <!--滑鼠移入，顯示表格(jquery設定"2-1")-->
-            <link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
-            <style>
-                img {
-                    width: 250px;
-                    height: 250px;
-                    margin: auto;
-                }
-            </style>
-            <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <jsp:include page="/header_css.jsp" />
+        <!--滑鼠移入，顯示表格(jquery設定"2-1")-->
+        <link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
+        <style>
+            #img1 {
+                width: 250px;
+                height: 250px;
+                margin: auto;
+            }
+        </style>
+        <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     </head>
 
     <body>
@@ -34,7 +32,7 @@
                     <!--第二列-左邊表格-格式_.col-md-4-->
                     <div class="col-md-4">
                         <div class="col-md-12">
-                            <img alt="" src="<%=request.getContextPath() %>\players\201939.png">
+                            <img id="img1" alt="" src="<%=request.getContextPath() %>\players\201939.png">
                             <!--球員照片-->
                         </div>
                     </div>
@@ -81,7 +79,7 @@
                     <div class="col-md-4">
 
                         <div class="col-md-12">
-                            <img alt="" src="<%=request.getContextPath() %>\players\500px-Golden.png">
+                            <img id="img1" alt="" src="<%=request.getContextPath() %>\players\500px-Golden.png">
                             <!--球員照片-->
                         </div>
                     </div>
@@ -174,7 +172,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            
+                                            <td></td>
                                         </tr>
 
                                     </tbody>
@@ -189,19 +187,23 @@
 
                     </div>
                 </div>
-                <!--主文(結束)-->
-
                 <jsp:include page="/footer.jsp" />
-                <!--滑鼠移入，顯示表格(jquery設定"2-2")-->
-                <script src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
-                <script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
-                <script>
-                    $(function () {
-                        $("#tabs").tabs({
-                            event: "mouseover"
-                        });
-                    });
-                </script>
+
+            </div>
+        </div>
+        <!--主文(結束)-->
+
+        <jsp:include page="/footer_css.jsp" />
+        <!--滑鼠移入，顯示表格(jquery設定"2-2")-->
+        <script src="<%=request.getContextPath()%>/js/jquery-table-1.12.4.js"></script>
+        <script src="<%=request.getContextPath()%>/js/jquery-ui-table.js"></script>
+        <script>
+            $(function () {
+                $("#tabs").tabs({
+                    event: "mouseover"
+                });
+            });
+        </script>
     </body>
 
     </html>
