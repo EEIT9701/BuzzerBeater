@@ -7,24 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EEIT97-第一組</title>
-        <!--標頭樣式2-1-->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="fonts/FontAwesome/font-awesome.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/bootsnav.css" rel="stylesheet">
-    <link href="css/htmleaf-demo.css" rel="stylesheet" type="text/css" >
-    <link href="css/overwrite.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/color.css" rel="stylesheet">
-
-    <style>
-        .pageheader.fixed-demo.dark {
-            padding-top:30px
-        }
-    </style>
-
-
+	<jsp:include page="/header_css.jsp" />
 </head>
 <body id="home">
 
@@ -134,12 +117,9 @@
         </div>
     </div>
     <!--主文(結束)-->
+    
+			<jsp:include page="/footer_css.jsp" />
 
 
-
-    <!--標頭樣式2-2-->
-    <script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootsnav.js"></script>
 </body>
 </html>
