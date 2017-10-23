@@ -2,11 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="eeit.personaldata.model.*"%>
+<%@ page import="eeit.players.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     PersonalDataService playerSvc = new PersonalDataService();
     List<PersonalDataVO> list = playerSvc.getAll();
     pageContext.setAttribute("list",list);
+    
+    
+    PlayerService playersSvc =new  PlayerService();
+    Set<PlayersVO> list2 = playersSvc.getAllPlayer();
+    
 %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -27,6 +33,7 @@
     }
     </style>
     <link rel="stylesheet" type="text/css" href="../css/datatables.min.css"/>
+    <jsp:include page="/header_css.jsp" />
 </head>
 <body>
 
@@ -161,6 +168,7 @@
                     </div>
                 </div>          
         </div>
+     
     </div>
       
     <!--主文(結束)-->
