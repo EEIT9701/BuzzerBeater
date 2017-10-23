@@ -10,7 +10,7 @@ public class PersonalDataVO implements Serializable{
 private PlayersVO playersVO;
 private GamesVO gamesVO;
 private Integer teamID;
-private String gameTime;
+private Integer gameTime;
 private Integer twoPoint;
 private Integer twoPointShot;
 private Integer threePoint;
@@ -127,10 +127,11 @@ public Integer getPoints() {
 public void setPoints(Integer points) {
 	this.points = points;
 }
-public String getGameTime() {
+
+public Integer getGameTime() {
 	return gameTime;
 }
-public void setGameTime(String gameTime) {
+public void setGameTime(Integer gameTime) {
 	this.gameTime = gameTime;
 }
 public PlayersVO getPlayersVO() {
