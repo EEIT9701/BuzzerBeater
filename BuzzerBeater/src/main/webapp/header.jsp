@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
     <!--標頭(開始)-->
     <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
         <div class="container">
@@ -37,8 +36,8 @@
                 <!-- logo(開始) -->
                 <a class="navbar-brand" href="#brand">
 
-                    <img src="images/700_700.png" class="logo logo-display" alt="">
-                    <img src="images/700_700.png" class="logo logo-scrolled" alt="">
+                    <img src="<%=request.getContextPath() %>/images/700_700.png" class="logo logo-display" alt="">
+                    <img src="<%=request.getContextPath() %>/images/700_700.png" class="logo logo-scrolled" alt="">
                 </a>
                 <!-- logo(結束) -->
             </div>
