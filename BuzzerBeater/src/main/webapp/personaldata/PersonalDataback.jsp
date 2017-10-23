@@ -27,6 +27,7 @@
     }
     </style>
     <link rel="stylesheet" type="text/css" href="../css/datatables.min.css"/>
+    <jsp:include page="/header_css.jsp" />
 </head>
 <body>
 
@@ -161,6 +162,7 @@
                     </div>
                 </div>          
         </div>
+     
     </div>
       
     <!--主文(結束)-->
