@@ -8,10 +8,7 @@
 <title>EEIT97-第一組</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
-<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+<jsp:include page="/header_css.jsp" />
 </head>
 <body>
 
@@ -23,11 +20,11 @@
 		<div class="jumbotron">
 			<form class="form-inline" method="post" action="<%=request.getContextPath() %>/Players.do">
 				<div class="form-group">
-					<label for="Name">姓名</label> <input type="text"
+					<label for="Name">身分證字號:</label> <input type="text"
 						class="form-control" id="Name" name="playerName"
-						placeholder="請輸入球員名稱">
+						placeholder="請輸入球員身分證字號">
 				</div>
-				<button type="submit" class="btn btn-warning">搜尋</button>
+				<input type="submit" class="btn btn-warning" value="搜尋">
 				<input type="hidden" name="action" value="getOne_For_Display">
 			</form>
 			<!--表格(開始)-->
@@ -48,11 +45,11 @@
 								<th>體重</th>
 								<th>生日</th>
 								<th>國籍</th>
-								<th>照片</th>
+							
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="playersVO" items="${playersVO}">
+							<c:forEach var="playersVO" items="${playerSvc.allPlayer}">
 								<tr align='center' valign='middle'>
 									<td>${playersVO.playerID}</td>
 									<td>${playersVO.playerName}</td>
@@ -61,8 +58,7 @@
 									<td>${playersVO.weights}</td>
 									<td>${playersVO.birthday}</td>
 									<td>${playersVO.nationality}</td>
-									
-									<td><img src="${playersPhoto}"></td>
+                                    <td><img src="${playersPhoto}"></td>
 									<td>
 										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
                                                 <button type="submit" class="btn btn-info">修改</button> <input type="hidden"
@@ -73,22 +69,27 @@
 									<td>
 										<Form method="post" action="<%=request.getContextPath() %>/Players.do">
                                                 <button type="submit" class="btn btn-danger">刪除</button> <input type="hidden"
-												name="playerID" value="${playerVO.playerID}"> <input
+												name="playerID" value="${playersVO.playerID}"> <input
 												type="hidden" name="action" value="delete">
 										</Form>
 									</td>
 								</tr>
+
+
+
 							</c:forEach>
 					</table>
 					<!--</div>-->
 				</div>
 			</div>
-
+			
+		<jsp:include page="/footer.jsp" />
+			
 		</div>
 	</div>
 	<!--主文(結束)-->
 
-	<jsp:include page="/footer.jsp" />
+<jsp:include page="/footer_css.jsp" />
 
 </body>
 </html>

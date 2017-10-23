@@ -59,7 +59,7 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 				
 				personalDataVO.setTeamID(rs.getInt("teamID"));
 			//	personalDataVO.setQuarters(rs.getString("quarters"));
-				personalDataVO.setGameTime(rs.getString("gameTime"));
+				personalDataVO.setGameTime(rs.getInt("gameTime"));
 				personalDataVO.setTwoPoint(rs.getInt("twoPoint"));
 				personalDataVO.setTwoPointShot(rs.getInt("twoPoint"));
 				personalDataVO.setThreePoint(rs.getInt("threePoint"));

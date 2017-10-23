@@ -7,14 +7,13 @@
 <%
     PersonalDataService playerSvc = new PersonalDataService();
     List<PersonalDataVO> list = playerSvc.getAll();
-    pageContext.setAttribute("list",list);   
-%>
-<%
-    PlayerService playersSvc =new PlayerService();  
-    Set<PlayersVO> list2 = playersSvc.getAllPlayer();
-    pageContext.setAttribute("list",list);   
-%>   
+    pageContext.setAttribute("list",list);
     
+    
+    PlayerService playersSvc =new  PlayerService();
+    Set<PlayersVO> list2 = playersSvc.getAllPlayer();
+    
+%>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,7 +33,7 @@
     }
     </style>
     <link rel="stylesheet" type="text/css" href="../css/datatables.min.css"/>
-     <jsp:include page="/header_css.jsp" />
+    <jsp:include page="/header_css.jsp" />
 </head>
 <body>
 
@@ -83,10 +82,7 @@
     -->
    
      
-     <select>
-     <option label="平均" ></option>       
-     <option label="總合" value="object:8">例行賽</option>
-    </select>
+    
     <input type="submit" value="確定">    
      
          </div>   
@@ -107,9 +103,9 @@
                           <thead>
                                 <tr>
                                                 
-                                    <th>球員編號  </th>
-      <th>比賽場次  </th>
-      <th>球隊  </th>
+                                    <th>背號 </th>
+      <th>球員 </th>
+      <th>球隊 </th>
       <th>出場時間  </th>
       <th>二分命中 </th>
       <th>二分出手數  </th>
@@ -126,6 +122,8 @@
       <th>犯規 </th> 
       <th>得分 </th>
       <th>是否先發 </th>  
+       <th> </th>
+      <th> </th>
                                 </tr>
                 </thead>     
                 <tbody>     
@@ -134,8 +132,8 @@
 
 	  <td>${personalDataVO.playersVO.playerID}</td>
       <td>${personalDataVO.gamesVO.gameID}</td>
-      <td>${personalDataVO.teamID}</td>     
-      <td>${personalDataVO.gameTime}</td>
+      <td>${personalDataVO.playersVO.playerName}</td>     
+      <td>${playersVO.playerName}</td>
       <td>${personalDataVO.twoPoint}</td>
       <td>${personalDataVO.twoPointShot}</td>
       <td>${personalDataVO.threePoint}</td>
@@ -150,7 +148,19 @@
       <td>${personalDataVO.turnover}</td>
       <td>${personalDataVO.personalFouls}</td>
       <td>${personalDataVO.points}</td>
-      <td>${personalDataVO.startingPlayer}</td>              
+      <td>${personalDataVO.startingPlayer}</td>  
+      <td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/player.do">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="playerID" value="${playerVO.playerID}">
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/player.do">
+			    <input type="submit" value="刪除">
+			    <input type="hidden" name="playerID" value="${playerVO.playerID}">
+			    <input type="hidden" name="action"value="delete"></FORM>
+			</td>            
                      </tr>  
                         </c:forEach>  
                      </tbody>
@@ -158,6 +168,7 @@
                     </div>
                 </div>          
         </div>
+     
     </div>
       
     <!--主文(結束)-->

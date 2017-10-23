@@ -53,7 +53,7 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 				
 	
 				personalDataVO.setTeamID(rs.getInt("teamID"));
-				personalDataVO.setGameTime(rs.getString("GameTime"));
+				personalDataVO.setGameTime(rs.getInt("GameTime"));
 				personalDataVO.setTwoPoint(rs.getInt("twoPoint"));
 				personalDataVO.setTwoPointShot(rs.getInt("twoPoint"));
 				personalDataVO.setThreePoint(rs.getInt("threePoint"));
