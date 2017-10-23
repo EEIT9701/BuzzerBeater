@@ -1,10 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-    <!--標尾(開始)-->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2016 Company, Inc.</p>
-        </div>
-    </footer>
-    <!--標尾(結束)-->    
+<!--標尾(開始)-->
+	<footer>
+		<p>&copy; 2016 Company, Inc.</p>
+	</footer>
+<!--標尾(結束)-->
