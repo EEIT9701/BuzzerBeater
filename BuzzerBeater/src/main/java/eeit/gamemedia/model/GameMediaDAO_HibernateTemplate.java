@@ -2,20 +2,22 @@ package eeit.gamemedia.model;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
 public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
-	
+
 	private HibernateTemplate hibernateTemplate;
 
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
-	private static final String GET_ALL_STMT = "FROM GameMediaVO ORDER BY gameMediaID";
+	private static final String GET_ALL_STMT = "FROM GameMediaVO ORDER BY mediaID";
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -50,6 +52,20 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 		Object obj = hibernateTemplate.find(GET_ALL_STMT);
 		List<GameMediaVO> list = (List<GameMediaVO>) obj;
 		return list;
+	}
+
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
+		GameMediaDAO_Interface dao = (GameMediaDAO_Interface) context.getBean("GameMediaDAO");
+		
+		
+		List<GameMediaVO> set =dao.getAll();
+		
+		for(GameMediaVO vo : set){
+			System.out.println(vo.getGameVideo());
+		}
+
+
 	}
 
 }

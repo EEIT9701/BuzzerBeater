@@ -28,7 +28,7 @@
 		        		<input type="submit" value="送出">
 		        	</form>
 		        
-		        <img src="data:image/jpeg;base64,${base64code}">
+		        <img src="data:image/png;base64,${base64code}">
 		   
 		</div>
 	</div>

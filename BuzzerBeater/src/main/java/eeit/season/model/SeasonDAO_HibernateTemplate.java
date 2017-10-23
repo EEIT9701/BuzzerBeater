@@ -1,6 +1,5 @@
 package eeit.season.model;
 
-import java.sql.Timestamp;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +20,7 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
-	private static final String GET_ALL_SEASON = "from SeasonVO order by seasonID";
+	private static final String GET_ALL_SEASON = "from SeasonVO";
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)

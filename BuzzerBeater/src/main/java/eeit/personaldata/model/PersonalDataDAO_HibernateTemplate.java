@@ -24,8 +24,8 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<PersonalDataVO> getAll() {
-		List<PersonalDataVO> list = (List<PersonalDataVO>) hibernateTemplate.find(GET_ALL_STMT);
-		return new LinkedHashSet<PersonalDataVO>(list);
+		Object obj = hibernateTemplate.find(GET_ALL_STMT);
+		return new LinkedHashSet<PersonalDataVO>((List<PersonalDataVO>) obj);
 	}
 
 	@Override
@@ -55,10 +55,9 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 	}
 
 	public static void main(String args[]) {
-		
+
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		PersonalDataDAO_interface dao = (PersonalDataDAO_interface) context.getBean("PersonalDataDAO");
-
 
 		Set<PersonalDataVO> set = dao.getAll();
 		for (PersonalDataVO vo : set) {

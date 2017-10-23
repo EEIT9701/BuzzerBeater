@@ -52,6 +52,7 @@ public class PlayerGroupsDAO_HibernateTemplate implements PlayerGroupsDAO_interf
 			System.out.print(vo.getPlayersVO().getPlayerName() + ", ");
 			System.out.print(vo.getPlayersVO().getHeight() + ", ");
 			System.out.print(vo.getGroupsVO().getSeasonVO().getSeasonName() + ", ");
+			System.out.println();
 		}
 	}
 
