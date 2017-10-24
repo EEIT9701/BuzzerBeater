@@ -7,17 +7,32 @@
 <head>
     <title>EEIT97-第一組</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
-    <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<jsp:include page="/header_css.jsp" />
+<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <style>
     #table{
-	table-layout: fixed;
+		table-layout: fixed;
 	}
 	#thead{
-	font-weight:bold;
+		font-weight:bold;
+	}
+	#video{
+		width:500px;
+		height:300px;
+		padding-top:20px;
+		padding-left:0px;
+		padding-right:0px;
+		align:middle;
+	}
+	#myModalLabel{
+		width:200px
+	}
+	#videoset{
+		margin-top:-75px;
+		padding-top:0px;
+	
 	}
     </style>
 
@@ -56,28 +71,51 @@
       						<td>備註</td>
       						<td>標籤</td>
       						<td></td>
+      						<td></td>
     					</tr>
   					<thead>
   					<tbody>
   						<tr align='center' valign='middle' id='data'>
-  							<td>${gameMediaVO.gamesVO.gameID}</td>
-      						<td>${gameMediaVO.mediaID}</td>
+  							<td>${gameMediaVO.gamesVO.groupsVO.groupName}</td>
+      						<td>${gameMediaVO.gamesVO.teamAVO.teamName} </br>VS</br> ${gameMediaVO.gamesVO.teamBVO.teamName}</td>
       						<td>${gameMediaVO.mediaDate}</td>
       						<td>${gameMediaVO.mediasName}</td>
       						<td>${gameMediaVO.descriptions}</td>
       						<td>${gameMediaVO.tag}</td>
       						<td>
-     							<input type="button" value="修改" id="check">
+     							<button class="btn btn-info" id="uploadButton"  data-toggle="modal" data-target="#myModal">預覽</button>
+								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+    								<div class="modal-dialog">
+        							<div class="modal-content">
+            							<div class="modal-header">
+                							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                							<h4 class="modal-title" id="myModalLabel">預覽影片</h4>
+            							</div>
+            						<div class="modal-body">
+            							<video controls id="video">
+       										<source src="<%=request.getContextPath()%>/videos/${gameMediaVO.gameVideo}" type="video/mp4">
+										</video>
+            						</div>
+            						<div class="modal-footer">
+                						<button type="button" class="btn btn-warning" data-dismiss="modal">離開</button>
+            						</div>
+        							</div>
+    								</div>
+								</div>
+      						</td>
+      						<td>
+     							<button class="btn btn-warning" type="submit" id="check">修改</button>
       						</td>
   						</tr>
   					</tbody>
   				</table>
 			</div>
+			<jsp:include page="/footer.jsp" />
         </div>
     </div>
     <!--主文(結束)-->
 
-<jsp:include page="/footer.jsp" />
+<jsp:include page="/footer_css.jsp" />
 <script>
 	$('#check').click(function(){
 		$('#check').css("value","取消")

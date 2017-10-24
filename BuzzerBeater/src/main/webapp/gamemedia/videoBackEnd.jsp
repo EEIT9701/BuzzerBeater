@@ -6,54 +6,38 @@
 <%@ page import="eeit.gamemedia.model.*"%>
 <%@ page import="java.util.*"%>
 <%
-	SeasonService seasonSvc = new SeasonService();
-	Set<HashMap<String, Object>> list = seasonSvc.getAll();
-// 	SeasonDAO_Hibernate dao = new SeasonDAO_Hibernate();
-// 	Set<SeasonVO> list = dao.getAll();
+// 	SeasonService seasonSvc = new SeasonService();
+// 	Set<HashMap<String, Object>> list = seasonSvc.getAll();
+ 	SeasonDAO_Hibernate dao = new SeasonDAO_Hibernate();
+ 	Set<SeasonVO> list = dao.getAll();
 	request.setAttribute("list", list);
 
 	SeasonVO seasonVO = new SeasonVO();
 	Set<GroupsVO> groupSet = seasonVO.getGroupsSet();
 	request.setAttribute("groupSet", groupSet);
 	
-	GameMediaDAO_JNDI gameMediaVO = new GameMediaDAO_JNDI();
-	List<GameMediaVO> media = gameMediaVO.getAll();
-	request.setAttribute("gameMediaVO", media);
+// 	GameMediaService gameMediaSvc = new GameMediaService();
+// 	List<GameMediaVO> media = gameMediaSvc.getAll();
+// 	request.setAttribute("gameMediaSvc", media);
+	
+	
 %>
-
+<jsp:useBean id="gameMediaSvc" scope="page" class="eeit.gamemedia.model.GameMediaService" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>EEIT97-第一組</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- <link rel="stylesheet" -->
 <!-- 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<link href="<%=request.getContextPath()%>/css/bootstrap.css"
-	rel='stylesheet' type='text/css' />
-<link href="<%=request.getContextPath()%>/css/style.css"
-	rel="stylesheet" type="text/css" media="all" />
+<script src="<%=request.getContextPath() %>/js/jquery-3.2.1.min.js"></script>
 
-<script src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+<jsp:include page="/header_css.jsp" />
 
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 
 <style>
-#search {
-	margin-bottom: 10px;
-	margin-right: 0px;
-	padding-right: 0px;
-}
-
-#button {
-	padding: 7px;
-}
-
-#search-button {
-	margin-left: 0px;
-	padding-left: 0px;
-	height:10px;
-}
 #myModalLabel{
 	width:200px
 }
@@ -90,83 +74,67 @@
 #delete{
 	margin:0px;
 }
-#search-box {
-  			font-size: 13px;
-  			width: 120px;
-  			background: #E6E6E6 url('<%=request.getContextPath()%>/images/search.png') no-repeat 3px 3px;
-  			padding: 3px 0px 3px 22px;
-  			margin-right:50px;
-  			margin-top:0px;
-  			border: 1px solid black;
-  			border-radius: 50px;
-		}
-</style>
+#topic{
+	margin-left:0px;
+	padding-left:0px;
+}
 
+</style>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/datatables.min.css" />
 
 </head>
 <body>
-
+	
 	<jsp:include page="/header.jsp" />
 	<!--主文(開始)-->
 	<div class="container">
 		<div class="jumbotron">
 			<div class="row">
-				<div class="col-md-3">
-					<h2>影片專區</h2>
+				<div class="col-md-4" id="topic">
+					<h1>影片專區</h1>
+					</br>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-2">
-					<div class="btn-group">
-						<button type="button" class="btn btn-primary" id="button">賽季</button>
-						<button type="button" class="btn btn-primary dropdown-toggle"
-							data-toggle="dropdown">
-							<span class="caret"></span><span></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<c:forEach var="list" items="${list}">
-								<li id="season">${list.seasonName}</li>
-							</c:forEach>
-						</ul>
+					<div class="dropdown">
+    					<button type="button" class="btn btn-warning dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">賽季<span class="caret"></span>
+    					</button>
+    					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        					<c:forEach var="list" items="${list}">
+        						<li>${list.seasonName}</li>
+        					</c:forEach>
+    					</ul>
 					</div>
 				</div>
 				<div class="col-md-2">
-					<div class="btn-group">
-						<button type="button" class="btn btn-primary" id="button">組別</button>
-						<button type="button" class="btn btn-primary dropdown-toggle"
-							data-toggle="dropdown">
-							<span class="caret"></span><span></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<c:forEach var="set" items="${list}">
-								<c:forEach var="g" items="${set.groupsSet}">
-									<li>${g.groupName}</li>
-								</c:forEach>
-							</c:forEach>
-						</ul>
+					<div class="dropdown">
+    					<button type="button" class="btn btn-danger dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">賽季<span class="caret"></span>
+    					</button>
+    					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        					<c:forEach var="set" items="${list}">
+        						<c:forEach var="g" items="${set.groupsSet}">
+        							<li>${g.groupName}</li>
+        						</c:forEach>
+        					</c:forEach>
+    					</ul>
 					</div>
 				</div>
 				<div class="col-md-2">
-					<div class="btn-group">
-						<button type="button" class="btn btn-primary" id="button">球隊</button>
-						<button type="button" class="btn btn-primary dropdown-toggle"
-							data-toggle="dropdown">
-							<span class="caret"></span><span></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<c:forEach var="list" items="${list}">
-								<li>${list.seasonName}</li>
-							</c:forEach>
-						</ul>
+					<div class="dropdown">
+    					<button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">球隊<span class="caret"></span>
+    					</button>
+    					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        					<c:forEach var="list" items="${list}">
+        						<li>${list.seasonName}</li>
+        					</c:forEach>
+    					</ul>
 					</div>
 				</div>
 				
-				<div class="col-md-offset-4 col-md-2">
-					<input id="search-box" type="text" name="search-box" />
-				</div>
 			</div>
 			</br>
-			<div id="tabletopic"><h3>影音管理</h3></div>
 			<div class="row">
 				<table class="table table-bordered" id="table">
   						<thead>
@@ -178,27 +146,30 @@
       							<td>備註</td>
       							<td>標籤</td>
       							<td></td>
+      							<td></td>
       							
     						</tr>
   						</thead>
   						<tbody>
-  							<c:forEach var="gameMediaVO" items="${gameMediaVO}">
+  							<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}">
   								<tr align='center' valign='middle'>
-      								<td>${gameMediaVO.gamesVO.gameID}</td>
-      								<td>${gameMediaVO.mediaID}</td>
-      								<td>${gameMediaVO.mediaDate}</td>
-      								<td>${gameMediaVO.mediasName}</td>
-      								<td>${gameMediaVO.descriptions}</td>
-      								<td>${gameMediaVO.tag}</td>
+      								<td>${gameMediaSvc.gamesVO.groupsVO.groupName}</td>
+      								<td>${gameMediaSvc.gamesVO.teamAVO.teamName} </br>VS</br> ${gameMediaSvc.gamesVO.teamBVO.teamName}</td>
+      								<td>${gameMediaSvc.mediaDate}</td>
+      								<td>${gameMediaSvc.mediasName}</td>
+      								<td>${gameMediaSvc.descriptions}</td>
+      								<td>${gameMediaSvc.tag}</td>
       								<td>
       									<Form method="post" action="<%=request.getContextPath() %>/GameMedia.do" id="update">
-      										<input type="submit" value="檢視">
-      										<input type="hidden" name="mediaID" value="${gameMediaVO.mediaID}"> 
+      										<button type="submit" class="btn btn-info">檢視</button>
+      										<input type="hidden" name="mediaID" value="${gameMediaSvc.mediaID}"> 
                                            	<input type="hidden" name="action" value="getOneForUpdate">
                                        	</Form>
+                                    </td>
+                                    <td>
                                         <Form method="post" action="<%=request.getContextPath() %>/GameMedia.do" id="delete">    
-      										<input type="submit" value="刪除">
-											<input type="hidden" name="mediaID" value="${gameMediaVO.mediaID}"> 
+      										<button type="submit" class="btn btn-danger">刪除</button>
+											<input type="hidden" name="mediaID" value="${gameMediaSvc.mediaID}"> 
                                            	<input type="hidden" name="action" value="delete">
 										</Form>
       								</td>
@@ -212,7 +183,7 @@
 				<div class="col-md-3"><h3>影片上傳</h3></div>
 			</div>
 			<div class="row">
-				<button class="btn btn-sm" id="uploadButton"  data-toggle="modal" data-target="#myModal">選擇檔案</button>
+				<button class="btn btn-warning" id="uploadButton"  data-toggle="modal" data-target="#myModal">選擇檔案</button>
 					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
     					<div class="modal-dialog">
         					<div class="modal-content">
@@ -223,8 +194,8 @@
             				<div class="modal-body">
             					<div class="row">
   									<div class="col-md-12">
-    									<label class="control-label">選擇檔案</label>
-      										<input type="file" class="file">
+<!--     									<label class="control-label">選擇檔案</label> -->
+      									<input type="file" class="file">
 									</div>
             					</div>
             					</br>
@@ -242,13 +213,7 @@
             						<span class="input-group-addon">標籤</span>
             							<input type="text" class="form-control" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣">
         						</div>
-        						<div class="row">
-        							<div class="col-md-offset-3">
-            							<video controls id="video">
-            								<source src="<%=request.getContextPath()%>/videos/${gameMediaVO[0].gameVideo}" type="video/mp4">
-            							</video>
-            						</div>
-        						</div>
+        				
         						
             				</div>
             				<div class="modal-footer">
@@ -262,14 +227,19 @@
 					
 			
 			
+			<jsp:include page="/footer.jsp" />
 		</div>
 	</div>
 	<!--主文(結束)-->
 
-<jsp:include page="/footer.jsp" />
-<script>
-
-</script>
+	<jsp:include page="/footer_css.jsp" />
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#table').DataTable();
+		});
+	</script>
 
 
 </body>
