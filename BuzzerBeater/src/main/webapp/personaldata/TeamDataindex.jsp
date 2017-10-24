@@ -23,7 +23,7 @@
     <style>
     #st1{
      padding:30px;
-     background-color:#1E90FF;  
+     background-color:#FFAA33;  
       
     }
     #st2{
@@ -124,8 +124,8 @@
             <c:forEach var="personalDataVO" items="${list}" >
 		    <tr align='center' valign='middle'>
 
-	  <td>${personalDataVO.teamID}</td> 
-      <td>${personalDataVO.teamID}</td>
+	  <td>${personalDataVO.teamsVO.teamName}</td>
+      <td>${personalDataVO.gameID}</td>
       <td>${personalDataVO.twoPoint}</td>
       <td>${personalDataVO.twoPointShot}</td>
       <td>${personalDataVO.threePoint}</td>

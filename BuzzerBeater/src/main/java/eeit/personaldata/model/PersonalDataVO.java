@@ -11,6 +11,7 @@ public class PersonalDataVO implements Serializable{
 private PlayersVO playersVO;
 private GamesVO gamesVO;
 private TeamsVO teamsVO;
+private Integer gameID;
 private Integer teamID;
 private Integer gameTime;
 private Integer twoPoint;
@@ -147,6 +148,12 @@ public Integer getStartingPlayer() {
 }
 public void setStartingPlayer(Integer startingPlayer) {
 	this.startingPlayer = startingPlayer;
+}
+public Integer getGameID() {
+	return gameID;
+}
+public void setGameID(Integer gameID) {
+	this.gameID = gameID;
 }
 
 

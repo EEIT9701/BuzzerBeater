@@ -29,7 +29,7 @@
     <style>
     #st1{
      padding:30px;
-     background-color:#1E90FF;       
+     background-color:#FFAA33;       
     }
     </style>
     <link rel="stylesheet" type="text/css" href="../css/datatables.min.css"/>
