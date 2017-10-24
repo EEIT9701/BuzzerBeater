@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+
+    
     <!--標頭(開始)-->
     <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
         <div class="container">
@@ -19,13 +22,16 @@
                         <!--新刪修"按鈕"(結束)-->
                     </li>
                     <!--登入登出"按鈕"(開始)-->
-                    <li><a href="#"><i class="glyphicon glyphicon-user"></i> Sign Up<!--這行的href輸入超連結頁面--></a></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-log-in"></i> Login<!--這行的href輸入超連結頁面--></a></li>
+                    <li><button type="submit"><i class="glyphicon glyphicon-user">
+               		    </i> Sign Up<!--這行的href輸入超連結頁面--></button></li>
+               		    
+                    <li><button onclick="document.getElementById('id01').style.display='block'" type="submit">
+                    	<i class="glyphicon glyphicon-log-in"></i> Login<!--這行的href輸入超連結頁面--></button></li>
                     <!--登入登出"按鈕"(結束)-->
                 </ul>
             </div>
 
-
+			<jsp:include page="/header_login.jsp" />
 
             <div class="navbar-header">
                 <!-- 縮小視窗(左列)(開始) -->
@@ -115,6 +121,7 @@
         </div>
     </nav>
     <!--標頭(結束)-->
+    
 
     <!--至頂空白(開始)-->
     <div class="pageheader fixed-demo dark">

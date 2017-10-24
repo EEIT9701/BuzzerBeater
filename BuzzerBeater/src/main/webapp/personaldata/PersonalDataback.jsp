@@ -29,7 +29,7 @@
     <style>
     #st1{
      padding:30px;
-     background-color:#1E90FF;       
+     background-color:#FFAA33;       
     }
     </style>
     <link rel="stylesheet" type="text/css" href="../css/datatables.min.css"/>
@@ -103,10 +103,9 @@
                           <thead>
                                 <tr>
                                                 
-                                    <th>背號 </th>
-      <th>球員 </th>
-      <th>球隊 </th>
-      <th>出場時間  </th>
+                                    <th>球員 </th>
+      <th>球隊名稱 </th>
+      <th>出場時間 </th>
       <th>二分命中 </th>
       <th>二分出手數  </th>
       <th>三分命中  </th>
@@ -120,8 +119,7 @@
       <th>阻攻  </th>
       <th>失誤  </th>
       <th>犯規 </th> 
-      <th>得分 </th>
-      <th>是否先發 </th>  
+      <th>得分 </th> 
        <th> </th>
       <th> </th>
                                 </tr>
@@ -130,10 +128,9 @@
             <c:forEach var="personalDataVO" items="${list}" >
 		    <tr align='center' valign='middle'>
 
-	  <td>${personalDataVO.playersVO.playerID}</td>
-      <td>${personalDataVO.gamesVO.gameID}</td>
-      <td>${personalDataVO.playersVO.playerName}</td>     
-      <td>${playersVO.playerName}</td>
+	  <td>${personalDataVO.playersVO.playerName}</td>
+      <td>${personalDataVO.teamsVO.teamName}</td>
+      <td>${personalDataVO.gameTime}</td>     
       <td>${personalDataVO.twoPoint}</td>
       <td>${personalDataVO.twoPointShot}</td>
       <td>${personalDataVO.threePoint}</td>
@@ -147,8 +144,7 @@
       <td>${personalDataVO.blocks}</td>
       <td>${personalDataVO.turnover}</td>
       <td>${personalDataVO.personalFouls}</td>
-      <td>${personalDataVO.points}</td>
-      <td>${personalDataVO.startingPlayer}</td>  
+      <td>${personalDataVO.points}</td> 
       <td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/player.do">
 			     <input type="submit" value="修改">

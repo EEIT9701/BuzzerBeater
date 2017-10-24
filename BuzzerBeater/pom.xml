@@ -99,7 +99,13 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
-
+		
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+  		  <groupId>javax.servlet</groupId>
+  		  <artifactId>jstl</artifactId>
+  		  <version>1.2</version>
+		</dependency>
 
 		<!-- slf4j -->
 		<dependency>

@@ -160,4 +160,10 @@ public class MemberInfoHibernateDAO implements MemberInfoDAO_interface {
 		}
 
 	}
+
+	@Override
+	public boolean findByAcc(String acc) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
