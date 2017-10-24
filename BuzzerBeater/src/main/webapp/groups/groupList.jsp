@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
+
+
 <!DOCTYPE html>
     <html>
 
@@ -36,11 +38,9 @@
 							<td>${seasonVO.seasonBeginDate}</td>
 							<td>${seasonVO.seasonEndDate}</td>
 						</tr>
-						<tr>
-							<td colspan="3">${seasonVO.descriptions}</td>
-						</tr>
 					</tbody>
 				</table>
+				<p>${seasonVO.descriptions}</p>
 				
 				<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
 					<h3>${groupsSet.groupName}</h3>
@@ -52,10 +52,10 @@
 							<c:forEach var="gamesSet" items="${groupsSet.gamesSet}">
 								<tr>
 									<td><fmt:formatDate value="${gamesSet.gameBeginDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-									<td><a href="<%=request.getContextPath()%>/teams/teamInformation.jsp?teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
-									<td><a href="<%=request.getContextPath()%>/games/gameInfo.jsp?gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a></td>
-									<td><a href="<%=request.getContextPath()%>/teams/teamInformation.jsp?teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
-									<td><a href="<%=request.getContextPath()%>/location/locationinfo.jsp?locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
+									<td><a href="<%=request.getContextPath() %>/Locationinfo.do?action=GET_ONE_LOCATION&locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
+									<td><a href="<%=request.getContextPath() %>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
+									<td><a href="<%=request.getContextPath() %>/Groups.do?action=GET_GAME&gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a></td>
+									<td><a href="<%=request.getContextPath() %>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

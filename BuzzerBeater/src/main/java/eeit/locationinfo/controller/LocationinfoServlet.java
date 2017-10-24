@@ -30,6 +30,14 @@ public class LocationinfoServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String action = request.getParameter("action");
+		
+		if("GET_ONE_LOCATION".equals(action)){
+			Integer locationID = Integer.parseInt(request.getParameter("locationID"));
+			LocationinfoService svc = new LocationinfoService();
+			
+			request.setAttribute("locationVO",svc.findByID(locationID));
+			request.getRequestDispatcher("/location/locationinfo.jsp").forward(request, response);
+		}
 
 		if ("GET_ONE_TO_UPDATE".equals(action)) {
 			Integer locationID = Integer.parseInt(request.getParameter("locationID"));

@@ -214,21 +214,21 @@ create table LocationInfo     --場地資訊
 (
   locationID             int primary key IDENTITY (101,1),  --場地ID
   locationName           nvarchar(20),						--場地名稱
-  locationAddr           nvarchar(50),						--地址
-  locationMark           nvarchar(50),                      --Mark(googleMap)
+  locationAddr           nvarchar(500),						--地址
+  locationMark           nvarchar(500),                      --Mark(googleMap)
   locationPhoto          nvarchar(max),                 --場地圖片
 )
 GO
 
-insert into LocationInfo values ('甲骨文體育館','美國加州奧克蘭','','');
-insert into LocationInfo values ('AT&T中心','德克薩斯州聖安東尼奧','','');
-insert into LocationInfo values ('豐田中心球館','德克薩斯州休士頓','','');
-insert into LocationInfo values ('史坦波中心','蓋瑞福尼亞州洛杉磯史坦波中心','','');
+insert into LocationInfo values ('甲骨文體育館','美國加州奧克蘭','Oracle Arena 美國 California, Oakland, Coliseum Way','');
+insert into LocationInfo values ('AT&T中心','德克薩斯州聖安東尼奧','AT&T中心 美國 Texas, San Antonio, AT&T Center Parkway','');
+insert into LocationInfo values ('豐田中心球館','德克薩斯州休士頓','Toyota Center, 1510 Polk St, Houston, TX 77002美國','');
+insert into LocationInfo values ('史坦波中心','蓋瑞福尼亞州洛杉磯史坦波中心','史坦波中心 美國 California, Los Angeles, S Figueroa St','');
 
-insert into LocationInfo values ('Vivint智慧家庭體育館','猶他州鹽湖城','','');
-insert into LocationInfo values ('切薩皮克能源球場','奧克拉荷馬州奧克拉荷馬市','','');
-insert into LocationInfo values ('聯邦快遞廣場','田納西州曼非斯','','');
-insert into LocationInfo values ('摩達中心','奧勒岡州波特蘭','','');
+insert into LocationInfo values ('Vivint智慧家庭體育館','猶他州鹽湖城','能源方案球館 美國 Utah, Salt Lake City, S Temple','');
+insert into LocationInfo values ('切薩皮克能源球場','奧克拉荷馬州奧克拉荷馬市','契薩皮克能源公司球場 美國 Oklahoma, Oklahoma City, W Reno Ave','');
+insert into LocationInfo values ('聯邦快遞廣場','田納西州曼非斯','聯邦快遞廣場 美國 Tennessee, Memphis, Beale St, 郵政編碼: 38103','');
+insert into LocationInfo values ('摩達中心','奧勒岡州波特蘭','摩達中心 美國 Oregon, Portland, N Center Ct St, 郵政編碼: 97227','');
 
 
 select * from LocationInfo

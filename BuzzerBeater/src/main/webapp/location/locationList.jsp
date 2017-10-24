@@ -36,7 +36,7 @@
 							<td>${loc.locationAddr}</td>
 							<td>
 								<a href="https://www.google.com.tw/maps/place/${loc.locationName}" target="blank">
-									<img src="http://maps.googleapis.com/maps/api/staticmap?size=400x250&markers=color:red%7clabel=${loc.locationName}&key=AIzaSyAS6MEEhoGriCE2up42rqcoLK01YTwQoUA&format=jpg-baseline">
+									<img src="http://maps.googleapis.com/maps/api/staticmap?size=400x250&markers=color:red%7clabel=${loc.locationMark}&key=AIzaSyAS6MEEhoGriCE2up42rqcoLK01YTwQoUA&format=jpg-baseline">
 								</a>
 							</td>
 						</tr>
