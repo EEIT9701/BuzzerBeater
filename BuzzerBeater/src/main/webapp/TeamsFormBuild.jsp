@@ -66,49 +66,49 @@
             <legend >球隊建立</legend>
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="Prénom">球隊名稱</label>
+                <label class="col-md-4 control-label" for="teamName">球隊名稱</label>
                 <div class="col-md-4">
                     <input id="teamName" name="teamName" placeholder="球隊名稱" class="form-control input-md" type="text" required>
                 </div>
             </div>
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="selectbasic">隊長Email</label>
+                <label class="col-md-4 control-label" for="captainEmail">隊長Email</label>
                 <div class="col-md-4">
                     <input id="captainEmail" name="captainEmail" placeholder="隊長Email" class="form-control input-md"  type="text" required>
                 </div>
             </div>
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="Nom22">隊長連絡電話</label>
+                <label class="col-md-4 control-label" for="captainPhone">隊長連絡電話</label>
                 <div class="col-md-4">
                     <input id="captainPhone" name="captainPhone" placeholder="隊長連絡電話" class="form-control input-md" type="text" required>
                 </div>
             </div>
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="Nom22">總教練</label>
+                <label class="col-md-4 control-label" for="coachName">總教練</label>
                 <div class="col-md-4">
                     <input id="coachName" name="coachName" placeholder="總教練" class="form-control input-md" type="text" required>
                 </div>
             </div>
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="Nom22">老闆</label>
+                <label class="col-md-4 control-label" for="bossName">老闆</label>
                 <div class="col-md-4">
                     <input id="bossName" name="bossName" placeholder="老闆" class="form-control input-md" type="text" required>
                 </div>
             </div>
             <!-- Text input-->
             <div class="form-group">
-          	    <label class="col-md-4 control-label" for="Nom22">備註</label>
+          	    <label class="col-md-4 control-label" for="remarks">備註</label>
                 <div class="col-md-4">
-                    <textarea id="remarks" name="remarks" placeholder="備註" class="form-control input-md"  style="resize: none;" type="text"></textarea>
+                    <textarea id="remarks" name="remarks" placeholder="備註" class="form-control input-md"  style="resize: none"  type="text"></textarea>
                 </div>
             </div>
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="Nom22">隊徽</label>
+                <label class="col-md-4 control-label" for="teamBadge">隊徽</label>
                 <input type='file' class="upl" id="teamBadge">
                 <div class="col-md-4">
                     <img class="preview" style="max-width: 150px; max-height: 150px;">
