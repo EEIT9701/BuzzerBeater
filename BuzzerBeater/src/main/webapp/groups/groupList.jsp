@@ -9,7 +9,9 @@
         
     	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+    	
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    	<jsp:include page="/header_css.jsp" />
     	
         <title>Season</title>
     </head>
@@ -38,36 +40,33 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
+					<h3>${groupsSet.groupName}</h3>
+					<table class="table table-bordered">
+						<thead>
 
-		        <table class="table table-bordered">
-		            <thead>
-			            <tr>
-                    		<td>分組名稱</td>
-		                    <td>隊伍數量上限</td>
-		                    <td>隊伍數量下限</td>
-		                    <td>目前隊伍數量</td>
-		                    <td>球隊成員上限</td>
-		                    <td>球隊成員下限</td>
-			            </tr>
-			        </thead>
-			
-			        <tbody>
-			        	<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
-			        		<tr>
-			        			<td><a href="<%=request.getContextPath() %>/Groups.do?action=GET_GAMES&groupID=${groupsSet.groupID}">${groupsSet.groupName}</a></td>
-			        			<td>${groupsSet.maxTeams}</td>
-			        			<td>${groupsSet.minTeams}</td>
-			        			<td>${groupsSet.currentTeams}</td>
-			        			<td>${groupsSet.maxPlayers}</td>
-			        			<td>${groupsSet.minPlayers}</td>
-			        		</tr>
-			        	</c:forEach>			        	
-			        </tbody>
-			    </table>
+						</thead>
+						<tbody>
+							<c:forEach var="gamesSet" items="${groupsSet.gamesSet}">
+								<tr>
+									<td>${gamesSet.gameBeginDate}</td>
+									<td><a href="<%=request.getContextPath()%>/teams/teamInformation.jsp?teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
+									<td><a href="<%=request.getContextPath()%>/games/gameInfo.jsp?gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a></td>
+									<td><a href="<%=request.getContextPath()%>/teams/teamInformation.jsp?teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
+									<td><a href="<%=request.getContextPath()%>/location/locationinfo.jsp?locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</c:forEach>
+		        
 			    
 			    
 		    </div>
-	    </div>
+	    	<!-- 網頁內容END -->
+	    	<jsp:include page="/footer.jsp" />
+	    </div><!-- End of container -->
 	    
 	    
 	    <jsp:include page="/footer.jsp" />
