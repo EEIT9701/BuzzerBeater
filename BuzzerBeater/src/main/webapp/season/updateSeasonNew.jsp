@@ -48,40 +48,43 @@
 		<!-- 第二列(開始) -->
 		<!--****************-->
 		<div class="row">
-                <!--第一列-左邊表格-格式_.col-md-8-->
-                <div class="賽季">
-                      <h2 align="center">賽季 </h2>
-                      
-                    <table class="table table-bordered" id="example">
-                        <thead>
-                           <tr align='center' valign='middle' id="table1">
-                                <td>賽季名稱</td>
-                                <td>賽季開始時間</td>
-                                <td>賽季結束時間</td>
-                                <td>報名開始時間</td>
-                                <td>報名截止時間</td>
-                                <td>狀態</td>  
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-			        	<c:forEach var="sVO" items="${seasonSvc.all}">
-			        		<tr align='center' valign='middle'>
+			<!--第二列-左邊表格-格式_.col-md-4-->
+			 <h2 align="center">賽季 </h2>
+			<div class="col-md-12">
+				<div class="col-md-12">
+					<table class="table table-bordered" id="example">
+						<thead>
+							<tr align='center' valign='middle' id="table1">
+								<td>賽季名稱</td>
+								<td>賽季開始</td>
+								<td>賽季結束</td>
+								<td>報名開始時間</td>
+								<td>報名截止時間</td>
+								<td>狀態</td>
+								<td></td>
+								<td></td>
+							
+						</thead>
+						<tbody>
+							<c:forEach var="sVO" items="${seasonSvc.all}">
+			        		<tr>
 			        			<td><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
+			        			
 			        			<td>${sVO.seasonBeginDate}</td>
 			        			<td>${sVO.seasonEndDate}</td>
 			        			<td>${sVO.signUpBegin}</td>
-			        			<td>${sVO.signUpEnd}</td>
-			        			<td></td>
+			        			<td>${sVO.signUpEnd}<td>
+			        			<td><button type="button" class="btn btn-lg btn-primary">修改</button></td>
+									<td><button type="button" class="btn btn-lg btn-warning">刪除</button></td>
 			        		</tr>
-			        	</c:forEach>
-			        </tbody>
-			    </table>
-		    </div>
-	    </div>
-               
-                </div>
-	    <jsp:include page="/footer.jsp" />
+			        	</c:forEach>							
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	<jsp:include page="/footer.jsp" />
 	</div>
 
 	<!--主文(結束)-->

@@ -11,15 +11,17 @@
     <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <style>
-    	#search{
-    		margin-bottom:10px;
-    		margin-right:0px;
-    		padding-right:0px;
-    	}
-    	#botton{
-    		margin-left:0px;
-    		padding-left:0px;
-    	}
+    	#search-box {
+  			font-size: 13px;
+  			width: 120px;
+  			background: #E6E6E6 url('<%=request.getContextPath()%>/images/search.png') no-repeat 3px 3px;
+  			padding: 3px 3px 3px 22px;
+  			margin-right:50px;
+  			margin-top:30px;
+  			border: 1px solid black;
+  			border-radius: 50px;
+		}
+
     </style>
 
 </head>
@@ -34,11 +36,9 @@
             <!-- 第一列(開始) -->
             <!--****************-->
             <div class="row">
-            	<div class="col-md-offset-9 col-md-2" id="search"> 
-					<input class="form-control input-sm" type="text" placeholder="請輸入標籤內容">
-				</div>
-				<div class="col-md-1" id="botton">
-					<input type="button" value="go">
+            	<div class="col-md-offset-1 col-md-4"><h2>精彩賽事影音</h2></div>
+				<div class="col-md-offset-5 col-md-2">
+					<input id="search-box" type="text" name="search-box" />
 				</div>
 			</div>
 			<br/>

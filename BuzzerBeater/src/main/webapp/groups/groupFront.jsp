@@ -7,7 +7,7 @@
 	List<MemberInfoVO> list = dao.getAll();
 	pageContext.setAttribute("list", list);
 %>
-<jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
+<jsp:useBean id="groupGvc" scope="page" class="eeit.groups.model.GroupsService" />
 <!DOCTYPE >
 <html>
 <head>
@@ -48,40 +48,45 @@
 		<!-- 第二列(開始) -->
 		<!--****************-->
 		<div class="row">
-                <!--第一列-左邊表格-格式_.col-md-8-->
-                <div class="賽季">
-                      <h2 align="center">賽季 </h2>
-                      
-                    <table class="table table-bordered" id="example">
-                        <thead>
-                           <tr align='center' valign='middle' id="table1">
-                                <td>賽季名稱</td>
-                                <td>賽季開始時間</td>
-                                <td>賽季結束時間</td>
-                                <td>報名開始時間</td>
-                                <td>報名截止時間</td>
-                                <td>狀態</td>  
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-			        	<c:forEach var="sVO" items="${seasonSvc.all}">
-			        		<tr align='center' valign='middle'>
-			        			<td><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
-			        			<td>${sVO.seasonBeginDate}</td>
-			        			<td>${sVO.seasonEndDate}</td>
-			        			<td>${sVO.signUpBegin}</td>
-			        			<td>${sVO.signUpEnd}</td>
+			<!--第二列-左邊表格-格式_.col-md-4-->
+			<div class="分組">
+			<h2 align="center">分組</h2> 
+			<div class="col-md-12">
+				<div class="col-md-12"> 
+					<table class="table table-bordered" id="example">
+						<thead>
+							<tr align='center' valign='middle' id="table1">
+								<td>分組名稱</td>
+								<td>目前球隊</td>
+								<td>球隊上限</td>
+								<td>球隊下限</td>
+								<td>球員上限</td>
+								<td>球員下限</td>
+								<td>狀態</td>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="gVO" items="${groupGvc.all}">
+								<tr align='center' valign='middle'>
+								<td><a href="<%=request.getContextPath() %>/Groups.do?action=GET_ALL_GROUPS">${gVO.groupName}</a></td>			        			
+			        			
+			        			<td>${gVO.currentTeams}</td>
+			        			<td>${gVO.maxTeams}</td>
+			        			<td>${gVO.minTeams}</td>
+			        			<td>${gVO.maxPlayers}</td>
+			        			<td>${gVO.minPlayers}</td>
 			        			<td></td>
-			        		</tr>
-			        	</c:forEach>
-			        </tbody>
-			    </table>
-		    </div>
-	    </div>
-               
-                </div>
-	    <jsp:include page="/footer.jsp" />
+									
+									
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	<jsp:include page="/footer.jsp" />
 	</div>
 
 	<!--主文(結束)-->

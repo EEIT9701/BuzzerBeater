@@ -83,6 +83,23 @@
 	padding-left:0px;
 	padding-right:100px;
 }
+#update{
+	margin:0px;
+}
+
+#delete{
+	margin:0px;
+}
+#search-box {
+  			font-size: 13px;
+  			width: 120px;
+  			background: #E6E6E6 url('<%=request.getContextPath()%>/images/search.png') no-repeat 3px 3px;
+  			padding: 3px 0px 3px 22px;
+  			margin-right:50px;
+  			margin-top:0px;
+  			border: 1px solid black;
+  			border-radius: 50px;
+		}
 </style>
 
 
@@ -143,12 +160,9 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-md-offset-3 col-md-2" id="search">
-					<input class="form-control input-sm" type="text"
-						placeholder="請輸入標籤內容">
-				</div>
-				<div class="col-md-1" id="search-button">
-					<input type="button" value="go">
+				
+				<div class="col-md-offset-4 col-md-2">
+					<input id="search-box" type="text" name="search-box" />
 				</div>
 			</div>
 			</br>
@@ -164,6 +178,7 @@
       							<td>備註</td>
       							<td>標籤</td>
       							<td></td>
+      							
     						</tr>
   						</thead>
   						<tbody>
@@ -176,8 +191,16 @@
       								<td>${gameMediaVO.descriptions}</td>
       								<td>${gameMediaVO.tag}</td>
       								<td>
-      									<input type="button" value="修改">
-										<input type="button" value="刪除">
+      									<Form method="post" action="<%=request.getContextPath() %>/GameMedia.do" id="update">
+      										<input type="submit" value="檢視">
+      										<input type="hidden" name="mediaID" value="${gameMediaVO.mediaID}"> 
+                                           	<input type="hidden" name="action" value="getOneForUpdate">
+                                       	</Form>
+                                        <Form method="post" action="<%=request.getContextPath() %>/GameMedia.do" id="delete">    
+      										<input type="submit" value="刪除">
+											<input type="hidden" name="mediaID" value="${gameMediaVO.mediaID}"> 
+                                           	<input type="hidden" name="action" value="delete">
+										</Form>
       								</td>
     							</tr>
   							</c:forEach>
