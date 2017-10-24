@@ -1,10 +1,7 @@
 package eeit.gamemedia.controller;
 
 import java.io.IOException;
-import java.sql.Blob;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.RequestDispatcher;
@@ -14,15 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.rowset.serial.SerialBlob;
 
 import eeit.gamemedia.model.GameMediaService;
 import eeit.gamemedia.model.GameMediaVO;
 import eeit.games.model.GamesVO;
+import eeit.players.model.PlayersVO;
 
 
 
 
+@SuppressWarnings("serial")
 @WebServlet("/GameMedia.do")
 public class GameMediaServlet extends HttpServlet {
 
@@ -36,7 +34,7 @@ public class GameMediaServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
+		GameMediaService gameMediaSvc = new GameMediaService();
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -72,8 +70,8 @@ public class GameMediaServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始查詢資料*****************************************/
-				GameMediaService GameMediaSvc = new GameMediaService();
-				GameMediaVO gameMediaVO = GameMediaSvc.getOneGameMedia(gameID);
+				
+				GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(gameID);
 				if (gameMediaVO == null) {
 					errorMsgs.add("查無資料");
 				}
@@ -98,6 +96,19 @@ public class GameMediaServlet extends HttpServlet {
 			}
 		}
 		
+		if("getOneForUpdate".equals(action)){
+			
+			
+			Integer mediaID = new Integer(req.getParameter("mediaID"));
+			
+			GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
+			
+			req.setAttribute("gameMediaVO", gameMediaVO);
+			
+			String url = "/gamemedia/displayOneVideo.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
 		
 		if ("Update".equals(action)) { // 來自listAllEmp.jsp的請求
 
@@ -112,14 +123,14 @@ public class GameMediaServlet extends HttpServlet {
 				Integer mediaID = new Integer(req.getParameter("mediaID")); 
 				String mediasName = req.getParameter("mediasName");
 				String gameVideo = req.getParameter("gameVideo");
-				Blob gamePhoto = new SerialBlob(req.getParameter("gamePhoto").getBytes());
+				String gamePhoto = req.getParameter("gamePhoto");
 				String mediaType = req.getParameter("mediaType");
 				Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 				String descriptions = req.getParameter("descriptions");
 				String tag = req.getParameter("tag");
 				
 				
-				GameMediaService gameMediaSvc = new GameMediaService();
+				
 				gameMediaSvc.updateGameMedia(gameID, mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag);				
 				
 				GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
@@ -140,8 +151,8 @@ public class GameMediaServlet extends HttpServlet {
 		
 		if ("getAll".equals(action)) {
 			/***************************開始查詢資料 ****************************************/
-			GameMediaService GameMediaSvc = new GameMediaService();
-			List<GameMediaVO> list = GameMediaSvc.getAll();
+			
+			List<GameMediaVO> list = gameMediaSvc.getAll();
 
 			/***************************查詢完成,準備轉交(Send the Success view)*************/
 			HttpSession session = req.getSession();
@@ -229,7 +240,7 @@ public class GameMediaServlet extends HttpServlet {
 				
 				String mediasName = req.getParameter("mediasName");
 				String gameVideo = req.getParameter("gameVideo");
-				Blob gamePhoto = new SerialBlob(req.getParameter("gamePhoto").getBytes());
+				String gamePhoto = req.getParameter("gamePhoto");
 				String mediaType = req.getParameter("mediaType");
 				Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 				String descriptions = req.getParameter("descriptions");
@@ -257,7 +268,7 @@ public class GameMediaServlet extends HttpServlet {
 				}
 				
 				/***************************2.開始新增資料***************************************/
-				GameMediaService gameMediaSvc = new GameMediaService();
+				
 				gameMediaVO = gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, gamePhoto, mediaType, mediaDate, descriptions, tag);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
@@ -274,7 +285,7 @@ public class GameMediaServlet extends HttpServlet {
 		}
 		
 		
-		if ("delete".equals(action)) { // 來自listAllEmp.jsp
+		if ("delete".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -286,18 +297,18 @@ public class GameMediaServlet extends HttpServlet {
 				Integer mediaID = new Integer(req.getParameter("mediaID"));
 				
 				/***************************2.開始刪除資料***************************************/
-				GameMediaService gameMediaSvc = new GameMediaService();
+				
 				gameMediaSvc.deleteGameMedia(mediaID);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/gamemedia/video.jsp";
+				String url = "/gamemedia/videoBackEnd.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/video.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/videoBackEnd.jsp");
 				failureView.forward(req, res);
 			}
 		}
