@@ -30,7 +30,7 @@
     <style>
     #st1{
      padding:30px;
-     background-color:#1E90FF;       
+     background-color:#FFAA33;       
     }
     </style>
     <link rel="stylesheet" type="text/css" href="../css/datatables.min.css"/>
@@ -108,8 +108,8 @@
                                 <tr>
                                                 
                                     <th>球員編號  </th>
-      <th>比賽場次  </th>
-      <th>球隊  </th>
+      <th>球隊名稱  </th>
+      <th>出場次數  </th>
       <th>出場時間  </th>
       <th>二分命中 </th>
       <th>二分出手數  </th>
@@ -125,16 +125,16 @@
       <th>失誤  </th>
       <th>犯規 </th> 
       <th>得分 </th>
-      <th>是否先發 </th>  
+       
                                 </tr>
                 </thead>     
                 <tbody>     
             <c:forEach var="personalDataVO" items="${list1}" >
 		    <tr align='center' valign='middle'>
 
-	  <td>${personalDataVO.playersVO.playerID}</td>
-      <td>${personalDataVO.gamesVO.gameID}</td>
-      <td>${personalDataVO.teamID}</td>     
+	  <td>${personalDataVO.playersVO.playerName}</td>
+      <td>${personalDataVO.teamsVO.teamName}</td>
+      <td>${personalDataVO.gameID}</td>
       <td>${personalDataVO.gameTime}</td>
       <td>${personalDataVO.twoPoint}</td>
       <td>${personalDataVO.twoPointShot}</td>
@@ -150,7 +150,7 @@
       <td>${personalDataVO.turnover}</td>
       <td>${personalDataVO.personalFouls}</td>
       <td>${personalDataVO.points}</td>
-      <td>${personalDataVO.startingPlayer}</td>              
+              
                      </tr>  
                         </c:forEach>  
                      </tbody>

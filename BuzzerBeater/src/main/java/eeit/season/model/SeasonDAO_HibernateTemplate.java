@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import eeit.groups.model.GroupsVO;
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 	private HibernateTemplate hibernateTemplate;
 
@@ -75,7 +75,7 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 //		 SeasonVO sVO1 = new SeasonVO();
 //		 sVO1.setSeasonName("第十六季例行賽");
 //		 sVO1.setSeasonBeginDate(null);
-//		 sVO1.setSignUpBegin(Timestamp.valueOf("2017-10-10 18:00:00"));
+//		 sVO1.setSignUpBegin(java.sql.Timestamp.valueOf("2017-10-10 18:00:00"));
 //		 sVO1.setDescriptions("...");
 //		
 //		 GroupsVO gVO1 = new GroupsVO();

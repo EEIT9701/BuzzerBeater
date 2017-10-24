@@ -2,11 +2,16 @@ package eeit.groups.model;
 
 import java.util.Set;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class GroupsService {
 	private GroupsDAO_interface dao;
 
 	public GroupsService() {
-		dao = new GroupsDAO_Hibernate();
+//		dao = new GroupsDAO_Hibernate();
+		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
+		dao = (GroupsDAO_interface) context.getBean("GroupsDAO");
 	}
 	
 	public GroupsVO findByGroupID(Integer groupID){

@@ -1,33 +1,30 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="eeit.season.model.*"%>
 <%@ page import="java.util.*"%>
-
-<%
-// 	SeasonService dao = new SeasonService();
-// 	Set<HashMap<String, Object>> set = dao.getAll();
-// 	pageContext.setAttribute("set", set);
-%>
 
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
 
 <!DOCTYPE html>
-    <html>
+    <html lang="zh" class="no-js">
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      	<meta charset="UTF-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         
     	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
-    	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    	
+		
         <title>Season</title>
+        <jsp:include page="/header_css.jsp" />
     </head>
 
     <body>
 	    <jsp:include page="/header.jsp" />
 	
 		<div class="container">
+			<!-- 網頁內容 -->
 			<div class="col-md-12">
 		        <h2>賽季列表</h2>
 		        <h4><a href="<%=request.getContextPath() %>/season/addSeason.jsp">新增賽季</a></h4>
@@ -69,10 +66,13 @@
 			        </tbody>
 			    </table>
 		    </div>
-	    </div>
+		
+			<!-- 網頁內容END -->
+	    	<jsp:include page="/footer.jsp" />
+	    </div><!-- End of container -->
 	    
 	    
-	    <jsp:include page="/footer.jsp" />
+	    <jsp:include page="/footer_css.jsp" />
     </body>
 
     </html>

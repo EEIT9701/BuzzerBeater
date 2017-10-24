@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,9 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONValue;
+
 import eeit.season.model.SeasonService;
 import eeit.season.model.SeasonVO;
-import net.minidev.json.JSONValue;
 
 @WebServlet("/Season.do")
 public class SeasonServlet extends HttpServlet {
@@ -59,11 +57,8 @@ public class SeasonServlet extends HttpServlet {
 			// 取得Service的實例
 			SeasonService sSvc = new SeasonService();
 
-			// 取得Service回傳的資料
-			Set<HashMap<String, Object>> seasonList = sSvc.getAll();
-
 			// 轉換為JSON格式
-			String jsonString = JSONValue.toJSONString(seasonList);
+			String jsonString = JSONValue.toJSONString(sSvc.getAll());
 
 			// 經由Response送往瀏覽器
 			PrintWriter out = response.getWriter();
@@ -126,6 +121,10 @@ public class SeasonServlet extends HttpServlet {
 
 				String descriptions = request.getParameter("descriptions").trim();
 
+				for (int i = 0; i < 10; i++) {
+
+					System.out.println(request.getParameter("groupName" + i).trim());
+				}
 				// 放入VO
 				SeasonVO sVO = new SeasonVO();
 				sVO.setSeasonName(seasonName);
