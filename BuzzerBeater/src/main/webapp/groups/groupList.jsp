@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <!DOCTYPE html>
     <html>
@@ -50,7 +51,7 @@
 						<tbody>
 							<c:forEach var="gamesSet" items="${groupsSet.gamesSet}">
 								<tr>
-									<td>${gamesSet.gameBeginDate}</td>
+									<td><fmt:formatDate value="${gamesSet.gameBeginDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 									<td><a href="<%=request.getContextPath()%>/teams/teamInformation.jsp?teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
 									<td><a href="<%=request.getContextPath()%>/games/gameInfo.jsp?gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a></td>
 									<td><a href="<%=request.getContextPath()%>/teams/teamInformation.jsp?teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
