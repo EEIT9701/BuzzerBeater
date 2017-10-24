@@ -28,7 +28,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 	private static final String GET_ALL_STMT =
 		      "SELECT * FROM GameMedia order by gameID";
 	private static final String GET_ONE_STMT =
-		      "SELECT gameID,mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag FROM GameMedia where gameID = ?";
+		      "SELECT gameID,mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag FROM GameMedia where mediaID = ?";
 	private static final String DELETE =
 		      "DELETE FROM GameMedia where mediaID = ?";
 	private static final String UPDATE =
@@ -50,7 +50,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 			pstmt.setInt(1, gameMediaVO.getGamesVO().getGameID());
 			pstmt.setString(2, gameMediaVO.getMediasName());
 			pstmt.setString(3, gameMediaVO.getGameVideo());
-			pstmt.setBlob(4, gameMediaVO.getGamePhoto());
+			pstmt.setString(4, gameMediaVO.getGamePhoto());
 			pstmt.setString(5, gameMediaVO.getMediaType());
 			pstmt.setTimestamp(6, gameMediaVO.getMediaDate());
 			pstmt.setString(7, gameMediaVO.getDescriptions());
@@ -94,7 +94,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 			pstmt.setInt(1, gameMediaVO.getGamesVO().getGameID());
 			pstmt.setString(2, gameMediaVO.getMediasName());
 			pstmt.setString(3, gameMediaVO.getGameVideo());
-			pstmt.setBlob(4, gameMediaVO.getGamePhoto());
+			pstmt.setString(4, gameMediaVO.getGamePhoto());
 			pstmt.setString(5, gameMediaVO.getMediaType());
 			pstmt.setTimestamp(6, gameMediaVO.getMediaDate());
 			pstmt.setString(7, gameMediaVO.getDescriptions());
@@ -166,6 +166,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 
 	@Override
 	public GameMediaVO findByPrimaryKey(Integer mediaID) {
+		
 		GameMediaVO gameMediaVO = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -173,21 +174,21 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 
 		try {
 
-			conn = ds.getConnection();
+			conn=ds.getConnection();
 			pstmt = conn.prepareStatement(GET_ONE_STMT);
-
 			pstmt.setInt(1, mediaID);
-
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				// empVo 也稱為 Domain objects
 				gameMediaVO = new GameMediaVO();
-				gameMediaVO.getGamesVO().setGameID(rs.getInt("gameID"));
+				GamesVO gamesVO = new GamesVO();
+				gamesVO.setGameID(rs.getInt("gameID"));
+				gameMediaVO.setGamesVO(gamesVO);
 				gameMediaVO.setMediaID(rs.getInt("mediaID"));
 				gameMediaVO.setMediasName(rs.getString("mediasName"));
-				gameMediaVO.setGameVideo(rs.getString("gameVedio"));
-				gameMediaVO.setGamePhoto(rs.getBlob("gamePhoto"));
+				gameMediaVO.setGameVideo(rs.getString("gameVideo"));
+				gameMediaVO.setGamePhoto(rs.getString("gamePhoto"));
 				gameMediaVO.setMediaType(rs.getString("mediaType"));
 				gameMediaVO.setMediaDate(rs.getTimestamp("mediaDate"));
 				gameMediaVO.setDescriptions(rs.getString("descriptions"));
@@ -249,7 +250,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 				gameMediaVO.setMediaID(rs.getInt("mediaID"));
 				gameMediaVO.setMediasName(rs.getString("mediasName"));
 				gameMediaVO.setGameVideo(rs.getString("gameVideo"));
-				gameMediaVO.setGamePhoto(rs.getBlob("gamePhoto"));
+				gameMediaVO.setGamePhoto(rs.getString("gamePhoto"));
 				gameMediaVO.setMediaType(rs.getString("mediaType"));
 				gameMediaVO.setMediaDate(rs.getTimestamp("mediaDate"));
 				gameMediaVO.setDescriptions(rs.getString("descriptions"));
