@@ -7,7 +7,7 @@ import hibernate.util.HibernateUtil;
 
 public class MemberInfoDAO implements MemberInfoDAO_interface {
 	private static final String GET_ALL_STMT = "FROM MemberInfoVO order by memberID";
-	
+
 	@Override
 	public void insert(MemberInfoVO memberInfoVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -23,7 +23,7 @@ public class MemberInfoDAO implements MemberInfoDAO_interface {
 		}
 	}
 
-    @Override
+	@Override
 	public void update(MemberInfoVO memberInfoVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
@@ -92,49 +92,77 @@ public class MemberInfoDAO implements MemberInfoDAO_interface {
 		return list;
 	}
 
-//	public static void main(String[] args) {
-//		MemberInfoDAO dao = new MemberInfoDAO();
-//		/*************** insert ***************/
-//		MemberInfoVO memberInfoVO = new MemberInfoVO();
-//		memberInfoVO.setAcc("javaeeit97201701@gmail.com");
-//		memberInfoVO.setName("彥誠");
-//		memberInfoVO.setAuth("parttime");
-//		memberInfoVO.setRegisterTime(Timestamp.valueOf("2017-10-10 18:00:00"));
-//		memberInfoVO.setTeamID(0);
-//		dao.insert(memberInfoVO);
+	@SuppressWarnings({ "deprecation", "rawtypes" })
+	@Override
+	public boolean findByAcc(String acc) {
+			
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Iterator result = null;
+		try {
+			session.beginTransaction();
+			
+			Query query = session.createQuery("from MemberInfoVO where acc=?");	
+			query.setParameter(0, acc);
+			result = query.iterate();
+			if(result.hasNext()){
+				return true;
+			}
+			else return false;
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		
+	}
 
-		/*************** update ***************/
-//		MemberInfoVO memberInfoVO2 = new MemberInfoVO();
-//		memberInfoVO2.setMemberID(8018);
-//		memberInfoVO2.setAcc("javaeeit9720170101@gmail.com");
-//		memberInfoVO2.setName("彥誠2");
-//		memberInfoVO2.setAuth("admin");
-//		memberInfoVO2.setRegisterTime(Timestamp.valueOf("2017-10-10 20:00:00"));		
-//		memberInfoVO2.setTeamID(0);
-//		dao.insert(memberInfoVO2);
-		/*************** delete ***************/
-//		dao.delete(8018);
+//	 public static void main(String[] args) {
+//	 MemberInfoDAO dao = new MemberInfoDAO();
+	 
+//	 /*************** findByAcc ***************/
+//	 
+//	 String acc = "admin123@gmail.com";
+//	 System.out.println(dao.findByAcc(acc));
+	// /*************** insert ***************/
+	// MemberInfoVO memberInfoVO = new MemberInfoVO();
+	// memberInfoVO.setAcc("javaeeit97201701@gmail.com");
+	// memberInfoVO.setName("彥誠");
+	// memberInfoVO.setAuth("parttime");
+	// memberInfoVO.setRegisterTime(Timestamp.valueOf("2017-10-10 18:00:00"));
+	// memberInfoVO.setTeamID(0);
+	// dao.insert(memberInfoVO);
 
-		/*************** findBuPK ***************/
-		// MemberInfoVO memberInfoVO = dao.findByPK(8002);
-		// System.out.println(memberInfoVO.getTeamID());
-		// System.out.println(memberInfoVO.getAcc());
-		// System.out.println(memberInfoVO.getName());
-		// System.out.println(memberInfoVO.getAuth());
-		// System.out.println(memberInfoVO.getRegisterTime());
-		// System.out.println(memberInfoVO.getMemberID());
+	/*************** update ***************/
+	// MemberInfoVO memberInfoVO2 = new MemberInfoVO();
+	// memberInfoVO2.setMemberID(8018);
+	// memberInfoVO2.setAcc("javaeeit9720170101@gmail.com");
+	// memberInfoVO2.setName("彥誠2");
+	// memberInfoVO2.setAuth("admin");
+	// memberInfoVO2.setRegisterTime(Timestamp.valueOf("2017-10-10 20:00:00"));
+	// memberInfoVO2.setTeamID(0);
+	// dao.insert(memberInfoVO2);
+	/*************** delete ***************/
+	// dao.delete(8018);
 
-		/*************** getALL ***************/
-//		List<MemberInfoVO> list = dao.getAll();
-//		for (MemberInfoVO aMemberInfoVO : list) {
-//			System.out.print(aMemberInfoVO.getMemberID() + "\t");
-//			System.out.print(aMemberInfoVO.getAcc() + "\t");
-//			System.out.print(aMemberInfoVO.getName() + "\t");
-//			System.out.print(aMemberInfoVO.getAuth() + "\t");
-//			System.out.print(aMemberInfoVO.getRegisterTime() + "\t");
-//			System.out.print(aMemberInfoVO.getTeamID());
-//			System.out.println();
-//		}
-//
+	/*************** findBuPK ***************/
+	// MemberInfoVO memberInfoVO = dao.findByPK(8002);
+	// System.out.println(memberInfoVO.getTeamID());
+	// System.out.println(memberInfoVO.getAcc());
+	// System.out.println(memberInfoVO.getName());
+	// System.out.println(memberInfoVO.getAuth());
+	// System.out.println(memberInfoVO.getRegisterTime());
+	// System.out.println(memberInfoVO.getMemberID());
+
+	/*************** getALL ***************/
+//	 List<MemberInfoVO> list = dao.getAll();
+//	 for (MemberInfoVO aMemberInfoVO : list) {
+//	 System.out.print(aMemberInfoVO.getMemberID() + "\t");
+//	 System.out.print(aMemberInfoVO.getAcc() + "\t");
+//	 System.out.print(aMemberInfoVO.getName() + "\t");
+//	 System.out.print(aMemberInfoVO.getAuth() + "\t");
+//	 System.out.print(aMemberInfoVO.getRegisterTime() + "\t");
+//	 System.out.print(aMemberInfoVO.getTeamID());
+//	 System.out.println();
+//	 }
+//	
 //	}
 }

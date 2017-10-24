@@ -8,4 +8,6 @@ public interface MemberInfoDAO_interface {
 	public void delete(Integer memberID);
 	public MemberInfoVO findByPK(Integer memberID);
 	public List<MemberInfoVO> getAll();
+
+	public boolean findByAcc(String acc);
 }

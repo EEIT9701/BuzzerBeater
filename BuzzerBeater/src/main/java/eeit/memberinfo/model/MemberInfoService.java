@@ -17,4 +17,8 @@ public class MemberInfoService {
 	public MemberInfoVO findByPK(Integer memberID){
 		return dao.findByPK(memberID);
 	}
+	
+	public boolean findByAcc(String acc){
+		return dao.findByAcc(acc);
+	}
 }
