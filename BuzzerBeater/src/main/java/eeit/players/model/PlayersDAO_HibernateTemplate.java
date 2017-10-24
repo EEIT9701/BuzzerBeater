@@ -10,6 +10,8 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import eeit.season.model.SeasonVO;
+
 @Transactional(readOnly = true)
 public class PlayersDAO_HibernateTemplate implements PlayerDAO_interface {
 	private HibernateTemplate hibernateTemplate;
@@ -53,18 +55,27 @@ public class PlayersDAO_HibernateTemplate implements PlayerDAO_interface {
 		List<PlayersVO> list = (List<PlayersVO>) hibernateTemplate.find(GET_ALL_STMT);
 		return new LinkedHashSet<PlayersVO>(list);
 	}
+	
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public PlayersVO findByID(Integer playerID) {
+		return (PlayersVO) hibernateTemplate.get(PlayersVO.class, playerID);
+	}
 
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		PlayerDAO_interface dao = (PlayerDAO_interface) context.getBean("PlayersDAO");
 
-		Set<PlayersVO> set = dao.getAll();
-		for (PlayersVO vo : set) {
-			System.out.print(vo.getPlayerName() + ", ");
-			System.out.print(vo.getHeight() + ", ");
-			System.out.print(vo.getBirthday() + ", ");
-			System.out.println();
-		}
+//		Set<PlayersVO> set = dao.getAll();
+//		for (PlayersVO vo : set) {
+//			System.out.print(vo.getPlayerName() + ", ");
+//			System.out.print(vo.getHeight() + ", ");
+//			System.out.print(vo.getPhoto() + ", ");
+//			System.out.println();
+//		}
+		
+		PlayersVO vo = dao.findByID(70001);
+		System.out.println(vo.getPhoto());
 
 	}
 
