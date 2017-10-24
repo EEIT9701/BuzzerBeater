@@ -26,7 +26,9 @@
 				                        請修正以下錯誤:
 				<ul>
 					<c:forEach var="message" items="${errorMsgs}">
-						<li>${message}</li>
+						<c:if test="${not empty message}">
+							<li>${message}</li>
+						</c:if>
 					</c:forEach>
 				</ul>
 			</c:if>
@@ -94,6 +96,7 @@
 			    		</tr>
 			    	</tfoot>
 			    </table>
+			    
 			    <input type="submit" value="送出">
 				<input type="reset" value="重置">
 			</form>
