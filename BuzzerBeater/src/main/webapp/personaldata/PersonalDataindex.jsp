@@ -2,12 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="eeit.personaldata.model.*"%>
+<%@ page import="eeit.players.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     PersonalDataService playerSvc = new PersonalDataService();
     List<PersonalDataVO> list = playerSvc.getAll();
-    pageContext.setAttribute("list",list);
+    pageContext.setAttribute("list1",list);   
 %>
+<%
+    PlayerService playersSvc =new PlayerService();  
+    Set<PlayersVO> list2 = playersSvc.getAllPlayer();
+    pageContext.setAttribute("list",list);   
+%>   
+    
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,7 +25,7 @@
     <link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.12.4.js"></script>
     
     <style>
     #st1{
@@ -27,6 +34,7 @@
     }
     </style>
     <link rel="stylesheet" type="text/css" href="../css/datatables.min.css"/>
+     <jsp:include page="/header_css.jsp" />
 </head>
 <body>
 
@@ -60,7 +68,7 @@
      <option label="少年組" value="object:9">季後賽</option>
     </select>
         
-             球員數據                                                
+             <!--球員數據                                                
      <select>
      <option label="得分" value="object:7" selected="selected">季前熱身賽</option>       
      <option label="籃板" value="object:8">例行賽</option>
@@ -72,7 +80,7 @@
      <option label="投籃" value="object:8">例行賽</option>
      <option label="三分" value="object:8">例行賽</option>
     </select>
-    
+    -->
    
      
      <select>
@@ -121,7 +129,7 @@
                                 </tr>
                 </thead>     
                 <tbody>     
-            <c:forEach var="personalDataVO" items="${list}" >
+            <c:forEach var="personalDataVO" items="${list1}" >
 		    <tr align='center' valign='middle'>
 
 	  <td>${personalDataVO.playersVO.playerID}</td>
