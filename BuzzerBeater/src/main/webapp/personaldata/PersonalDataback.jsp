@@ -24,7 +24,7 @@
     <link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-1.12.4.js"></script>
     
     <style>
     #st1{
