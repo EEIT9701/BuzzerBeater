@@ -50,9 +50,9 @@
 		<div class="row">
 			<!--第二列-左邊表格-格式_.col-md-4-->
 			<div class="分組">
-			<h2 align="center">分組</h2>
+			<h2 align="center">分組</h2> 
 			<div class="col-md-12">
-				<div class="col-md-12">
+				<div class="col-md-12"> 
 					<table class="table table-bordered" id="example">
 						<thead>
 							<tr align='center' valign='middle' id="table1">
