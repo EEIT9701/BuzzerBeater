@@ -5,10 +5,12 @@ import java.io.Serializable;
 import eeit.games.model.GamesVO;
 import eeit.groups.model.GroupsVO;
 import eeit.players.model.PlayersVO;
+import eeit.teams.model.TeamsVO;
 
 public class PersonalDataVO implements Serializable{
 private PlayersVO playersVO;
 private GamesVO gamesVO;
+private TeamsVO teamsVO;
 private Integer teamID;
 private Integer gameTime;
 private Integer twoPoint;
@@ -26,16 +28,36 @@ private Integer turnover;
 private Integer personalFouls;
 private Integer points;
 private Integer startingPlayer;
-
-
-
+public PlayersVO getPlayersVO() {
+	return playersVO;
+}
+public void setPlayersVO(PlayersVO playersVO) {
+	this.playersVO = playersVO;
+}
+public GamesVO getGamesVO() {
+	return gamesVO;
+}
+public void setGamesVO(GamesVO gamesVO) {
+	this.gamesVO = gamesVO;
+}
+public TeamsVO getTeamsVO() {
+	return teamsVO;
+}
+public void setTeamsVO(TeamsVO teamsVO) {
+	this.teamsVO = teamsVO;
+}
 public Integer getTeamID() {
 	return teamID;
 }
 public void setTeamID(Integer teamID) {
 	this.teamID = teamID;
 }
-
+public Integer getGameTime() {
+	return gameTime;
+}
+public void setGameTime(Integer gameTime) {
+	this.gameTime = gameTime;
+}
 public Integer getTwoPoint() {
 	return twoPoint;
 }
@@ -108,13 +130,6 @@ public Integer getTurnover() {
 public void setTurnover(Integer turnover) {
 	this.turnover = turnover;
 }
-public Integer getStartingPlayer() {
-	return startingPlayer;
-}
-public void setStartingPlayer(Integer startingPlayer) {
-	this.startingPlayer = startingPlayer;
-}
-
 public Integer getPersonalFouls() {
 	return personalFouls;
 }
@@ -127,25 +142,13 @@ public Integer getPoints() {
 public void setPoints(Integer points) {
 	this.points = points;
 }
+public Integer getStartingPlayer() {
+	return startingPlayer;
+}
+public void setStartingPlayer(Integer startingPlayer) {
+	this.startingPlayer = startingPlayer;
+}
 
-public Integer getGameTime() {
-	return gameTime;
-}
-public void setGameTime(Integer gameTime) {
-	this.gameTime = gameTime;
-}
-public PlayersVO getPlayersVO() {
-	return playersVO;
-}
-public void setPlayersVO(PlayersVO playersVO) {
-	this.playersVO = playersVO;
-}
-public GamesVO getGamesVO() {
-	return gamesVO;
-}
-public void setGamesVO(GamesVO gamesVO) {
-	this.gamesVO = gamesVO;
-}
 
 
 
