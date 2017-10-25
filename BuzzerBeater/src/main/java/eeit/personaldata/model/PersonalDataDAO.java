@@ -60,7 +60,7 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 	@Override
 	public List<PersonalDataVO> getAll() {
         List<PersonalDataVO> list=new ArrayList<PersonalDataVO>(); 
-        PersonalDataVO personalDataVO=null;
+        PersonalDataVO personalData=null;
      
 		
         Connection con=null;
@@ -72,38 +72,38 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
         	pstmt=con.prepareStatement(GETALL);
         	rs=pstmt.executeQuery();
 			while (rs.next()){
-				personalDataVO=new PersonalDataVO();
+				personalData=new PersonalDataVO();
 				PlayersVO playersVO = new PlayersVO();
 				playersVO.setPlayerName(rs.getString("playerName"));
 				playersVO.setPhoto(rs.getString("photo"));
-				personalDataVO.setPlayersVO(playersVO);
+				personalData.setPlayersVO(playersVO);
 				
 				GamesVO gamesVO = new GamesVO();
 		   //   gamesVO.setGameID(rs.getInt("gameID"));			
-				personalDataVO.setGamesVO(gamesVO);
+				personalData.setGamesVO(gamesVO);
 				
 	            TeamsVO teamsVO =new TeamsVO();
 	            teamsVO.setTeamName(rs.getString("teamName"));
-	            personalDataVO.setTeamsVO(teamsVO);
+	            personalData.setTeamsVO(teamsVO);
 				
-		     	personalDataVO.setGameID(rs.getInt("gameID"));
-				personalDataVO.setGameTime(rs.getInt("gameTime"));
-				personalDataVO.setTwoPoint(rs.getInt("twoPoint"));
-				personalDataVO.setTwoPointShot(rs.getInt("twoPoint"));
-				personalDataVO.setThreePoint(rs.getInt("threePoint"));
-				personalDataVO.setThreePointShot(rs.getInt("threePointShot"));
-				personalDataVO.setFg(rs.getInt("fg"));
-				personalDataVO.setFgShot(rs.getInt("fgShot"));
-				personalDataVO.setDefReb(rs.getInt("defReb"));
-				personalDataVO.setOffReb(rs.getInt("offReb"));
-				personalDataVO.setAssist(rs.getInt("assist"));
-				personalDataVO.setSteal(rs.getInt("steal"));
-				personalDataVO.setBlocks(rs.getInt("blocks"));
-				personalDataVO.setTurnover(rs.getInt("turnover"));
-				personalDataVO.setPersonalFouls(rs.getInt("personalFouls"));
-				personalDataVO.setPoints(rs.getInt("points"));
+		     	personalData.setGameID(rs.getInt("gameID"));
+				personalData.setGameTime(rs.getInt("gameTime"));
+				personalData.setTwoPoint(rs.getInt("twoPoint"));
+				personalData.setTwoPointShot(rs.getInt("twoPoint"));
+				personalData.setThreePoint(rs.getInt("threePoint"));
+				personalData.setThreePointShot(rs.getInt("threePointShot"));
+				personalData.setFg(rs.getInt("fg"));
+				personalData.setFgShot(rs.getInt("fgShot"));
+				personalData.setDefReb(rs.getInt("defReb"));
+				personalData.setOffReb(rs.getInt("offReb"));
+				personalData.setAssist(rs.getInt("assist"));
+				personalData.setSteal(rs.getInt("steal"));
+				personalData.setBlocks(rs.getInt("blocks"));
+				personalData.setTurnover(rs.getInt("turnover"));
+				personalData.setPersonalFouls(rs.getInt("personalFouls"));
+				personalData.setPoints(rs.getInt("points"));
 		//		personalDataVO.setStartingPlayer(rs.getInt("startingPlayer"));
-				list.add(personalDataVO);
+				list.add(personalData);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

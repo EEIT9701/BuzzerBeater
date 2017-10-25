@@ -9,11 +9,7 @@
     List<PersonalDataVO> list = playerSvc.getAll();
     pageContext.setAttribute("list1",list);   
 %>
-<%
-    PlayerService playersSvc =new PlayerService();  
-    Set<PlayersVO> list2 = playersSvc.getAllPlayer();
-    pageContext.setAttribute("list",list);   
-%>   
+
     
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
