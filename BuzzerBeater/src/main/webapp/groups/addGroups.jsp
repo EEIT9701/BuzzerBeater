@@ -44,11 +44,11 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>${sVO.seasonName}</td>
-			        	<td>${sVO.seasonBeginDate}</td>
-			        	<td>${sVO.seasonEndDate}</td>
-			        	<td>${sVO.signUpBegin}</td>
-			        	<td>${sVO.signUpEnd}</td>
+						<td>${seasonVO.seasonName}</td>
+			        	<td>${seasonVO.seasonBeginDate}</td>
+			        	<td>${seasonVO.seasonEndDate}</td>
+			        	<td>${seasonVO.signUpBegin}</td>
+			        	<td>${seasonVO.signUpEnd}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -81,6 +81,7 @@
 		    	<tfoot>
 					<form action="<%=request.getContextPath()%>/Groups.do" method="post">
 						<input type="hidden" name="action" value="ADD_GROUP">
+						<input type="hidden" name="seasonID" value="${seasonVO.seasonID}">
 						<tr>
 				    		<td><input type="text" name="groupName"></td>
 					    	<td><input type="text" name="maxTeams"></td>

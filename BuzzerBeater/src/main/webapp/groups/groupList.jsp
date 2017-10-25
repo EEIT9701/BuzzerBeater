@@ -15,30 +15,18 @@
     	
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     	<jsp:include page="/header_css.jsp" />
-    	<style>
-    	h3{
-    	text-align:center;   	
-    	}
-    	thead{
-    	font-size:larger;
-    	font-weight:bold;
-    	text-align:center;
-    	}
-    	tbody{
-    	text-align:center;
-    	}
-    	</style>
-    	
+    	<jsp:include page="/font_css.jsp" />
+    	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
         <title>Season</title>
     </head>
 
     <body>
 	    <jsp:include page="/header.jsp" />
-	
 		<div class="container">
 		<div class="jumbotron">
 			<div class="col-md-12">
-				<table class="table table-bordered">
+				<h3>賽季起迄</h3>
+				<table class="table table-bordered" id="season_cycle">
 					<thead>
 						<tr>
 							<td>賽季名稱</td>
@@ -57,17 +45,16 @@
 				<p>${seasonVO.descriptions}</p>
 				
 				<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
-				
-				<h3>${groupsSet.groupName}</h3>
-					<table class="table table-bordered">
+					<h3>${groupsSet.groupName}</h3>
+					<table class="table table-bordered test" id="season_group">
 						<thead>
 							<tr>
-								<td>比賽時間</td>
-			                	<td>比賽地點</td>
-			                	<td>主隊</td>
-			                	<td>比分</td>
-			                	<td>客隊</td>
-							</tr>
+							  <td>比賽時間</td>
+			              	  <td>比賽地點</td>
+			              	  <td>主隊</td>
+			              	  <td>比分</td>
+			              	  <td>客隊</td>
+			                </tr>
 						</thead>
 						<tbody>
 							<c:forEach var="gamesSet" items="${groupsSet.gamesSet}">
@@ -86,14 +73,23 @@
 			    
 			    
 		    </div>
+		    <jsp:include page="/footer.jsp" />
+		    </div>
 	    	<!-- 網頁內容END -->
-	    	<jsp:include page="/footer.jsp" />
-	    </div>
 	    </div>
 	    <!-- End of container -->
 	    
 	    
 	    <jsp:include page="/footer_css.jsp" />
+	    <script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	    <script>
+// 	    $(document).ready(function() {
+// 	    	$('#season_cycle').DataTable();
+// 	    	});
+	    $(document).ready(function() {
+	    	$('.test').DataTable();
+	    	});
+	    </script>
     </body>
 
     </html>
