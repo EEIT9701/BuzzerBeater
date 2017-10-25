@@ -22,7 +22,7 @@ import eeit.season.model.SeasonVO;
 @WebServlet("/Season.do")
 public class SeasonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -57,8 +57,8 @@ public class SeasonServlet extends HttpServlet {
 			// 取得Service的實例
 			SeasonService sSvc = new SeasonService();
 
-			// 轉換為JSON格式
-			String jsonString = JSONValue.toJSONString(sSvc.getAll());
+			// 轉換為JSON格式(最好轉為純String的List或Map)
+			String jsonString = JSONValue.toJSONString(sSvc.getPureList());
 
 			// 經由Response送往瀏覽器
 			PrintWriter out = response.getWriter();

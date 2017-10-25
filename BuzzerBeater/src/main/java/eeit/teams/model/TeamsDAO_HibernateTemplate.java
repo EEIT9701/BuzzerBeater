@@ -60,7 +60,7 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 		
 		Set<TeamsVO> set = dao.getAll();
 		for(TeamsVO vo : set){
-			System.out.print(vo.getTeamName()+", ");
+			System.out.print(vo.getTeamID()+", ");
 			System.out.print(vo.getBossName()+", ");
 			System.out.print(vo.getCaptainPhone()+", ");
 			System.out.println();

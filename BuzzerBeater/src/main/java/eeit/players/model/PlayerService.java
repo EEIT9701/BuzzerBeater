@@ -1,19 +1,23 @@
 package eeit.players.model;
 
-import java.io.InputStream;
 import java.sql.Date;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.servlet.http.Part;
 
-import org.hibernate.engine.jdbc.BinaryStream;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import eeit.season.model.SeasonDAO_interface;
 
 public class PlayerService {
 	private PlayerDAO_interface dao;
 	
 	public PlayerService(){
-		dao = new PlayerDAO();
+//		dao = new PlayerDAO();
+		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
+		dao = (PlayerDAO_interface) context.getBean("PlayersDAO");
+		
 	}
 	public PlayersVO addPlayer(Integer playerID,String playerName,String id,Integer height,Integer weights,Date birthday,String nationality){
 		PlayersVO playerVO = new PlayersVO();
@@ -36,7 +40,7 @@ public class PlayerService {
 		playerVO.setWeights(weights);
 		playerVO.setBirthday(birthday);
 		playerVO.setNationality(nationality);
-		playerVO.setPhoto(photo);
+//		playerVO.setPhoto(photo);
 		dao.update(playerVO);
 		return playerVO;
 	}
@@ -48,15 +52,23 @@ public class PlayerService {
 	}
 	
 	
-	 public Set<PlayersVO> getOnePlayer(String playerName){
+	 public Set<PlayersVO> getOnePlayerName(String playerName){
 		
 	
 		
 		return dao.findByPlayerName(playerName);
 		
 	}
+	 public PlayersVO getOnePlayerID(Integer playerID){
+			
+			
+			
+			return dao.findByID(playerID);
+			
+		}
 	 
 	 public Set<PlayersVO> getAllPlayer(){
 			return dao.getAll();
 		}
+
 }

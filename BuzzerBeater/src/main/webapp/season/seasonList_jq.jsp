@@ -53,7 +53,7 @@
                         	console.log(datas);
                         	
                             var frag = $(document.createDocumentFragment());
-                            $.each(datas.datas, function(idx, season) {
+                            $.each(datas, function(idx, season) {
                                 var cell1 = $('<td></td>').text(season.seasonName);
                                 //三元運算子 (條件式) ? (if true) : (if false)
                                 var cell2 = (season.seasonBeginDate == null) ? $('<td></td>').text("") : $('<td></td>').text(season.seasonBeginDate);

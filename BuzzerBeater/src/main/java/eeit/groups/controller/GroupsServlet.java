@@ -17,6 +17,7 @@ import org.json.simple.JSONValue;
 
 import eeit.groups.model.GroupsService;
 import eeit.groups.model.GroupsVO;
+import eeit.locationinfo.model.LocationinfoService;
 
 @WebServlet("/Groups.do")
 public class GroupsServlet extends HttpServlet {
@@ -37,7 +38,6 @@ public class GroupsServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String action = request.getParameter("action");
-		System.out.println("action: " + action);
 
 		if ("GET_ALL_GROUPS".equals(action)) {
 
@@ -159,9 +159,13 @@ public class GroupsServlet extends HttpServlet {
 			
 			request.setAttribute("teamsCount", teamsCount);
 			request.setAttribute("result", result);
-			RequestDispatcher view = request.getRequestDispatcher("groups/algorithm_test.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/groups/algorithm_test.jsp");
 			view.forward(request, response);
 		}
+		
+		
+		
+		
 
 	}
 
