@@ -22,11 +22,11 @@
     	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
     	<jsp:include page="/header_css.jsp" />
-    	
+   		<jsp:include page="/font_css.jsp" />
+    	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
         <title>Season</title>
         
     </head>
-
     <body>
 	    <jsp:include page="/header.jsp" />
 	
@@ -65,6 +65,13 @@
 	    
 	    
 	    <jsp:include page="/footer_css.jsp" />
+	    
+	    <script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	    <script>
+	    $(document).ready(function() {
+	    	$('#seasonList').DataTable();
+	    	});
+	    </script>
     </body>
 
     </html>
