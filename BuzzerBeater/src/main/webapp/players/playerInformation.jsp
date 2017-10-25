@@ -23,8 +23,8 @@
         <link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
         <style>
             #img1 {
-                width: 250px;
-                height: 250px;
+                width: 195px;
+                height: 200px;
                 margin: auto;
             }
         </style>
@@ -43,7 +43,7 @@
                     <!--第二列-左邊表格-格式_.col-md-4-->
                     <div class="col-md-4">
                         <div class="col-md-12">
-                            <img id="img1" alt="" src="<%=request.getContextPath() %>\players\201939.png">
+                            <img id="img1" src="data:image/jpeg;base64,${playerVO.photo}">
                             <!--球員照片-->
                         </div>
                     </div>
