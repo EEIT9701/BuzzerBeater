@@ -31,6 +31,7 @@
 	    <jsp:include page="/header.jsp" />
 	
 		<div class="container">
+		<div class="jumbotron">
 			<div class="col-md-12">
 		        <h2>賽季列表</h2>
 
@@ -59,6 +60,7 @@
 			    </table>
 		    </div>
 	    	<jsp:include page="/footer.jsp" />
+	    </div>
 	    </div>
 	    
 	    

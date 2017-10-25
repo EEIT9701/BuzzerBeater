@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 
 <!--標尾(開始)-->
+	<hr>
 	<footer>
 		<p>&copy; 2016 Company, Inc.</p>
 	</footer>

@@ -63,9 +63,9 @@
         
              組別                                                
      <select>
-     <option label="社會組" value="object:7" selected="selected">季前熱身賽</option>       
-     <option label="青年組" value="object:8">例行賽</option>
-     <option label="少年組" value="object:9">季後賽</option>
+     <option label="東區" value="object:7" selected="selected">季前熱身賽</option>       
+     <option label="西區" value="object:8">例行賽</option>
+  <!--   <option label="少年組" value="object:9">季後賽</option>   -->
     </select>
         
              <!--球員數據                                                
@@ -107,7 +107,8 @@
                           <thead>
                                 <tr>
                                                 
-                                    <th>球員編號  </th>
+      <th>球員編號  </th>
+      <th>球員照片  </th>
       <th>球隊名稱  </th>
       <th>出場次數  </th>
       <th>出場時間  </th>
@@ -133,6 +134,15 @@
 		    <tr align='center' valign='middle'>
 
 	  <td>${personalDataVO.playersVO.playerName}</td>
+	  <td>
+	  	<c:if test="${not empty personalDataVO.playersVO.photo}">
+	  		<img src="data:image/png;base64,${personalDataVO.playersVO.photo}" height="67.5" width="45">
+	  	</c:if>
+	  	<c:if test="${empty personalDataVO.playersVO.photo}">
+	  	    <img src="<%=request.getContextPath() %>/images/placholder_testimonial-180x180.png" height="67.5" width="45">
+	  	</c:if>
+	  </td>
+	
       <td>${personalDataVO.teamsVO.teamName}</td>
       <td>${personalDataVO.gameID}</td>
       <td>${personalDataVO.gameTime}</td>
