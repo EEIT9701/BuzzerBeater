@@ -1,4 +1,4 @@
-package eeit.login.controller;
+package eeit.login.model;
 
 import eeit.memberinfo.model.MemberInfoService;
 
