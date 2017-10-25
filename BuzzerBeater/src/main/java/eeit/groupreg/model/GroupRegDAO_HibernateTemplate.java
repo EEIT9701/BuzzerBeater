@@ -53,7 +53,7 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		GroupRegDAO_interface dao = (GroupRegDAO_interface) context.getBean("GroupRegDAO");
 
-		// dao.delete(4001);
+//		 dao.delete(4001);
 
 		Set<GroupRegVO> set = dao.getAll();
 		for (GroupRegVO gvo : set) {

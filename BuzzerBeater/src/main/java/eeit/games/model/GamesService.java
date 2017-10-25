@@ -20,30 +20,8 @@ public class GamesService {
 		dao = (GamesDAO_interface) context.getBean("GamesDAO");
 	}
 
-	public Set<HashMap<String, Object>> getAll() {
-		Set<HashMap<String, Object>> set = new LinkedHashSet<HashMap<String, Object>>();
-
-		for (GamesVO vo : dao.getAll()) {
-			Map<String,Object> map = new HashMap<String, Object>();
-			map.put("gameID", vo.getGameID());
-			map.put("groupsVO", vo.getGroupsVO());
-			map.put("locationinfoVO", vo.getLocationinfoVO());
-			map.put("teamAVO", vo.getTeamAVO());
-			map.put("teamBVO", vo.getTeamBVO());
-			map.put("gameMediaSet", vo.getGameMediaSet());
-			map.put("personalDataSet", vo.getPersonalDataSet());
-			map.put("teamsSet", vo.getTeamsSet());
-			map.put("teamAScore", vo.getTeamAScore());
-			map.put("teamBScore", vo.getTeamBScore());
-			map.put("winnerID", vo.getWinnerID());
-			
-			SimpleDateFormat sdf = new SimpleDateFormat();
-			map.put("gameBeginDate", sdf.format(vo.getGameBeginDate()));
-			map.put("gameEndDate", sdf.format(vo.getGameEndDate()));
-			set.add((HashMap<String, Object>) map);
-		}
-
-		return set;
+	public Set<GamesVO> getAll() {
+		return dao.getAll();
 	}
 
 	public void addGames(Integer groupID, Integer locationID, Integer teamAID, Integer teamAScore, Integer teamBID,

@@ -136,7 +136,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 
 		/****************** delete ******************/
 
-//		dao.delete(1001);
+		dao.delete(1001);
 
 		/****************** getAll ******************/
 

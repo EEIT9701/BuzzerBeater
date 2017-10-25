@@ -23,15 +23,16 @@ public class GlobalService implements Filter {
 			throws IOException, ServletException {
 
 		HttpServletRequest request = (HttpServletRequest) req;
-		HttpServletResponse reponse = (HttpServletResponse) resp;
+		HttpServletResponse response = (HttpServletResponse) resp;
 
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 
 		String action = request.getParameter("action");
 		if (action != null)
 			System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
 
-		chain.doFilter(request, reponse);
+		chain.doFilter(request, response);
 	}
 
 	@Override
