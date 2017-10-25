@@ -12,33 +12,34 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebFilter("/*")
 public class GlobalService implements Filter {
-    public GlobalService() {
-        super();
-    }
+	public GlobalService() {
+		super();
+	}
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
-		
+
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse reponse = (HttpServletResponse) resp;
-		
+
 		request.setCharacterEncoding("UTF-8");
-		
+
 		String action = request.getParameter("action");
-		System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
-		
+		if (action != null)
+			System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
+
 		chain.doFilter(request, reponse);
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException { }
+	public void init(FilterConfig arg0) throws ServletException {
+	}
 
 	@Override
-	public void destroy() { }
-	
+	public void destroy() {
+	}
 
 }

@@ -36,7 +36,7 @@
 		<property name="weights" column="weights" />
 		<property name="birthday" column="birthday" />
 		<property name="nationality" column="nationality" />
-<!-- 		<property name="photo" column="photo" /> -->
+		<property name="photo" column="photo" />
 
 	</class>
 </hibernate-mapping>

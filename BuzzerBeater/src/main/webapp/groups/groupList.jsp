@@ -15,6 +15,19 @@
     	
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     	<jsp:include page="/header_css.jsp" />
+    	<style>
+    	h3{
+    	text-align:center;   	
+    	}
+    	thead{
+    	font-size:larger;
+    	font-weight:bold;
+    	text-align:center;
+    	}
+    	tbody{
+    	text-align:center;
+    	}
+    	</style>
     	
         <title>Season</title>
     </head>
@@ -23,6 +36,7 @@
 	    <jsp:include page="/header.jsp" />
 	
 		<div class="container">
+		<div class="jumbotron">
 			<div class="col-md-12">
 				<table class="table table-bordered">
 					<thead>
@@ -43,10 +57,17 @@
 				<p>${seasonVO.descriptions}</p>
 				
 				<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
-					<h3>${groupsSet.groupName}</h3>
+				
+				<h3>${groupsSet.groupName}</h3>
 					<table class="table table-bordered">
 						<thead>
-
+							<tr>
+								<td>比賽時間</td>
+			                	<td>比賽地點</td>
+			                	<td>主隊</td>
+			                	<td>比分</td>
+			                	<td>客隊</td>
+							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="gamesSet" items="${groupsSet.gamesSet}">
@@ -67,10 +88,12 @@
 		    </div>
 	    	<!-- 網頁內容END -->
 	    	<jsp:include page="/footer.jsp" />
-	    </div><!-- End of container -->
+	    </div>
+	    </div>
+	    <!-- End of container -->
 	    
 	    
-	    <jsp:include page="/footer.jsp" />
+	    <jsp:include page="/footer_css.jsp" />
     </body>
 
     </html>
