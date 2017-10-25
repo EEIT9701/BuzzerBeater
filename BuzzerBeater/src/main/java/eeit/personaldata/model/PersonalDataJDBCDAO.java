@@ -21,7 +21,7 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 	String password="P@ssw0rd";
 	
 	//private static final String GETAll="SELECT playerID,gameID,teamID,GameTime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,points,startingPlayer from personaldata order by playerID";
-	  private static final String GETAll="select p.playerName,t.teamName,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
+	  private static final String GETAll="select p.playerName,t.teamName,p.photo,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
 	  		"from   (select playerID,teamID,\r\n" + 
 	  		"        count(gameID)as gameID,\r\n" + 
 	  		"        sum(gameTime)as gametime,\r\n" + 
@@ -69,7 +69,7 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 		
 				PlayersVO playersVO = new PlayersVO();
 				playersVO.setPlayerName(rs.getString("playerName"));
-			//	playersVO.setPlayerID(rs.getInt("playerID"));
+				playersVO.setPhoto(rs.getString("photo"));
 				personalDataVO.setPlayersVO(playersVO);
 				
 				GamesVO gamesVO = new GamesVO();
@@ -121,6 +121,7 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
     	List<PersonalDataVO> list=dao.getAll();
     	for(PersonalDataVO aPersonal:list){
     		System.out.print(aPersonal.getPlayersVO().getPlayerName()+",");
+    		System.out.print(aPersonal.getPlayersVO().getPhoto()+",");
     		System.out.print(aPersonal.getTeamsVO().getTeamName()+",");
     	  //System.out.print(aPersonal.getTeamID()+",");
     		System.out.print(aPersonal.getGameTime()+",");

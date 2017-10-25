@@ -31,7 +31,7 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 	//private static final String GETALL="SELECT playerID,gameID,teamID,quarters,quarterTime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,startingPlayer from personaldata order by playerID";
 	//private static final String GETALL="SELECT ROW_NUMBER() OVER(ORDER BY points DESC) AS ranking,* FROM personaldata";
 	//private static final String GETALL="SELECT * from personaldata order by points";
-	private static final String GETALL="select p.playerName,t.teamName,gameID,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
+	private static final String GETALL="select p.playerName,p.photo,t.teamName,gameID,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
 	  		"from   (select playerID,teamID,\r\n" + 
 	  		"        count(gameID)as gameID,\r\n" + 
 	  		"        sum(gameTime)as gametime,\r\n" + 
@@ -75,7 +75,7 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 				personalDataVO=new PersonalDataVO();
 				PlayersVO playersVO = new PlayersVO();
 				playersVO.setPlayerName(rs.getString("playerName"));
-			//	playersVO.setPlayerID(rs.getInt("playerID"));
+				playersVO.setPhoto(rs.getString("photo"));
 				personalDataVO.setPlayersVO(playersVO);
 				
 				GamesVO gamesVO = new GamesVO();
@@ -109,10 +109,9 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        
-        
+ 
 		return list;
 	}
 
+	
 }
