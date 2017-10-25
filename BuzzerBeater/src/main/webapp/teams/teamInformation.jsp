@@ -131,6 +131,7 @@
                                             <tr>
                                                 <th>背號</th>
                                                 <th>照片</th>
+                                                <th>姓名</th>
                                                 <th>位置</th>
                                                 <th>身高</th>
                                                 <th>體重</th>
@@ -138,6 +139,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
