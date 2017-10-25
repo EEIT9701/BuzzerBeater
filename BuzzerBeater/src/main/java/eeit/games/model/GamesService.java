@@ -1,25 +1,49 @@
 package eeit.games.model;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import eeit.season.model.SeasonDAO_interface;
 
 public class GamesService {
 
 	private GamesDAO_interface dao;
 
 	public GamesService() {
-//		dao = new GamesDAO_Hibernate();
+		// dao = new GamesDAO_Hibernate();
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (GamesDAO_interface) context.getBean("GamesDAO");
 	}
 
-	public Set<GamesVO> getAll() {
-		return dao.getAll();
+	public Set<HashMap<String, Object>> getAll() {
+		Set<HashMap<String, Object>> set = new LinkedHashSet<HashMap<String, Object>>();
+
+		for (GamesVO vo : dao.getAll()) {
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("gameID", vo.getGameID());
+			map.put("groupsVO", vo.getGroupsVO());
+			map.put("locationinfoVO", vo.getLocationinfoVO());
+			map.put("teamAVO", vo.getTeamAVO());
+			map.put("teamBVO", vo.getTeamBVO());
+			map.put("gameMediaSet", vo.getGameMediaSet());
+			map.put("personalDataSet", vo.getPersonalDataSet());
+			map.put("teamsSet", vo.getTeamsSet());
+			map.put("teamAScore", vo.getTeamAScore());
+			map.put("teamBScore", vo.getTeamBScore());
+			map.put("winnerID", vo.getWinnerID());
+			
+			SimpleDateFormat sdf = new SimpleDateFormat();
+			map.put("gameBeginDate", sdf.format(vo.getGameBeginDate()));
+			map.put("gameEndDate", sdf.format(vo.getGameEndDate()));
+			set.add((HashMap<String, Object>) map);
+		}
+
+		return set;
 	}
 
 	public void addGames(Integer groupID, Integer locationID, Integer teamAID, Integer teamAScore, Integer teamBID,

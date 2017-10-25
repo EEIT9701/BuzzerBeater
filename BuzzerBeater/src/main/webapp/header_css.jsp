@@ -133,4 +133,5 @@
         }
     </style>
     
-
+<script src="https://apis.google.com/js/platform.js"  defer></script>
+<script src="https://apis.google.com/js/api.js"  defer></script>
