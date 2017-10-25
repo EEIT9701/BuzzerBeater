@@ -12,18 +12,21 @@
     
     <style>
 		#video{
-			width:100%;
-			height:530px;
+			width:105%;
+			height:100%;
 			padding-bottom:30px;
-			border-radius:30px;
+			margin-left:-15px;
+			margin-right:-35px;
 		}
-		#topictext{
-			color:blue;
-		}
-		
 		#mediaplayer{
 			background-color:#BEBEBE;
 			padding-left:-15px;
+			width:100%;
+			height:100%;
+		}
+		#videolist{
+			background-color:#BEBEBE;
+ 			height:105%;
 		}
 		video::-internal-media-controls-download-button {
    	 		display:none;
@@ -35,6 +38,14 @@
 
 		video::-webkit-media-controls-panel {
     		width: calc(100% + 30px); 
+		}
+		#medias{
+			height:100%;
+			width:100%;
+			text-align:left;
+		}
+		h3{
+			text-align:center;
 		}
     </style>
 
@@ -64,10 +75,20 @@
             			<source src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4">
             		</video>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4" id="videolist">
+					<h3>精選影片</h3>
 					<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}">
-						<h5>${gameMediaSvc.mediasName}</h5>
+						<h4 id=medias>${gameMediaSvc.mediasName}</h4>
+<!-- 						</br> -->
 					</c:forEach>
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
+					</br>
 				</div>
                 <!--第一列-右邊表格-格式_.col-md-4-->
 <!--               	<div> -->

@@ -78,10 +78,15 @@
 	margin-left:0px;
 	padding-left:0px;
 }
-
+#x{
+	margin-right:-20px;
+}
+span{
+	margin-top:-20px;
+}
 </style>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/datatables.min.css" />
+<!-- <link rel="stylesheet" type="text/css" -->
+<%-- 	href="<%=request.getContextPath()%>/css/datatables.min.css" /> --%>
 
 </head>
 <body>
@@ -94,6 +99,14 @@
 				<div class="col-md-4" id="topic">
 					<h1>影片專區</h1>
 					</br>
+					<c:if test="${not empty errorMsgs}">
+					請修正以下錯誤:
+                    <ul>
+                        <c:forEach var="message" items="${errorMsgs}">
+                            <li>${message}</li>
+                        </c:forEach>
+                    </ul>
+                </c:if>
 				</div>
 			</div>
 			<div class="row">
@@ -188,7 +201,7 @@
     					<div class="modal-dialog">
         					<div class="modal-content">
             					<div class="modal-header">
-                					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                					<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="x">&times;</button>
                 					<h4 class="modal-title" id="myModalLabel">檔案上傳</h4>
             					</div>
             				<div class="modal-body">
@@ -233,12 +246,10 @@
 	<!--主文(結束)-->
 
 	<jsp:include page="/footer_css.jsp" />
-	<script type="text/javascript"
-		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+<!-- 	<script type="text/javascript" -->
+<%-- 		src="<%=request.getContextPath()%>/js/datatables.min.js"></script> --%>
 	<script>
-		$(document).ready(function() {
-			$('#table').DataTable();
-		});
+
 	</script>
 
 
