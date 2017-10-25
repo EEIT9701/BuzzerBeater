@@ -120,7 +120,7 @@
       <th>失誤  </th>
       <th>犯規 </th> 
       <th>得分 </th> 
-       <th> </th>
+      <th> </th>
       <th> </th>
                                 </tr>
                 </thead>     
@@ -145,7 +145,7 @@
       <td>${personalDataVO.turnover}</td>
       <td>${personalDataVO.personalFouls}</td>
       <td>${personalDataVO.points}</td> 
-      <td>
+            <td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/player.do">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="playerID" value="${playerVO.playerID}">
