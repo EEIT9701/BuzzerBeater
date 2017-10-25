@@ -20,6 +20,7 @@
 	    <jsp:include page="/header.jsp" />
 	
 		<div class="container">
+		<div class="jumbotron">
 			<!-- 網頁內容 -->
 			<h1>${locationVO.locationName}</h1>
 			
@@ -32,7 +33,9 @@
 		
 			<!-- 網頁內容END -->
 	    	<jsp:include page="/footer.jsp" />
-	    </div><!-- End of container -->
+	    </div>
+	    </div>
+	    <!-- End of container -->
 	    
 	    
 	    <jsp:include page="/footer_css.jsp" />
