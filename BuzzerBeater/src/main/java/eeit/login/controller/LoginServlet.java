@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -22,10 +23,13 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
+import eeit.memberinfo.model.MemberInfoVO;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -33,7 +37,7 @@ import java.security.GeneralSecurityException;
 import java.util.Arrays;
 import java.util.Collections;
 
-@WebServlet("/helloServlet")
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -54,7 +58,8 @@ public class LoginServlet extends HttpServlet {
 		String inputLine;
 		JSONObject jsonOb = null;
 		StringBuilder sb = null;
-	
+		MemberInfoVO memberInfoVO = new MemberInfoVO();
+		HttpSession session = request.getSession();
 		try {
 			  URL url = new URL("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+idTokenString);
 			  URLConnection conn = url.openConnection();
@@ -73,14 +78,20 @@ public class LoginServlet extends HttpServlet {
 			//System.out.println(sb.toString());
 					
 		try {
+			PrintWriter out = response.getWriter();
 			jsonOb =  new JSONObject("{'userinfo':" + sb.toString() + "}");
 			//String j =jsonOb.getJSONObject("userinfo").get("name").toString();
-			System.out.println(jsonOb.getJSONObject("userinfo").get("name").toString());
-			System.out.println(jsonOb.getJSONObject("userinfo").get("email").toString());
-			System.out.println(jsonOb.getJSONObject("userinfo").get("email_verified").toString());
-			System.out.println(jsonOb.getJSONObject("userinfo").get("picture").toString());
-		
+//			System.out.println(jsonOb.getJSONObject("userinfo").get("name").toString());
+//			System.out.println(jsonOb.getJSONObject("userinfo").get("email").toString());
+//			System.out.println(jsonOb.getJSONObject("userinfo").get("email_verified").toString());
+//			System.out.println(jsonOb.getJSONObject("userinfo").get("picture").toString());
+//			memberInfoVO.setAcc(jsonOb.getJSONObject("userinfo").get("email").toString());
+//			memberInfoVO.setName(jsonOb.getJSONObject("userinfo").get("name").toString());
+//			session.setAttribute("memberInfoVO", memberInfoVO);
 			
+			session.setAttribute("email", jsonOb.getJSONObject("userinfo").get("email").toString());
+			out.print(jsonOb.getJSONObject("userinfo").get("email").toString());
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
