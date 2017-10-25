@@ -102,7 +102,7 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 		/****************** delete ******************/
 
-//		 dao.delete(1001);
+		 dao.delete(1002);
 
 		/****************** getAll ******************/
 

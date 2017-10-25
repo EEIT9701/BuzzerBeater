@@ -10,8 +10,6 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import eeit.groupreg.model.GroupRegDAO_interface;
-
 @Transactional(readOnly = true)
 public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 	private HibernateTemplate hibernateTemplate;
@@ -24,7 +22,6 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<GroupsVO> getAll() {
 		List<GroupsVO> list = (List<GroupsVO>) hibernateTemplate.find(GET_ALL_STMT);
 		return new LinkedHashSet<GroupsVO>(list);
@@ -39,7 +36,9 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void delete(Integer groupID) {
-		GroupsVO groupsVO = hibernateTemplate.get(GroupsVO.class, groupID);
+//		GroupsVO groupsVO = hibernateTemplate.get(GroupsVO.class, groupID);
+		GroupsVO groupsVO = new GroupsVO();
+		groupsVO.setGroupID(groupID);
 		hibernateTemplate.delete(groupsVO);
 	}
 
@@ -50,13 +49,13 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public GroupsVO findByGroupID(Integer groupID) {
 		GroupsVO groupsVO = hibernateTemplate.get(GroupsVO.class, groupID);
 		return groupsVO;
 	}
 
 	public static void main(String args[]) {
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		GroupsDAO_interface dao = (GroupsDAO_interface) context.getBean("GroupsDAO");
 
@@ -72,9 +71,6 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 		// gVO1.setMinPlayers(7);
 		// dao.insert(gVO1);
 
-		// *****delete*****
-
-//		 dao.delete(2011);
 
 		// *****update*****
 
@@ -89,6 +85,10 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 		// gVO3.setGroupID(2004);
 		// dao.update(gVO3);
 
+		// *****delete*****
+		
+		 dao.delete(2004);
+		
 		// *****getAll*****
 		Set<GroupsVO> set1 = dao.getAll();
 		for (GroupsVO gVO : set1) {

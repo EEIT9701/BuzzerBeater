@@ -9,14 +9,21 @@
 			<generator class="identity" />
 		</id>
 
-		<many-to-one name="playersVO" class="eeit.players.model.PlayersVO" lazy="false">
-			<column name="captainID" />
-		</many-to-one>
-
-		<many-to-one name="locationinfoVO" class="eeit.locationinfo.model.LocationinfoVO" lazy="proxy">
+		<many-to-one name="locationinfoVO" class="eeit.locationinfo.model.LocationinfoVO" lazy="false">
 			<column name="locationID" />
 		</many-to-one>
-
+		
+		<set name="teamCompositionSet" table="TeamComposition" lazy="false" cascade="all-delete-orphan"  inverse="true">			
+			<key><column name="teamID"/></key>
+			<one-to-many class="eeit.teamcomposition.model.TeamCompositionVO" />
+		</set>
+		
+		<set name="groupRegSet" table="GroupRegistration" lazy="false" cascade="all-delete-orphan"  inverse="true">			
+			<key><column name="teamID"/></key>
+			<one-to-many class="eeit.groupreg.model.GroupRegVO" />
+		</set>
+		
+		<property name="captainID" column="captainID" />
 		<property name="captainEmail" column="captainEmail" />
 		<property name="captainPhone" column="captainPhone" />
 		<property name="teamName" column="teamName" />

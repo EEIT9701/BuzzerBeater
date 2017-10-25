@@ -3,20 +3,35 @@ package eeit.personaldata.model;
 import java.io.Serializable;
 
 import eeit.games.model.GamesVO;
-import eeit.groups.model.GroupsVO;
 import eeit.players.model.PlayersVO;
 import eeit.teams.model.TeamsVO;
 
 public class PersonalDataVO implements Serializable {
-	private PlayersVO playersVO;
-	private GamesVO gamesVO;
-	private TeamsVO teamsVO;
-	private Integer gameID;
-	private Integer teamID;
+	private static final long serialVersionUID = 524463388633294511L;
+
+	private PlayersVO playersVO; // playerID CPK
+	private GamesVO gamesVO; // gameID CPK
+	private TeamsVO teamsVO; // teamID
+
+	private Integer gameID; // for JDBC
+	private Integer teamID; // for JDBC
+	
 	private Integer gameTime;
 	private Integer twoPoint;
 	private Integer twoPointShot;
 	private Integer threePoint;
+	private Integer threePointShot;
+	private Integer fg;
+	private Integer fgShot;
+	private Integer offReb;
+	private Integer defReb;
+	private Integer assist;
+	private Integer steal;
+	private Integer blocks;
+	private Integer turnover;
+	private Integer personalFouls;
+	private Integer points;
+	private Integer startingPlayer;
 
 	@Override
 	public int hashCode() {
@@ -48,19 +63,6 @@ public class PersonalDataVO implements Serializable {
 			return false;
 		return true;
 	}
-
-	private Integer threePointShot;
-	private Integer fg;
-	private Integer fgShot;
-	private Integer offReb;
-	private Integer defReb;
-	private Integer assist;
-	private Integer steal;
-	private Integer blocks;
-	private Integer turnover;
-	private Integer personalFouls;
-	private Integer points;
-	private Integer startingPlayer;
 
 	public PlayersVO getPlayersVO() {
 		return playersVO;

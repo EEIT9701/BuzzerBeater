@@ -1,7 +1,6 @@
 package eeit.gamemedia.model;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.sql.Timestamp;
 
 import eeit.games.model.GamesVO;

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import eeit.groups.model.GroupsVO;
 import eeit.players.model.PlayersVO;
-import eeit.season.model.SeasonVO;
 
 public class PlayerGroupsVO implements Serializable {
 	private static final long serialVersionUID = -310982995736374426L;

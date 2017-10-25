@@ -239,7 +239,7 @@ GO
  create table Teams			--球隊
 (
   teamID                  int primary key IDENTITY (3001,1),        --球隊ID
-  captainID               int references Players(playerID ),        --隊長ID
+  captainID               int,                                       --隊長ID
   captainEmail            varchar(40),                              --隊長Email
   captainPhone            varchar(20),                              --隊長連絡電話
   locationID              int,	                                    --主場ID

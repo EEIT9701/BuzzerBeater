@@ -19,8 +19,8 @@ public class PlayersVO implements java.io.Serializable {
 
 	private String playerName;
 	private String id;
-	private Double height;// Double height
-	private Double weights;// Double weights
+	private Double height;
+	private Double weights;
 	private Date birthday;
 	private String nationality;
 	private String photo;
