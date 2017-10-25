@@ -34,7 +34,8 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void delete(Integer mediaID) {
-		GameMediaVO gameMediaVO = (GameMediaVO) hibernateTemplate.get(GameMediaVO.class, mediaID);
+		GameMediaVO gameMediaVO = new GameMediaVO();
+		gameMediaVO.setMediaID(mediaID);
 		hibernateTemplate.delete(gameMediaVO);
 	}
 
@@ -58,11 +59,12 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		GameMediaDAO_Interface dao = (GameMediaDAO_Interface) context.getBean("GameMediaDAO");
 		
+		dao.delete(6001);
 		
 		List<GameMediaVO> set =dao.getAll();
 		
 		for(GameMediaVO vo : set){
-			System.out.println(vo.getGameVideo());
+			System.out.println(vo.getMediaID());
 		}
 
 

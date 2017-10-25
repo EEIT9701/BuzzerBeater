@@ -22,6 +22,10 @@ public class SeasonService {
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (SeasonDAO_interface) context.getBean("SeasonDAO");
 	}
+	
+	public SeasonVO getLatestSeason(){
+		return null;
+	}
 
 	public SeasonVO addSeason(String seasonName, Date seasonBeginDate, Date seasonEndDate, Timestamp signUpBegin,
 			Timestamp signUpEnd, String descriptions) {
