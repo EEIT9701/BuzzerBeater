@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
+import java.util.Base64;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -19,8 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.apache.commons.io.IOUtils;
 import org.hibernate.engine.jdbc.BinaryStream;
 
+import eeit.locationinfo.model.LocationinfoService;
 import eeit.players.model.PlayerService;
 import eeit.players.model.PlayersVO;
 
@@ -42,6 +45,8 @@ public class PlayersSevrlet extends HttpServlet {
 		String action = req.getParameter("action");
 		System.out.println("action: " + action);
 		PlayerService playerSvc = new PlayerService();
+		
+		
 		if("getOne_For_Display".equals(action)){
 		
 			/***************************1.接收請求參數****************************************/
@@ -49,7 +54,7 @@ public class PlayersSevrlet extends HttpServlet {
 			
 			/***************************2.開始查詢資料****************************************/
 			
-			Set<PlayersVO> playersVO = playerSvc.getOnePlayer(playerName);
+			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
 			
 			/***************************3.查詢完成,準備轉交(Send the Success view)************/
 //			 req.setAttribute("listOnePlayer", playerVO);        // 資料庫取出的empVO物件,存入req
@@ -68,7 +73,7 @@ public class PlayersSevrlet extends HttpServlet {
 			String playerName = req.getParameter("playerName");
 			
 			
-			Set<PlayersVO> playersVO = playerSvc.getOnePlayer(playerName);
+			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
 			
 			req.setAttribute("playersVO", playersVO);
 			
@@ -133,7 +138,7 @@ public class PlayersSevrlet extends HttpServlet {
 			
 			
 			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality,photo);
-			Set<PlayersVO> playersVO = playerSvc.getOnePlayer(playerName);
+			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
 		
 			
 			req.setAttribute("playersVO", playersVO);

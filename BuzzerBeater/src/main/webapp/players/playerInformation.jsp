@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+    <%@ page import="java.util.*"%>
+    <%@ page import="eeit.players.model.*"%>
+    <%
+    Integer playerID = new Integer(request.getParameter("playerID"));
+    PlayerService PlayerSvc = new PlayerService();
+    PlayersVO playerVO = PlayerSvc.getOnePlayerID(playerID);
+	pageContext.setAttribute("playerVO", playerVO);
+    %>
+    
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <html>
 
@@ -40,20 +51,20 @@
                     <div class="col-md-4">
 
                         <div class="col-md-12">
-                            <h2>STEPHEN CURRY</h2>
+                            <h2>${playerVO.playerName}</h2>
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td>球隊 | 金州勇士</td>
-                                        <td>生日 | 1987-01-28</td>
+                                        <td>球隊 |<c:forEach var="team" items="${playerVO.teamCompositionSet}">${team.teamsVO.teamName}</c:forEach></td>
+                                        <td>生日 | ${playerVO.birthday}</td>
                                     </tr>
                                     <tr>
                                         <td>背號 | #30</td>
-                                        <td>國籍 | 美國</td>
+                                        <td>國籍 | ${playerVO.nationality}</td>
                                     </tr>
                                     <tr>
-                                        <td>身高 | 190公分</td>
-                                        <td>體重 | 86.2公斤</td>
+                                        <td>身高 | ${playerVO.height}公分</td>
+                                        <td>體重 | ${playerVO.weights}公斤</td>
                                     </tr>
                                 </tbody>
                             </table>

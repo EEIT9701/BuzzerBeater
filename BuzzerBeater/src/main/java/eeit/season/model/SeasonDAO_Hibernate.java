@@ -12,7 +12,7 @@ import hibernate.util.HibernateUtil;
 
 public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 
-	private static final String GET_ALL_SEASON = "from SeasonVO order by seasonID";
+	private static final String GET_ALL_SEASON = "from SeasonVO order by seasonbegindate desc";
 
 	@Override
 	public SeasonVO findBySeasonID(Integer seasonID) {

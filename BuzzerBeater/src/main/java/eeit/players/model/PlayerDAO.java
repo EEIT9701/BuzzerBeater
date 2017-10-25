@@ -32,8 +32,9 @@ public class PlayerDAO implements PlayerDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO Players (PlayerName,ID,Height,Weights,Birthday,Nationality) VALUES(?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE Players SET PlayerName=?, ID=?, Height=?, Weights=?, Birthday=?, Nationality=? where PlayerID = ?";
 	private static final String DELETE_STMT = "DELETE FROM Players where PlayerID = ?";
-	private static final String GET_ONE_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality FROM Players where PlayerName = ?";
-	private static final String GET_ALL_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality FROM Players";
+	private static final String GET_ONENAME_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality FROM Players where PlayerName = ?";
+	private static final String GET_ONEID_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality FROM Players where PlayerID = ?";
+	private static final String GET_ALL_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality,Photo FROM Players";
 	
 	//新增method
 	@Override
@@ -159,7 +160,7 @@ public class PlayerDAO implements PlayerDAO_interface {
 		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt = con.prepareStatement(GET_ONENAME_STMT);
 			pstmt.setString(1, playerName);
 			rs = pstmt.executeQuery();
 			
@@ -197,6 +198,54 @@ public class PlayerDAO implements PlayerDAO_interface {
 		
 		return set;
 	}
+	@Override
+	public PlayersVO findByPlayerID(Integer playerID) {
+		PlayersVO playerVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONEID_STMT);
+			pstmt.setInt(1, playerID);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				playerVO = new PlayersVO();
+				playerVO.setPlayerID(rs.getInt("playerID"));
+				playerVO.setPlayerName(rs.getString("playerName"));
+				playerVO.setId(rs.getString("id"));
+				playerVO.setHeight(rs.getInt("height"));
+				playerVO.setWeights(rs.getInt("weights"));
+				playerVO.setBirthday(rs.getDate("birthday"));
+				playerVO.setNationality(rs.getString("nationality"));
+				
+			}
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return playerVO;
+	}
 
 	@Override
 	public Set<PlayersVO> getAll() {
@@ -221,7 +270,49 @@ public class PlayerDAO implements PlayerDAO_interface {
 				playerVO.setWeights(rs.getInt("weights"));
 				playerVO.setBirthday(rs.getDate("birthday"));
 				playerVO.setNationality(rs.getString("nationality"));
+//				playerVO.setPhoto(rs.getString("photo"));
 				set.add(playerVO);
+			}
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+	
+	public Set<String> getPhoto() {
+		Set<String> set = new LinkedHashSet<String>();
+		PlayersVO playerVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				playerVO = new PlayersVO();
+				
+				set.add(playerVO.getPhoto());
 			}
 
 		} catch (SQLException se) {
@@ -271,9 +362,9 @@ public class PlayerDAO implements PlayerDAO_interface {
 //		playerVO2.setNationality("taiwan");
 //		dao.update(playerVO2);
 //		// // 刪除
-		dao.delete(70005);
+		//dao.delete(70005);
 //
-//		// 查詢
+		// 查詢
 //		Set<PlayerVO> set1 = dao.findByPlayerName("蔣淯安");
 //		for (PlayerVO aPlayer1 : set1) {
 //			System.out.print(aPlayer1.getPlayer_ID() + ",");
@@ -287,18 +378,20 @@ public class PlayerDAO implements PlayerDAO_interface {
 //		 System.out.println("---------------------");
 
 		// 查詢
-//		Set<PlayerVO> set2 = dao.getAll();
-//		for (PlayerVO aPlayer2 : set2) {
-//			System.out.print(aPlayer2.getPlayer_ID() + ",");
-//			System.out.print(aPlayer2.getPlayer_name() + ",");
-//			System.out.print(aPlayer2.getId_number() + ",");
-//			System.out.print(aPlayer2.getHeight() + ",");
-//			System.out.print(aPlayer2.getWeights() + ",");
-//			System.out.print(aPlayer2.getBirthday() + ",");
-//			System.out.println(aPlayer2.getNationality());
-//			System.out.println();
+		Set<PlayersVO> set2 = dao.getAll();
+		for (PlayersVO aPlayer2 : set2) {
+			System.out.print(aPlayer2.getPlayerID() + ",");
+			System.out.print(aPlayer2.getPlayerName() + ",");
+			System.out.print(aPlayer2.getId() + ",");
+			System.out.print(aPlayer2.getHeight() + ",");
+			System.out.print(aPlayer2.getWeights() + ",");
+			System.out.print(aPlayer2.getBirthday() + ",");
+			System.out.println(aPlayer2.getNationality());
+			System.out.println(aPlayer2.getPhoto());
+			System.out.println();
 		}
 	}
+}
 
 
 //70005,翁嘉鴻,A120156181,182,79,1992-01-10,taiwan
