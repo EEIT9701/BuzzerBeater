@@ -18,8 +18,8 @@
     			'width':'100%'}
     	var Gmail={'vertical-align': 'middle',
     		  	  'padding-top': '25px',
-       			  'margin-left': '55px',
-       	 		  'width': '70%'}
+       			  'margin-left': '38px',
+       	 		  'width': '80%'}
     	var FB={'background-color':'#4267b2'}
     	var Twitter={'background-color':'#1da1f2'}
     	$('li').find("button").css(x1)
