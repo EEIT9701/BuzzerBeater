@@ -64,10 +64,11 @@
 												<td>${playersVO.nationality}</td>
 												<td>
 													<Form method="post" action="<%=request.getContextPath() %>/Players.do">
-														<button type="submit" class="btn btn-info">修改</button> <input type="hidden" name="playerName" value="${playersVO.playerName}">
-														<input type="hidden" name="action" value="getOne_For_Update">
+														<button type="submit" class="btn btn-info">修改</button> 
+														<input type="hidden" name="playerName" value="${playersVO.playerName}">
+                                                        <input type="hidden" name="action" value="getOne_For_Update">
 													</Form>
-												</td>
+													</td>
 												<td>
 													<Form method="post" action="<%=request.getContextPath() %>/Players.do">
 														<button type="submit" class="btn btn-danger">刪除</button> <input type="hidden" name="playerID" value="${playersVO.playerID}">														<input type="hidden" name="action" value="delete">
@@ -83,6 +84,7 @@
 							</div>
 						</div>
 					</div>
+
 					<jsp:include page="/footer.jsp" />
 
 				</div>
@@ -90,12 +92,16 @@
 			<!--主文(結束)-->
 
 			<jsp:include page="/footer_css.jsp" />
+
 			<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 			<script>
 				$(document).ready(function () {
 					$('#table').DataTable();
 				});
+				
 			</script>
+ 			
+
 		</body>
 
 		</html>

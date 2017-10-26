@@ -246,7 +246,7 @@ GO
   teamName                nvarchar(40),                             --球隊名稱
   coachName               nvarchar(30),                             --總教練
   bossName                nvarchar(30),                             --老闆
-  teamBadge               image,                                    --隊徽
+  teamBadge               varchar(MAX),                                    --隊徽
   totalWin                int,                                      --總勝場數
   totalLose               int,                                      --總敗場數
   winRate                 float,                                    --勝率
