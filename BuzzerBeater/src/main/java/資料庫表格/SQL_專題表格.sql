@@ -246,7 +246,7 @@ GO
   teamName                nvarchar(40),                             --球隊名稱
   coachName               nvarchar(30),                             --總教練
   bossName                nvarchar(30),                             --老闆
-  teamBadge               varchar(MAX),                                    --隊徽
+  teamBadge               image,                                    --隊徽
   totalWin                int,                                      --總勝場數
   totalLose               int,                                      --總敗場數
   winRate                 float,                                    --勝率
@@ -612,10 +612,15 @@ insert into GameMedia values('4001','Curry單手爆扣','001.mp4','','video','2016-1
 insert into GameMedia values('4002','哈登監視器','002.mp4','','video','2016-10-25','哈登監視器模式!!','休士頓火箭,哈登,監視器');
 insert into GameMedia values('4003','保羅船長過人','003.mp4','','video','2016-10-25','保羅船長換手過人!','洛杉磯快艇,保羅,運球過人');
 insert into GameMedia values('4004','Kawhi Leonard 受傷','004.mp4','','video','2016-10-26','Kawhi Leonard 受傷 踩到Zaza的腳','聖安東尼奧馬刺,Kawhi Leonard,受傷');
+insert into GameMedia values('4001','Stephen Curry','','','photo','2016-10-25','Curry手插腰','金州勇士,Curry,吐護齒套');
+insert into GameMedia values('4002','James Harden','','','photo','2016-10-25','炸彈超人哈登','休士頓火箭,哈登,炸彈超人');
+insert into GameMedia values('4003','Chris Paul','','','photo','2016-10-25','保羅發呆','洛杉磯快艇,保羅,發呆');
+insert into GameMedia values('4004','Kawhi Leonard','','','photo','2016-10-26','Kawhi Leonard看得你心發寒','聖安東尼奧馬刺,Kawhi Leonard,黑幫');
 
 
 select * from GameMedia
 GO
+
 
 ---------------------------------------------------------------------------------------------------------------
 

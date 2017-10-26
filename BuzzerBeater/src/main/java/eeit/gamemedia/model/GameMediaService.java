@@ -13,9 +13,9 @@ public class GameMediaService {
 	private GameMediaDAO_Interface dao;
 	
 	public GameMediaService(){
-	//	dao = new GameMediaDAO_JNDI();
-		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
-		dao = (GameMediaDAO_Interface) context.getBean("GameMediaDAO");
+//		dao = new GameMediaDAO_JNDI();
+    	ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
+    	dao = (GameMediaDAO_Interface) context.getBean("GameMediaDAO");
 	}
 	public GameMediaVO insertGameMedia(Integer gameID,String mediasName,String gameVideo,String gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag ){
 		

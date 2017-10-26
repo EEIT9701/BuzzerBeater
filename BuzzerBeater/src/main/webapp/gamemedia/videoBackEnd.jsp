@@ -85,9 +85,12 @@
 span{
 	margin-top:-20px;
 }
+.input-group-addon{
+	padding-top:-15px;
+}
 </style>
-<!-- <link rel="stylesheet" type="text/css" -->
-<%-- 	href="<%=request.getContextPath()%>/css/datatables.min.css" /> --%>
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/datatables.min.css" />
 
 </head>
 <body>
@@ -247,10 +250,12 @@ span{
 	<!--主文(結束)-->
 
 	<jsp:include page="/footer_css.jsp" />
-<!-- 	<script type="text/javascript" -->
-<%-- 		src="<%=request.getContextPath()%>/js/datatables.min.js"></script> --%>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
-
+	$(document).ready(function () {
+		$('#table').DataTable();
+	});
 	</script>
 
 
