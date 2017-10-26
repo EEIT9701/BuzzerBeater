@@ -1,6 +1,7 @@
 package eeit.groupreg.model;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Query;
@@ -49,6 +50,19 @@ public class GroupRegDAO_Hibernate implements GroupRegDAO_interface {
 	public void delete(Integer games_ID) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public List<GroupRegVO> findByGroupID(Integer groupID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<GroupRegVO> findByTeamID(Integer teamID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	public static void main(String[] args) {

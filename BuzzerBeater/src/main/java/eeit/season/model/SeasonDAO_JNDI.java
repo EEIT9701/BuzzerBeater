@@ -30,7 +30,47 @@ public class SeasonDAO_JNDI implements SeasonDAO_interface {
 	private static final String DELETE_STMT = "DELETE from season WHERE seasonID=?";
 	private static final String GET_ALL_STMT = "SELECT seasonID, seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, descriptions FROM season ORDER BY seasonBeginDate DESC";
 	private static final String GET_ONE_BY_ID = "SELECT seasonID, seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, descriptions FROM season WHERE seasonID=?";
+	private static final String GET_LATEST_ID = "SELECT MAX(seasonID) FROM Season";
 
+	@Override
+	public Integer getLatestID() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		Integer latestID = null;
+
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(GET_LATEST_ID);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				latestID = rs.getInt(1);
+			}
+
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		return latestID;
+	}
 	@Override
 	public SeasonVO findBySeasonID(Integer SeasonID) {
 		Connection con = null;

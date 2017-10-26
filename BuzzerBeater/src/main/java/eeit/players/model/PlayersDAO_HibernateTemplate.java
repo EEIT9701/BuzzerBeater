@@ -10,8 +10,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import eeit.season.model.SeasonVO;
-
+@SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
 public class PlayersDAO_HibernateTemplate implements PlayerDAO_interface {
 	private HibernateTemplate hibernateTemplate;
@@ -21,6 +20,7 @@ public class PlayersDAO_HibernateTemplate implements PlayerDAO_interface {
 	}
 
 	private static final String GET_ALL_STMT = "FROM PlayersVO ORDER BY playerID";
+	private static final String FIND_BY_PLAYERNAME = "FROM PlayersVO WHERE playerName=?";
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -42,27 +42,24 @@ public class PlayersDAO_HibernateTemplate implements PlayerDAO_interface {
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<PlayersVO> findByPlayerName(String playerName) {
-
-		return null;
+		List<PlayersVO> list = (List<PlayersVO>) hibernateTemplate.find(FIND_BY_PLAYERNAME, playerName);
+		return new LinkedHashSet<PlayersVO>(list);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<PlayersVO> getAll() {
 		List<PlayersVO> list = (List<PlayersVO>) hibernateTemplate.find(GET_ALL_STMT);
 		return new LinkedHashSet<PlayersVO>(list);
 	}
 	
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public PlayersVO findByID(Integer playerID) {
 		return (PlayersVO) hibernateTemplate.get(PlayersVO.class, playerID);
 	}
 
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		PlayerDAO_interface dao = (PlayerDAO_interface) context.getBean("PlayersDAO");
 

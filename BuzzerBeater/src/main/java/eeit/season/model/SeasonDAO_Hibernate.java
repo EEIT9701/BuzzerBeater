@@ -61,10 +61,10 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			
+
 			SeasonVO seasonVO = (SeasonVO) session.get(SeasonVO.class, seasonID);
 			session.delete(seasonVO);
-			
+
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -72,7 +72,6 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 		}
 		return null;
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -84,7 +83,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 
 			Query query = session.createQuery(GET_ALL_SEASON);
 			set = new LinkedHashSet<SeasonVO>(query.list());
-			
+
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
@@ -93,46 +92,51 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 		return set;
 	}
 
+	@Override
+	public Integer getLatestID() {
+		return null;
+	}
+
 	public static void main(String args[]) {
 		SeasonDAO_Hibernate dao = new SeasonDAO_Hibernate();
 
 		/****************** getOneByID ******************/
 
-//		 SeasonVO sVO3 = dao.findBySeasonID(1001);
-//		 Set<GroupsVO> set = sVO3.getGroupsSet();
-//		 
-//		 for(GroupsVO g:set){
-//			 System.out.print(sVO3.getSeasonName()+", ");
-//			 System.out.println(g.getGroupName()+", ");
-//		 }
+		// SeasonVO sVO3 = dao.findBySeasonID(1001);
+		// Set<GroupsVO> set = sVO3.getGroupsSet();
+		//
+		// for(GroupsVO g:set){
+		// System.out.print(sVO3.getSeasonName()+", ");
+		// System.out.println(g.getGroupName()+", ");
+		// }
 
 		/****************** insert ******************/
 
-//		 SeasonVO sVO1 = new SeasonVO();
-//		 sVO1.setSeasonName("第十六季例行賽");
-//		 sVO1.setSeasonBeginDate(null);
-//		 sVO1.setSignUpBegin(Timestamp.valueOf("2017-10-10 18:00:00"));
-//		 sVO1.setDescriptions("...");
-//		 
-//		 GroupsVO gVO1 = new GroupsVO();
-//		 gVO1.setGroupName("新增1");
-//		 gVO1.setMaxPlayers(3);
-//		 GroupsVO gVO2 = new GroupsVO();
-//		 gVO2.setGroupName("新增2");
-//		 gVO2.setMaxPlayers(3);
-//		 Set<GroupsVO> gSet = new LinkedHashSet<GroupsVO>();
-//		 gSet.add(gVO1);
-//		 gSet.add(gVO2);
-//		 sVO1.setGroupsSet(gSet);
-//		 dao.insert(sVO1);
+		// SeasonVO sVO1 = new SeasonVO();
+		// sVO1.setSeasonName("第十六季例行賽");
+		// sVO1.setSeasonBeginDate(null);
+		// sVO1.setSignUpBegin(Timestamp.valueOf("2017-10-10 18:00:00"));
+		// sVO1.setDescriptions("...");
+		//
+		// GroupsVO gVO1 = new GroupsVO();
+		// gVO1.setGroupName("新增1");
+		// gVO1.setMaxPlayers(3);
+		// GroupsVO gVO2 = new GroupsVO();
+		// gVO2.setGroupName("新增2");
+		// gVO2.setMaxPlayers(3);
+		// Set<GroupsVO> gSet = new LinkedHashSet<GroupsVO>();
+		// gSet.add(gVO1);
+		// gSet.add(gVO2);
+		// sVO1.setGroupsSet(gSet);
+		// dao.insert(sVO1);
 
 		/****************** update ******************/
 
-//		 SeasonVO sVO2 = new SeasonVO();
-//		 sVO2.setSeasonID(1003);
-//		 sVO2.setSeasonName("已修改");
-//		 sVO2.setDescriptions("已修改");
-//		 dao.update(sVO2);
+		// SeasonVO sVO2 = new SeasonVO();
+		// sVO2.setSeasonID(1003);
+		// sVO2.setSeasonName("已修改");
+		// sVO2.setDescriptions("已修改");
+		// dao.update(sVO2);
 
 		/****************** delete ******************/
 
@@ -150,7 +154,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 			System.out.print(sVO.getSignUpEnd() + ", ");
 			System.out.print(sVO.getDescriptions());
 			Set<GroupsVO> gVO = sVO.getGroupsSet();
-			for(GroupsVO v:gVO){
+			for (GroupsVO v : gVO) {
 				System.out.print(v.getGroupID());
 			}
 			System.out.println();

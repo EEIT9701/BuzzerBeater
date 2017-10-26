@@ -10,8 +10,6 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import eeit.season.model.SeasonDAO_interface;
-
 @Transactional(readOnly = true)
 public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 	private HibernateTemplate hibernateTemplate;
@@ -55,6 +53,7 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 	}
 
 	public static void main(String[] args){
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		TeamsDAO_interface dao = (TeamsDAO_interface) context.getBean("TeamsDAO");
 		

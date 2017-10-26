@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%request.getSession().removeAttribute("seasonVO"); %>
+<%request.getSession().removeAttribute("groupsSet"); %>
 
 <!DOCTYPE html>
     <html>
@@ -34,7 +36,7 @@
 			</c:if>
 			
 			<form method="post" action="<%=request.getContextPath()%>/Season.do">
-				<input type="hidden" name="action" value="ADD_SEASON">
+				<input type="hidden" name="action" value="TO_ADD_GROUPS">
 				
 				<table class="table table-bordered" id="seasonList">
 			        <tbody>

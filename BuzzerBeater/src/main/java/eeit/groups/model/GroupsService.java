@@ -5,6 +5,8 @@ import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import eeit.season.model.SeasonVO;
+
 public class GroupsService {
 	private GroupsDAO_interface dao;
 
@@ -22,6 +24,11 @@ public class GroupsService {
 			Integer maxPlayers, Integer minPlayers) {
 
 		GroupsVO gVO = new GroupsVO();
+		
+		SeasonVO sVO = new SeasonVO();
+		sVO.setSeasonID(seasonID);
+		gVO.setSeasonVO(sVO);
+		
 		gVO.setGroupName(groupName);
 		gVO.setMaxTeams(maxTeams);
 		gVO.setMinTeams(minTeams);

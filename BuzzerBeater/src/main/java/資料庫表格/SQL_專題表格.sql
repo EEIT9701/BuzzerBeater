@@ -53,8 +53,6 @@ create table Groups			--分組
  insert into Groups values ('1002','東區','8','4','0','15','7');
  insert into Groups values ('1002','西區','8','4','0','15','7');
  
-
-
  select * from Groups
  GO
 
@@ -246,7 +244,7 @@ GO
   teamName                nvarchar(40),                             --球隊名稱
   coachName               nvarchar(30),                             --總教練
   bossName                nvarchar(30),                             --老闆
-  teamBadge               image,                                    --隊徽
+  teamBadge               nvarchar(max),                                    --隊徽
   totalWin                int,                                      --總勝場數
   totalLose               int,                                      --總敗場數
   winRate                 float,                                    --勝率
@@ -600,7 +598,7 @@ mediaID                 int  primary key IDENTITY (6001,1),    --影音編號
 gameID					int  references Games(gameID ),        --賽事ID
 mediasName              nvarchar(20),                          --影音名稱
 gameVideo			    varchar(200),                          --賽事影片(連結)
-gamePhoto			    varchar(max),                                 --賽事照片
+gamePhoto			    nvarchar(max),                                 --賽事照片
 mediaType               varchar(10),                           --檔案類型
 mediaDate               datetime,                              --日期
 descriptions            nvarchar(200),                         --描述

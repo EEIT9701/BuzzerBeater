@@ -1,5 +1,6 @@
 package eeit.teamcomposition.model;
 
+import java.util.List;
 import java.util.Set;
 
 public interface TeamCompositionDAO_interface {
@@ -11,7 +12,7 @@ public interface TeamCompositionDAO_interface {
 
 	public Set<TeamCompositionVO> getAll();
 
-	public TeamCompositionVO findByTeamID(Integer teamID);
+	public List<TeamCompositionVO> findByTeamID(Integer teamID);
 
-	public TeamCompositionVO findByPlayerID(Integer playerID);
+	public List<TeamCompositionVO> findByPlayerID(Integer playerID);
 }

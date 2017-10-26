@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+@SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
 public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 	private HibernateTemplate hibernateTemplate;
@@ -18,11 +19,11 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
-	private static final String GET_ALL_STMT = "from GroupRegVO";
+	private static final String GET_ALL_STMT = "FROM GroupRegVO";
+	private static final String FIND_BY_GROUPID = "FROM GroupRegVO WHERE groupID=?";
+	private static final String FIND_BY_TEAMID = "FROM GroupRegVO WHERE teamID=?";
 
-	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<GroupRegVO> getAll() {
 		Object obj = hibernateTemplate.find(GET_ALL_STMT);
 		Set<GroupRegVO> set = new LinkedHashSet<GroupRegVO>((List<GroupRegVO>) obj);
@@ -48,12 +49,23 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 		hibernateTemplate.delete(groupRegVO);
 	}
 
+	@Override
+	public List<GroupRegVO> findByGroupID(Integer groupID) {
+		return (List<GroupRegVO>) hibernateTemplate.find(FIND_BY_GROUPID, groupID);
+	}
+
+	@Override
+	public List<GroupRegVO> findByTeamID(Integer teamID) {
+		return (List<GroupRegVO>) hibernateTemplate.find(FIND_BY_TEAMID, teamID);
+	}
+
 	public static void main(String[] args) {
-		
+
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		GroupRegDAO_interface dao = (GroupRegDAO_interface) context.getBean("GroupRegDAO");
 
-//		 dao.delete(4001);
+		// dao.delete(4001);
 
 		Set<GroupRegVO> set = dao.getAll();
 		for (GroupRegVO gvo : set) {
@@ -64,6 +76,10 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 			System.out.print(gvo.getPaymentNumber() + ", ");
 			System.out.println();
 		}
+
+//		for (GroupRegVO vo : dao.findByTeamID(3002)) {
+//			System.out.println(vo.getPaymentNumber());
+//		}
 	}
 
 }

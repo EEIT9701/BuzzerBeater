@@ -1,5 +1,6 @@
 package eeit.groupreg.model;
 
+import java.util.List;
 import java.util.Set;
 
 public interface GroupRegDAO_interface {
@@ -11,4 +12,8 @@ public interface GroupRegDAO_interface {
 	public void update(GroupRegVO gVO);
 
 	public void delete(Integer games_ID);
+	
+	public List<GroupRegVO> findByGroupID(Integer groupID);
+	
+	public List<GroupRegVO> findByTeamID(Integer teamID);
 }

@@ -99,6 +99,12 @@ public class GamesDAO_JDBC implements GamesDAO_interface {
 
 	}
 
+	@Override
+	public GamesVO findByID(Integer gamesID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public static void main(String[] args) {
 		GamesDAO_JDBC dao = new GamesDAO_JDBC();
 
@@ -109,5 +115,7 @@ public class GamesDAO_JDBC implements GamesDAO_interface {
 			System.out.println();
 		}
 	}
+
+
 
 }

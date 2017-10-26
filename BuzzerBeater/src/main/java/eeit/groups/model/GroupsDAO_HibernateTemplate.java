@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+@SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
 public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 	private HibernateTemplate hibernateTemplate;
@@ -20,7 +21,6 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 
 	private static final String GET_ALL_STMT = "FROM GroupsVO";
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Set<GroupsVO> getAll() {
 		List<GroupsVO> list = (List<GroupsVO>) hibernateTemplate.find(GET_ALL_STMT);
@@ -61,33 +61,37 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 
 		// *****insert*****
 
-		// GroupsVO gVO1 = new GroupsVO();
-		// gVO1.setSeasonID(1002);
-		// gVO1.setGroupName("北區");
-		// gVO1.setMaxTeams(10);
-		// gVO1.setMinTeams(5);
-		// gVO1.setCurrentTeams(2);
-		// gVO1.setMaxPlayers(18);
-		// gVO1.setMinPlayers(7);
-		// dao.insert(gVO1);
+//		 GroupsVO gVO1 = new GroupsVO();
+//		 SeasonVO seasonVO = new SeasonVO();
+//		 
+//		 SeasonDAO_JDBC jd = new SeasonDAO_JDBC();
+//		 System.out.println(jd.getLatestID());
+//		 seasonVO.setSeasonID(jd.getLatestID());
+//		 gVO1.setSeasonVO(seasonVO);
+//		 gVO1.setGroupName("北區");
+//		 gVO1.setMaxTeams(10);
+//		 gVO1.setMinTeams(5);
+//		 gVO1.setCurrentTeams(2);
+//		 gVO1.setMaxPlayers(18);
+//		 gVO1.setMinPlayers(7);
+//		 dao.insert(gVO1);
 
 
 		// *****update*****
 
-		// GroupsVO gVO3 = new GroupsVO();
-		// gVO3.setSeasonID(1002);
-		// gVO3.setGroupName("北區");
-		// gVO3.setMaxTeams(10);
-		// gVO3.setMinTeams(5);
-		// gVO3.setCurrentTeams(2);
-		// gVO3.setMaxPlayers(18);
-		// gVO3.setMinPlayers(7);
-		// gVO3.setGroupID(2004);
-		// dao.update(gVO3);
+		 GroupsVO gVO3 = new GroupsVO();
+		 gVO3.setGroupName("北區");
+		 gVO3.setMaxTeams(10);
+		 gVO3.setMinTeams(5);
+		 gVO3.setCurrentTeams(2);
+		 gVO3.setMaxPlayers(18);
+		 gVO3.setMinPlayers(7);
+		 gVO3.setGroupID(2004);
+		 dao.update(gVO3);
 
 		// *****delete*****
 		
-		 dao.delete(2004);
+//		 dao.delete(2004);
 		
 		// *****getAll*****
 		Set<GroupsVO> set1 = dao.getAll();

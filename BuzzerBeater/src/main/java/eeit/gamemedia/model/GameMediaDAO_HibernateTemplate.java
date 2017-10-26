@@ -41,7 +41,6 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public GameMediaVO findByPrimaryKey(Integer gameMediaID) {
 		GameMediaVO gameMediaVO = (GameMediaVO) hibernateTemplate.get(GameMediaVO.class, gameMediaID);
 		return gameMediaVO;
@@ -49,7 +48,6 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public List<GameMediaVO> getAll() {
 		Object obj = hibernateTemplate.find(GET_ALL_STMT);
 		List<GameMediaVO> list = (List<GameMediaVO>) obj;
@@ -57,6 +55,7 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 	}
 
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		GameMediaDAO_Interface dao = (GameMediaDAO_Interface) context.getBean("GameMediaDAO");
 		
