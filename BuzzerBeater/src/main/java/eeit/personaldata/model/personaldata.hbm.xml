@@ -29,6 +29,8 @@
 		<property name="steal" column="steal" />
 		<property name="blocks" column="blocks" />
 		<property name="turnover" column="turnover" />
+		<property name="personalFouls" column="personalFouls" />
+		<property name="points" column="points" />
 		<property name="startingPlayer" column="startingPlayer" />
 
 

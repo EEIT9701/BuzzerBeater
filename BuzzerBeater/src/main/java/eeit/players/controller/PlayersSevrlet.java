@@ -60,7 +60,7 @@ public class PlayersSevrlet extends HttpServlet {
 //			 req.setAttribute("listOnePlayer", playerVO);        // 資料庫取出的empVO物件,存入req
 			
 			 req.setAttribute("playersVO", playersVO);
-			 String url = "/players/listOnePlayer.jsp";
+			 String url = "/players/listOnePlayer_back.jsp";
 			 RequestDispatcher successView = req.getRequestDispatcher(url);
 			 successView.forward(req, resp);
 
@@ -102,7 +102,7 @@ public class PlayersSevrlet extends HttpServlet {
 //			if(!id.trim().matches(idReg)){
 //				errorMsgs.add("身分證第一碼必須為英為字母，後九碼必須為數字");
 //			}
-			Integer height = new Integer(req.getParameter("height")) ;
+			Double height = new Double(req.getParameter("height")) ;
 //			Integer height = null;
 //			try{
 //			height = (req.getParameter("height").trim()==null)?null:new Integer(req.getParameter("height").trim());
@@ -114,7 +114,7 @@ public class PlayersSevrlet extends HttpServlet {
 //			}
 			
 			
-			Integer weights = new Integer(req.getParameter("weights"));
+			Double weights = new Double(req.getParameter("weights"));
 //			Integer weights = null;
 //			try{
 //				weights = (req.getParameter("weights").trim() == null)?null:new Integer(req.getParameter("weights").trim());
@@ -132,21 +132,22 @@ public class PlayersSevrlet extends HttpServlet {
 //				RequestDispatcher successView = req.getRequestDispatcher(url);
 //				successView.forward(req, resp);
 //			}
-			Part photo = req.getPart("photo");
 			
 			
 			
 			
-			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality,photo);
+			
+			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality);
 			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
 		
 			
 			req.setAttribute("playersVO", playersVO);
-			String url = "/players/listOnePlayer.jsp";
+			String url = "/players/listOnePlayer_back.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
 		}
-	}
+	
 
 	
-}
+	}
+	}

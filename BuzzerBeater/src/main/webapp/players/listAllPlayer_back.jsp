@@ -9,12 +9,11 @@
 			<title>EEIT97-第一組</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-			<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
-			<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css" media="all" />
 			<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 			<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 			<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 			<jsp:include page="/header_css.jsp" />
+			
 		</head>
 
 		<body>
@@ -43,7 +42,6 @@
 								<table class="table table-bordered" id="table">
 									<thead>
 										<tr>
-											<th>球員編號</th>
 											<th>球員姓名</th>
 											<th>身分證ID</th>
 											<th>身高</th>
@@ -58,7 +56,6 @@
 									<tbody>
 										<c:forEach var="playersVO" items="${playerSvc.allPlayer}">
 											<tr align='center' valign='middle'>
-												<td>${playersVO.playerID}</td>
 												<td>${playersVO.playerName}</td>
 												<td>${playersVO.id}</td>
 												<td>${playersVO.height}</td>

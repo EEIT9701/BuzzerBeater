@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -81,7 +82,7 @@ public class SeasonServlet extends HttpServlet {
 				if (seasonName.trim().equals(null) || seasonName.trim().length() == 0) {
 					errorMsgs.add("請輸入賽季名稱");
 				} else if (!seasonName.trim().matches("^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,20}$")) {
-					errorMsgs.add("賽季名稱只能是中、英文字母、和數字 , 且長度必需在2到10之間");
+					errorMsgs.add("賽季名稱只能是中、英文字母、和數字 , 且長度必需在2到20之間");
 				}
 
 				Date seasonBeginDate = null;
@@ -131,11 +132,10 @@ public class SeasonServlet extends HttpServlet {
 				sVO.setSignUpEnd(signUpEnd);
 				sVO.setDescriptions(descriptions);
 
-
 				if (!errorMsgs.isEmpty()) {
 					request.setAttribute("seasonVO", sVO);
-					RequestDispatcher successView = request.getRequestDispatcher("/season/addSeason.jsp");
-					successView.forward(request, response);
+					RequestDispatcher failView = request.getRequestDispatcher("/season/addSeason.jsp");
+					failView.forward(request, response);
 					return;
 				}
 				// 取得Service的實例
@@ -143,15 +143,16 @@ public class SeasonServlet extends HttpServlet {
 
 				// 呼叫永續層
 				sSvc.addSeason(seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, descriptions);
-				
-				
-				
-				RequestDispatcher failureView = request.getRequestDispatcher("/groups/addGroups.jsp");
-				failureView.forward(request, response);
+
+
+				SeasonVO seasonVO = sSvc.findBySeasonID(sSvc.getLatestSeason());
+
+				request.setAttribute("seasonVO", seasonVO);
+				RequestDispatcher successView = request.getRequestDispatcher("/groups/addGroups.jsp");
+				successView.forward(request, response);
 
 				// 其他可能的錯誤處理
 			} catch (Exception e) {
-
 				request.setAttribute("seasonVO", sVO);
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = request.getRequestDispatcher("/season/addSeason.jsp");

@@ -19,8 +19,8 @@ public class PlayersVO implements java.io.Serializable {
 
 	private String playerName;
 	private String id;
-	private Integer height;// Double height
-	private Integer weights;// Double weights
+	private Double height;
+	private Double weights;
 	private Date birthday;
 	private String nationality;
 	private String photo;
@@ -81,19 +81,19 @@ public class PlayersVO implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Integer getHeight() {
+	public Double getHeight() {
 		return height;
 	}
 
-	public void setHeight(Integer height) {
+	public void setHeight(Double height) {
 		this.height = height;
 	}
 
-	public Integer getWeights() {
+	public Double getWeights() {
 		return weights;
 	}
 
-	public void setWeights(Integer weights) {
+	public void setWeights(Double weights) {
 		this.weights = weights;
 	}
 

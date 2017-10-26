@@ -23,9 +23,9 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public Set<PersonalDataVO> getAll() {
+	public List<PersonalDataVO> getAll() {
 		Object obj = hibernateTemplate.find(GET_ALL_STMT);
-		return new LinkedHashSet<PersonalDataVO>((List<PersonalDataVO>) obj);
+		return (List<PersonalDataVO>) obj;
 	}
 
 	@Override

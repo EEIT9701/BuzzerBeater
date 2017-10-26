@@ -1,25 +1,31 @@
 package eeit.teams.model;
 
 import java.io.Serializable;
-import java.sql.Blob;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import eeit.games.model.GamesVO;
+import eeit.groupreg.model.GroupRegVO;
 import eeit.locationinfo.model.LocationinfoVO;
-import eeit.players.model.PlayersVO;
+import eeit.teamcomposition.model.TeamCompositionVO;
 
 public class TeamsVO implements Serializable {
 	private static final long serialVersionUID = 4619696135305057321L;
 
 	private Integer teamID;// PK
 
-	private PlayersVO playersVO;// replace captainID
 	private LocationinfoVO locationinfoVO;// replace locationID
 
+	private Set<TeamCompositionVO> teamCompositionSet = new LinkedHashSet<TeamCompositionVO>();
+	private Set<GroupRegVO> groupRegSet = new LinkedHashSet<GroupRegVO>();
+
+	private Integer captainID;
 	private String captainEmail;
 	private String captainPhone;
 	private String teamName;
 	private String coachName;
 	private String bossName;
-	private Blob teamBadge;
+	private String teamBadge;
 	private Integer totalWin;
 	private Integer totalLose;
 	private Float winRate;
@@ -41,12 +47,12 @@ public class TeamsVO implements Serializable {
 		this.locationinfoVO = locationinfoVO;
 	}
 
-	public PlayersVO getPlayersVO() {
-		return playersVO;
+	public Integer getCaptainID() {
+		return captainID;
 	}
 
-	public void setPlayersVO(PlayersVO playersVO) {
-		this.playersVO = playersVO;
+	public void setCaptainID(Integer captainID) {
+		this.captainID = captainID;
 	}
 
 	public String getCaptainEmail() {
@@ -89,11 +95,11 @@ public class TeamsVO implements Serializable {
 		this.bossName = bossName;
 	}
 
-	public Blob getTeamBadge() {
+	public String getTeamBadge() {
 		return teamBadge;
 	}
 
-	public void setTeamBadge(Blob teamBadge) {
+	public void setTeamBadge(String teamBadge) {
 		this.teamBadge = teamBadge;
 	}
 
@@ -127,6 +133,22 @@ public class TeamsVO implements Serializable {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public Set<TeamCompositionVO> getTeamCompositionSet() {
+		return teamCompositionSet;
+	}
+
+	public void setTeamCompositionSet(Set<TeamCompositionVO> teamCompositionSet) {
+		this.teamCompositionSet = teamCompositionSet;
+	}
+
+	public Set<GroupRegVO> getGroupRegSet() {
+		return groupRegSet;
+	}
+
+	public void setGroupRegSet(Set<GroupRegVO> groupRegSet) {
+		this.groupRegSet = groupRegSet;
 	}
 
 }

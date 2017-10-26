@@ -19,23 +19,66 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 	private static final String DELETE_STMT = "DELETE from season WHERE seasonID=?";
 	private static final String GET_ALL_STMT = "SELECT seasonID, seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, descriptions FROM season ORDER BY seasonBeginDate DESC";
 	private static final String GET_ONE_BY_ID = "SELECT seasonID, seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, descriptions FROM season WHERE seasonID=?";
+	private static final String GET_LATEST_ID = "SELECT MAX(seasonID) FROM Season";
+
+	public Integer getLatestID() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		Integer latestID = null;
+
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, pswd);
+			pstmt = conn.prepareStatement(GET_LATEST_ID);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				latestID = rs.getInt(1);
+			}
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		return latestID;
+	}
 
 	@Override
 	public SeasonVO findBySeasonID(Integer SeasonID) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		SeasonVO sVO = new SeasonVO();
 
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(url,user,pswd);
+			con = DriverManager.getConnection(url, user, pswd);
 			pstmt = con.prepareStatement(GET_ONE_BY_ID);
 			pstmt.setInt(1, SeasonID);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
+
+			while (rs.next()) {
 				sVO.setSeasonID(rs.getInt(1));
 				sVO.setSeasonName(rs.getString(2));
 				sVO.setSeasonBeginDate(rs.getDate(3));
@@ -70,7 +113,7 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 
 		return sVO;
 	}
-	
+
 	@Override
 	public void insert(SeasonVO seasonVO) {
 		Connection con = null;
@@ -78,7 +121,7 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(url,user,pswd);
+			con = DriverManager.getConnection(url, user, pswd);
 			pstmt = con.prepareStatement(INSER_TSTMT);
 
 			pstmt.setString(1, seasonVO.getSeasonName());
@@ -121,7 +164,7 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(url,user,pswd);
+			con = DriverManager.getConnection(url, user, pswd);
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			pstmt.setString(1, seasonVO.getSeasonName());
@@ -132,7 +175,7 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 			pstmt.setString(6, seasonVO.getDescriptions());
 			pstmt.setInt(7, seasonVO.getSeasonID());
 			pstmt.executeUpdate();
-			
+
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
@@ -167,7 +210,7 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(url,user,pswd);
+			con = DriverManager.getConnection(url, user, pswd);
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setInt(1, seasonID);
 			result = pstmt.executeUpdate();
@@ -208,7 +251,7 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(url,user,pswd);
+			con = DriverManager.getConnection(url, user, pswd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			ResultSet rs = pstmt.executeQuery();
 
@@ -252,20 +295,20 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 
 	public static void main(String args[]) {
 		SeasonDAO_JDBC dao = new SeasonDAO_JDBC();
-		
+
 		/****************** getOneByID ******************/
-		
-//		SeasonVO sVO3 = dao.getOneByID(1001);
-//		System.out.println(sVO3.getSeasonName());
+
+		// SeasonVO sVO3 = dao.getOneByID(1001);
+		// System.out.println(sVO3.getSeasonName());
 
 		/****************** insert ******************/
 
-//		SeasonVO sVO1 = new SeasonVO();
-//		sVO1.setSeasonName("第十六季例行賽");
-//		sVO1.setSeasonBeginDate(null);
-//		sVO1.setSignUpBegin(Timestamp.valueOf("2017-10-10 18:00:00"));
-//		sVO1.setDescriptions("...");
-//		dao.insert(sVO1);
+		// SeasonVO sVO1 = new SeasonVO();
+		// sVO1.setSeasonName("第十六季例行賽");
+		// sVO1.setSeasonBeginDate(null);
+		// sVO1.setSignUpBegin(Timestamp.valueOf("2017-10-10 18:00:00"));
+		// sVO1.setDescriptions("...");
+		// dao.insert(sVO1);
 
 		/****************** update ******************/
 
@@ -293,6 +336,8 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 			System.out.print(sVO.getDescriptions());
 			System.out.println();
 		}
+		
+		System.out.println(dao.getLatestID());
 
 	}
 

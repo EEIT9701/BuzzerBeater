@@ -19,8 +19,8 @@
 		font-weight:bold;
 	}
 	#video{
-		width:500px;
-		height:300px;
+		width:100%;
+		height:100%;
 		padding-top:20px;
 		padding-left:0px;
 		padding-right:0px;
@@ -33,6 +33,9 @@
 		margin-top:-75px;
 		padding-top:0px;
 	
+	}
+	#x{
+		margin-right:-20px;
 	}
     </style>
 
@@ -88,7 +91,7 @@
     								<div class="modal-dialog">
         							<div class="modal-content">
             							<div class="modal-header">
-                							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="x">&times;</button>
                 							<h4 class="modal-title" id="myModalLabel">預覽影片</h4>
             							</div>
             						<div class="modal-body">

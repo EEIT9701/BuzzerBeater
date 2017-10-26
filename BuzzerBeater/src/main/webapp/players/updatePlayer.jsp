@@ -1,71 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-   <%@ page import="java.util.*"%>
-<%@ page import="eeit.players.model.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+        <%@ page import="java.util.*"%>
+            <%@ page import="eeit.players.model.*"%>
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+                <html>
 
-<c:if test="${not empty errorMsgs}">
-	<font color='red'>請修正以下錯誤:
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li>${message}</li>
-		</c:forEach>
-	</ul>
-	</font>
-</c:if>
+                <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                    <title>Insert title here</title>
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                    <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
+                    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
+                    <jsp:include page="/header_css.jsp" />
 
 
-<c:forEach var = "playersVO" items = "${playersVO}" >
-  <Form method="post" action="<%=request.getContextPath() %>/Players.do" enctype="multipart/form-data">
-  <input type="hidden" name="action" value="update">
-  <input type="hidden" name="playerID" value="${playersVO.playerID}">
-            <table border="0">
-        <tr>
-            <td>球員編號:</td>
-            <td>${playersVO.playerID}</td>
-            
-        </tr>
-        <tr>
-            <td>球員姓名:</td>
-            <td><input type="text" name="playerName" size="30" value="${playersVO.playerName}"></td>
-        </tr>
-        <tr>
-            <td>身分證ID:</td>
-            <td><input type="text" name="id" size="30" value="${playersVO.id}"></td>
-        </tr>
-        <tr>
-            <td>身高:</td>
-            <td><input type="text" name="height" size="30" value="${playersVO.height}"></td>
-        </tr>
-        <tr>
-            <td>體重:</td>
-            <td><input type="text" name="weights" size="30" value="${playersVO.weights}"></td>
-        </tr>
-        <tr>
-            <td>生日:</td>
-            <td><input type="text" name="birthday" size="30" value="${playersVO.birthday}"></td>
-        </tr>
-        <tr>
-            <td>國籍:</td>
-            <td><input type="text" name="nationality" size="30" value="${playersVO.nationality}"></td>
-        </tr>
-   
-        <tr>
-        <td>照片:</td>
-        <td><Input Type="file" size="40"  style="width: 480px;"  name="${playersVO.photo}" ></td>
-      </tr>
-     
-    </table> 
-       <input type="submit" value="送出">    
-       </Form>
-    </c:forEach>
- 
-</body>
-</html>
+                </head>
+
+                <body>
+
+                    <jsp:include page="/header.jsp" />
+
+                    <!--主文(開始)-->
+                    <div class="container">
+                        <div class="jumbotron">
+                            <c:if test="${not empty errorMsgs}">
+                                <font color='red'>請修正以下錯誤:
+                                    <ul>
+                                        <c:forEach var="message" items="${errorMsgs}">
+                                            <li>${message}</li>
+                                        </c:forEach>
+                                    </ul>
+                                </font>
+                            </c:if>
+
+                            <Form method="post" action="<%=request.getContextPath() %>/Players.do">
+                                <c:forEach var="playersVO" items="${playersVO}">
+
+
+                                    <input type="hidden" name="playerID" value="${playersVO.playerID}">
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">球員姓名:</label>
+                                        <input type="text" name="playerName" class="form-control" id="exampleInputEmail1" value="${playersVO.playerName}">
+                                        <label for="exampleInputEmail1">身分證ID:</label>
+                                        <input type="text" name="id" class="form-control" id="exampleInputEmail1" value="${playersVO.id}">
+                                        <label for="exampleInputEmail1">身高(cm):</label>
+                                        <input type="text" name="height" class="form-control" id="exampleInputEmail1" value="${playersVO.height}">
+                                        <label for="exampleInputEmail1">體重(kg):</label>
+                                        <input type="text" name="weights" class="form-control" id="exampleInputEmail1" value="${playersVO.weights}">
+                                        <label for="exampleInputEmail1">生日:</label>
+                                        <input type="text" name="birthday" class="form-control" id="exampleInputEmail1" value="${playersVO.birthday}">
+                                        <label for="exampleInputEmail1">國籍:</label>
+                                        <input type="text" name="nationality" class="form-control" id="exampleInputEmail1" value="${playersVO.nationality}">
+                                    </div>
+                                </c:forEach>
+                                <nobr>
+                                    <input type="submit" class="btn btn-warning" value="送出">
+                                    <input type="hidden" name="action" value="update">
+
+                            </Form>
+                            <input type="submit" class="btn btn-warning" value="取消">
+                            <input type="hidden" name="action" value="getOne_For_Display">
+                            </nobr>
+
+
+                            <jsp:include page="/footer.jsp" />
+
+                        </div>
+                    </div>
+                    <!--主文(結束)-->
+
+                    <jsp:include page="/footer_css.jsp" />
+
+                </body>
+
+                </html>

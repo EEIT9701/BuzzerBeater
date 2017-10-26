@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=BIG5"
+    pageEncoding="BIG5"%>
+    <style>
+    h2{		
+    font-family:標楷體;   	  
+    text-align:center;
+    }
+    h3{		
+    font-family:標楷體;   	  
+    text-align:center;
+    }
+    thead{
+    font-family:標楷體;  
+    font-size:larger;
+    font-weight:bold;
+    text-align:center;
+    }
+    tbody{
+    font-family:標楷體;  
+    text-align:center;
+    }
+    </style> 

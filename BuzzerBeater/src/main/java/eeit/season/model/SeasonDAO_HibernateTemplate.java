@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import eeit.groups.model.GroupsVO;
 
-@Transactional(readOnly = false)
+@Transactional(readOnly = true)
 public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 	private HibernateTemplate hibernateTemplate;
 
@@ -21,7 +21,8 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 	}
 
 	private static final String GET_ALL_SEASON = "from SeasonVO";
-
+	
+	
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public SeasonVO findBySeasonID(Integer seasonID) {
@@ -29,6 +30,7 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 	}
 
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void insert(SeasonVO seasonVO) {
 		hibernateTemplate.save(seasonVO);
 	}
@@ -100,7 +102,7 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 		/****************** delete ******************/
 
-//		 dao.delete(1001);
+		 dao.delete(1002);
 
 		/****************** getAll ******************/
 
@@ -119,7 +121,9 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 			}
 			System.out.println();
 		}
-
+		
 	}
+
+
 
 }

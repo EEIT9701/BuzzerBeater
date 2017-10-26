@@ -239,7 +239,7 @@ GO
  create table Teams			--球隊
 (
   teamID                  int primary key IDENTITY (3001,1),        --球隊ID
-  captainID               int references Players(playerID ),        --隊長ID
+  captainID               int,                                       --隊長ID
   captainEmail            varchar(40),                              --隊長Email
   captainPhone            varchar(20),                              --隊長連絡電話
   locationID              int,	                                    --主場ID
@@ -608,10 +608,10 @@ tag                     nvarchar(200),                         --Tag
 )
 GO 
 
-insert into GameMedia values('4001','Curry單手爆扣','https://www.youtube.com/watch?v=MTXlPAdvwtY','','video','2016-10-25','技壓全場!!Curry連過三人單手爆扣!!','金州勇士,Curry,單手爆扣');
-insert into GameMedia values('4002','哈登監視器','https://www.youtube.com/watch?v=RZYaI9ZrdLs','','video','2016-10-25','哈登監視器模式!!','休士頓火箭,哈登,監視器');
-insert into GameMedia values('4003','保羅船長過人','https://www.youtube.com/watch?v=HdF0F2Gnk04','','video','2016-10-25','保羅船長換手過人!','洛杉磯快艇,保羅,運球過人');
-insert into GameMedia values('4004','Kawhi Leonard 受傷','https://www.youtube.com/watch?v=VxzVF4v9v68','','video','2016-10-26','Kawhi Leonard 受傷 踩到Zaza的腳','聖安東尼奧馬刺,Kawhi Leonard,受傷');
+insert into GameMedia values('4001','Curry單手爆扣','001.mp4','','video','2016-10-25','技壓全場!!Curry連過三人單手爆扣!!','金州勇士,Curry,單手爆扣');
+insert into GameMedia values('4002','哈登監視器','002.mp4','','video','2016-10-25','哈登監視器模式!!','休士頓火箭,哈登,監視器');
+insert into GameMedia values('4003','保羅船長過人','003.mp4','','video','2016-10-25','保羅船長換手過人!','洛杉磯快艇,保羅,運球過人');
+insert into GameMedia values('4004','Kawhi Leonard 受傷','004.mp4','','video','2016-10-26','Kawhi Leonard 受傷 踩到Zaza的腳','聖安東尼奧馬刺,Kawhi Leonard,受傷');
 
 
 select * from GameMedia
