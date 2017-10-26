@@ -596,8 +596,8 @@ GO
 
 create table GameMedia    --賽事影音
 (
-gameID					int  references Games(gameID ),        --賽事ID
 mediaID                 int  primary key IDENTITY (6001,1),    --影音編號
+gameID					int  references Games(gameID ),        --賽事ID
 mediasName              nvarchar(20),                          --影音名稱
 gameVideo			    varchar(200),                          --賽事影片(連結)
 gamePhoto			    varchar(max),                                 --賽事照片
@@ -655,83 +655,79 @@ GO
 
 create table PlayerGroups      --球員分組表
 (
- seasonID             int,                                  --賽季ID
  groupID              int references Groups(groupID ),	    --分組ID 
  playerID             int references Players(playerID ),    --球員ID
  primary key(groupID,playerID)
 )
 
---select g1.seasonID, g1.groupID, t1.playerID  from Groups g1, GroupRegistration g2 ,TeamComposition t1 where g1.groupID =  g2.groupID and g2.teamID = t1.teamID
-
-insert into PlayerGroups values('1001','2002','70001');
-insert into PlayerGroups values('1001','2002','70002');
-insert into PlayerGroups values('1001','2002','70003');
-insert into PlayerGroups values('1001','2002','70004');
-insert into PlayerGroups values('1001','2002','70005');
-insert into PlayerGroups values('1001','2002','70006');
-insert into PlayerGroups values('1001','2002','70007');
-insert into PlayerGroups values('1001','2002','70008');
-insert into PlayerGroups values('1001','2002','70009');
-insert into PlayerGroups values('1001','2002','70010');
-insert into PlayerGroups values('1001','2002','70011');
-insert into PlayerGroups values('1001','2002','70012');
-insert into PlayerGroups values('1001','2002','70013');
-insert into PlayerGroups values('1001','2002','70014');
-insert into PlayerGroups values('1001','2002','70015');
-insert into PlayerGroups values('1001','2002','70016');
-insert into PlayerGroups values('1001','2002','70017');
-insert into PlayerGroups values('1001','2002','70018');
-insert into PlayerGroups values('1001','2002','70019');
-insert into PlayerGroups values('1001','2002','70020');
-insert into PlayerGroups values('1001','2002','70021');
-insert into PlayerGroups values('1001','2002','70022');
-insert into PlayerGroups values('1001','2002','70023');
-insert into PlayerGroups values('1001','2002','70024');
-insert into PlayerGroups values('1001','2002','70025');
-insert into PlayerGroups values('1001','2002','70026');
-insert into PlayerGroups values('1001','2002','70027');
-insert into PlayerGroups values('1001','2002','70028');
-insert into PlayerGroups values('1001','2002','70029');
-insert into PlayerGroups values('1001','2002','70030');
-insert into PlayerGroups values('1001','2002','70031');
-insert into PlayerGroups values('1001','2002','70032');
-insert into PlayerGroups values('1001','2002','70033');
-insert into PlayerGroups values('1001','2002','70034');
-insert into PlayerGroups values('1001','2002','70035');
-insert into PlayerGroups values('1001','2002','70036');
-insert into PlayerGroups values('1001','2002','70037');
-insert into PlayerGroups values('1001','2002','70038');
-insert into PlayerGroups values('1001','2002','70039');
-insert into PlayerGroups values('1001','2002','70040');
-insert into PlayerGroups values('1001','2002','70041');
-insert into PlayerGroups values('1001','2002','70042');
-insert into PlayerGroups values('1001','2002','70043');
-insert into PlayerGroups values('1001','2002','70044');
-insert into PlayerGroups values('1001','2002','70045');
-insert into PlayerGroups values('1001','2002','70046');
-insert into PlayerGroups values('1001','2002','70047');
-insert into PlayerGroups values('1001','2002','70048');
-insert into PlayerGroups values('1001','2002','70049');
-insert into PlayerGroups values('1001','2002','70050');
-insert into PlayerGroups values('1001','2002','70051');
-insert into PlayerGroups values('1001','2002','70052');
-insert into PlayerGroups values('1001','2002','70053');
-insert into PlayerGroups values('1001','2002','70054');
-insert into PlayerGroups values('1001','2002','70055');
-insert into PlayerGroups values('1001','2002','70056');
-insert into PlayerGroups values('1001','2002','70057');
-insert into PlayerGroups values('1001','2002','70058');
-insert into PlayerGroups values('1001','2002','70059');
-insert into PlayerGroups values('1001','2002','70060');
-insert into PlayerGroups values('1001','2002','70061');
-insert into PlayerGroups values('1001','2002','70062');
-insert into PlayerGroups values('1001','2002','70063');
-insert into PlayerGroups values('1001','2002','70064');
-insert into PlayerGroups values('1001','2002','70065');
-insert into PlayerGroups values('1001','2002','70066');
 
 
-
+insert into PlayerGroups values('2002','70001');
+insert into PlayerGroups values('2002','70002');
+insert into PlayerGroups values('2002','70003');
+insert into PlayerGroups values('2002','70004');
+insert into PlayerGroups values('2002','70005');
+insert into PlayerGroups values('2002','70006');
+insert into PlayerGroups values('2002','70007');
+insert into PlayerGroups values('2002','70008');
+insert into PlayerGroups values('2002','70009');
+insert into PlayerGroups values('2002','70010');
+insert into PlayerGroups values('2002','70011');
+insert into PlayerGroups values('2002','70012');
+insert into PlayerGroups values('2002','70013');
+insert into PlayerGroups values('2002','70014');
+insert into PlayerGroups values('2002','70015');
+insert into PlayerGroups values('2002','70016');
+insert into PlayerGroups values('2002','70017');
+insert into PlayerGroups values('2002','70018');
+insert into PlayerGroups values('2002','70019');
+insert into PlayerGroups values('2002','70020');
+insert into PlayerGroups values('2002','70021');
+insert into PlayerGroups values('2002','70022');
+insert into PlayerGroups values('2002','70023');
+insert into PlayerGroups values('2002','70024');
+insert into PlayerGroups values('2002','70025');
+insert into PlayerGroups values('2002','70026');
+insert into PlayerGroups values('2002','70027');
+insert into PlayerGroups values('2002','70028');
+insert into PlayerGroups values('2002','70029');
+insert into PlayerGroups values('2002','70030');
+insert into PlayerGroups values('2002','70031');
+insert into PlayerGroups values('2002','70032');
+insert into PlayerGroups values('2002','70033');
+insert into PlayerGroups values('2002','70034');
+insert into PlayerGroups values('2002','70035');
+insert into PlayerGroups values('2002','70036');
+insert into PlayerGroups values('2002','70037');
+insert into PlayerGroups values('2002','70038');
+insert into PlayerGroups values('2002','70039');
+insert into PlayerGroups values('2002','70040');
+insert into PlayerGroups values('2002','70041');
+insert into PlayerGroups values('2002','70042');
+insert into PlayerGroups values('2002','70043');
+insert into PlayerGroups values('2002','70044');
+insert into PlayerGroups values('2002','70045');
+insert into PlayerGroups values('2002','70046');
+insert into PlayerGroups values('2002','70047');
+insert into PlayerGroups values('2002','70048');
+insert into PlayerGroups values('2002','70049');
+insert into PlayerGroups values('2002','70050');
+insert into PlayerGroups values('2002','70051');
+insert into PlayerGroups values('2002','70052');
+insert into PlayerGroups values('2002','70053');
+insert into PlayerGroups values('2002','70054');
+insert into PlayerGroups values('2002','70055');
+insert into PlayerGroups values('2002','70056');
+insert into PlayerGroups values('2002','70057');
+insert into PlayerGroups values('2002','70058');
+insert into PlayerGroups values('2002','70059');
+insert into PlayerGroups values('2002','70060');
+insert into PlayerGroups values('2002','70061');
+insert into PlayerGroups values('2002','70062');
+insert into PlayerGroups values('2002','70063');
+insert into PlayerGroups values('2002','70064');
+insert into PlayerGroups values('2002','70065');
+insert into PlayerGroups values('2002','70066');
 
 
 select * from PlayerGroups
