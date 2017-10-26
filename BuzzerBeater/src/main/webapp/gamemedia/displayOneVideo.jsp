@@ -29,12 +29,18 @@
 	#myModalLabel{
 		width:200px
 	}
+	#myModalLabel1{
+		width:200px
+	}
 	#videoset{
 		margin-top:-75px;
 		padding-top:0px;
 	
 	}
 	#x{
+		margin-right:-20px;
+	}
+	#x1{
 		margin-right:-20px;
 	}
     </style>
@@ -86,7 +92,7 @@
       						<td>${gameMediaVO.descriptions}</td>
       						<td>${gameMediaVO.tag}</td>
       						<td>
-     							<button class="btn btn-info" id="uploadButton"  data-toggle="modal" data-target="#myModal">預覽</button>
+     							<button class="btn btn-info" id="priviewButton"  data-toggle="modal" data-target="#myModal">預覽</button>
 								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
     								<div class="modal-dialog">
         							<div class="modal-content">
@@ -107,7 +113,36 @@
 								</div>
       						</td>
       						<td>
-     							<button class="btn btn-warning" type="submit" id="check">修改</button>
+								<button class="btn btn-warning" id="updateButton"  data-toggle="modal" data-target="#myModal">修改</button>
+								<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="false">
+    								<div class="modal-dialog">
+        							<div class="modal-content">
+            							<div class="modal-header">
+                							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="x1">&times;</button>
+                							<h4 class="modal-title" id="myModalLabel1">修改影片</h4>
+            							</div>
+            						<div class="modal-body">
+            							<div class="input-group">
+            								<span class="input-group-addon">標題</span>
+            								<input type="text" class="form-control" value="${gameMediaVO.mediasName}">
+        								</div>
+        								</br>
+        								<div class="input-group">
+            								<span class="input-group-addon">備註</span>
+            								<input type="text" class="form-control" value="${gameMediaVO.descriptions}">
+        								</div>
+        								</br>
+        								<div class="input-group">
+            								<span class="input-group-addon">標籤</span>
+            								<input type="text" class="form-control" value="${gameMediaVO.tag}">
+        								</div>
+            						</div>
+            						<div class="modal-footer">
+                						<button type="button" class="btn btn-warning" data-dismiss="modal">離開</button>
+            						</div>
+        							</div>
+    								</div>
+								</div>
       						</td>
   						</tr>
   					</tbody>

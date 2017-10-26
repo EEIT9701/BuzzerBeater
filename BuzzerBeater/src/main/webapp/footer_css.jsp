@@ -16,15 +16,37 @@
     			'border':'none',
     			'cursor':'pointer',
     			'width':'100%'}
+    	var Gmail={'vertical-align': 'middle',
+    		  	  'padding-top': '25px',
+       			  'margin-left': '55px',
+       	 		  'width': '70%'}
     	var FB={'background-color':'#4267b2'}
-    	var Gmail={'background-color':'#d14836'}
     	var Twitter={'background-color':'#1da1f2'}
     	$('li').find("button").css(x1)
     	$('#id01').children("form").children("div").children("button").css(x1)
-    	$('#id01').children("form").children("div").children("button:eq(0)").css(FB)
-    	$('#id01').children("form").children("div").children("button:eq(1)").css(Gmail)
-    	$('#id01').children("form").children("div").children("button:eq(2)").css(Twitter)
+    	$('#id01').children("form").children("a:eq(0)").children("img").css(Gmail)
     })
     </script>
+    <script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+    </script>
+
+
     
    

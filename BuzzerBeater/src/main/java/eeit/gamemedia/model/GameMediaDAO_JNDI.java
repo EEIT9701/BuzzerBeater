@@ -33,7 +33,6 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 		      "DELETE FROM GameMedia where mediaID = ?";
 	private static final String UPDATE =
 		      "UPDATE GameMedia set gameID=?,mediasName=?, gameVideo=?, gamePhoto=?, mediaType=?, mediaDate=?, descriptions=?, tag=? where mediaID = ?";
-
 	
 	
 	@Override
@@ -282,9 +281,11 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 		return list;
 	}
 	
+
+	
 	public static void main(String[] args) {
 		GameMediaDAO_JNDI dao = new GameMediaDAO_JNDI();
-
+		
 		List<GameMediaVO> list = null;
 		
 		list = dao.getAll();

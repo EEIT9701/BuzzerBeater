@@ -12,6 +12,13 @@
 			<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 			<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 			<jsp:include page="/header_css.jsp" />
+			<style>
+            #img1 {
+                width: 55px;
+                height: 40px;
+                margin: auto;
+            }
+            </style>
 		</head>
 
 		<body>
@@ -71,7 +78,7 @@
 								<tbody>
 									<c:forEach var="teamsVO" items="${teamsSvc.all}">
 										<tr align='center' valign='middle'>
-											<td>${teamsVO.teamBadge}</td>
+											<td><img id="img1" src="data:image/png;base64,${teamsVO.teamBadge}"></td>
 											<!--隊徽-->
 											<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teamsVO.teamID}">${teamsVO.teamName}</a></td>
 											<!--球名-->

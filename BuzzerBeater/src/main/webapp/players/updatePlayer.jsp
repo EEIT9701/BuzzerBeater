@@ -12,7 +12,9 @@
                     <meta name="viewport" content="width=device-width, initial-scale=1">
                     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                     <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-                    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
+                    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/iEdit.css">
+                    <script src="<%=request.getContextPath() %>/js/jquery-3.1.1.min.js"></script>
+                    <script src="<%=request.getContextPath() %>/js/iEdit.js"></script>
                     <jsp:include page="/header_css.jsp" />
 
 
@@ -23,6 +25,7 @@
                     <jsp:include page="/header.jsp" />
 
                     <!--主文(開始)-->
+
                     <div class="container">
                         <div class="jumbotron">
                             <c:if test="${not empty errorMsgs}">
@@ -36,24 +39,31 @@
                             </c:if>
 
                             <Form method="post" action="<%=request.getContextPath() %>/Players.do">
-                                <c:forEach var="playersVO" items="${playersVO}">
+                                <c:forEach var="playersIfo" items="${playersIfo}">
 
 
-                                    <input type="hidden" name="playerID" value="${playersVO.playerID}">
+                                    <input type="hidden" name="playerID" value="${playersIfo.playerID}">
 
                                     <div class="form-group">
+                                        <label for="exampleInputFile">球員照片:</label>
+                                        <input type="file" id="file">
+                                        <br>
+                                        <img id="result"><br>
+                                        <input type ="hidden" id="photo" name = "photo">
+                                        
+                                        <br>
                                         <label for="exampleInputEmail1">球員姓名:</label>
-                                        <input type="text" name="playerName" class="form-control" id="exampleInputEmail1" value="${playersVO.playerName}">
+                                        <input type="text" name="playerName" class="form-control" id="exampleInputEmail1" value="${playersIfo.playerName}">
                                         <label for="exampleInputEmail1">身分證ID:</label>
-                                        <input type="text" name="id" class="form-control" id="exampleInputEmail1" value="${playersVO.id}">
+                                        <input type="text" name="id" class="form-control" id="exampleInputEmail1" value="${playersIfo.id}">
                                         <label for="exampleInputEmail1">身高(cm):</label>
-                                        <input type="text" name="height" class="form-control" id="exampleInputEmail1" value="${playersVO.height}">
+                                        <input type="text" name="height" class="form-control" id="exampleInputEmail1" value="${playersIfo.height}">
                                         <label for="exampleInputEmail1">體重(kg):</label>
-                                        <input type="text" name="weights" class="form-control" id="exampleInputEmail1" value="${playersVO.weights}">
+                                        <input type="text" name="weights" class="form-control" id="exampleInputEmail1" value="${playersIfo.weights}">
                                         <label for="exampleInputEmail1">生日:</label>
-                                        <input type="text" name="birthday" class="form-control" id="exampleInputEmail1" value="${playersVO.birthday}">
+                                        <input type="text" name="birthday" class="form-control" id="exampleInputEmail1" value="${playersIfo.birthday}">
                                         <label for="exampleInputEmail1">國籍:</label>
-                                        <input type="text" name="nationality" class="form-control" id="exampleInputEmail1" value="${playersVO.nationality}">
+                                        <input type="text" name="nationality" class="form-control" id="exampleInputEmail1" value="${playersIfo.nationality}">
                                     </div>
                                 </c:forEach>
                                 <nobr>
@@ -73,7 +83,22 @@
                     <!--主文(結束)-->
 
                     <jsp:include page="/footer_css.jsp" />
+                    <script>
+                        $("#file").change(function (e) {
 
+                            var img = e.target.files[0];
+
+                            if (!img.type.match('image.*')) {
+                                alert("Whoops! That is not an image.");
+                                return;
+                            }
+                            iEdit.open(img, true, function (res) {
+                                $("#result").attr("src", res);
+                                $("#photo").attr("value", res);
+                            });
+
+                        });
+                    </script>
                 </body>
 
                 </html>

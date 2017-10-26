@@ -31,7 +31,7 @@ public class PlayerService {
 		dao.insert(playerVO);
 		return playerVO;
 	}
-	public PlayersVO updatePlayer(Integer playerID,String playerName,String id,Double height,Double weights,Date birthday,String nationality){
+	public PlayersVO updatePlayer(Integer playerID,String playerName,String id,Double height,Double weights,Date birthday,String nationality,String photo){
 		PlayersVO playerVO = new PlayersVO();
 		playerVO.setPlayerID(playerID);
 		playerVO.setPlayerName(playerName);
@@ -40,7 +40,7 @@ public class PlayerService {
 		playerVO.setWeights(weights);
 		playerVO.setBirthday(birthday);
 		playerVO.setNationality(nationality);
-//		playerVO.setPhoto(photo);
+		playerVO.setPhoto(photo);
 		dao.update(playerVO);
 		return playerVO;
 	}
