@@ -11,4 +11,7 @@ public class PersonalDataService {
 	public List<PersonalDataVO> getAll(){
 		return dao.getAll();
 	}
+	public List<PersonalDataVO> getAll1(){
+		return dao.getAll1();
+	}
 }
