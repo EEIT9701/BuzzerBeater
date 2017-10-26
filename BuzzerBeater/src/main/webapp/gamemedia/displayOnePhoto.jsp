@@ -55,7 +55,7 @@
         <div class="jumbotron">
             <div class="row">
 				<div class="col-md-3">
-					<h2>檢視影片資料</h2>
+					<h2>檢視照片資料</h2>
 				</div>
 			</div>
 			<div>
@@ -98,12 +98,10 @@
         							<div class="modal-content">
             							<div class="modal-header">
                 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="x">&times;</button>
-                							<h4 class="modal-title" id="myModalLabel">預覽影片</h4>
+                							<h4 class="modal-title" id="myModalLabel">預覽照片</h4>
             							</div>
             						<div class="modal-body">
-            							<video controls id="video">
-       										<source src="<%=request.getContextPath()%>/videos/${gameMediaVO.gameVideo}" type="video/mp4">
-										</video>
+            							<img src="${gameMediaVO.gamePhoto}">
             						</div>
             						<div class="modal-footer">
                 						<button type="button" class="btn btn-warning" data-dismiss="modal">離開</button>
@@ -119,7 +117,7 @@
         							<div class="modal-content">
             							<div class="modal-header">
                 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="x1">&times;</button>
-                							<h4 class="modal-title" id="myModalLabel1">修改影片</h4>
+                							<h4 class="modal-title" id="myModalLabel1">修改照片</h4>
             							</div>
             						<div class="modal-body">
             							<div class="input-group">
