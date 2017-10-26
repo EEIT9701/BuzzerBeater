@@ -107,6 +107,14 @@
 <!--             		</video> -->
 <!-- 				</div> -->
            	</div>
+           	</br>
+           	<div class="row">
+				<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}">
+					<div>
+						
+					</div>
+				</c:forEach>
+           	</div>
 			<jsp:include page="/footer.jsp" />  
         </div>
     </div>

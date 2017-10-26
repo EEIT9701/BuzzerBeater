@@ -18,6 +18,7 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 	}
 
 	private static final String GET_ALL_STMT = "FROM GameMediaVO ORDER BY mediaID";
+	private static final String GET_TOP_FOUR = "SELECT Top 4 * FROM GameMedia where gameVideo IS NOT NULL";
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
