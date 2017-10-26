@@ -9,6 +9,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <jsp:include page="/header_css.jsp" />
+<style>
+            #img1 {
+                width: 40px;
+                height: 40px;
+                margin: auto;
+            }
+            </style>
 </head>
 <body>
 
@@ -38,7 +45,7 @@
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<th>球員編號</th>
+								<th>球員照片</th>
 								<th>球員姓名</th>
 								<th>身分證ID</th>
 								<th>身高</th>
@@ -51,7 +58,7 @@
 						<tbody>
 							<c:forEach var="playersVO" items="${playersVO}">
 								<tr align='center' valign='middle'>
-									<td>${playersVO.playerID}</td>
+									<td><img id="img1" src="data:image/jpeg;base64,${playersVO.photo}"></td>
 									<td>${playersVO.playerName}</td>
 									<td>${playersVO.id}</td>
 									<td>${playersVO.height}</td>

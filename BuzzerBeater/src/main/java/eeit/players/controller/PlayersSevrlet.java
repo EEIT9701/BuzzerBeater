@@ -73,9 +73,9 @@ public class PlayersSevrlet extends HttpServlet {
 			String playerName = req.getParameter("playerName");
 			
 			
-			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
+			Set<PlayersVO> playersIfo = playerSvc.getOnePlayerName(playerName);
 			
-			req.setAttribute("playersVO", playersVO);
+			req.setAttribute("playersIfo", playersIfo);
 			
 			String url = "/players/updatePlayer.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -84,6 +84,10 @@ public class PlayersSevrlet extends HttpServlet {
 		}
 		if("update".equals(action)){
 //			Set<String> errorMsgs = new LinkedHashSet<String>();
+			String base64 = req.getParameter("photo");
+			System.out.println(base64);
+			String photo = base64.substring(base64.lastIndexOf(",")+1);
+			System.out.println(photo);
 			Integer playerID = new Integer(req.getParameter("playerID"));
 			String playerName = req.getParameter("playerName");
 //			if(playerName == null||playerName.trim().length() == 0){
@@ -137,7 +141,7 @@ public class PlayersSevrlet extends HttpServlet {
 			
 			
 			
-			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality);
+			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality,photo);
 			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
 		
 			

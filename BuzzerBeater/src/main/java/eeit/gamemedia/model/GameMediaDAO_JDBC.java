@@ -11,7 +11,6 @@ public class GameMediaDAO_JDBC implements GameMediaDAO_Interface{
 	
 	
 	
-	
 	private static final String GET_ONE_STMT =
 		      "SELECT gameID,mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag FROM GameMedia where mediaID = ?";
 	private static final String GET_ALL_STMT =
@@ -82,26 +81,26 @@ public class GameMediaDAO_JDBC implements GameMediaDAO_Interface{
 	public static void main(String[] args) {
 		GameMediaDAO_JDBC dao = new GameMediaDAO_JDBC();
 
-//		GameMediaVO list = null;
-//		
-//		list = dao.getAll();
-//		for (GameMediaVO media : list) {
-//			
-//			System.out.print(media.getGamesVO().getGameID() + ",");
-//			System.out.print(media.getMediaID() + ",");
-//			System.out.print(media.getMediasName() + ",");
-//			System.out.print(media.getGameVideo() + ",");
-//			System.out.print(media.getGamePhoto() + ",");
-//			System.out.print(media.getMediaType() + ",");
-//			System.out.print(media.getMediaDate() + ",");
-//			System.out.print(media.getDescriptions() + ",");
-//			System.out.print(media.getTag());
-//			System.out.println();
-//		}
-//		
-		GameMediaVO gameMediaVO = dao.findByPrimaryKey(6001);
+		List<GameMediaVO> list = null;
 		
-		System.out.println(gameMediaVO.getTag());
+		list = dao.getAll();
+		for (GameMediaVO media : list) {
+			
+			System.out.print(media.getGamesVO().getGameID() + ",");
+			System.out.print(media.getMediaID() + ",");
+			System.out.print(media.getMediasName() + ",");
+			System.out.print(media.getGameVideo() + ",");
+			System.out.print(media.getGamePhoto() + ",");
+			System.out.print(media.getMediaType() + ",");
+			System.out.print(media.getMediaDate() + ",");
+			System.out.print(media.getDescriptions() + ",");
+			System.out.print(media.getTag());
+			System.out.println();
+		}
+//		
+//		GameMediaVO gameMediaVO = dao.findByPrimaryKey(6001);
+//		
+//		System.out.println(gameMediaVO.getTag());
 		
 	}
 
@@ -187,5 +186,6 @@ public class GameMediaDAO_JDBC implements GameMediaDAO_Interface{
 		}
 		return gameMediaVO;
 	}
+
 	
 }

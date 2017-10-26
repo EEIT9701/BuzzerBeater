@@ -14,8 +14,8 @@
             <link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
             <style>
                 #img1 {
-                    width: 250px;
-                    height: 250px;
+                    width: 300px;
+                    height: 220px;
                     margin: auto;
                 }
             </style>
@@ -34,7 +34,7 @@
                         <!--第二列-左邊表格-格式_.col-md-4-->
                         <div class="col-md-4">
                             <div class="col-md-12">
-                                <img id="img1" alt="" src="<%=request.getContextPath() %>\teams\500px-Golden.png">
+                                <img id="img1" src="data:image/png;base64,${teamsVO.teamBadge}">
                                 <!--球員照片-->
                             </div>
                         </div>
@@ -92,10 +92,10 @@
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>平均得分</th>
-                                            <th>平均籃板</th>
-                                            <th>平均助攻</th>
-                                            <th>平均失分</th>
+                                            <th>平均</br>得分</th>
+                                            <th>平均</br>籃板</th>
+                                            <th>平均</br>助攻</th>
+                                            <th>平均</br>失分</th>
                                         </tr>
                                     </thead>
                                     <tbody>
