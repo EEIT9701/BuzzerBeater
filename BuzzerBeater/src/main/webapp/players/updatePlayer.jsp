@@ -46,10 +46,10 @@
 
                                     <div class="form-group">
                                         <label for="exampleInputFile">球員照片:</label>
-                                        <input type="file" id="file">
+                                        <input type="file" id="file" >
                                         <br>
-                                        <img id="result"><br>
-                                        <input type ="hidden" id="photo" name = "photo">
+                                        <img id="result" src="data:image/jpeg;base64,${playersIfo.photo}"><br>
+                                        <input type ="hidden" id="photo" name = "photo" value ="data:image/jpeg;base64,${playersIfo.photo}">
                                         
                                         <br>
                                         <label for="exampleInputEmail1">球員姓名:</label>
@@ -71,8 +71,14 @@
                                     <input type="hidden" name="action" value="update">
 
                             </Form>
-                            <input type="submit" class="btn btn-warning" value="取消">
-                            <input type="hidden" name="action" value="getOne_For_Display">
+                            
+                            <form action="<%=request.getContextPath() %>/Players.do">
+                             <c:forEach var="playersIfo" items="${playersIfo}">
+                            <button type="submit" class="btn btn-danger"><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp">取消</a></button>
+<!--                             <input type="hidden" name="action" value="getOne_For_Display"> -->
+<%--                             <input type="hidden" name="playerName" value="${playersIfo.playerName}"> --%>
+                            </c:forEach>
+                            </form>
                             </nobr>
 
 
