@@ -30,9 +30,9 @@ public class PlayerDAO implements PlayerDAO_interface {
 	
 	//宣告sql指令。
 	private static final String INSERT_STMT = "INSERT INTO Players (PlayerName,ID,Height,Weights,Birthday,Nationality) VALUES(?,?,?,?,?,?)";
-	private static final String UPDATE_STMT = "UPDATE Players SET PlayerName=?, ID=?, Height=?, Weights=?, Birthday=?, Nationality=? where PlayerID = ?";
+	private static final String UPDATE_STMT = "UPDATE Players SET PlayerName=?, ID=?, Height=?, Weights=?, Birthday=?, Nationality=?,Photo=? where PlayerID = ?";
 	private static final String DELETE_STMT = "DELETE FROM Players where PlayerID = ?";
-	private static final String GET_ONENAME_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality FROM Players where PlayerName = ?";
+	private static final String GET_ONENAME_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality,photo FROM Players where PlayerName = ?";
 	private static final String GET_ONEID_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality,Photo FROM Players where PlayerID = ?";
 	private static final String GET_ALL_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality,Photo FROM Players";
 	
@@ -88,7 +88,8 @@ public class PlayerDAO implements PlayerDAO_interface {
 			pstmt.setDouble(4, playerVO.getWeights());
 			pstmt.setDate(5, playerVO.getBirthday());
 			pstmt.setString(6, playerVO.getNationality());
-			pstmt.setInt(7, playerVO.getPlayerID());
+			pstmt.setString(7, playerVO.getPhoto());
+			pstmt.setInt(8, playerVO.getPlayerID());
 			pstmt.executeUpdate();
 			
 		} catch (SQLException se) {
@@ -169,6 +170,7 @@ public class PlayerDAO implements PlayerDAO_interface {
 				playerVO.setWeights(rs.getDouble("weights"));
 				playerVO.setBirthday(rs.getDate("birthday"));
 				playerVO.setNationality(rs.getString("nationality"));
+				playerVO.setPhoto(rs.getString("photo"));
 				set.add(playerVO);
 			}
 			
@@ -322,17 +324,18 @@ public class PlayerDAO implements PlayerDAO_interface {
 		//dao.delete(70005);
 //
 		// 查詢
-		Set<PlayersVO> set1 = dao.findByPlayerName("Matt Barnes");
-		for (PlayersVO aPlayer1 : set1) {
-			System.out.print(aPlayer1.getPlayerID() + ",");
-			System.out.print(aPlayer1.getPlayerName() + ",");
-			System.out.print(aPlayer1.getId() + ",");
-			System.out.print(aPlayer1.getHeight() + ",");
-			System.out.print(aPlayer1.getWeights() + ",");
-			System.out.print(aPlayer1.getBirthday() + ",");
-			System.out.println(aPlayer1.getNationality());
-			System.out.println();
-	}
+//		Set<PlayersVO> set1 = dao.findByPlayerName("Matt Barnes");
+//		for (PlayersVO aPlayer1 : set1) {
+//			System.out.print(aPlayer1.getPlayerID() + ",");
+//			System.out.print(aPlayer1.getPlayerName() + ",");
+//			System.out.print(aPlayer1.getId() + ",");
+//			System.out.print(aPlayer1.getHeight() + ",");
+//			System.out.print(aPlayer1.getWeights() + ",");
+//			System.out.print(aPlayer1.getBirthday() + ",");
+//			System.out.println(aPlayer1.getNationality()+ ",");
+//			System.out.println(aPlayer1.getPhoto());
+//			System.out.println();
+//	}
 //		 System.out.println("---------------------");
 
 		// 查詢
