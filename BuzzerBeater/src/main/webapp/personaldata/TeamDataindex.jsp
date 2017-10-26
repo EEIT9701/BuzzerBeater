@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     PersonalDataService playerSvc = new PersonalDataService();
-    List<PersonalDataVO> list = playerSvc.getAll();
+    List<PersonalDataVO> list = playerSvc.getAll1();
     pageContext.setAttribute("list",list);
 %>
     

@@ -12,8 +12,8 @@
 		<div class="attr-nav">
 			<ul>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <i class="glyphicon glyphicon-pencil"></i>
-				</a> <!--新刪修"按鈕"(開始)-->
+					data-toggle="dropdown"> <i class="glyphicon glyphicon-pencil"></i></a> 
+				<!--新刪修"按鈕"(開始)-->
 					<ul class="dropdown-menu cart-list">
 						<li><h6>
 								<a href="#">新增<!--這行的href輸入超連結頁面--></a>
@@ -24,26 +24,21 @@
 						<li><h6>
 								<a href="#">修改<!--這行的href輸入超連結頁面--></a>
 							</h6></li>
-					</ul> <!--新刪修"按鈕"(結束)--></li>
+					</ul> 
+				<!--新刪修"按鈕"(結束)-->
+				</li>
+					
 				<!--登入登出"按鈕"(開始)-->
-				<li><button href="#" onclick="signOut();" type="submit">
-						<i class="glyphicon glyphicon-user"> </i> Sign Up
-						<!--這行的href輸入超連結頁面-->
-					</button></li>
-				<script>
-					function signOut() {
-						var auth2 = gapi.auth2.getAuthInstance();
-						auth2.signOut().then(function() {
-							console.log('User signed out.');
-						});
-					}
-				</script>
-				<li><button
-						onclick="document.getElementById('id01').style.display='block'"
-						type="submit">
-						<i class="glyphicon glyphicon-log-in"></i> Login
-						<!--這行的href輸入超連結頁面-->
-					</button></li>
+				<li>
+					<a href="#" class="cd-signin" onclick="document.getElementById('id01').style.display='block'">
+					<i class="glyphicon glyphicon-log-in" ></i> 登入</a>
+                </li>				
+				
+                <li>
+                	<a href="#" class="cd-signup" " >
+                	<i class="glyphicon glyphicon-user"></i> 登出</a>
+                </li>	
+
 				<!--登入登出"按鈕"(結束)-->
 			</ul>
 		</div>
