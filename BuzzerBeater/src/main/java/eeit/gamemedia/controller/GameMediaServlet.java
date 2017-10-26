@@ -164,6 +164,23 @@ public class GameMediaServlet extends HttpServlet {
 			return;
 		}
 		
+		if ("getTopFour".equals(action)){
+			
+			List<GameMediaVO> list = gameMediaSvc.getAll();
+
+			for(int i=0;i<4;i++){
+				
+			}
+			
+			HttpSession session = req.getSession();
+			session.setAttribute("list", list);    // 資料庫取出的list物件,存入session
+			// Send the Success view
+			String url = "/gamemedia/video.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);  // 成功轉交listAllEmp2_getFromSession.jsp
+			successView.forward(req, res);
+			return;
+		}
+		
 		
 //		if ("update".equals(action)) { 
 //			

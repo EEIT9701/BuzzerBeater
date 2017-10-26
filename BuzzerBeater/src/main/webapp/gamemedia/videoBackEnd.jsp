@@ -18,6 +18,7 @@
 	
 // 	GameMediaService gameMediaSvc = new GameMediaService();
 // 	List<GameMediaVO> media = gameMediaSvc.getAll();
+
 // 	request.setAttribute("gameMediaSvc", media);
 	
 	
