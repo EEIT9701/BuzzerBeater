@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
+import eeit.login.model.LoginCheckService;
 import eeit.memberinfo.model.MemberInfoVO;
 
 import java.io.BufferedReader;
@@ -39,7 +40,7 @@ public class GoogleLoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// Google取得access_token的url
+				// Google取得access_token的url
 				String g_client_id = "879939044143-sfo5p4l1nmd7ndrpdjhg8fh07ass3akm.apps.googleusercontent.com";
 				String g_client_secret = "MhfMOERt_clyvAcZpgMqIocG";
 				String g_redirect_uri = "http://localhost:8080/BuzzerBeater/GoogleLogin.do";
@@ -122,20 +123,29 @@ public class GoogleLoginServlet extends HttpServlet {
 		try {
 			Timestamp ts = new Timestamp(System.currentTimeMillis());  
 			
-			PrintWriter out = resp.getWriter();
+			//PrintWriter out = resp.getWriter();
 			JSONObject jsonOb =  new JSONObject(sb.toString());
-			//System.out.println(jsonOb.getString("email"));
-            //System.out.println("Timestamp="+ ts);
-			
-			memberInfoVO.setAcc(jsonOb.getString("email"));
-			memberInfoVO.setName(jsonOb.getString("name"));
-			memberInfoVO.setRegisterTime(ts);
-			session.setAttribute("memberInfoVO", memberInfoVO);		
-			session.setAttribute("pictureUri", jsonOb.getString("picture"));
-
-			   
-			RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
-			rd.forward(req, resp);
+		    
+			LoginCheckService loginCheckflag = new LoginCheckService();
+			memberInfoVO = loginCheckflag.findByAcc(jsonOb.getString("email"));
+			if(memberInfoVO!=null){ //check Email 是否有在資料庫內	
+//				memberInfoVO.setAcc(jsonOb.getString("email"));   //使用者帳號
+//				memberInfoVO.setName(jsonOb.getString("name"));   //使用者姓名
+//				memberInfoVO.setRegisterTime(ts);	              //照片的url		
+				session.setAttribute("LoginOK", memberInfoVO);		
+				
+				session.setAttribute("pictureUri", jsonOb.getString("picture"));
+//				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
+//				rd.forward(req, resp);
+				resp.sendRedirect("page.jsp");
+				return;
+			}else{
+				resp.sendRedirect("page.jsp");
+				return;
+//				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
+//				rd.forward(req, resp);
+			}
+	
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
