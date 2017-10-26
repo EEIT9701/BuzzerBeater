@@ -90,7 +90,7 @@
                             </ul>
                             <div id="tabs-1">
                                 <table class="table table-bordered">
-                                   					<table class="table table-bordered" id="example">
+                                   					<table class="table table-bordered" id="table">
 						<thead>
 							<tr>
 
@@ -183,7 +183,7 @@
                             </div>
                             <div id="tabs-2">
                                 <table class="table table-bordered">
-                      <table class="table table-bordered" id="example2">
+                      <table class="table table-bordered" id="table2">
 						<thead>
 							<tr>
 
@@ -294,12 +294,12 @@
 	<script type="text/javascript" src="../js/datatables.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			$('#example').DataTable();
+			$('#table').DataTable();
 		});
 	</script>
 	<script>
 		$(document).ready(function() {
-			$('#example2').DataTable();
+			$('#table2').DataTable();
 		});
 	</script>
 	<jsp:include page="/footer.jsp" />
