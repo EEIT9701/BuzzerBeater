@@ -9,7 +9,7 @@
 			<generator class="identity"/>
 		</id>
 
-		<set name="groupsSet" table="Groups" lazy="false" cascade="all"  inverse="true"  order-by="groupID asc">			
+		<set name="groupsSet" table="Groups" lazy="false" cascade="all-delete-orphan"  inverse="true"  order-by="groupID asc">			
 			<key>
 				<column name="seasonID" />
 			</key>

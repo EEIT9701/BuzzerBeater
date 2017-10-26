@@ -65,4 +65,35 @@ public class TeamCompositionVO implements Serializable {
 		this.leaveTeamDate = leaveTeamDate;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((playersVO == null) ? 0 : playersVO.hashCode());
+		result = prime * result + ((teamsVO == null) ? 0 : teamsVO.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TeamCompositionVO other = (TeamCompositionVO) obj;
+		if (playersVO == null) {
+			if (other.playersVO != null)
+				return false;
+		} else if (!playersVO.equals(other.playersVO))
+			return false;
+		if (teamsVO == null) {
+			if (other.teamsVO != null)
+				return false;
+		} else if (!teamsVO.equals(other.teamsVO))
+			return false;
+		return true;
+	}
+
 }

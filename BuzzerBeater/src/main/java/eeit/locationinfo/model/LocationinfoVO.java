@@ -1,7 +1,6 @@
 package eeit.locationinfo.model;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

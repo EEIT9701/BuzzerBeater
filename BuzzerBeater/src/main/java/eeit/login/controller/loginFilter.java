@@ -13,7 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpSession;
 @WebFilter(
 		urlPatterns = { "/*" }, 
 		initParams = { 
-				@WebInitParam(name = "memberinfoweb", value = "/memberInfo/*")
+				//@WebInitParam(name = "memberinfoweb", value = "/memberInfo/*")
 		})
 public class loginFilter implements Filter {
 	Collection<String> url = new ArrayList<String>();
@@ -41,21 +40,22 @@ public class loginFilter implements Filter {
 			HttpServletRequest req = (HttpServletRequest)request;
 			HttpServletResponse resp = (HttpServletResponse)response;
 			String servletPath = req.getServletPath();
-//			System.out.println("111--->"+servletPath);
+			System.out.println("111--->"+servletPath);
 		
 			if(mustLogin(servletPath)){
 				if(checkLogin(req)){       //request的網頁是在有控管的網頁list內, 且session裡有login的token則 讓他通過
-//					System.out.println("222--->需要Login,已經Login");
+					System.out.println("222--->需要Login,已經Login");
 					chain.doFilter(request, response);   //交棒
 				}else {                    //request的網頁是在有控管的網頁list內, 且session裡沒有login的token則 去資料庫驗證帳號 
 					HttpSession session = req.getSession();
 					//session.setAttribute("target", req.getServletPath()); 
-//					System.out.println("333--->需要Login,尚未Login, ServletPat=" + req.getServletPath());
+					System.out.println("333--->需要Login,尚未Login, ServletPat=" + req.getServletPath());
 					RequestDispatcher rd = request.getRequestDispatcher("/testlogin/testLoginFailure.jsp");
 					rd.forward(req, resp);
+					
 				}
 			}else {						//request的網頁不在有控管的網頁list內,則 讓他通過
-//				System.out.println("444--->不需要Login");
+				System.out.println("444--->不需要Login");
 				chain.doFilter(request, response);
 				
 			}

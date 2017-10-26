@@ -9,10 +9,7 @@
 			<title>EEIT97-第一組</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-			<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
-			<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css" media="all" />
 			<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-			<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 			<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 			<jsp:include page="/header_css.jsp" />
 		</head>
@@ -77,16 +74,13 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="teamsVO" items="${teamsSvc.allTeams}">
+										<c:forEach var="teamsVO" items="${teamsSvc.all}">
 											<tr align='center' valign='middle'>
-
 												<td>${teamsVO.captainEmail}</td>
-												<!--隊長E-mail-->
 												<td>${teamsVO.captainPhone}</td>
-												<!--隊長電話-->
 												<td>${teamsVO.teamBadge}</td>
 												<!--隊徽-->
-												<td>${teamsVO.teamName}</td>
+												<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teamsVO.teamID}">${teamsVO.teamName}</a></td>
 												<!--球名-->
 												<td></td>
 												<!--分組-->
@@ -100,6 +94,7 @@
 												<!--敗場數-->
 												<td>${teamsVO.winRate}</td>
 												<!--勝率-->
+
 												<td>
 													<Form method="post" action="<%=request.getContextPath() %>/Players.do">
 														<button type="submit" class="btn btn-info">修改</button> <input type="hidden" name="playerName" value="${playersVO.playerName}">

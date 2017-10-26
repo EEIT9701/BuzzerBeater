@@ -14,12 +14,12 @@ public class PlayerService {
 	private PlayerDAO_interface dao;
 	
 	public PlayerService(){
-//		dao = new PlayerDAO();
-		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
-		dao = (PlayerDAO_interface) context.getBean("PlayersDAO");
+		dao = new PlayerDAO();
+//		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
+//		dao = (PlayerDAO_interface) context.getBean("PlayersDAO");
 		
 	}
-	public PlayersVO addPlayer(Integer playerID,String playerName,String id,Integer height,Integer weights,Date birthday,String nationality){
+	public PlayersVO addPlayer(Integer playerID,String playerName,String id,Double height,Double weights,Date birthday,String nationality){
 		PlayersVO playerVO = new PlayersVO();
 		playerVO.setPlayerID(playerID);
 		playerVO.setPlayerName(playerName);
@@ -31,7 +31,7 @@ public class PlayerService {
 		dao.insert(playerVO);
 		return playerVO;
 	}
-	public PlayersVO updatePlayer(Integer playerID,String playerName,String id,Integer height,Integer weights,Date birthday,String nationality,Part photo){
+	public PlayersVO updatePlayer(Integer playerID,String playerName,String id,Double height,Double weights,Date birthday,String nationality){
 		PlayersVO playerVO = new PlayersVO();
 		playerVO.setPlayerID(playerID);
 		playerVO.setPlayerName(playerName);

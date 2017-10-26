@@ -11,13 +11,18 @@
 			<title>EEIT97-第一組</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-			<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
-			<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css" media="all" />
+
 			<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 			<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 			<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 			<jsp:include page="/header_css.jsp" />
-
+<style>
+            #img1 {
+                width: 35px;
+                height: 40px;
+                margin: auto;
+            }
+            </style>
 
 		</head>
 
@@ -84,9 +89,9 @@
 
 
 
-											<%--<td><img src="data:image/jpg;base64,${playersVO.photo}"></td> --%>
+											<td><img id="img1" src="data:image/jpeg;base64,${playersVO.photo}"></td>
 												<!--球員照片-->
-												<td>${playersVO.photo}</td>
+												
 
 												<td><a href="<%=request.getContextPath()%>/players/playerInformation.jsp?playerID=${playersVO.playerID}">${playersVO.playerName}</a></td>
 												<!--球員姓名-->
@@ -128,7 +133,7 @@
 				
 											$(document).ready(function () {
 				 								$('#seasonSelect').on('blur', function () {
-													$.post('<%=request.getContextPath()%> 
+													$.getJSON('<%=request.getContextPath()%> 
 														Groups.do ', {
 				 											'action': 'GET_ALL_GROUPS'
 				 										},
