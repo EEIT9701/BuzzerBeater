@@ -96,8 +96,68 @@ public class GameMediaServlet extends HttpServlet {
 			}
 		}
 		
+		if ("getOnePhotoForDisplay".equals(action)) { 
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				String str = req.getParameter("gameID");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入賽事編號");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/displayOnePhoto.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				Integer gameID = null;
+				try {
+					gameID = new Integer(str);
+				} catch (Exception e) {
+					errorMsgs.add("賽事編號格式不正確");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/displayOnePhoto.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				/***************************2.開始查詢資料*****************************************/
+				
+				GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(gameID);
+				if (gameMediaVO == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/displayOnePhoto.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+				req.setAttribute("gameMediaVO", gameMediaVO); // 資料庫取出的gameMediaVO物件,存入req
+				String url = "/gamemedia/displayOnePhoto.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); 
+				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理*************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/displayOnePhoto.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
 		if("getOneForUpdate".equals(action)){
-			
 			
 			Integer mediaID = new Integer(req.getParameter("mediaID"));
 			
@@ -109,6 +169,21 @@ public class GameMediaServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
+		
+		if("getOnePhotoForUpdate".equals(action)){
+			
+			Integer mediaID = new Integer(req.getParameter("mediaID"));
+			
+			GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
+			
+			req.setAttribute("gameMediaVO", gameMediaVO);
+			
+			String url = "/gamemedia/displayOnePhoto.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+		}
+		
+		
 		
 		if ("Update".equals(action)) { // 來自listAllEmp.jsp的請求
 
@@ -326,6 +401,34 @@ public class GameMediaServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/videoBackEnd.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if ("deletePhoto".equals(action)) { 
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+	
+			try {
+				/***************************1.接收請求參數***************************************/
+				Integer mediaID = new Integer(req.getParameter("mediaID"));
+				
+				/***************************2.開始刪除資料***************************************/
+				
+				gameMediaSvc.deleteGameMedia(mediaID);
+				
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+				String url = "/gamemedia/photoBackEnd.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:"+e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/PhotoBackEnd.jsp");
 				failureView.forward(req, res);
 			}
 		}

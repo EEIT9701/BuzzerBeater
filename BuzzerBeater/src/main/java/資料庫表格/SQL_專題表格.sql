@@ -644,7 +644,9 @@ insert into MemberInfo values('OklahomaCityThunder@ymail.com','¶ø§J©Ô²ü°¨¹p¾^','
 insert into MemberInfo values('MemphisGrizzlies@ymail.com','°Òµá´µ¦Çºµ','teams','2016-02-15','3007');
 insert into MemberInfo values('PortlandTrail@ymail.com','ªi¯SÄõ©İ¯îªÌ','teams','2016-02-17','3008');
 
-insert into MemberInfo values('javeeeit972017@gmail.com','èûèû','parttime','2017-06-23','');
+insert into MemberInfo values('javaeeit972017@gmail.com','èûèû','parttime','2017-06-23','');
+insert into MemberInfo values('frank810618@gmail.com','¸êµ¦·|ª÷«°ªZ','admin','2017-09-23','');
+insert into MemberInfo values('s988309@gmail.com','ª÷«°ªZ','admin','2017-09-23','');
 
 select * from MemberInfo
 GO

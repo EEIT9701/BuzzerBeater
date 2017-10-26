@@ -252,9 +252,10 @@ public class MemberInfoJNDIDAO implements MemberInfoDAO_interface {
 	}
 
 	@Override
-	public boolean findByAcc(String acc) {
+	public MemberInfoVO findByAcc(String account) {
 		// TODO Auto-generated method stub
-		return false;
+		MemberInfoVO memberInfoVO = null;
+		return memberInfoVO;
 	}
 
 //	public static void main(String[] args) {
