@@ -146,7 +146,7 @@ public class PlayersSevrlet extends HttpServlet {
 		
 			
 			req.setAttribute("playersVO", playersVO);
-			String url = "/players/listOnePlayer_back.jsp";
+			String url = "/players/listOnePlayer_updateCheck.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
 		}

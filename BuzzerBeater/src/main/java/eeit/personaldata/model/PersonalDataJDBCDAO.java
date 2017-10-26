@@ -144,6 +144,11 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
     		
     	}
     }
+	@Override
+	public List<PersonalDataVO> getAll1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	

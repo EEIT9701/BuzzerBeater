@@ -67,7 +67,7 @@
 							<!--   <option label="少年組" value="object:9">季後賽</option>   -->
 						</select>
 
-						 <input type="submit" value="確定">
+					 <input type="submit" value="確定">
 
 					</div>
 				</div>
@@ -99,11 +99,14 @@
 								<th>球隊名稱</th>
 								<th>出場次數</th>
 								<th>平均出場時間</th>
-							
+								<th>二分命中</th>
+								<th>二分出手數</th>
 								<th>投籃(%)</th>
-							
+								<th>三分命中</th>
+								<th>三分出手數</th>
 								<th>三分(%)</th>
-							
+								<th>罰球命中</th>
+								<th>罰球出手數</th>
 								<th>罰球(%)</th>
 								<th>進攻籃板</th>
 								<th>防守籃板</th>
@@ -136,7 +139,9 @@
 									<td>${personalDataVO.teamsVO.teamName}</td>
 									<td>${personalDataVO.gameID}</td>
 									<td><fmt:formatNumber type="number" value="${personalDataVO.gameTime/personalDataVO.gameID}" maxFractionDigits="0"/></td>
-								
+									<td><fmt:formatNumber type="number" value="${personalDataVO.twoPoint/personalDataVO.gameID}" maxFractionDigits="1"/></td>
+									<td><fmt:formatNumber type="number" value="${personalDataVO.twoPointShot/personalDataVO.gameID}" maxFractionDigits="1"/></td>
+									
 									<td><c:if test="${'0'==personalDataVO.twoPointShot}">
 							               0
 									    </c:if>
@@ -145,6 +150,8 @@
 									    </c:if>
 									</td>
 									
+									<td><fmt:formatNumber type="number" value="${personalDataVO.threePoint/personalDataVO.gameID}" maxFractionDigits="1"/></td>
+									<td><fmt:formatNumber type="number" value="${personalDataVO.threePointShot/personalDataVO.gameID}" maxFractionDigits="1"/></td>
 									
 									<td><c:if test="${'0'==personalDataVO.threePointShot}">
 							               0
@@ -154,7 +161,9 @@
 									    </c:if>
 									</td>
 									
-								
+									<td><fmt:formatNumber type="number" value="${personalDataVO.fg/personalDataVO.gameID}" maxFractionDigits="1"/></td>
+									<td><fmt:formatNumber type="number" value="${personalDataVO.fgShot/personalDataVO.gameID}" maxFractionDigits="1"/></td>
+									
 									<td><c:if test="${'0'==personalDataVO.fgShot}">
 							               0
 									    </c:if>
@@ -192,11 +201,14 @@
 								<th>球隊名稱</th>
 								<th>出場次數</th>
 								<th>出場時間</th>
-							
+								<th>二分命中</th>
+								<th>二分出手數</th>
 								<th>投籃(%)</th>
-								
+								<th>三分命中</th>
+								<th>三分出手數</th>
 								<th>三分(%)</th>
-							
+								<th>罰球命中</th>
+								<th>罰球出手數</th>
 								<th>罰球(%)</th>
 								<th>進攻籃板</th>
 								<th>防守籃板</th>
@@ -228,7 +240,9 @@
 									<td>${personalDataVO.teamsVO.teamName}</td>
 									<td>${personalDataVO.gameID}</td>
 									<td>${personalDataVO.gameTime}</td>
-																	
+									<td>${personalDataVO.twoPoint}</td>
+									<td>${personalDataVO.twoPointShot}</td>
+									
 									<td><c:if test="${'0'==personalDataVO.twoPointShot}">
 							               0
 									    </c:if>
@@ -237,7 +251,9 @@
 									    </c:if>
 									</td>
 									
-																
+									<td>${personalDataVO.threePoint}</td>
+									<td>${personalDataVO.threePointShot}</td>
+									
 									<td><c:if test="${'0'==personalDataVO.threePointShot}">
 							               0
 									    </c:if>
@@ -246,7 +262,9 @@
 									    </c:if>
 									</td>
 									
-															
+									<td>${personalDataVO.fg}</td>
+									<td>${personalDataVO.fgShot}</td>
+									
 									<td><c:if test="${'0'==personalDataVO.fgShot}">
 							               0
 									    </c:if>
