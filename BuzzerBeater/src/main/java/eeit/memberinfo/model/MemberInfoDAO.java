@@ -92,14 +92,13 @@ public class MemberInfoDAO implements MemberInfoDAO_interface {
 		return list;
 	}
     /***比對資料庫是否有帳號***/
-	@SuppressWarnings({ "deprecation", "rawtypes" })
 	@Override
 	public MemberInfoVO findByAcc(String account) {
 			
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Iterator result = null;
 		Transaction tx = null;
-		MemberInfoVO memberInfoVO = null;
+		MemberInfoVO memberInfoVO = new MemberInfoVO();
 		try {
 			tx = session.beginTransaction();
 			
@@ -121,8 +120,8 @@ public class MemberInfoDAO implements MemberInfoDAO_interface {
 				memberInfoVO.setRegisterTime(aMemberInfoVO.getRegisterTime());
 				memberInfoVO.setTeamID(aMemberInfoVO.getTeamID());
 			}
-			
-		   tx.commit();
+			tx.commit();
+		   
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;

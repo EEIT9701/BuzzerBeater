@@ -127,7 +127,8 @@ public class GoogleLoginServlet extends HttpServlet {
 			JSONObject jsonOb =  new JSONObject(sb.toString());
 		    
 			LoginCheckService loginCheckflag = new LoginCheckService();
-			memberInfoVO = loginCheckflag.findByAcc(jsonOb.getString("email"));
+			String acc = jsonOb.getString("email");
+			memberInfoVO = loginCheckflag.findByAcc(acc);
 			if(memberInfoVO!=null){ //check Email 是否有在資料庫內	
 //				memberInfoVO.setAcc(jsonOb.getString("email"));   //使用者帳號
 //				memberInfoVO.setName(jsonOb.getString("name"));   //使用者姓名
