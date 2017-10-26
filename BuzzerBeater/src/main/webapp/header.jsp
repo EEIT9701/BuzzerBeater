@@ -12,8 +12,8 @@
 		<div class="attr-nav">
 			<ul>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <i class="glyphicon glyphicon-pencil"></i></a> 
-				<!--新刪修"按鈕"(開始)-->
+					data-toggle="dropdown"> <i class="glyphicon glyphicon-pencil"></i></a>
+					<!--新刪修"按鈕"(開始)-->
 					<ul class="dropdown-menu cart-list">
 						<li><h6>
 								<a href="#">新增<!--這行的href輸入超連結頁面--></a>
@@ -24,20 +24,31 @@
 						<li><h6>
 								<a href="#">修改<!--這行的href輸入超連結頁面--></a>
 							</h6></li>
-					</ul> 
-				<!--新刪修"按鈕"(結束)-->
-				</li>
-					
+					</ul> <!--新刪修"按鈕"(結束)--></li>
+
 				<!--登入登出"按鈕"(開始)-->
-				<li>
-					<a href="#" class="cd-signin" onclick="document.getElementById('id01').style.display='block'">
-					<i class="glyphicon glyphicon-log-in" ></i> 登入</a>
-                </li>				
-				
-                <li>
-                	<a href="#" class="cd-signup" " >
-                	<i class="glyphicon glyphicon-user"></i> 登出</a>
-                </li>	
+				<li><a href="#" class="cd-signin"
+					onclick="document.getElementById('id01').style.display='block'">
+						<i class="glyphicon glyphicon-log-in"></i> <c:choose>
+							<c:when test="${empty memberInfoVO.acc}">
+								<c:set var="var01" value="未登入" />
+							</c:when>
+							<c:otherwise>
+								<c:set var="var01" value="${memberInfoVO.acc}" />
+							</c:otherwise>
+						</c:choose> ${var01}
+				</a></li>
+
+				<li><a href="GoogleLoginOutServlet" class="cd-signup"" > <i
+						class="glyphicon glyphicon-user"></i> <c:choose>
+							<c:when test="${empty memberInfoVO.acc}">
+								<c:set var="var02" value="" />
+							</c:when>
+							<c:otherwise>
+								<c:set var="var02" value="登出" />
+							</c:otherwise>
+						</c:choose> ${var02}
+				 </a></li>
 
 				<!--登入登出"按鈕"(結束)-->
 			</ul>
