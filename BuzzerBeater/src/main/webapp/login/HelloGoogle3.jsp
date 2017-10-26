@@ -9,9 +9,9 @@
 <body>
 	<a href="https://accounts.google.com/o/oauth2/auth?
 scope=https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&
-redirect_uri=http://localhost:8080/BuzzerBeater/LoginServlet2&
+redirect_uri=http://localhost:8080/BuzzerBeater/GoogleLogin.do&
 response_type=code&
 state=/profile&
-client_id=479061090060-qgqlhuskuhlic83mre6d26pmr9cejk6f.apps.googleusercontent.com">HA</a>
+client_id=879939044143-sfo5p4l1nmd7ndrpdjhg8fh07ass3akm.apps.googleusercontent.com">HA</a>
 </body>
 </html>

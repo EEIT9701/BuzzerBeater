@@ -13,6 +13,13 @@
 			<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 			<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 			<jsp:include page="/header_css.jsp" />
+			<style>
+            #img1 {
+                width: 40px;
+                height: 40px;
+                margin: auto;
+            }
+            </style>
 			
 		</head>
 
@@ -42,6 +49,7 @@
 								<table class="table table-bordered" id="table">
 									<thead>
 										<tr>
+										    <th>球員照片</th>
 											<th>球員姓名</th>
 											<th>身分證ID</th>
 											<th>身高</th>
@@ -56,6 +64,7 @@
 									<tbody>
 										<c:forEach var="playersVO" items="${playerSvc.allPlayer}">
 											<tr align='center' valign='middle'>
+											    <td><img id="img1" src="data:image/jpeg;base64,${playersVO.photo}"></td>
 												<td>${playersVO.playerName}</td>
 												<td>${playersVO.id}</td>
 												<td>${playersVO.height}</td>

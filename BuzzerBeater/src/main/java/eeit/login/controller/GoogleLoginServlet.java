@@ -1,5 +1,6 @@
 package eeit.login.controller;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +22,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-@WebServlet("/LoginServlet2")
-public class LoginServlet2 extends HttpServlet {
+@WebServlet("/GoogleLogin.do")
+public class GoogleLoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -36,13 +40,14 @@ public class LoginServlet2 extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// Google取得access_token的url
-				String g_client_id = "479061090060-qgqlhuskuhlic83mre6d26pmr9cejk6f.apps.googleusercontent.com";
-				String g_client_secret = "6RVebu0jkFIGO760--ywruME";
-				String g_redirect_uri = "http://localhost:8080/BuzzerBeater/LoginServlet2";
+				String g_client_id = "879939044143-sfo5p4l1nmd7ndrpdjhg8fh07ass3akm.apps.googleusercontent.com";
+				String g_client_secret = "MhfMOERt_clyvAcZpgMqIocG";
+				String g_redirect_uri = "http://localhost:8080/BuzzerBeater/GoogleLogin.do";
 				URL urlObtainToken = new URL("https://accounts.google.com/o/oauth2/token");
 				HttpURLConnection connectionObtainToken = (HttpURLConnection) urlObtainToken.openConnection();
 				
-				String idTokenString = null;
+				//String idTokenString = null;
+				String accessTokenString = null;
 				String inputLine;
 				StringBuilder sb = null;
 				MemberInfoVO memberInfoVO = new MemberInfoVO();
@@ -73,12 +78,14 @@ public class LoginServlet2 extends HttpServlet {
 						System.out.println(strLine);
 						sbLines.append(strLine);
 					}
-
+					//System.out.println("第一次:"+req.getPathInfo());
 					try {
 						// 把上面取回來的資料，放進JSONObject中，以方便我們直接存取到想要的參數
 						JSONObject jo = new JSONObject(sbLines.toString());
-						idTokenString = jo.getString("id_token");
-						//idTokenString = jo.getString("access_token");
+						//idTokenString = jo.getString("id_token");
+						
+						accessTokenString = jo.getString("access_token");
+						
 						// 印出Google回傳的access token
 						//resp.getWriter().println(jo.getString("id_token"));
 						//System.out.println(idTokenString);
@@ -90,11 +97,13 @@ public class LoginServlet2 extends HttpServlet {
 		resp.setHeader("content-type", "text/html;charset=UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 
-		//取得id_Token然後再去 google端解碼
+		
+		/***取得id_Token然後再去 google端解碼***/	
 		try {
-			 	
-			  URL url = new URL("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token="+idTokenString);
-			  //URL url = new URL("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token="+idTokenString);
+			  	
+			  URL url = new URL("https://www.googleapis.com/oauth2/v1/userinfo?access_token="+accessTokenString);
+			  //https://www.googleapis.com/oauth2/v3/tokeninfo? idToken or accessToken
+			  //https://www.googleapis.com/oauth2/v1/userinfo?access_token  使用者資訊
 			  URLConnection conn = url.openConnection();
 			  BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));  //接收google回傳的資料
 			  sb = new StringBuilder();     //準備stringBuilder容器接收
@@ -109,22 +118,30 @@ public class LoginServlet2 extends HttpServlet {
 				me.printStackTrace();
 			}
 			//System.out.println(sb.toString());
-		//google回傳JSON格式,取資料			
+		/***google回傳JSON格式,取資料***/			
 		try {
+			Timestamp ts = new Timestamp(System.currentTimeMillis());  
+			
 			PrintWriter out = resp.getWriter();
 			JSONObject jsonOb =  new JSONObject(sb.toString());
-			System.out.println(jsonOb.getString("email"));
+			//System.out.println(jsonOb.getString("email"));
+            //System.out.println("Timestamp="+ ts);
 			
 			memberInfoVO.setAcc(jsonOb.getString("email"));
-			//memberInfoVO.setName(jsonOb.getString("email"));
-			session.setAttribute("memberInfoVO", memberInfoVO);
-			
-//			session.setAttribute("email", jsonOb.getJSONObject("userinfo").get("email").toString());
-//			out.print(jsonOb.getJSONObject("userinfo").get("email").toString());
+			memberInfoVO.setName(jsonOb.getString("name"));
+			memberInfoVO.setRegisterTime(ts);
+			session.setAttribute("memberInfoVO", memberInfoVO);		
+			session.setAttribute("pictureUri", jsonOb.getString("picture"));
 
+			   
+			RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
+			rd.forward(req, resp);
+			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 }

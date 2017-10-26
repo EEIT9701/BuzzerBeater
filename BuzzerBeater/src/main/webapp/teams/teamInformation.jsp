@@ -16,7 +16,7 @@
                 #img1 {
                     width: 300px;
                     height: 220px;
-                    margin: auto;
+                    margin:auto;
                 }
             </style>
             <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>

@@ -76,16 +76,11 @@
 
         /* Modal Content/Box */
         .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
-<<<<<<< HEAD
-            width: 390px; /* Could be more or less, depending on screen size */
-            height: 250px;
-=======
-            width: 80%; /* Could be more or less, depending on screen size */
-            padding-top:30px
->>>>>>> branch 'branch' of https://github.com/EEIT9701/BuzzerBeater.git
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        border: 1px solid #888;
+        height: 280px;
+        width: 20%;
         }
 
         /* The Close Button (x) */
