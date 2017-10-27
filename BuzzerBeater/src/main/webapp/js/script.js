@@ -2,7 +2,7 @@
 $(function () {
 	
     var note = $('#note'),
-        //¨ì´Á®É¶¡
+        //ï¿½ï¿½ï¿½ï¿½É¶ï¿½
 		//OutTime = new Date("2017/11/17"),
         ts = new Date("2017/11/17").getTime(),
         newYear = true;
@@ -14,18 +14,18 @@ $(function () {
 		    console.log(new Date(ts))
 			var message = "";
 			
-			message += days + " ¤Ñ" + (days == 1 ? '' : '') + ", ";	
-			message += hours + " ®É" + ( hours==1 ? '':'' ) + ", ";
-			message += minutes + " ¤À" + ( minutes==1 ? '':'' ) ;
-			message += seconds + " ¬í" + ( seconds==1 ? '':'' ) + " <br />";
+			message += days + " å¤©" + (days == 1 ? '' : '') + ", ";	
+			message += hours + " æ™‚" + ( hours==1 ? '':'' ) + ", ";
+			message += minutes + " åˆ†" + ( minutes==1 ? '':'' ) ;
+			message += seconds + " ç§’" + ( seconds==1 ? '':'' ) + " <br />";
 
 			if (ts <= (new Date().getTime())) {
 			    console.log("3-a");
-			    message += "³ø¦W¤wºI¤îQQ";
+			    message += "å ±åå·²æˆªæ­¢QQ";
 			}
 			else {
 			    console.log("3-b");
-				message += "³ø¦W­Ë¼Æ¤¤";
+				message += "å ±åå€’æ•¸ä¸­";
 			}
 
 			note.html(message);

@@ -35,6 +35,7 @@
 		<property name="personalFouls" column="personalFouls" />
 		<property name="points" column="points" />
 		<property name="startingPlayer" column="startingPlayer" />
+		<property name="gameTime" column="gameTime" />
 
 
 	</class>

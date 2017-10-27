@@ -177,7 +177,7 @@ public class GroupsServlet extends HttpServlet {
 				// 錯誤處理
 				if (!errorMsgs.isEmpty()) {
 					request.setAttribute("groupsVO", groupsVO);
-					RequestDispatcher failVeiw = request.getRequestDispatcher("/groups/addGroups.jsp");
+					RequestDispatcher failVeiw = request.getRequestDispatcher("/groups/groupsUpdata_back.jsp");
 					failVeiw.forward(request, response);
 					return;
 				}
@@ -193,13 +193,13 @@ public class GroupsServlet extends HttpServlet {
 				groupsSet.add(groupsVO);
 
 				session.setAttribute("groupsSet", groupsSet);
-				RequestDispatcher successView = request.getRequestDispatcher("/groups/addGroups.jsp");
+				RequestDispatcher successView = request.getRequestDispatcher("/groups/groupsUpdata_back.jsp");
 				successView.forward(request, response);
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				request.setAttribute("groupsVO", groupsVO);
-				RequestDispatcher failView = request.getRequestDispatcher("/groups/addGroups.jsp");
+				RequestDispatcher failView = request.getRequestDispatcher("/groups/groupsUpdata_back.jsp");
 				failView.forward(request, response);
 			}
 
