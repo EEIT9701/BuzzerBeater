@@ -14,7 +14,6 @@
     	
         <title>Season</title>
         <jsp:include page="/header_css.jsp" />
-        <jsp:include page="/font_css.jsp" />
     </head>
 
     <body>
@@ -23,7 +22,11 @@
 		<div class="container">
 			<div class="jumbotron">
 			<!-- 網頁內容 -->
-			
+			<form action="<%=request.getContextPath()%>/Games.do" method="post">
+				<input type="hidden" name="action" value="GET_GAMES_EXCEL">
+				<input type="hidden" name="groupID" value="2002">
+				<input type="submit" value="下載">
+			</form>
 		
 		
 		
