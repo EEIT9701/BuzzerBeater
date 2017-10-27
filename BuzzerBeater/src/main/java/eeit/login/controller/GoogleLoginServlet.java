@@ -47,7 +47,7 @@ public class GoogleLoginServlet extends HttpServlet {
 				URL urlObtainToken = new URL("https://accounts.google.com/o/oauth2/token");
 				HttpURLConnection connectionObtainToken = (HttpURLConnection) urlObtainToken.openConnection();
 				
-				//String idTokenString = null;
+				String idTokenString = null;
 				String accessTokenString = null;
 				String inputLine;
 				StringBuilder sb = null;
@@ -83,7 +83,7 @@ public class GoogleLoginServlet extends HttpServlet {
 					try {
 						// 把上面取回來的資料，放進JSONObject中，以方便我們直接存取到想要的參數
 						JSONObject jo = new JSONObject(sbLines.toString());
-						//idTokenString = jo.getString("id_token");
+						idTokenString = jo.getString("id_token");
 						
 						accessTokenString = jo.getString("access_token");
 						
@@ -103,6 +103,7 @@ public class GoogleLoginServlet extends HttpServlet {
 		try {
 			  	
 			  URL url = new URL("https://www.googleapis.com/oauth2/v1/userinfo?access_token="+accessTokenString);
+			  //URL url = new URL("https://www.googleapis.com/oauth2/v1/tokeninfo?id_token="+idTokenString);
 			  //https://www.googleapis.com/oauth2/v3/tokeninfo? idToken or accessToken
 			  //https://www.googleapis.com/oauth2/v1/userinfo?access_token  使用者資訊
 			  URLConnection conn = url.openConnection();

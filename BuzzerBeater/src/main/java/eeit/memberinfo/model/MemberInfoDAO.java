@@ -72,26 +72,28 @@ public class MemberInfoDAO implements MemberInfoDAO_interface {
 		return memberInfoVO;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<MemberInfoVO> getAll() {
-		MemberInfoVO memberInfoVO = null;
-		List<MemberInfoVO> list = new ArrayList<MemberInfoVO>();
-
+	public Set<MemberInfoVO> getAll() {
+		MemberInfoVO memberInfoVO = new MemberInfoVO();
+		Set<MemberInfoVO> set = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery(GET_ALL_STMT);
-			list = query.list();
+			set = new LinkedHashSet<MemberInfoVO>(query.list());
+			
 			session.getTransaction().commit();
 		} catch (RuntimeException re) {
 			session.getTransaction().rollback();
 			throw re;
 		}
 
-		return list;
+		return set;
 	}
     /***比對資料庫是否有帳號***/
+	@SuppressWarnings("deprecation")
 	@Override
 	public MemberInfoVO findByAcc(String account) {
 			

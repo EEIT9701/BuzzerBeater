@@ -21,7 +21,7 @@
 	rel="stylesheet" type="text/css" media="all" />
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/jquery-3.1.1.min.js"></script>
+	src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 
 <style>
 #st1 {
@@ -51,14 +51,14 @@
 					<table class="table table-bordered" id="example">
 						<thead>
 							<tr align='center' valign='middle'>
-								<td>會員編號</td>
-								<td>會員帳號</td>
-								<td>會員名稱</td>
-								<td>權限</td>
-								<td>註冊時間</td>
-							    <td style="display:none;">球隊ID</td>
-								<td></td>
-								<td></td>
+								<th>會員編號</th>
+								<th>會員帳號</th>
+								<th>會員名稱</th>
+								<th>權限</th>
+								<th>註冊時間</th>
+							    <th>球隊ID</th>
+								<th></th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -69,25 +69,9 @@
 									<td>${MemberInfoVO.name}</td>
 									<td>${MemberInfoVO.auth}</td>
 									<td>${MemberInfoVO.registerTime}</td>
-							        <td style="display:none;">${MemberInfoVO.teamID}</td>
+							        <td>${MemberInfoVO.teamID}</td>
 								    <td><button type="button" class="btn btn-lg btn-primary" >修改</button></td>
-								    <td><button type="button" class="btn btn-lg btn-warning">刪除</button></td>
-									<!-- 									<td> -->
-									<!-- 										<FORM METHOD="post" -->
-									<%-- 											ACTION="<%=request.getContextPath()%>/player.do"> --%>
-									<!-- 											<input type="submit" value="修改"> <input type="hidden" -->
-									<%-- 												name="memberID" value="${MemberInfoVO.memberID}"> <input --%>
-									<!-- 												type="hidden" name="action" value=""> -->
-									<!-- 										</FORM> -->
-									<!-- 									</td> -->
-									<!-- 									<td> -->
-									<!-- 										<FORM METHOD="post" -->
-									<%-- 											ACTION="<%=request.getContextPath()%>/player.do"> --%>
-									<!-- 											<input type="submit" value="刪除"> <input type="hidden" -->
-									<%-- 												name="memberID" value="${MemberInfoVO.memberID}"> <input --%>
-									<!-- 												type="hidden" name="action" value=""> -->
-									<!-- 										</FORM> -->
-									<!-- 									</td> -->
+								    <td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -102,27 +86,31 @@
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
+	$(function(){
 		$(document).ready(function() {
-			$('#example').DataTable({
-				columnDefs: [{ width: 200, targets: 6}],
-				"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-				"pagingType": "full_numbers",
-				"language": {
-					"lengthMenu":"每一頁顯示_MENU_ 筆資料",
-					"zeroRecords":"查無資料",
-					"info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
-					"infoEmpty":"無資料",
-					"infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
-					"search":"搜尋：",
-					"paginate":{
-						"first":"第一頁",
-						"previous":"上一頁",
-						"next":"下一頁",
-						"last":"最末頁"					
-				}
-			  }
-			})
+			$('#productTable').DataTable();
 		});
+		
+		$('#productTable>tbody').on('click','tr button:nth-child(1)',function(){
+		   var id = $(this).parents('tr').find('td:nth-child(1)').text();
+		   $.get('ProductsDelete',{ProductID:id},function(data){
+		   alert(data);
+		   loadProduct(1);
+		   $('#productTable>tfoot input').val("");
+		   $('#productTable>tfoot input').text("");
+		   })
+		 })
+		var test = {
+				name:value,
+				action:
+			
+		}
+		 $.post("memberInfoServlet",{"action":"GET_ALL_SEASON"} ,function(data){
+			 
+		 });
+		 
+	})
+		
 	</script>
 	
 </body>
