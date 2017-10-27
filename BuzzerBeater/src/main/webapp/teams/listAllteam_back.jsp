@@ -12,6 +12,13 @@
 			<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 			<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 			<jsp:include page="/header_css.jsp" />
+			<style>
+				#img1 {
+					width: 55px;
+					height: 40px;
+					margin: auto;
+				}
+			</style>
 		</head>
 
 		<body>
@@ -21,7 +28,7 @@
 			<!--主文(開始)-->
 			<div class="container">
 				<div class="jumbotron">
-					<form class="form-inline" method="post" action="<%=request.getContextPath() %>/Players.do">
+					<form class="form-inline" method="post" action="<%=request.getContextPath() %>/Teams.do">
 						<select class="form-control" name="season">
 					<option>賽季</option>
 					<option>2</option>
@@ -44,7 +51,7 @@
 					<option>5</option>
 				  </select>
 						<input type="submit" class="btn btn-warning" value="搜尋">
-						<input type="hidden" name="action" value="getOne_For_Display">
+						<input type="hidden" name="action" value="GET_ONE_TEAM">
 					</form>
 					<!--表格(開始)-->
 					<!--****************-->
@@ -78,7 +85,7 @@
 											<tr align='center' valign='middle'>
 												<td>${teamsVO.captainEmail}</td>
 												<td>${teamsVO.captainPhone}</td>
-												<td>${teamsVO.teamBadge}</td>
+												<td><img id="img1" src="data:image/png;base64,${teamsVO.teamBadge}"></td>
 												<!--隊徽-->
 												<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teamsVO.teamID}">${teamsVO.teamName}</a></td>
 												<!--球名-->
@@ -96,14 +103,14 @@
 												<!--勝率-->
 
 												<td>
-													<Form method="post" action="<%=request.getContextPath() %>/Players.do">
-														<button type="submit" class="btn btn-info">修改</button> <input type="hidden" name="playerName" value="${playersVO.playerName}">
+													<Form method="post" action="<%=request.getContextPath() %>/Teams.do">
+														<button type="submit" class="btn btn-info">修改</button> <input type="hidden" name="teamID" value="${teamsVO.teamID}">
 														<input type="hidden" name="action" value="getOne_For_Update">
 													</Form>
 												</td>
 												<td>
-													<Form method="post" action="<%=request.getContextPath() %>/Players.do">
-														<button type="submit" class="btn btn-danger">刪除</button> <input type="hidden" name="playerID" value="${playersVO.playerID}">														<input type="hidden" name="action" value="delete">
+													<Form method="post" action="<%=request.getContextPath() %>/Teams.do">
+														<button type="submit" class="btn btn-danger">刪除</button> <input type="hidden" name="teamID" value="${teamsVO.teamID}">														<input type="hidden" name="action" value="delete">
 													</Form>
 												</td>
 											</tr>

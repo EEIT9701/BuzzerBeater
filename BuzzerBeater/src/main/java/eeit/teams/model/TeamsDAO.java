@@ -24,7 +24,7 @@ public class TeamsDAO implements TeamsDAO_interface {
 	}
 	
 	private static final String GET_ALLTEAMS_STMT = "SELECT teamID,captainEmail,captainPhone,teamName,coachName,bossName,teamBadge,totalWin,totalLose,winRate,remarks FROM Teams";
-
+	private static final String GET_ONETEAMS_STMT = "SELECT teamID,captainEmail,captainPhone,teamName,coachName,bossName,teamBadge,totalWin,totalLose,winRate,remarks FROM Teams WHERE teamID =?";
 	@Override
 	public void insert(TeamsVO teamsVO) {
 		// TODO Auto-generated method stub
@@ -83,8 +83,35 @@ public class TeamsDAO implements TeamsDAO_interface {
 
 	@Override
 	public TeamsVO findByID(Integer teamID) {
-		// TODO Auto-generated method stub
-		return null;
+		TeamsVO teamsVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONETEAMS_STMT);
+			pstmt.setInt(1,teamID);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				teamsVO = new TeamsVO();
+				teamsVO.setCaptainID(rs.getInt("captainID"));
+				teamsVO.setCaptainEmail(rs.getString("captainEmail"));
+				teamsVO.setCaptainPhone(rs.getString("captainPhone"));
+				teamsVO.setTeamName(rs.getString("teamName"));
+				teamsVO.setCoachName(rs.getString("coachName"));
+				teamsVO.setBossName(rs.getString("bossName"));
+				teamsVO.setTeamBadge(rs.getString("teamBadge"));
+				teamsVO.setTotalWin(rs.getInt("totalWin"));
+				teamsVO.setTotalLose(rs.getInt("totalLose"));
+				teamsVO.setWinRate(rs.getFloat("winRate"));
+				teamsVO.setRemarks(rs.getString("remarks"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return teamsVO;
 	}
 
 }

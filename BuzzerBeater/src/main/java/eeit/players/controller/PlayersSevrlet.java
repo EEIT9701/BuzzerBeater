@@ -73,9 +73,9 @@ public class PlayersSevrlet extends HttpServlet {
 			String playerName = req.getParameter("playerName");
 			
 			
-			Set<PlayersVO> playersIfo = playerSvc.getOnePlayerName(playerName);
+			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
 			
-			req.setAttribute("playersIfo", playersIfo);
+			req.setAttribute("playersVO", playersVO);
 			
 			String url = "/players/updatePlayer.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
