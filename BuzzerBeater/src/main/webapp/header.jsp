@@ -28,17 +28,20 @@
 					</ul> <!--新刪修"按鈕"(結束)--></li>
 
 				<!--登入登出"按鈕"(開始)-->
-				<li><a href="#" class="cd-signin" onclick="document.getElementById('id01').style.display='block'"><c:choose>
-							<c:when test="${empty LoginOK}">
-<!-- 								<i class="glyphicon glyphicon-log-in"></i> -->	 
-								<c:set var="var01" value="登入" />
-							</c:when>
-							<c:otherwise>
-							    <img src="${pictureUri}"  width="25" height="25"> 
-								<c:set var="var01" value="${LoginOK.name}" />
-							</c:otherwise>
-						</c:choose> ${var01}
-				</a></li>
+				<li >			
+					<c:if test="${empty LoginOK}">
+						<a href="#" class="cd-signin" onclick="document.getElementById('id01').style.display='block'">
+							登入
+						</a>
+					</c:if>								
+					<c:if test="${!empty LoginOK}">		
+						<a>			
+							<img  src="${pictureUri}"  style="width:25px; height:25px;text-decoration:none;"> 
+							<c:set var="var01" value="${LoginOK.name}" />
+							${var01}
+						</a>
+					</c:if>		
+				</li>
 				<li><a href="GoogleLoginOutServlet" class="cd-signup"" > 
 <!-- 				<i class="glyphicon glyphicon-user"></i>  -->
 				         <c:choose>
@@ -77,14 +80,14 @@
 		<div class="collapse navbar-collapse" id="navbar-menu">
 			<ul class="nav navbar-nav navbar-right" data-in="fadeInDown">
 				<li><a href="#">Home</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/season/season_front.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">賽季<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">賽季子頁1<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="#">賽季子頁2<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="#">賽季子頁3<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/groups/groupFront.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">分組<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">分組子頁1<!--這行的href輸入超連結頁面--></a></li>
@@ -120,14 +123,15 @@
 						<li><a href="<%=request.getContextPath() %>/personaldata/PersonalDataindex.jsp">個人數據<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="<%=request.getContextPath() %>/personaldata/TeamDataindex.jsp">球隊數據<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/gamemedia/video.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">影片<!--這行的href輸入超連結頁面--></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">影片子頁1<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">影片子頁2<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">影片子頁3<!--這行的href輸入超連結頁面--></a></li>
-					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+<!-- 					<ul class="dropdown-menu"> -->
+<!-- 						<li><a href="#">影片子頁1這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">影片子頁2這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">影片子頁3這行的href輸入超連結頁面</a></li> -->
+<!-- 					</ul> -->
+					</li>
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/gamemedia/photo.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">照片<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">照片子頁1<!--這行的href輸入超連結頁面--></a></li>
