@@ -733,3 +733,11 @@ insert into PlayerGroups values('2002','70066');
 select * from PlayerGroups
 GO
 
+
+---------------------------------------------------------------------------------------------------------------
+
+create table GroupStat      --分組狀態表
+(
+ groupStatID        int primary key,	    --分組ID 
+ groupStat           nvarchar(50),    --分組狀態
+)
