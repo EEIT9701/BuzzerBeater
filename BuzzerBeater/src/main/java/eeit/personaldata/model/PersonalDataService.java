@@ -31,4 +31,8 @@ public class PersonalDataService {
 	public PersonalDataVO findByPersonalDataID(Integer PersonalDataID) {
 		return dao.findByPersonalDataID(PersonalDataID);
 	}
+
+	public List<PersonalDataVO> findByGameIDAndTeamID(Integer GameID, Integer TeamID) {
+		return dao.findByGameIDAndTeamID(GameID, TeamID);
+	}
 }
