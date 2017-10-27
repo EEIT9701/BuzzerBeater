@@ -171,7 +171,7 @@ font-size:2px;
 
 
 
-	<script type="text/javascript" src="../js/datatables.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#example').DataTable();

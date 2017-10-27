@@ -26,7 +26,9 @@
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
-
+<link rel="stylesheet" type="text/css" href="../css/datatables.min.css" />
+<jsp:include page="/header_css.jsp" />
+<link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
 <style>
 #st1 {
 	padding: 30px;
@@ -35,9 +37,7 @@
 
 </style>
 
-<link rel="stylesheet" type="text/css" href="../css/datatables.min.css" />
-<jsp:include page="/header_css.jsp" />
-<link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -121,7 +121,7 @@
 							<c:forEach var="personalDataVO" items="${list1}">
 								<tr align='center' valign='middle'>
 
-									<td>${personalDataVO.playersVO.playerName}</td>
+									<td><a href="<%=request.getContextPath()%>/players/playerInformation.jsp?playerID=${personalDataVO.playersVO.playerID}">${personalDataVO.playersVO.playerName}</a></td>
 									<td><c:if
 											test="${not empty personalDataVO.playersVO.photo}">
 											<img
@@ -133,7 +133,7 @@
 												height="67.5" width="45">
 										</c:if></td>
 
-									<td>${personalDataVO.teamsVO.teamName}</td>
+									<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${personalDataVO.teamsVO.teamID}">${personalDataVO.teamsVO.teamName}</a></td>
 									<td>${personalDataVO.gameID}</td>
 									<td><fmt:formatNumber type="number" value="${personalDataVO.gameTime/personalDataVO.gameID}" maxFractionDigits="0"/></td>
 								
@@ -213,8 +213,8 @@
 						<tbody>
 							<c:forEach var="personalDataVO" items="${list1}">
 								<tr align='center' valign='middle'>
-
-									<td>${personalDataVO.playersVO.playerName}</td>
+                                    <td><a href="<%=request.getContextPath()%>/players/playerInformation.jsp?playerID=${personalDataVO.playersVO.playerID}">${personalDataVO.playersVO.playerName}</a></td>
+								
 									<td><c:if
 											test="${not empty personalDataVO.playersVO.photo}">
 											<img src="data:image/png;base64,${personalDataVO.playersVO.photo}"
@@ -225,7 +225,7 @@
 												height="67.5" width="45">
 										</c:if></td>
 
-									<td>${personalDataVO.teamsVO.teamName}</td>
+									<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${personalDataVO.teamsVO.teamID}">${personalDataVO.teamsVO.teamName}</a></td>
 									<td>${personalDataVO.gameID}</td>
 									<td>${personalDataVO.gameTime}</td>
 																	
@@ -277,12 +277,13 @@
 
 				</div>
 			</div>
+				<jsp:include page="/footer_css.jsp" />
 		</div>
 	</div>
 
 	<!--主文(結束)-->
 
-            <script src="../js/jquery-ui.js"></script>
+            <script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
             <script>
                 $(function () {
                     $("#tabs").tabs({
@@ -291,7 +292,7 @@
                 });
             </script>
 
-	<script type="text/javascript" src="../js/datatables.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#table').DataTable();
@@ -303,5 +304,6 @@
 		});
 	</script>
 	<jsp:include page="/footer.jsp" />
+
 </body>
 </html>

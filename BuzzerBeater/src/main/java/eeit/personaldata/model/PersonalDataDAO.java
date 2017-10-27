@@ -31,7 +31,7 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 	//private static final String GETALL="SELECT playerID,gameID,teamID,quarters,quarterTime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,startingPlayer from personaldata order by playerID";
 	//private static final String GETALL="SELECT ROW_NUMBER() OVER(ORDER BY points DESC) AS ranking,* FROM personaldata";
 	//private static final String GETALL="SELECT * from personaldata order by points";
-	private static final String GETALL="select p.playerName,p.photo,t.teamName,gameID,gametime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
+	private static final String GETALL="select t.teamID,p.playerName,p.playerID,p.photo,t.teamName,gameID,gametime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
 	  		"from   (select playerID,teamID,\r\n" + 
 	  		"        count(gameID)as gameID,\r\n" + 
 	  		"        sum(gameTime)as gametime,\r\n" + 
@@ -52,10 +52,10 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 	  		"        from PersonalData\r\n" + 
 	  		"        GROUP BY playerID,teamID)\r\n" + 
 	  		"pd join teams t\r\n" + 
-	  		"on pd.teamid=t.teamID\r\n" + 
+	  		"on pd.teamId=t.teamID\r\n" + 
 	  		"join players p\r\n" + 
 	  		"on pd.playerID=p.playerID";
-	private static final String GETALL2="select t.teamName,gameID,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
+	private static final String GETALL2="select t.teamID,t.teamBadge,t.teamName,gameID,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
 			"from   (select teamID,\r\n" + 
 			"        count(gameID)as gameID,\r\n" + 
 			"        sum(gameTime)as gametime,\r\n" + 
@@ -76,7 +76,7 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 			"        from PersonalData\r\n" + 
 			"        GROUP BY teamID)\r\n" + 
 			"pd join teams t\r\n" + 
-			"on pd.teamid=t.teamID";
+			"on pd.teamId=t.teamID";
 	
 	@Override
 	public List<PersonalDataVO> getAll() {
@@ -96,6 +96,7 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 				personalData=new PersonalDataVO();
 				PlayersVO playersVO = new PlayersVO();
 				playersVO.setPlayerName(rs.getString("playerName"));
+				playersVO.setPlayerID(rs.getInt("playerID"));
 				playersVO.setPhoto(rs.getString("photo"));
 				personalData.setPlayersVO(playersVO);
 				
@@ -104,7 +105,9 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 				personalData.setGamesVO(gamesVO);
 				
 	            TeamsVO teamsVO =new TeamsVO();
+	          
 	            teamsVO.setTeamName(rs.getString("teamName"));
+	            teamsVO.setTeamID(rs.getInt("teamID"));
 	            personalData.setTeamsVO(teamsVO);
 				
 		     	personalData.setGameID(rs.getInt("gameID"));
@@ -159,7 +162,9 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 				personalData.setGamesVO(gamesVO);
 				
 	            TeamsVO teamsVO =new TeamsVO();
+	            teamsVO.setTeamBadge(rs.getString("teamBadge"));
 	            teamsVO.setTeamName(rs.getString("teamName"));
+	            teamsVO.setTeamID(rs.getInt("teamID"));;
 	            personalData.setTeamsVO(teamsVO);
 				
 		     	personalData.setGameID(rs.getInt("gameID"));

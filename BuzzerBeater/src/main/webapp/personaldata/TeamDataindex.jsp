@@ -64,9 +64,7 @@
 							<option label="社會組" value="object:7" selected="selected">季前熱身賽</option>
 							<option label="青年組" value="object:8">例行賽</option>
 							<option label="少年組" value="object:9">季後賽</option>
-						</select>
-
-						<input type="submit" value="確定">
+						</select> <input type="submit" value="確定">
 
 					</div>
 				</div>
@@ -93,12 +91,10 @@
 									<thead>
 										<tr>
 											<th>球隊</th>
+											<th>球隊</th>
 											<th>比賽次數</th>
-
 											<th>投籃(%)</th>
-
 											<th>三分(%)</th>
-
 											<th>罰球(%)</th>
 											<th>進攻籃板</th>
 											<th>防守籃板</th>
@@ -114,14 +110,15 @@
 									<tbody>
 										<c:forEach var="personalDataVO" items="${list}">
 											<tr align='center' valign='middle'>
+												<td><img
+													src="data:image/png;base64,${personalDataVO.teamsVO.teamBadge}"
+													height="60" width="60"></td>
 
-												<td>${personalDataVO.teamsVO.teamName}</td>
+												<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${personalDataVO.teamsVO.teamID}">${personalDataVO.teamsVO.teamName}</a></td>
 												<td>${personalDataVO.gameID}</td>
-
-
-												<td><c:if test="${'0'==personalDataVO.twoPointShot}">
-							               0
-		 </c:if> <c:if test="${'0' != personalDataVO.twoPointShot}">
+									     		<td><c:if test="${'0'==personalDataVO.twoPointShot}">
+							                        0
+		                                            </c:if> <c:if test="${'0' != personalDataVO.twoPointShot}">
 														<p>
 															<fmt:formatNumber type="number"
 																value="${personalDataVO.twoPoint/personalDataVO.twoPointShot*100}"
@@ -129,11 +126,9 @@
 														</p>
 													</c:if></td>
 
-
-
 												<td><c:if test="${'0'==personalDataVO.threePointShot}">
-							               0
-									    </c:if> <c:if test="${'0' != personalDataVO.threePointShot}">
+							                        0
+									               </c:if> <c:if test="${'0' != personalDataVO.threePointShot}">
 														<p>
 															<fmt:formatNumber type="number"
 																value="${personalDataVO.threePoint/personalDataVO.threePointShot*100}"
@@ -141,11 +136,9 @@
 														</p>
 													</c:if></td>
 
-
-
 												<td><c:if test="${'0'==personalDataVO.fgShot}">
-							               0
-									    </c:if> <c:if test="${'0' != personalDataVO.fgShot}">
+							                       0
+									            </c:if> <c:if test="${'0' != personalDataVO.fgShot}">
 														<p>
 															<fmt:formatNumber type="number"
 																value="${personalDataVO.fg/personalDataVO.fgShot*100}"
@@ -193,6 +186,7 @@
 									<thead>
 										<tr>
 											<th>球隊</th>
+											<th>球隊</th>
 											<th>比賽次數</th>
 											<th>二分命中</th>
 											<th>二分出手數</th>
@@ -217,15 +211,16 @@
 									<tbody>
 										<c:forEach var="personalDataVO" items="${list}">
 											<tr align='center' valign='middle'>
-
-												<td>${personalDataVO.teamsVO.teamName}</td>
+												<td><img
+													src="data:image/png;base64,${personalDataVO.teamsVO.teamBadge}"
+													height="60" width="60"></td>
+												<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${personalDataVO.teamsVO.teamID}">${personalDataVO.teamsVO.teamName}</a></td>
 												<td>${personalDataVO.gameID}</td>
 												<td>${personalDataVO.twoPoint}</td>
 												<td>${personalDataVO.twoPointShot}</td>
-
 												<td><c:if test="${'0'==personalDataVO.twoPointShot}">
-							               0
-		 </c:if> <c:if test="${'0' != personalDataVO.twoPointShot}">
+							                        0
+		                                            </c:if> <c:if test="${'0' != personalDataVO.twoPointShot}">
 														<p>
 															<fmt:formatNumber type="number"
 																value="${personalDataVO.twoPoint/personalDataVO.twoPointShot*100}"
@@ -235,10 +230,9 @@
 
 												<td>${personalDataVO.threePoint}</td>
 												<td>${personalDataVO.threePointShot}</td>
-
 												<td><c:if test="${'0'==personalDataVO.threePointShot}">
-							               0
-									    </c:if> <c:if test="${'0' != personalDataVO.threePointShot}">
+							                         0
+									                </c:if> <c:if test="${'0' != personalDataVO.threePointShot}">
 														<p>
 															<fmt:formatNumber type="number"
 																value="${personalDataVO.threePoint/personalDataVO.threePointShot*100}"
@@ -248,10 +242,9 @@
 
 												<td>${personalDataVO.fg}</td>
 												<td>${personalDataVO.fgShot}</td>
-
 												<td><c:if test="${'0'==personalDataVO.fgShot}">
-							               0
-									    </c:if> <c:if test="${'0' != personalDataVO.fgShot}">
+				            			             0
+									                </c:if> <c:if test="${'0' != personalDataVO.fgShot}">
 														<p>
 															<fmt:formatNumber type="number"
 																value="${personalDataVO.fg/personalDataVO.fgShot*100}"
@@ -275,16 +268,15 @@
 								</table>
 							</table>
 						</div>
-
-
 					</div>
 				</div>
 			</div>
+			<jsp:include page="/footer_css.jsp" />
 		</div>
 	</div>
 
 	<!--主文(結束)-->
-	<script src="../js/jquery-ui.js"></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
 	<script>
 		$(function() {
 			$("#tabs").tabs({
@@ -293,7 +285,8 @@
 		});
 	</script>
 
-	<script type="text/javascript" src="../js/datatables.min.js"></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#table').DataTable();
