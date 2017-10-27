@@ -8,7 +8,9 @@ public interface TeamCompositionDAO_interface {
 
 	public void update(TeamCompositionVO teamCompositionVO);
 
-	public void delete(Integer teamID);
+	public void deleteByTeamID(Integer teamID);
+
+	public void deleteByPlayerID(Integer playerID);
 
 	public Set<TeamCompositionVO> getAll();
 
