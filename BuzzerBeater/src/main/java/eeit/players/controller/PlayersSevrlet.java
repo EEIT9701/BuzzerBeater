@@ -150,6 +150,12 @@ public class PlayersSevrlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
 		}
+		
+		if("goTolistAllPlayer_back".equals(action)){
+			String url = "/players/listAllPlayer_back.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, resp);
+		}
 	
 
 	

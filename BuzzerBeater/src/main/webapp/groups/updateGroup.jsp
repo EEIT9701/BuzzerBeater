@@ -77,8 +77,20 @@
 			        			<td>${gVO.maxPlayers}</td>
 			        			<td>${gVO.minPlayers}</td>
 			        			<td></td>
-									<td><button type="button" class="btn btn-lg btn-primary">修改</button></td>
-									<td><button type="button" class="btn btn-lg btn-warning">刪除</button></td>
+									<td>
+									<Form method="post" action="<%=request.getContextPath() %>/Groups.do" id="update">
+									<button type="submit" class="btn btn-lg btn-primary">新增</button>
+									<input type="hidden" name="groupID" value="${gVO.groupID}"> 
+                                    <input type="hidden" name="action" value="ADD_GROUP">
+			        			</Form>
+									</td>
+									<td>
+									<Form method="post" action="<%=request.getContextPath() %>/Groups.do" id="delete">
+									<button type="submit" class="btn btn-lg btn-warning">刪除</button>
+									<input type="hidden" name="groupID" value="${gVO.groupID}"> 
+                                           	<input type="hidden" name="action" value="REMOVE_GROUP_TEMP">
+									</Form>
+									</td>
 									
 								</tr>
 							</c:forEach>

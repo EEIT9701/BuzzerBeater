@@ -647,7 +647,7 @@ insert into MemberInfo values('PortlandTrail@ymail.com','波特蘭拓荒者','teams','
 insert into MemberInfo values('javaeeit972017@gmail.com','叡叡','parttime','2017-06-23','');
 insert into MemberInfo values('frank810618@gmail.com','資策會金城武','admin','2017-09-23','');
 insert into MemberInfo values('s988309@gmail.com','金城武','admin','2017-09-23','');
-
+insert into MemberInfo values('qwe020488952@gmail.com','金城武666','admin','2017-09-23','');
 select * from MemberInfo
 GO
 
