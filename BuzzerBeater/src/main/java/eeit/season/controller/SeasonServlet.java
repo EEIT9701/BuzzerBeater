@@ -62,7 +62,7 @@ public class SeasonServlet extends HttpServlet {
 
 			return;
 		}
-
+		
 		/********************************************************************/
 		if ("ADD_SEASON".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
