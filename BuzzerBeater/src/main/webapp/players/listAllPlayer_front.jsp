@@ -3,12 +3,12 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<jsp:useBean id="season" scope="page" class="eeit.season.model.SeasonService" />
 		<jsp:useBean id="group" scope="page" class="eeit.groups.model.GroupsService" />
-        <jsp:useBean id="playerSvc" scope="page" class="eeit.players.model.PlayerService" />
+		<jsp:useBean id="playerSvc" scope="page" class="eeit.players.model.PlayerService" />
 		<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 		<html>
 
 		<head>
-			<title>EEIT97-第一組</title>
+			<title>BuzzerBeater-球員</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -16,20 +16,20 @@
 			<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 			<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 			<jsp:include page="/header_css.jsp" />
-<style>
-            #img1 {
-                width: 35px;
-                height: 40px;
-                margin: auto;
-            }
-            </style>
+			<style>
+				#img1 {
+					width: 35px;
+					height: 40px;
+					margin: auto;
+				}
+			</style>
 
 		</head>
 
 		<body>
 
 			<jsp:include page="/header.jsp" />
-			
+
 			<!--主文(開始)-->
 			<div class="container">
 				<div class="jumbotron">
@@ -90,30 +90,30 @@
 
 
 											<td><img id="img1" src="data:image/jpeg;base64,${playersVO.photo}"></td>
-												<!--球員照片-->
-												
+											<!--球員照片-->
 
-												<td><a href="<%=request.getContextPath()%>/players/playerInformation.jsp?playerID=${playersVO.playerID}">${playersVO.playerName}</a></td>
-												<!--球員姓名-->
-												<td></td>
-												<!--分組-->
-												<td></td>
-												<!--球隊-->
-												<td>${playersVO.height}</td>
-												<!--身高-->
-												<td>${playersVO.weights}</td>
-												<!--體重-->
-												<td>${playersVO.birthday}</td>
-												<!--生日-->
-												<td>${playersVO.nationality}</td>
-												<!--國籍-->
+
+											<td><a href="<%=request.getContextPath()%>/players/playerInformation.jsp?playerID=${playersVO.playerID}">${playersVO.playerName}</a></td>
+											<!--球員姓名-->
+											<td></td>
+											<!--分組-->
+											<td></td>
+											<!--球隊-->
+											<td>${playersVO.height}</td>
+											<!--身高-->
+											<td>${playersVO.weights}</td>
+											<!--體重-->
+											<td>${playersVO.birthday}</td>
+											<!--生日-->
+											<td>${playersVO.nationality}</td>
+											<!--國籍-->
 										</tr>
 
 
 
 									</c:forEach>
 							</table>
-							
+
 						</div>
 					</div>
 					<jsp:include page="/footer.jsp" />
@@ -123,53 +123,52 @@
 			<!--主文(結束)-->
 
 			<jsp:include page="/footer_css.jsp" />
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+			<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 			<script>
 				$(document).ready(function () {
 					$('#table').DataTable();
 				});
-				</script>
-				<script>
-				
-											$(document).ready(function () {
-				 								$('#seasonSelect').on('blur', function () {
-													$.getJSON('<%=request.getContextPath()%> 
-														Groups.do ', {
-				 											'action': 'GET_ALL_GROUPS'
-				 										},
-				 										function (datas) {
+			</script>
+			<script>
+				$(document).ready(function () {
+					$('#seasonSelect').on('blur', function () {
+							$.getJSON('<%=request.getContextPath()%> 
+									Groups.do ', {
+									'action': 'GET_ALL_GROUPS'
+								},
+								function (datas) {
 
-				 											console
-				 												.log(datas);
-				 											$
-				 												.each(
-				 													datas,
-				 													function (
-																		idx,
-				 														groups) {
-				 														console
-				 															.log(groups.groupName);
-				 														var cell1 = $(
-				 																'<option></option>')
-				 															.text(
-				 																groups.groupName);
-				 														var cell2 = $(
-				 																'<option></option>')
-				 															.value(
-				 																groups.groupID);
-																	})
-				 											$(
-				 													'#groupsSelect')
-				 												.append(
-				 													[
-				 														cell1,
-				 														cell2
-				 													]);
-				 										})
-				 								})
-				 							})
-				 							</script>
-			
+									console
+										.log(datas);
+									$
+										.each(
+											datas,
+											function (
+												idx,
+												groups) {
+												console
+													.log(groups.groupName);
+												var cell1 = $(
+														'<option></option>')
+													.text(
+														groups.groupName);
+												var cell2 = $(
+														'<option></option>')
+													.value(
+														groups.groupID);
+											})
+									$(
+											'#groupsSelect')
+										.append(
+											[
+												cell1,
+												cell2
+											]);
+								})
+					})
+				})
+			</script>
+
 		</body>
 
 		</html>

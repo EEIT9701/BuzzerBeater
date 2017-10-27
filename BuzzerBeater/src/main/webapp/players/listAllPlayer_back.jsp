@@ -6,7 +6,7 @@
 		<html>
 
 		<head>
-			<title>EEIT97-第一組</title>
+			<title>BuzzerBeater-球員管理</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
@@ -52,6 +52,8 @@
 										    <th>球員照片</th>
 											<th>球員姓名</th>
 											<th>身分證ID</th>
+											<th>背號</th>
+											<th>位置</th>
 											<th>身高</th>
 											<th>體重</th>
 											<th>生日</th>
@@ -67,6 +69,8 @@
 											    <td><img id="img1" src="data:image/jpeg;base64,${playersVO.photo}"></td>
 												<td>${playersVO.playerName}</td>
 												<td>${playersVO.id}</td>
+												<td></td>
+												<td></td>
 												<td>${playersVO.height}</td>
 												<td>${playersVO.weights}</td>
 												<td>${playersVO.birthday}</td>

@@ -20,6 +20,8 @@ public class PlayerGroupsDAO_HibernateTemplate implements PlayerGroupsDAO_interf
 	}
 
 	private static final String GET_ALL_STMT = "FROM PlayerGroupsVO";
+	private static final String FIND_BY_PLAYERID = "FROM PlayerGroupsVO WHERE playerID=?";
+	private static final String FIND_BY_GROUPID = "FROM PlayerGroupsVO WHERE groupID=?";
 
 	@Override
 	public Set<PlayerGroupsVO> getAll() {
@@ -38,6 +40,16 @@ public class PlayerGroupsDAO_HibernateTemplate implements PlayerGroupsDAO_interf
 	public void update(PlayerGroupsVO playerGroupsVO) {
 		hibernateTemplate.update(playerGroupsVO);
 	}
+	
+	@Override
+	public List<PlayerGroupsVO> findByPlayerID(Integer playerID) {
+		return (List<PlayerGroupsVO>) hibernateTemplate.find(FIND_BY_PLAYERID, playerID);
+	}
+
+	@Override
+	public List<PlayerGroupsVO> findByGroupID(Integer groupID) {
+		return (List<PlayerGroupsVO>) hibernateTemplate.find(FIND_BY_GROUPID, groupID);
+	}
 
 	public static void main(String[] args) {
 		@SuppressWarnings("resource")
@@ -53,5 +65,7 @@ public class PlayerGroupsDAO_HibernateTemplate implements PlayerGroupsDAO_interf
 			System.out.println();
 		}
 	}
+
+
 
 }

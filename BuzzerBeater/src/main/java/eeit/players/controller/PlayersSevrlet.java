@@ -73,9 +73,9 @@ public class PlayersSevrlet extends HttpServlet {
 			String playerName = req.getParameter("playerName");
 			
 			
-			Set<PlayersVO> playersIfo = playerSvc.getOnePlayerName(playerName);
+			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
 			
-			req.setAttribute("playersIfo", playersIfo);
+			req.setAttribute("playersVO", playersVO);
 			
 			String url = "/players/updatePlayer.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -147,6 +147,12 @@ public class PlayersSevrlet extends HttpServlet {
 			
 			req.setAttribute("playersVO", playersVO);
 			String url = "/players/listOnePlayer_updateCheck.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, resp);
+		}
+		
+		if("goTolistAllPlayer_back".equals(action)){
+			String url = "/players/listAllPlayer_back.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
 		}

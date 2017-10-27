@@ -1,5 +1,6 @@
 package eeit.playergroups.model;
 
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -35,6 +36,18 @@ public class PlayerGroupsDAO_Hibernate implements PlayerGroupsDAO_interface {
 
 	}
 	
+	@Override
+	public List<PlayerGroupsVO> findByPlayerID(Integer playerID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PlayerGroupsVO> findByGroupID(Integer groupID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public static void main (String[] args){
 		PlayerGroupsDAO_Hibernate dao = new PlayerGroupsDAO_Hibernate();
 		Set<PlayerGroupsVO> set = dao.getAll();
@@ -45,5 +58,7 @@ public class PlayerGroupsDAO_Hibernate implements PlayerGroupsDAO_interface {
 			System.out.print(vo.getGroupsVO().getSeasonVO().getSeasonName()+", ");
 		}
 	}
+
+
 
 }

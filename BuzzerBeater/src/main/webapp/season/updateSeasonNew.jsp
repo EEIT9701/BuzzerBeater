@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="eeit.memberinfo.model.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="eeit.season.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	MemberInfoService dao = new MemberInfoService();
@@ -74,8 +75,21 @@
 			        			<td>${sVO.seasonEndDate}</td>
 			        			<td>${sVO.signUpBegin}</td>
 			        			<td>${sVO.signUpEnd}<td>
-			        			<td><button type="button" class="btn btn-lg btn-primary">修改</button></td>
-									<td><button type="button" class="btn btn-lg btn-warning">刪除</button></td>
+			        			<td>
+			        			<Form method="post" action="<%=request.getContextPath() %>/Season.do" id="update">
+			        			<button type="submit" class="btn btn-lg btn-primary">修改</button>
+			        			<input type="hidden" name="seasonID" value="${sVO.seasonID}"> 
+                                    <input type="hidden" name="action" value="GET_ONE_TO_UPDATE">
+			        			</Form>
+			        			</td>
+			        			<td>
+			        			 <Form method="post" action="<%=request.getContextPath() %>/Season.do" id="delete"> 
+									
+									<button type="submit" class="btn btn-lg btn-warning">刪除</button>
+									<input type="hidden" name="seasonID" value="${sVO.seasonID}"> 
+                                           	<input type="hidden" name="action" value="DELETE_SEASON">
+									</Form>	
+									</td>	
 			        		</tr>
 			        	</c:forEach>							
 							

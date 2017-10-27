@@ -1,6 +1,7 @@
 package eeit.games.model;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Query;
@@ -33,11 +34,11 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 	@Override
 	public void insert(GamesVO gVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
+		try {
 			session.beginTransaction();
 			session.saveOrUpdate(gVO);
 			session.getTransaction().commit();
-		}catch(RuntimeException ex){
+		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
@@ -47,11 +48,11 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 	@Override
 	public void update(GamesVO gVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
+		try {
 			session.beginTransaction();
 			session.saveOrUpdate(gVO);
 			session.getTransaction().commit();
-		}catch(RuntimeException ex){
+		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
@@ -61,22 +62,28 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 	@Override
 	public void delete(Integer gameID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try{
+		try {
 			session.beginTransaction();
-			
+
 			GamesVO gamesVO = (GamesVO) session.get(GamesVO.class, gameID);
 			session.delete(gamesVO);
-			
+
 			session.getTransaction().commit();
-		}catch(RuntimeException ex){
+		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
 
 	}
-	
+
 	@Override
-	public GamesVO findByID(Integer gamesID) {
+	public GamesVO findByGameID(Integer gameID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GamesVO> findByGroupID(Integer groupID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -84,7 +91,7 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 	public static void main(String[] args) {
 
 		GamesDAO_Hibernate dao = new GamesDAO_Hibernate();
-//		dao.delete(4001);
+		// dao.delete(4001);
 
 		Set<GamesVO> set = dao.getAll();
 		for (GamesVO gvo : set) {
@@ -95,7 +102,5 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 			System.out.println();
 		}
 	}
-
-
 
 }

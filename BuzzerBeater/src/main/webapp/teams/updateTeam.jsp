@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@ page import="java.util.*"%>
-            <%@ page import="eeit.players.model.*"%>
+            <%@ page import="eeit.teams.model.*"%>
                 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <html>
 
@@ -38,75 +38,69 @@
                                     </ul>
                                 </font>
                             </c:if>
-                            <Form class="form-horizontal" method="post" action="<%=request.getContextPath() %>/Players.do">
+                            <Form class="form-horizontal" method="post" action="<%=request.getContextPath() %>/Teams.do">
                                 <fieldset>
                                     <!-- Form Name -->
-                                    <legend>球員修改</legend>
+                                    <legend>球隊修改</legend>
 
-                                    <c:forEach var="playersVO" items="${playersVO}">
+                                    <c:forEach var="teamsVO" items="${teamsVO}">
 
 
-                                        <input type="hidden" name="playerID" value="${playersVO.playerID}">
+                                        <input type="hidden" name="teamName" value="${teamsVO.teamName}">
 
                                         <!-- Text input-->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">球員照片:</label>
+                                            <label class="col-md-4 control-label">隊徽:</label>
                                             <input type="file" id="file">
                                             <div class="col-md-4">
-                                                <img id="result" src="data:image/jpeg;base64,${playersVO.photo}"><br>
-                                                <input type="hidden" id="photo" name="photo" value="data:image/jpeg;base64,${playersVO.photo}">
+                                                <img id="result" src="data:image/jpeg;base64,${teamsVO.teamBadge}"><br>
+                                                <input type="hidden" id="photo" name="teamBadge" value="data:image/jpeg;base64,${teamsVO.teamBadge}">
                                             </div>
                                         </div>
 
                                         <!-- Text input-->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">球員姓名:</label>
+                                            <label class="col-md-4 control-label">球隊名稱:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="playerName" class="form-control" id="exampleInputEmail1" value="${playersVO.playerName}">
+                                                <input type="text" name="teamName" class="form-control" id="exampleInputEmail1" value ="${teamsVO.teamName}" >
                                             </div>
                                         </div>
                                          <!-- Text input-->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">身分證ID:</label>
+                                            <label class="col-md-4 control-label">隊長Email:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="id" class="form-control" id="exampleInputEmail1" value="${playersVO.id}">
+                                                <input type="text" name="captainEmail" class="form-control" id="exampleInputEmail1" value="${teamsVO.captainEmail}">
                                             </div>
                                         </div>
                                          <!-- Text input-->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">背號:</label>
+                                            <label class="col-md-4 control-label">隊長連絡電話:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="id" class="form-control" id="exampleInputEmail1" value="">
+                                                <input type="text" name="captainPhone" class="form-control" id="exampleInputEmail1" value="${teamsVO.captainPhone}">
                                             </div>
                                         </div>
                                         <!-- Text input-->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">位置:</label>
+                                            <label class="col-md-4 control-label">總教練:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="height" class="form-control" id="exampleInputEmail1" value="">
+                                                <input type="text" name="coachName" class="form-control" id="exampleInputEmail1" value="${teamsVO.coachName}">
                                             </div>
                                         </div>
                                         <!-- Text input-->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">體重(kg):</label>
+                                            <label class="col-md-4 control-label">老闆:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="weights" class="form-control" id="exampleInputEmail1" value="${playersVO.weights}">
+                                                <input type="text" name="bossName" class="form-control" id="exampleInputEmail1" value="${teamsVO.bossName}">
                                             </div>
                                         </div>
                                         <!-- Text input-->
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">生日:</label>
+                                            <label class="col-md-4 control-label">備註:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="birthday" class="form-control" id="exampleInputEmail1" value="${playersVO.birthday}">
+                                                <input type="text" name="remarks" class="form-control" id="exampleInputEmail1" value="${teamsVO.remarks}">
                                             </div>
                                         </div>
-                                        <!-- Text input-->
-                                        <div class="form-group">
-                                            <label class="col-md-4 control-label">國籍:</label>
-                                            <div class="col-md-4">
-                                                <input type="text" name="nationality" class="form-control" id="exampleInputEmail1" value="${playersVO.nationality}">
-                                            </div>
-                                        </div>
+                                        
 
 
 
@@ -116,8 +110,8 @@
                                     <input type="hidden" name="action" value="update">
                             </Form>
 
-                            <form action="<%=request.getContextPath() %>/Players.do">
-                                <c:forEach var="playersVO" items="${playersVO}">
+                            <form action="<%=request.getContextPath() %>/Teams.do">
+                                <c:forEach var="teamsVO" items="${teamsVO}">
                                     <button type="submit" class="btn btn-danger">取消</button>
                                     <input type="hidden" name="action" value="goTolistAllPlayer_back">
                                     <!--                             <input type="hidden" name="action" value="getOne_For_Display"> -->

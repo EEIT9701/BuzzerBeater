@@ -35,12 +35,14 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/datatables.min.css" />
 <jsp:include page="/header_css.jsp" />
+<jsp:include page="/font_css.jsp" />
 </head>
 <body>
 
 	<jsp:include page="/header.jsp" />
 	<!--主文(開始)-->
 	<div class="container">
+	<div class="jumbotron">
 
 		<br>
 		<br>
@@ -84,10 +86,15 @@
 						</tbody>
 					</table>
 				</div>
+				<jsp:include page="/footer.jsp" />
 			</div>
 		</div>
-	<jsp:include page="/footer.jsp" />
+	<jsp:include page="/footer_css.jsp" />
+	
 	</div>
+	</div>
+	</div>
+
 
 	<!--主文(結束)-->
 	<script type="text/javascript"
