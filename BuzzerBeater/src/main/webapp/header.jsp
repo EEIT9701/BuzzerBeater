@@ -28,23 +28,21 @@
 					</ul> <!--新刪修"按鈕"(結束)--></li>
 
 				<!--登入登出"按鈕"(開始)-->
-				<li >					
-					<c:choose>
-						<c:when test="${empty LoginOK}">
-							<a href="#" class="cd-signin" onclick="document.getElementById('id01').style.display='block'">
+				<li >			
+					<c:if test="${empty LoginOK}">
+						<a href="#" class="cd-signin" onclick="document.getElementById('id01').style.display='block'">
 							登入
-							</a>
-						</c:when>						
-						<c:otherwise>					
-							<img src="${pictureUri}"  style="width:50px; height:50px;margin-top:50px　"> 
+						</a>
+					</c:if>								
+					<c:if test="${!empty LoginOK}">		
+						<a>			
+							<img  src="${pictureUri}"  style="width:25px; height:25px;text-decoration:none;"> 
 							<c:set var="var01" value="${LoginOK.name}" />
-							<p>${var01}
-						</c:otherwise>						
-					</c:choose> 				
-				</li>		
-						
-				<li >
-					<a href="GoogleLoginOutServlet" class="cd-signup"" > 
+							${var01}
+						</a>
+					</c:if>		
+				</li>
+				<li><a href="GoogleLoginOutServlet" class="cd-signup"" > 
 <!-- 				<i class="glyphicon glyphicon-user"></i>  -->
 				         <c:choose>
 							<c:when test="${empty LoginOK}">
@@ -54,8 +52,7 @@
 								<c:set var="var02" value="登出" />
 							</c:otherwise>
 						</c:choose> ${var02}
-					 </a>
-				 </li>
+				 </a></li>
 
 				<!--登入登出"按鈕"(結束)-->
 			</ul>
