@@ -40,14 +40,12 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<TeamsVO> getAll() {
 		List<TeamsVO> list = (List<TeamsVO>) hibernateTemplate.find(GET_ALL_STMT);
 		return new LinkedHashSet<TeamsVO>(list);
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public TeamsVO findByID(Integer teamID) {
 		return (TeamsVO) hibernateTemplate.get(TeamsVO.class, teamID);
 	}
