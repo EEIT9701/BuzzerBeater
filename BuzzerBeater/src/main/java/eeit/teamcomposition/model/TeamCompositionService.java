@@ -22,56 +22,52 @@ public class TeamCompositionService {
 	public void insert(Integer teamID, Integer playerID, Integer playerNo, String playerRole, Timestamp joinTeamDate,
 			Timestamp leaveTeamDate) {
 		TeamCompositionVO teamCompositionVO = new TeamCompositionVO();
-		
+
 		TeamsVO teamsVO = new TeamsVO();
 		teamsVO.setTeamID(teamID);
 		teamCompositionVO.setTeamsVO(teamsVO);
-		
+
 		PlayersVO playersVO = new PlayersVO();
 		playersVO.setPlayerID(playerID);
 		teamCompositionVO.setPlayersVO(playersVO);
-		
+
 		teamCompositionVO.setPlayerNo(playerNo);
 		teamCompositionVO.setPlayerRole(playerRole);
 		teamCompositionVO.setJoinTeamDate(joinTeamDate);
 		teamCompositionVO.setLeaveTeamDate(leaveTeamDate);
-		
+
 		dao.insert(teamCompositionVO);
 	}
 
 	public void update(Integer teamID, Integer playerID, Integer playerNo, String playerRole, Timestamp joinTeamDate,
 			Timestamp leaveTeamDate) {
 		TeamCompositionVO teamCompositionVO = new TeamCompositionVO();
-		
+
 		TeamsVO teamsVO = new TeamsVO();
 		teamsVO.setTeamID(teamID);
 		teamCompositionVO.setTeamsVO(teamsVO);
-		
+
 		PlayersVO playersVO = new PlayersVO();
 		playersVO.setPlayerID(playerID);
 		teamCompositionVO.setPlayersVO(playersVO);
-		
+
 		teamCompositionVO.setPlayerNo(playerNo);
 		teamCompositionVO.setPlayerRole(playerRole);
 		teamCompositionVO.setJoinTeamDate(joinTeamDate);
 		teamCompositionVO.setLeaveTeamDate(leaveTeamDate);
-		
+
 		dao.insert(teamCompositionVO);
 	}
 
-	public void delete(Integer teamID) {
-		dao.delete(teamID);
-	}
-
 	public Set<TeamCompositionVO> getAll() {
-
+		return dao.getAll();
 	}
 
 	public List<TeamCompositionVO> findByTeamID(Integer teamID) {
-
+		return dao.findByTeamID(teamID);
 	}
 
 	public List<TeamCompositionVO> findByPlayerID(Integer playerID) {
-
+		return dao.findByPlayerID(playerID);
 	}
 }
