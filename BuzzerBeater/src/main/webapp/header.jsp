@@ -12,7 +12,8 @@
 		<div class="attr-nav">
 			<ul>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <i class="glyphicon glyphicon-pencil"></i></a>
+					data-toggle="dropdown"> 
+					<i class="glyphicon glyphicon-pencil"></i></a>
 					<!--新刪修"按鈕"(開始)-->
 					<ul class="dropdown-menu cart-list">
 						<li><h6>
@@ -27,21 +28,21 @@
 					</ul> <!--新刪修"按鈕"(結束)--></li>
 
 				<!--登入登出"按鈕"(開始)-->
-				<li><a href="#" class="cd-signin"
-					onclick="document.getElementById('id01').style.display='block'">
-						<i class="glyphicon glyphicon-log-in"></i> <c:choose>
-							<c:when test="${empty memberInfoVO.acc}">
-								<c:set var="var01" value="未登入" />
+				<li><a href="#" class="cd-signin" onclick="document.getElementById('id01').style.display='block'"><c:choose>
+							<c:when test="${empty LoginOK}">
+<!-- 								<i class="glyphicon glyphicon-log-in"></i> -->	 
+								<c:set var="var01" value="登入" />
 							</c:when>
 							<c:otherwise>
-								<c:set var="var01" value="${memberInfoVO.acc}" />
+							    <img src="${pictureUri}"  width="25" height="25"> 
+								<c:set var="var01" value="${LoginOK.name}" />
 							</c:otherwise>
 						</c:choose> ${var01}
 				</a></li>
-
-				<li><a href="GoogleLoginOutServlet" class="cd-signup"" > <i
-						class="glyphicon glyphicon-user"></i> <c:choose>
-							<c:when test="${empty memberInfoVO.acc}">
+				<li><a href="GoogleLoginOutServlet" class="cd-signup"" > 
+<!-- 				<i class="glyphicon glyphicon-user"></i>  -->
+				         <c:choose>
+							<c:when test="${empty LoginOK}">
 								<c:set var="var02" value="" />
 							</c:when>
 							<c:otherwise>
@@ -97,20 +98,22 @@
 						<li><a href="#">賽程子頁2<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="#">賽程子頁3<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/teams/listAllteam_front.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">球隊<!--這行的href輸入超連結頁面--></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">球隊子頁1<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">球隊子頁2<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">球隊子頁3<!--這行的href輸入超連結頁面--></a></li>
-					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+<!-- 					<ul class="dropdown-menu"> -->
+<!-- 						<li><a href="#">球隊子頁1這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">球隊子頁2這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">球隊子頁3這行的href輸入超連結頁面</a></li> -->
+<!-- 					</ul> -->
+					</li>
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/players/listAllPlayer_front.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">球員<!--這行的href輸入超連結頁面--></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">球員子頁1<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">球員子頁2<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">球員子頁3<!--這行的href輸入超連結頁面--></a></li>
-					</ul></li>
+<!-- 					<ul class="dropdown-menu"> -->
+<!-- 						<li><a href="#">球員子頁1這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">球員子頁2這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">球員子頁3這行的href輸入超連結頁面</a></li> -->
+<!-- 					</ul> -->
+					</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">數據<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">

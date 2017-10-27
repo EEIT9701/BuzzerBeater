@@ -169,6 +169,8 @@ span{
   						</thead>
   						<tbody>
   							<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}">
+  							<c:forEach var="gameMediaType" items="${gameMediaSvc.mediaType}">
+  							<c:if test="${gameMediaType eq 'video'}">
   								<tr align='center' valign='middle'>
       								<td>${gameMediaSvc.gamesVO.groupsVO.groupName}</td>
       								<td>${gameMediaSvc.gamesVO.teamAVO.teamName} </br>VS</br> ${gameMediaSvc.gamesVO.teamBVO.teamName}</td>
@@ -191,6 +193,8 @@ span{
 										</Form>
       								</td>
     							</tr>
+    							</c:if>
+  							</c:forEach>
   							</c:forEach>
   						</tbody>
 				</table>
@@ -250,8 +254,7 @@ span{
 	<!--主文(結束)-->
 
 	<jsp:include page="/footer_css.jsp" />
-	<script type="text/javascript"
-		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
 	$(document).ready(function () {
 		$('#table').DataTable();

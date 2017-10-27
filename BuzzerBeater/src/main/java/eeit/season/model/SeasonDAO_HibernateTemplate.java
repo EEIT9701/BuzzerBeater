@@ -20,11 +20,11 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
-	private static final String GET_ALL_SEASON = "from SeasonVO";
+	private static final String GET_ALL_SEASON = "FROM SeasonVO";
+	private static final String FIND_LATEST_SEASON = "SELECT MAX(seasonID) FROM SeasonVO";
 	
 	
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public SeasonVO findBySeasonID(Integer seasonID) {
 		return (SeasonVO) hibernateTemplate.get(SeasonVO.class, seasonID);
 	}
@@ -51,10 +51,14 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<SeasonVO> getAll() {
 		Object obj = hibernateTemplate.find(GET_ALL_SEASON);
 		return new LinkedHashSet<SeasonVO>((List<SeasonVO>) obj);
+	}
+	
+	@Override
+	public Integer getLatestID() {
+		return (Integer) hibernateTemplate.find(FIND_LATEST_SEASON).get(0);
 	}
 
 	public static void main(String args[]) {
@@ -79,13 +83,18 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 //		 sVO1.setSeasonBeginDate(null);
 //		 sVO1.setSignUpBegin(java.sql.Timestamp.valueOf("2017-10-10 18:00:00"));
 //		 sVO1.setDescriptions("...");
-//		
+//		 
 //		 GroupsVO gVO1 = new GroupsVO();
 //		 gVO1.setGroupName("新增1");
 //		 gVO1.setMaxPlayers(3);
+//		 SeasonVO sVO2 = new SeasonVO();
+//		 sVO2.setSeasonID(1001);
+//		 gVO1.setSeasonVO(sVO2);
+//		 
 //		 GroupsVO gVO2 = new GroupsVO();
 //		 gVO2.setGroupName("新增2");
 //		 gVO2.setMaxPlayers(3);
+//		 
 //		 Set<GroupsVO> gSet = new LinkedHashSet<GroupsVO>();
 //		 gSet.add(gVO1);
 //		 gSet.add(gVO2);
@@ -102,7 +111,7 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 		/****************** delete ******************/
 
-		 dao.delete(1002);
+//		 dao.delete(1001);
 
 		/****************** getAll ******************/
 
@@ -122,8 +131,8 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 			System.out.println();
 		}
 		
+		
 	}
-
 
 
 }

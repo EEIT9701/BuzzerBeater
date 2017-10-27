@@ -28,14 +28,12 @@ public class LocationinfoDAO_HibernateTemplate implements LocationinfoDAO_interf
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<LocationinfoVO> getAll() {
 		List<LocationinfoVO> list = (List<LocationinfoVO>) hibernateTemplate.find(GET_ALL_STMT);
 		return new LinkedHashSet<LocationinfoVO>(list);
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public LocationinfoVO findByID(Integer locationID) {
 		return (LocationinfoVO) hibernateTemplate.get(LocationinfoVO.class, locationID);
 	}
@@ -60,6 +58,7 @@ public class LocationinfoDAO_HibernateTemplate implements LocationinfoDAO_interf
 	}
 
 	public static void main(String[] args) throws Exception {
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		LocationinfoDAO_interface dao = (LocationinfoDAO_interface) context.getBean("LocationinfoDAO");
 

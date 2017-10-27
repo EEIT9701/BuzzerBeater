@@ -10,5 +10,7 @@ public interface GamesDAO_interface {
 
 	public void update(GamesVO gVO);
 
-	public void delete(Integer games_ID);
+	public void delete(Integer gameID);
+	
+	public GamesVO findByID(Integer gameID);
 }

@@ -6,7 +6,7 @@
         <html>
 
         <head>
-            <title>EEIT97-第一組</title>
+            <title>${teamsVO.teamName}</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <jsp:include page="/header_css.jsp" />

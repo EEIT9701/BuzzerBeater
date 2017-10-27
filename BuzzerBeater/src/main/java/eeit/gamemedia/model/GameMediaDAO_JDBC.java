@@ -14,7 +14,7 @@ public class GameMediaDAO_JDBC implements GameMediaDAO_Interface{
 	private static final String GET_ONE_STMT =
 		      "SELECT gameID,mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag FROM GameMedia where mediaID = ?";
 	private static final String GET_ALL_STMT =
-		      "SELECT * FROM GameMedia order by gameID";
+		      "SELECT * FROM GameMedia order by mediaID where mediaType = 'photo'";
 
 	@Override
 	public List<GameMediaVO> getAll() {

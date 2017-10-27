@@ -312,11 +312,11 @@ public class SeasonDAO_JDBC implements SeasonDAO_interface {
 
 		/****************** update ******************/
 
-		// SeasonVO sVO2 = new SeasonVO();
-		// sVO2.setSeasonID(1003);
-		// sVO2.setSeasonName("已修改");
-		// sVO2.setDescriptions("已修改");
-		// dao.update(sVO2);
+//		 SeasonVO sVO2 = new SeasonVO();
+//		 sVO2.setSeasonID(1002);
+//		 sVO2.setSeasonName("已修改");
+//		 sVO2.setDescriptions("已修改");
+//		 dao.update(sVO2);
 
 		/****************** delete ******************/
 

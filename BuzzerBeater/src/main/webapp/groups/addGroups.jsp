@@ -45,10 +45,10 @@
 				<tbody>
 					<tr>
 						<td>${seasonVO.seasonName}</td>
-			        	<td>${seasonVO.seasonBeginDate}</td>
-			        	<td>${seasonVO.seasonEndDate}</td>
-			        	<td>${seasonVO.signUpBegin}</td>
-			        	<td>${seasonVO.signUpEnd}</td>
+			        	<td><c:out value="${seasonVO.seasonBeginDate}" default="未輸入"/></td>
+			        	<td><c:out value="${seasonVO.seasonEndDate}" default="未輸入"/></td>
+			        	<td><c:out value="${seasonVO.signUpBegin}" default="未輸入"/></td>
+			        	<td><c:out value="${seasonVO.signUpEnd}" default="未輸入"/></td>
 					</tr>
 				</tbody>
 			</table>
@@ -67,33 +67,45 @@
 			   		</tr>
 			   	</thead>
 		    	<tbody>
-		    		<c:forEach var="groupsVO" items="${seasonVO.groupsSet}">
+		    		<%! int i = 0; %>
+		    		<c:forEach var="groupsSet" items="${groupsSet}">
 			    		<tr>
-			    			<td><input type="text" name="groupName" value="${groupsVO.groupName}"></td>
-				    		<td><input type="text" name="maxTeams" value="${groupsVO.maxTeams}"></td>
-				    		<td><input type="text" name="minTeams" value="${groupsVO.minTeams}"></td>
-				    		<td><input type="text" name="maxPlayers" value="${groupsVO.minPlayers}"></td>
-				    		<td><input type="text" name="minPlayers" value="${groupsVO.minPlayers}"></td>
-				    		<td><button type="button" id="btnDelGroup">刪除</button></td>
+			    			<td>${groupsSet.groupName}</td>
+				    		<td>${groupsSet.maxTeams}</td>
+				    		<td>${groupsSet.minTeams}</td>
+				    		<td>${groupsSet.minPlayers}</td>
+				    		<td>${groupsSet.minPlayers}</td>
+				    		<form action="<%=request.getContextPath()%>/Groups.do" method="post">
+				    			<input type="hidden" name="action" value="REMOVE_GROUP_TEMP">
+				    			<input type="hidden" name="setIndex" value="<%= i++ %>">
+				    			<td><input type="submit" id="btnDelGroup" value="刪除"></td>
+				    		</form>
 			    		</tr>
 		    		</c:forEach>
+		    		<% i=0; %>
 		    	</tbody>
 		    	<tfoot>
 					<form action="<%=request.getContextPath()%>/Groups.do" method="post">
-						<input type="hidden" name="action" value="ADD_GROUP">
-						<input type="hidden" name="seasonID" value="${seasonVO.seasonID}">
+						<input type="hidden" name="action" value="CHECK_GROUP">
 						<tr>
-				    		<td><input type="text" name="groupName"></td>
-					    	<td><input type="text" name="maxTeams"></td>
-					    	<td><input type="text" name="minTeams"></td>
-					    	<td><input type="text" name="maxPlayers"></td>
-					    	<td><input type="text" name="minPlayers"></td>
+				    		<td><input type="text" name="groupName" value='<c:out value="${groupsVO.groupName}" default=""/>'></td>
+					    	<td><input type="text" name="maxTeams" value='<c:out value="${groupsVO.maxTeams}" default="16"/>'></td>
+					    	<td><input type="text" name="minTeams" value='<c:out value="${groupsVO.minTeams}" default="2"/>'></td>
+					    	<td><input type="text" name="maxPlayers" value='<c:out value="${groupsVO.maxPlayers}" default="15"/>'></td>
+					    	<td><input type="text" name="minPlayers" value='<c:out value="${groupsVO.minPlayers}" default="7"/>'></td>
 					    	<td><input type="submit" value="新增"></td>
 					    	<td><input type="reset" value="清除"></td>
 				    	</tr>
 			    	</form>
 		    	</tfoot>
 		    </table>
+		    
+		    <form action="<%=request.getContextPath()%>/Season.do" method="post">
+		    	<input type="hidden" name="action" value="ADD_SEASON">
+		    	<input type="submit" value="確認新增">
+		    </form>
+		    
+		    
 			
 		
 			<!-- 網頁內容END -->
@@ -107,15 +119,7 @@
 			$(document).ready(function(){
 				
 				
-				function loadGroups(){
-					$.getJSON('<%=request.getContextPath()%>/Season.do',{'action':'GET_GROUPS'}
-					,function(data){
-						
-						
-						
-						
-					})					
-				}
+
 			})
 		</script>
     </body>

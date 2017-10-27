@@ -13,19 +13,22 @@ import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import eeit.groups.model.GroupsVO;
+
 public class SeasonService {
 
 	private SeasonDAO_interface dao;
 
 	public SeasonService() {
 		// dao = new SeasonDAO_Hibernate();
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (SeasonDAO_interface) context.getBean("SeasonDAO");
 	}
-	
-	public Integer getLatestSeason(){
-		SeasonDAO_JDBC jdbc = new SeasonDAO_JDBC();
-		return jdbc.getLatestID();
+
+
+	public Integer getLatestSeason() {
+		return dao.getLatestID();
 	}
 
 	public SeasonVO addSeason(String seasonName, Date seasonBeginDate, Date seasonEndDate, Timestamp signUpBegin,
@@ -121,4 +124,5 @@ public class SeasonService {
 
 		return returnList;
 	}
+
 }

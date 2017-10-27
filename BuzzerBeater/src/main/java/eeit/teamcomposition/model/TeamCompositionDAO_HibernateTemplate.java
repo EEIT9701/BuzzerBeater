@@ -9,10 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import eeit.players.model.PlayerDAO_interface;
-import eeit.players.model.PlayersVO;
-
+@SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
 public class TeamCompositionDAO_HibernateTemplate implements TeamCompositionDAO_interface {
 	private HibernateTemplate hibernateTemplate;
@@ -22,6 +19,8 @@ public class TeamCompositionDAO_HibernateTemplate implements TeamCompositionDAO_
 	}
 
 	private static final String GET_ALL_STMT = "FROM TeamCompositionVO ORDER BY leaveTeamDate DESC";
+	private static final String FIND_BY_TEAMID = "FROM TeamCompositionVO WHERE teamID=?";
+	private static final String FIND_BY_PLAYERID = "FROM TeamCompositionVO WHERE playerID=?";
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -37,42 +36,52 @@ public class TeamCompositionDAO_HibernateTemplate implements TeamCompositionDAO_
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void delete(Integer teamID) {
+	public void deleteByTeamID(Integer teamID) {
 		TeamCompositionVO tcVO = (TeamCompositionVO) hibernateTemplate.get(TeamCompositionVO.class, teamID);
 		hibernateTemplate.delete(tcVO);
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void deleteByPlayerID(Integer playerID) {
+		TeamCompositionVO tcVO = (TeamCompositionVO) hibernateTemplate.get(TeamCompositionVO.class, playerID);
+		hibernateTemplate.delete(tcVO);
+	}
+
+	@Override
 	public Set<TeamCompositionVO> getAll() {
 		List<TeamCompositionVO> list = (List<TeamCompositionVO>)hibernateTemplate.find(GET_ALL_STMT);
 		return new LinkedHashSet<TeamCompositionVO>(list);
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public TeamCompositionVO findByTeamID(Integer teamID) {
-		return (TeamCompositionVO) hibernateTemplate.get(TeamCompositionVO.class, teamID);
+	public List<TeamCompositionVO> findByTeamID(Integer teamID) {
+		return (List<TeamCompositionVO>) hibernateTemplate.find(FIND_BY_TEAMID, teamID);
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public TeamCompositionVO findByPlayerID(Integer playerID) {
-		return (TeamCompositionVO) hibernateTemplate.get(TeamCompositionVO.class, playerID);
+	public List<TeamCompositionVO> findByPlayerID(Integer playerID) {
+		return (List<TeamCompositionVO>) hibernateTemplate.find(FIND_BY_PLAYERID, playerID);
 	}
 	
 	public static void main(String[] args){
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		TeamCompositionDAO_interface dao = (TeamCompositionDAO_interface) context.getBean("TeamCompositionDAO");
 		
-		Set<TeamCompositionVO> set = dao.getAll();
-		for(TeamCompositionVO vo : set ){
-			System.out.print(vo.getPlayerRole()+", ");
-			System.out.print(vo.getPlayerNo()+", ");
-			System.out.println();
-			
-		}
+//		Set<TeamCompositionVO> set = dao.getAll();
+//		for(TeamCompositionVO vo : set ){
+//			System.out.print(vo.getPlayerRole()+", ");
+//			System.out.print(vo.getPlayerNo()+", ");
+//			System.out.println();
+//		}
+		
+//		List<TeamCompositionVO> list = dao.findByPlayerID(70001);
+//		for(TeamCompositionVO vo : list){
+//			System.out.println(vo.getPlayerRole());
+//		}
+		
+		dao.deleteByPlayerID(70001);
 	}
 
 }

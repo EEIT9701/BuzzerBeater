@@ -74,6 +74,12 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 		}
 
 	}
+	
+	@Override
+	public GamesVO findByID(Integer gamesID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public static void main(String[] args) {
 
@@ -89,5 +95,7 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 			System.out.println();
 		}
 	}
+
+
 
 }

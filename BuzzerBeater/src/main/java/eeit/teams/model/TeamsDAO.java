@@ -64,7 +64,7 @@ public class TeamsDAO implements TeamsDAO_interface {
 				TeamsVO.setTeamName(rs.getString("teamName"));
 				TeamsVO.setCoachName(rs.getString("coachName"));
 				TeamsVO.setBossName(rs.getString("bossName"));
-				TeamsVO.setTeamBadge(rs.getBlob("teamBadge"));
+				TeamsVO.setTeamBadge(rs.getString("teamBadge"));
 				TeamsVO.setTotalWin(rs.getInt("totalWin"));
 				TeamsVO.setTotalLose(rs.getInt("totalLose"));
 				TeamsVO.setWinRate(rs.getFloat("winRate"));

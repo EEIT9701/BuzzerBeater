@@ -20,7 +20,7 @@ public class InsersTeamPhoto {
 		String user = "sa";
 		String pswd = "P@ssw0rd";
 		
-		String path = "Team Photo";
+		String path = "C:/Resource/Project/BuzzerBeater/BuzzerBeater/src/main/java/資料庫表格/Team Photo";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;

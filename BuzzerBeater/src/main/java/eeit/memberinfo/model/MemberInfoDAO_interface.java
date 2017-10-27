@@ -9,5 +9,5 @@ public interface MemberInfoDAO_interface {
 	public MemberInfoVO findByPK(Integer memberID);
 	public List<MemberInfoVO> getAll();
 
-	public boolean findByAcc(String acc);
+	public MemberInfoVO findByAcc(String acc);
 }

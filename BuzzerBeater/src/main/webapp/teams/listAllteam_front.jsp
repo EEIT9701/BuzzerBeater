@@ -6,19 +6,19 @@
 		<html>
 
 		<head>
-			<title>EEIT97-第一組</title>
+			<title>BuzzerBeater-球隊</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 			<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 			<jsp:include page="/header_css.jsp" />
 			<style>
-            #img1 {
-                width: 55px;
-                height: 40px;
-                margin: auto;
-            }
-            </style>
+				#img1 {
+					width: 55px;
+					height: 40px;
+					margin: auto;
+				}
+			</style>
 		</head>
 
 		<body>

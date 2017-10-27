@@ -91,30 +91,71 @@ public class MemberInfoDAO implements MemberInfoDAO_interface {
 
 		return list;
 	}
-
-	@SuppressWarnings({ "deprecation", "rawtypes" })
+    /***比對資料庫是否有帳號***/
 	@Override
-	public boolean findByAcc(String acc) {
+	public MemberInfoVO findByAcc(String account) {
 			
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Iterator result = null;
+		Transaction tx = null;
+		MemberInfoVO memberInfoVO = new MemberInfoVO();
 		try {
-			session.beginTransaction();
+			tx = session.beginTransaction();
 			
 			Query query = session.createQuery("from MemberInfoVO where acc=?");	
-			query.setParameter(0, acc);
-			result = query.iterate();
-			if(result.hasNext()){
-				return true;
+			query.setParameter(0, account);
+			List<MemberInfoVO> list = query.list();
+			for (MemberInfoVO aMemberInfoVO : list) {
+//				System.out.print(aMemberInfoVO.getAcc() + ",");
+//				System.out.print(aMemberInfoVO.getAuth() + ",");
+//				System.out.print(aMemberInfoVO.getName() + ",");
+//				System.out.print(aMemberInfoVO.getMemberID() + ",");
+//				System.out.print(aMemberInfoVO.getRegisterTime() + ",");
+//				System.out.print(aMemberInfoVO.getTeamID());
+//				System.out.println();
+				memberInfoVO.setAcc(aMemberInfoVO.getAcc());
+				memberInfoVO.setAuth(aMemberInfoVO.getAuth());
+				memberInfoVO.setMemberID(aMemberInfoVO.getMemberID());
+				memberInfoVO.setName(aMemberInfoVO.getName());
+				memberInfoVO.setRegisterTime(aMemberInfoVO.getRegisterTime());
+				memberInfoVO.setTeamID(aMemberInfoVO.getTeamID());
 			}
-			else return false;
+			tx.commit();
+		   
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		
+		return memberInfoVO;
 	}
-
+//	/***比對資料庫是否有帳號***/
+//	@SuppressWarnings({ "deprecation", "rawtypes" })
+//	@Override
+//	public MemberInfoVO findByAcc(String account) {
+//			
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		Iterator result = null;
+//		Transaction tx = null;
+//		boolean bl ;         //回傳true代表資料庫有account ,false 則資料庫沒有account
+//		try {
+//			tx = session.beginTransaction();
+//			
+//			Query query = session.createQuery("from MemberInfoVO where acc=?");	
+//			query.setParameter(0, account);
+//			result = query.iterate();
+//			
+//			if(result.hasNext()){
+//				bl =  true;
+//			}
+//			else bl =  false;
+//			
+//		   tx.commit();
+//		} catch (RuntimeException ex) {
+//			session.getTransaction().rollback();
+//			throw ex;
+//		}
+//		return bl;
+//	}
 //	 public static void main(String[] args) {
 //	 MemberInfoDAO dao = new MemberInfoDAO();
 	 

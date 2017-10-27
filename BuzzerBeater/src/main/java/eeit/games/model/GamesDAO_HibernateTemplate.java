@@ -18,11 +18,10 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
-	private static final String GET_ALL_STMT = "from GamesVO";
+	private static final String GET_ALL_STMT = "FROM GamesVO";
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<GamesVO> getAll() {
 		Object obj = hibernateTemplate.find(GET_ALL_STMT);
 		Set<GamesVO> set = new LinkedHashSet<GamesVO>((List<GamesVO>)obj);
@@ -47,12 +46,18 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		GamesVO gamesVO = (GamesVO) hibernateTemplate.get(GamesVO.class, gameID);
 		hibernateTemplate.delete(gamesVO);
 	}
+	
+	@Override
+	public GamesVO findByID(Integer gameID) {
+		return (GamesVO) hibernateTemplate.get(GamesVO.class, gameID);
+	}
 
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		GamesDAO_interface dao = (GamesDAO_interface) context.getBean("GamesDAO");
+		
 //		 dao.delete(4003);
 
 		Set<GamesVO> set = dao.getAll();
@@ -64,5 +69,7 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 			System.out.println();
 		}
 	}
+
+
 
 }

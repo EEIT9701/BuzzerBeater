@@ -10,8 +10,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import eeit.personaldata.model.PersonalDataDAO_interface;
-
+@SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
 public class PlayerGroupsDAO_HibernateTemplate implements PlayerGroupsDAO_interface {
 	private HibernateTemplate hibernateTemplate;
@@ -22,9 +21,7 @@ public class PlayerGroupsDAO_HibernateTemplate implements PlayerGroupsDAO_interf
 
 	private static final String GET_ALL_STMT = "FROM PlayerGroupsVO";
 
-	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Set<PlayerGroupsVO> getAll() {
 		List<PlayerGroupsVO> list = (List<PlayerGroupsVO>)hibernateTemplate.find(GET_ALL_STMT);
 		return new LinkedHashSet<PlayerGroupsVO>(list);
@@ -43,6 +40,7 @@ public class PlayerGroupsDAO_HibernateTemplate implements PlayerGroupsDAO_interf
 	}
 
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		PlayerGroupsDAO_interface dao = (PlayerGroupsDAO_interface) context.getBean("PlayerGroupsDAO");
 
