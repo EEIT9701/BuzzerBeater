@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+@SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
 public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 	private HibernateTemplate hibernateTemplate;
@@ -19,8 +20,8 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 	}
 
 	private static final String GET_ALL_STMT = "FROM GamesVO";
+	private static final String FIND_BY_GROUPID = "FROM GamesVO WHERE groupID=?";
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Set<GamesVO> getAll() {
 		Object obj = hibernateTemplate.find(GET_ALL_STMT);
@@ -48,8 +49,13 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 	}
 	
 	@Override
-	public GamesVO findByID(Integer gameID) {
+	public GamesVO findByGameID(Integer gameID) {
 		return (GamesVO) hibernateTemplate.get(GamesVO.class, gameID);
+	}
+	
+	@Override
+	public List<GamesVO> findByGroupID(Integer groupID) {
+		return (List<GamesVO>) hibernateTemplate.find(FIND_BY_GROUPID, groupID);
 	}
 
 	public static void main(String[] args) {
@@ -60,7 +66,7 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		
 //		 dao.delete(4003);
 
-		Set<GamesVO> set = dao.getAll();
+		Set<GamesVO> set = new LinkedHashSet<GamesVO>(dao.findByGroupID(2002));
 		for (GamesVO gvo : set) {
 			System.out.print(gvo.getGameID() + ", ");
 			System.out.print(gvo.getGroupsVO().getGroupID() + ", ");
@@ -68,7 +74,12 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 			System.out.print(gvo.getLocationinfoVO().getLocationName() + ", ");
 			System.out.println();
 		}
+		
+		
+		
 	}
+
+
 
 
 

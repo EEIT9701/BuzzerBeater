@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import eeit.groups.model.GroupsVO;
@@ -100,11 +101,17 @@ public class GamesDAO_JDBC implements GamesDAO_interface {
 	}
 
 	@Override
-	public GamesVO findByID(Integer gamesID) {
+	public GamesVO findByGameID(Integer gamesID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	@Override
+	public List<GamesVO> findByGroupID(Integer groupID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public static void main(String[] args) {
 		GamesDAO_JDBC dao = new GamesDAO_JDBC();
 
@@ -115,7 +122,5 @@ public class GamesDAO_JDBC implements GamesDAO_interface {
 			System.out.println();
 		}
 	}
-
-
 
 }

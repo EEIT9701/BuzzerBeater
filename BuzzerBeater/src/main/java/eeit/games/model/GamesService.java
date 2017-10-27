@@ -1,10 +1,7 @@
 package eeit.games.model;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.ApplicationContext;
@@ -16,6 +13,7 @@ public class GamesService {
 
 	public GamesService() {
 		// dao = new GamesDAO_Hibernate();
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (GamesDAO_interface) context.getBean("GamesDAO");
 	}
@@ -61,5 +59,13 @@ public class GamesService {
 
 	public void deleteGames(Integer gamesID) {
 		dao.delete(gamesID);
+	}
+
+	public GamesVO findByGameID(Integer gameID) {
+		return dao.findByGameID(gameID);
+	}
+
+	public List<GamesVO> findByGroupID(Integer groupID) {
+		return dao.findByGroupID(groupID);
 	}
 }
