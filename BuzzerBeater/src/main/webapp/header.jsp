@@ -121,14 +121,15 @@
 						<li><a href="#">數據子頁2<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="#">數據子頁3<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/gamemedia/video.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">影片<!--這行的href輸入超連結頁面--></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">影片子頁1<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">影片子頁2<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">影片子頁3<!--這行的href輸入超連結頁面--></a></li>
-					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+<!-- 					<ul class="dropdown-menu"> -->
+<!-- 						<li><a href="#">影片子頁1這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">影片子頁2這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">影片子頁3這行的href輸入超連結頁面</a></li> -->
+<!-- 					</ul> -->
+					</li>
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/gamemedia/photo.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">照片<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">照片子頁1<!--這行的href輸入超連結頁面--></a></li>
