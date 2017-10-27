@@ -74,7 +74,8 @@
                             
                             <form action="<%=request.getContextPath() %>/Players.do">
                              <c:forEach var="playersIfo" items="${playersIfo}">
-                            <button type="submit" class="btn btn-danger"><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp">取消</a></button>
+                            <button type="submit" class="btn btn-danger">取消</button>
+                            <input type="hidden" name="action" value="goTolistAllPlayer_back">
 <!--                             <input type="hidden" name="action" value="getOne_For_Display"> -->
 <%--                             <input type="hidden" name="playerName" value="${playersIfo.playerName}"> --%>
                             </c:forEach>

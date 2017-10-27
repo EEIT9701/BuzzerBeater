@@ -104,20 +104,22 @@
 						<li><a href="#">賽程子頁2<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="#">賽程子頁3<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/teams/listAllteam_front.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">球隊<!--這行的href輸入超連結頁面--></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">球隊子頁1<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">球隊子頁2<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">球隊子頁3<!--這行的href輸入超連結頁面--></a></li>
-					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+<!-- 					<ul class="dropdown-menu"> -->
+<!-- 						<li><a href="#">球隊子頁1這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">球隊子頁2這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">球隊子頁3這行的href輸入超連結頁面</a></li> -->
+<!-- 					</ul> -->
+					</li>
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/players/listAllPlayer_front.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">球員<!--這行的href輸入超連結頁面--></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">球員子頁1<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">球員子頁2<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">球員子頁3<!--這行的href輸入超連結頁面--></a></li>
-					</ul></li>
+<!-- 					<ul class="dropdown-menu"> -->
+<!-- 						<li><a href="#">球員子頁1這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">球員子頁2這行的href輸入超連結頁面</a></li> -->
+<!-- 						<li><a href="#">球員子頁3這行的href輸入超連結頁面</a></li> -->
+<!-- 					</ul> -->
+					</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">數據<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">

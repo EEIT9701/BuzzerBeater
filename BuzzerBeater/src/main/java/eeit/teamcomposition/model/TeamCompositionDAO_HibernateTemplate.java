@@ -36,8 +36,15 @@ public class TeamCompositionDAO_HibernateTemplate implements TeamCompositionDAO_
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void delete(Integer teamID) {
+	public void deleteByTeamID(Integer teamID) {
 		TeamCompositionVO tcVO = (TeamCompositionVO) hibernateTemplate.get(TeamCompositionVO.class, teamID);
+		hibernateTemplate.delete(tcVO);
+	}
+	
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void deleteByPlayerID(Integer playerID) {
+		TeamCompositionVO tcVO = (TeamCompositionVO) hibernateTemplate.get(TeamCompositionVO.class, playerID);
 		hibernateTemplate.delete(tcVO);
 	}
 
@@ -69,10 +76,12 @@ public class TeamCompositionDAO_HibernateTemplate implements TeamCompositionDAO_
 //			System.out.println();
 //		}
 		
-		List<TeamCompositionVO> list = dao.findByPlayerID(70001);
-		for(TeamCompositionVO vo : list){
-			System.out.println(vo.getPlayerRole());
-		}
+//		List<TeamCompositionVO> list = dao.findByPlayerID(70001);
+//		for(TeamCompositionVO vo : list){
+//			System.out.println(vo.getPlayerRole());
+//		}
+		
+		dao.deleteByPlayerID(70001);
 	}
 
 }
