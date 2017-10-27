@@ -285,6 +285,12 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 		return null;
 	}
 
+	@Override
+	public List<PersonalDataVO> findByGameIDAndTeamID(Integer GameID, Integer TeamID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 }

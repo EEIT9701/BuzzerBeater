@@ -19,10 +19,17 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 
 	private static final String GET_ALL_STMT = "FROM PersonalDataVO";
 	private static final String FIND_BY_GAMEID = "FROM PersonalDataVO WHERE GameID=?";
-	
+	private static final String FIND_BY_GAMEID_AND_TEAMID = "FROM PersonalDataVO WHERE GameID=? AND TeamID=?";
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<PersonalDataVO> findByGameID(Integer GameID){
+	public List<PersonalDataVO> findByGameIDAndTeamID(Integer GameID, Integer TeamID) {
+		return (List<PersonalDataVO>) hibernateTemplate.find(FIND_BY_GAMEID_AND_TEAMID, GameID, TeamID);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PersonalDataVO> findByGameID(Integer GameID) {
 		return (List<PersonalDataVO>) hibernateTemplate.find(FIND_BY_GAMEID, GameID);
 	}
 
@@ -63,21 +70,26 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		PersonalDataDAO_interface dao = (PersonalDataDAO_interface) context.getBean("PersonalDataDAO");
 
-//		List<PersonalDataVO> set = dao.getAll();
-//		for (PersonalDataVO vo : set) {
-//			System.out.print(vo.getPlayersVO().getPlayerID() + ", ");
-//			System.out.print(vo.getGamesVO().getGameID() + ", ");
-//			System.out.print(vo.getTeamsVO().getTeamName() + ", ");
-//			System.out.print(vo.getPlayersVO().getPlayerName() + ", ");
-//			System.out.println();
-//		}
-		
-		List<PersonalDataVO> list = dao.findByGameID(4001);
-		for(PersonalDataVO vo:list){
+		// List<PersonalDataVO> set = dao.getAll();
+		// for (PersonalDataVO vo : set) {
+		// System.out.print(vo.getPlayersVO().getPlayerID() + ", ");
+		// System.out.print(vo.getGamesVO().getGameID() + ", ");
+		// System.out.print(vo.getTeamsVO().getTeamName() + ", ");
+		// System.out.print(vo.getPlayersVO().getPlayerName() + ", ");
+		// System.out.println();
+		// }
+
+		List<PersonalDataVO> list = dao.findByGameIDAndTeamID(4001, 3001);
+		for (PersonalDataVO vo : list) {
 			System.out.print(vo.getPlayersVO().getPlayerID() + ", ");
 			System.out.print(vo.getGamesVO().getGameID() + ", ");
+			System.out.print(vo.getTeamsVO().getTeamID()+ ", ");
 			System.out.print(vo.getTeamsVO().getTeamName() + ", ");
 			System.out.print(vo.getPlayersVO().getPlayerName() + ", ");
+			System.out.print(vo.getFg() + ", ");
+			System.out.print(vo.getPlayersVO().getPlayerName() + ", ");
+			System.out.print(vo.getTeamsVO().getTeamName() + ", ");
+
 			System.out.println();
 		}
 	}
