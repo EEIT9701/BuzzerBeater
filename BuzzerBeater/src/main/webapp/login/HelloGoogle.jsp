@@ -37,7 +37,7 @@
 			//把取得的id_token送回後端servlet
 			var xhr = new XMLHttpRequest();
 			if (xhr != null) {  
-				xhr.open("POST", "LoginServlet");
+				xhr.open("POST", "memberInfoServlet.do");
 				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 				xhr.send("idtoken=" + id_token);
 			}

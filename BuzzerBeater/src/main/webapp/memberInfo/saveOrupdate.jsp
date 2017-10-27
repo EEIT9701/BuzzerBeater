@@ -3,9 +3,9 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	MemberInfoService dao = new MemberInfoService();
-	List<MemberInfoVO> list = dao.getAll();
-	pageContext.setAttribute("list", list);
+// 	MemberInfoService dao = new MemberInfoService();
+// 	List<MemberInfoVO> list = dao.getAll();
+// 	pageContext.setAttribute("list", list);
 %>
 <jsp:useBean id="memberInfoSvc" scope="page" class="eeit.memberinfo.model.MemberInfoService" />
 <!DOCTYPE >
@@ -62,7 +62,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="MemberInfoVO" items="${list}">
+							<c:forEach var="MemberInfoVO" items="${memberInfoSvc.all}">
 								<tr align='center' valign='middle'>
 									<td>${MemberInfoVO.memberID}</td>
 									<td>${MemberInfoVO.acc}</td>
@@ -123,6 +123,8 @@
 			  }
 			})
 		});
+		
+		
 	</script>
 	
 </body>
