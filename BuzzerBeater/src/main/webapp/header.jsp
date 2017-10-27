@@ -77,14 +77,14 @@
 		<div class="collapse navbar-collapse" id="navbar-menu">
 			<ul class="nav navbar-nav navbar-right" data-in="fadeInDown">
 				<li><a href="#">Home</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/season/season_front.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">賽季<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">賽季子頁1<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="#">賽季子頁2<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="#">賽季子頁3<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/groups/groupFront.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">分組<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">分組子頁1<!--這行的href輸入超連結頁面--></a></li>
