@@ -3,12 +3,11 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	MemberInfoService dao = new MemberInfoService();
-	List<MemberInfoVO> list = dao.getAll();
-	pageContext.setAttribute("list", list);
+// 	MemberInfoService dao = new MemberInfoService();
+// 	List<MemberInfoVO> list = dao.getAll();
+// 	pageContext.setAttribute("list", list);
 %>
-<jsp:useBean id="memberInfoSvc" scope="page"
-	class="eeit.memberinfo.model.MemberInfoService" />
+<%-- <jsp:useBean id="memberInfoSvc" scope="page" class="eeit.memberinfo.model.MemberInfoService" /> --%>
 <!DOCTYPE >
 <html>
 <head>
@@ -21,13 +20,11 @@
 <link href="<%=request.getContextPath()%>/css/style.css"
 	rel="stylesheet" type="text/css" media="all" />
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
-
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 <!-- ***套用新的模太框檔案*** -->
 <script src="<%=request.getContextPath()%>/dist/jdialog.min.js"></script>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/dist/jdialog.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/dist/jdialog.min.css">	
+
 <style>
 #st1 {
 	padding: 30px;
@@ -44,7 +41,8 @@
 	<!--主文(開始)-->
 	<div class="container">
 
-		<br> <br>
+		<br>
+		<br>
 		<!--****************-->
 		<!-- 第二列(開始) -->
 		<!--****************-->
@@ -60,54 +58,98 @@
 								<th>會員名稱</th>
 								<th>權限</th>
 								<th>註冊時間</th>
-								<th style="display: none;">球隊ID</th>
+							    <th>球隊ID</th>
 								<th></th>
 								<th></th>
 							</tr>
 						</thead>
-						<tbody>
-							<c:forEach var="MemberInfoVO" items="${list}">
-								<tr align='center' valign='middle'>
-									<td>${MemberInfoVO.memberID}</td>
-									<td>${MemberInfoVO.acc}</td>
-									<td>${MemberInfoVO.name}</td>
-									<td>${MemberInfoVO.auth}</td>
-									<td>${MemberInfoVO.registerTime}</td>
-									<td style="display: none;">${MemberInfoVO.teamID}</td>
-									<td><button type="button" class="btn btn-lg btn-primary" data-toggle="JDialog" data-target="dialog-4" name="test01">修改</button></td>
-									<td><button type="button" class="btn btn-lg btn-warning">刪除</button></td>
-								</tr>
-							</c:forEach>
+						<tbody id="tbody01">
+
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-		<jsp:include page="/footer.jsp" />
+	<jsp:include page="/footer.jsp" />
 	</div>
-	
-	<div class="jDialog" id="dialog-4">
+   
+	<!--主文(結束)-->
+<div class="jDialog" id="dialog-4">
 		<div class="content">
-<!-- 			<h3 id="MemberInfoVO_memberID">ID:會員資料</h3> -->
+		
+<!-- 			<h3 id="MemberInfoVO_memberID">會員資料ID:</h3> -->
 <!-- 			 <input id="MemberInfoVO_memberID"  placeholder="會員編號" type="text" required> -->
-			 <input id="MemberInfoVO_acc" placeholder="會員帳號" type="text" value="" required>
-			 <input id="MemberInfoVO_name"  placeholder="會員名稱" type="text" value="" required>
-			 <input id="MemberInfoVO_auth"  placeholder="權限"  type="text" value="" required>
+			     <input id="MemberInfoVO_acc" placeholder="會員帳號" type="text" value="" required>
+			     <input id="MemberInfoVO_name"  placeholder="會員名稱" type="text" value="" required>
+			     <input id="MemberInfoVO_auth"  placeholder="權限"  type="text" value="" required>
 <!-- 			 <input id="MemberInfoVO_registerTime"  placeholder="註冊時間" type="text" required> -->
 <!-- 			 <input id="MemberInfoVO_teamID"  placeholder="球隊ID" type="text" required> -->
 			
 			<div>
-				<button class="button" data-dismiss="JDialog" id="test">確定</button>
+				<button class="button" data-dismiss="JDialog" id="jDialogButton">確定</button>
 			</div>
 		</div>
-	</div>
-
-	<!--主文(結束)-->
+	</div>	
+	
+	
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
-		$(document).ready(function() {
-			$('#example').DataTable({
+	$(function(){
+		//生成memberInfoServlet 取值, 回傳JSON格式物件,並且 指定位置生成資料
+		loadProduct('GET_ALL_MEMBERINFO_JSON');
+
+		function loadProduct(id){
+		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){
+			 var docFrag = $(document.createDocumentFragment());
+			 //var tb = $('#example>tbody').children('tr:eq(0)');
+			 var tb = $('#tbody01');
+			 tb.empty;
+			 $.each(data, function (idx, MemberInfoVO) {
+	               var cell1 = $('<td></td>').text(MemberInfoVO.memberID);
+	               var cell2 = $('<td></td>').text(MemberInfoVO.acc);
+	               var cell3 = $('<td></td>').text(MemberInfoVO.name);
+	               var cell4 = $('<td></td>').text(MemberInfoVO.auth);
+	               var cell5 = $('<td></td>').text(MemberInfoVO.registerTime);
+	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
+	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" data-toggle="JDialog" data-target="dialog-4" >修改</button></td>');
+	               var cell8 = $('<td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td>');
+	               var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8]);
+ 	               docFrag.append(row);
+ 	               tb.append(docFrag);
+	           })
+     
+	     	   $(".JDialog").jDialog({		
+				     skinClassName : 'demo',
+				     animationType : 'flip',
+				     allowOverlay : false
+		       }); 
+	          	
+			   //案修改鍵後,跳出視窗所顯示的訊息
+	           $('.btn-primary').on('click', function(){          	    		         
+ 		       	 //可以取得acc
+ 		       	 var acc = $(this).parents('tr').find('td:nth-child(2)').text();
+ 		        //可以取得name
+ 		       	 var name = $(this).parents('tr').find('td:nth-child(3)').text();
+ 		       	 //可以取得auth
+ 		       	 var auth = $(this).parents('tr').find('td:nth-child(4)').text()
+ 		       	    	 
+	        	 $("#MemberInfoVO_acc").val(acc);
+	  			 $("#MemberInfoVO_name").val(name);
+	  			 $("#MemberInfoVO_auth").val(auth);
+          
+	           });
+			 	     
+	           //跳出視窗的 "確定"鍵, 這邊設定回傳到servlet的參數
+	           $('#jDialogButton').on('click', function(){ 
+	        	   alert($("#MemberInfoVO_acc").val() + $("#MemberInfoVO_name").val() + $("#MemberInfoVO_auth").val());
+// 	         	$.post('/BuzzerBeater/memberInfoServlet.do',{"MemberInfoVO_acc":"","MemberInfoVO_name":"","MemberInfoVO_auth":""},function(){ 		
+// 	         	})	  
+
+ 		       });    
+     
+	           /***執行jQuery table 的DataTable套件, 然後套用中文參數***/
+              $('#example').DataTable({
 				columnDefs: [{ width: 200, targets: 6}],
 				"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
 				"pagingType": "full_numbers",
@@ -123,33 +165,14 @@
 						"previous":"上一頁",
 						"next":"下一頁",
 						"last":"最末頁"					
-				}
+					}
 			  }
-			});
-		});
-		
-		$("tbody button[name=test01]").on('click',function(){
-//  			var datas = $(this).val();
-//  			$("#MemberInfoVO_memberID").text(datas);
-//          console.log(datas);
-//          console.log($("tbody button[name=test01]").parent("tr").children("td:eq(0)").);
-			
-			var datas = $(this).parents('tr').find('td:nth-child(1)').text();
-// 			 $("#MemberInfoVO_memberID").attr('placeholder',$(this).parents('tr').find('td:nth-child(1)').text());
-			 $("#MemberInfoVO_acc").attr('value',$(this).parents('tr').find('td:nth-child(1)').text());
-			 $("#MemberInfoVO_name").attr('value',$(this).parents('tr').find('td:nth-child(2)').text());
-			 $("#MemberInfoVO_auth").attr('value',$(this).parents('tr').find('td:nth-child(3)').text());
-//			 $("#MemberInfoVO_registerTime").attr('placeholder',$(this).parents('tr').find('td:nth-child(1)').text());
-// 			 $("#MemberInfoVO_teamID").attr('placeholder',$(this).parents('tr').find('td:nth-child(1)').text());
-			 
-		})
-		
-		$(".JDialog").jDialog({		
-			skinClassName : 'demo',
-			animationType : 'flip',
-			allowOverlay : false
-		});
-	</script>
+			})
+		 });
+		} 
 
+	})
+	</script>
+	
 </body>
 </html>

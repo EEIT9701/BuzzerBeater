@@ -20,8 +20,7 @@
 <link href="<%=request.getContextPath()%>/css/style.css"
 	rel="stylesheet" type="text/css" media="all" />
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 
 <style>
 #st1 {
@@ -62,18 +61,7 @@
 							</tr>
 						</thead>
 						<tbody id="tbody01">
-<%-- 							<c:forEach var="MemberInfoVO" items="${list}"> --%>
-<!-- 								<tr align='center' valign='middle' > -->
-<%-- 									<td>${MemberInfoVO.memberID}</td> --%>
-<%-- 									<td>${MemberInfoVO.acc}</td> --%>
-<%-- 									<td>${MemberInfoVO.name}</td> --%>
-<%-- 									<td>${MemberInfoVO.auth}</td> --%>
-<%-- 									<td>${MemberInfoVO.registerTime}</td> --%>
-<%-- 							        <td>${MemberInfoVO.teamID}</td> --%>
-<!-- 								    <td><button type="button" class="btn btn-lg btn-primary" >修改</button></td> -->
-<!-- 								    <td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td> -->
-<!-- 								</tr> -->
-<%-- 							</c:forEach> --%>
+
 						</tbody>
 					</table>
 				</div>
@@ -83,13 +71,37 @@
 	</div>
    
 	<!--主文(結束)-->
+	
+	
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
 	$(function(){
-		/***執行jQuery table 的DataTable套件, 然後套用中文參數***/
-		$(document).ready(function() {
-			$('#example').DataTable({
+		//生成memberInfoServlet 取值, 回傳JSON格式物件,並且 指定位置生成資料
+		loadProduct('GET_ALL_MEMBERINFO_JSON');
+
+		function loadProduct(id){
+		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){
+			 var docFrag = $(document.createDocumentFragment());
+			 //var tb = $('#example>tbody').children('tr:eq(0)');
+			 var tb = $('#tbody01');
+			 tb.empty;
+			 $.each(data, function (idx, MemberInfoVO) {
+	               var cell1 = $('<td></td>').text(MemberInfoVO.memberID);
+	               var cell2 = $('<td></td>').text(MemberInfoVO.acc);
+	               var cell3 = $('<td></td>').text(MemberInfoVO.name);
+	               var cell4 = $('<td></td>').text(MemberInfoVO.auth);
+	               var cell5 = $('<td></td>').text(MemberInfoVO.registerTime);
+	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
+	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" data-toggle="JDialog" data-target="dialog-4" >修改</button></td>');
+	               var cell8 = $('<td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td>');
+	               var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8]);
+ 	               docFrag.append(row);
+ 	               tb.append(docFrag);         
+	           }) 
+				buttonFunction();
+	           /***執行jQuery table 的DataTable套件, 然後套用中文參數***/
+              $('#example').DataTable({
 				columnDefs: [{ width: 200, targets: 6}],
 				"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
 				"pagingType": "full_numbers",
@@ -105,46 +117,35 @@
 						"previous":"上一頁",
 						"next":"下一頁",
 						"last":"最末頁"					
-				}
+					}
 			  }
 			})
-		});
-		//生成memberInfoServlet 取值, 回傳JSON格式物件,並且 指定位置生成資料
-		loadProduct('GET_ALL_MEMBERINFO_JSON');
-		
-		
-		
-// 		$('#productTable>tbody').on('click','tr button:nth-child(1)',function(){
-// 		   var id = $(this).parents('tr').find('td:nth-child(1)').text();
-// 		   $.get('ProductsDelete',{ProductID:id},function(data){
-// 		   alert(data);
-// 		   loadProduct(1);
-// 		   $('#productTable>tfoot input').val("");
-// 		   $('#productTable>tfoot input').text("");
-// 		   })
-// 		 })
-		function loadProduct(id){
-		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){
-			 var docFrag = $(document.createDocumentFragment());
-			 //var tb = $('#example>tbody').children('tr:eq(0)');
-			 var tb = $('#tbody01');
-			 tb.empty;
-			 $.each(data, function (idx, MemberInfoVO) {
-	               var cell1 = $('<td></td>').text(MemberInfoVO.memberID);
-	               var cell2 = $('<td></td>').text(MemberInfoVO.acc);
-	               var cell3 = $('<td></td>').text(MemberInfoVO.name);
-	               var cell4 = $('<td></td>').text(MemberInfoVO.auth);
-	               var cell5 = $('<td></td>').text(MemberInfoVO.registerTime);
-	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
-	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" >修改</button></td>');
-	               var cell8 = $('<td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td>');
-	               var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8]);
- 	               docFrag.append(row);
- 	               tb.append(docFrag);
-	           })
-
 		 });
 		} 
+		
+		function buttonFunction(){
+		  $('.btn-primary').on('click', function(){          	    		         
+	       	//可以取得acc
+	       	var acc = $(this).parents('tr').find('td:nth-child(2)').text();
+	        //可以取得name
+	       	var name = $(this).parents('tr').find('td:nth-child(3)').text();
+	       	//可以取得auth
+	       	var auth = $(this).parents('tr').find('td:nth-child(4)').text();
+	        
+	       	if($(this).text() == '修改'){	
+	       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="帳號"  type="text" value="" required>');
+	       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="名稱"  type="text" value="" required>');
+	       	  $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="權限"  type="text" value="" required>');
+	       	  $(this).text('確定');
+           }
+	       	else{
+	       	  $(this).parents('tr').find('td:nth-child(2)').html('');
+	       	  $(this).parents('tr').find('td:nth-child(3)').html('');
+	       	  $(this).parents('tr').find('td:nth-child(4)').html('');
+	       	  $(this).text('修改');
+     	   }    
+       });
+	 }	
 	})
 	</script>
 	
