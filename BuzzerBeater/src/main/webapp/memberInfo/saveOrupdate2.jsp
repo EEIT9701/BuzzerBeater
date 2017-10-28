@@ -75,23 +75,10 @@
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
-	$(function(){
-		
-
-		
+	$(function(){	
 		//生成memberInfoServlet 取值, 回傳JSON格式物件,並且 指定位置生成資料
 		loadProduct('GET_ALL_MEMBERINFO_JSON');
-		
-		
-// 		$('#productTable>tbody').on('click','tr button:nth-child(1)',function(){
-// 		   var id = $(this).parents('tr').find('td:nth-child(1)').text();
-// 		   $.get('ProductsDelete',{ProductID:id},function(data){
-// 		   alert(data);
-// 		   loadProduct(1);
-// 		   $('#productTable>tfoot input').val("");
-// 		   $('#productTable>tfoot input').text("");
-// 		   })
-// 		 })
+
 		function loadProduct(id){
 		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){
 			 var docFrag = $(document.createDocumentFragment());
@@ -114,7 +101,7 @@
         
 	           
 	           /***執行jQuery table 的DataTable套件, 然後套用中文參數***/
-              $('#example').DataTable({
+              $('#example').DataTable({ 
 				columnDefs: [{ width: 200, targets: 6}],
 				"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
 				"pagingType": "full_numbers",

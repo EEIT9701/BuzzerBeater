@@ -61,7 +61,6 @@
 							</tr>
 						</thead>
 						<tbody id="tbody01">
-
 						</tbody>
 					</table>
 				</div>
@@ -125,27 +124,48 @@
 		
 		function buttonFunction(){
 		  $('.btn-primary').on('click', function(){          	    		         
-	       	//可以取得acc
-	       	var acc = $(this).parents('tr').find('td:nth-child(2)').text();
-	        //可以取得name
-	       	var name = $(this).parents('tr').find('td:nth-child(3)').text();
-	       	//可以取得auth
-	       	var auth = $(this).parents('tr').find('td:nth-child(4)').text();
+	       	
 	        
 	       	if($(this).text() == '修改'){	
-	       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="帳號"  type="text" value="" required>');
-	       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="名稱"  type="text" value="" required>');
-	       	  $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="權限"  type="text" value="" required>');
+	         //可以取得acc
+		     var acc = $(this).parents('tr').find('td:nth-child(2)').text();
+		     //可以取得name
+		     var name = $(this).parents('tr').find('td:nth-child(3)').text();
+		     //可以取得auth
+		     var auth = $(this).parents('tr').find('td:nth-child(4)').text();
+	       	
+	       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="帳號"  type="text" value="'+ acc +'" required>');
+	       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="名稱"  type="text" value="'+ name +'" required>');
+	       	  $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="權限"  type="text" value="'+ auth +'" required>');
+ 	  		  
 	       	  $(this).text('確定');
+	       	  
+	       	 
            }
 	       	else{
-	       	  $(this).parents('tr').find('td:nth-child(2)').html('');
-	       	  $(this).parents('tr').find('td:nth-child(3)').html('');
-	       	  $(this).parents('tr').find('td:nth-child(4)').html('');
+	       	  var acc =   $(this).parents('tr').find('td:nth-child(2)>input').val();
+	       	  var name =  $(this).parents('tr').find('td:nth-child(3)>input').val();
+ 	       	  var auth = $(this).parents('tr').find('td:nth-child(4)>input').val();
+	       	  
+	       		
+		      $(this).parents('tr').find('td:nth-child(2)').text(acc);
+		      $(this).parents('tr').find('td:nth-child(3)').text(name);
+		      $(this).parents('tr').find('td:nth-child(4)').text(auth);
 	       	  $(this).text('修改');
+	       	  
+	       	  
      	   }    
        });
-	 }	
+	 }
+		
+		
+// 	  function postForUpdat(Update,acc,name,auth){
+// 		  //$.post({'/BuzzerBeater/memberInfoServlet.do',{"":"", },
+       		  
+   		  
+//        	  });  
+		  
+// 	  }	
 	})
 	</script>
 	
