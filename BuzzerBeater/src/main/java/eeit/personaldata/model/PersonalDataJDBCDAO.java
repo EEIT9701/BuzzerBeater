@@ -150,6 +150,10 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 		return null;
 	}
 	
-	
+	@Override
+	public List<PersonalDataVO> getAll2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
