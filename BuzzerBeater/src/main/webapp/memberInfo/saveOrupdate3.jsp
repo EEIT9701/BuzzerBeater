@@ -78,9 +78,9 @@
 	$(function(){
 		//生成memberInfoServlet 取值, 回傳JSON格式物件,並且 指定位置生成資料
 		loadProduct('GET_ALL_MEMBERINFO_JSON');
-
+		
 		function loadProduct(id){
-		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){
+		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){	 
 			 var docFrag = $(document.createDocumentFragment());
 			 //var tb = $('#example>tbody').children('tr:eq(0)');
 			 var tb = $('#tbody01');
@@ -125,8 +125,8 @@
 		function buttonFunction(){
 		  $('.btn-primary').on('click', function(){          	    		         
 	       	
-	        
-	       	if($(this).text() == '修改'){	
+		   //按下修改鍵 
+	       if($(this).text() == '修改'){	
 	         //可以取得acc
 		     var acc = $(this).parents('tr').find('td:nth-child(2)').text();
 		     //可以取得name
@@ -139,22 +139,43 @@
 	       	  $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="權限"  type="text" value="'+ auth +'" required>');
  	  		  
 	       	  $(this).text('確定');
-	       	  
+	
 	       	 
-           }
-	       	else{
-	       	  var acc =   $(this).parents('tr').find('td:nth-child(2)>input').val();
-	       	  var name =  $(this).parents('tr').find('td:nth-child(3)>input').val();
+           } 
+	       	else{ //按下確定鍵 
+	       	  //把input, 顯示在table欄位上的值取出	
+	       	  var memberID = $(this).parents('tr').find('td:nth-child(1)').text();
+	       	  var acc = $(this).parents('tr').find('td:nth-child(2)>input').val();
+	       	  var name = $(this).parents('tr').find('td:nth-child(3)>input').val();
  	       	  var auth = $(this).parents('tr').find('td:nth-child(4)>input').val();
-	       	  
-	       		
-		      $(this).parents('tr').find('td:nth-child(2)').text(acc);
-		      $(this).parents('tr').find('td:nth-child(3)').text(name);
-		      $(this).parents('tr').find('td:nth-child(4)').text(auth);
-	       	  $(this).text('修改');
-	       	  
-	       	  
-     	   }    
+ 	       	  //將字串轉為毫秒
+//  	       	  var registerTimeString = $(this).parents('tr').find('td:nth-child(5)').text();
+//  	          dateTimeParts = registerTimeString.split(' '),
+// 	          timeParts = dateTimeParts[1].split(':'),
+// 	          dateParts = dateTimeParts[0].split('-'),
+// 	          registerTime;
+//  	     	  registerTime = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
+ 	       	  var registerTime = $(this).parents('tr').find('td:nth-child(5)').text();
+ 	     	  var teamID = $(this).parents('tr').find('td:nth-child(6)').text();
+    
+ 	          //alert(registerTime);
+ 	          //把輸入的資料包裝成JSON格式字串, 給post傳送用
+ 	       	  var dataStr = JSON.stringify({ memberID:memberID, acc:acc, name:name, auth:auth, registerTime:registerTime, teamID:teamID})
+              //將 顯示在table欄位改回tr,並把值填入 
+ 	       	  $(this).parents('tr').find('td:nth-child(1)').html(memberID);
+ 	       	  $(this).parents('tr').find('td:nth-child(2)').html(acc);
+ 			  $(this).parents('tr').find('td:nth-child(3)').html(name);
+ 			  $(this).parents('tr').find('td:nth-child(4)').html(auth);
+ 			  $(this).parents('tr').find('td:nth-child(5)').html(registerTime);
+ 			  $(this).parents('tr').find('td:nth-child(6)').html(teamID);
+ 	       	  
+ 			  //把輸入在欄位上的資料經過post傳送
+ 	       	  $.post('/BuzzerBeater/memberInfoServlet.do', {'action':'UPDATE', 'data':dataStr}, function(datas){
+					//只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
+ 	       	  })
+		      
+	       	  $(this).text('修改');	       	  
+	       	}
        });
 	 }
 		
