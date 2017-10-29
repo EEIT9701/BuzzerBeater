@@ -11,7 +11,7 @@ public interface GroupRegDAO_interface {
 
 	public void update(GroupRegVO gVO);
 
-	public void delete(Integer games_ID);
+	public void delete(Integer teamID);
 	
 	public List<GroupRegVO> findByGroupID(Integer groupID);
 	
