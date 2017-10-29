@@ -78,7 +78,7 @@
 		<!-- 選單列表(開始) -->
 		<div class="collapse navbar-collapse" id="navbar-menu">
 			<ul class="nav navbar-nav navbar-right" data-in="fadeInDown">
-				<li><a href="<%=request.getContextPath() %>/page.jsp">Home</a></li>
+				<li><a href="<%=request.getContextPath() %>/index.jsp">Home</a></li>
 				<li class="dropdown"><a href="<%=request.getContextPath() %>/season/season_front.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">賽季<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
@@ -122,29 +122,11 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">數據<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
-<<<<<<< HEAD
 						<li><a href="<%=request.getContextPath() %>/personaldata/PersonalDataindex.jsp">個人數據<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="<%=request.getContextPath() %>/personaldata/TeamDataindex.jsp">球隊數據<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
-				<li class="dropdown"><a href="<%=request.getContextPath() %>/gamemedia/video.jsp" class="dropdown-toggle"
-					data-toggle="dropdown">影片<!--這行的href輸入超連結頁面--></a>
-<!-- 					<ul class="dropdown-menu"> -->
-<!-- 						<li><a href="#">影片子頁1這行的href輸入超連結頁面</a></li> -->
-<!-- 						<li><a href="#">影片子頁2這行的href輸入超連結頁面</a></li> -->
-<!-- 						<li><a href="#">影片子頁3這行的href輸入超連結頁面</a></li> -->
-<!-- 					</ul> -->
-					</li>
-				<li class="dropdown"><a href="<%=request.getContextPath() %>/gamemedia/photo.jsp" class="dropdown-toggle"
-					data-toggle="dropdown">照片<!--這行的href輸入超連結頁面--></a>
-=======
-						<li><a href="#">數據子頁1<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">數據子頁2<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">數據子頁3<!--這行的href輸入超連結頁面--></a></li>
-					</ul>
-				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">影音<!--這行的href輸入超連結頁面--></a>
->>>>>>> branch 'branch' of https://github.com/EEIT9701/BuzzerBeater.git
 					<ul class="dropdown-menu">
 						<li><a href="<%=request.getContextPath() %>/gamemedia/photo.jsp">照片<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="<%=request.getContextPath() %>/gamemedia/video.jsp">影片<!--這行的href輸入超連結頁面--></a></li>
