@@ -128,34 +128,7 @@ public class MemberInfoDAO implements MemberInfoDAO_interface {
 		}
 		return memberInfoVO;
 	}
-//	/***比對資料庫是否有帳號***/
-//	@SuppressWarnings({ "deprecation", "rawtypes" })
-//	@Override
-//	public MemberInfoVO findByAcc(String account) {
-//			
-//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//		Iterator result = null;
-//		Transaction tx = null;
-//		boolean bl ;         //回傳true代表資料庫有account ,false 則資料庫沒有account
-//		try {
-//			tx = session.beginTransaction();
-//			
-//			Query query = session.createQuery("from MemberInfoVO where acc=?");	
-//			query.setParameter(0, account);
-//			result = query.iterate();
-//			
-//			if(result.hasNext()){
-//				bl =  true;
-//			}
-//			else bl =  false;
-//			
-//		   tx.commit();
-//		} catch (RuntimeException ex) {
-//			session.getTransaction().rollback();
-//			throw ex;
-//		}
-//		return bl;
-//	}
+
 //	 public static void main(String[] args) {
 //	 MemberInfoDAO dao = new MemberInfoDAO();
 	 

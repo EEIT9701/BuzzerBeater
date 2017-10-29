@@ -35,6 +35,14 @@ public class TeamsServlet extends HttpServlet {
 			request.setAttribute("teamsVO", svc.findByID(teamID));
 			request.getRequestDispatcher("/teams/teamInformation.jsp").forward(request, response);
 		}
+		
+		if ("getOne_For_Update".equals(action)) {
+			Integer teamID = Integer.parseInt(request.getParameter("teamID"));
+
+			TeamsService svc = new TeamsService();
+			request.setAttribute("teamsVO", svc.findByID(teamID));
+			request.getRequestDispatcher("/teams/updateTeam.jsp").forward(request, response);
+		}
 
 	}
 

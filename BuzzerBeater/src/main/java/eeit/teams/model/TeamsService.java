@@ -9,9 +9,10 @@ public class TeamsService {
 	private TeamsDAO_interface dao;
 
 	public TeamsService() {
-		@SuppressWarnings("resource")
-		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
-		dao = (TeamsDAO_interface) context.getBean("TeamsDAO");
+		dao = new TeamsDAO();
+//		@SuppressWarnings("resource")
+//		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
+//		dao = (TeamsDAO_interface) context.getBean("TeamsDAO");
 	}
 
 	public Set<TeamsVO> getAll() {

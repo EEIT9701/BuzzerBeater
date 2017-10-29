@@ -48,6 +48,8 @@
 								<th>球員照片</th>
 								<th>球員姓名</th>
 								<th>身分證ID</th>
+								<th>背號</th>
+								<th>位置</th>
 								<th>身高</th>
 								<th>體重</th>
 								<th>生日</th>
@@ -61,6 +63,8 @@
 									<td><img id="img1" src="data:image/jpeg;base64,${playersVO.photo}"></td>
 									<td>${playersVO.playerName}</td>
 									<td>${playersVO.id}</td>
+									<td></td>
+									<td></td>
 									<td>${playersVO.height}</td>
 									<td>${playersVO.weights}</td>
 									<td>${playersVO.birthday}</td>

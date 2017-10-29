@@ -64,7 +64,7 @@
                     <form class="form-horizontal">
                         <fieldset>
                             <!-- Form Name -->
-                            <legend>球隊建立</legend>
+                            <legend>編輯我的球隊</legend>
                             <!-- Text input-->
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="teamName">球隊名稱</label>
@@ -114,6 +114,62 @@
                                 <div class="col-md-4">
                                     <img class="preview" style="max-width: 150px; max-height: 150px;">
                                     <div class="size"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!--第一列-左邊表格-格式_.col-md-8-->
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered" id="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>球員照片</th>
+                                                    <th>球員姓名</th>
+                                                    <th>身分證ID</th>
+                                                    <th>背號</th>
+                                                    <th>位置</th>
+                                                    <th>身高</th>
+                                                    <th>體重</th>
+                                                    <th>生日</th>
+                                                    <th>國籍</th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="playersVO" items="${playerSvc.allPlayer}">
+                                                    <tr align='center' valign='middle'>
+                                                        <td><img id="img1" src="data:image/jpeg;base64,${playersVO.photo}"></td>
+                                                        <td>${playersVO.playerName}</td>
+                                                        <td>${playersVO.id}</td>
+                                                        <th>背號</th>
+                                                        <th>位置</th>
+                                                        <td>${playersVO.height}</td>
+                                                        <td>${playersVO.weights}</td>
+                                                        <td>${playersVO.birthday}</td>
+                                                        <td>${playersVO.nationality}</td>
+                                                        <td>
+                                                            <Form method="post" action="<%=request.getContextPath() %>/Players.do">
+                                                                <button type="submit" class="btn btn-info">修改</button>
+                                                                <input type="hidden" name="playerName" value="${playersVO.playerName}">
+                                                                <input type="hidden" name="action" value="getOne_For_Update">
+                                                            </Form>
+                                                        </td>
+                                                        <td>
+                                                            <Form method="post" action="<%=request.getContextPath() %>/Players.do">
+                                                                <button type="submit" class="btn btn-danger">刪除</button>                                                                <input type="hidden" name="playerID" value="${playersVO.playerID}">                                                                <input type="hidden" name="action" value="delete">
+                                                            </Form>
+                                                        </td>
+                                                    </tr>
+
+
+
+                                                </c:forEach>
+                                        </table>
+
+                                    </div>
                                 </div>
                             </div>
 

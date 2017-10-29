@@ -13,6 +13,8 @@
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
 		
     	<jsp:include page="/header_css.jsp" />  
+<%--     	<jsp:include page="/font_css.jsp" /> --%>
+    	
     	  	
         <title>Season</title>
     </head>
@@ -21,9 +23,10 @@
 	    <jsp:include page="/header.jsp" />
 	
 		<div class="container">
+		<div class="jumbotron">
 			<div class="col-md-12">
 
-			<h1>新增賽季</h1>
+			<h2>新增賽季</h2>
 			<c:if test="${not empty errorMsgs}">
 				                        請修正以下錯誤:
 				<ul>
@@ -75,6 +78,7 @@
 			</form>
 		    </div>
 		    <jsp:include page="/footer.jsp" />
+		    </div>
 	    </div>
 		<jsp:include page="/footer_css.jsp" />
 		

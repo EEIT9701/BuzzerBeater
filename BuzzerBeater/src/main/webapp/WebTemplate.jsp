@@ -14,6 +14,7 @@
     	
         <title>Season</title>
         <jsp:include page="/header_css.jsp" />
+        <jsp:include page="/font_css.jsp" />
     </head>
 
     <body>

@@ -22,10 +22,16 @@
                         <!--滑鼠移入，顯示表格(jquery設定"2-1")-->
                         <link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
                         <style>
-                            #img1 {
+                            #imgPlayer {
                                 width: 200px;
                                 height: 300px;
-                                margin: 50px 50px 50px 50px;
+                                margin: 0px 0px 30px 70px;
+                            }
+
+                            #imgTeam {
+                                width: 300px;
+                                height: 250px;
+                                margin: 25px 100px 30px 0px;
                             }
                         </style>
                         <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
@@ -43,7 +49,7 @@
                                     <!--第二列-左邊表格-格式_.col-md-4-->
                                     <div class="col-md-4">
                                         <div class="col-md-12">
-                                            <img id="img1" src="data:image/jpeg;base64,${playerVO.photo}">
+                                            <img id="imgPlayer" src="data:image/jpeg;base64,${playerVO.photo}">
                                             <!--球員照片-->
                                         </div>
                                     </div>
@@ -92,7 +98,7 @@
                                     <div class="col-md-4">
 
                                         <div class="col-md-12">
-                                            <img id="img1" alt="" src="<%=request.getContextPath() %>\players\500px-Golden.png">
+                                            <img id="imgTeam" alt="" src="<%=request.getContextPath() %>\players\500px-Golden.png">
                                             <!--球員照片-->
                                         </div>
                                     </div>

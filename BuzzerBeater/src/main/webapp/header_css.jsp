@@ -79,8 +79,7 @@
         background-color: #fefefe;
         margin: 5% auto 15% auto;
         border: 1px solid #888;
-        height: 280px;
-        width: 20%;
+
         }
 
         /* The Close Button (x) */

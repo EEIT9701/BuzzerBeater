@@ -7,7 +7,7 @@
 // 	List<MemberInfoVO> list = dao.getAll();
 // 	pageContext.setAttribute("list", list);
 %>
-<jsp:useBean id="memberInfoSvc" scope="page" class="eeit.memberinfo.model.MemberInfoService" />
+<%-- <jsp:useBean id="memberInfoSvc" scope="page" class="eeit.memberinfo.model.MemberInfoService" /> --%>
 <!DOCTYPE >
 <html>
 <head>
@@ -21,7 +21,7 @@
 	rel="stylesheet" type="text/css" media="all" />
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/jquery-3.1.1.min.js"></script>
+	src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 
 <style>
 #st1 {
@@ -51,45 +51,18 @@
 					<table class="table table-bordered" id="example">
 						<thead>
 							<tr align='center' valign='middle'>
-								<td>會員編號</td>
-								<td>會員帳號</td>
-								<td>會員名稱</td>
-								<td>權限</td>
-								<td>註冊時間</td>
-							    <td style="display:none;">球隊ID</td>
-								<td></td>
-								<td></td>
+								<th>會員編號</th>
+								<th>會員帳號</th>
+								<th>會員名稱</th>
+								<th>權限</th>
+								<th>註冊時間</th>
+							    <th>球隊ID</th>
+								<th></th>
+								<th></th>
 							</tr>
 						</thead>
-						<tbody>
-							<c:forEach var="MemberInfoVO" items="${memberInfoSvc.all}">
-								<tr align='center' valign='middle'>
-									<td>${MemberInfoVO.memberID}</td>
-									<td>${MemberInfoVO.acc}</td>
-									<td>${MemberInfoVO.name}</td>
-									<td>${MemberInfoVO.auth}</td>
-									<td>${MemberInfoVO.registerTime}</td>
-							        <td style="display:none;">${MemberInfoVO.teamID}</td>
-								    <td><button type="button" class="btn btn-lg btn-primary" >修改</button></td>
-								    <td><button type="button" class="btn btn-lg btn-warning">刪除</button></td>
-									<!-- 									<td> -->
-									<!-- 										<FORM METHOD="post" -->
-									<%-- 											ACTION="<%=request.getContextPath()%>/player.do"> --%>
-									<!-- 											<input type="submit" value="修改"> <input type="hidden" -->
-									<%-- 												name="memberID" value="${MemberInfoVO.memberID}"> <input --%>
-									<!-- 												type="hidden" name="action" value=""> -->
-									<!-- 										</FORM> -->
-									<!-- 									</td> -->
-									<!-- 									<td> -->
-									<!-- 										<FORM METHOD="post" -->
-									<%-- 											ACTION="<%=request.getContextPath()%>/player.do"> --%>
-									<!-- 											<input type="submit" value="刪除"> <input type="hidden" -->
-									<%-- 												name="memberID" value="${MemberInfoVO.memberID}"> <input --%>
-									<!-- 												type="hidden" name="action" value=""> -->
-									<!-- 										</FORM> -->
-									<!-- 									</td> -->
-								</tr>
-							</c:forEach>
+						<tbody id="tbody01">
+
 						</tbody>
 					</table>
 				</div>
@@ -97,13 +70,38 @@
 		</div>
 	<jsp:include page="/footer.jsp" />
 	</div>
-
+   
 	<!--主文(結束)-->
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
-		$(document).ready(function() {
-			$('#example').DataTable({
+	$(function(){	
+		//生成memberInfoServlet 取值, 回傳JSON格式物件,並且 指定位置生成資料
+		loadProduct('GET_ALL_MEMBERINFO_JSON');
+
+		function loadProduct(id){
+		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){
+			 var docFrag = $(document.createDocumentFragment());
+			 //var tb = $('#example>tbody').children('tr:eq(0)');
+			 var tb = $('#tbody01');
+			 tb.empty;
+			 $.each(data, function (idx, MemberInfoVO) {
+	               var cell1 = $('<td></td>').text(MemberInfoVO.memberID);
+	               var cell2 = $('<td></td>').text(MemberInfoVO.acc);
+	               var cell3 = $('<td></td>').text(MemberInfoVO.name);
+	               var cell4 = $('<td></td>').text(MemberInfoVO.auth);
+	               var cell5 = $('<td></td>').text(MemberInfoVO.registerTime);
+	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
+	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" >修改</button></td>');
+	               var cell8 = $('<td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td>');
+	               var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8]);
+ 	               docFrag.append(row);
+ 	               tb.append(docFrag);
+	           })
+        
+	           
+	           /***執行jQuery table 的DataTable套件, 然後套用中文參數***/
+              $('#example').DataTable({ 
 				columnDefs: [{ width: 200, targets: 6}],
 				"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
 				"pagingType": "full_numbers",
@@ -119,12 +117,12 @@
 						"previous":"上一頁",
 						"next":"下一頁",
 						"last":"最末頁"					
-				}
+					}
 			  }
 			})
-		});
-		
-		
+		 });
+		} 
+	})
 	</script>
 	
 </body>

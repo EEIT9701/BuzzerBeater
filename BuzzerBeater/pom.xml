@@ -170,31 +170,12 @@
 			<artifactId>poi</artifactId>
 			<version>3.9</version>
 		</dependency>
-
-
-		<!-- google api -->
-		<!-- <dependency> -->
-		<!-- <groupId>com.google.apis</groupId> -->
-		<!-- <artifactId>google-api-services-plus</artifactId> -->
-		<!-- <version>v1-rev530-1.23.0</version> -->
-		<!-- </dependency> -->
-
-		<!-- <dependency> -->
-		<!-- <groupId>com.google.apis</groupId> -->
-		<!-- <artifactId>google-api-services-plusDomains</artifactId> -->
-		<!-- <version>v1-rev434-1.23.0</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>com.google.api-client</groupId> -->
-		<!-- <artifactId>google-api-client</artifactId> -->
-		<!-- <version>1.23.0</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>com.google.api-client</groupId> -->
-		<!-- <artifactId>google-api-client-appengine</artifactId> -->
-		<!-- <version>1.23.0</version> -->
-		<!-- </dependency> -->
-
+		<!-- jackson-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.3</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>

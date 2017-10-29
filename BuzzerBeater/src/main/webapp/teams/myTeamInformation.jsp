@@ -121,9 +121,10 @@
                             <!--滑鼠移入，顯示表格(開始)-->
                             <div id="tabs">
                                 <ul>
-                                    <li><a href="#tabs-1">球員名單</a></li>
-                                    <li><a href="#tabs-2">過去賽事</a></li>
                                     <li><a href="#tabs-3">未來賽事</a></li>
+                                    <li><a href="#tabs-2">過去賽事</a></li>
+                                    <li><a href="#tabs-1">球員名單</a></li>
+                                    <li><a href="#tabs-4">球員數據</a></li>   
                                 </ul>
                                 <div id="tabs-1">
                                     <table class="table table-bordered">
@@ -181,6 +182,48 @@
                                         </thead>
                                         <tbody>
                                             <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div id="tabs-4">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>比賽場次 </th>
+                                                <th>出場時間 </th>
+                                                <th>二分命中 </th>
+                                                <th>二分出手數 </th>
+                                                <th>三分命中 </th>
+                                                <th>三分出手數 </th>
+                                                <th>罰球命中 </th>
+                                                <th>罰球出手數 </th>
+                                                <th>進攻籃板 </th>
+                                                <th>防守籃板 </th>
+                                                <th>助攻 </th>
+                                                <th>抄截 </th>
+                                                <th>阻攻 </th>
+                                                <th>失誤 </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>

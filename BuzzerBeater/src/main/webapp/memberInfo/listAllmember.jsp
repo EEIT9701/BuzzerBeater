@@ -4,12 +4,13 @@
 <%@ page import="java.util.*"%>
 
 <%
-  MemberInfoService dao = new MemberInfoService();
-  List<MemberInfoVO> list = dao.getAll();
-  pageContext.setAttribute("list",list);
+//   MemberInfoService dao = new MemberInfoService();
+//   List<MemberInfoVO> list = dao.getAll();
+//   pageContext.setAttribute("list",list);
 %> 
+<jsp:useBean id="memberInfoSvc" scope="page" class="eeit.memberinfo.model.MemberInfoService" />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE >
 <html>
 <head>
 <title>所有會員資料</title>
@@ -24,7 +25,7 @@
 		<th>註冊時間</th>
 		<th>球隊ID</th>
 	</tr>
-	<c:forEach var="MemberInfoVO" items="${list}">
+	<c:forEach var="MemberInfoVO" items="${memberInfoSvc.all}">
 		<tr align='center' valign='middle'>
 			<td>${MemberInfoVO.memberID}</td>
 			<td>${MemberInfoVO.acc}</td>

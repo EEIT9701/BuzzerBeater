@@ -30,10 +30,10 @@ public class GoogleLoginOutServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-
-		request.getRequestDispatcher("header.jsp").include(request, response);
+//		response.setContentType("text/html");
+//		PrintWriter out = response.getWriter();
+//
+//		request.getRequestDispatcher("header.jsp").include(request, response);
 
 		HttpSession session = request.getSession();
 		session.invalidate();
@@ -41,6 +41,6 @@ public class GoogleLoginOutServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/page.jsp");
 		rd.forward(request, response);
 
-		out.close();
+//		out.close();
 	}
 }
