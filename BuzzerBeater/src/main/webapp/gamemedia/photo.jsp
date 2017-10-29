@@ -72,47 +72,60 @@
 			<br/>
             <div class="row" id="mediaplayer">
 
-            <!--廣告輪播(開始)-->
-            <!--800x600(50萬像素),1024x768(80萬像素),1280x960(130萬像素)-->
-            <div class="carousel slide" id="myCarousel">
-                <ol class="carousel-indicators">
-                    <li class="active" data-slide-to="0" data-target="#myCarousel"></li>
-                    <li data-slide-to="1" data-target="#myCarousel" class=""></li>
-                    <li data-slide-to="2" data-target="#myCarousel" class=""></li>
-                    <li data-slide-to="3" data-target="#myCarousel" class=""></li>
-                </ol>
-                <div class="carousel-inner">
-                	<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}" varStatus="loop">
-                		<c:forEach var="gameMediaType" items="${gameMediaSvc.mediaType}">
-                			<c:if test="${gameMediaType eq 'photo'}">
-                    			<div class='item'>
-                        			<img class="img-responsive center-block"  src="data:image/jpeg;base64,${gameMediaSvc.gamePhoto}">
-                    			</div>
-                    		</c:if>
-                    	</c:forEach>
-                	</c:forEach>   
-                </div>
+            	<!--廣告輪播(開始)-->
+            	<!--800x600(50萬像素),1024x768(80萬像素),1280x960(130萬像素)-->
+            	<div class="carousel slide" id="myCarousel">
+                	<ol class="carousel-indicators">
+                    	<li class="active" data-slide-to="0" data-target="#myCarousel"></li>
+                    	<li data-slide-to="1" data-target="#myCarousel" class=""></li>
+                    	<li data-slide-to="2" data-target="#myCarousel" class=""></li>
+                    	<li data-slide-to="3" data-target="#myCarousel" class=""></li>
+                	</ol>
+                	<div class="carousel-inner">
+                		<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}" varStatus="loop">
+                			<c:forEach var="gameMediaType" items="${gameMediaSvc.mediaType}">
+                				<c:if test="${gameMediaType eq 'photo'}">
+                    				<div class='item'>
+                        				<img class="img-responsive center-block"  src="data:image/jpeg;base64,${gameMediaSvc.gamePhoto}">
+                    				</div>
+                    			</c:if>
+                    		</c:forEach>
+                		</c:forEach>   
+                	</div>
 
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-            </div>
+                	<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    	<span class="glyphicon glyphicon-chevron-left"></span>
+                	</a>
+                	<a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    	<span class="glyphicon glyphicon-chevron-right"></span>
+                	</a>
+            	</div>
             <!--廣告輪播(結束)-->
-
            	</div>
            	</br>
-
+           	</br>
+           	<div class="row">
+           		<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}" varStatus="loop">
+                	<c:forEach var="gameMediaType" items="${gameMediaSvc.mediaType}">
+                		<c:if test="${gameMediaType eq 'photo'}">
+                			<c:if test="${loop.count}<5">
+                    			<div class='item'>
+                   					<img src="data:image/jpeg;base64,${gameMediaSvc.gamePhoto}">
+                    			</div>
+                    		</c:if>
+                    	</c:if>
+                    </c:forEach>
+                </c:forEach>   
+           	</div>
 			<jsp:include page="/footer.jsp" />  
         </div>
     </div>
     <!--主文(結束)-->
     <script>
-    $(document).ready(function(){
-    	$('.item:first').addClass('active');
-    })
+    
+    	$(document).ready(function(){
+    		$('.item:first').addClass('active');
+    	})
     
     
     </script>
