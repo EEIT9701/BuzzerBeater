@@ -60,9 +60,8 @@ General
 }
 
 .pageheader{
-    padding: 70px 0;
     background-image: url(../images/bg/brick-wall-dark.png);
-    background-color: #f43438;
+    background-color: #c06234;
 }
 
 .pageheader.fixed-demo{
@@ -70,7 +69,7 @@ General
 }
 
 .pageheader.fixed-demo.dark{
-   background-color: #666 !important;
+
 }
 
 .pageheader.fixed-demo.white{
