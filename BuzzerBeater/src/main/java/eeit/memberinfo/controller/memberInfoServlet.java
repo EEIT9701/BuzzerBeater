@@ -2,7 +2,10 @@ package eeit.memberinfo.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -39,20 +43,22 @@ public class memberInfoServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		if("GET_ALL_MEMBERINFO_JSON".equals(action)){
-	
-			
-			
 			//取得service實例
 			MemberInfoService mSvc = new MemberInfoService();
-			
-			// 轉換為JSON格式	
-			//String jsonInString = JSONValue.toJSONString(mSvc.getAll());
-			Gson gson = new Gson();
-			String jsonInString = gson.toJson(mSvc.getAll());
-			
+			// 轉換為JSON格式
+			/***1***/
+			//Gson gson = new Gson();
+			//String jsonString = gson.toJson(mSvc.getAll());
+			/***2***/
+			ObjectMapper jsonMapper = new ObjectMapper();
+            String jsonString = jsonMapper.writeValueAsString(mSvc.getAll());          
+			/***3***/
+			//System.out.println(jsonString);
+			//String jsonString = JSONValue.toJSONString(mSvc.getAll());
+
 			// 經由Response送往瀏覽器
 			PrintWriter out = response.getWriter();
-			out.println(jsonInString);
+			out.println(jsonString);
 				
 			return;
 		}
@@ -91,23 +97,29 @@ public class memberInfoServlet extends HttpServlet {
 			//取得service實例
 			MemberInfoService mSvc = new MemberInfoService();
 			MemberInfoVO memberInfoVO = new MemberInfoVO();
-			//取得insert 參數
+			//取得UPDATE 參數
 			String jsonStr  = request.getParameter("data");
 			JSONObject mVO = new JSONObject(jsonStr);
+			//將registerTime轉成Timestamp
+			String timeTemp = mVO.getString("registerTime");
+			Timestamp registerTimeData = new Timestamp(System.currentTimeMillis()); 
+			String timeTemp01 = timeTemp.replace("T", " ");
+			String timeTemp02 = timeTemp01.replace("Z", "");
 			
+			System.out.println(timeTemp02);
+			registerTimeData = Timestamp.valueOf(timeTemp02); 
 			
+			//System.out.println(registerTimeData);
+
 			memberInfoVO.setMemberID(Integer.parseInt(mVO.get("memberID").toString()));
 			memberInfoVO.setAcc(mVO.get("acc").toString());
 			memberInfoVO.setName(mVO.get("name").toString());
 			memberInfoVO.setAuth(mVO.get("auth").toString());
-			memberInfoVO.setRegisterTime(Timestamp.valueOf(mVO.get("registerTime").toString()));
+			memberInfoVO.setRegisterTime(registerTimeData);
 			memberInfoVO.setTeamID(Integer.parseInt(mVO.get("teamID").toString()));
-
-			
-			System.out.println("registerTime:" + Timestamp.valueOf(mVO.get("registerTime").toString()));
 			
 			//將傳送過來的值,執行update
-			//mSvc.update(memberInfoVO);
+			mSvc.update(memberInfoVO);
 			
 			//把Action 從request清空
 			request.removeAttribute("Action");		

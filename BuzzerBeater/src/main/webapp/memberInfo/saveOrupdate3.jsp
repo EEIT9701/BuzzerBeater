@@ -84,13 +84,15 @@
 			 var docFrag = $(document.createDocumentFragment());
 			 //var tb = $('#example>tbody').children('tr:eq(0)');
 			 var tb = $('#tbody01');
+			 
 			 tb.empty;
 			 $.each(data, function (idx, MemberInfoVO) {
 	               var cell1 = $('<td></td>').text(MemberInfoVO.memberID);
 	               var cell2 = $('<td></td>').text(MemberInfoVO.acc);
 	               var cell3 = $('<td></td>').text(MemberInfoVO.name);
-	               var cell4 = $('<td></td>').text(MemberInfoVO.auth);
-	               var cell5 = $('<td></td>').text(MemberInfoVO.registerTime);
+	               var cell4 = $('<td></td>').text(MemberInfoVO.auth);		   	 
+ 	               maxDate = new Date(MemberInfoVO.registerTime);          //ms to data
+ 	               var cell5 = $('<td></td>').text(maxDate);
 	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
 	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" data-toggle="JDialog" data-target="dialog-4" >修改</button></td>');
 	               var cell8 = $('<td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td>');
@@ -123,8 +125,7 @@
 		} 
 		
 		function buttonFunction(){
-		  $('.btn-primary').on('click', function(){          	    		         
-	       	
+		  $('.btn-primary').on('click', function(){          	    		            	
 		   //按下修改鍵 
 	       if($(this).text() == '修改'){	
 	         //可以取得acc
@@ -148,19 +149,15 @@
 	       	  var acc = $(this).parents('tr').find('td:nth-child(2)>input').val();
 	       	  var name = $(this).parents('tr').find('td:nth-child(3)>input').val();
  	       	  var auth = $(this).parents('tr').find('td:nth-child(4)>input').val();
- 	       	  //將字串轉為毫秒
-//  	       	  var registerTimeString = $(this).parents('tr').find('td:nth-child(5)').text();
-//  	          dateTimeParts = registerTimeString.split(' '),
-// 	          timeParts = dateTimeParts[1].split(':'),
-// 	          dateParts = dateTimeParts[0].split('-'),
-// 	          registerTime;
-//  	     	  registerTime = new Date(dateParts[2], parseInt(dateParts[1], 10) - 1, dateParts[0], timeParts[0], timeParts[1]);
  	       	  var registerTime = $(this).parents('tr').find('td:nth-child(5)').text();
  	     	  var teamID = $(this).parents('tr').find('td:nth-child(6)').text();
     
  	          //alert(registerTime);
+ 	          
+ 	          //把time轉成date
+ 	          var registerTimeToMs = new Date(registerTime);
  	          //把輸入的資料包裝成JSON格式字串, 給post傳送用
- 	       	  var dataStr = JSON.stringify({ memberID:memberID, acc:acc, name:name, auth:auth, registerTime:registerTime, teamID:teamID})
+ 	       	  var dataStr = JSON.stringify({ memberID:memberID, acc:acc, name:name, auth:auth, registerTime:registerTimeToMs, teamID:teamID})
               //將 顯示在table欄位改回tr,並把值填入 
  	       	  $(this).parents('tr').find('td:nth-child(1)').html(memberID);
  	       	  $(this).parents('tr').find('td:nth-child(2)').html(acc);
@@ -177,16 +174,13 @@
 	       	  $(this).text('修改');	       	  
 	       	}
        });
+		  $('.btn-warning').on('click', function(){
+			  alert("確定要刪除嗎?"); 
+			  
+			  
+		  }) 
 	 }
 		
-		
-// 	  function postForUpdat(Update,acc,name,auth){
-// 		  //$.post({'/BuzzerBeater/memberInfoServlet.do',{"":"", },
-       		  
-   		  
-//        	  });  
-		  
-// 	  }	
 	})
 	</script>
 	
