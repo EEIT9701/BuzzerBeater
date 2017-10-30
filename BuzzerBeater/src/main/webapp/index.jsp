@@ -29,15 +29,13 @@
     <div class="pageheader fixed-demo dark" style="padding-top:0px">
 
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
+            <div class="row">          
+
                     <div id="countdown">
                         <div>報名日期倒數 :</div>
                     </div>
                     <p style="color:#303030" id="note"></p>
-                </div>
+
             </div>
         </div>
     </div>
