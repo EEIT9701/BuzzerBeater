@@ -5,8 +5,8 @@
 
 
 
-<!DOCTYPE html>
 
+<jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
 
 <!--標頭(開始)-->
 <nav
