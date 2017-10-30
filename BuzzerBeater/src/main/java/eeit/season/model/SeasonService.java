@@ -5,15 +5,12 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import eeit.groups.model.GroupsVO;
 
 public class SeasonService {
 
@@ -68,32 +65,8 @@ public class SeasonService {
 		return dao.delete(seasonID);
 	}
 
-	public Set<HashMap<String, Object>> getAll() {
-		// Domain Knowledge 在Service內實作
-
-		// 取得DAO回傳的原始資料
-		Set<SeasonVO> set = dao.getAll();
-
-		Set<HashMap<String, Object>> returnSet = new LinkedHashSet<HashMap<String, Object>>();
-		Map<String, Object> map = null;
-
-		// 根據需要轉換型態並以字串回傳
-		for (SeasonVO sVO : set) {
-			map = new HashMap<String, Object>();
-			map.put("seasonID", sVO.getSeasonID());
-			map.put("seasonName", sVO.getSeasonName());
-			map.put("seasonBeginDate", sVO.getSeasonBeginDate());
-			map.put("seasonEndDate", sVO.getSeasonEndDate());
-
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			map.put("signUpBegin", (sVO.getSignUpBegin() != null) ? sdf.format(sVO.getSignUpBegin()) : " ");
-			map.put("signUpEnd", (sVO.getSignUpEnd() != null) ? sdf.format(sVO.getSignUpEnd()) : " ");
-			map.put("groupsSet", sVO.getGroupsSet());
-
-			returnSet.add((HashMap<String, Object>) map);
-		}
-
-		return returnSet;
+	public Set<SeasonVO> getAll() {
+		return dao.getAll();
 	}
 
 	public SeasonVO findBySeasonID(Integer seasonID) {

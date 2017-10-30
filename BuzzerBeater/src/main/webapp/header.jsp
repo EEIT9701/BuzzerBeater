@@ -14,22 +14,52 @@
 	<div class="container">
 		<div class="attr-nav">
 			<ul>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> 
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 					<i class="glyphicon glyphicon-pencil"></i></a>
-					<!--新刪修"按鈕"(開始)-->
-					<ul class="dropdown-menu cart-list">
+					<!--  新刪修"按鈕"(開始)-->
+					<ul class="dropdown-menu cart-list" id="functionButton">
+					 <!-- 未登入使用 --> 	
+					 <c:choose>
+					   <c:when test="${empty LoginOK}">
 						<li><h6>
-								<a href="#">新增<!--這行的href輸入超連結頁面--></a>
-							</h6></li>
-						<li><h6>
-								<a href="#">刪除<!--這行的href輸入超連結頁面--></a>
-							</h6></li>
-						<li><h6>
-								<a href="#">修改<!--這行的href輸入超連結頁面--></a>
-							</h6></li>
-					</ul> <!--新刪修"按鈕"(結束)--></li>
-
+							<a href="#">未登入使用</a>	
+						</h6></li>
+					   </c:when> 
+					    <c:when test="${LoginOK.auth == 'admin'}">
+<%-- 							<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li> --%>
+								<li><h6><a href="<%=request.getContextPath() %>/memberInfo/memberInfoI_U_D.jsp">權限管理</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">賽季管理</a></h6></li>
+<!-- 							<li><h6><a href="">分組</a></h6></li> -->
+<!-- 							<li><h6><a href="">賽程</a></h6></li> -->
+								<li><h6><a href="<%=request.getContextPath() %>/teams/listAllteam_back.jsp">球隊</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></h6></li>	
+								 
+						</c:when>
+						<c:when test="${LoginOK.auth == 'parttime'}">
+<%-- 							<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li> --%>
+<%-- 							<li><h6><a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">賽季管理</a></h6></li> --%>
+								<li><h6><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></h6></li>
+						</c:when>
+						<c:when test="${LoginOK.auth == 'teams'}">
+								<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li>
+								<li><h6><a href="#">我的球隊</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/Groups.do?action=GET_GROUP_SINGUP">分組報名</a></h6></li>
+								<li><h6><a href="#">繳費</a></h6></li>
+						</c:when>
+						<c:otherwise>
+						   <li><h6>
+								<a href="#">${LoginOK.auth}登入使用</a>
+						   </h6></li>
+						</c:otherwise>
+						</c:choose>	
+					</ul> 
+				</li>
+<!-- 				新刪修"按鈕"(結束) -->
 				<!--登入登出"按鈕"(開始)-->
 				<li >			
 					<c:if test="${empty LoginOK}">
@@ -128,7 +158,8 @@
 						<li><a href="<%=request.getContextPath() %>/personaldata/PersonalDataindex.jsp">個人數據<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="<%=request.getContextPath() %>/personaldata/TeamDataindex.jsp">球隊數據<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
+<!-- 					影音本身沒有超聯結 -->
+				<li class="dropdown"><a href="#" class="dropdown-toggle"    
 					data-toggle="dropdown">影音<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=request.getContextPath() %>/gamemedia/photo.jsp">照片<!--這行的href輸入超連結頁面--></a></li>

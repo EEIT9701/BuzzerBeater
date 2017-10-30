@@ -75,7 +75,7 @@
    
 	<!--主文(結束)-->
 	<!-- 模太框 -->
-<div class="jDialog" id="dialog-3">
+<div class="jDialog" id="dialog-4">
 		<div class="content">
 		
 <!-- 			<h3 id="MemberInfoVO_memberID">會員資料ID:</h3> -->
@@ -113,7 +113,7 @@
 	               var cell4 = $('<td></td>').text(MemberInfoVO.auth);
 	               var cell5 = $('<td></td>').text(MemberInfoVO.registerTime);
 	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
-	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" data-toggle="JDialog" data-target="dialog-3" >修改</button></td>');
+	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" data-toggle="JDialog" data-target="dialog-4" >修改</button></td>');
 	               var cell8 = $('<td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td>');
 	               var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8]);
  	               docFrag.append(row);

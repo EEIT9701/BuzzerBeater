@@ -54,36 +54,47 @@
 								<tbody>
 									<tr align='center' valign='middle'>
 
-										<td><img id="img1" src="data:image/png;base64,${teamsVO.teamBadge}"></td>
+										<td><img id="img1" src="data:image/png;base64,${teamBadge}"></td>
 										<!--隊徽-->
-										<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teamsVO.teamID}">${teamsVO.teamName}</a></td>
+										<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teamID}">${teamName}</a></td>
 										<!--球名-->
 										<td></td>
 										<!--分組-->
-										<td>${teamsVO.captainEmail}</td>
+										<td>${captainEmail}</td>
 										<!--隊長E-mail-->
-										<td>${teamsVO.captainPhone}</td>
+										<td>${captainPhone}</td>
 										<!--隊長電話-->
-										<td>${teamsVO.coachName}</td>
+										<td>${coachName}</td>
 										<!--教練-->
-										<td>${teamsVO.bossName}</td>
+										<td>${bossName}</td>
 										<!--老闆-->
-										<td>${teamsVO.totalWin}</td>
+										<td>${totalWin}</td>
 										<!--勝場數-->
-										<td>${teamsVO.totalLose}</td>
+										<td>${totalLose}</td>
 										<!--敗場數-->
-										<td>${teamsVO.winRate}</td>
+										<td>${winRate}</td>
 										<!--勝率-->
-										<td>${teamsVO.remarks}</td>
+										<td>${remarks}</td>
 										<!--備註-->
 							</table>
 							<div class="col-md-4"></div>
 							<div class="col-md-4">
-								<form action="<%=request.getContextPath() %>/Teams.do">
+								<form method="post" action="<%=request.getContextPath() %>/Teams.do">
 									<div class="form-group">
 										<div class="col-md-4">
 											<button type="submit" class="btn btn-primary">確認修改</button>
-											<input type="hidden" name="action" value="goTolistAllTeam_back">
+											<input type="hidden" name="action" value="goTolistAllTeam_update">
+											<input type="hidden" name="teamID" value="${teamID}">
+											<input type="hidden" name="teamBadge" value="${teamBadge}">
+											<input type="hidden" name="teamName" value="${teamName}">
+											<input type="hidden" name="captainEmail" value="${captainEmail}">
+											<input type="hidden" name="captainPhone" value="${captainPhone}">
+											<input type="hidden" name="coachName" value="${coachName}">
+											<input type="hidden" name="bossName" value="${bossName}">
+											<input type="hidden" name="totalWin" value="${totalWin}">
+											<input type="hidden" name="totalLose" value="${totalLose}">
+											<input type="hidden" name="winRate" value="${winRate}">
+											<input type="hidden" name="remarks" value="${remarks}">
 										</div>
 									</div>
 									<!-- <button type="submit" class="btn btn-warning">確認修改</button>
@@ -96,13 +107,23 @@
 								<div class="col-md-4"></div>
 
 								<Form method="post" action="<%=request.getContextPath() %>/Teams.do">
-									
-										<div class="col-md-4">
-											<button type="submit" class="btn btn-danger">返回修改</button>
-											<input type="hidden" name="teamID" value="${teamsVO.teamID}">
-											<input type="hidden" name="action" value="getOne_For_Update">
-										</div>
-									
+
+									<div class="col-md-4">
+										<button type="submit" class="btn btn-danger">返回修改</button>
+										<input type="hidden" name="action" value="getOne_For_Update">
+										<input type="hidden" name="teamID" value="${teamID}">
+										<input type="hidden" name="teamBadge" value="${teamBadge}">
+										<input type="hidden" name="teamName" value="${teamName}">
+										<input type="hidden" name="captainEmail" value="${captainEmail}">
+										<input type="hidden" name="captainPhone" value="${captainPhone}">
+										<input type="hidden" name="coachName" value="${coachName}">
+										<input type="hidden" name="bossName" value="${bossName}">
+										<input type="hidden" name="totalWin" value="${totalWin}">
+										<input type="hidden" name="totalLose" value="${totalLose}">
+										<input type="hidden" name="winRate" value="${winRate}">
+										<input type="hidden" name="remarks" value="${remarks}">
+									</div>
+
 								</Form>
 
 							</div>

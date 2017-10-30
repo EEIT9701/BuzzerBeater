@@ -134,15 +134,16 @@ public class GoogleLoginServlet extends HttpServlet {
 //				memberInfoVO.setAcc(jsonOb.getString("email"));   //使用者帳號
 //				memberInfoVO.setName(jsonOb.getString("name"));   //使用者姓名
 //				memberInfoVO.setRegisterTime(ts);	              //照片的url		
-				session.setAttribute("LoginOK", memberInfoVO);		
+				session.setAttribute("LoginOK", memberInfoVO);
+				
 				
 				session.setAttribute("pictureUri", jsonOb.getString("picture"));
 //				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
 //				rd.forward(req, resp);
-				resp.sendRedirect("page.jsp");
+				resp.sendRedirect("index.jsp");
 				return;
 			}else{
-				resp.sendRedirect("page.jsp");
+				resp.sendRedirect("index.jsp");
 				return;
 //				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
 //				rd.forward(req, resp);
