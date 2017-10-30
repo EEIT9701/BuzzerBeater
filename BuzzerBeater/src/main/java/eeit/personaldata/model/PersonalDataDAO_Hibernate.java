@@ -1,12 +1,6 @@
 package eeit.personaldata.model;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-
-import hibernate.util.HibernateUtil;
+import java.util.List;
 
 public class PersonalDataDAO_Hibernate implements PersonalDataDAO_interface {
 
@@ -14,19 +8,8 @@ public class PersonalDataDAO_Hibernate implements PersonalDataDAO_interface {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Set<PersonalDataVO> getAll() {
-		Set<PersonalDataVO> set = null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			Query query = session.createQuery(GET_ALL_STMT);
-			set = new LinkedHashSet<PersonalDataVO>(query.list());
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return set;
+	public List<PersonalDataVO> getAll() {
+		return null;
 	}
 
 	@Override
@@ -53,18 +36,23 @@ public class PersonalDataDAO_Hibernate implements PersonalDataDAO_interface {
 
 	}
 
-	public static void main(String args[]) {
-		PersonalDataDAO_Hibernate dao = new PersonalDataDAO_Hibernate();
 
-		Set<PersonalDataVO> set = dao.getAll();
-		for (PersonalDataVO vo : set) {
-			System.out.print(vo.getPlayersVO().getPlayerID() + ", ");
-			System.out.print(vo.getGamesVO().getGameID() + ", ");
-			System.out.print(vo.getTeamsVO().getTeamName() + ", ");
-			System.out.print(vo.getPlayersVO().getPlayerName() + ", ");
-			System.out.print(vo.getQuarters() + ", ");
-			System.out.println();
-		}
+	@Override
+	public List<PersonalDataVO> getAll1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> getAll2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> findByGameID(Integer GameID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

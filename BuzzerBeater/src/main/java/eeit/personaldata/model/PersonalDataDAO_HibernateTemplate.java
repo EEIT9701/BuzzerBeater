@@ -1,6 +1,5 @@
 package eeit.personaldata.model;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +18,20 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 	}
 
 	private static final String GET_ALL_STMT = "FROM PersonalDataVO";
+	private static final String FIND_BY_GAMEID = "FROM PersonalDataVO WHERE GameID=?";
+	private static final String FIND_BY_GAMEID_AND_TEAMID = "FROM PersonalDataVO WHERE GameID=? AND TeamID=?";
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PersonalDataVO> findByGameIDAndTeamID(Integer GameID, Integer TeamID) {
+		return (List<PersonalDataVO>) hibernateTemplate.find(FIND_BY_GAMEID_AND_TEAMID, GameID, TeamID);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PersonalDataVO> findByGameID(Integer GameID) {
+		return (List<PersonalDataVO>) hibernateTemplate.find(FIND_BY_GAMEID, GameID);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -28,7 +41,6 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public PersonalDataVO findByPersonalDataID(Integer PersonalDataID) {
 		return (PersonalDataVO) hibernateTemplate.get(PersonalDataVO.class, PersonalDataID);
 	}
@@ -58,15 +70,40 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		PersonalDataDAO_interface dao = (PersonalDataDAO_interface) context.getBean("PersonalDataDAO");
 
-		Set<PersonalDataVO> set = dao.getAll();
-		for (PersonalDataVO vo : set) {
+		// List<PersonalDataVO> set = dao.getAll();
+		// for (PersonalDataVO vo : set) {
+		// System.out.print(vo.getPlayersVO().getPlayerID() + ", ");
+		// System.out.print(vo.getGamesVO().getGameID() + ", ");
+		// System.out.print(vo.getTeamsVO().getTeamName() + ", ");
+		// System.out.print(vo.getPlayersVO().getPlayerName() + ", ");
+		// System.out.println();
+		// }
+
+		List<PersonalDataVO> list = dao.findByGameIDAndTeamID(4001, 3001);
+		for (PersonalDataVO vo : list) {
 			System.out.print(vo.getPlayersVO().getPlayerID() + ", ");
 			System.out.print(vo.getGamesVO().getGameID() + ", ");
+			System.out.print(vo.getTeamsVO().getTeamID()+ ", ");
 			System.out.print(vo.getTeamsVO().getTeamName() + ", ");
 			System.out.print(vo.getPlayersVO().getPlayerName() + ", ");
-			System.out.print(vo.getQuarters() + ", ");
+			System.out.print(vo.getFg() + ", ");
+			System.out.print(vo.getPlayersVO().getPlayerName() + ", ");
+			System.out.print(vo.getTeamsVO().getTeamName() + ", ");
+
 			System.out.println();
 		}
+	}
+
+	@Override
+	public List<PersonalDataVO> getAll1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> getAll2() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

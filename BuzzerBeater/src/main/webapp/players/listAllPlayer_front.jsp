@@ -126,7 +126,25 @@
 			<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 			<script>
 				$(document).ready(function () {
-					$('#table').DataTable();
+					 $('#table').DataTable({
+						    columnDefs: [{ width: 200, targets: 6}],
+						    "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+						    "pagingType": "full_numbers",
+						    "language": {
+						     "lengthMenu":"每一頁顯示_MENU_ 筆資料",
+						     "zeroRecords":"查無資料",
+						     "info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
+						     "infoEmpty":"無資料",
+						     "infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
+						     "search":"搜尋：",
+						     "paginate":{
+						      "first":"第一頁",
+						      "previous":"上一頁",
+						      "next":"下一頁",
+						      "last":"最末頁"     
+						    }
+						     }
+						   })
 				});
 			</script>
 			<script>
@@ -168,7 +186,6 @@
 					})
 				})
 			</script>
-
 		</body>
 
 		</html>

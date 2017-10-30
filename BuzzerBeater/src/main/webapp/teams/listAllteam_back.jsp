@@ -63,18 +63,18 @@
 							<div class="col-md-12">
 								<table class="table table-bordered" id="table">
 									<thead>
-										<tr>
-
-											<th>隊長E-mail</th>
-											<th>隊長電話</th>
+										<tr>	
 											<th>隊徽</th>
 											<th>隊名</th>
 											<th>分組</th>
+											<th>隊長E-mail</th>
+											<th>隊長電話</th>
 											<th>教練</th>
 											<th>老闆</th>
 											<th>勝場數</th>
 											<th>敗場數</th>
 											<th>勝率</th>
+											<th>備註</th>
 											<th></th>
 											<th></th>
 
@@ -83,14 +83,17 @@
 									<tbody>
 										<c:forEach var="teamsVO" items="${teamsSvc.all}">
 											<tr align='center' valign='middle'>
-												<td>${teamsVO.captainEmail}</td>
-												<td>${teamsVO.captainPhone}</td>
+												
 												<td><img id="img1" src="data:image/png;base64,${teamsVO.teamBadge}"></td>
 												<!--隊徽-->
 												<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teamsVO.teamID}">${teamsVO.teamName}</a></td>
 												<!--球名-->
 												<td></td>
 												<!--分組-->
+												<td>${teamsVO.captainEmail}</td>
+												<!--隊長E-mail-->
+												<td>${teamsVO.captainPhone}</td>
+												<!--隊長電話-->
 												<td>${teamsVO.coachName}</td>
 												<!--教練-->
 												<td>${teamsVO.bossName}</td>
@@ -101,11 +104,14 @@
 												<!--敗場數-->
 												<td>${teamsVO.winRate}</td>
 												<!--勝率-->
+												<td>${teamsVO.remarks}</td>
+												<!--備註-->
 
 												<td>
 													<Form method="post" action="<%=request.getContextPath() %>/Teams.do">
-														<button type="submit" class="btn btn-info">修改</button> <input type="hidden" name="teamID" value="${teamsVO.teamID}">
+														<button type="submit" class="btn btn-info">修改</button> 
 														<input type="hidden" name="action" value="getOne_For_Update">
+														<input type="hidden" name="teamID" value="${teamsVO.teamID}">
 													</Form>
 												</td>
 												<td>
