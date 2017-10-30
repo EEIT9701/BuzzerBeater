@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
+
+
 <!DOCTYPE html>
 
 
@@ -79,12 +82,12 @@
 		<div class="collapse navbar-collapse" id="navbar-menu">
 			<ul class="nav navbar-nav navbar-right" data-in="fadeInDown">
 				<li><a href="<%=request.getContextPath() %>/index.jsp">Home</a></li>
-				<li class="dropdown"><a href="<%=request.getContextPath() %>/season/season_front.jsp" class="dropdown-toggle"
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/season/seasonList.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">賽季<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">賽季子頁1<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">賽季子頁2<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">賽季子頁3<!--這行的href輸入超連結頁面--></a></li>
+						<c:forEach var="seasonSet" items="${seasonSvc.all}" begin="0" end="3">
+							<li><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${seasonSet.seasonID}">${seasonSet.seasonName}</a></li>
+						</c:forEach>
 					</ul>
 				</li>
 				<li class="dropdown"><a href="<%=request.getContextPath() %>/groups/groupFront.jsp" class="dropdown-toggle"

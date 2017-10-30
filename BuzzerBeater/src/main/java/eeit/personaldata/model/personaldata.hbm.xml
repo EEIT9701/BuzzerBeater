@@ -15,8 +15,11 @@
 			</key-many-to-one>
 		</composite-id>
 		
+		<many-to-one name="teamsVO" class="eeit.teams.model.TeamsVO" lazy="false">
+			<column name="teamID" />
+		</many-to-one>
+		
 	
-		<property name="teamID" column="teamID" />
 		<property name="twoPoint" column="twoPoint" />
 		<property name="twoPointShot" column="twoPointShot" />
 		<property name="threePoint" column="threePoint" />
