@@ -61,6 +61,7 @@
 							</tr>
 						</thead>
 						<tbody id="tbody01">
+						
 						</tbody>
 					</table>
 				</div>
@@ -83,8 +84,7 @@
 		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){	 
 			 var docFrag = $(document.createDocumentFragment());
 			 //var tb = $('#example>tbody').children('tr:eq(0)');
-			 var tb = $('#tbody01');
-			 
+			 var tb = $('#tbody01');	 
 			 tb.empty;
 			 $.each(data, function (idx, MemberInfoVO) {
 	               var cell1 = $('<td></td>').text(MemberInfoVO.memberID);
@@ -135,12 +135,11 @@
 		     //可以取得auth
 		     var auth = $(this).parents('tr').find('td:nth-child(4)').text();
 	       	
-	       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="帳號"  type="text" value="'+ acc +'" required>');
-	       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="名稱"  type="text" value="'+ name +'" required>');
-	       	  $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="權限"  type="text" value="'+ auth +'" required>');
+	       	 $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="帳號"  type="text" value="'+ acc +'" required>');
+	       	 $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="名稱"  type="text" value="'+ name +'" required>');
+	       	 $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="權限"  type="text" value="'+ auth +'" required>');
  	  		  
-	       	  $(this).text('確定');
-	
+	       	  $(this).text('確定');	
 	       	 
            } 
 	       	else{ //按下確定鍵 
@@ -169,8 +168,7 @@
  			  //把輸入在欄位上的資料經過post傳送
  	       	  $.post('/BuzzerBeater/memberInfoServlet.do', {'action':'UPDATE', 'data':dataStr}, function(datas){
 					//只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
- 	       	  })
-		      
+ 	       	  })   
 	       	  $(this).text('修改');	       	  
 	       	}
        });

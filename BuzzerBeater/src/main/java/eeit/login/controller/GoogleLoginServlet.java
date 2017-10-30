@@ -139,10 +139,10 @@ public class GoogleLoginServlet extends HttpServlet {
 				session.setAttribute("pictureUri", jsonOb.getString("picture"));
 //				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
 //				rd.forward(req, resp);
-				resp.sendRedirect("page.jsp");
+				resp.sendRedirect("index.jsp");
 				return;
 			}else{
-				resp.sendRedirect("page.jsp");
+				resp.sendRedirect("index.jsp");
 				return;
 //				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
 //				rd.forward(req, resp);
