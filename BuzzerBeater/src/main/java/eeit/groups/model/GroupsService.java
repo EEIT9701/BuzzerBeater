@@ -11,12 +11,13 @@ public class GroupsService {
 	private GroupsDAO_interface dao;
 
 	public GroupsService() {
-//		dao = new GroupsDAO_Hibernate();
+		// dao = new GroupsDAO_Hibernate();
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (GroupsDAO_interface) context.getBean("GroupsDAO");
 	}
-	
-	public GroupsVO findByGroupID(Integer groupID){
+
+	public GroupsVO findByGroupID(Integer groupID) {
 		return dao.findByGroupID(groupID);
 	}
 
@@ -24,11 +25,11 @@ public class GroupsService {
 			Integer maxPlayers, Integer minPlayers) {
 
 		GroupsVO gVO = new GroupsVO();
-		
+
 		SeasonVO sVO = new SeasonVO();
 		sVO.setSeasonID(seasonID);
 		gVO.setSeasonVO(sVO);
-		
+
 		gVO.setGroupName(groupName);
 		gVO.setMaxTeams(maxTeams);
 		gVO.setMinTeams(minTeams);
@@ -56,7 +57,7 @@ public class GroupsService {
 		return gVO;
 	}
 
-	public void deleteGroup(Integer groupID) {
+	public void delete(Integer groupID) {
 		dao.delete(groupID);
 	}
 
