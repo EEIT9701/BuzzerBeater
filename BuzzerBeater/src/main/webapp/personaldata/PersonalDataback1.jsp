@@ -114,7 +114,7 @@ font-size:2px;
 				</div>
 			</div>
 		</div>
-	<jsp:include page="/footer.jsp" />
+<jsp:include page="/footer_css.jsp" />
 	</div>
 
 	<!--主文(結束)-->
@@ -210,7 +210,7 @@ font-size:2px;
 		       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="賽事"  type="text" value="'+ gameID +'" required>');
 		       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="球隊名稱"  type="text" value="'+ teamID +'" required>');
 		       	  $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="比賽時間"  type="text" value="'+ gameTime +'" required>');
-		          $(this).parents('tr').find('td:nth-child(5)').html('<input placeholder=""  type="text" value="'+ twoPoint +'" required>');
+		          $(this).parents('tr').find('td:nth-child(5)').html('<input placeholder="二分"  type="text" value="'+ twoPoint +'" required>');
 		          $(this).parents('tr').find('td:nth-child(6)').html('<input placeholder=""  type="text" value="'+ twoPointShot +'" required>');
 		          $(this).parents('tr').find('td:nth-child(7)').html('<input placeholder=""  type="text" value="'+ threePoint +'" required>');
 		          $(this).parents('tr').find('td:nth-child(8)').html('<input placeholder=""  type="text" value="'+ threePointShot +'" required>');
@@ -231,14 +231,45 @@ font-size:2px;
 		       	 
 	           }
 		       	else{
-		       	  var acc =   $(this).parents('tr').find('td:nth-child(2)>input').val();
-		       	  var name =  $(this).parents('tr').find('td:nth-child(3)>input').val();
-	 	       	  var auth = $(this).parents('tr').find('td:nth-child(4)>input').val();
+		       	  var gameID =   $(this).parents('tr').find('td:nth-child(2)>input').val();
+		       	  var teamID =  $(this).parents('tr').find('td:nth-child(3)>input').val();
+	 	       	  var gameTime = $(this).parents('tr').find('td:nth-child(4)>input').val();
+	 	          var twoPoint = $(this).parents('tr').find('td:nth-child(5)>input').val();
+			      var twoPointShot = $(this).parents('tr').find('td:nth-child(6)>input').val();
+			      var threePoint = $(this).parents('tr').find('td:nth-child(7)>input').val();
+			      var threePointShot = $(this).parents('tr').find('td:nth-child(8)>input').val();
+			      var fg = $(this).parents('tr').find('td:nth-child(9)>input').val();
+			      var fgShot = $(this).parents('tr').find('td:nth-child(10)>input').val();
+			      var offReb = $(this).parents('tr').find('td:nth-child(11)>input').val();
+			      var defReb = $(this).parents('tr').find('td:nth-child(12)>input').val();
+			      var assist = $(this).parents('tr').find('td:nth-child(13)>input').val();
+			      var steal = $(this).parents('tr').find('td:nth-child(14)>input').val();
+			      var blocks = $(this).parents('tr').find('td:nth-child(15)>input').val();
+			      var turnover = $(this).parents('tr').find('td:nth-child(16)>input').val();
+			      var personalFouls = $(this).parents('tr').find('td:nth-child(17)>input').val();
+			      var points = $(this).parents('tr').find('td:nth-child(18)>input').val();
+			      var startingPlayer = $(this).parents('tr').find('td:nth-child(19)>input').val();
 		       	  
 		       		
-			      $(this).parents('tr').find('td:nth-child(2)').text(acc);
-			      $(this).parents('tr').find('td:nth-child(3)').text(name);
-			      $(this).parents('tr').find('td:nth-child(4)').text(auth);
+			      $(this).parents('tr').find('td:nth-child(2)').text(gameID);
+			      $(this).parents('tr').find('td:nth-child(3)').text(teamID);
+			      $(this).parents('tr').find('td:nth-child(4)').text(gameTime);
+			      $(this).parents('tr').find('td:nth-child(5)').text(twoPoint);
+			      $(this).parents('tr').find('td:nth-child(6)').text(twoPointShot);
+			      $(this).parents('tr').find('td:nth-child(7)').text(threePoint);
+			      $(this).parents('tr').find('td:nth-child(8)').text(threePointShot);
+			      $(this).parents('tr').find('td:nth-child(9)').text(fg);
+			      $(this).parents('tr').find('td:nth-child(10)').text(fgShot);
+			      $(this).parents('tr').find('td:nth-child(11)').text(offReb);
+			      $(this).parents('tr').find('td:nth-child(12)').text(defReb);
+			      $(this).parents('tr').find('td:nth-child(13)').text(assist);
+			      $(this).parents('tr').find('td:nth-child(14)').text(steal);
+			      $(this).parents('tr').find('td:nth-child(15)').text(blocks);
+			      $(this).parents('tr').find('td:nth-child(16)').text(turnover);
+			      $(this).parents('tr').find('td:nth-child(17)').text(personalFouls);
+			      $(this).parents('tr').find('td:nth-child(18)').text(points);
+			      $(this).parents('tr').find('td:nth-child(19)').text(startingPlayer);
+			      
 		       	  $(this).text('修改');
 		       	  
 		       	  
@@ -254,7 +285,7 @@ font-size:2px;
 			$('#example').DataTable();
 		});
 	</script> -->
-<%-- 	<jsp:include page="/footer.jsp" /> --%>
+	<jsp:include page="/footer.jsp" />
 
 </body>
 </html>
