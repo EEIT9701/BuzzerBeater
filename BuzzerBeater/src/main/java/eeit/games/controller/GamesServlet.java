@@ -76,7 +76,7 @@ public class GamesServlet extends HttpServlet {
 				int i = 0;
 				while (rows.hasNext()) {
 					row = (HSSFRow) rows.next();
-
+					
 					if (i++ == 0) {
 						continue; // 為了跳過標題列
 					}

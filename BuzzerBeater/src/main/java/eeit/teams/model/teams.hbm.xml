@@ -13,12 +13,12 @@
 			<column name="locationID" />
 		</many-to-one>
 		
-		<set name="teamCompositionSet" table="TeamComposition" lazy="false" cascade="all-delete-orphan"  inverse="true">			
+		<set name="teamCompositionSet" table="TeamComposition" lazy="false">			
 			<key><column name="teamID"/></key>
 			<one-to-many class="eeit.teamcomposition.model.TeamCompositionVO" />
 		</set>
 		
-		<set name="groupRegSet" table="GroupRegistration" lazy="false" cascade="all-delete-orphan"  inverse="true">			
+		<set name="groupRegSet" table="GroupRegistration" lazy="false">			
 			<key><column name="teamID"/></key>
 			<one-to-many class="eeit.groupreg.model.GroupRegVO" />
 		</set>

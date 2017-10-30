@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import eeit.groups.model.GroupsVO;
 import eeit.teams.model.TeamsVO;
 
 @SuppressWarnings("unchecked")
@@ -24,6 +25,16 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 	private static final String GET_ALL_STMT = "FROM GroupRegVO";
 	private static final String FIND_BY_GROUPID = "FROM GroupRegVO WHERE groupID=?";
 	private static final String FIND_BY_TEAMID = "FROM GroupRegVO WHERE teamID=?";
+	private static final String DELETE_BY_TEAMID = "FROM GroupRegVO WHERE teamID=?";
+	private static final String DELETE_BY_GROUPID = "FROM GroupRegVO WHERE groupID=?";
+	private static final String DELETE_BY_CID = "FROM GroupRegVO WHERE groupID=? AND teamID=?";
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void deleteByCID(Integer teamID, Integer groupID) {
+		List<GroupRegVO> list = (List<GroupRegVO>) hibernateTemplate.find(DELETE_BY_CID, groupID, teamID);
+		hibernateTemplate.deleteAll(list);
+	}
 
 	@Override
 	public Set<GroupRegVO> getAll() {
@@ -46,9 +57,16 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void delete(Integer teamID) {
-		GroupRegVO groupRegVO = hibernateTemplate.get(GroupRegVO.class, teamID);
-		hibernateTemplate.delete(groupRegVO);
+	public void deleteByTeamID(Integer teamID) {
+		List<GroupRegVO> list = (List<GroupRegVO>) hibernateTemplate.find(DELETE_BY_TEAMID, teamID);
+		hibernateTemplate.deleteAll(list);
+	}
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void deleteByGroupID(Integer groupID) {
+		List<GroupRegVO> list = (List<GroupRegVO>) hibernateTemplate.find(DELETE_BY_GROUPID, groupID);
+		hibernateTemplate.deleteAll(list);
 	}
 
 	@Override
@@ -67,11 +85,13 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		GroupRegDAO_interface dao = (GroupRegDAO_interface) context.getBean("GroupRegDAO");
 
-		dao.delete(3001);
+		// dao.deleteByTeamID(3001);
+		// dao.deleteByGroupID(2002);
+		// dao.deleteByCID(3001, 2002);
 
 		Set<GroupRegVO> set = dao.getAll();
 		for (GroupRegVO gvo : set) {
-			System.out.print(gvo.getGroupsVO().getSeasonVO().getSeasonBeginDate() + ", ");
+			System.out.print(gvo.getTeamsVO().getTeamID() + ", ");
 			System.out.print(gvo.getGroupsVO().getGroupID() + ", ");
 			System.out.print(gvo.getGroupsVO().getGroupName() + ", ");
 			System.out.print(gvo.getTeamsVO().getTeamName() + ", ");

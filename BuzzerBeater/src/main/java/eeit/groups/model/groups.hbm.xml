@@ -13,21 +13,21 @@
 			<column name="seasonID" />
 		</many-to-one>
 
-		<set name="groupRegSet" table="GroupRegistration" lazy="false" cascade="all-delete-orphan" inverse="true">
+		<set name="groupRegSet" table="GroupRegistration" lazy="false">
 			<key>
 				<column name="groupID" />
 			</key>
 			<one-to-many class="eeit.groupreg.model.GroupRegVO" />
 		</set>
 		
-		<set name="playerGroupsSet" table="PlayerGroup" lazy="false" cascade="all-delete-orphan" inverse="true">
+		<set name="playerGroupsSet" table="PlayerGroup" lazy="false">
 			<key>
 				<column name="groupID" />
 			</key>
 			<one-to-many class="eeit.playergroups.model.PlayerGroupsVO" />
 		</set>
 		
-		<set name="gamesSet" table="Games" lazy="false" cascade="all-delete-orphan" inverse="true" order-by="gameBeginDate asc">
+		<set name="gamesSet" table="Games" lazy="false" order-by="gameBeginDate asc">
 			<key>
 				<column name="groupID" />
 			</key>

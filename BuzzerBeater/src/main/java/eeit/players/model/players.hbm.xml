@@ -9,21 +9,21 @@
 			<generator class="identity" />
 		</id>
 
-		<set name="playerGroupsSet" table="PlayerGroup" lazy="false" cascade="all" inverse="true">
+		<set name="playerGroupsSet" table="PlayerGroup" lazy="false">
 			<key>
 				<column name="playerID" />
 			</key>
 			<one-to-many class="eeit.playergroups.model.PlayerGroupsVO" />
 		</set>
 		
-		<set name="personalDataSet" table="PersonalData" lazy="false" cascade="all" inverse="true">
+		<set name="personalDataSet" table="PersonalData" lazy="false">
 			<key>
 				<column name="playerID" />
 			</key>
 			<one-to-many class="eeit.personaldata.model.PersonalDataVO" />
 		</set>
 		
-		<set name="teamCompositionSet" table="TeamComposition" lazy="false" cascade="all" inverse="true">
+		<set name="teamCompositionSet" table="TeamComposition" lazy="false">
 			<key>
 				<column name="playerID" />
 			</key>
