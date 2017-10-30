@@ -1,6 +1,7 @@
 package eeit.gamemedia.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -12,18 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
+import com.google.gson.Gson;
+
 import eeit.gamemedia.model.GameMediaService;
 import eeit.gamemedia.model.GameMediaVO;
 import eeit.games.model.GamesVO;
-import eeit.players.model.PlayersVO;
 
 
-
-
-@SuppressWarnings("serial")
 @WebServlet("/GameMedia.do")
 public class GameMediaServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		doPost(req, res);
@@ -225,34 +227,24 @@ public class GameMediaServlet extends HttpServlet {
 		}
 		
 		if ("getAll".equals(action)) {
-			/***************************開始查詢資料 ****************************************/
+			res.setHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("content-type", "text/html;charset=UTF-8");
+			res.setCharacterEncoding("UTF-8");
 			
-			List<GameMediaVO> list = gameMediaSvc.getAll();
-
-			/***************************查詢完成,準備轉交(Send the Success view)*************/
-			HttpSession session = req.getSession();
-			session.setAttribute("list", list);    // 資料庫取出的list物件,存入session
-			// Send the Success view
-			String url = "/gamemedia/video.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);  // 成功轉交listAllEmp2_getFromSession.jsp
-			successView.forward(req, res);
-			return;
-		}
-		
-		if ("getTopFour".equals(action)){
+			System.out.println("123");
+			//String jsonList = JSONValue.toJSONString(gameMediaSvc.getAllInJsonForm());
+			Gson gson = new Gson();
+			String jsonList = gson.toJson(gameMediaSvc.getAllInJsonForm());
 			
-			List<GameMediaVO> list = gameMediaSvc.getAll();
-
-			for(int i=0;i<4;i++){
-				
-			}
+			PrintWriter out = res.getWriter();
+			out.println(jsonList);
 			
-			HttpSession session = req.getSession();
-			session.setAttribute("list", list);    // 資料庫取出的list物件,存入session
-			// Send the Success view
-			String url = "/gamemedia/video.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url);  // 成功轉交listAllEmp2_getFromSession.jsp
-			successView.forward(req, res);
+//			HttpSession session = req.getSession();
+//			session.setAttribute("jsonList", jsonList);    // 資料庫取出的list物件,存入session
+//			// Send the Success view
+//			String url = "/gamemedia/video.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);  // 成功轉交listAllEmp2_getFromSession.jsp
+//			successView.forward(req, res);
 			return;
 		}
 		

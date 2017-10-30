@@ -78,19 +78,21 @@
 	$(function(){
 		//生成memberInfoServlet 取值, 回傳JSON格式物件,並且 指定位置生成資料
 		loadProduct('GET_ALL_MEMBERINFO_JSON');
-
+		
 		function loadProduct(id){
-		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){
+		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){	 
 			 var docFrag = $(document.createDocumentFragment());
 			 //var tb = $('#example>tbody').children('tr:eq(0)');
 			 var tb = $('#tbody01');
+			 
 			 tb.empty;
 			 $.each(data, function (idx, MemberInfoVO) {
 	               var cell1 = $('<td></td>').text(MemberInfoVO.memberID);
 	               var cell2 = $('<td></td>').text(MemberInfoVO.acc);
 	               var cell3 = $('<td></td>').text(MemberInfoVO.name);
-	               var cell4 = $('<td></td>').text(MemberInfoVO.auth);
-	               var cell5 = $('<td></td>').text(MemberInfoVO.registerTime);
+	               var cell4 = $('<td></td>').text(MemberInfoVO.auth);		   	 
+ 	               maxDate = new Date(MemberInfoVO.registerTime);          //ms to data
+ 	               var cell5 = $('<td></td>').text(maxDate);
 	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
 	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" data-toggle="JDialog" data-target="dialog-4" >修改</button></td>');
 	               var cell8 = $('<td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td>');
@@ -123,10 +125,9 @@
 		} 
 		
 		function buttonFunction(){
-		  $('.btn-primary').on('click', function(){          	    		         
-	       	
-	        
-	       	if($(this).text() == '修改'){	
+		  $('.btn-primary').on('click', function(){          	    		            	
+		   //按下修改鍵 
+	       if($(this).text() == '修改'){	
 	         //可以取得acc
 		     var acc = $(this).parents('tr').find('td:nth-child(2)').text();
 		     //可以取得name
@@ -139,33 +140,47 @@
 	       	  $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="權限"  type="text" value="'+ auth +'" required>');
  	  		  
 	       	  $(this).text('確定');
-	       	  
+	
 	       	 
-           }
-	       	else{
-	       	  var acc =   $(this).parents('tr').find('td:nth-child(2)>input').val();
-	       	  var name =  $(this).parents('tr').find('td:nth-child(3)>input').val();
+           } 
+	       	else{ //按下確定鍵 
+	       	  //把input, 顯示在table欄位上的值取出	
+	       	  var memberID = $(this).parents('tr').find('td:nth-child(1)').text();
+	       	  var acc = $(this).parents('tr').find('td:nth-child(2)>input').val();
+	       	  var name = $(this).parents('tr').find('td:nth-child(3)>input').val();
  	       	  var auth = $(this).parents('tr').find('td:nth-child(4)>input').val();
-	       	  
-	       		
-		      $(this).parents('tr').find('td:nth-child(2)').text(acc);
-		      $(this).parents('tr').find('td:nth-child(3)').text(name);
-		      $(this).parents('tr').find('td:nth-child(4)').text(auth);
-	       	  $(this).text('修改');
-	       	  
-	       	  
-     	   }    
+ 	       	  var registerTime = $(this).parents('tr').find('td:nth-child(5)').text();
+ 	     	  var teamID = $(this).parents('tr').find('td:nth-child(6)').text();
+    
+ 	          //alert(registerTime);
+ 	          
+ 	          //把time轉成date
+ 	          var registerTimeToMs = new Date(registerTime);
+ 	          //把輸入的資料包裝成JSON格式字串, 給post傳送用
+ 	       	  var dataStr = JSON.stringify({ memberID:memberID, acc:acc, name:name, auth:auth, registerTime:registerTimeToMs, teamID:teamID})
+              //將 顯示在table欄位改回tr,並把值填入 
+ 	       	  $(this).parents('tr').find('td:nth-child(1)').html(memberID);
+ 	       	  $(this).parents('tr').find('td:nth-child(2)').html(acc);
+ 			  $(this).parents('tr').find('td:nth-child(3)').html(name);
+ 			  $(this).parents('tr').find('td:nth-child(4)').html(auth);
+ 			  $(this).parents('tr').find('td:nth-child(5)').html(registerTime);
+ 			  $(this).parents('tr').find('td:nth-child(6)').html(teamID);
+ 	       	  
+ 			  //把輸入在欄位上的資料經過post傳送
+ 	       	  $.post('/BuzzerBeater/memberInfoServlet.do', {'action':'UPDATE', 'data':dataStr}, function(datas){
+					//只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
+ 	       	  })
+		      
+	       	  $(this).text('修改');	       	  
+	       	}
        });
+		  $('.btn-warning').on('click', function(){
+			  alert("確定要刪除嗎?"); 
+			  
+			  
+		  }) 
 	 }
 		
-		
-// 	  function postForUpdat(Update,acc,name,auth){
-// 		  //$.post({'/BuzzerBeater/memberInfoServlet.do',{"":"", },
-       		  
-   		  
-//        	  });  
-		  
-// 	  }	
 	})
 	</script>
 	

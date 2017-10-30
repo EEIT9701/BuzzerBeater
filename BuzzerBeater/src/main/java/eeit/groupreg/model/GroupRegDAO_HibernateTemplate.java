@@ -10,6 +10,8 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import eeit.teams.model.TeamsVO;
+
 @SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
 public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
@@ -44,8 +46,8 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void delete(Integer games_ID) {
-		GroupRegVO groupRegVO = hibernateTemplate.get(GroupRegVO.class, games_ID);
+	public void delete(Integer teamID) {
+		GroupRegVO groupRegVO = hibernateTemplate.get(GroupRegVO.class, teamID);
 		hibernateTemplate.delete(groupRegVO);
 	}
 
@@ -65,7 +67,7 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		GroupRegDAO_interface dao = (GroupRegDAO_interface) context.getBean("GroupRegDAO");
 
-		// dao.delete(4001);
+		dao.delete(3001);
 
 		Set<GroupRegVO> set = dao.getAll();
 		for (GroupRegVO gvo : set) {
@@ -77,9 +79,9 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 			System.out.println();
 		}
 
-//		for (GroupRegVO vo : dao.findByTeamID(3002)) {
-//			System.out.println(vo.getPaymentNumber());
-//		}
+		// for (GroupRegVO vo : dao.findByTeamID(3002)) {
+		// System.out.println(vo.getPaymentNumber());
+		// }
 	}
 
 }
