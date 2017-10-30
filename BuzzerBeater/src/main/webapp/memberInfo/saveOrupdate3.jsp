@@ -21,6 +21,9 @@
 	rel="stylesheet" type="text/css" media="all" />
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
+<!-- ***套用新的模太框檔案*** -->
+<script src="<%=request.getContextPath()%>/dist/jdialog.min.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/dist/jdialog.min.css">	
 
 <style>
 #st1 {
@@ -37,7 +40,7 @@
 	<jsp:include page="/header.jsp" />
 	<!--主文(開始)-->
 	<div class="container">
-
+		<div><button type="button" class="btn btn-danger" data-toggle="JDialog" data-target="dialog-4" id="button_insert">新增</button></div>
 		<br>
 		<br>
 		<!--****************-->
@@ -72,18 +75,71 @@
    
 	<!--主文(結束)-->
 	
+	<!-- 模太框 -->
+	<div class="jDialog" id="dialog-4">
+		<div class="content">
+		 <H3>新增帳號</H3>
+			     <input id="MemberInfoVO_acc" placeholder="會員帳號" type="text" value="" required>
+			     <input id="MemberInfoVO_name"  placeholder="會員名稱" type="text" value="" required>
+			     <input id="MemberInfoVO_auth"  placeholder="權限"  type="text" value="" required>
+			 <div>
+				<button class="button" data-dismiss="JDialog" id="jDialogButton">確定</button>
+			</div>
+		</div>
+	</div>
 	
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
-	$(function(){
+	$(function(){	
 		//生成memberInfoServlet 取值, 回傳JSON格式物件,並且 指定位置生成資料
 		loadProduct('GET_ALL_MEMBERINFO_JSON');
+		
+		//模太框相關按鈕
+		$(".JDialog").jDialog({		
+		     skinClassName : 'demo',
+		     animationType : 'flip',
+		     allowOverlay : false
+       });
+	    
+		$('#button_insert').on('click', function(){ 
+// 				alert($('#MemberInfoVO_acc').val());
+// 				alert($('#MemberInfoVO_name').val());
+// 				alert($('#MemberInfoVO_auth').val());
+
+	    });
+		
+		$('#jDialogButton').on('click', function(){
+			//抓input 的值
+			var acc =  $('#MemberInfoVO_acc').val();
+			var name = $('#MemberInfoVO_name').val();
+			var auth = $('#MemberInfoVO_auth').val();
+			if(acc!= '' & name!= '' & auth != '' ){
+				//取得目前時間
+				registerTimeToMs = Date.now() + 28800000; //台北時間+8小時
+				//alert(registerTimeToMs);
+				registerTime = new Date(registerTimeToMs);
+				
+				//把input 清空
+				$('#MemberInfoVO_acc').val('');
+				$('#MemberInfoVO_name').val('');
+				$('#MemberInfoVO_auth').val('');
+				
+				var dataStr = JSON.stringify({ acc:acc, name:name, auth:auth, registerTime:registerTime })
+				$.post('/BuzzerBeater/memberInfoServlet.do', {'action':'INSERT', 'data':dataStr}, function(datas){
+					//只是把新增資料傳回後台 不需回傳東西, 或做輸入與法判斷
+					alert("新增成功");
+					location.reload();
+		       	}) 
+		    }else {
+		    	alert("新增失敗");
+		    }
+			
+		});
 		
 		function loadProduct(id){
 		 $.getJSON('/BuzzerBeater/memberInfoServlet.do',{'action':id} ,function(data){	 
 			 var docFrag = $(document.createDocumentFragment());
-			 //var tb = $('#example>tbody').children('tr:eq(0)');
 			 var tb = $('#tbody01');	 
 			 tb.empty();
 			 $.each(data, function (idx, MemberInfoVO) {
@@ -94,7 +150,7 @@
  	               maxDate = new Date(MemberInfoVO.registerTime);          //ms to data
  	               var cell5 = $('<td></td>').text(maxDate);
 	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
-	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" data-toggle="JDialog" data-target="dialog-4" >修改</button></td>');
+	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" >修改</button></td>');
 	               var cell8 = $('<td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td>');
 	               var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8]);
  	               docFrag.append(row);
@@ -125,6 +181,7 @@
 		} 
 		
 		function buttonFunction(){
+		  //修改鍵	
 		  $('.btn-primary').on('click', function(){          	    		            	
 		   //按下修改鍵 
 	       if($(this).text() == '修改'){	
@@ -140,7 +197,7 @@
 	       	 $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="權限"  type="text" value="'+ auth +'" required>');
  	  		  
 	       	  $(this).text('確定');	
-	       	 
+	       	  
            } 
 	       	else{ //按下確定鍵 
 	       	  //把input, 顯示在table欄位上的值取出	
@@ -153,7 +210,7 @@
     
  	          //alert(registerTime);
  	          
- 	          //把time轉成date
+ 	          //把time轉成date(台北標準時間)
  	          var registerTimeToMs = new Date(registerTime);
  	          //把輸入的資料包裝成JSON格式字串, 給post傳送用
  	       	  var dataStr = JSON.stringify({ memberID:memberID, acc:acc, name:name, auth:auth, registerTime:registerTimeToMs, teamID:teamID})
@@ -172,13 +229,20 @@
 	       	  $(this).text('修改');	       	  
 	       	}
        });
+          //刪除鍵
 		  $('.btn-warning').on('click', function(){
-			  alert("確定要刪除嗎?"); 
-			  
-			  
+			  alert("確定要刪除嗎?");
+			  var memberID = $(this).parents('tr').find('td:nth-child(1)').text();
+			  //alert(memberID);
+			  //把輸入在欄位上的資料經過post傳送
+ 	       	  $.post('/BuzzerBeater/memberInfoServlet.do', {'action':'DELETE', 'MemberID':memberID}, function(datas){
+					//刪除資料 不需回傳東西, 或做輸入與法判斷
+ 	       	  })
+			  $(this).parents('tr').empty();
+ 	       	  //location.reload()
 		  }) 
-	 }
-		
+	  }
+		 		
 	})
 	</script>
 	
