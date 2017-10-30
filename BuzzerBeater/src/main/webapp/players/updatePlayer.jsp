@@ -122,13 +122,15 @@
 
                                     </c:forEach>
                                     <div class="col-md-12">
-                                            <div class="col-md-4"></div>
-                                        <!-- Button -->
+                                        <div class="col-md-4"></div>
                                         <div class="col-md-4">
-                                            <input type="submit" class="btn btn-warning" value="送出">
-                                            <input type="hidden" name="action" value="update">
-                                        </div>
+                                            <!-- Button -->
+                                            <div class="col-md-4">
+                                                <input type="submit" class="btn btn-warning" value="送出">
+                                                <input type="hidden" name="action" value="update">
+                                            </div>
                             </Form>
+                            <div class="col-md-4"></div>
                             <div class="col-md-4">
                                 <form action="<%=request.getContextPath() %>/Players.do">
                                     <c:forEach var="playersVO" items="${playersVO}">
@@ -139,6 +141,7 @@
                                     </c:forEach>
 
                                 </form>
+                            </div>
                             </div>
                             <div class="col-md-4"></div>
                             </div>

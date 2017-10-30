@@ -12,7 +12,7 @@ public class PersonalDataVO implements Serializable {
 	private PlayersVO playersVO; // playerID CPK
 	private GamesVO gamesVO; // gameID CPK
 	private TeamsVO teamsVO; // teamID
-
+	private Integer playerID;
 	private Integer gameID; // for JDBC
 	private Integer teamID; // for JDBC
 	
@@ -230,6 +230,14 @@ public class PersonalDataVO implements Serializable {
 
 	public void setGameID(Integer gameID) {
 		this.gameID = gameID;
+	}
+
+	public Integer getPlayerID() {
+		return playerID;
+	}
+
+	public void setPlayerID(Integer playerID) {
+		this.playerID = playerID;
 	}
 
 }

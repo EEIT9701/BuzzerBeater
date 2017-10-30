@@ -150,6 +150,40 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 		return null;
 	}
 	
-	
+	@Override
+	public List<PersonalDataVO> getAll2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public PersonalDataVO findByPersonalDataID(Integer PersonalDataID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void insert(PersonalDataVO personalDataVO) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void update(PersonalDataVO personalDataVO) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void delete(Integer PersonalDataID) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public List<PersonalDataVO> findByGameID(Integer GameID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<PersonalDataVO> findByGameIDAndTeamID(Integer GameID, Integer TeamID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
