@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="https://accounts.google.com/o/oauth2/auth?
-scope=https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&
-redirect_uri=http://localhost:8080/BuzzerBeater/GoogleLogin.do&
-response_type=code&
-state=/profile&
-client_id=879939044143-sfo5p4l1nmd7ndrpdjhg8fh07ass3akm.apps.googleusercontent.com">HA</a>
+	<a href="https://www.facebook.com/v2.5/dialog/oauth?
+             client_id=144809318927994&
+             redirect_uri=http://localhost:8080/BuzzerBeater/FaceBookLogin.do&
+             state=/profile&
+             response_type=code&
+             scope=email,public_profile">HA</a>
 </body>
 </html>

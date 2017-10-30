@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="<%=request.getContextPath()%>/memberInfo/login.jsp">AAAA</a>
+<a href="https://www.facebook.com/v2.10/dialog/oauth?">HA</a>a>
 </body>
 </html>
