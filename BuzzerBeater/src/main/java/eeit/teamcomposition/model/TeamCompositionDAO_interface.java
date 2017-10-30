@@ -12,9 +12,12 @@ public interface TeamCompositionDAO_interface {
 
 	public void deleteByPlayerID(Integer playerID);
 
+	public void deleteByCID(Integer teamID, Integer playerID);
+
 	public Set<TeamCompositionVO> getAll();
 
 	public List<TeamCompositionVO> findByTeamID(Integer teamID);
 
 	public List<TeamCompositionVO> findByPlayerID(Integer playerID);
+
 }

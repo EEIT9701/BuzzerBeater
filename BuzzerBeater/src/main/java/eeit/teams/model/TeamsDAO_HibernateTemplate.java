@@ -64,4 +64,10 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 		}
 
 	}
+
+	@Override
+	public Integer findMaxID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

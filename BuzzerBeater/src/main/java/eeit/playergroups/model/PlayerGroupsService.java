@@ -57,4 +57,16 @@ public class PlayerGroupsService {
 	public List<PlayerGroupsVO> findByGroupID(Integer groupID) {
 		return dao.findByGroupID(groupID);
 	}
+	
+	public void deleteByPlayerID(Integer playerID){
+		dao.deleteByPlayerID(playerID);
+	}
+
+	public void deleteByGroupID(Integer groupID){
+		dao.deleteByGroupID(groupID);
+	}
+
+	public void deleteByCID(Integer playerID, Integer groupID){
+		dao.deleteByCID(playerID, groupID);
+	}
 }
