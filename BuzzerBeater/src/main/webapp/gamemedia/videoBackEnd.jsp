@@ -199,7 +199,7 @@ span{
             											<div class="modal-body">
             												<div class="row" >
   																<video controls >
-       																<source id="xxx" src="<%=request.getContextPath()%>"+"/videos/data.gameVideo" type="video/mp4">
+       																<source id="xxx" src="<%=request.getContextPath()%>"+"/videos/${}" type="video/mp4">
 																</video>
             												</div>
             												</br>
