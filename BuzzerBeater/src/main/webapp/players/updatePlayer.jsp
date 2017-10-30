@@ -45,19 +45,19 @@
                                     <!-- Form Name -->
                                     <legend>球員修改</legend>
 
-                                    <c:forEach var="playersVO" items="${playersVO}">
+                                   
 
 
-                                        <input type="hidden" name="playerID" value="${playersVO.playerID}">
+                                        <input type="hidden" name="playerID" value="${playerID}">
 
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">球員照片:</label>
                                             <input type="file" id="file">
                                             <div class="col-md-4">
-                                                <img id="result" src="data:image/jpeg;base64,${playersVO.photo}">
+                                                <img id="result" src="data:image/jpeg;base64,${photo}">
                                                 <br>
-                                                <input type="hidden" id="photo" name="photo" value="data:image/jpeg;base64,${playersVO.photo}">
+                                                <input type="hidden" id="photo" name="photo" value="data:image/jpeg;base64,${photo}">
                                             </div>
                                         </div>
 
@@ -65,14 +65,14 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">球員姓名:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="playerName" class="form-control" id="exampleInputEmail1" value="${playersVO.playerName}">
+                                                <input type="text" name="playerName" class="form-control" id="exampleInputEmail1" value="${playerName}">
                                             </div>
                                         </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">身分證ID:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="id" class="form-control" id="exampleInputEmail1" value="${playersVO.id}">
+                                                <input type="text" name="id" class="form-control" id="exampleInputEmail1" value="${id}">
                                             </div>
                                         </div>
                                         <!-- Text input-->
@@ -93,41 +93,41 @@
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">身高(cm):</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="height" class="form-control" id="exampleInputEmail1" value="${playersVO.height}">
+                                                <input type="text" name="height" class="form-control" id="exampleInputEmail1" value="${height}">
                                             </div>
                                         </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">體重(kg):</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="weights" class="form-control" id="exampleInputEmail1" value="${playersVO.weights}">
+                                                <input type="text" name="weights" class="form-control" id="exampleInputEmail1" value="${weights}">
                                             </div>
                                         </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">生日:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="birthday" class="form-control" id="exampleInputEmail1" value="${playersVO.birthday}">
+                                                <input type="text" name="birthday" class="form-control" id="exampleInputEmail1" value="${birthday}">
                                             </div>
                                         </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">國籍:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="nationality" class="form-control" id="exampleInputEmail1" value="${playersVO.nationality}">
+                                                <input type="text" name="nationality" class="form-control" id="exampleInputEmail1" value="${nationality}">
                                             </div>
                                         </div>
 
 
 
-                                    </c:forEach>
+                                    
                                     <div class="col-md-12">
                                         <div class="col-md-4"></div>
                                         <div class="col-md-4">
                                             <!-- Button -->
                                             <div class="col-md-4">
                                                 <input type="submit" class="btn btn-warning" value="送出">
-                                                <input type="hidden" name="action" value="update">
+                                                <input type="hidden" name="action" value="updateCheck">
                                             </div>
                             </Form>
                             <div class="col-md-4"></div>
