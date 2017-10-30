@@ -79,9 +79,9 @@
 			        			<td></td>
 									<td>
 									<Form method="post" action="<%=request.getContextPath() %>/Groups.do" id="update">
-									<button type="submit" class="btn btn-lg btn-primary">新增</button>
+									<button type="submit" class="btn btn-lg btn-primary">修改</button>
 									<input type="hidden" name="groupID" value="${gVO.groupID}"> 
-                                    <input type="hidden" name="action" value="ADD_GROUP">
+                                    <input type="hidden" name="action" value="CHECK_GROUP">
 			        			</Form>
 									</td>
 									<td>
