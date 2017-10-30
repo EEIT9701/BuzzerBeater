@@ -1,7 +1,11 @@
 package eeit.gamemedia.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -62,6 +66,32 @@ public class GameMediaService {
 
 	public List<GameMediaVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<HashMap<String,String>> getAllInJsonForm(){
+		
+		List<GameMediaVO> list = dao.getAll();
+		List<HashMap<String,String>> returnlist = new ArrayList<HashMap<String, String>>();
+		Map<String,String> map = null;
+		
+		for(GameMediaVO gameMediaVO:list){
+			map = new HashMap<String,String>();
+			map.put("gameID",gameMediaVO.getGamesVO().getGameID().toString());
+			map.put("mediaID",gameMediaVO.getMediaID().toString());
+			map.put("mediasName",gameMediaVO.getMediasName());
+			map.put("gameVideo",gameMediaVO.getGameVideo());
+			map.put("gamePhoto",gameMediaVO.getGamePhoto());
+			map.put("mediaType",gameMediaVO.getMediaType());
+			map.put("'mediaDate",gameMediaVO.getMediaDate().toString());
+			map.put("descriptions",gameMediaVO.getDescriptions());
+			map.put("tag", gameMediaVO.getTag());
+			
+			returnlist.add((HashMap<String, String>) map);
+		}
+		
+		
+		return returnlist;
+		
 	}
 	
 }

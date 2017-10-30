@@ -32,14 +32,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- <link rel="stylesheet" -->
 <!-- 	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<script src="<%=request.getContextPath() %>/js/jquery-3.2.1.min.js"></script>
 
 <jsp:include page="/header_css.jsp" />
+<%-- <script src="<%=request.getContextPath() %>/js/jquery-3.2.1.min.js"></script> --%>
 
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 
 <style>
 #myModalLabel{
+	width:200px
+}
+#myModalLabel1{
+	width:200px
+}
+#myModalLabel2{
+	width:200px
+}
+#myModalLabel3{
 	width:200px
 }
 #table{
@@ -95,7 +104,7 @@ span{
 </head>
 <body>
 	
-	<jsp:include page="/header.jsp" />
+<%-- 	<jsp:include page="/header.jsp" /> --%>
 	<!--主文(開始)-->
 	<div class="container">
 		<div class="jumbotron">
@@ -156,7 +165,7 @@ span{
 				<table class="table table-bordered" id="table">
   						<thead>
     						<tr align='center' valign='middle' id="thead">
-      							<td>分組</td>
+      							<td><nobr>分組</nobr></td>
       							<td>賽事</td>
       							<td>最後上傳/修改時間</td>
       							<td>標題</td>
@@ -164,7 +173,7 @@ span{
       							<td>標籤</td>
       							<td></td>
       							<td></td>
-      							
+      							<td></td>      							
     						</tr>
   						</thead>
   						<tbody>
@@ -179,19 +188,78 @@ span{
       								<td>${gameMediaSvc.descriptions}</td>
       								<td>${gameMediaSvc.tag}</td>
       								<td>
-      									<Form method="post" action="<%=request.getContextPath() %>/GameMedia.do" id="update">
-      										<button type="submit" class="btn btn-info">檢視</button>
-      										<input type="hidden" name="mediaID" value="${gameMediaSvc.mediaID}"> 
-                                           	<input type="hidden" name="action" value="getOneForUpdate">
-                                       	</Form>
+      									<button class="btn btn-info" id="uploadButton"  data-toggle="modal" data-target="#myModal1">預覽</button>
+      										<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true" data-backdrop="false">
+    											<div class="modal-dialog">
+        											<div class="modal-content">
+            											<div class="modal-header">
+                											<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="x">&times;</button>
+                											<h4 class="modal-title" id="myModalLabel1">預覽影片</h4>
+            											</div>
+            											<div class="modal-body">
+            												<div class="row" >
+  																<video controls >
+       																<source id="xxx" src="<%=request.getContextPath()%>"+"/videos/data.gameVideo" type="video/mp4">
+																</video>
+            												</div>
+            												</br>
+            											</div>
+            											<div class="modal-footer">
+                											<button type="button" class="btn btn-default" data-dismiss="modal">離開</button>
+            											</div>
+        											</div>
+    											</div>
+											</div>
                                     </td>
                                     <td>
-                                        <Form method="post" action="<%=request.getContextPath() %>/GameMedia.do" id="delete">    
-      										<button type="submit" class="btn btn-danger">刪除</button>
-											<input type="hidden" name="mediaID" value="${gameMediaSvc.mediaID}"> 
-                                           	<input type="hidden" name="action" value="delete">
-										</Form>
+                                    	<button class="btn btn-warning" id="123"  data-toggle="modal" data-target="#myModal2">修改</button>
+      										<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true" data-backdrop="false">
+    											<div class="modal-dialog">
+        											<div class="modal-content">
+            											<div class="modal-header">
+                											<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="x">&times;</button>
+                											<h4 class="modal-title" id="myModalLabel2">修改影片資訊</h4>
+            											</div>
+            											<div class="modal-body">
+            												<div class="row">
+  																
+            												</div>
+            												</br>
+            											</div>
+            											<div class="modal-footer">
+            												<button type="button" class="btn btn-default" data-dismiss="modal">確定</button>
+                											<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            											</div>
+        											</div>
+    											</div>
+											</div>	
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" id="456"  data-toggle="modal" data-target="#myModal3">刪除</button>
+      										<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true" data-backdrop="false">
+    											<div class="modal-dialog">
+        											<div class="modal-content">
+            											<div class="modal-header">
+                											<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="x">&times;</button>
+                											<h4 class="modal-title" id="myModalLabel3">刪除影片</h4>
+            											</div>
+            											<div class="modal-body">
+            												<div class="row">
+  																<h4>警告!!!</br>
+  																	即將刪除影片${gameMediaSvc.mediasName}，是否確定?
+  																</h4>
+            												</div>
+            												</br>
+            											</div>
+            											<div class="modal-footer">
+            												<button type="button" class="btn btn-default" data-dismiss="modal">確定</button>
+                											<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            											</div>
+        											</div>
+    											</div>
+											</div>	
       								</td>
+      					
     							</tr>
     							</c:if>
   							</c:forEach>
@@ -204,7 +272,7 @@ span{
 				<div class="col-md-3"><h3>影片上傳</h3></div>
 			</div>
 			<div class="row">
-				<button class="btn btn-warning" id="uploadButton"  data-toggle="modal" data-target="#myModal">選擇檔案</button>
+				<button class="btn btn-warning" id="789"  data-toggle="modal" data-target="#myModal">選擇檔案</button>
 					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
     					<div class="modal-dialog">
         					<div class="modal-content">
@@ -230,10 +298,10 @@ span{
             							<input type="text" class="form-control">
         						</div>
         						</br>
-        						<div class="input-group">
-            						<span class="input-group-addon">標籤</span>
-            							<input type="text" class="form-control" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣">
-        						</div>
+       						<div class="input-group">
+           						<span class="input-group-addon">標籤</span>
+           							<input type="text" class="form-control" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣">
+       						</div>
         				
         						
             				</div>
@@ -256,9 +324,52 @@ span{
 	<jsp:include page="/footer_css.jsp" />
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
-	$(document).ready(function () {
-		$('#table').DataTable();
-	});
+	$(function(){
+		$('#uploadButton').click(function(event){
+			
+<%-- 		    alert("<%=request.getContextPath()%>"); --%>
+<%-- 			var src="<%=request.getContextPath()%>"+"/videos/data.gameVideo";	 --%>
+// 			$('#xxx').attr("src",src );
+// 			var videotag = 0;
+// 			videotag.empty();
+// 			$.getJSON('/BuzzerBeater/GameMedia.do', {'action':'getAll'},function(data){
+// 				if(data.mediaType='video'){
+// 				console.log(data)
+<%-- 					$('#xxx > source').attr("src","<%=request.getContextPath()%>/videos/data.gameVideo") --%>
+// 				}
+// 			});
+		})
+	})
+		
+	
+// 	$(function(){
+// 		loadGameMedia('getAll');
+		
+// 		function loadGameMedia(act){
+// 			$.getJSON('/BuzzerBeater/GameMedia.do',{'action':act},function(data){
+// 				var docFrag = $(document.createDocumentFragment());
+// 				console.log(data.mediasName)
+// 			})
+// 		}
+// 	})
+// 		$('#uploadButton').click(function(event){
+// 			if(data.mediaType=="video"){
+<%-- 				$('#video > source').attr("src","<%=request.getContextPath()%>/videos/data.gameVideo")	 --%>
+// 			}
+// 		})		
+// 	$(document).ready(function () {
+// 		$('#table').DataTable();
+// 	});
+	
+	
+	
+// 	$('#uploadButton').click(function(event){
+<%--  $(#video > source).attr("src","<%=request.getContextPath()%>/videos/${gameMediaSvc.gameVideo}") --%>
+// 		$.each($("#video > source"),function(index,source){
+<%-- source.src="<%=request.getContextPath()%>/videos/" --%>
+// 		})
+		
+// 	});
 	</script>
 
 
