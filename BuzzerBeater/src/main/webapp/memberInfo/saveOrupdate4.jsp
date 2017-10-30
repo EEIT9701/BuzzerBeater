@@ -104,7 +104,7 @@
 			 var docFrag = $(document.createDocumentFragment());
 			 //var tb = $('#example>tbody').children('tr:eq(0)');
 			 var tb = $('#tbody01');
-			 tb.empty;
+			 tb.empty();
 			 $.each(data, function (idx, MemberInfoVO) {
 	               var cell1 = $('<td></td>').text(MemberInfoVO.memberID);
 	               var cell2 = $('<td></td>').text(MemberInfoVO.acc);

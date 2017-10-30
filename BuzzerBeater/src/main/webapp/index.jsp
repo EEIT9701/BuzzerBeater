@@ -29,19 +29,16 @@
     <div class="pageheader fixed-demo dark" style="padding-top:0px">
 
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6">
+            <div class="row">          
+
                     <div id="countdown">
                         <div>報名日期倒數 :</div>
                     </div>
                     <p style="color:#303030" id="note"></p>
-                </div>
+
             </div>
         </div>
     </div>
-	
 	
 	
     <!--主文(開始)-->
@@ -283,9 +280,6 @@
     <!--計時器("2-2")-->
     <script src="js/jquery.countdown.js"></script>
     <script src="js/script.js" charset="big5" type="text/javascript" ></script>
-    
-    
-
 
 </body>
 </html>
