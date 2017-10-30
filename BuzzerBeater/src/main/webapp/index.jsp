@@ -26,7 +26,7 @@
 	
 	
 	    <!--計時器(開始)-->
-    <div class="pageheader fixed-demo dark">
+    <div class="pageheader fixed-demo dark" style="padding-top:0px">
 
         <div class="container">
             <div class="row">

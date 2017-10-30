@@ -131,6 +131,9 @@
                 width: 100%;
             }
         }
+        .pageheader.fixed-demo.dark{
+        padding-top:90px;
+        }
     </style>
 
 
