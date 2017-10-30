@@ -38,6 +38,8 @@
                                     </ul>
                                 </font>
                             </c:if>
+
+                            <!-- 修改表單 -->
                             <Form class="form-horizontal" method="post" action="<%=request.getContextPath() %>/Players.do">
                                 <fieldset>
                                     <!-- Form Name -->
@@ -53,7 +55,8 @@
                                             <label class="col-md-4 control-label">球員照片:</label>
                                             <input type="file" id="file">
                                             <div class="col-md-4">
-                                                <img id="result" src="data:image/jpeg;base64,${playersVO.photo}"><br>
+                                                <img id="result" src="data:image/jpeg;base64,${playersVO.photo}">
+                                                <br>
                                                 <input type="hidden" id="photo" name="photo" value="data:image/jpeg;base64,${playersVO.photo}">
                                             </div>
                                         </div>
@@ -65,25 +68,32 @@
                                                 <input type="text" name="playerName" class="form-control" id="exampleInputEmail1" value="${playersVO.playerName}">
                                             </div>
                                         </div>
-                                         <!-- Text input-->
+                                        <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">身分證ID:</label>
                                             <div class="col-md-4">
                                                 <input type="text" name="id" class="form-control" id="exampleInputEmail1" value="${playersVO.id}">
                                             </div>
                                         </div>
-                                         <!-- Text input-->
+                                        <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">背號:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="id" class="form-control" id="exampleInputEmail1" value="">
+                                                <input type="text" name="playerNo" class="form-control" id="exampleInputEmail1" value="">
                                             </div>
                                         </div>
                                         <!-- Text input-->
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">位置:</label>
                                             <div class="col-md-4">
-                                                <input type="text" name="height" class="form-control" id="exampleInputEmail1" value="">
+                                                <input type="text" name="playerRole" class="form-control" id="exampleInputEmail1" value="">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">身高(cm):</label>
+                                            <div class="col-md-4">
+                                                <input type="text" name="height" class="form-control" id="exampleInputEmail1" value="${playersVO.height}">
                                             </div>
                                         </div>
                                         <!-- Text input-->
@@ -111,27 +121,34 @@
 
 
                                     </c:forEach>
-                                    <!-- Button -->
-                                    <input type="submit" class="btn btn-warning" value="送出">
-                                    <input type="hidden" name="action" value="update">
+                                    <div class="col-md-12">
+                                            <div class="col-md-4"></div>
+                                        <!-- Button -->
+                                        <div class="col-md-4">
+                                            <input type="submit" class="btn btn-warning" value="送出">
+                                            <input type="hidden" name="action" value="update">
+                                        </div>
                             </Form>
+                            <div class="col-md-4">
+                                <form action="<%=request.getContextPath() %>/Players.do">
+                                    <c:forEach var="playersVO" items="${playersVO}">
+                                        <button type="submit" class="btn btn-danger">取消</button>
+                                        <input type="hidden" name="action" value="goTolistAllPlayer_back">
+                                        <!--                             <input type="hidden" name="action" value="getOne_For_Display"> -->
+                                        <%--                             <input type="hidden" name="playerName" value="${playersIfo.playerName}"> --%>
+                                    </c:forEach>
 
-                            <form action="<%=request.getContextPath() %>/Players.do">
-                                <c:forEach var="playersVO" items="${playersVO}">
-                                    <button type="submit" class="btn btn-danger">取消</button>
-                                    <input type="hidden" name="action" value="goTolistAllPlayer_back">
-                                    <!--                             <input type="hidden" name="action" value="getOne_For_Display"> -->
-                                    <%--                             <input type="hidden" name="playerName" value="${playersIfo.playerName}"> --%>
-                                </c:forEach>
+                                </form>
+                            </div>
+                            <div class="col-md-4"></div>
+                            </div>
 
-                            </form>
-                           
 
 
 
                             <jsp:include page="/footer.jsp" />
                             </fieldset>
-                            
+
                         </div>
                     </div>
                     <!--主文(結束)-->

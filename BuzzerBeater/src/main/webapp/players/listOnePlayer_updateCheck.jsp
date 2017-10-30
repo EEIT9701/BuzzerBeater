@@ -41,6 +41,8 @@
 										<th>球員照片</th>
 										<th>球員姓名</th>
 										<th>身分證ID</th>
+										<th>背號</th>
+										<th>位置</th>
 										<th>身高</th>
 										<th>體重</th>
 										<th>生日</th>
@@ -51,39 +53,51 @@
 								<tbody>
 									<c:forEach var="playersVO" items="${playersVO}">
 										<tr align='center' valign='middle'>
-											<td><img id="img1" src="data:image/jpeg;base64,${playersVO.photo}"></td>
+											<td>
+												<img id="img1" src="data:image/jpeg;base64,${playersVO.photo}">
+											</td>
 											<td>${playersVO.playerName}</td>
 											<td>${playersVO.id}</td>
+											<td></td>
+
 											<td>${playersVO.height}</td>
 											<td>${playersVO.weights}</td>
 											<td>${playersVO.birthday}</td>
 											<td>${playersVO.nationality}</td>
 
 										</tr>
-
+									</c:forEach>
 							</table>
-							<form action="<%=request.getContextPath() %>/Players.do">
-								<div class="form-group">
-									<label class="col-md-4 control-label"></label>
-									<div class="col-md-4">
-										<button type="submit" class="btn btn-primary">確認修改</button>
-										<input type="hidden" name="action" value="goTolistAllPlayer_back">
+							<div class="col-md-4"></div>
+							<div class="col-md-4">
+								<form action="<%=request.getContextPath() %>/Players.do">
+									<div class="form-group">
+										<div class="col-md-4">
+											<button type="submit" class="btn btn-primary">確認修改</button>
+											<input type="hidden" name="action" value="goTolistAllPlayer_back">
+										</div>
 									</div>
-								</div>
-								<!-- <button type="submit" class="btn btn-warning">確認修改</button>
+									<!-- <button type="submit" class="btn btn-warning">確認修改</button>
 								<input type="hidden" name="action" value="goTolistAllPlayer_back"> -->
-								<!--                             <input type="hidden" name="action" value="getOne_For_Display"> -->
-								<%--                             <input type="hidden" name="playerName" value="${playersIfo.playerName}"> --%>
+									<!--                             <input type="hidden" name="action" value="getOne_For_Display"> -->
+									<%--                             <input type="hidden" name="playerName" value="${playersIfo.playerName}"> --%>
 
-							</form>
-							<!-- <button type="submit" class="btn btn-info"><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp">確認修改</a></button> -->
-
-							<Form method="post" action="<%=request.getContextPath() %>/Players.do">
-								<button type="submit" class="btn btn-danger">返回修改</button>
-								<input type="hidden" name="playerName" value="${playersVO.playerName}">
-								<input type="hidden" name="action" value="getOne_For_Update">
-							</Form>
-							</c:forEach>
+								</form>
+								<!-- <button type="submit" class="btn btn-info"><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp">確認修改</a></button> -->
+								<div class="col-md-4"></div>
+								
+									<Form method="post" action="<%=request.getContextPath() %>/Players.do">
+											<c:forEach var="playersVO" items="${playersVO}">
+										<div class="col-md-4">
+											<button type="submit" class="btn btn-danger">返回修改</button>
+											<input type="hidden" name="playerName" value="${playersVO.playerName}">
+											<input type="hidden" name="action" value="getOne_For_Update">
+										</div>
+									</c:forEach>
+									</Form>
+								
+							</div>
+							<div class="col-md-4"></div>
 						</div>
 					</div>
 

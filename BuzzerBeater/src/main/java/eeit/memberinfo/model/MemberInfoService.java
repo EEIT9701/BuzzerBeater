@@ -9,6 +9,14 @@ public class MemberInfoService {
 		dao = new MemberInfoDAO();
 	}
 	
+	public void insert(MemberInfoVO memberInfoVO){
+		dao.insert(memberInfoVO);
+	}
+	
+	public void update(MemberInfoVO memberInfoVO){
+		dao.update(memberInfoVO);
+	}
+	
 	public List<MemberInfoVO>getAll(){
 		
 		return dao.getAll();

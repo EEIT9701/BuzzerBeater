@@ -27,6 +27,14 @@
 				<input type="hidden" name="groupID" value="2002">
 				<input type="submit" value="下載">
 			</form>
+			
+			<br><br><br>
+			
+			<form action="<%=request.getContextPath()%>/Games.do" method="post"  enctype="multipart/form-data">
+				<input type="hidden" name="action" value="UPLOAD_GAMES_EXCEL">
+				<input type="file" name="uploadExcel" accept=".xls,.xlsx">
+				<input type="submit" value="上傳">
+			</form>
 		
 		
 		
