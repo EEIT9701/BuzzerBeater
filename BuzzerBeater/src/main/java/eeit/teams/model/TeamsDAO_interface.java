@@ -12,5 +12,7 @@ interface TeamsDAO_interface {
 	public Set<TeamsVO> getAll();
 
 	public TeamsVO findByID(Integer teamID);
+	
+	public Integer findMaxID();
 
 }
