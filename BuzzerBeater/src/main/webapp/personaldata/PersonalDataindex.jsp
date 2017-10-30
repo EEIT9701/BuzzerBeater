@@ -26,7 +26,7 @@
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 <jsp:include page="/header_css.jsp" />
 <link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
 <style>
@@ -294,13 +294,47 @@
 
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
-		$(document).ready(function() {
-			$('#table').DataTable();
-		});
+	$(document).ready(function() {
+		$('#table').DataTable({
+			"lengthMenu": [[10, 15, 25, -1], [10, 15, 25, "All"]],
+			"pagingType": "full_numbers",
+			"language": {
+				"lengthMenu":"每一頁顯示_MENU_ 筆資料",
+				"zeroRecords":"查無資料",
+				"info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
+				"infoEmpty":"無資料",
+				"infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
+				"search":"搜尋：",
+				"paginate":{
+					"first":"第一頁",
+					"previous":"上一頁",
+					"next":"下一頁",
+					"last":"最末頁"					
+				}
+		  }
+		})
+	});
 	</script>
 	<script>
 		$(document).ready(function() {
-			$('#table2').DataTable();
+			$('#table2').DataTable({
+				"lengthMenu": [[10, 15, 25, -1], [10, 15, 25, "All"]],
+				"pagingType": "full_numbers",
+				"language": {
+					"lengthMenu":"每一頁顯示_MENU_ 筆資料",
+					"zeroRecords":"查無資料",
+					"info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
+					"infoEmpty":"無資料",
+					"infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
+					"search":"搜尋：",
+					"paginate":{
+						"first":"第一頁",
+						"previous":"上一頁",
+						"next":"下一頁",
+						"last":"最末頁"					
+					}
+			  }
+			})
 		});
 	</script>
 	<jsp:include page="/footer.jsp" />

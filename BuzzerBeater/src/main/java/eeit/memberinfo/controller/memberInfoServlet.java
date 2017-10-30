@@ -79,6 +79,15 @@ public class memberInfoServlet extends HttpServlet {
 			memberInfoVO.setAcc(mVO.get("acc").toString());
 			memberInfoVO.setName(mVO.get("name").toString());
 			memberInfoVO.setAuth(mVO.get("auth").toString());
+			//將registerTime轉成Timestamp
+			String timeTemp = mVO.getString("registerTime");
+			Timestamp registerTimeData = new Timestamp(System.currentTimeMillis()); 
+			String timeTemp01 = timeTemp.replace("T", " ");
+			String timeTemp02 = timeTemp01.replace("Z", "");
+			
+			System.out.println(timeTemp02);
+			registerTimeData = Timestamp.valueOf(timeTemp02); 
+			memberInfoVO.setRegisterTime(registerTimeData);
 	
 			mSvc.insert(memberInfoVO);
 			
@@ -87,7 +96,8 @@ public class memberInfoServlet extends HttpServlet {
 //			out.println();
 			request.removeAttribute("Action");	
 			return;
-		}if("UPDATE".equals(action)){
+		}
+		if("UPDATE".equals(action)){
 			
 			// 設定Response的Header和編碼
 			response.setHeader("Access-Control-Allow-Origin", "*");
@@ -125,6 +135,14 @@ public class memberInfoServlet extends HttpServlet {
 			request.removeAttribute("Action");		
 			return;
 			
+		}
+		if("DELETE".equals(action)){
+			//取得service實例
+			MemberInfoService mSvc = new MemberInfoService();
+			String memberID = request.getParameter("MemberID");
+			mSvc.delete(Integer.parseInt(memberID));         
+			
+			return;
 		}else System.out.println("HELLO");
 		
 		return;
