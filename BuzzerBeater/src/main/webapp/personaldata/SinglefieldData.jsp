@@ -46,25 +46,14 @@
 			<!--****************-->
 			<!-- 第一列(開始) -->
 			<!--****************-->
-			<div class="row">
+		
 				<!--第一列-左邊表格-格式_.col-md-8-->
 				<div class="col-md-12">
 
 					<li><a href="index.jsp"> 首頁<!--這行的href輸入超連結頁面--></a>/球員數據排名</li> <br>
-					<br>
-					<div id=st1>
-						球季 <select>
-							<option label="2015賽季" value="object:7" selected="selected">季前熱身賽</option>
-							<option label="2016賽季" value="object:8">例行賽</option>
-							<option label="2017賽季" value="object:9">季後賽</option>
-						</select> 組別 <select>
-							<option label="東區" value="object:7" selected="selected">季前熱身賽</option>
-							<option label="西區" value="object:8">例行賽</option>
-							<!--   <option label="少年組" value="object:9">季後賽</option>   -->
-						</select> <input type="submit" value="確定">
+					
 
-					</div>
-				</div>
+			
 			</div>
 		</div>
 		<br> <br>

@@ -1,115 +1,80 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="eeit.memberinfo.model.*"%>
-<%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	MemberInfoService dao = new MemberInfoService();
-	List<MemberInfoVO> list = dao.getAll();
-	pageContext.setAttribute("list", list);
-%>
-<jsp:useBean id="groupGvc" scope="page" class="eeit.groups.model.GroupsService" />
-<!DOCTYPE >
+
+<!DOCTYPE html>
+
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>EEIT97-第一組</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<%=request.getContextPath()%>/css/bootstrap.css"
-	rel='stylesheet' type='text/css' />
-<link href="<%=request.getContextPath()%>/css/style.css"
-	rel="stylesheet" type="text/css" media="all" />
-<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
-
-<style>
-#st1 {
-	padding: 30px;
-	background-color: #1E90FF;
-}
-#table1{
-	font-weight:bold;
-}
-</style>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/datatables.min.css" />
-<jsp:include page="/header_css.jsp" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       
+  	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+   	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
+   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		    	
+    <jsp:include page="/header_css.jsp" />
+    
+    <title>修改分組</title>
 </head>
+
 <body>
-
 	<jsp:include page="/header.jsp" />
-	<!--主文(開始)-->
-	<div class="container">
-
-		<br>
-		<br>
-		<!--****************-->
-		<!-- 第二列(開始) -->
-		<!--****************-->
-		<div class="row">
-			<!--第二列-左邊表格-格式_.col-md-4-->
-			<h2 align="center">分組</h2>
-			<div class="col-md-12">
-				<div class="col-md-12">
-					<table class="table table-bordered" id="example">
-						<thead>
-							<tr align='center' valign='middle' id="table1">
-								<td>分組名稱</td>
-								<td>目前球隊</td>
-								<td>球隊上限</td>
-								<td>球隊下限</td>
-								<td>球員上限</td>
-								<td>球員下限</td>
-								<td>狀態</td>
-								<td></td>
-								<td></td>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="gVO" items="${groupGvc.all}">
-								<tr align='center' valign='middle'>
-								<td><a href="<%=request.getContextPath() %>/Groups.do?action=GET_ALL_GROUPS">${gVO.groupName}</a></td>			        			
-			        			
-			        			<td>${gVO.currentTeams}</td>
-			        			<td>${gVO.maxTeams}</td>
-			        			<td>${gVO.minTeams}</td>
-			        			<td>${gVO.maxPlayers}</td>
-			        			<td>${gVO.minPlayers}</td>
-			        			<td></td>
-									<td>
-									<Form method="post" action="<%=request.getContextPath() %>/Groups.do" id="update">
-									<button type="submit" class="btn btn-lg btn-primary">修改</button>
-									<input type="hidden" name="groupID" value="${gVO.groupID}"> 
-                                    <input type="hidden" name="action" value="CHECK_GROUP">
-			        			</Form>
-									</td>
-									<td>
-									<Form method="post" action="<%=request.getContextPath() %>/Groups.do" id="delete">
-									<button type="submit" class="btn btn-lg btn-warning">刪除</button>
-									<input type="hidden" name="groupID" value="${gVO.groupID}"> 
-                                           	<input type="hidden" name="action" value="REMOVE_GROUP_TEMP">
-									</Form>
-									</td>
-									
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	<jsp:include page="/footer.jsp" />
-	</div>
-
-	<!--主文(結束)-->
-	<script type="text/javascript"
-		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#example').DataTable();
-		});
-	</script>
 	
+	<div class="container">
+		<div class="col-md-12">
+		
+			<h1>修改分組</h1>
+            	<c:if test="${not empty errorMsgs}">
+					請修正以下錯誤:
+                    <ul>
+                        <c:forEach var="message" items="${errorMsgs}">
+                            <li>${message}</li>
+                        </c:forEach>
+                    </ul>
+                </c:if>
+
+		    <Form method="post" action="<%=request.getContextPath() %>/Groups.do">
+				<input type="hidden" name="action" value="UPDATE_GROUP">
+				<input type="hidden" name="groupID" value="${groupsVO.groupID}">
+				
+				<table class="table table-bordered" id="seasonList">
+			        <tbody>
+						<tr>
+							<td>分組名稱</td>
+							<td><input type="text" name="groupName" value="${groupsVO.groupName}"></td>
+						</tr>
+						<tr>
+							<td>目前球隊</td>
+							<td><input type="text" name="currentTeams" value="${groupsVO.currentTeams}"></td>
+						</tr>
+						<tr>
+							<td>球隊上限</td>
+							<td><input type="text" name="maxTeams" value="${groupsVO.maxTeams}"></td>
+						</tr>
+						<tr>
+							<td>球隊下限</td>
+							<td><input type="text" name="minTeams" value="${groupsVO.minTeams}"></td>
+						</tr>
+						<tr>
+							<td>球員上限</td>
+							<td><input type="text" name="maxPlayers" value="${groupsVO.maxPlayers}"></td>
+						</tr>
+						<tr>
+							<td>球員下限</td>
+							<td><input type="text" name="minPlayers" value="${groupsVO.minPlayers}"></td>
+						</tr>
+					
+			        </tbody>
+			        
+			    </table>
+			    <input type="submit" value="送出">
+			    <input type ="button" onclick="history.back()" value="取消"></input>
+			</form>
+		</div>
+	</div>
+	    
+	    
+	<jsp:include page="/footer.jsp" />
 </body>
+<jsp:include page="/footer_css.jsp" />
 </html>

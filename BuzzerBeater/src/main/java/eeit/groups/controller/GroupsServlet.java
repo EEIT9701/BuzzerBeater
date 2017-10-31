@@ -307,8 +307,13 @@ public class GroupsServlet extends HttpServlet {
 
 		if ("DELETE_GROUP".equals(action)) {
 			GroupsService svc = new GroupsService();
-			svc.delete(Integer.parseInt(request.getParameter("groupID")));
-			request.getRequestDispatcher("/groups/groupList_back.jsp").forward(request, response);
+			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
+			GroupsVO groupsVO = svc.findByGroupID(groupID);
+			Integer seasonID = groupsVO.getSeasonVO().getSeasonID();
+			svc.delete(groupID);
+
+			request.getRequestDispatcher("/Season.do?action=TO_GROUPS_BACK&seasonID=" + seasonID).forward(request,
+					response);
 		}
 
 		// 根據隊伍數量計算所需比賽場數
@@ -330,11 +335,14 @@ public class GroupsServlet extends HttpServlet {
 
 		if ("ADD_SCHEDULE".equals(action)) {
 			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
-
 			GroupsService gsvc = new GroupsService();
-			request.setAttribute("groupsVO", gsvc.findByGroupID(groupID));
+			GroupsVO groupsVO = gsvc.findByGroupID(groupID);
+			Integer currentTeams = groupsVO.getCurrentTeams();
+			Integer gamesNeeded = (currentTeams * (currentTeams - 1)) / 2;
+
+			request.setAttribute("groupsVO", groupsVO);
+			request.getSession().setAttribute("gamesNeeded", gamesNeeded);
 			request.getRequestDispatcher("/groups/addSchedule.jsp").forward(request, response);
-			return;
 		}
 
 	}

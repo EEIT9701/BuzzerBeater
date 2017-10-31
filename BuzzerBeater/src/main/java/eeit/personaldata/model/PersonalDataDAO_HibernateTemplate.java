@@ -19,7 +19,9 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 
 	private static final String GET_ALL_STMT = "FROM PersonalDataVO";
 	private static final String FIND_BY_GAMEID = "FROM PersonalDataVO WHERE GameID=?";
+	private static final String FIND_BY_PLAYERID = "FROM PersonalDataVO WHERE PlayerID=?";
 	private static final String FIND_BY_GAMEID_AND_TEAMID = "FROM PersonalDataVO WHERE GameID=? AND TeamID=?";
+	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -31,6 +33,12 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 	@Override
 	public List<PersonalDataVO> findByGameID(Integer GameID) {
 		return (List<PersonalDataVO>) hibernateTemplate.find(FIND_BY_GAMEID, GameID);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PersonalDataVO> findByPlayerID(Integer playerID) {
+		return (List<PersonalDataVO>) hibernateTemplate.find(FIND_BY_PLAYERID, playerID);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -79,7 +87,7 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 		// System.out.println();
 		// }
 
-		List<PersonalDataVO> list = dao.findByGameIDAndTeamID(4001, 3002);
+		List<PersonalDataVO> list = dao.findByPlayerID(70002);
 		for (PersonalDataVO vo : list) {
 			System.out.print(vo.getPlayersVO().getPlayerID() + ", ");
 			System.out.print(vo.getGameTime() + ", ");
@@ -102,6 +110,12 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 
 	@Override
 	public List<PersonalDataVO> getAll2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> findByPlyerID2(Integer playerID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
