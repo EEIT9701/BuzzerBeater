@@ -59,6 +59,24 @@ public class PlayerGroupsDAO_Hibernate implements PlayerGroupsDAO_interface {
 		}
 	}
 
+	@Override
+	public void deleteByPlayerID(Integer playerID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteByGroupID(Integer groupID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteByCID(Integer playerID, Integer groupID) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

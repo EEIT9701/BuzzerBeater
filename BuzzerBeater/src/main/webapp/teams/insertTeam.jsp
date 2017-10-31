@@ -47,7 +47,7 @@
                             <Form class="form-horizontal" method="post" action="<%=request.getContextPath() %>/Teams.do">
                                 <fieldset>
                                     <!-- Form Name -->
-                                    <legend>球隊修改</legend>
+                                    <legend>球隊新增</legend>
 
                                     <input type="hidden" name="teamID" value="${teamID}">
 

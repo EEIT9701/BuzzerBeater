@@ -30,7 +30,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 	}
 
 	@Override
-	public void insert(SeasonVO seasonVO) {
+	public Integer insert(SeasonVO seasonVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -40,6 +40,7 @@ public class SeasonDAO_Hibernate implements SeasonDAO_interface {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return null;
 
 	}
 

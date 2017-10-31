@@ -36,7 +36,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 	
 	
 	@Override
-	public void insert(GameMediaVO gameMediaVO) {
+	public Integer insert(GameMediaVO gameMediaVO) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -78,6 +78,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 				}
 			}
 		}
+		return null;
 	}
 
 	@Override

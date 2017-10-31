@@ -1,6 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%
+	java.util.Date date = new java.util.Date();
+	pageContext.setAttribute("date", date);
+%>
+
 <!DOCTYPE html>
     <html>
 
@@ -26,6 +31,8 @@
 							<td>賽季名稱</td>
 			                <td>賽季開始日期</td>
 			                <td>賽季結束日期</td>
+			                <td>報名開始日期</td>
+			                <td>報名結束日期</td>
 						</tr>
 					<thead>
 					<tbody>
@@ -33,13 +40,13 @@
 							<td>${seasonVO.seasonName}</td>
 							<td>${seasonVO.seasonBeginDate}</td>
 							<td>${seasonVO.seasonEndDate}</td>
-						</tr>
-						<tr>
-							<td colspan="3">${seasonVO.descriptions}</td>
+							<td>${seasonVO.signUpBegin}</td>
+							<td>${seasonVO.signUpEnd}</td>
 						</tr>
 					</tbody>
 				</table>
-
+				<p>${seasonVO.descriptions}</p>
+				
 		        <table class="table table-bordered">
 		            <thead>
 			            <tr>
@@ -49,18 +56,57 @@
 		                    <td>目前隊伍數量</td>
 		                    <td>球隊成員上限</td>
 		                    <td>球隊成員下限</td>
+		                    <td>狀態</td>
 			            </tr>
 			        </thead>
 			
 			        <tbody>
 			        	<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
 			        		<tr>
-			        			<td><a href="<%=request.getContextPath() %>/Groups.do?action=GET_GAMES&groupID=${groupsSet.groupID}">${groupsSet.groupName}</a></td>
+			        			<td>${groupsSet.groupName}</td>
 			        			<td>${groupsSet.maxTeams}</td>
 			        			<td>${groupsSet.minTeams}</td>
 			        			<td>${groupsSet.currentTeams}</td>
 			        			<td>${groupsSet.maxPlayers}</td>
 			        			<td>${groupsSet.minPlayers}</td>
+			        			<td>
+			        				<c:choose>
+			        					<c:when test="${groupsSet.seasonVO.signUpEnd < date}">
+			        						報名已截止
+			        					</c:when>
+			        					<c:when test="${groupsSet.seasonVO.signUpBegin > date}">
+			        						報名尚未開始
+			        					</c:when>
+			        					<c:otherwise>
+			        						<c:if test="${groupsSet.currentTeams < groupsSet.minTeams}">
+			        							未達最低隊伍數量
+			        						</c:if>
+			        						<c:if test="${groupsSet.currentTeams == groupsSet.maxTeams}">
+			        							已額滿
+			        							<c:if test="${empty groupsSet.gamesSet}">
+			        								<a href="<%=request.getContextPath()%>/Groups.do?action=ADD_SCHEDULE&groupID=${groupsSet.groupID}">可編排賽程</a>
+			        							</c:if>
+			        						</c:if>
+			        						<c:if test="${groupsSet.currentTeams < groupsSet.maxTeams && groupsSet.currentTeams >= groupsSet.minTeams}">
+			        							未額滿
+			        						</c:if>
+			        					</c:otherwise>
+			        				</c:choose>
+			        			</td>
+			        			<td>
+			        				<form action="<%=request.getContextPath()%>/Groups.do" method="post">
+			        					<input type="hidden" name="action" value="GET_ONE_TO_UPDATE">
+			        					<input type="hidden" name="groupID" value="${groupsSet.groupID}">
+			        					<input type="submit" value="修改">
+			        				</form>
+			        			</td>
+			        			<td>
+			        				<form action="<%=request.getContextPath()%>/Groups.do" method="post">
+			        					<input type="hidden" name="action" value="DELETE_GROUP">
+			        					<input type="hidden" name="groupID" value="${groupsSet.groupID}">
+			        					<input type="submit" value="刪除">
+			        				</form>
+			        			</td>
 			        		</tr>
 			        	</c:forEach>			        	
 			        </tbody>

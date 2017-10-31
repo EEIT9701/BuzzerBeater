@@ -30,7 +30,7 @@ public class TeamsDAO implements TeamsDAO_interface {
 	private static final String UPDATE_STMT = "UPDATE Teams SET teamBadge=?, teamName=?, captainEmail=?, captainPhone=?, coachName=?, bossName=?,totalWin=?,totalLose=?,winRate=?,remarks=? where teamID = ?";
 	
 	@Override
-	public void insert(TeamsVO teamsVO) {
+	public Integer insert(TeamsVO teamsVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -69,6 +69,7 @@ public class TeamsDAO implements TeamsDAO_interface {
 				}
 			}
 		}
+		return null;
 		
 	}
 

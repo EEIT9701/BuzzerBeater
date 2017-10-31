@@ -32,7 +32,7 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 	}
 
 	@Override
-	public void insert(GamesVO gVO) {
+	public Integer insert(GamesVO gVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -42,6 +42,7 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 			session.getTransaction().rollback();
 			throw ex;
 		}
+		return null;
 
 	}
 

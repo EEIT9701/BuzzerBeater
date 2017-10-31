@@ -22,8 +22,7 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 	private static final String GET_ALL_SEASON = "FROM SeasonVO ORDER BY SeasonBeginDate";
 	private static final String FIND_LATEST_SEASON = "SELECT MAX(seasonID) FROM SeasonVO";
-	
-	
+
 	@Override
 	public SeasonVO findBySeasonID(Integer seasonID) {
 		return (SeasonVO) hibernateTemplate.get(SeasonVO.class, seasonID);
@@ -31,8 +30,8 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void insert(SeasonVO seasonVO) {
-		hibernateTemplate.save(seasonVO);
+	public Integer insert(SeasonVO seasonVO) {
+		return (Integer) hibernateTemplate.save(seasonVO); // 此方法會回傳新增該筆資料的ID
 	}
 
 	@Override
@@ -55,14 +54,15 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 		Object obj = hibernateTemplate.find(GET_ALL_SEASON);
 		return new LinkedHashSet<SeasonVO>((List<SeasonVO>) obj);
 	}
-	
+
 	@Override
 	public Integer getLatestID() {
 		return (Integer) hibernateTemplate.find(FIND_LATEST_SEASON).get(0);
 	}
 
 	public static void main(String args[]) {
-		
+
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		SeasonDAO_interface dao = (SeasonDAO_interface) context.getBean("SeasonDAO");
 
@@ -78,61 +78,53 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 		/****************** insert ******************/
 
-//		 SeasonVO sVO1 = new SeasonVO();
-//		 sVO1.setSeasonName("第十六季例行賽");
-//		 sVO1.setSeasonBeginDate(null);
-//		 sVO1.setSignUpBegin(java.sql.Timestamp.valueOf("2017-10-10 18:00:00"));
-//		 sVO1.setDescriptions("...");
-//		 
-//		 GroupsVO gVO1 = new GroupsVO();
-//		 gVO1.setGroupName("新增1");
-//		 gVO1.setMaxPlayers(3);
-//		 SeasonVO sVO2 = new SeasonVO();
-//		 sVO2.setSeasonID(1001);
-//		 gVO1.setSeasonVO(sVO2);
-//		 
-//		 GroupsVO gVO2 = new GroupsVO();
-//		 gVO2.setGroupName("新增2");
-//		 gVO2.setMaxPlayers(3);
-//		 
-//		 Set<GroupsVO> gSet = new LinkedHashSet<GroupsVO>();
-//		 gSet.add(gVO1);
-//		 gSet.add(gVO2);
-//		 sVO1.setGroupsSet(gSet);
-//		 dao.insert(sVO1);
+//		SeasonVO seasonVO = new SeasonVO();
+//		GroupsVO groupsVO = new GroupsVO();
+//		GroupsVO groupsVO1 = new GroupsVO();
+//
+//		groupsVO.setGroupName("123");
+//		groupsVO.setSeasonVO(seasonVO);// 將seasonVO關聯到groupsVO
+//		seasonVO.setSeasonName("超級盃");
+//		seasonVO.getGroupsSet().add(groupsVO);// 將該筆groupsVO加進seasonVO
+//
+//		groupsVO1.setSeasonVO(seasonVO);
+//		groupsVO1.setGroupName("321");
+//		seasonVO.getGroupsSet().add(groupsVO1);
+//
+//		Integer seasonVO3 = dao.insert(seasonVO); // 結論:要互相包含
+//		
+//		System.out.println(seasonVO3);
 
 		/****************** update ******************/
 
-//		 SeasonVO sVO2 = new SeasonVO();
-//		 sVO2.setSeasonID(1003);
-//		 sVO2.setSeasonName("已修改");
-//		 sVO2.setDescriptions("已修改");
-//		 dao.update(sVO2);
+		// SeasonVO sVO2 = new SeasonVO();
+		// sVO2.setSeasonID(1003);
+		// sVO2.setSeasonName("已修改");
+		// sVO2.setDescriptions("已修改");
+		// dao.update(sVO2);
 
 		/****************** delete ******************/
 
-//		 dao.delete(1001);
+//		 dao.delete(1002);
 
 		/****************** getAll ******************/
 
-		Set<SeasonVO> set = dao.getAll();
-		for (SeasonVO sVO : set) {
-			System.out.print(sVO.getSeasonID() + ", ");
-			System.out.print(sVO.getSeasonName() + ", ");
-			System.out.print(sVO.getSeasonBeginDate() + ", ");
-			System.out.print(sVO.getSeasonEndDate() + ", ");
-			System.out.print(sVO.getSignUpBegin() + ", ");
-			System.out.print(sVO.getSignUpEnd() + ", ");
-			System.out.print(sVO.getDescriptions());
-			Set<GroupsVO> gVO = sVO.getGroupsSet();
-			for (GroupsVO v : gVO) {
-				System.out.print(v.getGroupID());
-			}
-			System.out.println();
-		}
-		
-		
-	}
+//		Set<SeasonVO> set = dao.getAll();
+//		for (SeasonVO sVO : set) {
+//			System.out.print(sVO.getSeasonID() + ", ");
+//			System.out.print(sVO.getSeasonName() + ", ");
+//			System.out.print(sVO.getSeasonBeginDate() + ", ");
+//			System.out.print(sVO.getSeasonEndDate() + ", ");
+//			System.out.print(sVO.getSignUpBegin() + ", ");
+//			System.out.print(sVO.getSignUpEnd() + ", ");
+//			System.out.print(sVO.getDescriptions());
+//			Set<GroupsVO> gVO = sVO.getGroupsSet();
+//			for (GroupsVO v : gVO) {
+//				System.out.print(v.getGroupID());
+//			}
+//			System.out.println();
+//		}
 
+	}
 
 }

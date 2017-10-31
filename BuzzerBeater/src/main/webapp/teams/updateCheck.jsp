@@ -33,6 +33,7 @@
 					<!--****************-->
 					<div class="row">
 						<!--第一列-左邊表格-格式_.col-md-8-->
+						<legend>修改確認</legend>
 						<div class="col-md-12">
 
 							<table class="table table-bordered">
@@ -110,7 +111,7 @@
 
 									<div class="col-md-4">
 										<button type="submit" class="btn btn-danger">返回修改</button>
-										<input type="hidden" name="action" value="getOne_For_Update">
+										<input type="hidden" name="action" value="UpdateTeam">
 										<input type="hidden" name="teamID" value="${teamID}">
 										<input type="hidden" name="teamBadge" value="${teamBadge}">
 										<input type="hidden" name="teamName" value="${teamName}">

@@ -105,7 +105,8 @@ public class GameMediaDAO_JDBC implements GameMediaDAO_Interface{
 	}
 
 	@Override
-	public void insert(GameMediaVO gameMediaVO) {
+	public Integer insert(GameMediaVO gameMediaVO) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}

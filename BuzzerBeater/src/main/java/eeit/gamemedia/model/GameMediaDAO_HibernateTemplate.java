@@ -18,12 +18,11 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 	}
 
 	private static final String GET_ALL_STMT = "FROM GameMediaVO ORDER BY mediaID";
-	private static final String GET_TOP_FOUR = "SELECT Top 4 * FROM GameMedia where gameVideo IS NOT NULL";
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void insert(GameMediaVO gameMediaVO) {
-		hibernateTemplate.save(gameMediaVO);
+	public Integer insert(GameMediaVO gameMediaVO) {
+		return (Integer) hibernateTemplate.save(gameMediaVO);
 	}
 
 	@Override
@@ -58,15 +57,26 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		GameMediaDAO_Interface dao = (GameMediaDAO_Interface) context.getBean("GameMediaDAO");
-		
-		dao.delete(6001);
-		
-		List<GameMediaVO> set =dao.getAll();
-		
-		for(GameMediaVO vo : set){
-			System.out.println(vo.getMediaID());
-		}
 
+		// dao.delete(6001);
+		
+//		GameMediaVO gameMediaVO = new GameMediaVO();
+//		GamesVO gamesVO = new GamesVO();
+//		gamesVO.setGameID(4004);
+//		gameMediaVO.setGamesVO(gamesVO);
+//		gameMediaVO.setMediasName("GGG");
+//		dao.insert(gameMediaVO);
+		
+		
+		List<GameMediaVO> set = dao.getAll();
+		
+		for (GameMediaVO vo : set) {
+			System.out.print(vo.getMediaID() + " ");
+			System.out.print(vo.getGamesVO().getGameID() + " ");
+			System.out.print(vo.getMediasName() + " ");
+			System.out.print(vo.getMediaDate() + " ");
+			System.out.println();
+		}
 
 	}
 

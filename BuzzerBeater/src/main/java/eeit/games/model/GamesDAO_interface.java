@@ -7,9 +7,9 @@ public interface GamesDAO_interface {
 
 	public Set<GamesVO> getAll();
 
-	public void insert(GamesVO gVO);
+	public Integer insert(GamesVO gamesVO);
 
-	public void update(GamesVO gVO);
+	public void update(GamesVO gamesVO);
 
 	public void delete(Integer gameID);
 

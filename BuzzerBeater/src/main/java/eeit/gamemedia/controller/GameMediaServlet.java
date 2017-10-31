@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -212,12 +213,18 @@ public class GameMediaServlet extends HttpServlet {
 				
 				GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
 				
+//				ObjectMapper jsonMapper = new ObjectMapper();
+//	            String jsonString = jsonMapper.writeValueAsString(gameMediaVO); 
 				
-				req.setAttribute("gameMediaVO", gameMediaVO);         // 資料庫取出的gameMediaVO物件,存入req
+				
+			    req.setAttribute("gameMediaVO", gameMediaVO);         // 資料庫取出的gameMediaVO物件,存入req
 				String url = "/gamemedia/displayOneVideo.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
+//	            PrintWriter out = res.getWriter();
+//				out.println(jsonString);
+//	            
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
@@ -230,8 +237,7 @@ public class GameMediaServlet extends HttpServlet {
 			res.setHeader("Access-Control-Allow-Origin", "*");
 			res.setHeader("content-type", "text/html;charset=UTF-8");
 			res.setCharacterEncoding("UTF-8");
-			
-			System.out.println("123");
+
 			//String jsonList = JSONValue.toJSONString(gameMediaSvc.getAllInJsonForm());
 			Gson gson = new Gson();
 			String jsonList = gson.toJson(gameMediaSvc.getAllInJsonForm());
@@ -247,6 +253,24 @@ public class GameMediaServlet extends HttpServlet {
 //			successView.forward(req, res);
 			return;
 		}
+		
+		if ("getOneForJSON".equals(action)) {
+			res.setHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("content-type", "text/html;charset=UTF-8");
+			res.setCharacterEncoding("UTF-8");
+			
+			Integer mediaID = new Integer(req.getParameter("mediaID"));
+			//String jsonList = JSONValue.toJSONString(gameMediaSvc.getAllInJsonForm());
+//			Gson gson = new Gson();
+//			String jsonList = gson.toJson(gameMediaSvc.getOneInJsonForm(mediaID));
+			ObjectMapper jsonMapper = new ObjectMapper();
+            String jsonString = jsonMapper.writeValueAsString(gameMediaSvc.getAllInJsonForm()); 
+			
+			PrintWriter out = res.getWriter();
+			out.println(jsonString);
+			return;
+		}
+		
 		
 		
 //		if ("update".equals(action)) { 

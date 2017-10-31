@@ -1,6 +1,5 @@
 package eeit.teamcomposition.model;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,8 +9,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import eeit.teams.model.TeamsVO;
 
 @SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
@@ -25,6 +22,7 @@ public class TeamCompositionDAO_HibernateTemplate implements TeamCompositionDAO_
 	private static final String GET_ALL_STMT = "FROM TeamCompositionVO ORDER BY leaveTeamDate DESC";
 	private static final String FIND_BY_TEAMID = "FROM TeamCompositionVO WHERE teamID=?";
 	private static final String FIND_BY_PLAYERID = "FROM TeamCompositionVO WHERE playerID=?";
+	private static final String FIND_BY_CID = "FROM TeamCompositionVO WHERE playerID=? AND teamID=?";
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -41,28 +39,22 @@ public class TeamCompositionDAO_HibernateTemplate implements TeamCompositionDAO_
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void deleteByTeamID(Integer teamID) {
-		//壞的
-		List<TeamCompositionVO> list = findByTeamID(teamID);
-		List<TeamCompositionVO> deletelist = new ArrayList<TeamCompositionVO>();
-		for (int i = 0; i < list.size(); i++) {
-			TeamCompositionVO teamCompositionVO = new TeamCompositionVO();
-			TeamsVO teamsVO = new TeamsVO();
-			teamsVO.setTeamID(teamID);
-			teamCompositionVO.setTeamsVO(teamsVO);
-			deletelist.add(teamCompositionVO);
-		}
-		
-		if (list != null && list.size() > 0) {
-			hibernateTemplate.deleteAll(deletelist);
-			hibernateTemplate.flush();
-		}
+		List<TeamCompositionVO> list = (List<TeamCompositionVO>) hibernateTemplate.find(FIND_BY_TEAMID, teamID);
+		hibernateTemplate.deleteAll(list);
 	}
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void deleteByPlayerID(Integer playerID) {
-		TeamCompositionVO tcVO = (TeamCompositionVO) hibernateTemplate.get(TeamCompositionVO.class, playerID);
-		hibernateTemplate.delete(tcVO);
+		List<TeamCompositionVO> list = (List<TeamCompositionVO>) hibernateTemplate.find(FIND_BY_PLAYERID, playerID);
+		hibernateTemplate.delete(list);
+	}
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void deleteByCID(Integer teamID, Integer playerID) {
+		List<TeamCompositionVO> list = (List<TeamCompositionVO>) hibernateTemplate.find(FIND_BY_CID, playerID, teamID);
+		hibernateTemplate.delete(list);
 	}
 
 	@Override
