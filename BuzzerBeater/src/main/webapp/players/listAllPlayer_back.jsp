@@ -79,7 +79,7 @@
 													<Form method="post" action="<%=request.getContextPath() %>/Players.do">
 														<button type="submit" class="btn btn-info">修改</button>
                                                         <input type="hidden" name="action" value="updatePlayer">
-                                                        <input type="hidden" name="playerID" value="${playersVO.photo}">
+                                                        <input type="hidden" name="photo" value="${playersVO.photo}">
                                                         <input type="hidden" name="playerID" value="${playersVO.playerID}">
                                                         <input type="hidden" name="playerName" value="${playersVO.playerName}">
                                                         <input type="hidden" name="id" value="${playersVO.id}">
