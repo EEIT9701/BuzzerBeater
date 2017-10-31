@@ -9,10 +9,9 @@
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
 
 <!--標頭(開始)-->
-<nav
-	class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
+<nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" style="font-size: larger">
 	<div class="container">
-		<div class="attr-nav">
+		<div class="attr-nav" style="padding-left:40px">
 			<ul>
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 					<i class="glyphicon glyphicon-pencil"></i></a>
@@ -77,7 +76,7 @@
 				<li><a href="LoginOutServlet" class="cd-signup"" > 
 				         <c:choose>
 							<c:when test="${empty LoginOK}">
-								<c:set var="var02" value="" />
+
 							</c:when>
 							<c:otherwise>
 								<c:set var="var02" value="登出" />
@@ -99,17 +98,17 @@
 			</button>
 			<!-- 縮小視窗(左列)(結束) -->
 			<!-- logo(開始) -->
-			<a class="navbar-brand" href="#brand"> <img
-				src="<%=request.getContextPath()%>/images/700_700.png"
-				class="logo logo-display" alt=""> <img
-				src="<%=request.getContextPath()%>/images/700_700.png"
-				class="logo logo-scrolled" alt="">
+			<a class="navbar-brand" href="#brand" style="padding-top: 1px"> 
+			<img src="<%=request.getContextPath()%>/images/700_700.png"
+				class="logo logo-display" alt="" > 
+			<img src="<%=request.getContextPath()%>/images/700_700.png"
+				class="logo logo-scrolled" alt="" >
 			</a>
 			<!-- logo(結束) -->
 		</div>
 		<!-- 選單列表(開始) -->
 		<div class="collapse navbar-collapse" id="navbar-menu">
-			<ul class="nav navbar-nav navbar-right" data-in="fadeInDown">
+			<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" style="margin-right: 15px">
 				<li><a href="<%=request.getContextPath() %>/index.jsp">Home</a></li>
 				<li class="dropdown"><a href="<%=request.getContextPath() %>/season/seasonList.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">賽季<!--這行的href輸入超連結頁面--></a>
