@@ -122,4 +122,10 @@ public class LocationinfoDAO_Hibernate implements LocationinfoDAO_interface {
 		}
 	}
 
+	@Override
+	public Set<LocationinfoVO> getAllList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

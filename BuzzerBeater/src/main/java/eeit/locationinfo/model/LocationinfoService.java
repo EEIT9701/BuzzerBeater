@@ -10,12 +10,18 @@ public class LocationinfoService {
 	private LocationinfoDAO_interface dao = null;
 
 	public LocationinfoService() {
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (LocationinfoDAO_interface) context.getBean("LocationinfoDAO");
 	}
 
 	public Set<LocationinfoVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public Set<LocationinfoVO> getAllList(){
+		dao = new LocationinfoDAO_JDBC();
+		return dao.getAllList();
 	}
 
 	public LocationinfoVO findByID(Integer locationID) {
@@ -32,7 +38,7 @@ public class LocationinfoService {
 
 	public void update(Integer locationID, String locationName, String locationAddr, String locationMark,
 			String locationPhoto) {
-		
+
 		LocationinfoVO locVO = new LocationinfoVO();
 		locVO.setLocationID(locationID);
 		locVO.setLocationName(locationName);
