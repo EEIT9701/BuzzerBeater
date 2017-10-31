@@ -27,7 +27,7 @@ GO
 --insert into Season values ('2015-16例行賽','2015-10-28','2016-04-13','2015-01-01','2015-9-30',null);
 insert into Season values ('2016-17例行賽','2016-10-25','2017-04-12','2016-01-01','2016-9-30',null);
 insert into Season values ('2017-18例行賽','2017-10-18','2018-04-12','2017-01-01','2017-9-30',null);
-
+insert into Season values ('測試用例行賽','2018-10-18','2019-04-12','2017-10-01','2017-12-30',null);
 
 select * from Season
 GO
@@ -52,6 +52,9 @@ create table Groups			--分組
 
  insert into Groups values ('1002','東區','8','4','0','15','7');
  insert into Groups values ('1002','西區','8','4','0','15','7');
+
+ insert into Groups values ('1003','測試A區','8','4','6','15','7');
+ insert into Groups values ('1003','測試B區','8','4','8','15','7');
  
  select * from Groups
  GO
@@ -736,8 +739,12 @@ GO
 
 ---------------------------------------------------------------------------------------------------------------
 
-create table GroupStat      --分組狀態表
+create table TeamStat      --分組狀態表
 (
- groupStatID        int primary key,	    --分組ID 
- groupStat           nvarchar(50),    --分組狀態
+ teamStatID        int primary key,	    --分組ID 
+ teamStatus           nvarchar(50),    --分組狀態
 )
+
+insert into TeamStat values(0,'報名成功待繳費');
+
+select * from TeamStat

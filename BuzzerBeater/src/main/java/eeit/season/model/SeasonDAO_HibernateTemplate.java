@@ -30,8 +30,8 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void insert(SeasonVO seasonVO) {
-		hibernateTemplate.save(seasonVO);
+	public Integer insert(SeasonVO seasonVO) {
+		return (Integer) hibernateTemplate.save(seasonVO); // 此方法會回傳新增該筆資料的ID
 	}
 
 	@Override
@@ -62,6 +62,7 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 	public static void main(String args[]) {
 
+		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		SeasonDAO_interface dao = (SeasonDAO_interface) context.getBean("SeasonDAO");
 
@@ -90,7 +91,9 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 //		groupsVO1.setGroupName("321");
 //		seasonVO.getGroupsSet().add(groupsVO1);
 //
-//		dao.insert(seasonVO); // 結論:要互相包含
+//		Integer seasonVO3 = dao.insert(seasonVO); // 結論:要互相包含
+//		
+//		System.out.println(seasonVO3);
 
 		/****************** update ******************/
 
@@ -102,25 +105,25 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 		/****************** delete ******************/
 
-		 dao.delete(1004);
+//		 dao.delete(1002);
 
 		/****************** getAll ******************/
 
-		Set<SeasonVO> set = dao.getAll();
-		for (SeasonVO sVO : set) {
-			System.out.print(sVO.getSeasonID() + ", ");
-			System.out.print(sVO.getSeasonName() + ", ");
-			System.out.print(sVO.getSeasonBeginDate() + ", ");
-			System.out.print(sVO.getSeasonEndDate() + ", ");
-			System.out.print(sVO.getSignUpBegin() + ", ");
-			System.out.print(sVO.getSignUpEnd() + ", ");
-			System.out.print(sVO.getDescriptions());
-			Set<GroupsVO> gVO = sVO.getGroupsSet();
-			for (GroupsVO v : gVO) {
-				System.out.print(v.getGroupID());
-			}
-			System.out.println();
-		}
+//		Set<SeasonVO> set = dao.getAll();
+//		for (SeasonVO sVO : set) {
+//			System.out.print(sVO.getSeasonID() + ", ");
+//			System.out.print(sVO.getSeasonName() + ", ");
+//			System.out.print(sVO.getSeasonBeginDate() + ", ");
+//			System.out.print(sVO.getSeasonEndDate() + ", ");
+//			System.out.print(sVO.getSignUpBegin() + ", ");
+//			System.out.print(sVO.getSignUpEnd() + ", ");
+//			System.out.print(sVO.getDescriptions());
+//			Set<GroupsVO> gVO = sVO.getGroupsSet();
+//			for (GroupsVO v : gVO) {
+//				System.out.print(v.getGroupID());
+//			}
+//			System.out.println();
+//		}
 
 	}
 

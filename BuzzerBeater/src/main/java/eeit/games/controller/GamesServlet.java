@@ -3,14 +3,11 @@ package eeit.games.controller;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,7 +28,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
-import org.json.simple.JSONValue;
 
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
@@ -76,7 +72,7 @@ public class GamesServlet extends HttpServlet {
 				int i = 0;
 				while (rows.hasNext()) {
 					row = (HSSFRow) rows.next();
-					
+
 					if (i++ == 0) {
 						continue; // 為了跳過標題列
 					}
@@ -100,6 +96,7 @@ public class GamesServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			return;
 		}
 
 		if ("GET_GAMES_EXCEL".equals(action)) {
@@ -200,50 +197,11 @@ public class GamesServlet extends HttpServlet {
 				RequestDispatcher failureView = request.getRequestDispatcher("/games/WebTemplate.jsp");
 				failureView.forward(request, response);
 			}
+			return;
 		}
 
-		if ("GETALLGAMES".equals(action)) {
-			GamesService gSvc = new GamesService();
 
-			Set<GamesVO> set = gSvc.getAll();
 
-			response.setHeader("Access-Control-Allow-Origin", "*");
-			response.setHeader("content-type", "text/html;charset=UTF-8");
-			response.setCharacterEncoding("UTF-8");
-
-			PrintWriter out = response.getWriter();
-
-			String jsonString = JSONValue.toJSONString(set);
-			out.println(jsonString);
-		}
-
-		if ("ADDGAME".equals(action)) {
-			Integer groupID = (request.getParameter("groupID").equals("")) ? null
-					: Integer.valueOf(request.getParameter("groupID"));
-			Integer locationID = (request.getParameter("locationID").equals("")) ? null
-					: Integer.valueOf(request.getParameter("locationID"));
-			Integer teamAID = (request.getParameter("teamAID").equals("")) ? null
-					: Integer.valueOf(request.getParameter("teamAID"));
-			Integer teamAScore = (request.getParameter("teamAScore").equals("")) ? null
-					: Integer.valueOf(request.getParameter("teamAScore"));
-			Integer teamBID = (request.getParameter("teamBID").equals("")) ? null
-					: Integer.valueOf(request.getParameter("teamBID"));
-			Integer teamBScore = (request.getParameter("teamBScore").equals("")) ? null
-					: Integer.valueOf(request.getParameter("teamBScore"));
-			Integer winnerID = (request.getParameter("winnerID").equals("")) ? null
-					: Integer.valueOf(request.getParameter("winnerID"));
-
-			new Timestamp(System.currentTimeMillis());
-			Timestamp gameBeginDate = (request.getParameter("gameBeginDate").equals("")) ? null
-					: Timestamp.valueOf(request.getParameter("gameBeginDate"));
-			Timestamp gameEndDate = (request.getParameter("gameEndDate").equals("")) ? null
-					: Timestamp.valueOf(request.getParameter("gameEndDate"));
-
-			GamesService gSvc = new GamesService();
-
-			gSvc.addGames(groupID, locationID, teamAID, teamAScore, teamBID, teamBScore, winnerID, gameBeginDate,
-					gameEndDate);
-		}
 	}
 
 }
