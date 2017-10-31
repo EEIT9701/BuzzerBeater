@@ -388,6 +388,7 @@ video::-webkit-media-controls-panel {
 						var cell8 = $('<td><button type="button" class="btn btn-info testmodal" data-toggle="myModal1" data-target="dialog-4" value="'+gameVideo+'" >預覽</button></td>');
 						var cell9 = $('<td><button type="button" class="btn btn-warning updateData" id="'+id+'">修改</button></td>');
 						var cell10 = $('<td><button type="button" class="btn btn-danger" data-toggle="myModal" data-target="dialog-4" >刪除</button></td>');
+						
 						var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10])				 				
 						docFrag.append(row);
 						tb.append(docFrag);	
@@ -398,7 +399,7 @@ video::-webkit-media-controls-panel {
 	  				$(".testmodal").on('click',function(){
 	  					//事件處發顯示模態框
 	  			        $('#myModal1').modal('show');
-	  					//抓到上方cell7讀到的gameVideo內部的值
+	  					//抓到上方cell8讀到的gameVideo內部的值
                         var path01 = $(this).val(); 
 	  					//字串串接路徑
 	  				    var videoNo1 = "<%=request.getContextPath()%>/videos/"+ path01;
@@ -419,7 +420,7 @@ video::-webkit-media-controls-panel {
 	  						"search":"搜尋：",
 	  						"paginate":{
 	  							"first":"第一頁",
-	  							"previous":"上一頁",
+	  					 		"previous":"上一頁",
 	  							"next":"下一頁",
 	  							"last":"最末頁"					
 	  						}
@@ -428,13 +429,11 @@ video::-webkit-media-controls-panel {
 			});
  		}
 	  		function button(){
-	  				console.log(1);
 	  			$('.updateData').on('click',function(){
-	  				console.log(2);
 	  				if($(this).text() == '修改'){	
-	  					console.log(3);
 	  			         //取得預修改的欄位的資料
 	  				     
+	  			         
 	  				     var title = $(this).parents('tr').find('td:nth-child(5)').text();
 	  				     var descriptions = $(this).parents('tr').find('td:nth-child(6)').text();
 	  				 	 var tag = $(this).parents('tr').find('td:nth-child(7)').text();
@@ -447,15 +446,16 @@ video::-webkit-media-controls-panel {
 	  			       	  
 	  		           } 
 	  			       	else{ //按下確定鍵 
-	  			       		console.log(4);
+	  			       		
 	  			       	  //把input, 顯示在table欄位上的值取出	
 	  			       	 
+	  					  var mediaID = $(this).attr('id');
 	  		 	       	  var title = $(this).parents('tr').find('td:nth-child(5)>input').val();
 	  		 	       	  var descriptions = $(this).parents('tr').find('td:nth-child(6)>input').val();
 	  		 	     	  var tag = $(this).parents('tr').find('td:nth-child(7)>input').val();
 	  		    		 	          
 	  		 	          //把輸入的資料包裝成JSON格式字串, 給post傳送用
-	  		 	       	  var dataStr = JSON.stringify({ "title":title, "descriptions":descriptions, "tag":tag})
+	  		 	       	  var dataStr = JSON.stringify({ "mediaID":mediaID, "title":title, "descriptions":descriptions, "tag":tag})
 	  		              //將 顯示在table欄位改回tr,並把值填入 
 	  		 	       	
 	  		 			  $(this).parents('tr').find('td:nth-child(5)').html(title);
@@ -463,9 +463,8 @@ video::-webkit-media-controls-panel {
 	  		 			  $(this).parents('tr').find('td:nth-child(7)').html(tag);
 	  		 	       	  
 	  		 			  //把輸入在欄位上的資料經過post傳送
-	  		 	       	  $.post('/BuzzerBeater/GameMedia.do', {'action':'Update', 'data':dataStr}, function(datas){
-	  							//只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
-	  							console.log(123);
+	  		 	       	  $.post('/BuzzerBeater/GameMedia.do', {'action':'Update', "mediaID":mediaID, "title":title, "descriptions":descriptions, "tag":tag}, function(datas){
+	  							console.log(mediaID)//只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
 	  		 	       	  })   
 	  			       	  $(this).text('修改');	       	  
 	  			       	}
