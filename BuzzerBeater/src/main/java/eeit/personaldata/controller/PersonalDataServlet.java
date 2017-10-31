@@ -16,6 +16,8 @@ import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
 import eeit.personaldata.model.PersonalDataService;
 import eeit.personaldata.model.PersonalDataVO;
+import eeit.players.model.PlayerService;
+import eeit.players.model.PlayersVO;
 
 @WebServlet("/PersonalData.do")
 public class PersonalDataServlet extends HttpServlet {
@@ -66,8 +68,28 @@ public class PersonalDataServlet extends HttpServlet {
 			req.setAttribute("teamAList", teamAList);
 			req.setAttribute("teamBList", teamBList);
 			req.getRequestDispatcher("/personaldata/SinglefieldData.jsp").forward(req, resp);
-			
+
 		}
+
+		if ("Get_singleData".equals(action)) {
+			Integer playerID = new Integer(req.getParameter("playerID"));
+
+			PersonalDataService pdsvc = new PersonalDataService();
+			List<PersonalDataVO> list = pdsvc.findByPlyerID2(playerID);
+			
+			PlayerService psvc = new PlayerService();
+			PlayersVO playersVO = psvc.findByPlayerID(playerID);
+
+			req.setAttribute("playersVO", playersVO);
+
+			req.setAttribute("list1", list);
+
+			req.getRequestDispatcher("/players/playerInformation1.jsp").forward(req, resp);
+
+		}
+		
+
+
 	}
 
 }

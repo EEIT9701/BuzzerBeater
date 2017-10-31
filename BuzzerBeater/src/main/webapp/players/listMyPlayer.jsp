@@ -26,38 +26,21 @@
 		<body>
 
 			<jsp:include page="/header.jsp" />
-			<jsp:useBean id="playerSvc" scope="page" class="eeit.players.model.PlayerService" />
 			<!--主文(開始)-->
 			<div class="container">
 				<div class="jumbotron">
-					<form class="form-inline" method="post" action="<%=request.getContextPath() %>/Players.do">
-						<div class="form-group">
-							<label for="Name">身分證字號:</label>
-							<input type="text" class="form-control" id="Name" name="playerName" placeholder="請輸入球員身分證字號">
-						</div>
-						<input type="submit" class="btn btn-warning" value="搜尋">
-						<input type="hidden" name="action" value="getOne_For_Display">
-					</form>
-					<div class="col-md-4"></div>
 					<div class="col-md-4"></div>
 					<div class="col-md-4">
-						<div class="col-md-4"></div>
 						<div class="col-md-4"></div>
 						<div class="col-md-4">
 							<Form method="post" action="<%=request.getContextPath() %>/Players.do">
 								<button type="submit" class="btn btn-warning">新增球員</button>
-								<input type="hidden" name="action" value="insertPlayer">
-								<input type="hidden" name="photo" value="">
-                                                        
-                                                        <input type="hidden" name="playerName">
-                                                        <input type="hidden" name="id">
-                                                        <input type="hidden" name="height">
-                                                        <input type="hidden" name="weights">
-                                                        <input type="hidden" name="birthday">
-                                                        <input type="hidden" name="nationality">
+								<input type="hidden" name="action" value="insertMyPlayer">
 							</Form>
 						</div>
+						<div class="col-md-4"></div>
 					</div>
+					<div class="col-md-4"></div>
 					<!--表格(開始)-->
 					<!--****************-->
 					<!-- 第一列(開始) -->
@@ -120,7 +103,27 @@
 
 										</c:forEach>
 								</table>
-
+<div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <!-- Button -->
+                                            <div class="col-md-4">
+                                            <form action="<%=request.getContextPath() %>/Teams.do">
+                                                <button type="submit" class="btn btn-warning">上一步</button>
+                                                <input type="hidden" name="action" value="insertMyTeam">
+										
+										</form>
+                                            </div>
+                            </Form>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <form action="<%=request.getContextPath() %>/Players.do">
+                                    <button type="submit" class="btn btn-warning">下一步</button>
+                                    <input type="hidden" name="action" value="goTolistAllPlayer_back">
+										
+                                </form>
+                            </div>
+                            </div>
+                            <div class="col-md-4"></div>
 							</div>
 						</div>
 					</div>

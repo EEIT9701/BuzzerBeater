@@ -70,6 +70,45 @@
 	    <script>
 	    $(document).ready(function() {
 	    	$('#seasonList').DataTable();
+	    	
+// 	    	var td_thead_over={'background-color':'#032f4f',
+// 	    					   'color': '#fff'};
+// 	    	var td_thead_out={'background-color':'#006bb6',
+// 	    		    		  'box-shadow': 'inset 0 20px 0 -16px #efaa10'};
+// 	    	$('#seasonList').children('thead').find('tr').css(td_thead_over);
+// 	    	$('#seasonList').children('thead').find('tr').mouseover(thead_over);
+// 	    	$('#seasonList').children('thead').find('tr').mouseout(thead_out);
+// 	    	function thead_over(){
+// 	    		$(this).css(td_thead_out);
+// 	    	}
+// 	    	function thead_out(){
+// 	    		$(this).css(td_thead_over);
+// 	    	}
+	    	
+	    	
+	    	var td_odd_over={'background-color':'#f9f9f9'};
+	    	var td_odd_out={'background-color':'rgb(208, 207, 207)'};
+	    	var td_even_over={'background-color':'#eaeaea'};
+	    	var td_even_out={'background-color':'rgb(197, 196, 197)'};
+	    	$('#seasonList').children('tbody').find('tr:nth-child(odd)').css(td_odd_over);
+	    	$('#seasonList').children('tbody').find('tr:nth-child(odd)').mouseover(odd_over);
+	    	$('#seasonList').children('tbody').find('tr:nth-child(odd)').mouseout(odd_out);
+	    	$('#seasonList').children('tbody').find('tr:nth-child(even)').css(td_even_over);
+	    	$('#seasonList').children('tbody').find('tr:nth-child(even)').mouseover(even_over);
+	    	$('#seasonList').children('tbody').find('tr:nth-child(even)').mouseout(even_out);
+	    	function odd_over(){
+	    		$(this).css(td_odd_out);
+	    	}
+	    	function odd_out(){
+	    		$(this).css(td_odd_over);
+	    	}
+	    	function even_over(){
+	    		$(this).css(td_even_out);
+
+	    	}
+	    	function even_out(){
+	    		$(this).css(td_even_over); 
+	    	}
 	    	});
 	    </script>
     </body>
