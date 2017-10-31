@@ -70,4 +70,16 @@ public class TeamCompositionService {
 	public List<TeamCompositionVO> findByPlayerID(Integer playerID) {
 		return dao.findByPlayerID(playerID);
 	}
+
+	public void deleteByTeamID(Integer teamID) {
+		dao.deleteByTeamID(teamID);
+	}
+
+	public void deleteByPlayerID(Integer playerID) {
+		dao.deleteByPlayerID(playerID);
+	}
+
+	public void deleteByCID(Integer teamID, Integer playerID) {
+		dao.deleteByCID(teamID, playerID);
+	}
 }

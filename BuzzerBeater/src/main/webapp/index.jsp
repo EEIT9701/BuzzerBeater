@@ -41,7 +41,6 @@
     </div>
 	
 	
-	
     <!--主文(開始)-->
     
     <div class="container">
@@ -281,9 +280,6 @@
     <!--計時器("2-2")-->
     <script src="js/jquery.countdown.js"></script>
     <script src="js/script.js" charset="big5" type="text/javascript" ></script>
-    
-    
-
 
 </body>
 </html>

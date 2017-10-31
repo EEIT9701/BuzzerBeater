@@ -79,10 +79,10 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 		// System.out.println();
 		// }
 
-		List<PersonalDataVO> list = dao.findByGameIDAndTeamID(4001, 3001);
+		List<PersonalDataVO> list = dao.findByGameIDAndTeamID(4001, 3002);
 		for (PersonalDataVO vo : list) {
 			System.out.print(vo.getPlayersVO().getPlayerID() + ", ");
-			System.out.print(vo.getGamesVO().getGameID() + ", ");
+			System.out.print(vo.getGameTime() + ", ");
 			System.out.print(vo.getTeamsVO().getTeamID()+ ", ");
 			System.out.print(vo.getTeamsVO().getTeamName() + ", ");
 			System.out.print(vo.getPlayersVO().getPlayerName() + ", ");

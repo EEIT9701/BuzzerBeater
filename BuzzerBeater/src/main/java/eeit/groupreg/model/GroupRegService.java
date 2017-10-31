@@ -23,8 +23,7 @@ public class GroupRegService {
 		return dao.getAll();
 	}
 
-	public void insert(Integer groupID, Integer teamID, Integer teamStat, Timestamp registerDate,
-			String paymentNumber) {
+	public void insert(Integer groupID, Integer teamID) {
 		GroupRegVO vo = new GroupRegVO();
 
 		GroupsVO groupsVO = new GroupsVO();
@@ -35,9 +34,9 @@ public class GroupRegService {
 		teamsVO.setTeamID(teamID);
 		vo.setTeamsVO(teamsVO);
 
-		vo.setTeamStat(teamStat);
-		vo.setRegisterDate(registerDate);
-		vo.setPaymentNumber(paymentNumber);
+		vo.setTeamStat(0);
+		vo.setRegisterDate(new Timestamp(System.currentTimeMillis()));
+		vo.setPaymentNumber(null);
 
 		dao.insert(vo);
 	}
@@ -59,10 +58,6 @@ public class GroupRegService {
 		vo.setPaymentNumber(paymentNumber);
 
 		dao.insert(vo);
-	}
-
-	public void delete(Integer games_ID) {
-
 	}
 
 	public List<GroupRegVO> findByGroupID(Integer groupID) {

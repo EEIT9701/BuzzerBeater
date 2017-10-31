@@ -9,10 +9,10 @@ public class TeamsService {
 	private TeamsDAO_interface dao;
 
 	public TeamsService() {
-		dao = new TeamsDAO();
-//		@SuppressWarnings("resource")
-//		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
-//		dao = (TeamsDAO_interface) context.getBean("TeamsDAO");
+//		dao = new TeamsDAO();
+		@SuppressWarnings("resource")
+		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
+		dao = (TeamsDAO_interface) context.getBean("TeamsDAO");
 	}
 
 	public Set<TeamsVO> getAll() {
@@ -22,18 +22,27 @@ public class TeamsService {
 	public TeamsVO findByID(Integer teamID) {
 		return dao.findByID(teamID);
 	}
+	
+	public Integer findMaxID() {
+		dao = new TeamsDAO();
+		return dao.findMaxID();
+	}
 
-	public void insert(String teamName, String bossName, String coachName, String captainEmail, Integer captainID,
-			String remarks, String teamBadge) {
+	public void insert(String teamBadge,String teamName, String captainEmail,String captainPhone,String bossName, String coachName,Integer totalWin,Integer totalLose,Float winRate,  
+			String remarks ) {
 
 		TeamsVO teamsVO = new TeamsVO();
 		teamsVO.setBossName(bossName);
 		teamsVO.setCaptainEmail(captainEmail);
-		teamsVO.setCaptainID(captainID);
+		teamsVO.setCaptainPhone(captainPhone);
 		teamsVO.setCoachName(coachName);
+		teamsVO.setBossName(bossName);
+		teamsVO.setTotalWin(totalWin);
+		teamsVO.setTotalLose(totalLose);
+		teamsVO.setWinRate(winRate);
 		teamsVO.setRemarks(remarks);
-		teamsVO.setTeamBadge(teamBadge);
-		teamsVO.setTeamName(teamName);
+		
+		
 
 		dao.insert(teamsVO);
 	}

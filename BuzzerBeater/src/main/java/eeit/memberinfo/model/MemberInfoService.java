@@ -22,6 +22,11 @@ public class MemberInfoService {
 		return dao.getAll();
 	}
 	
+	public void delete(Integer memberID){
+		dao.delete(memberID);
+		
+	}
+	
 	public MemberInfoVO findByPK(Integer memberID){
 		return dao.findByPK(memberID);
 	}

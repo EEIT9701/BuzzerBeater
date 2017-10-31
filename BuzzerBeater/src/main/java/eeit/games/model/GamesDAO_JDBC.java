@@ -83,7 +83,8 @@ public class GamesDAO_JDBC implements GamesDAO_interface {
 	}
 
 	@Override
-	public void insert(GamesVO gVO) {
+	public Integer insert(GamesVO gVO) {
+		return null;
 		// TODO Auto-generated method stub
 
 	}

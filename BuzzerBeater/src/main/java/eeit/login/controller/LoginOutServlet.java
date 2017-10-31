@@ -15,10 +15,10 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class GoogleLoginOutServlet
  */
 @WebServlet("/GoogleLoginOutServlet")
-public class GoogleLoginOutServlet extends HttpServlet {
+public class LoginOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public GoogleLoginOutServlet() {
+	public LoginOutServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -38,7 +38,7 @@ public class GoogleLoginOutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 
-		RequestDispatcher rd = request.getRequestDispatcher("/page.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 		rd.forward(request, response);
 
 //		out.close();

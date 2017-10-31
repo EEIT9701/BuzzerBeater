@@ -33,6 +33,62 @@ public class TeamsServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String action = request.getParameter("action");
+		
+		if("insertTeam".equals(action)){
+			String base64 = request.getParameter("teamBadge");
+			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamName = request.getParameter("teamName");
+			String captainEmail = request.getParameter("captainEmail");
+			String captainPhone = request.getParameter("captainPhone");
+			String coachName = request.getParameter("coachName");
+			String bossName = request.getParameter("bossName");
+			Integer totalWin = new Integer(request.getParameter("totalWin"));
+			Integer totalLose = new Integer(request.getParameter("totalLose"));
+			Float winRate = new Float(request.getParameter("winRate"));
+			String remarks = request.getParameter("remarks");
+			
+			request.setAttribute("teamBadge", teamBadge);
+			request.setAttribute("teamName", teamName);
+			request.setAttribute("captainEmail", captainEmail);
+			request.setAttribute("captainPhone", captainPhone);
+			request.setAttribute("coachName", coachName);
+			request.setAttribute("bossName", bossName);
+			request.setAttribute("totalWin", totalWin);
+			request.setAttribute("totalLose", totalLose);
+			request.setAttribute("winRate", winRate);
+			request.setAttribute("remarks", remarks);
+			String url = "/teams/insertTeam.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url);
+			successView.forward(request, response);
+		}
+		
+		if("insert".equals(action)){
+			String base64 = request.getParameter("teamBadge");
+			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamName = request.getParameter("teamName");
+			String captainEmail = request.getParameter("captainEmail");
+			String captainPhone = request.getParameter("captainPhone");
+			String coachName = request.getParameter("coachName");
+			String bossName = request.getParameter("bossName");
+			Integer totalWin = new Integer(request.getParameter("totalWin"));
+			Integer totalLose = new Integer(request.getParameter("totalLose"));
+			Float winRate = new Float(request.getParameter("winRate"));
+			String remarks = request.getParameter("remarks");
+			
+			request.setAttribute("teamBadge", teamBadge);
+			request.setAttribute("teamName", teamName);
+			request.setAttribute("captainEmail", captainEmail);
+			request.setAttribute("captainPhone", captainPhone);
+			request.setAttribute("coachName", coachName);
+			request.setAttribute("bossName", bossName);
+			request.setAttribute("totalWin", totalWin);
+			request.setAttribute("totalLose", totalLose);
+			request.setAttribute("winRate", winRate);
+			request.setAttribute("remarks", remarks);
+			String url = "/teams/insertCheck.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url);
+			successView.forward(request, response);
+		}
 
 		if ("GET_ONE_TEAM".equals(action)) {
 			Integer teamID = Integer.parseInt(request.getParameter("teamID"));
@@ -42,15 +98,85 @@ public class TeamsServlet extends HttpServlet {
 			request.getRequestDispatcher("/teams/teamInformation.jsp").forward(request, response);
 		}
 		
-		if ("getOne_For_Update".equals(action)) {
-			Integer teamID = Integer.parseInt(request.getParameter("teamID"));
-
-			TeamsService svc = new TeamsService();
-			request.setAttribute("teamsVO", svc.findByID(teamID));
+		if ("UpdateTeam".equals(action)) {
+			String base64 = request.getParameter("teamBadge");
+			Integer teamID = new Integer(request.getParameter("teamID"));
+			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamName = request.getParameter("teamName");
+			String captainEmail = request.getParameter("captainEmail");
+			String captainPhone = request.getParameter("captainPhone");
+			String coachName = request.getParameter("coachName");
+			String bossName = request.getParameter("bossName");
+			Integer totalWin = new Integer(request.getParameter("totalWin"));
+			Integer totalLose = new Integer(request.getParameter("totalLose"));
+			Float winRate = new Float(request.getParameter("winRate"));
+			String remarks = request.getParameter("remarks");
+		
+			
+			request.setAttribute("teamBadge", teamBadge);
+			request.setAttribute("teamID", teamID);
+			request.setAttribute("teamName", teamName);
+			request.setAttribute("captainEmail", captainEmail);
+			request.setAttribute("captainPhone", captainPhone);
+			request.setAttribute("coachName", coachName);
+			request.setAttribute("bossName", bossName);
+			request.setAttribute("totalWin", totalWin);
+			request.setAttribute("totalLose", totalLose);
+			request.setAttribute("winRate", winRate);
+			request.setAttribute("remarks", remarks);
 			request.getRequestDispatcher("/teams/updateTeam.jsp").forward(request, response);
 		}
 		
-		if("update".equals(action)){
+		if("updateCheck".equals(action)){
+			String base64 = request.getParameter("teamBadge");
+			Integer teamID = new Integer(request.getParameter("teamID"));
+			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamName = request.getParameter("teamName");
+			String captainEmail = request.getParameter("captainEmail");
+			String captainPhone = request.getParameter("captainPhone");
+			String coachName = request.getParameter("coachName");
+			String bossName = request.getParameter("bossName");
+			Integer totalWin = new Integer(request.getParameter("totalWin"));
+			Integer totalLose = new Integer(request.getParameter("totalLose"));
+			Float winRate = new Float(request.getParameter("winRate"));
+			String remarks = request.getParameter("remarks");
+		
+			
+			request.setAttribute("teamBadge", teamBadge);
+			request.setAttribute("teamID", teamID);
+			request.setAttribute("teamName", teamName);
+			request.setAttribute("captainEmail", captainEmail);
+			request.setAttribute("captainPhone", captainPhone);
+			request.setAttribute("coachName", coachName);
+			request.setAttribute("bossName", bossName);
+			request.setAttribute("totalWin", totalWin);
+			request.setAttribute("totalLose", totalLose);
+			request.setAttribute("winRate", winRate);
+			request.setAttribute("remarks", remarks);
+			String url = "/teams/updateCheck.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url);
+			successView.forward(request, response);
+		}
+		if("goTolistAllTeam_insert".equals(action)){
+			String base64 = request.getParameter("teamBadge");
+			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamName = request.getParameter("teamName");
+			String captainEmail = request.getParameter("captainEmail");
+			String captainPhone = request.getParameter("captainPhone");
+			String coachName = request.getParameter("coachName");
+			String bossName = request.getParameter("bossName");
+			Integer totalWin = new Integer(request.getParameter("totalWin"));
+			Integer totalLose = new Integer(request.getParameter("totalLose"));
+			Float winRate = new Float(request.getParameter("winRate"));
+			String remarks = request.getParameter("remarks");
+			TeamsService teamSvc = new TeamsService();
+			teamSvc.insert(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName,totalWin,totalLose,winRate, remarks);
+			
+			String url = "/teams/listAllteam_back.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url);
+			successView.forward(request, response);
+		}
+		if("goTolistAllTeam_update".equals(action)){
 			String base64 = request.getParameter("teamBadge");
 			Integer teamID = new Integer(request.getParameter("teamID"));
 			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
@@ -65,15 +191,13 @@ public class TeamsServlet extends HttpServlet {
 			String remarks = request.getParameter("remarks");
 			TeamsService teamSvc = new TeamsService();
 			teamSvc.update(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName,totalWin,totalLose,winRate, remarks,teamID);
-			TeamsVO teamsVO = teamSvc.findByID(teamID);
-		
 			
-			request.setAttribute("teamsVO", teamsVO);
-			String url = "/teams/listOneTeam_updateCheck.jsp";
+			String url = "/teams/listAllteam_back.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);
 		}
 		if("goTolistAllTeam_back".equals(action)){
+			
 			String url = "/teams/listAllteam_back.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);

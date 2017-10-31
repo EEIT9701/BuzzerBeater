@@ -47,7 +47,7 @@
                             <Form class="form-horizontal" method="post" action="<%=request.getContextPath() %>/Teams.do">
                                 <fieldset>
                                     <!-- Form Name -->
-                                    <legend>球隊修改</legend>
+                                    <legend>球隊新增</legend>
 
                                     <input type="hidden" name="teamID" value="${teamID}">
 
@@ -58,7 +58,7 @@
                                         <input type="file" id="file">
                                         <div class="col-md-4">
                                             <img id="result" src="data:image/jpeg;base64,${teamBadge}"><br>
-                                            <input type="hidden" id="photo" name="teamBadge" value="data:image/jpeg;base64,${teamBadge}">
+                                            <input type="hidden" id="photo" name="teamBadge" value="${teamBadge}">
                                         </div>
                                     </div>
 
@@ -131,7 +131,7 @@
                                             <!-- Button -->
                                             <div class="col-md-4">
                                                 <input type="submit" class="btn btn-warning" value="送出">
-                                                <input type="hidden" name="action" value="updateCheck">
+                                                <input type="hidden" name="action" value="insert">
                                             </div>
                             </Form>
                             <div class="col-md-4"></div>

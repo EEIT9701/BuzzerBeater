@@ -9,7 +9,7 @@
 			<generator class="identity" />
 		</id>
 
-		<set name="gamesSet" table="Games" lazy="false" cascade="all" inverse="true">
+		<set name="gamesSet" table="Games" lazy="false">
 			<key>
 				<column name="locationID" />
 			</key>

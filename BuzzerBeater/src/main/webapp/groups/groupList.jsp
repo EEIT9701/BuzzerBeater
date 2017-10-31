@@ -45,31 +45,32 @@
 				<p>${seasonVO.descriptions}</p>
 				
 				<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
-					<h3>${groupsSet.groupName}</h3>
-					<table class="table table-bordered test" id="season_group">
-						<thead>
-							<tr>
-							  <td>比賽時間</td>
-			              	  <td>比賽地點</td>
-			              	  <td>主隊</td>
-			              	  <td>比分</td>
-			              	  <td>客隊</td>
-			                </tr>
-						</thead>
-						<tbody>
-							<c:forEach var="gamesSet" items="${groupsSet.gamesSet}">
+					<c:if test="${not empty groupsSet.gamesSet}">
+						<h3>${groupsSet.groupName}</h3>
+						<table class="table table-bordered test" id="season_group">
+							<thead>
 								<tr>
-									<td><fmt:formatDate value="${gamesSet.gameBeginDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-									<td><a href="<%=request.getContextPath() %>/Locationinfo.do?action=GET_ONE_LOCATION&locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
-									<td><a href="<%=request.getContextPath() %>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
-									<td><a href="<%=request.getContextPath() %>/Groups.do?action=GET_GAME&gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a></td>
-									<td><a href="<%=request.getContextPath() %>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+								  <td>比賽時間</td>
+				              	  <td>比賽地點</td>
+				              	  <td>主隊</td>
+				              	  <td>比分</td>
+				              	  <td>客隊</td>
+				                </tr>
+							</thead>
+							<tbody>
+								<c:forEach var="gamesSet" items="${groupsSet.gamesSet}">
+									<tr>
+										<td><fmt:formatDate value="${gamesSet.gameBeginDate}" pattern="yyyy-MM-dd HH:mm"/></td>
+										<td><a href="<%=request.getContextPath() %>/Locationinfo.do?action=GET_ONE_LOCATION&locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
+										<td><a href="<%=request.getContextPath() %>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
+										<td><a href="<%=request.getContextPath() %>/Groups.do?action=GET_GAME&gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a></td>
+										<td><a href="<%=request.getContextPath() %>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+			        </c:if>
 				</c:forEach>
-		        
 			    
 			    
 		    </div>

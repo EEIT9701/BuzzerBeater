@@ -15,4 +15,10 @@ interface PlayerGroupsDAO_interface {
 
 	public List<PlayerGroupsVO> findByGroupID(Integer groupID);
 
+	public void deleteByPlayerID(Integer playerID);
+
+	public void deleteByGroupID(Integer groupID);
+
+	public void deleteByCID(Integer playerID, Integer groupID);
+
 }

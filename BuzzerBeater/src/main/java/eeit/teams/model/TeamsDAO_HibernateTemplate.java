@@ -22,8 +22,8 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void insert(TeamsVO teamsVO) {
-		hibernateTemplate.save(teamsVO);
+	public Integer insert(TeamsVO teamsVO) {
+		return (Integer) hibernateTemplate.save(teamsVO);
 	}
 
 	@Override
@@ -55,6 +55,8 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		TeamsDAO_interface dao = (TeamsDAO_interface) context.getBean("TeamsDAO");
 		
+		dao.delete(3007);
+		
 		Set<TeamsVO> set = dao.getAll();
 		for(TeamsVO vo : set){
 			System.out.print(vo.getTeamID()+", ");
@@ -63,5 +65,11 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 			System.out.println();
 		}
 
+	}
+
+	@Override
+	public Integer findMaxID() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

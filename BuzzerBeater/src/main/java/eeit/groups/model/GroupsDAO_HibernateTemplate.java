@@ -120,4 +120,5 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 
 	}
 
+
 }

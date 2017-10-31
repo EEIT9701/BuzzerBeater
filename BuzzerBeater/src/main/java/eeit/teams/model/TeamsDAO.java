@@ -25,11 +25,51 @@ public class TeamsDAO implements TeamsDAO_interface {
 	
 	private static final String GET_ALLTEAMS_STMT = "SELECT teamID,captainID,captainEmail,captainPhone,teamName,coachName,bossName,teamBadge,totalWin,totalLose,winRate,remarks FROM Teams";
 	private static final String GET_ONETEAMS_STMT = "SELECT teamID,captainID,captainEmail,captainPhone,teamName,coachName,bossName,teamBadge,totalWin,totalLose,winRate,remarks FROM Teams WHERE teamID =?";
+	private static final String GET_TEAMID_MAX = "SELECT MAX(teamID) teamID FROM Teams";
+	private static final String INSERT_STMT = "INSERT INTO Teams (teamBadge,teamName,captainEmail,captainPhone,coachName,bossName,totalWin,totalLose,winRate,remarks) VALUES(?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE Teams SET teamBadge=?, teamName=?, captainEmail=?, captainPhone=?, coachName=?, bossName=?,totalWin=?,totalLose=?,winRate=?,remarks=? where teamID = ?";
 	
 	@Override
-	public void insert(TeamsVO teamsVO) {
-		// TODO Auto-generated method stub
+	public Integer insert(TeamsVO teamsVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			pstmt.setString(1,teamsVO.getTeamBadge());
+			pstmt.setString(2,teamsVO.getTeamName());
+			pstmt.setString(3,teamsVO.getCaptainEmail());
+			pstmt.setString(4,teamsVO.getCaptainPhone());
+			pstmt.setString(5,teamsVO.getCoachName());
+			pstmt.setString(6,teamsVO.getBossName());
+			pstmt.setInt(7,teamsVO.getTotalWin());
+			pstmt.setInt(8,teamsVO.getTotalLose());
+			pstmt.setFloat(9,teamsVO.getWinRate());
+			pstmt.setString(10,teamsVO.getRemarks());
+			pstmt.executeUpdate();
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return null;
 		
 	}
 
@@ -183,5 +223,43 @@ public class TeamsDAO implements TeamsDAO_interface {
 		}
 		return teamsVO;
 	}
-
+	public Integer findMaxID() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Integer teamID = null ;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_TEAMID_MAX);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+			teamID = rs.getInt("teamID");
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return teamID;
+	}
+	public static void main(String[] args){
+		TeamsDAO t = new TeamsDAO();
+		System.out.println(t.findMaxID());
+	}
 }
+
+

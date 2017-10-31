@@ -62,7 +62,7 @@ public class SeasonServlet extends HttpServlet {
 
 			return;
 		}
-		
+
 		/********************************************************************/
 		if ("ADD_SEASON".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
@@ -73,9 +73,7 @@ public class SeasonServlet extends HttpServlet {
 				Map<String, Object> seasonVO = (Map<String, Object>) session.getAttribute("seasonVO");
 				Set<GroupsVO> groupsSet = (Set<GroupsVO>) session.getAttribute("groupsSet");
 
-				// 取得最大的seasonID(即為剛剛新增的)
 				SeasonService sSvc = new SeasonService();
-				Integer seasonID = sSvc.getLatestSeason();
 
 				String seasonName = (String) seasonVO.get("seasonName");
 				Date seasonBeginDate = (Date) seasonVO.get("seasonBeginDate");
@@ -83,9 +81,9 @@ public class SeasonServlet extends HttpServlet {
 				Timestamp signUpBegin = (Timestamp) seasonVO.get("signUpBegin");
 				Timestamp signUpEnd = (Timestamp) seasonVO.get("signUpEnd");
 				String descriptions = (String) seasonVO.get("descriptions");
-				
-				sSvc.addSeason(seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, descriptions);
-				
+
+				Integer seasonID = sSvc.addSeason(seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, descriptions);
+
 				// 新增分組
 				GroupsService gSvc = new GroupsService();
 				for (GroupsVO gvo : groupsSet) {
@@ -338,6 +336,15 @@ public class SeasonServlet extends HttpServlet {
 
 			RequestDispatcher successView = request.getRequestDispatcher("/groups/groupList.jsp");
 			successView.forward(request, response);
+		}
+		
+		if("TO_GROUPS_BACK".equals(action)){
+			Integer seasonID = Integer.parseInt(request.getParameter("seasonID"));
+			SeasonService sSvc = new SeasonService();
+			request.setAttribute("seasonVO", sSvc.findBySeasonID(seasonID));
+			
+			request.getRequestDispatcher("/groups/groupList_back.jsp").forward(request, response);
+			
 		}
 
 	}

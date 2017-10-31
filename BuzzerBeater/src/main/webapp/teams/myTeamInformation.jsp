@@ -124,7 +124,7 @@
                                     <li><a href="#tabs-3">未來賽事</a></li>
                                     <li><a href="#tabs-2">過去賽事</a></li>
                                     <li><a href="#tabs-1">球員名單</a></li>
-                                    <li><a href="#tabs-4">球員數據</a></li>   
+                                    <li><a href="#tabs-4">球員數據</a></li>
                                 </ul>
                                 <div id="tabs-1">
                                     <table class="table table-bordered">

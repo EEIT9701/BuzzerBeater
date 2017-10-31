@@ -11,6 +11,7 @@ import java.util.Base64;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -68,21 +69,33 @@ public class PlayersSevrlet extends HttpServlet {
 		
 		}
 		
-		if("getOne_For_Update".equals(action)){
-			
+		if("updatePlayer".equals(action)){
+			String base64 = req.getParameter("photo");
+			String photo = base64.substring(base64.lastIndexOf(",")+1);
+			Integer playerID = new Integer(req.getParameter("playerID"));
 			String playerName = req.getParameter("playerName");
+			String id = req.getParameter("id");
+			Double height = new Double( req.getParameter("height"));
+			Double weights = new Double( req.getParameter("weights"));
+			String birthday = req.getParameter("birthday");
+			String nationality = req.getParameter("nationality");
 			
 			
-			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
-			
-			req.setAttribute("playersVO", playersVO);
+			req.setAttribute("photo", photo);
+			req.setAttribute("playerID", playerID);
+			req.setAttribute("playerName", playerName);
+			req.setAttribute("id", id);
+			req.setAttribute("height", height);
+			req.setAttribute("weights", weights);
+			req.setAttribute("birthday", birthday);
+			req.setAttribute("nationality", nationality);
 			
 			String url = "/players/updatePlayer.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
 			
 		}
-		if("update".equals(action)){
+		if("updateCheck".equals(action)){
 //			Set<String> errorMsgs = new LinkedHashSet<String>();
 			String base64 = req.getParameter("photo");
 			System.out.println(base64);
