@@ -260,7 +260,7 @@ insert into Teams values('70002','SanAntonioSpurs@gmail.com','09121222666','102'
 insert into Teams values('70003','HoustonRockets@ymail.com','0913125568','103','¥ð¤h¹y¤õ½b','Mike DAntoni','Leslie Alexander','0x1234','','','','');
 insert into Teams values('70004','LosAngelesClippers@ymail.com','0914125568','104','¬¥§üÁF§Ö¸¥','Doc Rivers','Steve Anthony Ballmer','','','','','');
 
-insert into Teams values('70005','UtahJazz@ymail.com','0915125568','105','Utah Jazz','µS¥LÀï¤h','Larry H. Miller','0x1234','','','','');
+insert into Teams values('70005','UtahJazz@ymail.com','0915125568','105','µS¥LÀï¤h','Quin Snyder','Larry H. Miller','0x1234','','','','');
 insert into Teams values('70006','OklahomaCityThunder@ymail.com','0916125568','106','¶ø§J©Ô²ü°¨¥«¹p¾^','Billy Donovan','Clay Bennett','','','','','');
 insert into Teams values('70007','MemphisGrizzlies@ymail.com','0917125568','107','°Ò´´´µ¦Çºµ','David Fizdale','Robert Pera','','','','','');
 insert into Teams values('70008','PortlandTrail@ymail.com','0917125568','108','ªi¯SÄõ©Ý¯îªÌ','Terry Stotts','Paul Gardner Allen','','','','','');
