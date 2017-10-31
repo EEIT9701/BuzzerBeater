@@ -14,11 +14,11 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class GoogleLoginOutServlet
  */
-@WebServlet("/GoogleLoginOutServlet")
-public class GoogleLoginOutServlet extends HttpServlet {
+@WebServlet("/LoginOutServlet.do")
+public class LoginOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public GoogleLoginOutServlet() {
+	public LoginOutServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,9 +33,10 @@ public class GoogleLoginOutServlet extends HttpServlet {
 //		response.setContentType("text/html");
 //		PrintWriter out = response.getWriter();
 //
-//		request.getRequestDispatcher("header.jsp").include(request, response);
+		request.getRequestDispatcher("header.jsp").include(request, response);
 
 		HttpSession session = request.getSession();
+		session.removeAttribute("LoginOK");
 		session.invalidate();
 
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");

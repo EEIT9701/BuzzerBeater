@@ -38,6 +38,26 @@
 						<input type="submit" class="btn btn-warning" value="搜尋">
 						<input type="hidden" name="action" value="getOne_For_Display">
 					</form>
+					<div class="col-md-4"></div>
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<div class="col-md-4"></div>
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<Form method="post" action="<%=request.getContextPath() %>/Players.do">
+								<button type="submit" class="btn btn-warning">新增球員</button>
+								<input type="hidden" name="action" value="insertPlayer">
+								<input type="hidden" name="photo" value="">
+                                                        
+                                                        <input type="hidden" name="playerName">
+                                                        <input type="hidden" name="id">
+                                                        <input type="hidden" name="height">
+                                                        <input type="hidden" name="weights">
+                                                        <input type="hidden" name="birthday">
+                                                        <input type="hidden" name="nationality">
+							</Form>
+						</div>
+					</div>
 					<!--表格(開始)-->
 					<!--****************-->
 					<!-- 第一列(開始) -->
@@ -79,7 +99,7 @@
 													<Form method="post" action="<%=request.getContextPath() %>/Players.do">
 														<button type="submit" class="btn btn-info">修改</button>
                                                         <input type="hidden" name="action" value="updatePlayer">
-                                                        <input type="hidden" name="playerID" value="${playersVO.photo}">
+                                                        <input type="hidden" name="photo" value="${playersVO.photo}">
                                                         <input type="hidden" name="playerID" value="${playersVO.playerID}">
                                                         <input type="hidden" name="playerName" value="${playersVO.playerName}">
                                                         <input type="hidden" name="id" value="${playersVO.id}">

@@ -27,8 +27,8 @@ public class SeasonService {
 	public Integer getLatestSeason() {
 		return dao.getLatestID();
 	}
-
-	public SeasonVO addSeason(String seasonName, Date seasonBeginDate, Date seasonEndDate, Timestamp signUpBegin,
+	
+	public Integer addSeason(String seasonName, Date seasonBeginDate, Date seasonEndDate, Timestamp signUpBegin,
 			Timestamp signUpEnd, String descriptions) {
 
 		SeasonVO sVO = new SeasonVO();
@@ -39,9 +39,7 @@ public class SeasonService {
 		sVO.setSignUpEnd(signUpEnd);
 		sVO.setDescriptions(descriptions);
 
-		dao.insert(sVO);
-
-		return sVO;
+		return dao.insert(sVO);
 	}
 
 	public SeasonVO updateSeason(String seasonName, Date seasonBeginDate, Date seasonEndDate, Timestamp signUpBegin,

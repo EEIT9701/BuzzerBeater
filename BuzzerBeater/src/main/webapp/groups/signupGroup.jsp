@@ -51,7 +51,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${not empty groupList.teamStat}">
-										${groupList.teamStat}
+										<c:if test="${groupList.teamStat eq 0}">報名成功待繳費</c:if>
 									</c:when>
 									<c:otherwise>
 										<form action="<%=request.getContextPath()%>/Groups.do" method="post">

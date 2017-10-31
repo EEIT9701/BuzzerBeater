@@ -31,8 +31,8 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void insert(GamesVO gVO) {
-		hibernateTemplate.save(gVO);
+	public Integer insert(GamesVO gVO) {
+		return (Integer) hibernateTemplate.save(gVO);
 	}
 
 	@Override

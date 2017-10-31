@@ -133,13 +133,8 @@
                             <div class="col-md-4"></div>
                             <div class="col-md-4">
                                 <form action="<%=request.getContextPath() %>/Players.do">
-                                    <c:forEach var="playersVO" items="${playersVO}">
                                         <button type="submit" class="btn btn-danger">取消</button>
                                         <input type="hidden" name="action" value="goTolistAllPlayer_back">
-                                        <!--                             <input type="hidden" name="action" value="getOne_For_Display"> -->
-                                        <%--                             <input type="hidden" name="playerName" value="${playersIfo.playerName}"> --%>
-                                    </c:forEach>
-
                                 </form>
                             </div>
                             </div>

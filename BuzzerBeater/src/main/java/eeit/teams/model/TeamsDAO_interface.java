@@ -3,7 +3,7 @@ package eeit.teams.model;
 import java.util.Set;
 
 interface TeamsDAO_interface {
-	public void insert(TeamsVO teamsVO);
+	public Integer insert(TeamsVO teamsVO);
 
 	public void update(TeamsVO teamsVO);
 

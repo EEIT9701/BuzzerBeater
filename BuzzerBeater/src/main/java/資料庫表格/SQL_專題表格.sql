@@ -27,7 +27,7 @@ GO
 --insert into Season values ('2015-16例行賽','2015-10-28','2016-04-13','2015-01-01','2015-9-30',null);
 insert into Season values ('2016-17例行賽','2016-10-25','2017-04-12','2016-01-01','2016-9-30',null);
 insert into Season values ('2017-18例行賽','2017-10-18','2018-04-12','2017-01-01','2017-9-30',null);
-
+insert into Season values ('測試用例行賽','2018-10-18','2019-04-12','2017-10-01','2017-12-30',null);
 
 select * from Season
 GO
@@ -52,6 +52,9 @@ create table Groups			--分組
 
  insert into Groups values ('1002','東區','8','4','0','15','7');
  insert into Groups values ('1002','西區','8','4','0','15','7');
+
+ insert into Groups values ('1003','測試A區','8','4','6','15','7');
+ insert into Groups values ('1003','測試B區','8','4','8','15','7');
  
  select * from Groups
  GO
@@ -252,15 +255,15 @@ GO
 )
 GO
 
-insert into Teams values('70001','GoldenStateWarriors@gmail.com','0911123456','101','Golden State Warriors','Steve Kerr','Joe Lacob','0x1234','','','','');
-insert into Teams values('70002','SanAntonioSpurs@gmail.com','09121222666','102','San Antonio Spurs','Gregg Popovich','Peter Holt','0x1234','','','','');
-insert into Teams values('70003','HoustonRockets@ymail.com','0913125568','103','Houston Rockets','Mike DAntoni','Leslie Alexander','0x1234','','','','');
-insert into Teams values('70004','LosAngelesClippers@ymail.com','0914125568','104','Los Angeles Clippers','Doc Rivers','Steve Anthony Ballmer','','','','','');
+insert into Teams values('70001','GoldenStateWarriors@gmail.com','0911123456','101','金州勇士','Steve Kerr','Joe Lacob','0x1234','','','','');
+insert into Teams values('70002','SanAntonioSpurs@gmail.com','09121222666','102','聖安東尼奧馬刺','Gregg Popovich','Peter Holt','0x1234','','','','');
+insert into Teams values('70003','HoustonRockets@ymail.com','0913125568','103','休士頓火箭','Mike DAntoni','Leslie Alexander','0x1234','','','','');
+insert into Teams values('70004','LosAngelesClippers@ymail.com','0914125568','104','洛杉磯快艇','Doc Rivers','Steve Anthony Ballmer','','','','','');
 
-insert into Teams values('70005','UtahJazz@ymail.com','0915125568','105','Utah Jazz','Quin Snyder','Larry H. Miller','0x1234','','','','');
-insert into Teams values('70006','OklahomaCityThunder@ymail.com','0916125568','106','Oklahoma City Thunder','Billy Donovan','Clay Bennett','','','','','');
-insert into Teams values('70007','MemphisGrizzlies@ymail.com','0917125568','107','Memphis Grizzlies','David Fizdale','Robert Pera','','','','','');
-insert into Teams values('70008','PortlandTrail@ymail.com','0917125568','108','Portland Trail','Terry Stotts','Paul Gardner Allen','','','','','');
+insert into Teams values('70005','UtahJazz@ymail.com','0915125568','105','猶他爵士','Quin Snyder','Larry H. Miller','0x1234','','','','');
+insert into Teams values('70006','OklahomaCityThunder@ymail.com','0916125568','106','奧克拉荷馬市雷霆','Billy Donovan','Clay Bennett','','','','','');
+insert into Teams values('70007','MemphisGrizzlies@ymail.com','0917125568','107','曼斐斯灰熊','David Fizdale','Robert Pera','','','','','');
+insert into Teams values('70008','PortlandTrail@ymail.com','0917125568','108','波特蘭拓荒者','Terry Stotts','Paul Gardner Allen','','','','','');
 
 
 select * from Teams
@@ -736,8 +739,12 @@ GO
 
 ---------------------------------------------------------------------------------------------------------------
 
-create table GroupStat      --分組狀態表
+create table TeamStat      --分組狀態表
 (
- groupStatID        int primary key,	    --分組ID 
- groupStat           nvarchar(50),    --分組狀態
+ teamStatID        int primary key,	    --分組ID 
+ teamStatus           nvarchar(50),    --分組狀態
 )
+
+insert into TeamStat values(0,'報名成功待繳費');
+
+select * from TeamStat

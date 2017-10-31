@@ -10,6 +10,7 @@ import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
 
 
@@ -41,9 +42,10 @@ public class GameMediaService {
 	
 	public GameMediaVO updateGameMedia(Integer gameID,Integer mediaID,String mediasName,String gameVideo,String gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag){
 		GameMediaVO gameMediaVO = new GameMediaVO();
-		GamesVO gamesVO = new GamesVO();
+		GamesService gs = new GamesService();
+		GamesVO gamesVO = gs.findByGameID(gameID);
 		
-		gamesVO.setGameID(gameID);
+		gameMediaVO.setGamesVO(gamesVO);
 		gameMediaVO.setMediasName(mediasName);
 		gameMediaVO.setGameVideo(gameVideo);
 		gameMediaVO.setGamePhoto(gamePhoto);

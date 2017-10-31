@@ -22,8 +22,8 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void insert(TeamsVO teamsVO) {
-		hibernateTemplate.save(teamsVO);
+	public Integer insert(TeamsVO teamsVO) {
+		return (Integer) hibernateTemplate.save(teamsVO);
 	}
 
 	@Override
@@ -54,6 +54,8 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		TeamsDAO_interface dao = (TeamsDAO_interface) context.getBean("TeamsDAO");
+		
+		dao.delete(3007);
 		
 		Set<TeamsVO> set = dao.getAll();
 		for(TeamsVO vo : set){

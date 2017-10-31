@@ -1,13 +1,9 @@
 package eeit.locationinfo.model;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.Base64;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -76,19 +72,19 @@ public class LocationinfoDAO_HibernateTemplate implements LocationinfoDAO_interf
 		// dao.update(locVO);
 
 		// 新增
-		LocationinfoVO locVO = new LocationinfoVO();
-		locVO.setLocationName("圖片測試");
-		locVO.setLocationAddr("addr");
-		locVO.setLocationMark("mark");
-
-		File file = new File("C:/Users/Student/Downloads/tomcat.gif");
-		FileInputStream fis = new FileInputStream(file);
-		byte[] bt = IOUtils.toByteArray(fis);
-		Base64.Encoder encoder = Base64.getEncoder();
-		String encodedText = encoder.encodeToString(bt);
-
-		locVO.setLocationPhoto(encodedText);
-		dao.insert(locVO);
+//		LocationinfoVO locVO = new LocationinfoVO();
+//		locVO.setLocationName("圖片測試");
+//		locVO.setLocationAddr("addr");
+//		locVO.setLocationMark("mark");
+//
+//		File file = new File("C:/Users/Student/Downloads/tomcat.gif");
+//		FileInputStream fis = new FileInputStream(file);
+//		byte[] bt = IOUtils.toByteArray(fis);
+//		Base64.Encoder encoder = Base64.getEncoder();
+//		String encodedText = encoder.encodeToString(bt);
+//
+//		locVO.setLocationPhoto(encodedText);
+//		dao.insert(locVO);
 
 		// 查詢全部
 		Set<LocationinfoVO> set = dao.getAll();
@@ -101,6 +97,12 @@ public class LocationinfoDAO_HibernateTemplate implements LocationinfoDAO_interf
 			}
 			System.out.println();
 		}
+	}
+
+	@Override
+	public Set<LocationinfoVO> getAllList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

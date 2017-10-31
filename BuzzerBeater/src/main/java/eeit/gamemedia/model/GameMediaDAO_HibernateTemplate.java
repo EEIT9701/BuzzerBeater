@@ -8,8 +8,6 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import eeit.games.model.GamesVO;
-
 @Transactional(readOnly = true)
 public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 
@@ -23,8 +21,8 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void insert(GameMediaVO gameMediaVO) {
-		hibernateTemplate.save(gameMediaVO);
+	public Integer insert(GameMediaVO gameMediaVO) {
+		return (Integer) hibernateTemplate.save(gameMediaVO);
 	}
 
 	@Override

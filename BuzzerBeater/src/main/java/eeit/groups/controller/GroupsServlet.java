@@ -42,19 +42,20 @@ public class GroupsServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-		
-		if("GET_ONE_TO_SIGNUP".equals(action)){
+
+		if ("GET_ONE_TO_SIGNUP".equals(action)) {
 			Integer teamID = new Integer(request.getParameter("teamID"));
 			Integer groupID = new Integer(request.getParameter("groupID"));
-			
+
 			GroupRegService grSvc = new GroupRegService();
 			grSvc.insert(groupID, teamID);
+
+			request.getRequestDispatcher("/groups/signupGroup.jsp").forward(request, response);
 		}
-		
 
 		if ("GET_GROUP_SIGNUP".equals(action)) {
 			Integer teamID = new Integer(request.getParameter("teamID"));
-			
+
 			GroupsService gSvc = new GroupsService();
 			Set<GroupsVO> groupsSet = gSvc.getAll();
 
@@ -76,9 +77,9 @@ public class GroupsServlet extends HttpServlet {
 					newMap.put("minTeams", groupsVO.getMinTeams());
 					newMap.put("maxPlayer", groupsVO.getMaxPlayers());
 					newMap.put("minPlayer", groupsVO.getMinPlayers());
-					
-					for(GroupRegVO grVO : groupsVO.getGroupRegSet()){
-						if(grVO.getTeamsVO().getTeamID().equals(teamID)){
+
+					for (GroupRegVO grVO : groupsVO.getGroupRegSet()) {
+						if (grVO.getTeamsVO().getTeamID().equals(teamID)) {
 							newMap.put("teamStat", grVO.getTeamStat());
 						}
 					}
@@ -177,7 +178,7 @@ public class GroupsServlet extends HttpServlet {
 				// 錯誤處理
 				if (!errorMsgs.isEmpty()) {
 					request.setAttribute("groupsVO", groupsVO);
-					RequestDispatcher failVeiw = request.getRequestDispatcher("/groups/groupsUpdata_back.jsp");
+					RequestDispatcher failVeiw = request.getRequestDispatcher("/groups/addGroups.jsp");
 					failVeiw.forward(request, response);
 					return;
 				}
@@ -193,16 +194,24 @@ public class GroupsServlet extends HttpServlet {
 				groupsSet.add(groupsVO);
 
 				session.setAttribute("groupsSet", groupsSet);
-				RequestDispatcher successView = request.getRequestDispatcher("/groups/groupsUpdata_back.jsp");
+				RequestDispatcher successView = request.getRequestDispatcher("/groups/addGroups.jsp");
 				successView.forward(request, response);
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				request.setAttribute("groupsVO", groupsVO);
-				RequestDispatcher failView = request.getRequestDispatcher("/groups/groupsUpdata_back.jsp");
+				RequestDispatcher failView = request.getRequestDispatcher("/groups/addGroups.jsp");
 				failView.forward(request, response);
 			}
 
+		}
+
+		if ("GET_ONE_TO_UPDATE".equals(action)) {
+			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
+
+			GroupsService svc = new GroupsService();
+			request.setAttribute("groupsVO", svc.findByGroupID(groupID));
+			request.getRequestDispatcher("/groups/updateGroup.jsp").forward(request, response);
 		}
 
 		if ("ADD_GROUP".equals(action)) {
@@ -296,6 +305,17 @@ public class GroupsServlet extends HttpServlet {
 
 		}
 
+		if ("DELETE_GROUP".equals(action)) {
+			GroupsService svc = new GroupsService();
+			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
+			GroupsVO groupsVO = svc.findByGroupID(groupID);
+			Integer seasonID = groupsVO.getSeasonVO().getSeasonID();
+			svc.delete(groupID);
+
+			request.getRequestDispatcher("/Season.do?action=TO_GROUPS_BACK&seasonID=" + seasonID).forward(request,
+					response);
+		}
+
 		// 根據隊伍數量計算所需比賽場數
 		if ("ALGORITHM_COUNT".equals(action)) {
 			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
@@ -311,6 +331,18 @@ public class GroupsServlet extends HttpServlet {
 			request.setAttribute("result", result);
 			RequestDispatcher view = request.getRequestDispatcher("/groups/algorithm_test.jsp");
 			view.forward(request, response);
+		}
+
+		if ("ADD_SCHEDULE".equals(action)) {
+			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
+			GroupsService gsvc = new GroupsService();
+			GroupsVO groupsVO = gsvc.findByGroupID(groupID);
+			Integer currentTeams = groupsVO.getCurrentTeams();
+			Integer gamesNeeded = (currentTeams * (currentTeams - 1)) / 2;
+
+			request.setAttribute("groupsVO", groupsVO);
+			request.getSession().setAttribute("gamesNeeded", gamesNeeded);
+			request.getRequestDispatcher("/groups/addSchedule.jsp").forward(request, response);
 		}
 
 	}

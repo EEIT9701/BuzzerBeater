@@ -34,9 +34,9 @@ public class TeamsServlet extends HttpServlet {
 
 		String action = request.getParameter("action");
 		
-		if("insertTeam".equals(action)){
+		if ("listMyPlayer".equals(action)) {
 			String base64 = request.getParameter("teamBadge");
-			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
 			String teamName = request.getParameter("teamName");
 			String captainEmail = request.getParameter("captainEmail");
 			String captainPhone = request.getParameter("captainPhone");
@@ -46,7 +46,28 @@ public class TeamsServlet extends HttpServlet {
 			Integer totalLose = new Integer(request.getParameter("totalLose"));
 			Float winRate = new Float(request.getParameter("winRate"));
 			String remarks = request.getParameter("remarks");
-			
+			TeamsService teamSvc = new TeamsService();
+			teamSvc.insert(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName, totalWin, totalLose,
+					winRate, remarks);
+
+			String url = "/players/listMyPlayer.jsp";
+			RequestDispatcher successView = request.getRequestDispatcher(url);
+			successView.forward(request, response);
+		}
+		
+		if ("insertTeam".equals(action)) {
+			String base64 = request.getParameter("teamBadge");
+			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
+			String teamName = request.getParameter("teamName");
+			String captainEmail = request.getParameter("captainEmail");
+			String captainPhone = request.getParameter("captainPhone");
+			String coachName = request.getParameter("coachName");
+			String bossName = request.getParameter("bossName");
+			Integer totalWin = new Integer(request.getParameter("totalWin"));
+			Integer totalLose = new Integer(request.getParameter("totalLose"));
+			Float winRate = new Float(request.getParameter("winRate"));
+			String remarks = request.getParameter("remarks");
+
 			request.setAttribute("teamBadge", teamBadge);
 			request.setAttribute("teamName", teamName);
 			request.setAttribute("captainEmail", captainEmail);
@@ -61,10 +82,10 @@ public class TeamsServlet extends HttpServlet {
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);
 		}
-		
-		if("insert".equals(action)){
+
+		if ("insert".equals(action)) {
 			String base64 = request.getParameter("teamBadge");
-			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
 			String teamName = request.getParameter("teamName");
 			String captainEmail = request.getParameter("captainEmail");
 			String captainPhone = request.getParameter("captainPhone");
@@ -74,7 +95,7 @@ public class TeamsServlet extends HttpServlet {
 			Integer totalLose = new Integer(request.getParameter("totalLose"));
 			Float winRate = new Float(request.getParameter("winRate"));
 			String remarks = request.getParameter("remarks");
-			
+
 			request.setAttribute("teamBadge", teamBadge);
 			request.setAttribute("teamName", teamName);
 			request.setAttribute("captainEmail", captainEmail);
@@ -97,11 +118,11 @@ public class TeamsServlet extends HttpServlet {
 			request.setAttribute("teamsVO", svc.findByID(teamID));
 			request.getRequestDispatcher("/teams/teamInformation.jsp").forward(request, response);
 		}
-		
+
 		if ("UpdateTeam".equals(action)) {
 			String base64 = request.getParameter("teamBadge");
 			Integer teamID = new Integer(request.getParameter("teamID"));
-			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
 			String teamName = request.getParameter("teamName");
 			String captainEmail = request.getParameter("captainEmail");
 			String captainPhone = request.getParameter("captainPhone");
@@ -111,8 +132,7 @@ public class TeamsServlet extends HttpServlet {
 			Integer totalLose = new Integer(request.getParameter("totalLose"));
 			Float winRate = new Float(request.getParameter("winRate"));
 			String remarks = request.getParameter("remarks");
-		
-			
+
 			request.setAttribute("teamBadge", teamBadge);
 			request.setAttribute("teamID", teamID);
 			request.setAttribute("teamName", teamName);
@@ -126,11 +146,11 @@ public class TeamsServlet extends HttpServlet {
 			request.setAttribute("remarks", remarks);
 			request.getRequestDispatcher("/teams/updateTeam.jsp").forward(request, response);
 		}
-		
-		if("updateCheck".equals(action)){
+
+		if ("updateCheck".equals(action)) {
 			String base64 = request.getParameter("teamBadge");
 			Integer teamID = new Integer(request.getParameter("teamID"));
-			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
 			String teamName = request.getParameter("teamName");
 			String captainEmail = request.getParameter("captainEmail");
 			String captainPhone = request.getParameter("captainPhone");
@@ -140,8 +160,7 @@ public class TeamsServlet extends HttpServlet {
 			Integer totalLose = new Integer(request.getParameter("totalLose"));
 			Float winRate = new Float(request.getParameter("winRate"));
 			String remarks = request.getParameter("remarks");
-		
-			
+
 			request.setAttribute("teamBadge", teamBadge);
 			request.setAttribute("teamID", teamID);
 			request.setAttribute("teamName", teamName);
@@ -157,9 +176,9 @@ public class TeamsServlet extends HttpServlet {
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);
 		}
-		if("goTolistAllTeam_insert".equals(action)){
+		if ("goTolistAllTeam_insert".equals(action)) {
 			String base64 = request.getParameter("teamBadge");
-			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
 			String teamName = request.getParameter("teamName");
 			String captainEmail = request.getParameter("captainEmail");
 			String captainPhone = request.getParameter("captainPhone");
@@ -170,16 +189,17 @@ public class TeamsServlet extends HttpServlet {
 			Float winRate = new Float(request.getParameter("winRate"));
 			String remarks = request.getParameter("remarks");
 			TeamsService teamSvc = new TeamsService();
-			teamSvc.insert(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName,totalWin,totalLose,winRate, remarks);
-			
+			teamSvc.insert(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName, totalWin, totalLose,
+					winRate, remarks);
+
 			String url = "/teams/listAllteam_back.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);
 		}
-		if("goTolistAllTeam_update".equals(action)){
+		if ("goTolistAllTeam_update".equals(action)) {
 			String base64 = request.getParameter("teamBadge");
 			Integer teamID = new Integer(request.getParameter("teamID"));
-			String teamBadge = base64.substring(base64.lastIndexOf(",")+1);
+			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
 			String teamName = request.getParameter("teamName");
 			String captainEmail = request.getParameter("captainEmail");
 			String captainPhone = request.getParameter("captainPhone");
@@ -190,14 +210,15 @@ public class TeamsServlet extends HttpServlet {
 			Float winRate = new Float(request.getParameter("winRate"));
 			String remarks = request.getParameter("remarks");
 			TeamsService teamSvc = new TeamsService();
-			teamSvc.update(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName,totalWin,totalLose,winRate, remarks,teamID);
-			
+			teamSvc.update(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName, totalWin, totalLose,
+					winRate, remarks, teamID);
+
 			String url = "/teams/listAllteam_back.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);
 		}
-		if("goTolistAllTeam_back".equals(action)){
-			
+		if ("goTolistAllTeam_back".equals(action)) {
+
 			String url = "/teams/listAllteam_back.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);

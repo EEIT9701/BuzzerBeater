@@ -42,7 +42,7 @@
 			        <tbody>
 			        	<c:forEach var="sVO" items="${seasonSvc.all}">
 			        		<tr>
-			        			<td><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
+			        			<td><a href="<%=request.getContextPath() %>/Season.do?action=TO_GROUPS_BACK&seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
 			        			<td>${sVO.seasonBeginDate}</td>
 			        			<td>${sVO.seasonEndDate}</td>
 			        			<td>${sVO.signUpBegin}</td>

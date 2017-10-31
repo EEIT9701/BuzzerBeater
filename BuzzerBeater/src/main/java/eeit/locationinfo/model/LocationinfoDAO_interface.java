@@ -13,4 +13,6 @@ interface LocationinfoDAO_interface {
 	public void update(LocationinfoVO locationinfoVO);
 
 	public void delete(Integer locationinfoID);
+	
+	public Set<LocationinfoVO> getAllList();
 }

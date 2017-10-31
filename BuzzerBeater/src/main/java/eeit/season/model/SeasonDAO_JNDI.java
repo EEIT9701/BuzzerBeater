@@ -120,7 +120,7 @@ public class SeasonDAO_JNDI implements SeasonDAO_interface {
 	}
 
 	@Override
-	public void insert(SeasonVO seasonVO) {
+	public Integer insert(SeasonVO seasonVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -156,7 +156,7 @@ public class SeasonDAO_JNDI implements SeasonDAO_interface {
 				}
 			}
 		}
-
+		return null;
 	}
 
 	@Override
