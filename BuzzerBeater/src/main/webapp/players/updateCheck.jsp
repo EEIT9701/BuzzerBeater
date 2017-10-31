@@ -51,30 +51,38 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="playersVO" items="${playersVO}">
+									
 										<tr align='center' valign='middle'>
 											<td>
-												<img id="img1" src="data:image/jpeg;base64,${playersVO.photo}">
+												<img id="img1" src="data:image/jpeg;base64,${photo}">
 											</td>
-											<td>${playersVO.playerName}</td>
-											<td>${playersVO.id}</td>
+											<td>${playerName}</td>
+											<td>${id}</td>
 											<td></td>
-
-											<td>${playersVO.height}</td>
-											<td>${playersVO.weights}</td>
-											<td>${playersVO.birthday}</td>
-											<td>${playersVO.nationality}</td>
+											<td></td>
+											<td>${height}</td>
+											<td>${weights}</td>
+											<td>${birthday}</td>
+											<td>${nationality}</td>
 
 										</tr>
-									</c:forEach>
+									
 							</table>
 							<div class="col-md-4"></div>
 							<div class="col-md-4">
-								<form action="<%=request.getContextPath() %>/Players.do">
+								<form method="post" action="<%=request.getContextPath() %>/Players.do">
 									<div class="form-group">
 										<div class="col-md-4">
 											<button type="submit" class="btn btn-primary">確認修改</button>
-											<input type="hidden" name="action" value="goTolistAllPlayer_back">
+											<input type="hidden" name="action" value="update">
+											<input type="hidden" name="playerID" value="${playerID}">
+											<input type="hidden" name="playerName" value="${playerName}">
+											<input type="hidden" name="photo" value="${photo}">
+											<input type="hidden" name="id" value="${id}">
+											<input type="hidden" name="height" value="${height}">
+											<input type="hidden" name="weights" value="${weights}">
+											<input type="hidden" name="birthday" value="${birthday}">
+											<input type="hidden" name="nationality" value="${nationality}">
 										</div>
 									</div>
 									<!-- <button type="submit" class="btn btn-warning">確認修改</button>
@@ -87,13 +95,20 @@
 								<div class="col-md-4"></div>
 								
 									<Form method="post" action="<%=request.getContextPath() %>/Players.do">
-											<c:forEach var="playersVO" items="${playersVO}">
+											
 										<div class="col-md-4">
 											<button type="submit" class="btn btn-danger">返回修改</button>
-											<input type="hidden" name="playerName" value="${playersVO.playerName}">
-											<input type="hidden" name="action" value="getOne_For_Update">
+											<input type="hidden" name="action" value="updatePlayer">
+											<input type="hidden" name="playerID" value="${playerID}">
+											<input type="hidden" name="playerName" value="${playerName}">
+											<input type="hidden" name="photo" value="${photo}">
+											<input type="hidden" name="id" value="${id}">
+											<input type="hidden" name="height" value="${height}">
+											<input type="hidden" name="weights" value="${weights}">
+											<input type="hidden" name="birthday" value="${birthday}">
+											<input type="hidden" name="nationality" value="${nationality}">
 										</div>
-									</c:forEach>
+									
 									</Form>
 								
 							</div>
