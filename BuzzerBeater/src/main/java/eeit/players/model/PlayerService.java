@@ -19,15 +19,15 @@ public class PlayerService {
 //		dao = (PlayerDAO_interface) context.getBean("PlayersDAO");
 		
 	}
-	public PlayersVO addPlayer(Integer playerID,String playerName,String id,Double height,Double weights,Date birthday,String nationality){
+	public PlayersVO insertPlayer(String playerName,String id,Double height,Double weights,Date birthday,String nationality,String photo){
 		PlayersVO playerVO = new PlayersVO();
-		playerVO.setPlayerID(playerID);
 		playerVO.setPlayerName(playerName);
 		playerVO.setId(id);
 		playerVO.setHeight(height);
 		playerVO.setWeights(weights);
 		playerVO.setBirthday(birthday);
 		playerVO.setNationality(nationality);
+		playerVO.setPhoto(photo);
 		dao.insert(playerVO);
 		return playerVO;
 	}
