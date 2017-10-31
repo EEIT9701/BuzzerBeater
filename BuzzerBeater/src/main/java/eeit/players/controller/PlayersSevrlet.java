@@ -72,7 +72,7 @@ public class PlayersSevrlet extends HttpServlet {
 		if("updatePlayer".equals(action)){
 			String base64 = req.getParameter("photo");
 			String photo = base64.substring(base64.lastIndexOf(",")+1);
-			Integer playerID = new Integer(req.getParameter("playerID"));
+			String playerID = req.getParameter("playerID");
 			String playerName = req.getParameter("playerName");
 			String id = req.getParameter("id");
 			Double height = new Double( req.getParameter("height"));
@@ -101,7 +101,7 @@ public class PlayersSevrlet extends HttpServlet {
 			System.out.println(base64);
 			String photo = base64.substring(base64.lastIndexOf(",")+1);
 			System.out.println(photo);
-			Integer playerID = new Integer(req.getParameter("playerID"));
+			String playerID = req.getParameter("playerID");;
 			String playerName = req.getParameter("playerName");
 //			if(playerName == null||playerName.trim().length() == 0){
 //				errorMsgs.add("球員姓名不可為空白");
@@ -141,7 +141,7 @@ public class PlayersSevrlet extends HttpServlet {
 //			if(weights>=200||weights<=30){
 //				errorMsgs.add("請填入正確體重");
 //			}
-			Date birthday = Date.valueOf(req.getParameter("birthday"));
+			String birthday = req.getParameter("birthday");
 			String nationality= req.getParameter("nationality");
 //			if(!errorMsgs.isEmpty()){
 //				req.setAttribute("errorMsgs", errorMsgs);
@@ -154,12 +154,36 @@ public class PlayersSevrlet extends HttpServlet {
 			
 			
 			
-			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality,photo);
-			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
+//			
+//			Set<PlayersVO> playersVO = playerSvc.getOnePlayerName(playerName);
 		
 			
-			req.setAttribute("playersVO", playersVO);
-			String url = "/players/listOnePlayer_updateCheck.jsp";
+			req.setAttribute("photo", photo);
+			req.setAttribute("playerID", playerID);
+			req.setAttribute("playerName", playerName);
+			req.setAttribute("id", id);
+			req.setAttribute("height", height);
+			req.setAttribute("weights", weights);
+			req.setAttribute("birthday", birthday);
+			req.setAttribute("nationality", nationality);
+			String url = "/players/updateCheck.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, resp);
+		}
+		
+		if("update".equals(action)){
+			String base64 = req.getParameter("photo");
+			String photo = base64.substring(base64.lastIndexOf(",")+1);
+			Integer playerID = Integer.parseInt(req.getParameter("playerID"));
+			String playerName = req.getParameter("playerName");
+			String id = req.getParameter("id");
+			Double height = new Double( req.getParameter("height"));
+			Double weights = new Double( req.getParameter("weights"));
+			Date birthday = Date.valueOf(req.getParameter("birthday"));
+			String nationality = req.getParameter("nationality");
+			
+			playerSvc.updatePlayer(playerID, playerName, id, height, weights, birthday, nationality,photo);
+			String url = "/players/listAllPlayer_back.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
 		}
