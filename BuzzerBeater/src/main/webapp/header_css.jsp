@@ -134,6 +134,12 @@
         .pageheader.fixed-demo.dark{
         padding-top:90px;
         }
+        body {
+        background-color:rgba(197, 197, 197, 0.78);
+        }
+        .jumbotron{
+        background-color: rgb(243, 242, 241);
+        }
     </style>
 
 
