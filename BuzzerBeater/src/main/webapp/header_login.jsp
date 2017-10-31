@@ -17,7 +17,15 @@
 					state=/profile&
 					client_id=879939044143-sfo5p4l1nmd7ndrpdjhg8fh07ass3akm.apps.googleusercontent.com">
 				<img src="<%=request.getContextPath()%>/images/google.png" />
-			</a>  
+			</a>
+			<a href="https://www.facebook.com/v2.5/dialog/oauth?
+             client_id=144809318927994&
+             redirect_uri=http://localhost:8080/BuzzerBeater/FaceBookLogin.do&
+             state=/profile&
+             response_type=code&
+             scope=email,public_profile">
+				<img src="<%=request.getContextPath()%>/images/FaceBook.png" />
+			</a>   
         </form>
     </div>
     
