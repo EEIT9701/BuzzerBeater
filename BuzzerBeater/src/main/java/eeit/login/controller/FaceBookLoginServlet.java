@@ -126,8 +126,8 @@ public class FaceBookLoginServlet extends HttpServlet {
 			LoginCheckService loginCheckflag = new LoginCheckService();
 			String acc = jsonOb.getString("email");
 			memberInfoVO = loginCheckflag.findByAcc(acc);
-
-			if (memberInfoVO != null) { // check Email 是否有在資料庫內
+            System.out.println("Acc:" + memberInfoVO.getAcc());
+			if (memberInfoVO.getAcc() != null) { // check Email 是否有在資料庫內
 				System.out.println("email:" + jsonOb.getString("email"));
 				// System.out.println("name:" + jsonOb.getString("name"));
 				// System.out.println("picture:" + jsonOb.getString("picture"));
@@ -144,7 +144,7 @@ public class FaceBookLoginServlet extends HttpServlet {
 
 				response.sendRedirect("index.jsp");
 				return;
-			} else {                                            // check Email 是否有在資料庫內,沒有則回首頁
+			} else {   // check Email 是否有在資料庫內,沒有則回首頁
 				response.sendRedirect("index.jsp");
 				return;
 			}

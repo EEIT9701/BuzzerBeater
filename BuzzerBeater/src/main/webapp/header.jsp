@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-
-
-
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
 
 <!--標頭(開始)-->
@@ -74,7 +70,7 @@
 						</a>
 					</c:if>		
 				</li>
-				<li><a href="LoginOutServlet" class="cd-signup"" > 
+				<li><a href="LoginOutServlet.do" class="cd-signup"" > 
 				         <c:choose>
 							<c:when test="${empty LoginOK}">
 								<c:set var="var02" value="" />
