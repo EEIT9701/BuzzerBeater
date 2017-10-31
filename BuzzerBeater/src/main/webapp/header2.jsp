@@ -3,9 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
-
+<%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/normalize.css" /> --%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/demo.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/component.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/content.css" />
+<script src="<%=request.getContextPath()%>/js/modernizr.custom.js"></script>
 <!--標頭(開始)-->
-<nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" style="font-size: larger">
+<nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" style="font-size: larger">				
 	<div class="container">
 		<div class="attr-nav" style="padding-left:40px">
 			<ul>
@@ -55,23 +59,29 @@
 				</li>
 <!-- 				新刪修"按鈕"(結束) -->
 				<!--登入登出"按鈕"(開始)-->
-				<li >			
+				<li>
+					<div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
 					<c:if test="${empty LoginOK}">
-						<a href="#" class="cd-signin" onclick="document.getElementById('id01').style.display='block'">
-							登入
-						</a>
+<%-- 						<a href="<%=request.getContextPath() %>/images/cas_test.png"></a> --%>
+<!-- 						<button type="button" >登入</button> -->
+						<button type="button" class="glyphicon glyphicon-cog"></button>
 					</c:if>								
-					<c:if test="${!empty LoginOK}">		
-						<a>			
-							<img  src="${pictureUri}"  style="width:25px; height:25px;text-decoration:none;"> 
-							<c:set var="var01" value="${LoginOK.name}" />
-							${var01}
-						</a>
-					</c:if>		
+						<div class="morph-content">
+							<div>
+								<div class="content-style-form content-style-form-1">
+									<span class="icon icon-close">Close the dialog</span>
+									<H3>Login</H3>
+									<jsp:include page="/header_login.jsp" />
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</li>
 				<li><a href="LoginOutServlet.do" class="cd-signup"" > 
 				         <c:choose>
 							<c:when test="${empty LoginOK}">
+
 							</c:when>
 							<c:otherwise>
 								<c:set var="var02" value="登出" />
@@ -173,7 +183,73 @@
 </div>
 <!--至頂空白(結束)-->
 <div class="clearfix"></div>
+<script src="<%=request.getContextPath() %>/js/classie.js"></script>
+		<script src="<%=request.getContextPath() %>/js/uiMorphingButton_fixed.js"></script>
+		<script>
+			(function() {
+				var docElem = window.document.documentElement, didScroll, scrollPosition;
 
+				// trick to prevent scrolling when opening/closing button
+				function noScrollFn() {
+					window.scrollTo( scrollPosition ? scrollPosition.x : 0, scrollPosition ? scrollPosition.y : 0 );
+				}
+
+				function noScroll() {
+					window.removeEventListener( 'scroll', scrollHandler );
+					window.addEventListener( 'scroll', noScrollFn );
+				}
+
+				function scrollFn() {
+					window.addEventListener( 'scroll', scrollHandler );
+				}
+
+				function canScroll() {
+					window.removeEventListener( 'scroll', noScrollFn );
+					scrollFn();
+				}
+
+				function scrollHandler() {
+					if( !didScroll ) {
+						didScroll = true;
+						setTimeout( function() { scrollPage(); }, 60 );
+					}
+				};
+
+				function scrollPage() {
+					scrollPosition = { x : window.pageXOffset || docElem.scrollLeft, y : window.pageYOffset || docElem.scrollTop };
+					didScroll = false;
+				};
+
+				scrollFn();
+
+				[].slice.call( document.querySelectorAll( '.morph-button' ) ).forEach( function( bttn ) {
+					new UIMorphingButton( bttn, {
+						closeEl : '.icon-close',
+						onBeforeOpen : function() {
+							// don't allow to scroll
+							noScroll();
+						},
+						onAfterOpen : function() {
+							// can scroll again
+							canScroll();
+						},
+						onBeforeClose : function() {
+							// don't allow to scroll
+							noScroll();
+						},
+						onAfterClose : function() {
+							// can scroll again
+							canScroll();
+						}
+					} );
+				} );
+
+				// for demo purposes only
+				[].slice.call( document.querySelectorAll( 'form button' ) ).forEach( function( bttn ) { 
+					bttn.addEventListener( 'click', function( ev ) { ev.preventDefault(); } );
+				} );
+			})();
+		</script>
 
 
 
