@@ -333,32 +333,24 @@ public class GameMediaServlet extends HttpServlet {
 		}
 		
 		
-		if ("delete".equals(action)) { 
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-	
-			try {
-				/***************************1.接收請求參數***************************************/
-				Integer mediaID = new Integer(req.getParameter("mediaID"));
-				
-				/***************************2.開始刪除資料***************************************/
-				
-				gameMediaSvc.deleteGameMedia(mediaID);
-				
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/gamemedia/videoBackEnd.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-				successView.forward(req, res);
-				
-				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e) {
-				errorMsgs.add("刪除資料失敗:"+e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/videoBackEnd.jsp");
-				failureView.forward(req, res);
-			}
+		if ("delete".equals(action)) {
+			
+			res.setHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("content-type", "text/html;charset=UTF-8");
+			res.setCharacterEncoding("UTF-8");
+						
+			/***************************1.接收請求參數***************************************/
+			
+			Integer mediaID = Integer.valueOf(req.getParameter("mediaID"));
+			
+			/***************************2.開始刪除資料***************************************/
+			
+			gameMediaSvc.deleteGameMedia(mediaID);
+			
+			/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+			
+			return;
+			
 		}
 		
 		if ("deletePhoto".equals(action)) { 
