@@ -34,8 +34,8 @@
 					    <c:set var="rebnameA" value=""/>
 					    <c:set var="rebphotoA" value=""/>
 						<c:forEach var="singlefieldVO" items="${list1}" >
-						   <c:if test="${singlefieldVO.points>pointmaxA}">			   
-								<c:set var="pointmaxA" value="${singlefieldVO.points}"/>
+						   <c:if test="${singlefieldVO.points/singlefieldVO.gameID>pointmaxA}">
+								<c:set var="pointmaxA" value="${singlefieldVO.points/singlefieldVO.gameID}"/>
 								<c:set var="nameA" value="${singlefieldVO.playersVO.playerName}"/>
 								<c:set var="photoA" value="${singlefieldVO.playersVO.photo}"/>
 						   </c:if>
