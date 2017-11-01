@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
+<jsp:useBean id="date" scope="page" class="java.util.Date"/>
+<jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService"/>
+<jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService"/>
+<jsp:useBean id="gamesSvc" scope="page" class="eeit.games.model.GamesService"/>
 
 <!--標頭(開始)-->
 <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" style="font-size: larger">
@@ -104,54 +107,36 @@
 		<!-- 選單列表(開始) -->
 		<div class="collapse navbar-collapse" id="navbar-menu">
 			<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" style="margin-right: 15px">
-				<li><a href="<%=request.getContextPath() %>/index.jsp">Home</a></li>
-				<li class="dropdown"><a href="<%=request.getContextPath() %>/season/seasonList.jsp" class="dropdown-toggle"
-					data-toggle="dropdown">賽季<!--這行的href輸入超連結頁面--></a>
+				<li><a href="<%=request.getContextPath() %>/index.jsp">首頁</a></li>
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/season/seasonList.jsp" class="dropdown-toggle" data-toggle="dropdown">賽季</a>
 					<ul class="dropdown-menu">
 						<c:forEach var="seasonSet" items="${seasonSvc.season}" begin="0" end="3">
 							<li><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${seasonSet.seasonID}">${seasonSet.seasonName}</a></li>
 						</c:forEach>
 					</ul>
 				</li>
-				<li class="dropdown"><a href="<%=request.getContextPath() %>/groups/groupFront.jsp" class="dropdown-toggle"
-					data-toggle="dropdown">分組<!--這行的href輸入超連結頁面--></a>
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">賽程</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">分組子頁1<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">分組子頁2<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">分組子頁3<!--這行的href輸入超連結頁面--></a></li>
+						<c:forEach var="games" items="${gamesSvc.all}">
+							<c:if test="${date<games.gameBeginDate}">
+								<li><a href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singlefieldData&gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
+							</c:if>
+						</c:forEach>
 					</ul>
 				</li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">賽程<!--這行的href輸入超連結頁面--></a>
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/teams/listAllteam_front.jsp" class="dropdown-toggle" data-toggle="dropdown">球隊</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">賽程子頁1<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">賽程子頁2<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="#">賽程子頁3<!--這行的href輸入超連結頁面--></a></li>
+						<c:forEach var="teams" items="${teamsSvc.teams}">
+							<li><a href="<%=request.getContextPath() %>/Teams.do?action=GET_ONE_TEAM&teamID=${teams.teamID}">${teams.teamName}</a></li>
+						</c:forEach>
 					</ul>
-				</li>
-				<li class="dropdown"><a href="<%=request.getContextPath() %>/teams/listAllteam_front.jsp" class="dropdown-toggle"
-					data-toggle="dropdown">球隊<!--這行的href輸入超連結頁面--></a>
-<!-- 					<ul class="dropdown-menu"> -->
-<!-- 						<li><a href="#">球隊子頁1這行的href輸入超連結頁面</a></li> -->
-<!-- 						<li><a href="#">球隊子頁2這行的href輸入超連結頁面</a></li> -->
-<!-- 						<li><a href="#">球隊子頁3這行的href輸入超連結頁面</a></li> -->
-<!-- 					</ul> -->
-					</li>
-				<li class="dropdown"><a href="<%=request.getContextPath() %>/players/listAllPlayer_front.jsp" class="dropdown-toggle"
-					data-toggle="dropdown">球員<!--這行的href輸入超連結頁面--></a>
-<!-- 					<ul class="dropdown-menu"> -->
-<!-- 						<li><a href="#">球員子頁1這行的href輸入超連結頁面</a></li> -->
-<!-- 						<li><a href="#">球員子頁2這行的href輸入超連結頁面</a></li> -->
-<!-- 						<li><a href="#">球員子頁3這行的href輸入超連結頁面</a></li> -->
-<!-- 					</ul> -->
 					</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">數據<!--這行的href輸入超連結頁面--></a>
+					data-toggle="dropdown">數據</a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=request.getContextPath() %>/personaldata/PersonalDataindex.jsp">個人數據<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="<%=request.getContextPath() %>/personaldata/TeamDataindex.jsp">球隊數據<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
-<!-- 					影音本身沒有超聯結 -->
 				<li class="dropdown"><a href="#" class="dropdown-toggle"    
 					data-toggle="dropdown">影音<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
