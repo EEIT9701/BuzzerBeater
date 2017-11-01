@@ -17,7 +17,8 @@
 					response_type=code&
 					state=/profile&
 					client_id=879939044143-sfo5p4l1nmd7ndrpdjhg8fh07ass3akm.apps.googleusercontent.com">
-				<img src="<%=request.getContextPath()%>/images/google_1.png" width=90%/>
+				<img src="<%=request.getContextPath()%>/images/google_1.png" 
+					style="width: 350px; height: 100px;padding-top: 50px;padding-left: 20px;"/>
 			</a>
 			<a href="https://www.facebook.com/v2.5/dialog/oauth?
              client_id=144809318927994&
@@ -25,7 +26,8 @@
              state=/profile&
              response_type=code&
              scope=email,public_profile">
-				<img src="<%=request.getContextPath()%>/images/facebook.png" width=90%/>
+				<img src="<%=request.getContextPath()%>/images/facebook_01.png"
+				style="width: 350px;height: 100px;padding-top: 50px;padding-left: 20px;"/>
 			</a>
 			</div>   
         </form>
