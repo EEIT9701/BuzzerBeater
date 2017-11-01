@@ -84,7 +84,7 @@ public class PersonalDataServlet extends HttpServlet {
 
 			req.setAttribute("list1", list);
 
-			req.getRequestDispatcher("/players/playerInformation1.jsp").forward(req, resp);
+			req.getRequestDispatcher("/players/playerInformation.jsp").forward(req, resp);
 
 		}
 		
