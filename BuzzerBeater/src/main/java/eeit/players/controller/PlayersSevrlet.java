@@ -1,17 +1,10 @@
 package eeit.players.controller;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Date;
-import java.util.Base64;
-import java.util.LinkedHashSet;
+import java.sql.Timestamp;
 import java.util.Set;
 
-import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -19,14 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
-import org.apache.commons.io.IOUtils;
-import org.hibernate.engine.jdbc.BinaryStream;
-
-import eeit.locationinfo.model.LocationinfoService;
 import eeit.players.model.PlayerService;
 import eeit.players.model.PlayersVO;
+import eeit.teamcomposition.model.TeamCompositionService;
+import eeit.teamcomposition.model.TeamCompositionVO;
+import eeit.teams.model.TeamsService;
+import eeit.teams.model.TeamsVO;
 
 @WebServlet("/Players.do")
 @MultipartConfig
@@ -81,12 +73,34 @@ public class PlayersSevrlet extends HttpServlet {
 			String photo = base64.substring(base64.lastIndexOf(",") + 1);
 			String playerName = req.getParameter("playerName");
 			String id = req.getParameter("id");
+			Integer playerNo = Integer.parseInt(req.getParameter("playerNo"));
+			String playerRole = req.getParameter("playerRole");
 			Double height = new Double(req.getParameter("height"));
 			Double weights = new Double(req.getParameter("weights"));
 			Date birthday = Date.valueOf(req.getParameter("birthday"));
 			String nationality = req.getParameter("nationality");
 
 			playerSvc.insertPlayer(playerName, id, height, weights, birthday, nationality, photo);
+			TeamCompositionService tcsvc =new TeamCompositionService();
+			
+			TeamsService svc = new TeamsService();
+			System.out.println(svc.findMaxID());
+			System.out.println(playerSvc.findMaxID());
+			tcsvc.insert(svc.findMaxID(), playerSvc.findMaxID(), playerNo, playerRole, new Timestamp(System.currentTimeMillis()),null);
+			
+			Integer teamID = Integer.valueOf(svc.findMaxID());
+			System.out.println(teamID);
+			TeamsService tsvc = new TeamsService();
+			TeamsVO teamsVO = tsvc.findByID(teamID);
+			
+			System.out.println("123");
+			for(TeamCompositionVO vo : teamsVO.getTeamCompositionSet()){
+				System.out.print(vo.getPlayersVO().getPlayerName());
+				System.out.println();
+			}
+			
+			req.setAttribute("teamsVO", teamsVO);
+			
 			String url = "/players/listMyPlayer.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
