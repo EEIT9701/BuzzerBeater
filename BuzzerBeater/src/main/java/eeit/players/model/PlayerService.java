@@ -69,7 +69,7 @@ public class PlayerService {
 	}
 
 	public Set<PlayersVO> getAllPlayer() {
-		dao = new PlayerDAO();
+//		dao = new PlayerDAO();
 		return dao.getAll();
 	}
 

@@ -31,7 +31,7 @@ public class PlayerDAO implements PlayerDAO_interface {
 	//宣告sql指令。
 	private static final String INSERT_STMT = "INSERT INTO Players (PlayerName,ID,Height,Weights,Birthday,Nationality,Photo) VALUES(?,?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "UPDATE Players SET PlayerName=?, ID=?, Height=?, Weights=?, Birthday=?, Nationality=?,Photo=? where PlayerID = ?";
-	private static final String DELETE_STMT = "DELETE FROM Players where PlayerID = ?";
+	private static final String DELETE_STMT = "DELETE FROM PlayerGroups where PlayerID = ?;DELETE FROM TeamComposition where PlayerID = ?;DELETE FROM PersonalData where PlayerID = ?;DELETE FROM Players where PlayerID = ?;";
 	private static final String GET_ONENAME_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality,photo FROM Players where PlayerName = ?";
 	private static final String GET_ONEID_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality,Photo FROM Players where PlayerID = ?";
 	private static final String GET_ALL_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality,Photo FROM Players";
@@ -123,6 +123,9 @@ public class PlayerDAO implements PlayerDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_STMT);
 			pstmt.setInt(1,playerID);
+			pstmt.setInt(2,playerID);
+			pstmt.setInt(3,playerID);
+			pstmt.setInt(4,playerID);
 			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
