@@ -130,7 +130,7 @@ public class GoogleLoginServlet extends HttpServlet {
 			LoginCheckService loginCheckflag = new LoginCheckService();
 			String acc = jsonOb.getString("email");
 			memberInfoVO = loginCheckflag.findByAcc(acc);
-			if(memberInfoVO!=null){ //check Email 是否有在資料庫內	
+			if(memberInfoVO.getAcc()!=null){ //check Email 是否有在資料庫內	
 //				memberInfoVO.setAcc(jsonOb.getString("email"));   //使用者帳號
 //				memberInfoVO.setName(jsonOb.getString("name"));   //使用者姓名
 //				memberInfoVO.setRegisterTime(ts);	              //照片的url		

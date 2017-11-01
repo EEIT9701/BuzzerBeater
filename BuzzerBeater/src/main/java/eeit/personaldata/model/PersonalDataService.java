@@ -32,6 +32,15 @@ public class PersonalDataService {
 		return dao.getAll2();
 	}
 
+	public List<PersonalDataVO> findByPlyerID2(Integer playerID){
+		dao = new PersonalDataDAO();
+		return dao.findByPlyerID2(playerID);
+	}
+	
+	public List<PersonalDataVO> getHibernateALL(){
+		return dao.getAll();
+	}
+	
 	public List<PersonalDataVO> findByGameID(Integer GameID) {
 		return dao.findByGameID(GameID);
 	}
@@ -43,4 +52,10 @@ public class PersonalDataService {
 	public List<PersonalDataVO> findByGameIDAndTeamID(Integer GameID, Integer TeamID) {
 		return dao.findByGameIDAndTeamID(GameID, TeamID);
 	}
+	
+	public List<PersonalDataVO> findByPlayerID(Integer PlayerID) {
+		return dao.findByPlayerID(PlayerID);
+	}
+	
+	
 }

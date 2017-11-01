@@ -185,5 +185,15 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public List<PersonalDataVO> findByPlayerID(Integer playerID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<PersonalDataVO> findByPlyerID2(Integer playerID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
