@@ -352,7 +352,7 @@ video::-webkit-media-controls-panel {
 			     <input id="teamA"  placeholder="分組A" type="text" value="" required>
 			     <input id="teamB"  placeholder="分組B"  type="text" value="" required>
 			     <input id="title" placeholder="標題" type="text" value="" required>
-			     <input id="descriptions"  placeholder="備註" type="text" value="" required>
+			     <input id="descriptions"  placeholder="備註" type="text" value="" required >
 			     <input id="tag"  placeholder="標籤"  type="text" value="" required>
 			 <div>
 				<button class="button" data-dismiss="JDialog" id="jDialogButton">確定</button>
