@@ -89,6 +89,30 @@
 // 	    	});
 	    $(document).ready(function() {
 	    	$('.test').DataTable();
+	    	
+	    	var td_odd_over={'background-color':'#f9f9f9'};
+	    	var td_odd_out={'background-color':'rgb(208, 207, 207)'};
+	    	var td_even_over={'background-color':'#eaeaea'};
+	    	var td_even_out={'background-color':'rgb(197, 196, 197)'};
+	    	$('#season_group').children('tbody').find('tr:nth-child(odd)').css(td_odd_over);
+	    	$('#season_group').children('tbody').find('tr:nth-child(odd)').mouseover(odd_over);
+	    	$('#season_group').children('tbody').find('tr:nth-child(odd)').mouseout(odd_out);
+	    	$('#season_group').children('tbody').find('tr:nth-child(even)').css(td_even_over);
+	    	$('#season_group').children('tbody').find('tr:nth-child(even)').mouseover(even_over);
+	    	$('#season_group').children('tbody').find('tr:nth-child(even)').mouseout(even_out);
+	    	function odd_over(){
+	    		$(this).css(td_odd_out);
+	    	}
+	    	function odd_out(){
+	    		$(this).css(td_odd_over);
+	    	}
+	    	function even_over(){
+	    		$(this).css(td_even_out);
+
+	    	}
+	    	function even_out(){
+	    		$(this).css(td_even_over); 
+	    	}
 	    	});
 	    </script>
     </body>

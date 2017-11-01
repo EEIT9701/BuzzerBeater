@@ -15,16 +15,17 @@
     			'margin':'8px 0',
     			'border':'none',
     			'cursor':'pointer',
-    			'width':'100%'}
+    			'width':'100%'};
     	var Gmail={'vertical-align': 'middle',
     		  	  'padding-top': '25px',
        			  'margin-left': '38px',
-       	 		  'width': '80%'}
-    	var FB={'background-color':'#4267b2'}
-    	var Twitter={'background-color':'#1da1f2'}
-    	$('li').find("button").css(x1)
-    	$('#id01').children("form").children("div").children("button").css(x1)
-    	$('#id01').children("form").children("a:eq(0)").children("img").css(Gmail)
+       	 		  'width': '80%'};
+    	var FB={'background-color':'#4267b2'};
+    	var Twitter={'background-color':'#1da1f2'};
+    	$('li').find("button").css(x1);
+    	$('#id01').children("form").children("div").children("button").css(x1);
+    	$('#id01').children("form").children("a:eq(0)").children("img").css(Gmail);
+    	
     })
     </script>
     <script>

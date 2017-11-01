@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 import org.json.simple.JSONValue;
 
 import com.google.gson.Gson;
@@ -189,48 +189,46 @@ public class GameMediaServlet extends HttpServlet {
 		
 		
 		if ("Update".equals(action)) { // 來自listAllEmp.jsp的請求
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
 			
-			try {
-				/***************************1.接收請求參數****************************************/
-				Integer gameID = new Integer(req.getParameter("gameID"));
-				Integer mediaID = new Integer(req.getParameter("mediaID")); 
-				String mediasName = req.getParameter("mediasName");
-				String gameVideo = req.getParameter("gameVideo");
-				String gamePhoto = req.getParameter("gamePhoto");
-				String mediaType = req.getParameter("mediaType");
-				Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
-				String descriptions = req.getParameter("descriptions");
-				String tag = req.getParameter("tag");
+			res.setHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("content-type", "text/html;charset=UTF-8");
+			res.setCharacterEncoding("UTF-8");
+			
+			String tag1 = req.getParameter("tag");
+			Integer mediaID = Integer.valueOf(req.getParameter("mediaID"));
+			String title = req.getParameter("title");
+			String descriptions1 = req.getParameter("descriptions");
+			//JSONObject gVO = new JSONObject(jsonString);
+			//================================================		
+			
+			GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
+			Integer gameID = gameMediaVO.getGamesVO().getGameID();
+			String mediasName = title;
+			String gameVideo = gameMediaVO.getGameVideo();
+			String gamePhoto = gameMediaVO.getGamePhoto();
+			String mediaType = gameMediaVO.getMediaType();
+			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
+			String descriptions = descriptions1;
+			String tag = tag1;
 				
 				
 				
-				gameMediaSvc.updateGameMedia(gameID, mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag);				
+			gameMediaSvc.updateGameMedia(gameID, mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag);				
 				
-				GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
+//			GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
 				
-//				ObjectMapper jsonMapper = new ObjectMapper();
-//	            String jsonString = jsonMapper.writeValueAsString(gameMediaVO); 
-				
-				
-			    req.setAttribute("gameMediaVO", gameMediaVO);         // 資料庫取出的gameMediaVO物件,存入req
-				String url = "/gamemedia/displayOneVideo.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
+//			ObjectMapper jsonMapper = new ObjectMapper();
+//	        String jsonString = jsonMapper.writeValueAsString(gameMediaVO); 
+			
+			return;	
+//			req.setAttribute("gameMediaVO", gameMediaVO);         // 資料庫取出的gameMediaVO物件,存入req
+//			String url = "/gamemedia/displayOneVideo.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url);
+//			successView.forward(req, res);
 
-//	            PrintWriter out = res.getWriter();
-//				out.println(jsonString);
-//	            
-				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e) {
-				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/displayOneVideo.jsp");
-				failureView.forward(req, res);
-			}
+//	        PrintWriter out = res.getWriter();
+//			out.println(jsonString);
+//	         
 		}
 		
 		if ("getAll".equals(action)) {
@@ -261,8 +259,8 @@ public class GameMediaServlet extends HttpServlet {
 			
 			Integer mediaID = new Integer(req.getParameter("mediaID"));
 			//String jsonList = JSONValue.toJSONString(gameMediaSvc.getAllInJsonForm());
-//			Gson gson = new Gson();
-//			String jsonList = gson.toJson(gameMediaSvc.getOneInJsonForm(mediaID));
+			//Gson gson = new Gson();
+			//String jsonList = gson.toJson(gameMediaSvc.getOneInJsonForm(mediaID));
 			ObjectMapper jsonMapper = new ObjectMapper();
             String jsonString = jsonMapper.writeValueAsString(gameMediaSvc.getAllInJsonForm()); 
 			
@@ -271,64 +269,6 @@ public class GameMediaServlet extends HttpServlet {
 			return;
 		}
 		
-		
-		
-//		if ("update".equals(action)) { 
-//			
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//		
-//			try {
-//				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-//				GamesVO gamesVO = new GamesVO();
-//				
-//				Integer gameID = new Integer(req.getParameter("gameID").trim());
-//				String mediasName = req.getParameter("mediasName").trim();
-//				String gameVideo = req.getParameter("gameVideo").trim();
-//				String gamePhoto = req.getParameter("gamePhoto").toString().trim();
-//				String mediaType = req.getParameter("mediaType").trim();
-//				String descriptions = req.getParameter("descriptions").trim(); 
-//				String tag = req.getParameter("tag").trim();
-//								
-//				Timestamp mediaDate = new Timestamp(System.currentTimeMillis()); 
-//
-//				GameMediaVO gamemediaVO = new GameMediaVO();
-//				gamesVO.setGameID(gameID);
-//				gamemediaVO.setMediasName(mediasName);
-//				gamemediaVO.setGameVideo(gameVideo);
-//				gamemediaVO.setMediaType(mediaType);
-//				gamemediaVO.setDescriptions(descriptions);
-//				gamemediaVO.setTag(tag);
-//				gamemediaVO.setMediaDate(mediaDate);
-//				
-//
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					req.setAttribute("gamemediaVO", gamemediaVO); // 含有輸入格式錯誤的gamemediaVO物件,也存入req
-//					RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/updateVideo.jsp");
-//					failureView.forward(req, res);
-//					return; //程式中斷
-//				}
-//				
-//				/***************************2.開始修改資料*****************************************/
-//				GameMediaService gameMediaSvc = new GameMediaService();
-//				gamemediaVO = gameMediaSvc.updateGameMedia(gameID,mediaID/*主鍵不用查詢?*/, mediasName, gameVideo, mediaType, descriptions,tag, mediaDate);
-//				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-//				req.setAttribute("gamemediaVO", gamemediaVO); // 資料庫update成功後,正確的的gamemediaVO物件,存入req
-//				String url = "/gamemedia/video.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
-//				successView.forward(req, res);
-//
-//				/***************************其他可能的錯誤處理*************************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("修改資料失敗:"+e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/gamemedia/video.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
 
         if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
 			
@@ -393,32 +333,24 @@ public class GameMediaServlet extends HttpServlet {
 		}
 		
 		
-		if ("delete".equals(action)) { 
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-	
-			try {
-				/***************************1.接收請求參數***************************************/
-				Integer mediaID = new Integer(req.getParameter("mediaID"));
-				
-				/***************************2.開始刪除資料***************************************/
-				
-				gameMediaSvc.deleteGameMedia(mediaID);
-				
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/gamemedia/videoBackEnd.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-				successView.forward(req, res);
-				
-				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e) {
-				errorMsgs.add("刪除資料失敗:"+e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/videoBackEnd.jsp");
-				failureView.forward(req, res);
-			}
+		if ("delete".equals(action)) {
+			
+			res.setHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("content-type", "text/html;charset=UTF-8");
+			res.setCharacterEncoding("UTF-8");
+						
+			/***************************1.接收請求參數***************************************/
+			
+			Integer mediaID = Integer.valueOf(req.getParameter("mediaID"));
+			
+			/***************************2.開始刪除資料***************************************/
+			
+			gameMediaSvc.deleteGameMedia(mediaID);
+			
+			/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+			
+			return;
+			
 		}
 		
 		if ("deletePhoto".equals(action)) { 

@@ -10,10 +10,16 @@ public class PlayerService {
 	private PlayerDAO_interface dao;
 
 	public PlayerService() {
-//		dao = new PlayerDAO();
+
+		// dao = new PlayerDAO();
+
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (PlayerDAO_interface) context.getBean("PlayersDAO");
 
+	}
+
+	public PlayersVO findByPlayerID(Integer playerID) {
+		return dao.findByID(playerID);
 	}
 
 	public PlayersVO insertPlayer(String playerName, String id, Double height, Double weights, Date birthday,
@@ -67,7 +73,4 @@ public class PlayerService {
 		return dao.getAll();
 	}
 
-	public PlayersVO findByPlayerID(Integer playerID){
-		return dao.findByID(playerID);
-	}
 }
