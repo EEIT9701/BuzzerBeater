@@ -84,8 +84,8 @@
 	                </div>
 	            </div>
 	            <div>
-	            <button id="Button01">上一步</button>
-	            <button id="Button02">下一步</button>
+	            <button id="Button01" class="btn btn-lg btn-primary">上一步</button>
+	            <button id="Button02" class="btn btn-lg btn-primary">下一步</button>
 	            </div>
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />

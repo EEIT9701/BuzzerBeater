@@ -8,17 +8,33 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import eeit.games.model.GamesVO;
 import eeit.players.model.PlayersVO;
 import eeit.teams.model.TeamsVO;
 
 
 
-public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
+public class PersonalDataJNDIDAO implements PersonalDataDAO_interface{
     String diver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url="jdbc:sqlserver://localhost:1433;DatabaseName=BasketBallDB";
 	String user="sa";
 	String password="P@ssw0rd";
+	
+	private static DataSource ds = null;
+	static{
+		 try{
+			Context ctx = new InitialContext();
+				ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+		 }catch(NamingException ne){
+			 ne.printStackTrace();
+		 }
+
+	}
 	
 	//private static final String GETAll="SELECT playerID,gameID,teamID,GameTime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,points,startingPlayer from personaldata order by playerID";
 	  private static final String GETAll="select p.playerName,t.teamName,p.photo,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
@@ -46,9 +62,9 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 	  		"join players p\r\n" + 
 	  		"on pd.playerID=p.playerID";
 	
-	
-	
-	
+	private static final String UPDATE = "UPDATE PersonalData set playerID=?, gameID=?, teamID=?, gameTime=?, twoPoint=?, twoPointShot=?, threePoint=?, threePointShot=?, fg=?, fgShot=?, offReb=?, defReb=?, assist=?, steal=?, blocks=?, turnover=?, personalFouls=?, points=?, startingPlayer=? where playerID = ? and gameID=? and teamID=?";
+	private static final String INSERT_STMT = "INSERT INTO PersonalData(gameTime, twoPoint, twoPointShot, threePoint, threePointShot, fg, fgShot, offReb, defReb, assist, steal, blocks, turnover, personalFouls, points, startingPlayer) VALUES(?, ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?)"; 
+	private static final String DELETE = "DELETE FROM PersonalData where playerID = ? and gameID=? and teamID=?";
 	@Override
 	public List<PersonalDataVO> getAll() {
 		List<PersonalDataVO> list =new ArrayList<PersonalDataVO>();
@@ -109,41 +125,10 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+	
 		return list;
 	}
-//    public static void main(String[] args){
-//    	PersonalDataJDBCDAO dao=new PersonalDataJDBCDAO();
-//    	
-//    	List<PersonalDataVO> list=dao.getAll();
-//    	for(PersonalDataVO aPersonal:list){
-//    		System.out.print(aPersonal.getPlayersVO().getPlayerName()+",");
-//    		System.out.print(aPersonal.getPlayersVO().getPhoto()+",");
-//    		System.out.print(aPersonal.getTeamsVO().getTeamName()+",");
-//    	  //System.out.print(aPersonal.getTeamID()+",");
-//    		System.out.print(aPersonal.getGameTime()+",");
-//    		System.out.print(aPersonal.getTwoPoint()+",");
-//    		System.out.print(aPersonal.getTwoPointShot()+",");
-//    		System.out.print(aPersonal.getThreePoint()+",");
-//    		System.out.print(aPersonal.getThreePointShot()+",");
-//    		System.out.print(aPersonal.getFg()+",");
-//    		System.out.print(aPersonal.getFgShot()+",");
-//    		System.out.print(aPersonal.getDefReb()+",");
-//    		System.out.print(aPersonal.getOffReb()+",");
-//    		System.out.print(aPersonal.getAssist()+",");
-//    		System.out.print(aPersonal.getSteal()+",");
-//    		System.out.print(aPersonal.getBlocks()+",");
-//    		System.out.print(aPersonal.getTurnover()+",");
-//    		System.out.print(aPersonal.getPersonalFouls()+",");
-//    		System.out.print(aPersonal.getPoints()+",");
-//    	  //System.out.print(aPersonal.getStartingPlayer()+",");
-//    		System.out.println();
-//    		
-//    	}
-//    }
+
 	@Override
 	public List<PersonalDataVO> getAll1() {
 		// TODO Auto-generated method stub
@@ -162,18 +147,156 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 	}
 	@Override
 	public void insert(PersonalDataVO personalDataVO) {
-		// TODO Auto-generated method stub
+		 Connection conn = null;
+		 PreparedStatement stmt = null;
+		
+		 try{
+		 
+		 conn = ds.getConnection();
+		 stmt = conn.prepareStatement(INSERT_STMT);
+
+//		 stmt.setInt(1, personalDataVO.getPlayerID());		 
+//		 stmt.setInt(2, personalDataVO.getGameID());
+//		 stmt.setInt(3, personalDataVO.getTeamID());
+		 stmt.setInt(1, personalDataVO.getGameTime());
+		 stmt.setInt(2, personalDataVO.getTwoPoint());
+		 stmt.setInt(3, personalDataVO.getTwoPointShot());
+		 stmt.setInt(4, personalDataVO.getThreePoint());
+		 stmt.setInt(5, personalDataVO.getThreePointShot());
+		 stmt.setInt(6, personalDataVO.getFg());
+		 stmt.setInt(7, personalDataVO.getFgShot());
+		 stmt.setInt(8, personalDataVO.getOffReb());
+		 stmt.setInt(9, personalDataVO.getDefReb());
+		 stmt.setInt(10, personalDataVO.getAssist());
+		 stmt.setInt(11, personalDataVO.getSteal());
+		 stmt.setInt(12, personalDataVO.getBlocks());
+		 stmt.setInt(13, personalDataVO.getTurnover());
+		 stmt.setInt(14, personalDataVO.getPersonalFouls());
+		 stmt.setInt(15, personalDataVO.getPoints());
+		 stmt.setInt(16, personalDataVO.getStartingPlayer());	 
+
+
+		 stmt.executeUpdate();
+ 
+		 }catch(SQLException sqle){
+		 sqle.printStackTrace();
+		 }finally{
+			 if(stmt!= null){
+				 try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 }
+			 if(conn!=null){
+				 try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 }
+			 
+		 }
 		
 	}
 	@Override
 	public void update(PersonalDataVO personalDataVO) {
+		 Connection conn = null;
+		 PreparedStatement stmt = null;
+		
+		 try{
+		 
+		 conn = ds.getConnection();
+		 stmt = conn.prepareStatement(UPDATE);
+		 
+//		 System.out.println(personalDataVO.getPlayerID());
+		 
+		 stmt.setInt(1, personalDataVO.getPlayerID());		 
+		 stmt.setInt(2, personalDataVO.getGameID());
+		 stmt.setInt(3, personalDataVO.getTeamID());
+		 stmt.setInt(4, personalDataVO.getGameTime());
+		 stmt.setInt(5, personalDataVO.getTwoPoint());
+		 stmt.setInt(6, personalDataVO.getTwoPointShot());
+		 stmt.setInt(7, personalDataVO.getThreePoint());
+		 stmt.setInt(8, personalDataVO.getThreePointShot());
+		 stmt.setInt(9, personalDataVO.getFg());
+		 stmt.setInt(10, personalDataVO.getFgShot());
+		 stmt.setInt(11, personalDataVO.getOffReb());
+		 stmt.setInt(12, personalDataVO.getDefReb());
+		 stmt.setInt(13, personalDataVO.getAssist());
+		 stmt.setInt(14, personalDataVO.getSteal());
+		 stmt.setInt(15, personalDataVO.getBlocks());
+		 stmt.setInt(16, personalDataVO.getTurnover());
+		 stmt.setInt(17, personalDataVO.getPersonalFouls());
+		 stmt.setInt(18, personalDataVO.getPoints());
+		 stmt.setInt(19, personalDataVO.getStartingPlayer());	 
+		 stmt.setInt(20, personalDataVO.getPlayerID());		 
+		 stmt.setInt(21, personalDataVO.getGameID());
+		 stmt.setInt(22, personalDataVO.getTeamID());
 
-
+		 stmt.executeUpdate();
+		 
+		 
+		 }catch(SQLException sqle){
+		 sqle.printStackTrace();
+		 }finally{
+			 if(stmt!= null){
+				 try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 }
+			 if(conn!=null){
+				 try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 }
+			 
+		 }
 		
 	}
 	@Override
 	public void delete(PersonalDataVO personalDataVO) {
-		// TODO Auto-generated method stub
+		 Connection conn = null;
+		 PreparedStatement stmt = null;
+		
+		 try{		 
+		 conn = ds.getConnection();
+		 stmt = conn.prepareStatement(DELETE);
+		 stmt.setInt(1, personalDataVO.getPlayerID());		 
+		 stmt.setInt(2, personalDataVO.getGameID());
+		 stmt.setInt(3, personalDataVO.getTeamID());
+		 stmt.executeUpdate();
+		 
+		 
+		 }catch(SQLException sqle){
+			 sqle.printStackTrace();
+			 }finally{
+				 if(stmt!= null){
+					 try {
+						stmt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				 }
+				 if(conn!=null){
+					 try {
+						conn.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				 }
+				 
+			 }
 		
 	}
 	@Override
@@ -201,5 +324,4 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }

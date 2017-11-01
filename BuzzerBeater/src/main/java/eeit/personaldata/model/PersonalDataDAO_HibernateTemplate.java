@@ -21,14 +21,13 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 	private static final String FIND_BY_GAMEID = "FROM PersonalDataVO WHERE GameID=?";
 	private static final String FIND_BY_PLAYERID = "FROM PersonalDataVO WHERE PlayerID=?";
 	private static final String FIND_BY_GAMEID_AND_TEAMID = "FROM PersonalDataVO WHERE GameID=? AND TeamID=?";
-	
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PersonalDataVO> findByGameIDAndTeamID(Integer GameID, Integer TeamID) {
 		return (List<PersonalDataVO>) hibernateTemplate.find(FIND_BY_GAMEID_AND_TEAMID, GameID, TeamID);
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PersonalDataVO> findByGameID(Integer GameID) {
@@ -65,13 +64,13 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 		hibernateTemplate.update(personalDataVO);
 	}
 
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void delete(Integer PersonalDataID) {
-		PersonalDataVO personalDataVO = (PersonalDataVO) hibernateTemplate.get(PersonalDataVO.class, PersonalDataID);
-		hibernateTemplate.delete(personalDataVO);
-
-	}
+//	@Override
+//	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+//	public void delete(Integer playerID, Integer gameID, Integer teamID) {
+//		PersonalDataVO personalDataVO = (PersonalDataVO) hibernateTemplate.get(PersonalDataVO.class, PersonalDataID);
+//		hibernateTemplate.delete(personalDataVO);
+//
+//	}
 
 	public static void main(String args[]) {
 
@@ -116,6 +115,18 @@ public class PersonalDataDAO_HibernateTemplate implements PersonalDataDAO_interf
 
 	@Override
 	public List<PersonalDataVO> findByPlyerID2(Integer playerID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(Integer playerID, Integer gameID, Integer teamID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<PersonalDataVO> findByPlayerIDAndGameID(Integer PlayerID, Integer GameID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

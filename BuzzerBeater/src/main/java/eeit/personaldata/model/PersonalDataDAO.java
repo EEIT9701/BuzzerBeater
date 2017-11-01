@@ -303,7 +303,7 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer PersonalDataID) {
+	public void delete(PersonalDataVO personalDataVO) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -383,6 +383,12 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public List<PersonalDataVO> findByPlayerIDAndGameID(Integer PlayerID, Integer GameID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -119,7 +119,7 @@ public class GoogleLoginServlet extends HttpServlet {
 			}catch(MalformedURLException me){
 				me.printStackTrace();
 			}
-			//System.out.println(sb.toString());
+			System.out.println(sb.toString());
 		/***google回傳JSON格式,取資料***/			
 		try {
 			Timestamp ts = new Timestamp(System.currentTimeMillis());  
