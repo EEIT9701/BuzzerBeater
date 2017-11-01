@@ -127,7 +127,7 @@
 				<li class="dropdown"><a href="<%=request.getContextPath() %>/teams/listAllteam_front.jsp" class="dropdown-toggle" data-toggle="dropdown">球隊</a>
 					<ul class="dropdown-menu">
 						<c:forEach var="teams" items="${teamsSvc.teams}">
-							<li><a href="<%=request.getContextPath() %>/Teams.do?action=GET_ONE_TEAM&teamID=${teams.teamID}">${teams.teamName}</a></li>
+							<li><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teams.teamID}">${teams.teamName}</a></li>
 						</c:forEach>
 					</ul>
 					</li>

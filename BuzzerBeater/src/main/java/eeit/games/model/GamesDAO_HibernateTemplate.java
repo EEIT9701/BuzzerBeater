@@ -84,6 +84,12 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		
 	}
 
+	@Override
+	public void deleteByGroupID(Integer groupID) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 
