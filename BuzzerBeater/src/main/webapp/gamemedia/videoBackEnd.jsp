@@ -109,16 +109,6 @@
 span {
 	margin-top: -20px;
 }
-
-.input-group-addon {
-	width: 10%;
-	height: 20px;
-}
-
-.form-control {
-	width: 90%;
-	height: 20px;
-}
 video::-internal-media-controls-download-button {
     display:none;
 }
@@ -135,6 +125,9 @@ video::-webkit-media-controls-panel {
 }
 #deleteTitle{
 	text-align:center;
+}
+.form-control{
+	margin-top:-8px;
 }
 </style>
 <link rel="stylesheet" type="text/css"
@@ -219,51 +212,6 @@ video::-webkit-media-controls-panel {
 						</tr>
 					</thead>
 					<tbody id="tbody">
-						<%--   							<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}"> --%>
-						<%--   							<c:forEach var="gameMediaType" items="${gameMediaSvc.mediaType}"> --%>
-						<%--   							<c:if test="${gameMediaType eq 'video'}"> --%>
-						<!--   								<tr align='center' valign='middle'> -->
-						<%--       								<td>${gameMediaSvc.gamesVO.groupsVO.groupName}</td> --%>
-						<%--       								<td>${gameMediaSvc.gamesVO.teamAVO.teamName} </br>VS</br> ${gameMediaSvc.gamesVO.teamBVO.teamName}</td> --%>
-						<%--       								<td>${gameMediaSvc.mediaDate}</td> --%>
-						<%--       								<td>${gameMediaSvc.mediasName}</td> --%>
-						<%--       								<td>${gameMediaSvc.descriptions}</td> --%>
-						<%--       								<td>${gameMediaSvc.tag}</td> --%>
-						<!--       								<td> -->
-						<!--                                     </td> -->
-						<!--                                     <td> -->
-						<!--                                     	<button class="btn btn-warning" id="123"  data-toggle="modal" data-target="#myModal2">修改</button> -->
-						<!--                                     </td> -->
-						<!--                                     <td> -->
-						<!--                                         <button class="btn btn-danger" id="456"  data-toggle="modal" data-target="#myModal3">刪除</button> -->
-						<!--       										<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true" data-backdrop="false"> -->
-						<!--     											<div class="modal-dialog"> -->
-						<!--         											<div class="modal-content"> -->
-						<!--             											<div class="modal-header"> -->
-						<!--                 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="x">&times;</button> -->
-						<!--                 											<h4 class="modal-title" id="myModalLabel3">刪除影片</h4> -->
-						<!--             											</div> -->
-						<!--             											<div class="modal-body"> -->
-						<!--             												<div class="row"> -->
-						<!--   																<h4>警告!!!</br> -->
-						<%--   																	即將刪除影片${gameMediaSvc.mediasName}，是否確定? --%>
-						<!--   																</h4> -->
-						<!--             												</div> -->
-						<!--             												</br> -->
-						<!--             											</div> -->
-						<!--             											<div class="modal-footer"> -->
-						<!--             												<button type="button" class="btn btn-default" data-dismiss="modal">確定</button> -->
-						<!--                 											<button type="button" class="btn btn-default" data-dismiss="modal">取消</button> -->
-						<!--             											</div> -->
-						<!--         											</div> -->
-						<!--     											</div> -->
-						<!-- 											</div>	 -->
-						<!--       								</td> -->
-
-						<!--     							</tr> -->
-						<%--     							</c:if> --%>
-						<%--   							</c:forEach> --%>
-						<%--   							</c:forEach> --%>
 					</tbody>
 				</table>
 			</div>
@@ -284,36 +232,54 @@ video::-webkit-media-controls-panel {
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true" id="x">&times;</button>
-								<h4 class="modal-title" id="myModalLabel">檔案上傳</h4>
+								<h4 class="modal-title" id="myModalLabel" style="text-align:'center'">檔案上傳</h4>
 							</div>
 							<div class="modal-body">
 								<div class="row">
-									<div class="col-md-12">
-										<!--     									<label class="control-label">選擇檔案</label> -->
-										<input type="file" class="file">
+									<div class="col-md-3">
+										<select id="seasonlist" name="season1">
+											<option selected>請選擇</option>
+    										<c:forEach var="list" items="${list}">
+    											<option value="${list.seasonID}">${list.seasonName}</option>
+  											</c:forEach>
+    									</select>
+									</div>
+									<div class="col-md-offset-1 col-md-3">
+										<select id="grouplist" name="group1">
+    									</select>
+									</div>
+									<div class="col-md-3">
+										<select id="gamelist">
+    									</select>
 									</div>
 								</div>
 								</br>
+								<div class=row>
+    								<div class=col-md-3>
+										<input type="file" class="file" value="影片">
+									</div>
+								</div>
+								</br>
+								 <div class="input-group input-group">
+            						<span class="input-group-addon">標題</span>
+           						 	<input type="text" class="form-control">
+        						 </div>
+								</br>
 								<div class="input-group">
-									<span class="input-group-addon">標題</span> <input type="text"
-										class="form-control">
+									<span class="input-group-addon">備註</span> 
+									<input type="text" class="form-control">
 								</div>
 								</br>
 								<div class="input-group">
-									<span class="input-group-addon">備註</span> <input type="text"
-										class="form-control">
-								</div>
-								</br>
-								<div class="input-group">
-									<span class="input-group-addon">標籤</span> <input type="text"
-										class="form-control" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣">
+									<span class="input-group-addon">標籤</span> 
+									<input type="text" class="form-control" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣">
 								</div>
 
 
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">確認上傳</button>
+								<button type="button" class="btn btn-warning"
+									data-dismiss="moda" >確認上傳</button>
 								<button type="button" class="btn btn-primary"
 									data-dismiss="modal">取消</button>
 							</div>
@@ -381,7 +347,8 @@ video::-webkit-media-controls-panel {
 	
 	$(function(){
 		
- 		loadTable();	
+ 		loadTable();
+ 		insert();
  		function loadTable(){
 			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
 				var docFrag = $(document.createDocumentFragment());
@@ -410,7 +377,7 @@ video::-webkit-media-controls-panel {
 	  				}
 	  				
 				})
-					button();
+					buttons();
 	  				$(".testmodal").on('click',function(){
 	  					//事件處發顯示模態框
 	  			        $('#myModal1').modal('show');
@@ -443,7 +410,7 @@ video::-webkit-media-controls-panel {
 	  			})
 			});
  		}
-	  		function button(){
+	  		function buttons(){
 	  			$('.updateData').on('click',function(){
 	  				if($(this).text() == '修改'){	
 	  			         //取得預修改的欄位的資料
@@ -484,12 +451,12 @@ video::-webkit-media-controls-panel {
 	  			       	  $(this).text('修改');	       	  
 	  			       	}
 	  		       });
+	  			
 	  			$('.deleteData').on('click',function(){
 	  				$('#myModal2').modal('show');
 	  				var title = $(this).parents('tr').find('td:nth-child(5)').text();
 	  				$('#deleteNote').text("即將刪除影片<"+title+">，刪除後不可復原，是否確定?")
 		  		 	$('.deleteConfirm').on('click', function(){
-					 	alert("確定要刪除嗎?");
 					  	var mediaID = $('.deleteData').val();
 					  	console.log(mediaID);
 					  	//alert(memberID);
@@ -501,13 +468,53 @@ video::-webkit-media-controls-panel {
 			  		}) 
 	  			})
 	  		}
+	  		function insert(){
+	  			var season = null;
+	  			var group = null;
+	  			
+	  			$('#seasonlist').change(function(){
+	  				season = $('select[name="season1"]').val(); 
+	  				$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'findGroupNameBySeasonID' , 'seasonID':season},function(data){
+	  					$('#grouplist').empty();
+	  					$('#grouplist').append($("<option></option>").text('請選擇'));
+	  					$.each(data, function(index,group){
+// 	  						console.log(group);
+	  						$('#grouplist').append($("<option></option>").attr("value",group.groupID).attr("id",group.groupID).text(group.groupName));
+	  					})
+	  				})
+	  			})
+	  			
+	  			$('#grouplist').change(function(){
+	  				group = $('select[name="group1"]').val();
+ 	  				console.log(group)
+	  				$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getGameInformation' , 'groupID':group},function(data){
+	  					$('#gamelist').empty();
+	  					$('#gamelist').append($("<option></option>").text('請選擇'));
+	  					$.each(data, function(index,game){	
+	  						$('#gamelist').append($("<option></option>").attr("value",game.gameID).text(game.teamA+"VS"+game.teamB+" "+game.gameBeginDate));
+	  					})
+	  				})
+	  				
+	  			})
+	  		}
 	});
 
 	
 	
 		
 	</script>
-
+	<script>
+	var count = 0;
+	$('video').click(function(){
+		if(count%2==0){
+			this.play();
+			count++; 
+		}else{
+			this.pause();
+			count++; 
+		}
+	})
+	</script>
 
 </body>
 </html>
