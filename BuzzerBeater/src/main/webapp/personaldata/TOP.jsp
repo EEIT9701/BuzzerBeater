@@ -34,18 +34,18 @@
 					    <c:set var="rebnameA" value=""/>
 					    <c:set var="rebphotoA" value=""/>
 						<c:forEach var="singlefieldVO" items="${list1}" >
-						   <c:if test="${singlefieldVO.points>pointmaxA}">
-								<c:set var="pointmaxA" value="${singlefieldVO.points}"/>
+						   <c:if test="${singlefieldVO.points/singlefieldVO.gameID>pointmaxA}">
+								<c:set var="pointmaxA" value="${singlefieldVO.points/singlefieldVO.gameID}"/>
 								<c:set var="nameA" value="${singlefieldVO.playersVO.playerName}"/>
 								<c:set var="photoA" value="${singlefieldVO.playersVO.photo}"/>
 						   </c:if>
-						    <c:if test="${singlefieldVO.assist>assistmaxA}">
-								<c:set var="assistmaxA" value="${singlefieldVO.assist}"/>
+						    <c:if test="${singlefieldVO.assist/singlefieldVO.gameID>assistmaxA}">
+								<c:set var="assistmaxA" value="${singlefieldVO.assist/singlefieldVO.gameID}"/>
 								<c:set var="assistnameA" value="${singlefieldVO.playersVO.playerName}"/>
 								<c:set var="assistphotoA" value="${singlefieldVO.playersVO.photo}"/>
 						   </c:if>
-						   <c:if test="${singlefieldVO.defReb+singlefieldVO.offReb>rebmaxA}">
-								<c:set var="rebmaxA" value="${singlefieldVO.defReb+singlefieldVO.offReb}"/>
+						   <c:if test="${singlefieldVO.defReb/singlefieldVO.gameID+singlefieldVO.offReb/singlefieldVO.gameID>rebmaxA}">
+								<c:set var="rebmaxA" value="${singlefieldVO.defReb/singlefieldVO.gameID+singlefieldVO.offReb/singlefieldVO.gameID}"/>
 								<c:set var="rebnameA" value="${singlefieldVO.playersVO.playerName}"/>
 								<c:set var="rebphotoA" value="${singlefieldVO.playersVO.photo}"/>
 						   </c:if>
@@ -58,14 +58,17 @@
 						  <td>得分王					  
 						    <img src="data:image/png;base64,${photoA}" height="135" width="90">
 						    <c:out value="${nameA}"/>
-						    <c:out value="${pointmaxA}"/>
+					
+							   平均得分:<fmt:formatNumber type="number" value="${pointmaxA}" maxFractionDigits="1"/>
 						  </td>
 						  
 					
 					      <td>助功王					  
 						    <img src="data:image/png;base64,${assistphotoA}" height="135" width="90">
 						    <c:out value="${assistnameA}"/>
-						    <c:out value="${assistmaxA}"/>
+					
+						   平均助功:<fmt:formatNumber type="number" value="${assistmaxA}" maxFractionDigits="1"/>
+						    
 						  </td>
 						
 					   
@@ -73,7 +76,8 @@
 					      <td>籃板王					  
 						    <img src="data:image/png;base64,${rebphotoA}" height="135" width="90">
 						    <c:out value="${rebnameA}"/>
-						    <c:out value="${rebmaxA}"/>
+				
+						   平均籃板:<fmt:formatNumber type="number" value="${rebmaxA}" maxFractionDigits="1"/>
 						  </td>
 						
 					    </tr>
