@@ -1,6 +1,7 @@
 package eeit.groups.model;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Query;
@@ -143,6 +144,12 @@ public class GroupsDAO_Hibernate implements GroupsDAO_interface {
 	public void delete(Integer groupID) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<GroupsVO> findBySeasonID(Integer seasonID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

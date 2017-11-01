@@ -57,28 +57,13 @@
     	</div>
     	<!--上層導覽列(結束) -->
 			<div class="col-md-12">
-				<h3>賽季起迄</h3>
-				<table class="table table-bordered" id="season_cycle">
-					<thead>
-						<tr>
-							<td>賽季名稱</td>
-			                <td>賽季開始日期</td>
-			                <td>賽季結束日期</td>
-						</tr>
-					<thead>
-					<tbody>
-						<tr>
-							<td>${seasonVO.seasonName}</td>
-							<td>${seasonVO.seasonBeginDate}</td>
-							<td>${seasonVO.seasonEndDate}</td>
-						</tr>
-					</tbody>
-				</table>
+				<h2>${seasonVO.seasonName}</h2>
+				<h6 align="center">${seasonVO.seasonBeginDate} ~ ${seasonVO.seasonEndDate}</h6>
 				<p>${seasonVO.descriptions}</p>
 				
 				<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
 					<c:if test="${not empty groupsSet.gamesSet}">
-						<h3>${groupsSet.groupName}</h3>
+						<h2>${groupsSet.groupName}</h2>
 						<table class="table table-bordered test" id="season_group">
 							<thead>
 								<tr>

@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:useBean id="locSvc" class="eeit.locationinfo.model.LocationinfoService" scope="page"/>
+<jsp:useBean id="groupRegSvc" class="eeit.groupreg.model.GroupRegService" scope="page"/>
 
 <!DOCTYPE html>
     <html lang="zh" class="no-js">
@@ -65,11 +66,15 @@
 			        	<c:forEach var="groupRegVO" items="${groupsVO.groupRegSet}">
 				        	<tr>
 				        		<td>${groupRegVO.teamsVO.teamName}</td>
-				        		<c:forEach var="playersVO" items="${groupRegVO.teamsVO.teamCompositionSet}" varStatus="s">
-					        		<c:set var="playerCount" value="${s.index}"/>
+				        		<%--計算該隊報名此分組人數 --%>
+				        		<c:set var="groupID" value="${groupRegVO.groupsVO.groupID}"/>
+				        		<c:set var="teamID" value="${groupRegVO.teamsVO.teamID}"/>
+				        		<c:set var="count" value="0"/>
+				        		<c:forEach var="signUpPlayer" items="${groupRegSvc.findSignUpPlayer(groupID,teamID)}" varStatus="s">
+				        			<c:set var="count" value="${s.index+1}"/>
 				        		</c:forEach>
-				        			<td>${playerCount}</td>
-				        		<td>${groupRegVO.registerDate}</td>
+				        		<td>${count}</td>
+				        		<td><fmt:formatDate value="${groupRegVO.registerDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				        	</tr>
 			        	</c:forEach>
 			        </tbody>

@@ -2,6 +2,7 @@ package eeit.groupreg.model;
 
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.context.ApplicationContext;
@@ -102,6 +103,12 @@ public class GroupRegDAO_HibernateTemplate implements GroupRegDAO_interface {
 		// for (GroupRegVO vo : dao.findByTeamID(3002)) {
 		// System.out.println(vo.getPaymentNumber());
 		// }
+	}
+
+	@Override
+	public List<Map<String, Object>> findSignUpPlayer(Integer groupID, Integer teamID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

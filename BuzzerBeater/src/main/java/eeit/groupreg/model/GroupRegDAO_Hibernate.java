@@ -2,6 +2,7 @@ package eeit.groupreg.model;
 
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.Query;
@@ -88,6 +89,12 @@ public class GroupRegDAO_Hibernate implements GroupRegDAO_interface {
 	public void deleteByCID(Integer teamID, Integer groupID) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Map<String, Object>> findSignUpPlayer(Integer groupID, Integer teamID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

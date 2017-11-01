@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%-- <%@ page import="eeit.season.model.*"%> --%>
 <%-- <%@ page import="java.util.*"%> --%>
 
@@ -8,7 +9,7 @@
 // 	Set<HashMap<String,Object>> set = dao.getAll();
 // 	pageContext.setAttribute("set", set);
 %>
-
+<jsp:useBean id="date" scope="page" class="java.util.Date"/>
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
 
 <!DOCTYPE html>
@@ -80,10 +81,18 @@
 			        	<c:forEach var="sVO" items="${seasonSvc.all}">
 			        		<tr>
 			        			<td><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
-			        			<td>${sVO.seasonBeginDate}</td>
-			        			<td>${sVO.seasonEndDate}</td>
-			        			<td>${sVO.signUpBegin}</td>
-			        			<td>${sVO.signUpEnd}</td>
+			        			<td><fmt:formatDate value="${sVO.seasonBeginDate}" pattern="yyyy-MM-dd"/></td>
+			        			<td><fmt:formatDate value="${sVO.seasonEndDate}" pattern="yyyy-MM-dd"/></td>
+			        			<c:choose>
+			        				<c:when test="${date>sVO.signUpEnd}">
+			        					<td><del><fmt:formatDate value="${sVO.signUpBegin}" pattern="yyyy-MM-dd HH:mm"/></del>已截止</td>
+			        					<td><del><fmt:formatDate value="${sVO.signUpEnd}" pattern="yyyy-MM-dd HH:mm"/></del>已截止</td>
+			        				</c:when>
+			        				<c:otherwise>
+			        					<td><fmt:formatDate value="${sVO.signUpBegin}" pattern="yyyy-MM-dd HH:mm"/></td>
+			        					<td><fmt:formatDate value="${sVO.signUpEnd}" pattern="yyyy-MM-dd HH:mm"/></td>
+			        				</c:otherwise>
+			        			</c:choose>
 			        		</tr>
 			        	</c:forEach>
 			        </tbody>

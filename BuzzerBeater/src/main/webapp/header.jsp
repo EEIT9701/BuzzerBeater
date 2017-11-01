@@ -108,7 +108,7 @@
 				<li class="dropdown"><a href="<%=request.getContextPath() %>/season/seasonList.jsp" class="dropdown-toggle"
 					data-toggle="dropdown">賽季<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
-						<c:forEach var="seasonSet" items="${seasonSvc.all}" begin="0" end="3">
+						<c:forEach var="seasonSet" items="${seasonSvc.season}" begin="0" end="3">
 							<li><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${seasonSet.seasonID}">${seasonSet.seasonName}</a></li>
 						</c:forEach>
 					</ul>

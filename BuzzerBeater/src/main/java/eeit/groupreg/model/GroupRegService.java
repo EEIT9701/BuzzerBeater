@@ -2,6 +2,7 @@ package eeit.groupreg.model;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.context.ApplicationContext;
@@ -17,6 +18,11 @@ public class GroupRegService {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (GroupRegDAO_interface) context.getBean("GroupRegDAO");
+	}
+
+	public List<Map<String, Object>> findSignUpPlayer(Integer groupID, Integer teamID) {
+		dao = new GroupRegDAO_JDBC();
+		return dao.findSignUpPlayer(groupID, teamID);
 	}
 
 	public Set<GroupRegVO> getAll() {

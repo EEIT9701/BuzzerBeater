@@ -20,7 +20,7 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
-	private static final String GET_ALL_SEASON = "FROM SeasonVO ORDER BY SeasonBeginDate";
+	private static final String GET_ALL_SEASON = "FROM SeasonVO ORDER BY SeasonBeginDate DESC";
 	private static final String FIND_LATEST_SEASON = "SELECT MAX(seasonID) FROM SeasonVO";
 
 	@Override
