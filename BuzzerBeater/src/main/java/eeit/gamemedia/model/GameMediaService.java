@@ -25,7 +25,8 @@ public class GameMediaService {
 	public GameMediaVO insertGameMedia(Integer gameID,String mediasName,String gameVideo,String gamePhoto,String mediaType,Timestamp mediaDate,String descriptions,String tag ){
 		
 		GameMediaVO gameMediaVO = new GameMediaVO();
-		GamesVO gamesVO = new GamesVO();
+		GamesService gs = new GamesService();
+		GamesVO gamesVO = gs.findByGameID(gameID);
 				
 		gamesVO.setGameID(gameID);
 		gameMediaVO.setMediasName(mediasName);

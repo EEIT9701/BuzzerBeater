@@ -41,8 +41,6 @@
 										<th>球員照片</th>
 										<th>球員姓名</th>
 										<th>身分證ID</th>
-										<th>背號</th>
-										<th>位置</th>
 										<th>身高</th>
 										<th>體重</th>
 										<th>生日</th>
@@ -58,8 +56,6 @@
 											</td>
 											<td>${playerName}</td>
 											<td>${id}</td>
-											<td></td>
-											<td></td>
 											<td>${height}</td>
 											<td>${weights}</td>
 											<td>${birthday}</td>

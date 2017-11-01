@@ -115,35 +115,35 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 		
 		return list;
 	}
-    public static void main(String[] args){
-    	PersonalDataJDBCDAO dao=new PersonalDataJDBCDAO();
-    	
-    	List<PersonalDataVO> list=dao.getAll();
-    	for(PersonalDataVO aPersonal:list){
-    		System.out.print(aPersonal.getPlayersVO().getPlayerName()+",");
-    		System.out.print(aPersonal.getPlayersVO().getPhoto()+",");
-    		System.out.print(aPersonal.getTeamsVO().getTeamName()+",");
-    	  //System.out.print(aPersonal.getTeamID()+",");
-    		System.out.print(aPersonal.getGameTime()+",");
-    		System.out.print(aPersonal.getTwoPoint()+",");
-    		System.out.print(aPersonal.getTwoPointShot()+",");
-    		System.out.print(aPersonal.getThreePoint()+",");
-    		System.out.print(aPersonal.getThreePointShot()+",");
-    		System.out.print(aPersonal.getFg()+",");
-    		System.out.print(aPersonal.getFgShot()+",");
-    		System.out.print(aPersonal.getDefReb()+",");
-    		System.out.print(aPersonal.getOffReb()+",");
-    		System.out.print(aPersonal.getAssist()+",");
-    		System.out.print(aPersonal.getSteal()+",");
-    		System.out.print(aPersonal.getBlocks()+",");
-    		System.out.print(aPersonal.getTurnover()+",");
-    		System.out.print(aPersonal.getPersonalFouls()+",");
-    		System.out.print(aPersonal.getPoints()+",");
-    	  //System.out.print(aPersonal.getStartingPlayer()+",");
-    		System.out.println();
-    		
-    	}
-    }
+//    public static void main(String[] args){
+//    	PersonalDataJDBCDAO dao=new PersonalDataJDBCDAO();
+//    	
+//    	List<PersonalDataVO> list=dao.getAll();
+//    	for(PersonalDataVO aPersonal:list){
+//    		System.out.print(aPersonal.getPlayersVO().getPlayerName()+",");
+//    		System.out.print(aPersonal.getPlayersVO().getPhoto()+",");
+//    		System.out.print(aPersonal.getTeamsVO().getTeamName()+",");
+//    	  //System.out.print(aPersonal.getTeamID()+",");
+//    		System.out.print(aPersonal.getGameTime()+",");
+//    		System.out.print(aPersonal.getTwoPoint()+",");
+//    		System.out.print(aPersonal.getTwoPointShot()+",");
+//    		System.out.print(aPersonal.getThreePoint()+",");
+//    		System.out.print(aPersonal.getThreePointShot()+",");
+//    		System.out.print(aPersonal.getFg()+",");
+//    		System.out.print(aPersonal.getFgShot()+",");
+//    		System.out.print(aPersonal.getDefReb()+",");
+//    		System.out.print(aPersonal.getOffReb()+",");
+//    		System.out.print(aPersonal.getAssist()+",");
+//    		System.out.print(aPersonal.getSteal()+",");
+//    		System.out.print(aPersonal.getBlocks()+",");
+//    		System.out.print(aPersonal.getTurnover()+",");
+//    		System.out.print(aPersonal.getPersonalFouls()+",");
+//    		System.out.print(aPersonal.getPoints()+",");
+//    	  //System.out.print(aPersonal.getStartingPlayer()+",");
+//    		System.out.println();
+//    		
+//    	}
+//    }
 	@Override
 	public List<PersonalDataVO> getAll1() {
 		// TODO Auto-generated method stub
@@ -167,11 +167,12 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 	}
 	@Override
 	public void update(PersonalDataVO personalDataVO) {
-		// TODO Auto-generated method stub
+
+
 		
 	}
 	@Override
-	public void delete(Integer PersonalDataID) {
+	public void delete(PersonalDataVO personalDataVO) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -192,6 +193,11 @@ public class PersonalDataJDBCDAO implements PersonalDataDAO_interface{
 	}
 	@Override
 	public List<PersonalDataVO> findByPlyerID2(Integer playerID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<PersonalDataVO> findByPlayerIDAndGameID(Integer PlayerID, Integer GameID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -10,6 +10,9 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import eeit.locationinfo.model.LocationinfoService;
+import eeit.teams.model.TeamsService;
+
 @SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
 public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
@@ -65,6 +68,7 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		GamesDAO_interface dao = (GamesDAO_interface) context.getBean("GamesDAO");
 		
 //		 dao.delete(4003);
+
 
 		Set<GamesVO> set = new LinkedHashSet<GamesVO>(dao.findByGroupID(2002));
 		for (GamesVO gvo : set) {

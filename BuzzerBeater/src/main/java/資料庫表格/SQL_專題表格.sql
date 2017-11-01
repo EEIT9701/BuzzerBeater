@@ -27,7 +27,7 @@ GO
 --insert into Season values ('2015-16例行賽','2015-10-28','2016-04-13','2015-01-01','2015-9-30',null);
 insert into Season values ('2016-17例行賽','2016-10-25','2017-04-12','2016-01-01','2016-9-30',null);
 insert into Season values ('2017-18例行賽','2017-10-18','2018-04-12','2017-01-01','2017-9-30',null);
-insert into Season values ('測試用例行賽','2018-10-18','2019-04-12','2017-10-01','2017-12-30',null);
+insert into Season values ('2018-19例行賽','2018-10-18','2019-04-12','2017-11-01','2018-9-30',null);
 
 select * from Season
 GO
@@ -54,7 +54,7 @@ create table Groups			--分組
  insert into Groups values ('1002','西區','8','4','0','15','7');
 
  insert into Groups values ('1003','測試A區','8','4','6','15','7');
- insert into Groups values ('1003','測試B區','8','4','8','15','7');
+ insert into Groups values ('1003','測試B區','4','4','4','15','7');
  
  select * from Groups
  GO
@@ -316,6 +316,10 @@ insert into GroupRegistration values('3002','2002','1','2016-06-07 09:48','45672
 insert into GroupRegistration values('3003','2002','1','2016-06-07 12:58','45673');
 insert into GroupRegistration values('3004','2002','1','2016-06-08 15:38','45674');
 
+insert into GroupRegistration values('3001','2006','1','2016-06-06 11:58','45671');
+insert into GroupRegistration values('3002','2006','1','2016-06-07 09:48','45672');
+insert into GroupRegistration values('3003','2006','1','2016-06-07 12:58','45673');
+insert into GroupRegistration values('3004','2006','1','2016-06-08 15:38','45674');
 
 select * from GroupRegistration
 GO

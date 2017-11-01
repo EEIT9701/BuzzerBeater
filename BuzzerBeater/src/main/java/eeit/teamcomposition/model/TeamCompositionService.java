@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import eeit.players.model.PlayersVO;
+import eeit.teams.model.TeamsDAO;
 import eeit.teams.model.TeamsVO;
 
 public class TeamCompositionService {
@@ -21,16 +22,18 @@ public class TeamCompositionService {
 
 	public void insert(Integer teamID, Integer playerID, Integer playerNo, String playerRole, Timestamp joinTeamDate,
 			Timestamp leaveTeamDate) {
+		dao = new TeamCompositionDAO();
 		TeamCompositionVO teamCompositionVO = new TeamCompositionVO();
 
-		TeamsVO teamsVO = new TeamsVO();
-		teamsVO.setTeamID(teamID);
-		teamCompositionVO.setTeamsVO(teamsVO);
+//		TeamsVO teamsVO = new TeamsVO();
+//		teamsVO.setTeamID(teamID);
+//		teamCompositionVO.setTeamsVO(teamsVO);
 
-		PlayersVO playersVO = new PlayersVO();
-		playersVO.setPlayerID(playerID);
-		teamCompositionVO.setPlayersVO(playersVO);
-
+//		PlayersVO playersVO = new PlayersVO();
+//		playersVO.setPlayerID(playerID);
+//		teamCompositionVO.setPlayersVO(playersVO);
+		teamCompositionVO.setTeamID(teamID);
+		teamCompositionVO.setPlayerID(playerID);
 		teamCompositionVO.setPlayerNo(playerNo);
 		teamCompositionVO.setPlayerRole(playerRole);
 		teamCompositionVO.setJoinTeamDate(joinTeamDate);

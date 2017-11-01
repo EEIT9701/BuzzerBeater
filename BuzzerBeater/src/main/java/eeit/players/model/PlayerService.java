@@ -6,16 +6,27 @@ import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import eeit.teams.model.TeamsDAO;
+
 public class PlayerService {
 	private PlayerDAO_interface dao;
 
 	public PlayerService() {
-//		dao = new PlayerDAO();
+
+		// dao = new PlayerDAO();
+
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (PlayerDAO_interface) context.getBean("PlayersDAO");
 
 	}
 
+	public PlayersVO findByPlayerID(Integer playerID) {
+		return dao.findByID(playerID);
+	}
+	public Integer findMaxID() {
+		dao = new PlayerDAO();
+		return dao.findMaxID();
+	}
 	public PlayersVO insertPlayer(String playerName, String id, Double height, Double weights, Date birthday,
 			String nationality, String photo) {
 		dao = new PlayerDAO();
@@ -58,16 +69,13 @@ public class PlayerService {
 	}
 
 	public PlayersVO getOnePlayerID(Integer playerID) {
-		dao = new PlayerDAO();
+//		dao = new PlayerDAO();
 		return dao.findByID(playerID);
 	}
 
 	public Set<PlayersVO> getAllPlayer() {
-		dao = new PlayerDAO();
+//		dao = new PlayerDAO();
 		return dao.getAll();
 	}
 
-	public PlayersVO findByPlayerID(Integer playerID){
-		return dao.findByID(playerID);
-	}
 }

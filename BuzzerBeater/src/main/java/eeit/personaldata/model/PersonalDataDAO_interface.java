@@ -17,11 +17,13 @@ public interface PersonalDataDAO_interface {
 
 	public void update(PersonalDataVO personalDataVO);
 
-	public void delete(Integer PersonalDataID);
+	public void delete(PersonalDataVO personalDataVO);
 
 	public List<PersonalDataVO> findByGameID(Integer GameID);
 
 	public List<PersonalDataVO> findByGameIDAndTeamID(Integer GameID, Integer TeamID);
+	
+	public List<PersonalDataVO> findByPlayerIDAndGameID(Integer PlayerID, Integer GameID);
 
 	List<PersonalDataVO> findByPlayerID(Integer playerID);
 

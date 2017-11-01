@@ -82,7 +82,7 @@ public class MemberInfoJNDIDAO implements MemberInfoDAO_interface {
 		 try{
 		 
 		 conn = ds.getConnection();
-		 stmt = conn.prepareStatement("UPDATE");
+		 stmt = conn.prepareStatement(UPDATE);
 		 
 		 stmt.setString(1, memberInfoVO.getAcc());
 		 stmt.setString(2, memberInfoVO.getName() );

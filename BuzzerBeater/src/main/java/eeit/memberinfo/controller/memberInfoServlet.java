@@ -116,7 +116,7 @@ public class memberInfoServlet extends HttpServlet {
 			String timeTemp01 = timeTemp.replace("T", " ");
 			String timeTemp02 = timeTemp01.replace("Z", "");
 			
-			System.out.println(timeTemp02);
+			//System.out.println(timeTemp02);
 			registerTimeData = Timestamp.valueOf(timeTemp02); 
 			
 			//System.out.println(registerTimeData);
