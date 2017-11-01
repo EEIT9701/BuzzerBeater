@@ -10,6 +10,8 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import eeit.groupreg.model.GroupRegVO;
+
 @Transactional(readOnly = true)
 public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 	private HibernateTemplate hibernateTemplate;
@@ -55,13 +57,16 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		TeamsDAO_interface dao = (TeamsDAO_interface) context.getBean("TeamsDAO");
 		
-		dao.delete(3007);
+//		dao.delete(3007);
 		
 		Set<TeamsVO> set = dao.getAll();
 		for(TeamsVO vo : set){
 			System.out.print(vo.getTeamID()+", ");
 			System.out.print(vo.getBossName()+", ");
 			System.out.print(vo.getCaptainPhone()+", ");
+			for(GroupRegVO gvo:vo.getGroupRegSet()){
+				System.out.print(gvo.getTeamStat()+", ");
+			}
 			System.out.println();
 		}
 

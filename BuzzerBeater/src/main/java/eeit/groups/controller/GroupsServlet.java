@@ -1,6 +1,8 @@
 package eeit.groups.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -8,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import eeit.games.model.GamesService;
 import eeit.groupreg.model.GroupRegService;
 import eeit.groupreg.model.GroupRegVO;
 import eeit.groups.model.GroupsService;
@@ -316,23 +320,6 @@ public class GroupsServlet extends HttpServlet {
 					response);
 		}
 
-		// 根據隊伍數量計算所需比賽場數
-		if ("ALGORITHM_COUNT".equals(action)) {
-			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
-			GroupsService gSvc = new GroupsService();
-			GroupsVO gVO = gSvc.findByGroupID(groupID);
-
-			int teamsCount = gVO.getGroupRegSet().size();
-			int result = (teamsCount * (teamsCount - 1)) / 2; // Round-robin
-																// tournament
-																// 循環賽
-
-			request.setAttribute("teamsCount", teamsCount);
-			request.setAttribute("result", result);
-			RequestDispatcher view = request.getRequestDispatcher("/groups/algorithm_test.jsp");
-			view.forward(request, response);
-		}
-
 		if ("ADD_SCHEDULE".equals(action)) {
 			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
 			GroupsService gsvc = new GroupsService();
@@ -340,9 +327,131 @@ public class GroupsServlet extends HttpServlet {
 			Integer currentTeams = groupsVO.getCurrentTeams();
 			Integer gamesNeeded = (currentTeams * (currentTeams - 1)) / 2;
 
-			request.setAttribute("groupsVO", groupsVO);
+			request.getSession().setAttribute("groupsVO", groupsVO);
 			request.getSession().setAttribute("gamesNeeded", gamesNeeded);
 			request.getRequestDispatcher("/groups/addSchedule.jsp").forward(request, response);
+		}
+
+		if ("SPLIT_LOCATION".equals(action)) {
+			HttpSession session = request.getSession();
+			Integer locationID = new Integer(request.getParameter("locationID").split(",")[0]);
+			String locationName = request.getParameter("locationID").split(",")[1];
+			Timestamp beginDate = Timestamp.valueOf(request.getParameter("beginDate"));
+			Timestamp endDate = Timestamp.valueOf(request.getParameter("endDate"));
+
+			Integer timeunit = Integer.parseInt(request.getParameter("timeUnit"));
+			long timeUnit = TimeUnit.MINUTES.convert(timeunit, TimeUnit.MINUTES);
+
+			// 如果session裡面原本沒有此list則創建一個
+			List<Map<String, Object>> list = null;
+			if ((list = (List<Map<String, Object>>) session.getAttribute("timeList")) == null) {
+				list = new ArrayList<Map<String, Object>>();
+			}
+
+			// 拆解時間並加入
+			Map<String, Object> map = null;
+			Timestamp beginTime = beginDate;
+			Timestamp endTime = null;
+			while (true) {
+				endTime = new Timestamp(beginTime.getTime() + timeUnit * 60 * 1000);
+				if (endTime.after(endDate)) {
+					break;
+				}
+
+				map = new HashMap<String, Object>();
+				map.put("beginTime", beginTime);
+				map.put("endTime", endTime);
+				map.put("locationID", locationID);
+				map.put("locationName", locationName);
+				map.put("timeUnit", timeunit);
+				list.add(map);
+				beginTime = endTime;
+			}
+
+			// 放入session並轉交
+			session.setAttribute("timeList", list);
+			request.getRequestDispatcher("/groups/addSchedule.jsp").forward(request, response);
+		}
+
+		if ("REMOVE_TIMELIST".equals(action)) {
+			HttpSession session = request.getSession();
+			int index = Integer.valueOf(request.getParameter("index"));
+
+			List<Map<String, Object>> timeList = (List<Map<String, Object>>) session.getAttribute("timeList");
+
+			timeList.remove(index);
+
+			session.removeAttribute("timeList");
+			session.setAttribute("timeList", timeList);
+			request.getRequestDispatcher("/groups/addSchedule.jsp").forward(request, response);
+		}
+
+		if ("MAKE_SCHEDULE".equals(action)) {
+			Integer groupID = Integer.valueOf(request.getParameter("groupID"));
+			HttpSession session = request.getSession();
+			List<Map<String, Object>> timeList = (List<Map<String, Object>>) session.getAttribute("timeList");
+			Integer gamesNeeded = (Integer) session.getAttribute("gamesNeeded");
+
+			// 場數不足回傳錯誤
+			if (timeList.size() < gamesNeeded) {
+				List<String> errorMsgs = new LinkedList<String>();
+				errorMsgs.add("場數不足");
+				request.setAttribute("errorMsgs", errorMsgs);
+				request.getRequestDispatcher("/groups/addSchedule.jsp").forward(request, response);
+				return;
+			}
+
+			// 取得所有球隊
+			GroupRegService grSvc = new GroupRegService();
+			List<GroupRegVO> groupRegList = grSvc.findByGroupID(groupID);
+
+			// 若球隊數量為奇數加入一隊空隊伍
+			if (groupRegList.size() / 2 == 0) {
+				groupRegList.add(new GroupRegVO());
+			}
+
+			List<Integer[]> schedule = new ArrayList<Integer[]>();
+			int total = 0;
+			int count = groupRegList.size();
+			GroupRegVO gVO = new GroupRegVO();
+			for (int j = 1; j < count; j++) {
+				for (int i = 0; i <= (count / 2) - 1; i++) {
+					if (groupRegList.get(i) != gVO && groupRegList.get(count - 1 - i) != gVO) {
+						Integer[] teamvs = { groupRegList.get(i).getTeamsVO().getTeamID(),
+								groupRegList.get(count - 1 - i).getTeamsVO().getTeamID() };
+						schedule.add(teamvs);
+						total += 1;
+					}
+				}
+				groupRegList.add(groupRegList.get(1));
+				groupRegList.remove(1);
+			}
+
+			for (int i = 0; i < 100; i++) {
+				int rd = (int) (Math.random() * total - 1);
+				schedule.add(schedule.get(rd));
+				schedule.remove(rd);
+			}
+
+			GamesService gSvc = new GamesService();
+			for (int i = 0; i < gamesNeeded; i++) {
+				Integer locationID = (Integer) timeList.get(i).get("locationID");
+				Timestamp gameBeginDate = (Timestamp) timeList.get(i).get("beginTime");
+				Timestamp gameEndDate = (Timestamp) timeList.get(i).get("endTime");
+				Integer teamAID = schedule.get(i)[0];
+				Integer teamBID = schedule.get(i)[1];
+
+				gSvc.addGames(groupID, locationID, teamAID, 0, teamBID, 0, gameBeginDate, gameEndDate);
+			}
+			
+			session.removeAttribute("timeList");
+			session.removeAttribute("gamesNeeded");
+			session.removeAttribute("groupsVO");
+			
+			GroupsService svc = new GroupsService();
+			GroupsVO groupsVO = svc.findByGroupID(groupID);
+			request.setAttribute("groupsVO", groupsVO);
+			request.getRequestDispatcher("/games/gameList.jsp").forward(request, response);
 		}
 
 	}

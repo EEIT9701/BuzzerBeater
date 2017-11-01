@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:useBean id="locSvc" class="eeit.locationinfo.model.LocationinfoService" scope="page"/>
 
@@ -63,10 +64,11 @@
 			        <tbody>
 			        	<c:forEach var="groupRegVO" items="${groupsVO.groupRegSet}">
 				        	<tr>
-				        		<td>${groupRegVO.teamsVO.teamsName}</td>
-				        		<c:forEach var="playersVO" items="${groupRegVO.teamsVO.playersSet}" varStatus="index">
-				        			<td>${index}</td>
+				        		<td>${groupRegVO.teamsVO.teamName}</td>
+				        		<c:forEach var="playersVO" items="${groupRegVO.teamsVO.teamCompositionSet}" varStatus="s">
+					        		<c:set var="playerCount" value="${s.index}"/>
 				        		</c:forEach>
+				        			<td>${playerCount}</td>
 				        		<td>${groupRegVO.registerDate}</td>
 				        	</tr>
 			        	</c:forEach>
@@ -75,46 +77,76 @@
 			    
 			    <p>有 ${groupsVO.currentTeams} 隊，循環賽共需打 ${gamesNeeded} 場比賽</p>
 			    
+			    	
 			    <table class="table table-bordered">
 		            <thead>
 			            <tr>
                     		<td>地點</td>
                     		<td>日期</td>
                     		<td>時間</td>
+                    		<td>比賽時間</td>
 			            </tr>
+			            <form action="<%=request.getContextPath()%>/Groups.do" method="post">
+				        	<tr>
+				        		<td>
+				        			<select name="locationID">
+					        			<c:forEach var="locVO" items="${locSvc.allList}">
+					        				<option value="${locVO.locationID},${locVO.locationName}">${locVO.locationName}</option>
+					        			</c:forEach>
+				        			</select>
+				        		</td>
+				        		<td colspan="2">
+				        			<input type="text" name="beginDate" style="width:40%" > ~ <input type="text" name="endDate" style="width:40%">
+				        		</td>
+				        		<td>
+				        			<br>單場:<select name="timeUnit">
+				        			<c:forEach var="time" begin="10" end="300" step="10">
+				        				<c:choose>
+				        					<c:when test="${time==90}">
+					        					<option value="${time}" selected="selected">${time}</option>
+				        					</c:when>
+				        					<c:otherwise>
+				        						<option value="${time}">${time}</option>
+				        					</c:otherwise>
+				        				</c:choose>
+				        			</c:forEach>
+				        			</select>分鐘
+				        		</td>
+				        		<td>
+					       			<input type="hidden" name="action" value="SPLIT_LOCATION">
+				        			<input type="submit" value="新增">
+				        		</td>
+				        	</tr>
+			       		</form>
 			        </thead>
 			
 			        <tbody>
-			        	<tr>
-			        		<td></td>
-                    		<td></td>
-                    		<td></td>
-			        	</tr>
+			        	<c:forEach var="timeList" items="${timeList}" varStatus="s">
+				        	<tr>
+				        		<td>${timeList.locationName}</td>
+	                    		<td><fmt:formatDate value="${timeList.beginTime}" pattern="yyyy-MM-dd"/></td>
+	                    		<td><fmt:formatDate value="${timeList.beginTime}" pattern="HH:mm"/> ~ <fmt:formatDate value="${timeList.endTime}" pattern="HH:mm"/></td>
+	                    		<td>${timeList.timeUnit}分鐘</td>
+	                    		<td>
+	                    			<form action="<%=request.getContextPath()%>/Groups.do" method="post">
+	                    				<input type="hidden" name="action" value="REMOVE_TIMELIST">
+	                    				<input type="hidden" name="index" value="${s.index}">
+	                    				<input type="submit" value="刪除">
+	                    			</form>
+	                    		</td>
+				        	</tr>
+			        	</c:forEach>
 			        </tbody>
 			        <tfoot>
-			        	<tr>
-			        		<td>
-			        			<select>
-				        			<c:forEach var="locVO" items="${locSvc.allList}">
-				        				<option value="${locVO.locationID}">${locVO.locationName}</option>
-				        			</c:forEach>
-			        			</select>
-			        		</td>
-			        		<td>
-			        			<input type="date" name="beginDate"> ~ <input type="date" name="endDate">
-			        		</td>
-			        		<td>
-			        			<input type="time" name="beginTime"> ~ <input type="time" name="endTime">
-			        		</td>
-			        		<td>
-			        			<input type="time" name="timeUnit">
-			        		</td>
-			        	</tr>
+		        		
 			        </tfoot>
 			    </table>
-			
-		
-		
+			    
+				<form action="<%=request.getContextPath()%>/Groups.do" method="post">
+					<input type="hidden" name="groupID" value="${groupsVO.groupID}">
+					<input type="hidden" name="action" value="MAKE_SCHEDULE">
+					<input type="submit" value="送出">
+				</form>
 		
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />

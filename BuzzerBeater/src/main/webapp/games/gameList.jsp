@@ -2,22 +2,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-    <html>
+    <html lang="zh" class="no-js">
 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      	<meta charset="UTF-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         
     	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     	
         <title>Season</title>
+        <jsp:include page="/header_css.jsp" />
+        <jsp:include page="/font_css.jsp" />
     </head>
 
     <body>
 	    <jsp:include page="/header.jsp" />
 	
 		<div class="container">
+			<div class="jumbotron">
+			<!-- 網頁內容 -->
 			<div class="col-md-12">
 				<table class="table table-bordered">
 					<thead>
@@ -30,9 +35,6 @@
 						<tr>
 							<td>${groupsVO.groupName}</td>
 							<td>${groupsVO.currentTeams}</td>
-						</tr>
-						<tr>
-							<td colspan="2">${seasonVO.descriptions}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -60,13 +62,18 @@
 			        	</c:forEach>			        	
 			        </tbody>
 			    </table>
-			    
-			    
 		    </div>
-	    </div>
-	    
-	    
-	    <jsp:include page="/footer.jsp" />
+		    
+		    <form action="<%=request.getContextPath()%>/Games.do" method="post">
+		    	<input type="hidden" name="action" value="GET_GAMES_EXCEL">
+		    	<input type="hidden" name="groupID" value="${groupsVO.groupID}">
+		    	<input type="submit" value="下載">
+		    </form>
+			<!-- 網頁內容END -->
+			<jsp:include page="/footer.jsp" />
+	    	</div>
+	    </div>    
+	    <jsp:include page="/footer_css.jsp" />
     </body>
 
     </html>
