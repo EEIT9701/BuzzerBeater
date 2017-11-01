@@ -278,6 +278,15 @@ public class PlayersSevrlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
 		}
+		
+		if ("delete".equals(action)) {
+			Integer playerID = Integer.parseInt(req.getParameter("playerID"));
+
+			playerSvc.deletePlayer(playerID);
+			String url = "/players/listAllPlayer_back.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, resp);
+		}
 
 	}
 }
