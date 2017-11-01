@@ -10,7 +10,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import eeit.groupreg.model.GroupRegVO;
+
 
 @Transactional(readOnly = true)
 public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
@@ -24,8 +24,8 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public Integer insert(TeamsVO teamsVO) {
-		return (Integer) hibernateTemplate.save(teamsVO);
+	public void insert(TeamsVO teamsVO) {
+		hibernateTemplate.save(teamsVO);
 	}
 
 	@Override
@@ -52,23 +52,22 @@ public class TeamsDAO_HibernateTemplate implements TeamsDAO_interface {
 		return (TeamsVO) hibernateTemplate.get(TeamsVO.class, teamID);
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		TeamsDAO_interface dao = (TeamsDAO_interface) context.getBean("TeamsDAO");
+
+
+		// dao.delete(3007);
+		//
+		// Set<TeamsVO> set = dao.getAll();
+		// for(TeamsVO vo : set){
+		// System.out.print(vo.getTeamID()+", ");
+		// System.out.print(vo.getBossName()+", ");
+		// System.out.print(vo.getCaptainPhone()+", ");
+		// System.out.println();
+		// }
 		
-//		dao.delete(3007);
-		
-		Set<TeamsVO> set = dao.getAll();
-		for(TeamsVO vo : set){
-			System.out.print(vo.getTeamID()+", ");
-			System.out.print(vo.getBossName()+", ");
-			System.out.print(vo.getCaptainPhone()+", ");
-			for(GroupRegVO gvo:vo.getGroupRegSet()){
-				System.out.print(gvo.getTeamStat()+", ");
-			}
-			System.out.println();
-		}
 
 	}
 

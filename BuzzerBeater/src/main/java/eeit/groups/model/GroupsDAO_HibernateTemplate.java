@@ -18,9 +18,10 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
-
+	
 	private static final String GET_ALL_STMT = "FROM GroupsVO";
-
+	private static final String FIND_BY_SEASONID = "FROM GroupsVO WHERE seasonID = ?";
+	
 	@Override
 	public Set<GroupsVO> getAll() {
 		List<GroupsVO> list = (List<GroupsVO>) hibernateTemplate.find(GET_ALL_STMT);
@@ -53,6 +54,12 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 		GroupsVO groupsVO = hibernateTemplate.get(GroupsVO.class, groupID);
 		return groupsVO;
 	}
+	
+	@Override
+	public List<GroupsVO> findBySeasonID(Integer seasonID) {
+		return (List<GroupsVO>) hibernateTemplate.find(FIND_BY_SEASONID, seasonID);	
+	}
+
 
 	public static void main(String args[]) {
 		@SuppressWarnings("resource")
@@ -120,5 +127,6 @@ public class GroupsDAO_HibernateTemplate implements GroupsDAO_interface {
 
 	}
 
+	
 
 }

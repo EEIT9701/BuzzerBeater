@@ -1,21 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
         <%@ page import="java.util.*"%>
             <%@ page import="eeit.players.model.*"%>
-           <%@ page import="eeit.personaldata.model.*"%>
-           <%@ page import="eeit.games.model.*"%>
-<% Integer playerID = new Integer(request.getParameter("playerID"));
+                <%
+    Integer playerID = new Integer(request.getParameter("playerID"));
     PlayerService PlayerSvc = new PlayerService();
     PlayersVO playerVO = PlayerSvc.getOnePlayerID(playerID);
-	pageContext.setAttribute("playerVO", playerVO); %>
-
-<%-- <%
-	PersonalDataService psvc = new PersonalDataService();
-	List<PersonalDataVO> list = psvc.findByPlyerID2(playerID);
-	pageContext.setAttribute("list1", list);
-%> --%>
+	pageContext.setAttribute("playerVO", playerVO);
+    %>
 
                     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                     <html>
@@ -120,10 +114,9 @@
                                         <div id="tabs">
                                             <ul>
                                                 <li><a href="#tabs-1">本季數據</a></li>
-                                                <li><a href="#tabs-2">近期比賽數據</a></li>
+                                                <li><a href="#tabs-2">進五場數據</a></li>
                                             </ul>
                                             <div id="tabs-1">
-                                                <table class="table table-bordered">
                                                 <table class="table table-bordered">
                                               <h5>本季平均</h5>  
                                                     <thead>
@@ -268,91 +261,44 @@
 						</tbody>
                                                 </table>
      
-                                                </table>
                                             </div>
                                             <div id="tabs-2">
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th>日期 </th>
-                                                            <th>對手 </th>
-                                                            <th>上場時間</th>
-                                                            <th>投籃命中 </th>
-                                                            <th>投籃出手 </th>
-                                                            <th>投籃(%) </th>
-                                                            <th>三分命中</th>
-                                                            <th>三分出手 </th>
-                                                            <th>三分(%)</th>
+                                                            <th>出場時間 </th>
+                                                            <th>二分命中 </th>
+                                                            <th>二分出手數 </th>
+                                                            <th>三分命中 </th>
+                                                            <th>三分出手數 </th>
                                                             <th>罰球命中 </th>
-                                                            <th>罰球出手 </th>
-                                                            <th>罰球(%) </th>
+                                                            <th>罰球出手數 </th>
                                                             <th>進攻籃板 </th>
                                                             <th>防守籃板 </th>
                                                             <th>助攻 </th>
                                                             <th>抄截 </th>
                                                             <th>阻攻 </th>
                                                             <th>失誤 </th>
-                                                            <th>犯規</th>
-                                                            <th>得分 </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <c:forEach var="personalDataVO" items="${playersVO.personalDataSet}">
                                                         <tr>
-                                                            <td>${personalDataVO.gamesVO.gameBeginDate}</td>
-                                                            <td>
-                                                               <c:if test="${personalDataVO.teamsVO.teamName==personalDataVO.gamesVO.teamAVO.teamName}">
-							                                      ${personalDataVO.gamesVO.teamBVO.teamName}
-									                           </c:if>
-									                           <c:if test="${personalDataVO.teamsVO.teamName==personalDataVO.gamesVO.teamBVO.teamName}">
-							                                      ${personalDataVO.gamesVO.teamAVO.teamName}
-									                           </c:if>
-									                        </td>
-                                                            <td>${personalDataVO.gameTime}</td>
-                                                            <td>${personalDataVO.twoPoint}</td>
-                                                            <td>${personalDataVO.twoPointShot}</td>
-                                                            <td>
-                                                               <c:if test="${'0'==personalDataVO.twoPointShot}">
-							                                    0
-		                                                       </c:if> <c:if test="${'0' != personalDataVO.twoPointShot}">
-														        	<fmt:formatNumber type="number"
-															    	value="${personalDataVO.twoPoint/personalDataVO.twoPointShot*100}"
-															    	maxFractionDigits="1" />
-												        	   </c:if>
-												        	</td>
-                                                            <td>${personalDataVO.threePoint}</td>
-                                                            <td>${personalDataVO.threePointShot}</td>
-                                                            <td>
-                                                               <c:if test="${'0'==personalDataVO.threePointShot}">
-							                                   0
-									                           </c:if> <c:if test="${'0' != personalDataVO.threePointShot}">
-															       <fmt:formatNumber type="number"
-																   value="${personalDataVO.threePoint/personalDataVO.threePointShot*100}"
-																   maxFractionDigits="1" />
-												               </c:if>
-													        </td>
-                                                            <td>${personalDataVO.fg}</td>
-                                                            <td>${personalDataVO.fgShot}</td>
-                                                            <td>
-                                                               <c:if test="${'0'==personalDataVO.fgShot}">
-							                                   0
-									                           </c:if> <c:if test="${'0' != personalDataVO.fgShot}">
-															       <fmt:formatNumber type="number"
-																   value="${personalDataVO.fg/personalDataVO.fgShot*100}"
-																   maxFractionDigits="1" />
-												               </c:if>
-												            </td>
-													        <td>${personalDataVO.offReb}</td>
-													        <td>${personalDataVO.defReb}</td>
-													        <td>${personalDataVO.assist}</td>
-													        <td>${personalDataVO.steal}</td>
-													        <td>${personalDataVO.blocks}</td>
-													        <td>${personalDataVO.turnover}</td>
-													        <td>${personalDataVO.personalFouls}</td>
-													        <td>${personalDataVO.points}</td>
-													         
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
                                                         </tr>
-                                                       </c:forEach>
+
                                                     </tbody>
                                                 </table>
                                             </div>

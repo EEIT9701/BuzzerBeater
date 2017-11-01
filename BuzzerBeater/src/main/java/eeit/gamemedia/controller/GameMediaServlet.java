@@ -3,6 +3,7 @@ package eeit.gamemedia.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.RequestDispatcher;
@@ -21,7 +22,10 @@ import com.google.gson.Gson;
 
 import eeit.gamemedia.model.GameMediaService;
 import eeit.gamemedia.model.GameMediaVO;
+import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
+import eeit.groups.model.GroupsService;
+import eeit.groups.model.GroupsVO;
 
 
 @WebServlet("/GameMedia.do")
@@ -32,12 +36,15 @@ public class GameMediaServlet extends HttpServlet {
 		doPost(req, res);
 	}
 
+	@SuppressWarnings("null")
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		GameMediaService gameMediaSvc = new GameMediaService();
+		GroupsService groupSvc = new GroupsService();
+		GamesService gameSvc = new GamesService();
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
@@ -331,7 +338,79 @@ public class GameMediaServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		if ("findGroupNameBySeasonID".equals(action)){
+			res.setHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("content-type", "text/html;charset=UTF-8");
+			res.setCharacterEncoding("UTF-8");
+			
+			Integer seasonID = new Integer(req.getParameter("seasonID"));
+			
+			List<GroupsVO> list = groupSvc.findBySeasonID(seasonID);
+			List<HashMap<String,String>> returnlist = new ArrayList<HashMap<String, String>>();
+			Map<String,String> map = null;
+
+			
+			for(GroupsVO groupsVO:list){
+				map = new HashMap<String,String>();
+				map.put("groupID", groupsVO.getGroupID().toString());
+				map.put("seasonID", groupsVO.getSeasonVO().getSeasonID().toString());
+				map.put("groupName", groupsVO.getGroupName());
+				map.put("maxTeams", groupsVO.getMaxTeams().toString());
+				map.put("minTeams", groupsVO.getMinTeams().toString());
+				map.put("currentTeams", groupsVO.getCurrentTeams().toString());
+				map.put("maxPlayers", groupsVO.getMaxPlayers().toString());
+				map.put("minPlayers", groupsVO.getMinPlayers().toString());
+				
+				returnlist.add((HashMap<String, String>) map);
+			}
+			
+			
+			Gson gson = new Gson();
+			String jsonList = gson.toJson(returnlist); 
+			
+			
+
+            System.out.println(jsonList);
+			
+            PrintWriter out = res.getWriter();
+			out.println(jsonList);
+			
+			
+		}
 		
+		if ("getGameInformation".equals(action)){
+			res.setHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("content-type", "text/html;charset=UTF-8");
+			res.setCharacterEncoding("UTF-8");
+			
+			gameSvc = new GamesService();
+			Integer groupID = Integer.valueOf(req.getParameter("groupID"));
+			
+			List<GamesVO> list = gameSvc.findByGroupID(groupID);
+			
+			List<HashMap<String,String>> returnlist = new ArrayList<HashMap<String, String>>();
+			Map<String,String> map = null;
+			
+			for(GamesVO gamesVO:list){
+				map = new HashMap<String,String>();
+				map.put("gameID", gamesVO.getGameID().toString());
+				map.put("gameBeginDate", gamesVO.getGameBeginDate().toString());
+				map.put("teamA", gamesVO.getTeamAVO().getTeamName());
+				map.put("teamB", gamesVO.getTeamBVO().getTeamName());
+				
+				returnlist.add((HashMap<String, String>) map);
+			}
+			System.out.println(map);
+			System.out.println(returnlist);
+			
+			Gson gson = new Gson();
+			String jsonString = gson.toJson(returnlist); 
+			
+			System.out.println(jsonString);
+			
+			PrintWriter out = res.getWriter();
+			out.println(jsonString);
+		}
 		
 		if ("delete".equals(action)) {
 			

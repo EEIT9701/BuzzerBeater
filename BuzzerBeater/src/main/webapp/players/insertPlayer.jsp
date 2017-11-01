@@ -16,6 +16,13 @@
                     <script src="<%=request.getContextPath() %>/js/jquery-3.1.1.min.js"></script>
                     <script src="<%=request.getContextPath() %>/js/iEdit.js"></script>
                     <jsp:include page="/header_css.jsp" />
+                    <style>
+                    #result{
+							width: 200px;
+                                height: 300px;
+                                margin: 0px 0px 30px 70px;                    
+                    }
+                    </style>
 
 
                 </head>
@@ -75,20 +82,7 @@
                                             <input type="text" name="id" class="form-control" id="exampleInputEmail1" value="${id}">
                                         </div>
                                     </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">背號:</label>
-                                        <div class="col-md-4">
-                                            <input type="text" name="playerNo" class="form-control" id="exampleInputEmail1" value="">
-                                        </div>
-                                    </div>
-                                    <!-- Text input-->
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">位置:</label>
-                                        <div class="col-md-4">
-                                            <input type="text" name="playerRole" class="form-control" id="exampleInputEmail1" value="">
-                                        </div>
-                                    </div>
+                                    
                                     <!-- Text input-->
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">身高(cm):</label>

@@ -74,6 +74,11 @@ create table Groups			--¤À²Õ
 )
 GO 
 
+
+
+
+
+
 insert into Players values ('Matt Barnes','A122968632','201 ','103 ','1980/3/9','us',null);
 insert into Players values ('Ian Clark','A122968633','191 ','79 ','1991/3/7','us',null);
 insert into Players values ('Stephen Curry','A122968634','191 ','86 ','1988/3/14','us',null);

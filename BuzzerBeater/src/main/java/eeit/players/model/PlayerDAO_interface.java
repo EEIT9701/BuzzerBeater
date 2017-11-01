@@ -14,4 +14,5 @@ public interface PlayerDAO_interface {
 	public Set<PlayersVO> getAll();
 
 	public PlayersVO findByID(Integer playerID);
+	public Integer findMaxID();
 }
