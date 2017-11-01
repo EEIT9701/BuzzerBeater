@@ -58,7 +58,7 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 	  		;
 	private static final String GETALL2="select t.teamID,t.teamBadge,t.teamName,gameID,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
 			"from   (select teamID,\r\n" + 
-			"        count(gameID)as gameID,\r\n" + 
+			"        count(DISTINCT gameID)as gameID,\r\n" + 
 			"        sum(gameTime)as gametime,\r\n" + 
 			"        sum(twoPoint)as twopoint,\r\n" + 
 			"        sum(twoPointShot)as twoPointShot,\r\n" + 

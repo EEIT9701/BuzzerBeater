@@ -31,6 +31,8 @@ import org.apache.poi.ss.usermodel.Row;
 
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
+import eeit.groups.model.GroupsService;
+import eeit.groups.model.GroupsVO;
 
 @WebServlet("/Games.do")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
@@ -50,6 +52,14 @@ public class GamesServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
+		
+		if("GET_GAMES".equals(action)){
+			Integer groupID = Integer.valueOf(request.getParameter("groupID"));
+			GroupsService svc = new GroupsService();
+			GroupsVO groupsVO = svc.findByGroupID(groupID);
+			request.setAttribute("groupsVO", groupsVO);
+			request.getRequestDispatcher("/games/gameList.jsp").forward(request, response);
+		}
 
 		if ("UPLOAD_GAMES_EXCEL".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();

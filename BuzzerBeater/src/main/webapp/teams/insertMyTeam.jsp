@@ -115,6 +115,7 @@
 										</div>
 										<div class="col-md-4"></div>
 									</div>
+								</fieldset>
 							</form>
 
 
@@ -122,7 +123,7 @@
 
 
 							<jsp:include page="/footer.jsp" />
-							</fieldset>
+
 
 						</div>
 					</div>

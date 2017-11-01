@@ -93,11 +93,19 @@
 											<!--球員照片-->
 
 
-											<td><a href="<%=request.getContextPath()%>/players/playerInformation.jsp?playerID=${playersVO.playerID}">${playersVO.playerName}</a></td>
+											<td><a href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singleData&playerID=${playersVO.playerID}">${playersVO.playerName}</a></td>
 											<!--球員姓名-->
-											<td></td>
+											<td>
+											<c:forEach var="playerGroupVO" items="${playersVO.playerGroupsSet}">
+											${playerGroupVO.groupsVO.groupName}
+											</c:forEach>
+											</td>
 											<!--分組-->
-											<td></td>
+											<td>
+											<c:forEach var="TeamCompositionVO" items="${playersVO.teamCompositionSet}">
+											${TeamCompositionVO.teamsVO.teamName}
+											</c:forEach>
+											</td>
 											<!--球隊-->
 											<td>${playersVO.height}</td>
 											<!--身高-->

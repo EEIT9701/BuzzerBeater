@@ -1,5 +1,6 @@
 package eeit.groups.model;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.ApplicationContext;
@@ -19,6 +20,10 @@ public class GroupsService {
 
 	public GroupsVO findByGroupID(Integer groupID) {
 		return dao.findByGroupID(groupID);
+	}
+	
+	public List<GroupsVO> findBySeasonID(Integer seasonID){
+		return dao.findBySeasonID(seasonID);
 	}
 
 	public GroupsVO addGroups(Integer seasonID, String groupName, Integer maxTeams, Integer minTeams,

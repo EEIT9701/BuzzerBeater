@@ -67,29 +67,28 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="playersVO" items="${playerSvc.allPlayer}">
+										<c:forEach var="teamCompositionVO" items="${teamsVO.teamCompositionSet}">
 											<tr align='center' valign='middle'>
-											    <td><img id="img1" src="data:image/jpeg;base64,${playersVO.photo}"></td>
-												<td>${playersVO.playerName}</td>
-												<td>${playersVO.id}</td>
-												<td></td>
-												<td></td>
-												<td>${playersVO.height}</td>
-												<td>${playersVO.weights}</td>
-												<td>${playersVO.birthday}</td>
-												<td>${playersVO.nationality}</td>
+											    <td><img id="img1" src="data:image/jpeg;base64,${teamCompositionVO.playersVO.photo}"></td>
+												<td>${teamCompositionVO.playersVO.playerName}</td>
+												<td>${teamCompositionVO.playersVO.id}</td>
+												<td>${teamCompositionVO.playerNo}</td>
+												<td>${teamCompositionVO.playerRole}</td>
+												<td>${teamCompositionVO.playersVO.height}</td>
+												<td>${teamCompositionVO.playersVO.weights}</td>
+												<td>${teamCompositionVO.playersVO.birthday}</td>
+												<td>${teamCompositionVO.playersVO.nationality}</td>
 												<td>
 													<Form method="post" action="<%=request.getContextPath() %>/Players.do">
 														<button type="submit" class="btn btn-info">修改</button>
                                                         <input type="hidden" name="action" value="updatePlayer">
-                                                        <input type="hidden" name="photo" value="${playersVO.photo}">
-                                                        <input type="hidden" name="playerID" value="${playersVO.playerID}">
-                                                        <input type="hidden" name="playerName" value="${playersVO.playerName}">
-                                                        <input type="hidden" name="id" value="${playersVO.id}">
-                                                        <input type="hidden" name="height" value="${playersVO.height}">
-                                                        <input type="hidden" name="weights" value="${playersVO.weights}">
-                                                        <input type="hidden" name="birthday" value="${playersVO.birthday}">
-                                                        <input type="hidden" name="nationality" value="${playersVO.nationality}">
+                                                        <input type="hidden" name="photo" value="${teamCompositionVO.playersVO.photo}">
+                                                        <input type="hidden" name="playerName" value="${teamCompositionVO.playersVO.playerName}">
+                                                        <input type="hidden" name="id" value="${teamCompositionVO.playersVO.id}">
+                                                        <input type="hidden" name="height" value="${teamCompositionVO.playersVO.height}">
+                                                        <input type="hidden" name="weights" value="${teamCompositionVO.playersVO.weights}">
+                                                        <input type="hidden" name="birthday" value="${teamCompositionVO.playersVO.birthday}">
+                                                        <input type="hidden" name="nationality" value="${teamCompositionVO.playersVO.nationality}">
 													</Form>
 													</td>
 												<td>

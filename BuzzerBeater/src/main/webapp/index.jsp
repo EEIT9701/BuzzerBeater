@@ -17,6 +17,18 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/jquery.countdown.css" />
     <link rel="stylesheet" href="css/bootstrap.css" />
+	<!--廣告輪播("2-1")-->
+    <link rel="stylesheet" type="text/css" href="css/normalize_2.css" />
+	<link rel="stylesheet" type="text/css" href="css/htmleaf-demo_3.css">
+	<link type="text/css" rel="stylesheet" href="css/posterTvGrid.css"> 
+	<style>
+	body {
+        background-color:rgba(197, 197, 197, 0.78);
+        }
+        .jumbotron{
+        background-color: rgb(243, 242, 241);
+        }
+	</style>
 </head>
 <body id="home">
 
@@ -26,64 +38,37 @@
 	
 	
 	    <!--計時器(開始)-->
-    <div class="pageheader fixed-demo dark" style="padding-top:0px">
+<!--     <div class="pageheader fixed-demo dark" style="padding-top:0px"> -->
 
-        <div class="container">
-            <div class="row">          
-
-                    <div id="countdown">
-                        <div>報名日期倒數 :</div>
-                    </div>
-                    <p style="color:#303030" id="note"></p>
-
-            </div>
-        </div>
-    </div>
+<!--         <div class="container"> -->
+<!--             <div class="row">           -->
+<!--                     <div id="countdown"> -->
+<!--                         <div>報名日期倒數 :</div> -->
+<!--                     </div> -->
+<!--                     <p style="color:#303030" id="note"></p> -->
+<!--             </div> -->
+<!--         </div> -->
+<!--     </div> -->
 	
 	
     <!--主文(開始)-->
     
     <div class="container">
         <div class="jumbotron">
+        <!--計時器(開始)-->
+			<div class="row">          
+				<div id="countdown">
+					<div>賽季報名日期倒數 :</div>
+				</div>
+				<p style="color:#303030" id="note"></p>
+            </div>
            <!--*****************-->
             <!--廣告輪播(開始)-->
             <!--800x600(50萬像素),1024x768(80萬像素),1280x960(130萬像素)-->
-            <div class="carousel slide" id="myCarousel">
-                <ol class="carousel-indicators">
-                    <li class="active" data-slide-to="0" data-target="#myCarousel"></li>
-                    <li data-slide-to="1" data-target="#myCarousel" class=""></li>
-                    <li data-slide-to="2" data-target="#myCarousel" class=""></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img class="img-responsive center-block" alt="First slide" src="images/800x600_001.jpg">
-                        <div class="carousel-caption">
-                            <h4>First Thumbnail label</h4>
-                            <p>測試1</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="img-responsive center-block" alt="Second slide" src="images/800x600_002.jpg">
-                        <div class="carousel-caption">
-                            <h4>Second Thumbnail label</h4>
-                            <p>測試2</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="img-responsive center-block" alt="Third slide" src="images/800x600_003.jpg">
-                        <div class="carousel-caption">
-                            <h4>Third Thumbnail label</h4>
-                            <p>測試3</p>
-                        </div>
-                    </div>
+            <div class="htmleaf-container" style="margin-left: -80px;">
+                <div class="htmleaf-content">
+                    <div id="posterTvGrid" style="margin:40px auto 0 auto"></div>
                 </div>
-
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
             </div>
             <!--廣告輪播(結束)-->
             <hr>
@@ -260,10 +245,26 @@
     </div>
     <!--主文(結束)-->
     
+    
 	<jsp:include page="/footer_css.jsp" />
     
-    <!-- 輪播廣告 -->
-	<script src="js/bootstrap.min.js"></script>
+    <!-- 輪播廣告("2-2") -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/posterTvGrid.js"></script>
+    <script type="text/javascript">
+                var posterTvGrid = new posterTvGrid('posterTvGrid', { className: "posterTvGrid" }, [
+                        { "img": "images\/1.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
+                        { "img": "images\/2.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
+                        { "img": "images\/3.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
+                        { "img": "images\/4.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
+                        { "img": "images\/5.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
+                        { "img": "images\/6.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
+                        { "img": "images\/7.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
+                        { "img": "images\/8.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
+                        { "img": "images\/9.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" }
+                ]
+                );
+     </script>
 
     <!--滑鼠移入，顯示表格("2-2")-->
     <script src="js/jquery-1.12.4.js"></script>
