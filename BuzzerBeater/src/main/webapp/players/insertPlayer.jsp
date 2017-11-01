@@ -16,6 +16,13 @@
                     <script src="<%=request.getContextPath() %>/js/jquery-3.1.1.min.js"></script>
                     <script src="<%=request.getContextPath() %>/js/iEdit.js"></script>
                     <jsp:include page="/header_css.jsp" />
+                    <style>
+                    #result{
+							width: 200px;
+                                height: 300px;
+                                margin: 0px 0px 30px 70px;                    
+                    }
+                    </style>
 
 
                 </head>

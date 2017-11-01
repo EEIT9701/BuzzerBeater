@@ -85,12 +85,12 @@ public class TeamCompositionDAO_HibernateTemplate implements TeamCompositionDAO_
 		// System.out.println();
 		// }
 
-		// List<TeamCompositionVO> list = dao.findByPlayerID(70001);
-		// for(TeamCompositionVO vo : list){
-		// System.out.println(vo.getPlayerRole());
-		// }
+		 List<TeamCompositionVO> list = dao.findByTeamID(3008);
+		 for(TeamCompositionVO vo : list){
+		 System.out.println(vo.getPlayersVO().getPlayerName());
+		 }
 
-		dao.deleteByTeamID(3001);
+//		dao.deleteByTeamID(3001);
 	}
 
 }

@@ -92,7 +92,6 @@
 									<tr>
 										<th>隊徽</th>
 										<th>隊名</th>
-										<th>分組</th>
 										<th>隊長E-mail</th>
 										<th>隊長電話</th>
 										<th>教練</th>
@@ -114,8 +113,6 @@
 											<!--隊徽-->
 											<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teamsVO.teamID}">${teamsVO.teamName}</a></td>
 											<!--球名-->
-											<td></td>
-											<!--分組-->
 											<td>${teamsVO.captainEmail}</td>
 											<!--隊長E-mail-->
 											<td>${teamsVO.captainPhone}</td>

@@ -11,7 +11,9 @@ public class TeamCompositionVO implements Serializable {
 
 	private TeamsVO teamsVO;// replace teamID
 	private PlayersVO playersVO;// replace playerID
-
+	
+	private Integer teamID;
+	private Integer playerID;
 	private Integer playerNo;
 	private String playerRole;
 	private Timestamp joinTeamDate;
@@ -94,6 +96,22 @@ public class TeamCompositionVO implements Serializable {
 		} else if (!teamsVO.equals(other.teamsVO))
 			return false;
 		return true;
+	}
+
+	public Integer getTeamID() {
+		return teamID;
+	}
+
+	public void setTeamID(Integer teamID) {
+		this.teamID = teamID;
+	}
+
+	public Integer getPlayerID() {
+		return playerID;
+	}
+
+	public void setPlayerID(Integer playerID) {
+		this.playerID = playerID;
 	}
 
 }

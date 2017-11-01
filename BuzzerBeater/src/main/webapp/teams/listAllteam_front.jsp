@@ -83,9 +83,10 @@
 											<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teamsVO.teamID}">${teamsVO.teamName}</a></td>
 											<!--球名-->
 											<td>
-											<c:forEach var="groupRegVO" items="${teamsVO.groupRegSet}">
-											${groupRegVO.groupsVO.groupName}
-											</c:forEach></td>
+												<c:forEach var="groupRegVO" items="${teamsVO.groupRegSet}">
+													${groupRegVO.groupsVO.groupName}
+												</c:forEach>
+											</td>
 											<!--分組-->
 											<td>${teamsVO.coachName}</td>
 											<!--教練-->

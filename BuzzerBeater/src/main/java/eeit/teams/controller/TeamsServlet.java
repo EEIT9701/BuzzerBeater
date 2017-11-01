@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import eeit.players.model.PlayersVO;
+import eeit.teamcomposition.model.TeamCompositionService;
 import eeit.teams.model.TeamsService;
 import eeit.teams.model.TeamsVO;
 
@@ -49,7 +50,9 @@ public class TeamsServlet extends HttpServlet {
 			TeamsService teamSvc = new TeamsService();
 			teamSvc.insert(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName, totalWin, totalLose,
 					winRate, remarks);
-
+			
+			
+			request.setAttribute("teamsVO", teamSvc.findByID(teamSvc.findMaxID()));
 			String url = "/players/listMyPlayer.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);

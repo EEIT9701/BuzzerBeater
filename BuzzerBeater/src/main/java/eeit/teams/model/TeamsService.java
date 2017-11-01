@@ -30,9 +30,10 @@ public class TeamsService {
 
 	public void insert(String teamBadge,String teamName, String captainEmail,String captainPhone,String bossName, String coachName,Integer totalWin,Integer totalLose,Float winRate,  
 			String remarks ) {
-
+		dao = new TeamsDAO();
 		TeamsVO teamsVO = new TeamsVO();
-		teamsVO.setBossName(bossName);
+		teamsVO.setTeamBadge(teamBadge);
+		teamsVO.setTeamName(teamName);
 		teamsVO.setCaptainEmail(captainEmail);
 		teamsVO.setCaptainPhone(captainPhone);
 		teamsVO.setCoachName(coachName);
@@ -49,7 +50,7 @@ public class TeamsService {
 
 	public void update( String teamBadge,String teamName, String captainEmail, String captainPhone, String coachName,
 			String bossName,Integer totalWin,Integer totalLose,Float winRate,String remarks, Integer teamID) {
-
+		dao = new TeamsDAO();
 		TeamsVO teamsVO = new TeamsVO();
 		teamsVO.setTeamBadge(teamBadge);
 		teamsVO.setTeamName(teamName);

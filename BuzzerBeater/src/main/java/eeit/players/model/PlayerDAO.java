@@ -35,7 +35,41 @@ public class PlayerDAO implements PlayerDAO_interface {
 	private static final String GET_ONENAME_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality,photo FROM Players where PlayerName = ?";
 	private static final String GET_ONEID_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality,Photo FROM Players where PlayerID = ?";
 	private static final String GET_ALL_STMT = "SELECT PlayerID,PlayerName,ID,Height,Weights,Birthday,Nationality,Photo FROM Players";
+	private static final String GET_PLAYERID_MAX = "SELECT MAX(playerID) playerID FROM Players";
 	
+	public Integer findMaxID() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Integer playerID = null ;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_PLAYERID_MAX);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				playerID = rs.getInt("playerID");
+			}
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return playerID;
+	}
 	//新增method
 	@Override
 	public void insert(PlayersVO playerVO) {
