@@ -50,7 +50,7 @@
 				<!--第一列-左邊表格-格式_.col-md-8-->
 				<div class="col-md-12">
 
-					<li><a href="index.jsp"> 首頁<!--這行的href輸入超連結頁面--></a>/球員數據排名</li> <br>
+					</div>
 					   <table class="table table-bordered">
 					 
 					 
@@ -155,8 +155,8 @@
 					    
                       </tbody>   
 			           </table>
-			</div>
-		</div>
+			
+		
 		<br> <br>
 		<!--****************-->
 		<!-- 第二列(開始) -->
@@ -188,7 +188,7 @@
 									<tr>
 										<th>球員</th>
 										<th>球員</th>
-										<th>出場時間</th>
+										<th>出場時間(分)</th>
 										<th>投籃命中</th>
 									    <th>投籃出手</th>
 										<th>投籃(%)</th>
@@ -223,14 +223,14 @@
 												src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png"
 												height="67.5" width="45">
 										</c:if></td>
-											<td>${singlefieldVO.gameTime}</td>
+											<td><fmt:formatNumber type="number" value="${singlefieldVO.gameTime/60}" maxFractionDigits="1"/></td>
 											<td>${singlefieldVO.twoPoint}</td>
 											<td>${singlefieldVO.twoPointShot}</td>
 											<td><c:if test="${'0'==singlefieldVO.twoPointShot}">
 							                    0
 									            </c:if>
 									            <c:if test="${'0' != singlefieldVO.twoPointShot}">
-									              <p><fmt:formatNumber type="number" value="${singlefieldVO.twoPoint/singlefieldVO.twoPointShot*100}" maxFractionDigits="1"/></p>
+									             <fmt:formatNumber type="number" value="${singlefieldVO.twoPoint/singlefieldVO.twoPointShot*100}" maxFractionDigits="1"/>
 									            </c:if>
 									        </td>
 											<td>${singlefieldVO.threePoint}</td>
@@ -239,7 +239,7 @@
 							                    0
 									            </c:if>
 									            <c:if test="${'0' != singlefieldVO.threePointShot}">
-									              <p><fmt:formatNumber type="number" value="${singlefieldVO.threePoint/singlefieldVO.threePointShot*100}" maxFractionDigits="1"/></p>
+									              <fmt:formatNumber type="number" value="${singlefieldVO.threePoint/singlefieldVO.threePointShot*100}" maxFractionDigits="1"/>
 									            </c:if>
 									        </td>
 											<td>${singlefieldVO.fg}</td>
@@ -248,7 +248,7 @@
 							                    0
 									            </c:if>
 									            <c:if test="${'0' != singlefieldVO.fgShot}">
-									              <p><fmt:formatNumber type="number" value="${singlefieldVO.fg/singlefieldVO.fgShot*100}" maxFractionDigits="1"/></p>
+									             <fmt:formatNumber type="number" value="${singlefieldVO.fg/singlefieldVO.fgShot*100}" maxFractionDigits="1"/>
 									            </c:if>
 									        </td>
 											<td>${singlefieldVO.offReb}</td>
@@ -274,7 +274,7 @@
 									<tr>
 										<th>球員</th>
 										<th>球員</th>
-										<th>出場時間</th>
+										<th>出場時間(分)</th>
 										<th>投籃命中</th>
 									    <th>投籃出手</th>
 										<th>投籃(%)</th>
@@ -309,14 +309,14 @@
 												src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png"
 												height="67.5" width="45">
 										</c:if></td>
-											<td>${singlefieldVO.gameTime}</td>
+											<td><fmt:formatNumber type="number" value="${singlefieldVO.gameTime/60}" maxFractionDigits="1"/></td>
 											<td>${singlefieldVO.twoPoint}</td>
 											<td>${singlefieldVO.twoPointShot}</td>
 											<td><c:if test="${'0'==singlefieldVO.twoPointShot}">
 							                    0
 									            </c:if>
 									            <c:if test="${'0' != singlefieldVO.twoPointShot}">
-									              <p><fmt:formatNumber type="number" value="${singlefieldVO.twoPoint/singlefieldVO.twoPointShot*100}" maxFractionDigits="1"/></p>
+									              <fmt:formatNumber type="number" value="${singlefieldVO.twoPoint/singlefieldVO.twoPointShot*100}" maxFractionDigits="1"/>
 									            </c:if>
 									        </td>
 											<td>${singlefieldVO.threePoint}</td>
@@ -325,7 +325,7 @@
 							                    0
 									            </c:if>
 									            <c:if test="${'0' != singlefieldVO.threePointShot}">
-									              <p><fmt:formatNumber type="number" value="${singlefieldVO.threePoint/singlefieldVO.threePointShot*100}" maxFractionDigits="1"/></p>
+									              <fmt:formatNumber type="number" value="${singlefieldVO.threePoint/singlefieldVO.threePointShot*100}" maxFractionDigits="1"/>
 									            </c:if>
 									        </td>
 											<td>${singlefieldVO.fg}</td>
@@ -334,7 +334,7 @@
 							                    0
 									            </c:if>
 									            <c:if test="${'0' != singlefieldVO.fgShot}">
-									              <p><fmt:formatNumber type="number" value="${singlefieldVO.fg/singlefieldVO.fgShot*100}" maxFractionDigits="1"/></p>
+									             <fmt:formatNumber type="number" value="${singlefieldVO.fg/singlefieldVO.fgShot*100}" maxFractionDigits="1"/>
 									            </c:if>
 									        </td>
 											<td>${singlefieldVO.offReb}</td>
@@ -359,7 +359,7 @@
 		</div>
 		<jsp:include page="/footer_css.jsp" />
 	</div>
-	</div>
+
 
 	<!--主文(結束)-->
 

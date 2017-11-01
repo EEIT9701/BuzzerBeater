@@ -5,7 +5,7 @@
 <!--標尾(開始)-->
 	<hr>
 	<footer>
-		<p>&copy; 2016 Company, Inc.</p>
+		<p>&copy; 2017 Company, Inc.</p>
 	</footer>
 <!--標尾(結束)-->
 

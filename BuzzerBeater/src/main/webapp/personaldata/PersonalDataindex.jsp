@@ -54,9 +54,8 @@
 				<!--第一列-左邊表格-格式_.col-md-8-->
 				<div class="col-md-12">
 
-					<li><a href="index.jsp"> 首頁<!--這行的href輸入超連結頁面--></a>/球員數據排名</li> <br>
-					<br>
-					<div id=st1>
+			
+					<div >
 						球季 <select>
 							<option label="2015賽季" value="object:7" >季前熱身賽</option>
 							<option label="2016賽季" value="object:8">例行賽</option>
@@ -72,7 +71,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		<br> <br>
 		<!--****************-->
 		<!-- 第二列(開始) -->
@@ -98,7 +97,7 @@
 								<th>球員</th>
 								<th>球隊名稱</th>
 								<th>出場次數</th>
-								<th>平均出場時間</th>
+								<th>平均出場時間(分)</th>
 							
 								<th>投籃(%)</th>
 							
@@ -135,13 +134,13 @@
 
 									<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${personalDataVO.teamsVO.teamID}">${personalDataVO.teamsVO.teamName}</a></td>
 									<td>${personalDataVO.gameID}</td>
-									<td><fmt:formatNumber type="number" value="${personalDataVO.gameTime/personalDataVO.gameID}" maxFractionDigits="0"/></td>
+									<td><fmt:formatNumber type="number" value="${personalDataVO.gameTime/personalDataVO.gameID/60}" maxFractionDigits="1"/></td>
 								
 									<td><c:if test="${'0'==personalDataVO.twoPointShot}">
 							               0
 									    </c:if>
 									    <c:if test="${'0' != personalDataVO.twoPointShot}">
-									      <p><fmt:formatNumber type="number" value="${personalDataVO.twoPoint/personalDataVO.twoPointShot*100}" maxFractionDigits="1"/></p>
+									      <fmt:formatNumber type="number" value="${personalDataVO.twoPoint/personalDataVO.twoPointShot*100}" maxFractionDigits="1"/>
 									    </c:if>
 									</td>
 									
@@ -150,7 +149,7 @@
 							               0
 									    </c:if>
 									    <c:if test="${'0' != personalDataVO.threePointShot}">
-									      <p><fmt:formatNumber type="number" value="${personalDataVO.threePoint/personalDataVO.threePointShot*100}" maxFractionDigits="1"/></p>
+									      <fmt:formatNumber type="number" value="${personalDataVO.threePoint/personalDataVO.threePointShot*100}" maxFractionDigits="1"/>
 									    </c:if>
 									</td>
 									
@@ -159,7 +158,7 @@
 							               0
 									    </c:if>
 									    <c:if test="${'0' != personalDataVO.fgShot}">
-									      <p><fmt:formatNumber type="number" value="${personalDataVO.fg/personalDataVO.fgShot*100}" maxFractionDigits="1"/></p>
+									      <fmt:formatNumber type="number" value="${personalDataVO.fg/personalDataVO.fgShot*100}" maxFractionDigits="1"/>
 									    </c:if>
 									</td>
 									
@@ -191,7 +190,7 @@
 								<th>球員</th>
 								<th>球隊名稱</th>
 								<th>出場次數</th>
-								<th>出場時間</th>
+								<th>出場時間(分)</th>
 							
 								<th>投籃(%)</th>
 								
@@ -227,13 +226,13 @@
 
 									<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${personalDataVO.teamsVO.teamID}">${personalDataVO.teamsVO.teamName}</a></td>
 									<td>${personalDataVO.gameID}</td>
-									<td>${personalDataVO.gameTime}</td>
-																	
+									
+									<td><fmt:formatNumber type="number" value="${personalDataVO.gameTime/60}" maxFractionDigits="1"/></td>								
 									<td><c:if test="${'0'==personalDataVO.twoPointShot}">
 							               0
 									    </c:if>
 									    <c:if test="${'0' != personalDataVO.twoPointShot}">
-									      <p><fmt:formatNumber type="number" value="${personalDataVO.twoPoint/personalDataVO.twoPointShot*100}" maxFractionDigits="1"/></p>
+									      <fmt:formatNumber type="number" value="${personalDataVO.twoPoint/personalDataVO.twoPointShot*100}" maxFractionDigits="1"/>
 									    </c:if>
 									</td>
 									
@@ -242,7 +241,7 @@
 							               0
 									    </c:if>
 									    <c:if test="${'0' != personalDataVO.threePointShot}">
-									      <p><fmt:formatNumber type="number" value="${personalDataVO.threePoint/personalDataVO.threePointShot*100}" maxFractionDigits="1"/></p>
+									      <fmt:formatNumber type="number" value="${personalDataVO.threePoint/personalDataVO.threePointShot*100}" maxFractionDigits="1"/>
 									    </c:if>
 									</td>
 									
@@ -251,7 +250,7 @@
 							               0
 									    </c:if>
 									    <c:if test="${'0' != personalDataVO.fgShot}">
-									      <p><fmt:formatNumber type="number" value="${personalDataVO.fg/personalDataVO.fgShot*100}" maxFractionDigits="1"/></p>
+									      <fmt:formatNumber type="number" value="${personalDataVO.fg/personalDataVO.fgShot*100}" maxFractionDigits="1"/>
 									    </c:if>
 									</td>
 									
@@ -278,9 +277,9 @@
 				</div>
 			</div>
 				<jsp:include page="/footer_css.jsp" />
-		</div>
-	</div>
+	
 
+</div>
 	<!--主文(結束)-->
 
             <script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>

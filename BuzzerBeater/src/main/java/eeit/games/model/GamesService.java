@@ -90,4 +90,8 @@ public class GamesService {
 	public List<GamesVO> findByGroupID(Integer groupID) {
 		return dao.findByGroupID(groupID);
 	}
+	
+	public List<GamesVO> findByTeamID(Integer teamID) {
+		return dao.findByTeamID(teamID);
+	}
 }
