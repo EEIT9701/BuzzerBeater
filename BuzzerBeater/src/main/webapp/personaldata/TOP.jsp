@@ -39,13 +39,13 @@
 								<c:set var="nameA" value="${singlefieldVO.playersVO.playerName}"/>
 								<c:set var="photoA" value="${singlefieldVO.playersVO.photo}"/>
 						   </c:if>
-						    <c:if test="${singlefieldVO.assist/singlefieldVO.gameID>assistmaxA}">
-								<c:set var="assistmaxA" value="${singlefieldVO.assist/singlefieldVO.gameID}"/>
+						    <c:if test="${singlefieldVO.assist>assistmaxA}">
+								<c:set var="assistmaxA" value="${singlefieldVO.assist}"/>
 								<c:set var="assistnameA" value="${singlefieldVO.playersVO.playerName}"/>
 								<c:set var="assistphotoA" value="${singlefieldVO.playersVO.photo}"/>
 						   </c:if>
-						   <c:if test="${singlefieldVO.defReb/singlefieldVO.gameID+singlefieldVO.offReb/singlefieldVO.gameID>rebmaxA}">
-								<c:set var="rebmaxA" value="${singlefieldVO.defReb/singlefieldVO.gameID+singlefieldVO.offReb/singlefieldVO.gameID}"/>
+						   <c:if test="${singlefieldVO.defReb+singlefieldVO.offReb>rebmaxA}">
+								<c:set var="rebmaxA" value="${singlefieldVO.defReb+singlefieldVO.offReb}"/>
 								<c:set var="rebnameA" value="${singlefieldVO.playersVO.playerName}"/>
 								<c:set var="rebphotoA" value="${singlefieldVO.playersVO.photo}"/>
 						   </c:if>
@@ -58,17 +58,14 @@
 						  <td>得分王					  
 						    <img src="data:image/png;base64,${photoA}" height="135" width="90">
 						    <c:out value="${nameA}"/>
-					
-							   平均得分:<fmt:formatNumber type="number" value="${pointmaxA}" maxFractionDigits="1"/>
+						    <c:out value="${pointmaxA}"/>
 						  </td>
 						  
 					
 					      <td>助功王					  
 						    <img src="data:image/png;base64,${assistphotoA}" height="135" width="90">
 						    <c:out value="${assistnameA}"/>
-					
-						   平均助功:<fmt:formatNumber type="number" value="${assistmaxA}" maxFractionDigits="1"/>
-						    
+						    <c:out value="${assistmaxA}"/>
 						  </td>
 						
 					   
@@ -76,8 +73,7 @@
 					      <td>籃板王					  
 						    <img src="data:image/png;base64,${rebphotoA}" height="135" width="90">
 						    <c:out value="${rebnameA}"/>
-				
-						   平均籃板:<fmt:formatNumber type="number" value="${rebmaxA}" maxFractionDigits="1"/>
+						    <c:out value="${rebmaxA}"/>
 						  </td>
 						
 					    </tr>
