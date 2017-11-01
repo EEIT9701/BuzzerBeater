@@ -51,9 +51,110 @@
 				<div class="col-md-12">
 
 					<li><a href="index.jsp"> 首頁<!--這行的href輸入超連結頁面--></a>/球員數據排名</li> <br>
-					
-
-			
+					   <table class="table table-bordered">
+					 
+					 
+					    <thead>
+									<tr>
+									
+									<tr>
+					  <thead>
+					    <c:set var="pointmaxA" value="0"/>
+					    <c:set var="assistmaxA" value="0"/>
+					    <c:set var="rebmaxA" value="0"/>
+					    <c:set var="nameA" value=""/>
+					    <c:set var="photoA" value=""/>
+					    <c:set var="assistnameA" value=""/>
+					    <c:set var="assistphotoA" value=""/>
+					    <c:set var="rebnameA" value=""/>
+					    <c:set var="rebphotoA" value=""/>
+						<c:forEach var="singlefieldVO" items="${teamAList}" >
+						   <c:if test="${singlefieldVO.points>pointmaxA}">
+								<c:set var="pointmaxA" value="${singlefieldVO.points}"/>
+								<c:set var="nameA" value="${singlefieldVO.playersVO.playerName}"/>
+								<c:set var="photoA" value="${singlefieldVO.playersVO.photo}"/>
+						   </c:if>
+						    <c:if test="${singlefieldVO.assist>assistmaxA}">
+								<c:set var="assistmaxA" value="${singlefieldVO.assist}"/>
+								<c:set var="assistnameA" value="${singlefieldVO.playersVO.playerName}"/>
+								<c:set var="assistphotoA" value="${singlefieldVO.playersVO.photo}"/>
+						   </c:if>
+						   <c:if test="${singlefieldVO.defReb+singlefieldVO.offReb>rebmaxA}">
+								<c:set var="rebmaxA" value="${singlefieldVO.defReb+singlefieldVO.offReb}"/>
+								<c:set var="rebnameA" value="${singlefieldVO.playersVO.playerName}"/>
+								<c:set var="rebphotoA" value="${singlefieldVO.playersVO.photo}"/>
+						   </c:if>
+                        </c:forEach>
+                        
+                        <c:set var="pointmaxB" value="0"/>
+                        <c:set var="assistmaxB" value="0"/>
+                        <c:set var="rebmaxB" value="0"/>
+                        <c:set var="nameB" value=""/>
+					    <c:set var="photoB" value=""/>
+					    <c:set var="assistnameB" value=""/>
+					    <c:set var="assistphotoB" value=""/>
+					    <c:set var="rebnameB" value=""/>
+					    <c:set var="rebphotoB" value=""/>
+						<c:forEach items="${teamBList}" var="singlefieldVO">
+						   <c:if test="${singlefieldVO.points>pointmaxB}">
+								<c:set var="pointmaxB" value="${singlefieldVO.points}"/>
+								<c:set var="nameB" value="${singlefieldVO.playersVO.playerName}"/>
+								<c:set var="photoB" value="${singlefieldVO.playersVO.photo}"/>
+						   </c:if>
+						   <c:if test="${singlefieldVO.assist>assistmaxB}">
+								<c:set var="assistmaxB" value="${singlefieldVO.assist}"/>
+								<c:set var="assistnameB" value="${singlefieldVO.playersVO.playerName}"/>
+								<c:set var="assistphotoB" value="${singlefieldVO.playersVO.photo}"/>
+						   </c:if>
+						   <c:if test="${singlefieldVO.defReb+singlefieldVO.offReb>rebmaxB}">
+								<c:set var="rebmaxB" value="${singlefieldVO.defReb+singlefieldVO.offReb}"/>
+								<c:set var="rebnameB" value="${singlefieldVO.playersVO.playerName}"/>
+								<c:set var="rebphotoB" value="${singlefieldVO.playersVO.photo}"/>
+						   </c:if>
+                        </c:forEach>
+                        
+					  <tbody>
+						<tr>
+						  <td>得分王					  
+						    <img src="data:image/png;base64,${photoA}" height="94.5" width="63">
+						    <c:out value="${nameA}"/>
+						    <c:out value="${pointmaxA}"/>
+						  </td>
+						  <td>
+						    <img src="data:image/png;base64,${photoB}" height="94.5" width="63">
+						    <c:out value="${nameB}"/>
+						    <c:out value="${pointmaxB}"/>
+						  </td>
+					    </tr>
+					    <tr>
+					      <td>助功王					  
+						    <img src="data:image/png;base64,${assistphotoA}" height="94.5" width="63">
+						    <c:out value="${assistnameA}"/>
+						    <c:out value="${assistmaxA}"/>
+						  </td>
+						  <td>
+						   <img src="data:image/png;base64,${assistphotoB}" height="94.5" width="63">
+						    <c:out value="${assistnameB}"/>
+						    <c:out value="${assistmaxB}"/>
+						  </td>
+					    </tr>
+					    <tr>
+					      <td>籃板王					  
+						    <img src="data:image/png;base64,${rebphotoA}" height="94.5" width="63">
+						    <c:out value="${rebnameA}"/>
+						    <c:out value="${rebmaxA}"/>
+						  </td>
+						  <td>
+						   <img src="data:image/png;base64,${rebphotoB}" height="94.5" width="63">
+					        <c:out value="${rebnameB}"/>
+						    <c:out value="${rebmaxB}"/>
+						  </td>
+					    </tr>
+					    
+					    
+					    
+                      </tbody>   
+			           </table>
 			</div>
 		</div>
 		<br> <br>

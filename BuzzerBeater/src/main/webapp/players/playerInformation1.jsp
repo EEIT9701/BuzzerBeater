@@ -120,7 +120,7 @@
                                         <div id="tabs">
                                             <ul>
                                                 <li><a href="#tabs-1">本季數據</a></li>
-                                                <li><a href="#tabs-2">進五場數據</a></li>
+                                                <li><a href="#tabs-2">近期比賽數據</a></li>
                                             </ul>
                                             <div id="tabs-1">
                                                 <table class="table table-bordered">

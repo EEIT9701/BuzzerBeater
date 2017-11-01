@@ -152,7 +152,8 @@
 											</td>
 											<td>
 												<Form method="post" action="<%=request.getContextPath() %>/Teams.do">
-													<button type="submit" class="btn btn-danger">刪除</button> <input type="hidden" name="teamID" value="${teamsVO.teamID}">													<input type="hidden" name="action" value="delete">
+													<button type="submit" class="btn btn-danger">刪除</button> <input type="hidden" name="teamID" value="${teamsVO.teamID}">
+													<input type="hidden" name="action" value="delete">
 												</Form>
 											</td>
 										</tr>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 		<jsp:useBean id="season" scope="page" class="eeit.season.model.SeasonService" />
 		<jsp:useBean id="group" scope="page" class="eeit.groups.model.GroupsService" />
@@ -126,66 +125,34 @@
 			<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 			<script>
 				$(document).ready(function () {
-					 $('#table').DataTable({
-						    columnDefs: [{ width: 200, targets: 6}],
-						    "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-						    "pagingType": "full_numbers",
-						    "language": {
-						     "lengthMenu":"每一頁顯示_MENU_ 筆資料",
-						     "zeroRecords":"查無資料",
-						     "info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
-						     "infoEmpty":"無資料",
-						     "infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
-						     "search":"搜尋：",
-						     "paginate":{
-						      "first":"第一頁",
-						      "previous":"上一頁",
-						      "next":"下一頁",
-						      "last":"最末頁"     
-						    }
-						     }
-						   })
+					$('#table').DataTable({
+						columnDefs: [{
+							width: 200,
+							targets: 6
+						}],
+						"lengthMenu": [
+							[5, 10, 15, -1],
+							[5, 10, 15, "All"]
+						],
+						"pagingType": "full_numbers",
+						"language": {
+							"lengthMenu": "每一頁顯示_MENU_ 筆資料",
+							"zeroRecords": "查無資料",
+							"info": "現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
+							"infoEmpty": "無資料",
+							"infoFiltered": "(總共搜尋了_MAX_ 筆資料)",
+							"search": "搜尋：",
+							"paginate": {
+								"first": "第一頁",
+								"previous": "上一頁",
+								"next": "下一頁",
+								"last": "最末頁"
+							}
+						}
+					})
 				});
 			</script>
-			<script>
-				$(document).ready(function () {
-					$('#seasonSelect').on('blur', function () {
-							$.getJSON('<%=request.getContextPath()%> 
-									Groups.do ', {
-									'action': 'GET_ALL_GROUPS'
-								},
-								function (datas) {
-
-									console
-										.log(datas);
-									$
-										.each(
-											datas,
-											function (
-												idx,
-												groups) {
-												console
-													.log(groups.groupName);
-												var cell1 = $(
-														'<option></option>')
-													.text(
-														groups.groupName);
-												var cell2 = $(
-														'<option></option>')
-													.value(
-														groups.groupID);
-											})
-									$(
-											'#groupsSelect')
-										.append(
-											[
-												cell1,
-												cell2
-											]);
-								})
-					})
-				})
-			</script>
+			
 		</body>
 
 		</html>

@@ -130,6 +130,12 @@ video::-webkit-media-controls-enclosure {
 video::-webkit-media-controls-panel {
     width: calc(100% + 30px); 
 }
+#deleteNote{
+	text-align:center;
+}
+#deleteTitle{
+	text-align:center;
+}
 </style>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/datatables.min.css" />
