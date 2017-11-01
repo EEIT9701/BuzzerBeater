@@ -244,11 +244,14 @@ video::-webkit-media-controls-panel {
   											</c:forEach>
     									</select>
 									</div>
-									<div class="col-md-offset-1 col-md-3">
+									<div class="col-md-offset-1 col-md-2">
 										<select id="grouplist" name="group1">
     									</select>
 									</div>
-									<div class="col-md-3">
+								</div>
+								</br>
+								<div class="row">
+									<div>
 										<select id="gamelist">
     									</select>
 									</div>
@@ -262,24 +265,24 @@ video::-webkit-media-controls-panel {
 								</br>
 								 <div class="input-group input-group">
             						<span class="input-group-addon">標題</span>
-           						 	<input type="text" class="form-control">
+           						 	<input type="text" class="form-control" id="insertTitle" required>
         						 </div>
 								</br>
 								<div class="input-group">
 									<span class="input-group-addon">備註</span> 
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" id="insertDescriptions" required>
 								</div>
 								</br>
 								<div class="input-group">
 									<span class="input-group-addon">標籤</span> 
-									<input type="text" class="form-control" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣">
+									<input type="text" class="form-control" id="insertTag" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣" required>
 								</div>
 
 
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-warning"
-									data-dismiss="moda" >確認上傳</button>
+									data-dismiss="modal" id="insertConfirm" >確認上傳</button>
 								<button type="button" class="btn btn-primary"
 									data-dismiss="modal">取消</button>
 							</div>
@@ -436,7 +439,7 @@ video::-webkit-media-controls-panel {
 	  		 			  $(this).parents('tr').find('td:nth-child(7)').html(tag);
 	  		 	       	  
 	  		 			  //把輸入在欄位上的資料經過post傳送
-	  		 	       	  $.post('/BuzzerBeater/GameMedia.do', {'action':'Update', "mediaID":mediaID, "title":title, "descriptions":descriptions, "tag":tag}, function(datas){
+	  		 	       	  $.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'Update', "mediaID":mediaID, "title":title, "descriptions":descriptions, "tag":tag}, function(datas){
 	  							console.log(mediaID)//只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
 	  		 	       	  })   
 	  			       	  $(this).text('修改');	       	  
@@ -466,6 +469,7 @@ video::-webkit-media-controls-panel {
 	  			var season = null;
 	  			var group = null;
 	  			
+	  			
 	  			$('#seasonlist').change(function(){
 	  				season = $('select[name="season1"]').val(); 
 	  				$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'findGroupNameBySeasonID' , 'seasonID':season},function(data){
@@ -489,6 +493,17 @@ video::-webkit-media-controls-panel {
 	  					})
 	  				})
 	  				
+	  			})
+	  			var gameID = $('#gamelist').val();
+	  			var title = $('#insertTitle').text();
+	  			var descriptions = $('#insertDescriptions').text();
+	  			var tag = $('#insertTag').text();
+	  			
+	  			
+	  			$('insertConfirm').click(function(){
+	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insert','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
+						//主鍵mediaID由Identity生成、mediaType、mediaDate均在Servlet設定，其餘接收後回傳
+ 	       	 		})	
 	  			})
 	  		}
 	});

@@ -108,7 +108,7 @@
            		<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}" varStatus="loop">
                 	<c:forEach var="gameMediaType" items="${gameMediaSvc.mediaType}">
                 		<c:if test="${gameMediaType eq 'photo'}">
-                			<c:if test="${loop.count}<5">
+                			<c:if test="${loop.count<5}">
                     			<div class='item'>
                    					<img src="data:image/jpeg;base64,${gameMediaSvc.gamePhoto}">
                     			</div>
