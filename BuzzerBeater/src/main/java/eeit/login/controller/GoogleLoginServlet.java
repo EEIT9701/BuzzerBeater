@@ -131,19 +131,19 @@ public class GoogleLoginServlet extends HttpServlet {
 			String acc = jsonOb.getString("email");
 			memberInfoVO = loginCheckflag.findByAcc(acc);
 			if(memberInfoVO.getAcc()!=null){ //check Email 是否有在資料庫內	
-//				memberInfoVO.setAcc(jsonOb.getString("email"));   //使用者帳號
-//				memberInfoVO.setName(jsonOb.getString("name"));   //使用者姓名
-//				memberInfoVO.setRegisterTime(ts);	              //照片的url		
+				memberInfoVO.setAcc(jsonOb.getString("email"));   //使用者帳號
+				memberInfoVO.setName(jsonOb.getString("name"));   //使用者姓名
+//				memberInfoVO.setRegisterTime(ts);	              	
 				session.setAttribute("LoginOK", memberInfoVO);
 				
 				
-				session.setAttribute("pictureUri", jsonOb.getString("picture"));
+				session.setAttribute("pictureUri", jsonOb.getString("picture")); //照片的url	
 //				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
 //				rd.forward(req, resp);
-				resp.sendRedirect("index.jsp");
+				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 				return;
 			}else{
-				resp.sendRedirect("index.jsp");
+				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 				return;
 //				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
 //				rd.forward(req, resp);

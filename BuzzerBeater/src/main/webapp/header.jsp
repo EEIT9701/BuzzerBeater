@@ -38,7 +38,7 @@
 						<c:when test="${LoginOK.auth == 'parttime'}">
 <%-- 							<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li> --%>
 <%-- 							<li><h6><a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">賽季管理</a></h6></li> --%>
-<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></h6></li>
@@ -73,7 +73,7 @@
 						</a>
 					</c:if>		
 				</li>
-				<li><a href="LoginOutServlet.do" class="cd-signup"" > 
+				<li><a href="<%=request.getContextPath()%>/LoginOutServlet.do" class="cd-signup"" > 
 				         <c:choose>
 							<c:when test="${empty LoginOK}">
 							</c:when>

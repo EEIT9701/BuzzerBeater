@@ -96,9 +96,9 @@
 	<div class="jDialog" id="dialog-4">
 		<div class="content">
 		 <H3>新增帳號</H3>
-			     <input id="MemberInfoVO_acc" placeholder="會員帳號" type="text" value="" required>
-			     <input id="MemberInfoVO_name"  placeholder="會員名稱" type="text" value="" required>
-			     <input id="MemberInfoVO_auth"  placeholder="權限"  type="text" value="" required>
+		  會員帳號<input id="MemberInfoVO_acc"   placeholder="會員帳號" type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+		  會員名稱<input id="MemberInfoVO_name"  placeholder="會員名稱" type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+			 權限<input id="MemberInfoVO_auth"  placeholder="權限"  type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 			 <div>
 				<button class="button" data-dismiss="JDialog" id="jDialogButton">確定</button>
 			</div>
@@ -121,13 +121,6 @@
 		     animationType : 'flip',
 		     allowOverlay : false
        });
-	    
-		$('#button_insert').on('click', function(){ 
-// 				alert($('#MemberInfoVO_acc').val());
-// 				alert($('#MemberInfoVO_name').val());
-// 				alert($('#MemberInfoVO_auth').val());
-
-	    });
 		
 		$('#jDialogButton').on('click', function(){
 			//抓input 的值
@@ -170,7 +163,7 @@
  	               maxDate = new Date(MemberInfoVO.registerTime);          //ms to data
  	               var cell5 = $('<td></td>').text(maxDate);
 	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
-	               var cell7 = $('<td><button type="button" class="btn btn-warning updateData" >修改</button></td>');
+	               var cell7 = $('<td><button type="button" class="btn btn-warning">修改</button></td>');
 	               var cell8 = $('<td><button type="button" class="btn btn-danger" >刪除</button></td>');
 	               var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8]);
  	               docFrag.append(row);
@@ -202,7 +195,7 @@
 		
 		function buttonFunction(){
 		  //修改鍵	
-		  $('.btn-primary').on('click', function(){          	    		            	
+		  $('.btn-warning').on('click', function(){          	    		            	
 		   //按下修改鍵 
 	       if($(this).text() == '修改'){	
 	         //可以取得acc
@@ -250,15 +243,18 @@
 	       	}
        });
           //刪除鍵
-		  $('.btn-warning').on('click', function(){
-			  alert("確定要刪除嗎?");
-			  var memberID = $(this).parents('tr').find('td:nth-child(1)').text();
-			  //alert(memberID);
-			  //把輸入在欄位上的資料經過post傳送
- 	       	  $.post('/BuzzerBeater/memberInfoServlet.do', {'action':'DELETE', 'MemberID':memberID}, function(datas){
-					//刪除資料 不需回傳東西, 或做輸入與法判斷
- 	       	  })
-			  $(this).parents('tr').empty();
+		  $('.btn-danger').on('click', function(){
+			  if(confirm("確定要刪除嗎?")){
+				  var memberID = $(this).parents('tr').find('td:nth-child(1)').text();
+				  //alert(memberID);
+				  //把輸入在欄位上的資料經過post傳送
+	 	       	  $.post('/BuzzerBeater/memberInfoServlet.do', {'action':'DELETE', 'MemberID':memberID}, function(datas){
+						//刪除資料 不需回傳東西, 或做輸入與法判斷
+	 	       	  })
+				  $(this).parents('tr').empty();  
+			  }else {
+				  
+			  }
  	       	  //location.reload()
 		  }) 
 	  }

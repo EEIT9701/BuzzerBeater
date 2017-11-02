@@ -40,9 +40,9 @@ public class LoginOutServlet extends HttpServlet {
 		session.removeAttribute("memberInfoVO");
 		session.invalidate();
 
-		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-		rd.forward(request, response);
-
+//		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+//		rd.forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
 //		out.close();
 	}
 }
