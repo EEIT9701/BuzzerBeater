@@ -20,7 +20,7 @@
 					 <c:choose>
 					   <c:when test="${empty LoginOK}">
 						<li><h6>
-							<a href="#">未登入使用</a>	
+<!-- 							<a href="#">未登入使用</a>	 -->
 						</h6></li>
 					   </c:when> 
 					    <c:when test="${LoginOK.auth == 'admin'}">
@@ -50,7 +50,7 @@
 						</c:when>
 						<c:otherwise>
 						   <li><h6>
-								<a href="#">${LoginOK.auth}登入使用</a>
+								<a>${LoginOK.auth}登入使用</a>
 						   </h6></li>
 						</c:otherwise>
 						</c:choose>	
@@ -72,7 +72,7 @@
 						</a>
 					</c:if>		
 				</li>
-				<li><a href="LoginOutServlet.do" class="cd-signup"" > 
+				<li><a href="<%=request.getContextPath()%>/LoginOutServlet.do" class="cd-signup"" > 
 				         <c:choose>
 							<c:when test="${empty LoginOK}">
 							</c:when>
