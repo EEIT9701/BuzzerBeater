@@ -12,12 +12,28 @@
 			<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 			<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 			<jsp:include page="/header_css.jsp" />
+			<jsp:include page="/font_css.jsp" />
 			<style>
 				#img1 {
 					width: 55px;
 					height: 40px;
 					margin: auto;
-				}
+					}
+				th {
+					text-align: center;
+					}
+	
+    			#pathWay {
+      				color: #666;
+      				height: 28px;
+      				line-height: 28px;
+        			border-bottom: 1px solid #c0b7b7;
+    				text-indent: 5px;
+    				font-size: 18px;
+        			font-weight: normal;
+        			margin-bottom: 10px;
+      				font-family:微軟正黑體;
+     			   }
 			</style>
 		</head>
 
@@ -27,7 +43,18 @@
 			<jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService" />
 			<!--主文(開始)-->
 			<div class="container">
-				<div class="jumbotron">
+					<div class="jumbotron">
+		
+		<!--上層導覽列(開始) -->
+		<div id="pathWay">
+		    <span>
+            	<a href="<%=request.getContextPath() %>/index.jsp">
+            		<span>首頁</span>
+            	</a>
+        	</span>&gt;
+        	<span><span>球隊</span></span>
+    	</div>
+    	<!--上層導覽列(結束) -->
 <%-- 					<form class="form-inline" method="post" action="<%=request.getContextPath() %>/Players.do"> --%>
 <!-- 						<select class="form-control" name="season"> -->
 <!-- 					<option>賽季</option> -->
@@ -60,7 +87,7 @@
 					<div class="row">
 
 						<div class="col-md-12">
-
+						<h2>球隊列表</h2>
 							<table class="table table-bordered" id="table">
 								<thead>
 									<tr>
