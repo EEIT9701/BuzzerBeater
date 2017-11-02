@@ -4,8 +4,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,10 +25,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.Row;
 
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
@@ -52,8 +51,8 @@ public class GamesServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-		
-		if("GET_GAMES".equals(action)){
+
+		if ("GET_GAMES".equals(action)) {
 			Integer groupID = Integer.valueOf(request.getParameter("groupID"));
 			GroupsService svc = new GroupsService();
 			GroupsVO groupsVO = svc.findByGroupID(groupID);
@@ -66,42 +65,56 @@ public class GamesServlet extends HttpServlet {
 			request.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				// 取得上傳檔案轉為資料流
+				// 取得上傳檔案並轉為資料流
 				Part part = request.getPart("uploadExcel");
 				FileInputStream fis = (FileInputStream) part.getInputStream();
 
 				// 用此資料流建立workbook
 				HSSFWorkbook workbook = new HSSFWorkbook(fis);
 
+				// 取得第一個工作表
 				HSSFSheet sheet = workbook.getSheetAt(0);
-				HSSFRow row;
-				HSSFCell cell;
 
-				Iterator<Row> rows = sheet.rowIterator();
+				// 從工作表名稱取得groupID
+				String sName = sheet.getSheetName();
+				Integer groupID = Integer.valueOf(sName.substring(sName.indexOf("(") + 1, sName.indexOf(")")));
 
-				int i = 0;
-				while (rows.hasNext()) {
-					row = (HSSFRow) rows.next();
+				// 取得該組比賽的所有gameID(等一下Excel資料新增成功才刪除)
+				List<Integer> gameIDList = new ArrayList<Integer>();
+				GamesService gSvc = new GamesService();
+				for (GamesVO gamesVO : gSvc.findByGroupID(groupID)) {
+					gameIDList.add(gamesVO.getGameID());
+				}
 
-					if (i++ == 0) {
+				// 取得所有row
+				for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
+					HSSFRow row = sheet.getRow(i);
+
+					if (i == 0) {
 						continue; // 為了跳過標題列
 					}
 
-					Iterator<Cell> cells = row.cellIterator();
-					while (cells.hasNext()) {
-						cell = (HSSFCell) cells.next();
+					String cell0 = row.getCell(0).toString();
+					Timestamp gameBeginDate = Timestamp.valueOf(cell0 + ":00");
 
-						if (cell.getCellType() == HSSFCell.CELL_TYPE_STRING) {
-							System.out.print(cell.getStringCellValue() + " ");
-						} else if (cell.getCellType() == HSSFCell.CELL_TYPE_NUMERIC) {
-							System.out.print(cell.getNumericCellValue() + " ");
-						} else {
-							// Handle Boolean, Formula, Errors
-						}
-					}
-					System.out.println();
+					String cell1 = row.getCell(1).toString();
+					Timestamp gameEndDate = Timestamp.valueOf(cell1 + ":00");
+
+					String cell2 = row.getCell(2).toString();
+					Integer locationID = Integer.valueOf(cell2.substring(cell2.indexOf("(") + 1, cell2.indexOf(")")));
+
+					String cell3 = row.getCell(3).toString();
+					Integer teamAID = Integer.valueOf(cell3.substring(cell3.indexOf("(") + 1, cell3.indexOf(")")));
+
+					String cell4 = row.getCell(4).toString();
+					Integer teamBID = Integer.valueOf(cell4.substring(cell4.indexOf("(") + 1, cell4.indexOf(")")));
+
+					gSvc.addGames(groupID, locationID, teamAID, 0, teamBID, 0, gameBeginDate, gameEndDate);
 				}
-				System.out.println("共取得 " + (i - 1) + " 筆資料");
+				
+				for (Integer gameID : gameIDList) {
+					gSvc.delete(gameID);
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -123,7 +136,7 @@ public class GamesServlet extends HttpServlet {
 
 				// 創建excel
 				HSSFWorkbook workbook = new HSSFWorkbook();
-				HSSFSheet sheet = workbook.createSheet("賽事資料");
+				HSSFSheet sheet = workbook.createSheet("賽事資料 (" + groupID + ")");
 
 				// 設定欄位文字樣式
 				Font titleFont = workbook.createFont();
@@ -150,7 +163,7 @@ public class GamesServlet extends HttpServlet {
 
 				// 設置欄位名稱
 				HSSFRow titleRow = sheet.createRow(0); // 產生row(橫排)
-				String[] column = { "比賽時間", "地點", "主隊", "比分", "客隊" };
+				String[] column = { "比賽開始時間", "比賽結束時間", "地點", "主隊", "客隊" };
 
 				for (int i = 0; i < column.length; i++) {
 					HSSFCell cell = titleRow.createCell(i); // Cell == 儲存格
@@ -160,28 +173,31 @@ public class GamesServlet extends HttpServlet {
 
 				// 設置表格內容
 				int rowNum = 1;
-				for (GamesVO vo : gamesList) {
+				for (GamesVO gamesVO : gamesList) {
 					HSSFRow row = sheet.createRow(rowNum);
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 					HSSFCell cell0 = row.createCell(0);
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-					cell0.setCellValue(sdf.format(vo.getGameBeginDate()));
+					cell0.setCellValue(sdf.format(gamesVO.getGameBeginDate()));
 					cell0.setCellStyle(cellStyle);
 
 					HSSFCell cell1 = row.createCell(1);
-					cell1.setCellValue(vo.getLocationinfoVO().getLocationName());
+					cell1.setCellValue(sdf.format(gamesVO.getGameEndDate()));
 					cell1.setCellStyle(cellStyle);
 
 					HSSFCell cell2 = row.createCell(2);
-					cell2.setCellValue(vo.getTeamAVO().getTeamName());
+					cell2.setCellValue(gamesVO.getLocationinfoVO().getLocationName() + " ("
+							+ gamesVO.getLocationinfoVO().getLocationID() + ")");
 					cell2.setCellStyle(cellStyle);
 
 					HSSFCell cell3 = row.createCell(3);
-					cell3.setCellValue(vo.getTeamAScore().toString() + " - " + vo.getTeamBScore().toString());
+					cell3.setCellValue(
+							gamesVO.getTeamAVO().getTeamName() + " (" + gamesVO.getTeamAVO().getTeamID() + ")");
 					cell3.setCellStyle(cellStyle);
 
 					HSSFCell cell4 = row.createCell(4);
-					cell4.setCellValue(vo.getTeamBVO().getTeamName());
+					cell4.setCellValue(
+							gamesVO.getTeamBVO().getTeamName() + " (" + gamesVO.getTeamBVO().getTeamID() + ")");
 					cell4.setCellStyle(cellStyle);
 
 					rowNum++;
@@ -192,10 +208,14 @@ public class GamesServlet extends HttpServlet {
 					sheet.autoSizeColumn(i);
 				}
 
+				GroupsService groupsSvc = new GroupsService();
+				GroupsVO groupsVO = groupsSvc.findByGroupID(groupID);
+				String groupName = groupsVO.getGroupName();
+				String seasonName = groupsVO.getSeasonVO().getSeasonName();
 				// 設定header
 				response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-				response.setHeader("Content-Disposition",
-						"attachment;filename=\"" + URLEncoder.encode("賽事資料.xls", "UTF-8") + "\"");
+				response.setHeader("Content-Disposition", "attachment;filename=\""
+						+ URLEncoder.encode(seasonName + "_" + groupName + "_賽事資料.xls", "UTF-8") + "\"");
 
 				// 回傳
 				OutputStream out = response.getOutputStream();
@@ -209,8 +229,6 @@ public class GamesServlet extends HttpServlet {
 			}
 			return;
 		}
-
-
 
 	}
 

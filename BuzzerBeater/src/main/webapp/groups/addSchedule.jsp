@@ -19,16 +19,55 @@
         <title>Season</title>
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
+        <style>
+/*         thead{ */
+/* 	      background-color: #d62d67; */
+/*     	  color: #e9e9e9; */
+/*         } */
+        #pathWay {
+      	  color: #666;
+      	  height: 28px;
+      	  line-height: 28px;
+      	  border-bottom: 1px solid #c0b7b7;
+      	  text-indent: 5px;
+      	  font-size: 18px;
+      	  font-weight: normal;
+      	  margin-bottom: 10px;
+      	  font-family:微軟正黑體;
+        }
+        </style>
     </head>
 
     <body>
 	    <jsp:include page="/header.jsp" />
 	
 		<div class="container">
-			<div class="jumbotron">
+					<div class="jumbotron">
+		
+		<!--上層導覽列(開始) -->
+		<div id="pathWay">
+        	<span>
+            	<a href="<%=request.getContextPath() %>/index.jsp">
+            		<span>使用者功能</span>
+            	</a>
+        	</span>&gt;
+        	<span>
+            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+            		<span>賽季管理</span>
+            	</a>
+        	</span>&gt;
+        	        	<span>
+            	<a href="<%=request.getContextPath() %>/Season.do?action=TO_GROUPS_BACK&seasonID=1003">
+            		<span>分組列表</span>
+            	</a>
+        	</span>&gt;
+        	<span><span>新增賽程</span></span>
+    	</div>
+    	<!--上層導覽列(結束) -->
 			<!-- 網頁內容 -->
+			<h2>新增賽程</h2>
 				<table class="table table-bordered">
-		            <thead>
+		            <thead style="background-color:#d62d67;color:#e9e9e9;">
 			            <tr>
                     		<td>賽季名稱</td>
                     		<td>分組名稱</td>
@@ -54,7 +93,7 @@
 			    </table>
 			    
 			    <table class="table table-bordered">
-		            <thead>
+		            <thead style="background-color:#d62d67;color:#e9e9e9;">
 			            <tr>
                     		<td>隊伍名稱</td>
 		                    <td>報隊成員數量</td>
@@ -82,10 +121,21 @@
 			    
 			    <p>有 ${groupsVO.currentTeams} 隊，循環賽共需打 ${gamesNeeded} 場比賽</p>
 			    
+			    <br>
+			    <c:if test="${not empty errorMsgs}">
+				                        請修正以下錯誤:
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<c:if test="${not empty message}">
+								<li>${message}</li>
+							</c:if>
+						</c:forEach>
+					</ul>
+				</c:if>
 			    	
 			    <table class="table table-bordered">
 		            <thead>
-			            <tr>
+			            <tr style="background-color:#d62d67;color:#e9e9e9;">
                     		<td>地點</td>
                     		<td>日期</td>
                     		<td>時間</td>
@@ -94,7 +144,7 @@
 			            <form action="<%=request.getContextPath()%>/Groups.do" method="post">
 				        	<tr>
 				        		<td>
-				        			<select name="locationID">
+				        			<select name="locationID" style="margin-top: 20px;">
 					        			<c:forEach var="locVO" items="${locSvc.allList}">
 					        				<option value="${locVO.locationID},${locVO.locationName}">${locVO.locationName}</option>
 					        			</c:forEach>
@@ -103,7 +153,7 @@
 				        		<td colspan="2">
 				        			<input type="text" name="beginDate" style="width:40%" > ~ <input type="text" name="endDate" style="width:40%">
 				        		</td>
-				        		<td>
+				        		<td style="padding-top: 1px;">
 				        			<br>單場:<select name="timeUnit">
 				        			<c:forEach var="time" begin="10" end="300" step="10">
 				        				<c:choose>
@@ -117,9 +167,9 @@
 				        			</c:forEach>
 				        			</select>分鐘
 				        		</td>
-				        		<td>
+				        		<td style="padding-top: 20px;">
 					       			<input type="hidden" name="action" value="SPLIT_LOCATION">
-				        			<input type="submit" value="新增">
+				        			<input type="submit" class="btn btn-primary" value="新增">
 				        		</td>
 				        	</tr>
 			       		</form>
@@ -150,7 +200,7 @@
 				<form action="<%=request.getContextPath()%>/Groups.do" method="post">
 					<input type="hidden" name="groupID" value="${groupsVO.groupID}">
 					<input type="hidden" name="action" value="MAKE_SCHEDULE">
-					<input type="submit" value="送出">
+					<input type="submit" class="btn btn-success" id="submit_move" value="送出">
 				</form>
 		
 			<!-- 網頁內容END -->
@@ -158,6 +208,13 @@
 	    	</div>
 	    </div>    
 	    <jsp:include page="/footer_css.jsp" />
+	    
+	<script>
+	$(document).ready(function(){
+		var submit={'margin-left': '952px'}
+	$("#submit_move").css(submit)
+	})
+	</script>
     </body>
 
     </html>

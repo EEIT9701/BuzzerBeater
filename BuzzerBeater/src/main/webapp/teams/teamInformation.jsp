@@ -92,10 +92,10 @@ th {
 			<div class="col-md-4">
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
-					<table class="table">
+					<table class="table" align='center' valign='middle'>
 
 						<tbody>
-							<tr>
+							<tr >
 								<td>
 									<h2>${teamsVO.totalWin}<span>勝</span>
 									</h2>
@@ -135,9 +135,9 @@ th {
 							<tr align='center' valign='middle'>
 								<td>排名</td>
 								<td>6th</td>
+								<td><fmt:formatNumber type="number" value="${personalDataVO.offReb/personalDataVO.gameID+personalDataVO.defReb/personalDataVO.gameID}" maxFractionDigits="2" /></td>
 								<td>6th</td>
-								<td>6th</td>
-								<td>6th</td>
+								<td><fmt:formatNumber type="number" value="${personalDataVO.points/personalDataVO.gameID}" maxFractionDigits="1" /></td>
 							</tr>
 						</tbody>
 					</table>

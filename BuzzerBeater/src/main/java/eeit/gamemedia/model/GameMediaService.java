@@ -28,7 +28,7 @@ public class GameMediaService {
 		GamesService gs = new GamesService();
 		GamesVO gamesVO = gs.findByGameID(gameID);
 				
-		gamesVO.setGameID(gameID);
+		gameMediaVO.setGamesVO(gamesVO);
 		gameMediaVO.setMediasName(mediasName);
 		gameMediaVO.setGameVideo(gameVideo);
 		gameMediaVO.setGamePhoto(gamePhoto);

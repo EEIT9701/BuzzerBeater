@@ -16,6 +16,9 @@ public interface GamesDAO_interface {
 	public GamesVO findByGameID(Integer gameID);
 
 	public List<GamesVO> findByGroupID(Integer groupID);
-	
+
 	public List<GamesVO> findByTeamID(Integer teamID);
+
+	public void deleteByGroupID(Integer groupID);
+
 }
