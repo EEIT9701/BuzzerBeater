@@ -121,7 +121,8 @@
 			        						<c:if test="${groupsSet.currentTeams == groupsSet.maxTeams}">
 			        							已額滿
 			        							<c:if test="${empty groupsSet.gamesSet}">
-			        								<a href="<%=request.getContextPath()%>/Groups.do?action=ADD_SCHEDULE&groupID=${groupsSet.groupID}">可編排賽程</a>
+<%-- 			        								<a href="<%=request.getContextPath()%>/Groups.do?action=ADD_SCHEDULE&groupID=${groupsSet.groupID}">可編排賽程</a> --%>
+			        								<br><button class="btn btn-primary"><a style="color:white;"href="<%=request.getContextPath()%>/Groups.do?action=ADD_SCHEDULE&groupID=${groupsSet.groupID}">可編排賽程</a></button>
 			        							</c:if>
 			        						</c:if>
 			        						<c:if test="${groupsSet.currentTeams < groupsSet.maxTeams && groupsSet.currentTeams >= groupsSet.minTeams}">

@@ -26,7 +26,7 @@
 		padding: 30px;
 		background-color: #1E90FF}
      thead{
-	      background-color: rgba(237, 125, 49, 0.8);
+	      background-color: #d62d67;
     	  color: #e9e9e9;
         }
      #pathWay {
