@@ -30,6 +30,7 @@ public class GamesDAO_JNDI implements GamesDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT gameID, groupID, locationID, teamAID, teamAScore, teamBID, teamBScore, winnerID, gameBeginDate, gameEndDate FROM Games";
 	private static final String INSERT_STMT = "INSERT INTO Games VALUES(?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_BY_GROUPID = "DELETE FROM Games WHERE groupID=?";
+	private static final String DELETE_BY_GAMEID = "DELETE FROM Games WHERE gameID=?";
 
 	@Override
 	public void deleteByGroupID(Integer groupID) {
@@ -171,9 +172,35 @@ public class GamesDAO_JNDI implements GamesDAO_interface {
 	}
 
 	@Override
-	public void delete(Integer games_ID) {
-		// TODO Auto-generated method stub
+	public void delete(Integer gameID) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(DELETE_BY_GAMEID);
+			pstmt.setInt(1, gameID);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -184,6 +211,12 @@ public class GamesDAO_JNDI implements GamesDAO_interface {
 
 	@Override
 	public List<GamesVO> findByGroupID(Integer groupID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GamesVO> findByTeamID(Integer teamID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

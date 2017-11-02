@@ -27,6 +27,10 @@ public class GamesService {
 	public void deleteByGroupID(Integer groupID) {
 		dao_JNDI.deleteByGroupID(groupID);
 	}
+	
+	public void delete(Integer gameID){
+		dao_JNDI.delete(gameID);
+	}
 
 	public Set<GamesVO> getAll() {
 		return dao.getAll();

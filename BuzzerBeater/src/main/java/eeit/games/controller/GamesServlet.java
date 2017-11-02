@@ -80,14 +80,10 @@ public class GamesServlet extends HttpServlet {
 				Integer groupID = Integer.valueOf(sName.substring(sName.indexOf("(") + 1, sName.indexOf(")")));
 
 				// 取得該組比賽的所有gameID(等一下Excel資料新增成功才刪除)
-				GamesService gSvc = new GamesService();
-				List<GamesVO> gameList = gSvc.findByGroupID(groupID);
 				List<Integer> gameIDList = new ArrayList<Integer>();
-				for (GamesVO vo : gameList) {
-					gameIDList.add(vo.getGameID());
-				}
-				for(Integer i:gameIDList){
-					System.out.println(i);
+				GamesService gSvc = new GamesService();
+				for (GamesVO gamesVO : gSvc.findByGroupID(groupID)) {
+					gameIDList.add(gamesVO.getGameID());
 				}
 
 				// 取得所有row
@@ -113,7 +109,11 @@ public class GamesServlet extends HttpServlet {
 					String cell4 = row.getCell(4).toString();
 					Integer teamBID = Integer.valueOf(cell4.substring(cell4.indexOf("(") + 1, cell4.indexOf(")")));
 
-					System.out.println(gameBeginDate.toString() + gameEndDate.toString());
+					gSvc.addGames(groupID, locationID, teamAID, 0, teamBID, 0, gameBeginDate, gameEndDate);
+				}
+
+				for (Integer gameID : gameIDList) {
+					gSvc.delete(gameID);
 				}
 
 			} catch (Exception e) {

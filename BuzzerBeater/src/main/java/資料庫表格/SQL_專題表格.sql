@@ -255,10 +255,10 @@ GO
 )
 GO
 
-insert into Teams values('70001','GoldenStateWarriors@gmail.com','0911123456','101','金州勇士','Steve Kerr','Joe Lacob','0x1234','','','','');
-insert into Teams values('70002','SanAntonioSpurs@gmail.com','09121222666','102','聖安東尼奧馬刺','Gregg Popovich','Peter Holt','0x1234','','','','');
-insert into Teams values('70003','HoustonRockets@ymail.com','0913125568','103','休士頓火箭','Mike DAntoni','Leslie Alexander','0x1234','','','','');
-insert into Teams values('70004','LosAngelesClippers@ymail.com','0914125568','104','洛杉磯快艇','Doc Rivers','Steve Anthony Ballmer','','','','','');
+insert into Teams values('70001','GoldenStateWarriors@gmail.com','0911123456','101','金州勇士','Steve Kerr','Joe Lacob','0x1234','1','2','0.33','');
+insert into Teams values('70002','SanAntonioSpurs@gmail.com','09121222666','102','聖安東尼奧馬刺','Gregg Popovich','Peter Holt','0x1234','1','2','0.33','');
+insert into Teams values('70003','HoustonRockets@ymail.com','0913125568','103','休士頓火箭','Mike DAntoni','Leslie Alexander','0x1234','2','1','0.66','');
+insert into Teams values('70004','LosAngelesClippers@ymail.com','0914125568','104','洛杉磯快艇','Doc Rivers','Steve Anthony Ballmer','','2','1','0.66','');
 
 insert into Teams values('70005','UtahJazz@ymail.com','0915125568','105','猶他爵士','Quin Snyder','Larry H. Miller','0x1234','','','','');
 insert into Teams values('70006','OklahomaCityThunder@ymail.com','0916125568','106','奧克拉荷馬市雷霆','Billy Donovan','Clay Bennett','','','','','');
@@ -416,7 +416,7 @@ create table PersonalData    --個人比賽數據
 ( 
   playerID            int references Players(playerID),   --球員ID
   gameID              int references Games(gameID),       --賽事ID
-  teamID              int references Teams(teamID),      --球隊ID
+  teamID              int  references Teams(teamID),      --球隊ID
   gameTime			  int,               --出場時間 (單位: 秒)
   twoPoint            INT,                --兩分命中數
   twoPointShot        INT,                --兩分出手數
@@ -641,7 +641,7 @@ teamID               int,                                                   --球
 GO 
 
 insert into MemberInfo values('admin123@gmail.com','admin01','admin','2017-09-23','');
-insert into MemberInfo values('javaeeit97201701@gmail.com','金州勇士','teams','2016-01-01','3001');
+insert into MemberInfo values('GoldenStateWarriors@gmail.com','金州勇士','teams','2016-01-01','3001');
 insert into MemberInfo values('aSnAntonioSpurs@gmail.com','聖安東尼奧馬刺','teams','2016-01-11','3002');
 insert into MemberInfo values('HoustonRockets@ymail.com','休士頓火箭','teams','2016-01-15','3003');
 insert into MemberInfo values('LosAngelesClippers@ymail.com','洛杉磯快艇','teams','2016-01-17','3004');

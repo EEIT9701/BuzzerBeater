@@ -38,6 +38,7 @@
 						<c:when test="${LoginOK.auth == 'parttime'}">
 <%-- 							<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li> --%>
 <%-- 							<li><h6><a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">賽季管理</a></h6></li> --%>
+<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></h6></li>
@@ -129,6 +130,10 @@
 						<c:forEach var="teams" items="${teamsSvc.teams}">
 							<li><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teams.teamID}">${teams.teamName}</a></li>
 						</c:forEach>
+					</ul>
+					</li>
+					<li class="dropdown"><a href="<%=request.getContextPath() %>/players/listAllPlayer_front.jsp" class="dropdown-toggle" data-toggle="dropdown">球員</a>
+					<ul class="dropdown-menu">
 					</ul>
 					</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
