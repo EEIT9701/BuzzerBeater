@@ -14,7 +14,9 @@ public class GameMediaDAO_JDBC implements GameMediaDAO_Interface{
 	private static final String GET_ONE_STMT =
 		      "SELECT gameID,mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag FROM GameMedia where mediaID = ?";
 	private static final String GET_ALL_STMT =
-		      "SELECT * FROM GameMedia order by mediaID where mediaType = 'photo'";
+		      "SELECT * FROM GameMedia order by mediaID WHERE mediaType = 'photo'";
+	private static final String GET_ALL_VIDEO_STMT =
+			  "SELECT * FROM GameMedia WHERE MediaType = 'video'";
 
 	@Override
 	public List<GameMediaVO> getAll() {
@@ -32,7 +34,7 @@ public class GameMediaDAO_JDBC implements GameMediaDAO_Interface{
 			String connUrl = "jdbc:sqlserver://localhost:1433;databaseName=BasketBallDB";
 			conn = DriverManager.getConnection(connUrl, "sa", "P@ssw0rd");
 			
-			pstmt = conn.prepareStatement(GET_ALL_STMT);
+			pstmt = conn.prepareStatement(GET_ALL_VIDEO_STMT);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -186,6 +188,12 @@ public class GameMediaDAO_JDBC implements GameMediaDAO_Interface{
 			}
 		}
 		return gameMediaVO;
+	}
+
+	@Override
+	public List<GameMediaVO> getAllVideo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

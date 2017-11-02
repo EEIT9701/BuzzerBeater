@@ -33,7 +33,8 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 		      "DELETE FROM GameMedia where mediaID = ?";
 	private static final String UPDATE =
 		      "UPDATE GameMedia set gameID=?,mediasName=?, gameVideo=?, gamePhoto=?, mediaType=?, mediaDate=?, descriptions=?, tag=? where mediaID = ?";
-	
+	private static final String GET_ALL_VIDEO_STMT = 
+			  "SELECT * FROM GameMedia WHERE MediaType = 'video'";;
 	
 	@Override
 	public Integer insert(GameMediaVO gameMediaVO) {
@@ -224,6 +225,61 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 			}
 		}
 		return gameMediaVO;
+	}
+	
+	public List<GameMediaVO> getAllVideo(){
+		List<GameMediaVO> list = new ArrayList<GameMediaVO>();
+		GameMediaVO gameMediaVO = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{
+			//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn=ds.getConnection();
+			pstmt = conn.prepareStatement(GET_ALL_VIDEO_STMT);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				gameMediaVO = new GameMediaVO();
+				GamesVO game = new GamesVO();
+				game.setGameID(rs.getInt("gameID"));
+				gameMediaVO.setGamesVO(game);
+				
+				gameMediaVO.setMediaID(rs.getInt("mediaID"));
+				gameMediaVO.setMediasName(rs.getString("mediasName"));
+				gameMediaVO.setGameVideo(rs.getString("gameVideo"));
+				gameMediaVO.setGamePhoto(rs.getString("gamePhoto"));
+				gameMediaVO.setMediaType(rs.getString("mediaType"));
+				gameMediaVO.setMediaDate(rs.getTimestamp("mediaDate"));
+				gameMediaVO.setDescriptions(rs.getString("descriptions"));
+				gameMediaVO.setTag(rs.getString("tag"));
+				list.add(gameMediaVO);
+			}
+			
+			// Handle any driver errors
+					} catch (SQLException se) {
+						throw new RuntimeException("A database error occured. "
+								+ se.getMessage());
+						// Clean up JDBC resources
+					} finally {
+						if (pstmt != null) {
+							try {
+								pstmt.close();
+							} catch (SQLException se) {
+								se.printStackTrace(System.err);
+							}
+						}
+						if (conn != null) {
+							try {
+								conn.close();
+							} catch (Exception e) {
+								e.printStackTrace(System.err);
+							}
+						}
+					}
+		return list;
 	}
 
 	@Override
