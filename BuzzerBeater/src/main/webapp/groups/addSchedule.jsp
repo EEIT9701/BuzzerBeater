@@ -135,6 +135,7 @@
 			    <table class="table table-bordered">
 		            <thead>
 			            <tr style="background-color:#d62d67;color:#e9e9e9;">
+                    		<td>#</td>
                     		<td>地點</td>
                     		<td>日期</td>
                     		<td>時間</td>
@@ -142,6 +143,7 @@
 			            </tr>
 			            <form action="<%=request.getContextPath()%>/Groups.do" method="post">
 				        	<tr>
+				        		<td></td>
 				        		<td>
 				        			<select name="locationID" style="margin-top: 20px;">
 					        			<c:forEach var="locVO" items="${locSvc.allList}">
@@ -150,7 +152,7 @@
 				        			</select>
 				        		</td>
 				        		<td colspan="2">
-				        			<input type="text" name="beginDate" style="width:40%" > ~ <input type="text" name="endDate" style="width:40%">
+				        			<input type="text" name="beginDate" id="beginDate" style="width:40%" > ~ <input type="text" name="endDate" id="endDate" style="width:40%">
 				        		</td>
 				        		<td style="padding-top: 1px;">
 				        			<br>單場:<select name="timeUnit">
@@ -177,6 +179,7 @@
 			        <tbody>
 			        	<c:forEach var="timeList" items="${timeList}" varStatus="s">
 				        	<tr>
+				        		<td>${s.index+1}</td>
 				        		<td>${timeList.locationName}</td>
 	                    		<td><fmt:formatDate value="${timeList.beginTime}" pattern="yyyy-MM-dd"/></td>
 	                    		<td><fmt:formatDate value="${timeList.beginTime}" pattern="HH:mm"/> ~ <fmt:formatDate value="${timeList.endTime}" pattern="HH:mm"/></td>
@@ -208,10 +211,25 @@
 	    </div>    
 	    <jsp:include page="/footer_css.jsp" />
 	    
+	    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+		<link href='<%=request.getContextPath()%>/css/jquery-ui-timepicker-addon.css' rel='stylesheet'>
+  		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-timepicker-addon.js"></script>
+  		<script type='text/javascript' src='<%=request.getContextPath()%>/js/jquery-ui-sliderAccess.js'></script>
+  		
+	    
 	<script>
 	$(document).ready(function(){
 		var submit={'margin-left': '952px'}
-	$("#submit_move").css(submit)
+		$("#submit_move").css(submit)
+	
+		
+		
+		var opttime={dateFormat: 'yy-mm-dd',timeFormat: 'HH:mm:ss'};
+
+		$('#beginDate').datetimepicker(opttime);
+		$('#endDate').datetimepicker(opttime);
 	})
 	</script>
     </body>
