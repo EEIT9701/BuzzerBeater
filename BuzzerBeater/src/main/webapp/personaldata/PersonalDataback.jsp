@@ -73,7 +73,7 @@ font-size:2px;
 								<th>球員</th>
 								<th>賽事</th>
 								<th>球隊名稱</th>
-								<th>出場時間</th>
+								<th>出場時間(分)</th>
 								<th>二分命中</th>
 								<th>二分出手</th>
 								<th>三分命中</th>	
