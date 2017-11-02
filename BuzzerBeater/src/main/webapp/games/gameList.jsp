@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
     <html lang="zh" class="no-js">
@@ -27,12 +28,14 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
+							<td>賽季名稱</td>
 							<td>分組名稱</td>
 			                <td>目前球隊數量</td>
 						</tr>
 					<thead>
 					<tbody>
 						<tr>
+							<td>${groupsVO.seasonVO.seasonName}</td>
 							<td>${groupsVO.groupName}</td>
 							<td>${groupsVO.currentTeams}</td>
 						</tr>
@@ -53,11 +56,11 @@
 			        <tbody>
 			        	<c:forEach var="gamesSet" items="${groupsVO.gamesSet}">
 			        		<tr>
-			        			<td>${gamesSet.gameBeginDate}</td>
-			        			<td>${gamesSet.gameEndDate}</td>
+			        			<td><fmt:formatDate value="${gamesSet.gameBeginDate}" pattern="yyyy-MM-dd HH:mm"/></td>
+			        			<td><fmt:formatDate value="${gamesSet.gameEndDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 			        			<td>${gamesSet.locationinfoVO.locationName}</td>
-			        			<td>${gamesSet.teamAVO.teamName}</td>
-			        			<td>${gamesSet.teamBVO.teamName}</td>
+			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}" target="blank">${gamesSet.teamAVO.teamName}</a></td>
+			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}" target="blank">${gamesSet.teamBVO.teamName}</a></td>
 			        		</tr>
 			        	</c:forEach>			        	
 			        </tbody>

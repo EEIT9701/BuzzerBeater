@@ -68,15 +68,15 @@
 
 							<table class="table table-bordered" id="table">
 								<thead>
-									<tr>
-										<th>球員照片</th>
-										<th>球員姓名</th>
-										<th>分組</th>
-										<th>球隊</th>
-										<th>身高</th>
-										<th>體重</th>
-										<th>生日</th>
-										<th>國籍</th>
+									<tr align='center' valign='middle' >
+										<td>球員照片</td>
+										<td>球員姓名</td>
+										<td>分組</td>
+										<td>球隊</td>
+										<td>身高(公分)</td>
+										<td>體重(公斤)</td>
+										<td>生日</td>
+										<td>國籍</td>
 
 									</tr>
 								</thead>

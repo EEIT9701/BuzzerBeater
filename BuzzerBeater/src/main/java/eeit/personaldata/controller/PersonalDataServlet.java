@@ -104,9 +104,9 @@ public class PersonalDataServlet extends HttpServlet {
 		    System.out.println(pDVOStr);
 		    JSONObject pVO = new JSONObject(pDVOStr);
 	
-//		    personalDataVO.setPlayerID(Integer.parseInt(pVO.get("playerID").toString()));
-//     	    personalDataVO.setGameID(Integer.parseInt(pVO.get("gameID").toString()));
-//		    personalDataVO.setTeamID(Integer.parseInt(pVO.get("teamID").toString()));
+		    personalDataVO.setPlayerID(Integer.parseInt(pVO.get("playerID").toString()));
+     	    personalDataVO.setGameID(Integer.parseInt(pVO.get("gameID").toString()));
+		    personalDataVO.setTeamID(Integer.parseInt(pVO.get("teamID").toString()));
 		    personalDataVO.setGameTime(Integer.parseInt(pVO.get("gameTime").toString()));
 		    personalDataVO.setTwoPoint(Integer.parseInt(pVO.get("twoPoint").toString()));
 		    personalDataVO.setTwoPointShot(Integer.parseInt(pVO.get("twoPointShot").toString()));
