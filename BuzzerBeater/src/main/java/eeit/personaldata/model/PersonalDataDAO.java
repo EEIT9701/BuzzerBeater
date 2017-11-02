@@ -108,6 +108,30 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 			"\r\n" + 
 			"WHERE p.playerID=?"
 	  		;
+	private static final String GETALL5="select t.teamID,t.teamBadge,t.teamName,gameID,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
+			"from   (select teamID,\r\n" + 
+			"        count(DISTINCT gameID)as gameID,\r\n" + 
+			"        sum(gameTime)as gametime,\r\n" + 
+			"        sum(twoPoint)as twopoint,\r\n" + 
+			"        sum(twoPointShot)as twoPointShot,\r\n" + 
+			"        sum(threePoint)as threePoint,\r\n" + 
+			"        sum(threePointShot)as threePointShot,\r\n" + 
+			"        sum(fg)as fg,\r\n" + 
+			"        sum(fgShot)as fgShot,\r\n" + 
+			"        sum(offReb)as offReb,\r\n" + 
+			"        sum(defReb)as defReb,\r\n" + 
+			"        sum(assist)as assist,\r\n" + 
+			"        sum(steal)as steal,\r\n" + 
+			"        sum(blocks)as blocks,\r\n" + 
+			"        sum(turnover)as turnover,\r\n" + 
+			"        sum(personalFouls)as personalFouls,\r\n" + 
+			"        sum(points)as points\r\n" + 
+			"        from PersonalData\r\n" + 
+			"        GROUP BY teamID)\r\n" + 
+			"pd join teams t\r\n" + 
+			"on pd.teamId=t.teamID"+ 
+			"\r\n" + 
+			"WHERE t.teamID=?";
 	
 	@Override
 	public List<PersonalDataVO> getAll() {
@@ -389,6 +413,58 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 	public List<PersonalDataVO> findByPlayerIDAndGameID(Integer PlayerID, Integer GameID) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> findByTeamID(Integer teamID) {
+	    List<PersonalDataVO> list=new ArrayList<PersonalDataVO>(); 
+        PersonalDataVO personalData=null;
+     
+		
+        Connection con=null;
+        PreparedStatement pstmt=null;
+        ResultSet rs =null;
+        
+        try {
+        	con=ds.getConnection();
+        	pstmt=con.prepareStatement(GETALL5);
+        	pstmt.setInt(1, teamID);
+        	rs=pstmt.executeQuery();
+			while (rs.next()){
+				personalData=new PersonalDataVO();
+			
+				
+				GamesVO gamesVO = new GamesVO();		
+				personalData.setGamesVO(gamesVO);
+				
+	            TeamsVO teamsVO =new TeamsVO();
+	            teamsVO.setTeamBadge(rs.getString("teamBadge"));
+	            teamsVO.setTeamName(rs.getString("teamName"));
+	            teamsVO.setTeamID(rs.getInt("teamID"));;
+	            personalData.setTeamsVO(teamsVO);
+				
+		     	personalData.setGameID(rs.getInt("gameID"));
+				personalData.setGameTime(rs.getInt("gameTime"));
+				personalData.setTwoPoint(rs.getInt("twoPoint"));
+				personalData.setTwoPointShot(rs.getInt("twoPointShot"));
+				personalData.setThreePoint(rs.getInt("threePoint"));
+				personalData.setThreePointShot(rs.getInt("threePointShot"));
+				personalData.setFg(rs.getInt("fg"));
+				personalData.setFgShot(rs.getInt("fgShot"));
+				personalData.setDefReb(rs.getInt("defReb"));
+				personalData.setOffReb(rs.getInt("offReb"));
+				personalData.setAssist(rs.getInt("assist"));
+				personalData.setSteal(rs.getInt("steal"));
+				personalData.setBlocks(rs.getInt("blocks"));
+				personalData.setTurnover(rs.getInt("turnover"));
+				personalData.setPersonalFouls(rs.getInt("personalFouls"));
+				personalData.setPoints(rs.getInt("points"));
+				list.add(personalData);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	

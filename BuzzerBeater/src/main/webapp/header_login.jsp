@@ -6,7 +6,7 @@
 
 
     <div id="id01" class="modal">
-        <form class="modal-content animate" style="height:280px;width:20%;">
+        <form class="modal-content animate" style="height:280px;width:380px;">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>

@@ -19,13 +19,27 @@
     <link rel="stylesheet" type="text/css" href="css/normalize_2.css" />
 	<link rel="stylesheet" type="text/css" href="css/htmleaf-demo_3.css">
 	<link type="text/css" rel="stylesheet" href="css/posterTvGrid.css"> 
+	<!--數據王("2-1")-->
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style_1.css">
+	<script src="js/modernizr.js"></script>
 	<style>
 	body {
         background-color:rgba(197, 197, 197, 0.78);
         }
-        .jumbotron{
+    .jumbotron{
         background-color: rgb(243, 242, 241);
         }
+    thead{
+    	font-family:微軟正黑體;  
+    	font-size:larger;
+    	font-weight:bold;
+/*     	text-align:center; */
+    }
+    tbody{
+    	font-family:微軟正黑體;  
+/*     	text-align:center; */
+    }
 	</style>
 </head>
 <body id="home">
@@ -33,20 +47,6 @@
 	<!--標頭(開始)-->
 	<jsp:include page="/header.jsp" />
 	<!--標頭(結束)-->
-	
-	
-	    <!--計時器(開始)-->
-<!--     <div class="pageheader fixed-demo dark" style="padding-top:0px"> -->
-
-<!--         <div class="container"> -->
-<!--             <div class="row">           -->
-<!--                     <div id="countdown"> -->
-<!--                         <div>報名日期倒數 :</div> -->
-<!--                     </div> -->
-<!--                     <p style="color:#303030" id="note"></p> -->
-<!--             </div> -->
-<!--         </div> -->
-<!--     </div> -->
 	
 	
     <!--主文(開始)-->
@@ -74,82 +74,118 @@
             <!--表格(開始)-->
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td rowspan="2">1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@TwBootstrap</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
+    			
+    		<div class="cd-pricing-container">
+                <ul class="cd-pricing-list cd-bounce-invert">
+                    <li>
+                        <ul class="cd-pricing-wrapper">
+                            <li data-type="monthly" class="is-visible" style="box-shadow: inset 0 0 20px 3px #e97d68;">
+                                <header class="cd-pricing-header">
+                             	   <h3>2016-17例行賽</h3><br>
+                                    <h2>Kawhi Leonard</h2>
+                                    <div class="cd-price">
+                                        <!--<span class="cd-currency">$</span>-->
+                                        <span class="cd-value"><img src="images/Kawhi Leonard.jpg" /></span>
+                                        <!--<span class="cd-duration">mo</span>-->
+                                    </div>
+                                </header> <!-- .cd-pricing-header -->
+                                <div class="cd-pricing-body">
+                                    <ul class="cd-pricing-features">
+                                        <li><em>得分王</em></li>
+                                        <!--<li><em>1</em> User</li>-->
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul> <!-- .cd-pricing-wrapper -->
+                    </li>
+                    <li class="cd-popular">
+                        <ul class="cd-pricing-wrapper">
+                            <li data-type="monthly" class="is-visible" style="box-shadow: inset 0 0 20px 3px #e97d68;">
+                                <header class="cd-pricing-header">
+                                	<h3>2016-17例行賽</h3><br>
+                                    <h2>James Harden</h2>
+                                    <div class="cd-price">
+                                        <!--<span class="cd-currency">$</span>-->
+                                        <span class="cd-value"><img src="images/James Harden.jpg" /></span>
+                                        <!--<span class="cd-duration">mo</span>-->
+                                    </div>
+                                </header> <!-- .cd-pricing-header -->
+                                <div class="cd-pricing-body">
+                                    <ul class="cd-pricing-features">
+                                        <li><em>助攻王</em> </li>
+                                        <!--<li><em>3</em> Users</li>
+                                        <li><em>24/7</em> Support</li>-->
+                                    </ul>
+                                </div> <!-- .cd-pricing-body -->
+                            </li>
+                        </ul> <!-- .cd-pricing-wrapper -->
+                    </li>
+                    <li>
+                        <ul class="cd-pricing-wrapper">
+                            <li data-type="monthly" class="is-visible" style="box-shadow: inset 0 0 20px 3px #e97d68;">
+                                <header class="cd-pricing-header">
+                                	<h3>2016-17例行賽</h3><br>
+                                    <h2> James Harden </h2>
+                                    <div class="cd-price">
+                                        <!--<span class="cd-currency">$</span>-->
+                                        <span class="cd-value"><img src="images/James Harden.jpg" /></span>
+                                        <!--<span class="cd-duration">mo</span>-->
+                                    </div>
+                                </header> <!-- .cd-pricing-header -->
+                                <div class="cd-pricing-body">
+                                    <ul class="cd-pricing-features">
+                                        <li><em>籃板王</em></li>
+                                        <!--<li><em>5</em> Users</li>-->
+                                    </ul>
+                                </div> <!-- .cd-pricing-body -->
+                            </li>
+
+                        </ul> <!-- .cd-pricing-wrapper -->
+                    </li>
+                </ul> <!-- .cd-pricing-list -->
+            </div> <!-- .cd-pricing-container -->
+    		
+    
                 </div>
+                 <h2 style="font-family: 微軟正黑體;text-align: center;font-size: 3em;">2016-17例行賽</h2><br>
+                 <h2 style="font-family: 微軟正黑體;text-align: center;font-size: 2em;">戰績排行</h2><br>
                 <div class="col-md-12">
                     <!--滑鼠移入，顯示表格(開始)-->
                     <div id="tabs">
                         <ul>
                             <!--<h3>戰績排行</h3>-->
-                            <li><a href="#tabs-1">First</a></li>
-                            <li><a href="#tabs-2">Second</a></li>
-                            <li><a href="#tabs-3">Third</a></li>
+                            <li><a href="#tabs-1">東區</a></li>
+                            <li><a href="#tabs-2">西區</a></li>
                         </ul>
                         <div id="tabs-1">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
+                                        <th>隊伍名稱</th>
+                                        <th>勝場</th>
+                                        <th>敗場</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td rowspan="2">1</td>
-                                        <td>Willy</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@TwBootstrap</td>
-                                    </tr>
-                                    <tr>
+                                	<tr>
+                                        <td>休士頓火箭</td>
                                         <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
+                                        <td>1</td>
                                     </tr>
                                     <tr>
-                                        <td>3</td>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>@twitter</td>
+                                        <td>洛杉磯快艇</td>
+										<td>2</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>金州勇士</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>聖安東尼奧馬刺</td>
+                                        <td>1</td>
+                                        <td>2</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -158,70 +194,32 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
+                                        <th>隊伍名稱</th>
+                                        <th>勝場</th>
+                                        <th>敗場</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td rowspan="2">1</td>
-                                        <td>Billy</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>猶他爵士</td>
+                                        <td>0</td>
+                                        <td>0</td>
                                     </tr>
                                     <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@TwBootstrap</td>
+                                        <td>奧克拉荷馬市雷霆</td>
+                                        <td>0</td>
+                                        <td>0</td>
                                     </tr>
                                     <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
+                                        <td>曼斐斯灰熊</td>
+                                        <td>0</td>
+                                        <td>0</td>
+
                                     </tr>
                                     <tr>
-                                        <td>3</td>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="tabs-3">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td rowspan="2">1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@TwBootstrap</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>@twitter</td>
+                                        <td>波特蘭拓荒者</td>
+										<td>0</td>
+                                        <td>0</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -231,7 +229,6 @@
                     <!--表格(結束)-->
                 </div>
             </div>
-            <hr>
 
             <!--表格(結束)-->
 
@@ -245,6 +242,9 @@
     
     
 	<jsp:include page="/footer_css.jsp" />
+    <!--數據王("2-2")-->
+	<script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/main.js"></script>
     
     <!-- 輪播廣告("2-2") -->
     <script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
