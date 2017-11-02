@@ -129,6 +129,9 @@ video::-webkit-media-controls-panel {
 .form-control{
 	margin-top:-8px;
 }
+#table{
+	width: 100%;
+}
 </style>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/datatables.min.css" />
@@ -196,7 +199,7 @@ video::-webkit-media-controls-panel {
 			</div>
 			</br>
 			<div class="row">
-				<table class="table table-bordered" id="table">
+				<table class="table table-bordered" id="table" style="width:100%">
 					<thead>
 						<tr align='center' valign='middle' id="thead">
 							<td><nobr>分組</nobr></td>
@@ -265,17 +268,17 @@ video::-webkit-media-controls-panel {
 								</br>
 								 <div class="input-group input-group">
             						<span class="input-group-addon">標題</span>
-           						 	<input type="text" class="form-control" id="insertTitle" required>
+           						 	<input type="text" class="form-control" id="insertTitle" style="margin: 0px 0;" required >
         						 </div>
 								</br>
 								<div class="input-group">
 									<span class="input-group-addon">備註</span> 
-									<input type="text" class="form-control" id="insertDescriptions" required>
+									<input type="text" class="form-control" id="insertDescriptions" style="margin: 0px 0;" required>
 								</div>
 								</br>
 								<div class="input-group">
 									<span class="input-group-addon">標籤</span> 
-									<input type="text" class="form-control" id="insertTag" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣" required>
+									<input type="text" class="form-control" id="insertTag" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣" style="margin: 0px 0;" required>
 								</div>
 
 
