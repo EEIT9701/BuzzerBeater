@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <jsp:useBean id="GroupRegSvc" scope="page" class="eeit.memberinfo.model.GroupRegService" /> --%>
+<jsp:useBean id="GroupRegSvc" scope="page" class="eeit.groupreg.model.GroupRegService" />
+<jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService" />
 
 <!DOCTYPE >
 <html>
@@ -28,8 +29,7 @@
 <body>
 
 	<jsp:include page="/header.jsp" />
-	<jsp:useBean id="teamsSvc" scope="page"
-		class="eeit.teams.model.TeamsService" />
+
 
 
 	<!--主文(開始)-->
@@ -55,37 +55,44 @@
 
 				<div class="col-md-12">
 
-					<table class="table table-bordered" id="table">
+					<table class="table table-bordered" >
 						<thead>
 							<tr>
-								<th>隊五名稱</th>
-								<th>報名時間</th>
-								<th>繳費時間</th>
-								<th>帳號後五碼</th>
-								<th>核對</th>
+								<td>隊伍名稱</td>
+								<td>報名分組</td>
+								<td>報名時間</td>
+								<td>繳費時間</td>
+								<td>帳號後五碼</td>
+								<td>核對</td>
 
 
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="teamsVO" items="${teamsSvc.all}">
-								<tr align='center' valign='middle'>
+						 <c:forEach var="groupRegVO" items="${GroupRegSvc.all}">
+                               
+                                
+                                    <tr align='center' valign='middle'>
 
-									<td><a
-										href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teamsVO.teamID}">${teamsVO.teamName}</a></td>
+									<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${groupRegVO.teamsVO.teamID}">${groupRegVO.teamsVO.teamName}</a></td>
+									<td>${groupRegVO.groupsVO.seasonVO.seasonName} - ${groupRegVO.groupsVO.groupName}</td>
 									<!--球隊名-->
-									<td><c:forEach var="groupRegVO"
-											items="${teamsVO.groupRegSet}">
-											${TeamsVO.groupsVO.groupName}
-											</c:forEach></td>
-									<!--報名時間-->
-									<td></td>
-									<!--繳費時間-->
-									<td></td>
-									<!--帳號後五碼-->
-									<td></td>
-									<!--核對-->
 
+									<!--報名時間-->
+									    <td>${groupRegVO.registerDate}</td>
+                                        <!--繳費時間-->
+                                        <td></td>
+                                        <!--帳號後五碼-->
+                                        <td>${groupRegVO.paymentNumber}</td>
+                                        <!--核對-->
+									 <td>
+                                            <Form method="post" action="<%=request.getContextPath() %>/Season.do" id="update">
+                                                <button type="button" class="btn btn-lg btn-primary">審核</button>
+                                                <%-- 			        			<input type="hidden" name="seasonID" value="${sVO.seasonID}">  --%>
+                                                <!--                                     <input type="hidden" name="action" value="GET_ONE_TO_UPDATE"> -->
+                                            </Form>
+                                       </td>
+                                      
 								</tr>
 							</c:forEach>
 					</table>
@@ -94,7 +101,7 @@
 			</div>
 			<jsp:include page="/footer.jsp" />
 		</div>
-
+</div>
 		<!--主文(結束)-->
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
