@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>EEIT97-第一組</title>
+<title>BuzzerBeater</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
