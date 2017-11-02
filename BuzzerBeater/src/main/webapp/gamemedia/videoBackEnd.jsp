@@ -254,7 +254,7 @@ video::-webkit-media-controls-panel {
 								</div>
 								</br>
 								<div class="row">
-									<div>
+									<div class="col-md-4">
 										<select id="gamelist">
     									</select>
 									</div>
@@ -293,6 +293,7 @@ video::-webkit-media-controls-panel {
 					</div>
 				</div>
 			</div>
+		<jsp:include page="/footer.jsp" />
 		</div>
 	</div>
 	<!--主文(結束)-->
@@ -317,12 +318,15 @@ video::-webkit-media-controls-panel {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-warning" data-dismiss="modal">離開</button>
 				</div>
+<<<<<<< HEAD
+=======
 			</div>
 		</div>
 	</div>
 
 <jsp:include page="/footer.jsp" />
 <!-- 模太框 -->
+
 	<div class="jDialog" id="dialog-4">
 		<div class="content">
 		 <H3 style="align:'center'; valign:'middle'">修改資訊</H3>
@@ -334,10 +338,11 @@ video::-webkit-media-controls-panel {
 			     <input id="tag"  placeholder="標籤"  type="text" value="" required>
 			 <div>
 				<button class="button" data-dismiss="JDialog" id="jDialogButton">確定</button>
+>>>>>>> branch 'branch' of https://github.com/EEIT9701/BuzzerBeater.git
 			</div>
 		</div>
 	</div>
-	
+
 	<jsp:include page="/footer_css.jsp" />
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
@@ -487,7 +492,7 @@ video::-webkit-media-controls-panel {
 	  			
 	  			$('#grouplist').change(function(){
 	  				group = $('select[name="group1"]').val();
- 	  				console.log(group)
+//  	  				console.log(group)
 	  				$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getGameInformation' , 'groupID':group},function(data){
 	  					$('#gamelist').empty();
 	  					$('#gamelist').append($("<option></option>").text('請選擇'));
@@ -503,10 +508,11 @@ video::-webkit-media-controls-panel {
 	  			var tag = $('#insertTag').text();
 	  			
 	  			
-	  			$('insertConfirm').click(function(){
-	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insert','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
+	  			$('#insertConfirm').click(function(){
+	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
 						//主鍵mediaID由Identity生成、mediaType、mediaDate均在Servlet設定，其餘接收後回傳
- 	       	 		})	
+ 	       	 			console.log('我傳出去囉')
+	  				})	
 	  			})
 	  		}
 	});

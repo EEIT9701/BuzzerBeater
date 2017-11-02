@@ -24,7 +24,6 @@
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 <!-- ***套用新的模太框檔案*** -->
-<script src="<%=request.getContextPath()%>/dist/jdialog.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/jdialog.min.css">	
 <style>
 #st1 {
@@ -38,7 +37,7 @@ font-size:2px;
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 <jsp:include page="/header_css.jsp" />
 </head>
-<body>
+<body style="line-height: 12px;">
 
 	<jsp:include page="/header.jsp" />
 	<!--主文(開始)-->
@@ -52,24 +51,9 @@ font-size:2px;
 				<!--第一列-左邊表格-格式_.col-md-8-->
 				<div class="col-md-12">
 
-					<li><a href="index.jsp"> 首頁<!--這行的href輸入超連結頁面--></a>/球員數據排名</li> <br>
-					<br>
-					<div id=st1>
-						球季 <select>
-							<option label="2015賽季" value="object:7" selected="selected">季前熱身賽</option>
-							<option label="2016賽季" value="object:8">例行賽</option>
-							<option label="2017賽季" value="object:9">季後賽</option>
-						</select> 組別 <select>
-							<option label="社會組" value="object:7" selected="selected">季前熱身賽</option>
-							<option label="青年組" value="object:8">例行賽</option>
-							<option label="少年組" value="object:9">季後賽</option>
-						</select>
+					
 
-
-						<input type="submit" value="確定">
-
-					</div>
-				</div>
+			
 			</div>
 		</div>
 		<br> <br>
@@ -89,13 +73,13 @@ font-size:2px;
 								<th>球員</th>
 								<th>賽事</th>
 								<th>球隊名稱</th>
-								<th>出場時間</th>
+								<th>出場時間(分)</th>
 								<th>二分命中</th>
-								<th>二分出手數</th>
+								<th>二分出手</th>
 								<th>三分命中</th>	
-								<th>三分出手數</th>					                           						                                  
+								<th>三分出手</th>					                           						                                  
 								<th>罰球命中</th>
-								<th>罰球出手數</th>
+								<th>罰球出手</th>
 								<th>進攻籃板</th>
 								<th>防守籃板</th>
 								<th>助攻</th>
@@ -117,37 +101,45 @@ font-size:2px;
 				</div>
 			</div>
 		</div>
-<jsp:include page="/footer.jsp" />
+	<jsp:include page="/footer.jsp" />		
+		</div>	
 	</div>
+			</div>
 
+	<jsp:include page="/footer_css.jsp" />
 	<!--主文(結束)-->
 <!-- 模太框 -->
-	<div class="jDialog" id="dialog-4">
+
+	<div  class="jDialog" id="dialog-4">
 		<div class="content">
 		<div>
-				<button class="button" data-dismiss="JDialog" id="jDialogButton">確定</button>
+				<button class="button" data-dismiss="JDialog" id="jDialogButton" style=" margin-top: 0px; border-top-width: 2px; border-right-width: 2px;
+    border-bottom-width: 2px; border-left-width: 2px; padding-bottom: 6px; padding-top: 6px; ">確定</button>
 			</div>
-		 <H3>新增球員數據</H3>
-			     <input id="PersonalDataVO_gameTime" placeholder="gameTime" type="text" value="" required>
-			     <input id="PersonalDataVO_twoPoint"  placeholder="twoPoint" type="text" value="" required>
-			     <input id="PersonalDataVO_twoPointShot"  placeholder="twoPointShot"  type="text" value="" required>
-			     <input id="PersonalDataVO_threePoint" placeholder="threePoint" type="text" value="" required>
-			     <input id="PersonalDataVO_threePointShot"  placeholder="threePointShot" type="text" value="" required>
-			     <input id="PersonalDataVO_fg"  placeholder="fg"  type="text" value="" required>
-			     <input id="PersonalDataVO_fgShot" placeholder="fgShot" type="text" value="" required>
-			     <input id="PersonalDataVO_offReb"  placeholder="offReb" type="text" value="" required>
-			     <input id="PersonalDataVO_defReb"  placeholder="defReb"  type="text" value="" required>
-			     <input id="PersonalDataVO_assist" placeholder="assist" type="text" value="" required>
-			     <input id="PersonalDataVO_steal"  placeholder="steal" type="text" value="" required>
-			     <input id="PersonalDataVO_blocks"  placeholder="blocks"  type="text" value="" required>
-			     <input id="PersonalDataVO_turnover" placeholder="turnover" type="text" value="" required>
-			     <input id="PersonalDataVO_personalFouls"  placeholder="personalFouls" type="text" value="" required>
-			     <input id="PersonalDataVO_points"  placeholder="points"  type="text" value="" required>
-			     <input id="PersonalDataVO_startingPlayer" placeholder="startingPlayer" type="text" value="" required>
+		 <H5>新增球員數據</H5>
+		 	     球員<input id="PersonalDataVO_playerID" placeholder="playerID" type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+		                 賽事<input id="PersonalDataVO_gameID" placeholder="gameID" type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+	                     球隊名稱<input id="PersonalDataVO_teamID"  placeholder="teamID" type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;"><br>
+	                     比賽時間<input id="PersonalDataVO_gameTime" placeholder="gameTime" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+	                     二分命中<input id="PersonalDataVO_twoPoint"  placeholder="twoPoint" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+		         二分出手<input id="PersonalDataVO_twoPointShot"  placeholder="twoPointShot"  type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;"><br>
+		        三分命中<input id="PersonalDataVO_threePoint" placeholder="threePoint" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+		        三分出手<input id="PersonalDataVO_threePointShot"  placeholder="threePointShot" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+	                    罰球命中<input id="PersonalDataVO_fg"  placeholder="fg"  type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;"><br>
+		        罰球出手<input id="PersonalDataVO_fgShot" placeholder="fgShot" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+	                    進攻籃板<input id="PersonalDataVO_offReb"  placeholder="offReb" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+		        防守籃板<input id="PersonalDataVO_defReb"  placeholder="defReb"  type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;"><br>
+			     助攻<input id="PersonalDataVO_assist" placeholder="assist" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+			     抄截<input id="PersonalDataVO_steal"  placeholder="steal" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+			     阻攻<input id="PersonalDataVO_blocks"  placeholder="blocks"  type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;"><br>
+			     失誤<input id="PersonalDataVO_turnover" placeholder="turnover" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+			     犯規<input id="PersonalDataVO_personalFouls"  placeholder="personalFouls" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;" >
+			     得分<input id="PersonalDataVO_points"  placeholder="points"  type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;"><br>
+			     先發<input id="PersonalDataVO_startingPlayer" placeholder="startingPlayer" type="text" value="0" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 		</div>
 	</div>
 
-
+	<script src="<%=request.getContextPath()%>/dist/jdialog.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
 	   $(function(){
@@ -165,6 +157,9 @@ font-size:2px;
 // 				var acc =  $('#MemberInfoVO_acc').val();
 // 				var name = $('#MemberInfoVO_name').val();
 // 				var auth = $('#MemberInfoVO_auth').val();
+                var playerID = $('#PersonalDataVO_playerID').val();
+				var gameID = $('#PersonalDataVO_gameID').val();
+				var teamID = $('#PersonalDataVO_teamID').val();
 				var gameTime = $('#PersonalDataVO_gameTime').val();
 				var twoPoint = $('#PersonalDataVO_twoPoint').val();
 				var twoPointShot = $('#PersonalDataVO_twoPointShot').val();
@@ -183,6 +178,9 @@ font-size:2px;
 				var startingPlayer = $('#PersonalDataVO_startingPlayer').val();
 				if(gameTime!= '' & twoPoint!= ''){ 
 						//把input 清空
+					$('#PersonalDataVO_playerID').val('');	
+				    $('#PersonalDataVO_gameID').val('');
+					$('#PersonalDataVO_teamID').val('');				
 					$('#PersonalDataVO_gameTime').val('');
 					$('#PersonalDataVO_twoPoint').val('');
 					$('#PersonalDataVO_twoPointShot').val('');
@@ -201,8 +199,9 @@ font-size:2px;
 					$('#PersonalDataVO_startingPlayer').val('');
 		
 					//把輸入的資料包裝成JSON格式字串, 給post傳送用
-				      var PersonalDataVO = JSON.stringify({ 
-				    	  'gameTime':gameTime, 'twoPoint':twoPoint,
+				      var PersonalDataVO = JSON.stringify({ 'playerID':playerID,
+				    	  'gameID':gameID,'teamID':teamID,
+				          'gameTime':gameTime, 'twoPoint':twoPoint,
 				    	  'twoPointShot':twoPointShot, 'threePoint':threePoint, 'threePointShot':threePointShot, 'fg':fg, 'fgShot':fgShot,
 				    	  'offReb':offReb, 'defReb':defReb, 'assist':assist, 'steal':steal, 'blocks':blocks,
 				    	  'turnover':turnover, 'personalFouls':personalFouls, 'points':points, 'startingPlayer':startingPlayer 
@@ -223,10 +222,11 @@ font-size:2px;
 				   var tb =$('#tbody01');
 				   tb.empty;
 				     $.each(data,function (idx, personalDataVO){
+		
 		               var cell1 = $('<td></td>').text(personalDataVO.playerID);
 		               var cell2 = $('<td></td>').text(personalDataVO.gameID);
 		               var cell3 = $('<td></td>').text(personalDataVO.teamID);
-		               var cell4 = $('<td></td>').text(personalDataVO.gameTime);
+		               var cell4 = $('<td></td>').text((personalDataVO.gameTime/60).toFixed(1));
 		               var cell5 = $('<td></td>').text(personalDataVO.twoPoint);
 		               var cell6 = $('<td></td>').text(personalDataVO.twoPointShot);
 		               var cell7 = $('<td></td>').text(personalDataVO.threePoint);	            
@@ -303,8 +303,8 @@ font-size:2px;
 			     var startingPlayer = $(this).parents('tr').find('td:nth-child(19)').text();
 		       	  
 // 			      $(this).parents('tr').find('td:nth-child(1)').html('<input placeholder="賽事"  type="text" value="'+ playerID +'" required>');
-// 		       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="賽事"  type="text" value="'+ gameID +'" required>');
-// 		       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="球隊名稱"  type="text" value="'+ teamID +'" required>');
+		       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="賽事"  type="text" value="'+ gameID +'" required>');
+		       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="球隊名稱"  type="text" value="'+ teamID +'" required>');
 		       	  $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="比賽時間"  type="text" value="'+ gameTime +'" required>');
 		          $(this).parents('tr').find('td:nth-child(5)').html('<input placeholder="二分"  type="text" value="'+ twoPoint +'" required>');
 		          $(this).parents('tr').find('td:nth-child(6)').html('<input placeholder=""  type="text" value="'+ twoPointShot +'" required>');
@@ -348,8 +348,8 @@ font-size:2px;
 			      var startingPlayer = $(this).parents('tr').find('td:nth-child(19)>input').val();
 		       	  
 // 			      $(this).parents('tr').find('td:nth-child(1)').text(playerID);	
-// 			      $(this).parents('tr').find('td:nth-child(2)').text(gameID);
-// 			      $(this).parents('tr').find('td:nth-child(3)').text(teamID);
+			      $(this).parents('tr').find('td:nth-child(2)').text(gameID);
+			      $(this).parents('tr').find('td:nth-child(3)').text(teamID);
 			      $(this).parents('tr').find('td:nth-child(4)').text(gameTime);
 			      $(this).parents('tr').find('td:nth-child(5)').text(twoPoint);
 			      $(this).parents('tr').find('td:nth-child(6)').text(twoPointShot);

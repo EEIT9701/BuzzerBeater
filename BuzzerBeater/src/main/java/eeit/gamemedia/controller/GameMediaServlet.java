@@ -277,7 +277,7 @@ public class GameMediaServlet extends HttpServlet {
 		}
 		
 
-        if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
+        if ("insertVideo".equals(action)) { // 來自addEmp.jsp的請求  
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -286,23 +286,23 @@ public class GameMediaServlet extends HttpServlet {
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-				Integer gameID = null; 
-				try{
-					gameID = new Integer(req.getParameter("gameID"));
-				}catch(NumberFormatException e){
-					errorMsgs.add("賽事ID請輸入數字");
-				}
-				
+				Integer gameID = Integer.valueOf(req.getParameter("gameID"));
 				String mediasName = req.getParameter("mediasName");
-				String gameVideo = req.getParameter("gameVideo");
-				String gamePhoto = req.getParameter("gamePhoto");
-				String mediaType = req.getParameter("mediaType");
+				
+				List<GameMediaVO> gameVideoAmount = gameMediaSvc.getAllVideo();
+				int count = gameVideoAmount.size();
+	
+				
+				String gamePhoto = null;
+				String mediaType = "video";
 				Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 				String descriptions = req.getParameter("descriptions");
 				String tag = req.getParameter("tag");
+				String gameVideo = "00"+(count+1)+".mp4";
+				
 				
 				GameMediaVO gameMediaVO = new GameMediaVO();
-				GamesVO gamesVO = new GamesVO();   //GamesVO 所要傳的GameID是否有傳到?
+				GamesVO gamesVO = new GamesVO();   
 				
 				gamesVO.setGameID(gameID);
 				gameMediaVO.setMediasName(mediasName);
@@ -314,20 +314,20 @@ public class GameMediaServlet extends HttpServlet {
 				gameMediaVO.setTag(tag);
 				
 
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("gameMediaVO", gameMediaVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/addGameMedia.jsp");
-					failureView.forward(req, res);
-					return;
-				}
+//				// Send the use back to the form, if there were errors
+//				if (!errorMsgs.isEmpty()) {
+//					req.setAttribute("gameMediaVO", gameMediaVO);
+//					RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/addGameMedia.jsp");
+//					failureView.forward(req, res);
+//					return;
+//				}
 				
 				/***************************2.開始新增資料***************************************/
-				
+				System.out.println(gameMediaVO);
 				gameMediaVO = gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, gamePhoto, mediaType, mediaDate, descriptions, tag);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/gamemedia/addGameMedia.jsp";
+				String url = "/gamemedia/VideoBackEnd.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);				
 				
@@ -394,7 +394,8 @@ public class GameMediaServlet extends HttpServlet {
 			for(GamesVO gamesVO:list){
 				map = new HashMap<String,String>();
 				map.put("gameID", gamesVO.getGameID().toString());
-				map.put("gameBeginDate", gamesVO.getGameBeginDate().toString());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				map.put("gameBeginDate", (gamesVO.getGameBeginDate() != null) ? sdf.format(gamesVO.getGameBeginDate()) : " ");
 				map.put("teamA", gamesVO.getTeamAVO().getTeamName());
 				map.put("teamB", gamesVO.getTeamBVO().getTeamName());
 				
