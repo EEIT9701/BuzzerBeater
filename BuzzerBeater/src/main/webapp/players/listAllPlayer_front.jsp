@@ -33,31 +33,31 @@
 			<!--主文(開始)-->
 			<div class="container">
 				<div class="jumbotron">
-					<form class="form-inline" method="post" action="<%=request.getContextPath()%>/Players.do">
-						<select class="form-control" name="season" id="seasonSelect">
-					<c:forEach var="season" items="${season.all}">
-						<option value="${season.seasonID}">${season.seasonName}</option>
-					</c:forEach>
-				</select> <select class="form-control" name="groups" id="groupsSelect">
+<%-- 					<form class="form-inline" method="post" action="<%=request.getContextPath()%>/Players.do"> --%>
+<!-- 						<select class="form-control" name="season" id="seasonSelect"> -->
+<%-- 					<c:forEach var="season" items="${season.all}"> --%>
+<%-- 						<option value="${season.seasonID}">${season.seasonName}</option> --%>
+<%-- 					</c:forEach> --%>
+<!-- 				</select> <select class="form-control" name="groups" id="groupsSelect"> -->
 
-				</select> <select class="form-control" name="teams">
-					<option>球隊</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-				</select> <select class="form-control" name="nationality">
-					<option>國家</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-				</select>
-						<div class="form-group">
-							<input type="text" class="form-control" id="Name" name="playerName" placeholder="根據球員姓名查詢">
-						</div>
-						<input type="submit" class="btn btn-warning" value="搜尋"> <input type="hidden" name="action" value="getOne_For_Display">
-					</form>
+<!-- 				</select> <select class="form-control" name="teams"> -->
+<!-- 					<option>球隊</option> -->
+<!-- 					<option>2</option> -->
+<!-- 					<option>3</option> -->
+<!-- 					<option>4</option> -->
+<!-- 					<option>5</option> -->
+<!-- 				</select> <select class="form-control" name="nationality"> -->
+<!-- 					<option>國家</option> -->
+<!-- 					<option>2</option> -->
+<!-- 					<option>3</option> -->
+<!-- 					<option>4</option> -->
+<!-- 					<option>5</option> -->
+<!-- 				</select> -->
+<!-- 						<div class="form-group"> -->
+<!-- 							<input type="text" class="form-control" id="Name" name="playerName" placeholder="根據球員姓名查詢"> -->
+<!-- 						</div> -->
+<!-- 						<input type="submit" class="btn btn-warning" value="搜尋"> <input type="hidden" name="action" value="getOne_For_Display"> -->
+<!-- 					</form> -->
 					<!--表格(開始)-->
 					<!--****************-->
 					<!-- 第一列(開始) -->
@@ -89,7 +89,12 @@
 
 
 
-											<td><img id="img1" src="data:image/jpeg;base64,${playersVO.photo}"></td>
+											<td><c:if test="${null==playersVO.photo}">
+							              <img id="img1" src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png">
+									    </c:if>
+									    <c:if test="${null!=playersVO.photo}">
+							               <img id="img1" src="data:image/jpeg;base64,${playersVO.photo}">
+									    </c:if></td>
 											<!--球員照片-->
 
 

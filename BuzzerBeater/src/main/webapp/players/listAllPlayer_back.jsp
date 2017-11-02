@@ -33,16 +33,16 @@
 	<!--主文(開始)-->
 	<div class="container">
 		<div class="jumbotron">
-			<form class="form-inline" method="post"
-				action="<%=request.getContextPath()%>/Players.do">
-				<div class="form-group">
-					<label for="Name">身分證字號:</label> <input type="text"
-						class="form-control" id="Name" name="playerName"
-						placeholder="請輸入球員身分證字號">
-				</div>
-				<input type="submit" class="btn btn-warning" value="搜尋"> <input
-					type="hidden" name="action" value="getOne_For_Display">
-			</form>
+<!-- 			<form class="form-inline" method="post" -->
+<%-- 				action="<%=request.getContextPath()%>/Players.do"> --%>
+<!-- 				<div class="form-group"> -->
+<!-- 					<label for="Name">身分證字號:</label> <input type="text" -->
+<!-- 						class="form-control" id="Name" name="playerName" -->
+<!-- 						placeholder="請輸入球員身分證字號"> -->
+<!-- 				</div> -->
+<!-- 				<input type="submit" class="btn btn-warning" value="搜尋"> <input -->
+<!-- 					type="hidden" name="action" value="getOne_For_Display"> -->
+<!-- 			</form> -->
 			<div class="col-md-4"></div>
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
@@ -87,8 +87,13 @@
 							<tbody>
 								<c:forEach var="playersVO" items="${playerSvc.allPlayer}">
 									<tr align='center' valign='middle'>
-										<td><img id="img1"
-											src="data:image/jpeg;base64,${playersVO.photo}"></td>
+										
+											<td><c:if test="${null==playersVO.photo}">
+							              <img id="img1" src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png">
+									    </c:if>
+									    <c:if test="${null!=playersVO.photo}">
+							               <img id="img1" src="data:image/jpeg;base64,${playersVO.photo}">
+									    </c:if></td>
 										<td>${playersVO.playerName}</td>
 										<td>${playersVO.id}</td>
 										<td>${playersVO.height}</td>
@@ -151,7 +156,25 @@
 
 			})
 			$(document).ready(function() {
-				$('#table').DataTable();
+				 $('#table').DataTable({
+					    columnDefs: [{ width: 200, targets: 6}],
+					    "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+					    "pagingType": "full_numbers",
+					    "language": {
+					     "lengthMenu":"每一頁顯示_MENU_ 筆資料",
+					     "zeroRecords":"查無資料",
+					     "info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
+					     "infoEmpty":"無資料",
+					     "infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
+					     "search":"搜尋：",
+					     "paginate":{
+					      "first":"第一頁",
+					      "previous":"上一頁",
+					      "next":"下一頁",
+					      "last":"最末頁"     
+					    }
+					     }
+					   })
 			});
 		});
 	</script>
