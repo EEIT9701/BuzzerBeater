@@ -222,10 +222,11 @@ font-size:2px;
 				   var tb =$('#tbody01');
 				   tb.empty;
 				     $.each(data,function (idx, personalDataVO){
+		
 		               var cell1 = $('<td></td>').text(personalDataVO.playerID);
 		               var cell2 = $('<td></td>').text(personalDataVO.gameID);
 		               var cell3 = $('<td></td>').text(personalDataVO.teamID);
-		               var cell4 = $('<td></td>').text(personalDataVO.gameTime);
+		               var cell4 = $('<td></td>').text((personalDataVO.gameTime/60).toFixed(1));
 		               var cell5 = $('<td></td>').text(personalDataVO.twoPoint);
 		               var cell6 = $('<td></td>').text(personalDataVO.twoPointShot);
 		               var cell7 = $('<td></td>').text(personalDataVO.threePoint);	            
