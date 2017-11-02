@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
+<jsp:useBean id="date" scope="page" class="java.util.Date"/>
+<jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService"/>
+<jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService"/>
+<jsp:useBean id="gamesSvc" scope="page" class="eeit.games.model.GamesService"/>
 
 <!--標頭(開始)-->
 <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" style="font-size: larger">
@@ -27,7 +30,7 @@
 <!-- 							<li><h6><a href="">分組</a></h6></li> -->
 <!-- 							<li><h6><a href="">賽程</a></h6></li> -->
 								<li><h6><a href="<%=request.getContextPath() %>/teams/listAllteam_back.jsp">球隊</a></h6></li>
-								<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp">球員</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></h6></li>					 
