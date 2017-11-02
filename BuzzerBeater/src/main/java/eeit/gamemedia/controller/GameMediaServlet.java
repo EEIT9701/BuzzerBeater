@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
@@ -22,6 +23,7 @@ import com.google.gson.Gson;
 
 import eeit.gamemedia.model.GameMediaService;
 import eeit.gamemedia.model.GameMediaVO;
+import eeit.games.model.GamesDAO_HibernateTemplate;
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
 import eeit.groups.model.GroupsService;
@@ -283,9 +285,9 @@ public class GameMediaServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
-			try {
-				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+//
+//			try {
+//				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				Integer gameID = Integer.valueOf(req.getParameter("gameID"));
 				String mediasName = req.getParameter("mediasName");
 				
@@ -293,7 +295,7 @@ public class GameMediaServlet extends HttpServlet {
 				int count = gameVideoAmount.size();
 	
 				
-				String gamePhoto = null;
+				String gamePhoto = "";
 				String mediaType = "video";
 				Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 				String descriptions = req.getParameter("descriptions");
@@ -301,18 +303,24 @@ public class GameMediaServlet extends HttpServlet {
 				String gameVideo = "00"+(count+1)+".mp4";
 				
 				
-				GameMediaVO gameMediaVO = new GameMediaVO();
-				GamesVO gamesVO = new GamesVO();   
+//				GameMediaVO gameMediaVO = new GameMediaVO();
+//				GamesService gs = new GamesService();
+//				GamesVO gamesVO = gs.findByGameID(gameID);
+//				
+//				
+//				gameMediaVO.setGamesVO(gamesVO);
+//				gameMediaVO.setMediasName(mediasName);
+//				gameMediaVO.setGameVideo(gameVideo);
+//				gameMediaVO.setGamePhoto(gamePhoto);
+//				gameMediaVO.setMediaType(mediaType);
+//				gameMediaVO.setMediaDate(mediaDate);
+//				gameMediaVO.setDescriptions(descriptions);
+//				gameMediaVO.setTag(tag);
 				
-				gamesVO.setGameID(gameID);
-				gameMediaVO.setMediasName(mediasName);
-				gameMediaVO.setGameVideo(gameVideo);
-				gameMediaVO.setGamePhoto(gamePhoto);
-				gameMediaVO.setMediaType(mediaType);
-				gameMediaVO.setMediaDate(mediaDate);
-				gameMediaVO.setDescriptions(descriptions);
-				gameMediaVO.setTag(tag);
+				Part part = req.getPart("file");
+				System.out.println(part);
 				
+			
 
 //				// Send the use back to the form, if there were errors
 //				if (!errorMsgs.isEmpty()) {
@@ -323,20 +331,21 @@ public class GameMediaServlet extends HttpServlet {
 //				}
 				
 				/***************************2.開始新增資料***************************************/
-				System.out.println(gameMediaVO);
-				gameMediaVO = gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, gamePhoto, mediaType, mediaDate, descriptions, tag);
+				//System.out.println(gameMediaVO);
+				System.out.println(gameID+","+mediasName+","+gameVideo+","+gamePhoto+","+mediaType+","+mediaDate+","+descriptions+","+tag);
+				gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, gamePhoto, mediaType, mediaDate, descriptions, tag);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/gamemedia/VideoBackEnd.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); 
-				successView.forward(req, res);				
+//				String url = "/gamemedia/videoBackEnd.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url); 
+//				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/addGameMedia.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				errorMsgs.add(e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/addGameMedia.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		if ("findGroupNameBySeasonID".equals(action)){
 			res.setHeader("Access-Control-Allow-Origin", "*");
@@ -369,9 +378,6 @@ public class GameMediaServlet extends HttpServlet {
 			String jsonList = gson.toJson(returnlist); 
 			
 			
-
-            System.out.println(jsonList);
-			
             PrintWriter out = res.getWriter();
 			out.println(jsonList);
 			
@@ -401,13 +407,9 @@ public class GameMediaServlet extends HttpServlet {
 				
 				returnlist.add((HashMap<String, String>) map);
 			}
-			System.out.println(map);
-			System.out.println(returnlist);
 			
 			Gson gson = new Gson();
 			String jsonString = gson.toJson(returnlist); 
-			
-			System.out.println(jsonString);
 			
 			PrintWriter out = res.getWriter();
 			out.println(jsonString);
