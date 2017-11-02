@@ -52,12 +52,19 @@
                                             <td>老闆 | ${teamsVO.bossName}</td>
                                         </tr>
                                         <tr>
-                                            <td>球場 | 甲骨文體育館</td>
+                                            <td>球場 | ${teamsVO.locationinfoVO.locationName}</td>
                                         </tr>
                                     </tbody>
                                 </table>
 
                             </div>
+                             <div class="col-md-12">
+                             <div class="col-md-4"></div>
+                             <div class="col-md-4">
+                             
+                             </div>
+                             <div class="col-md-4"></div>
+							</div>
                         </div>
                         <!--第二列-右邊表格-格式_.col-md-4-->
                         <div class="col-md-4">
@@ -67,7 +74,7 @@
                                 <table class="table">
 
                                     <tbody>
-                                        <tr>
+                                        <tralign='center' valign='middle'>
                                             <td>
                                                 <h2>${teamsVO.totalWin}<span>勝</span></h2>
 
