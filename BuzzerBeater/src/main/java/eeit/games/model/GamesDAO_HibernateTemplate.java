@@ -24,6 +24,7 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 
 	private static final String GET_ALL_STMT = "FROM GamesVO";
 	private static final String FIND_BY_GROUPID = "FROM GamesVO WHERE groupID=?";
+	private static final String FIND_BY_TEAMID = "FROM GamesVO WHERE teamAID=? OR teamBID =?";
 
 	@Override
 	public Set<GamesVO> getAll() {
@@ -57,6 +58,11 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 	}
 	
 	@Override
+	public List<GamesVO> findByTeamID(Integer teamID) {
+		return (List<GamesVO>) hibernateTemplate.find(FIND_BY_TEAMID, teamID,teamID);
+	}
+	
+	@Override
 	public List<GamesVO> findByGroupID(Integer groupID) {
 		return (List<GamesVO>) hibernateTemplate.find(FIND_BY_GROUPID, groupID);
 	}
@@ -70,7 +76,7 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 //		 dao.delete(4003);
 
 
-		Set<GamesVO> set = new LinkedHashSet<GamesVO>(dao.findByGroupID(2002));
+		Set<GamesVO> set = new LinkedHashSet<GamesVO>(dao.findByTeamID(3001));
 		for (GamesVO gvo : set) {
 			System.out.print(gvo.getGameID() + ", ");
 			System.out.print(gvo.getGroupsVO().getGroupID() + ", ");

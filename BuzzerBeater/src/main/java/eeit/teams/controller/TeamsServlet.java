@@ -2,6 +2,7 @@ package eeit.teams.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import eeit.games.model.GamesService;
+import eeit.games.model.GamesVO;
 import eeit.players.model.PlayersVO;
 import eeit.teamcomposition.model.TeamCompositionService;
 import eeit.teams.model.TeamsService;
@@ -116,10 +119,28 @@ public class TeamsServlet extends HttpServlet {
 
 		if ("GET_ONE_TEAM".equals(action)) {
 			Integer teamID = Integer.parseInt(request.getParameter("teamID"));
-
-			TeamsService svc = new TeamsService();
-			request.setAttribute("teamsVO", svc.findByID(teamID));
+			
+			
+			TeamsService tsvc = new TeamsService();
+			GamesService gsvc = new GamesService();
+			TeamsVO teamsVO = tsvc.findByID(teamID);
+			List<GamesVO> gamesVO = gsvc.findByTeamID(teamID);
+			request.setAttribute("teamsVO",teamsVO);
+			request.setAttribute("gamesVO",gamesVO);
 			request.getRequestDispatcher("/teams/teamInformation.jsp").forward(request, response);
+		}
+		
+		if ("GET_MY_TEAM".equals(action)) {
+			Integer teamID = Integer.parseInt(request.getParameter("teamID"));
+			
+			
+			TeamsService tsvc = new TeamsService();
+			GamesService gsvc = new GamesService();
+			TeamsVO teamsVO = tsvc.findByID(teamID);
+			List<GamesVO> gamesVO = gsvc.findByTeamID(teamID);
+			request.setAttribute("teamsVO",teamsVO);
+			request.setAttribute("gamesVO",gamesVO);
+			request.getRequestDispatcher("/teams/myTeamInformation.jsp").forward(request, response);
 		}
 
 		if ("UpdateTeam".equals(action)) {
