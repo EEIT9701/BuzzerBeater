@@ -443,15 +443,12 @@ public class GroupsServlet extends HttpServlet {
 
 				gSvc.addGames(groupID, locationID, teamAID, 0, teamBID, 0, gameBeginDate, gameEndDate);
 			}
-			
+
 			session.removeAttribute("timeList");
 			session.removeAttribute("gamesNeeded");
 			session.removeAttribute("groupsVO");
-			
-			GroupsService svc = new GroupsService();
-			GroupsVO groupsVO = svc.findByGroupID(groupID);
-			request.setAttribute("groupsVO", groupsVO);
-			request.getRequestDispatcher("/games/gameList.jsp").forward(request, response);
+
+			request.getRequestDispatcher("/Games.do?action=GET_GAMES&groupID=" + groupID).forward(request, response);
 		}
 
 	}

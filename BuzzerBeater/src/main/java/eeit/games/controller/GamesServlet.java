@@ -111,7 +111,7 @@ public class GamesServlet extends HttpServlet {
 
 					gSvc.addGames(groupID, locationID, teamAID, 0, teamBID, 0, gameBeginDate, gameEndDate);
 				}
-				
+
 				for (Integer gameID : gameIDList) {
 					gSvc.delete(gameID);
 				}
