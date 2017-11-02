@@ -63,7 +63,7 @@ public class PersonalDataJNDIDAO implements PersonalDataDAO_interface{
 	  		"on pd.playerID=p.playerID";
 	
 	private static final String UPDATE = "UPDATE PersonalData set playerID=?, gameID=?, teamID=?, gameTime=?, twoPoint=?, twoPointShot=?, threePoint=?, threePointShot=?, fg=?, fgShot=?, offReb=?, defReb=?, assist=?, steal=?, blocks=?, turnover=?, personalFouls=?, points=?, startingPlayer=? where playerID = ? and gameID=? and teamID=?";
-	private static final String INSERT_STMT = "INSERT INTO PersonalData(gameTime, twoPoint, twoPointShot, threePoint, threePointShot, fg, fgShot, offReb, defReb, assist, steal, blocks, turnover, personalFouls, points, startingPlayer) VALUES(?, ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?, ?, ?,?)"; 
+	private static final String INSERT_STMT = "INSERT INTO PersonalData(playerID, gameID, teamID, gameTime, twoPoint, twoPointShot, threePoint, threePointShot, fg, fgShot, offReb, defReb, assist, steal, blocks, turnover, personalFouls, points, startingPlayer) VALUES(?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?, ?)"; 
 	private static final String DELETE = "DELETE FROM PersonalData where playerID = ? and gameID=? and teamID=?";
 	@Override
 	public List<PersonalDataVO> getAll() {
@@ -148,36 +148,33 @@ public class PersonalDataJNDIDAO implements PersonalDataDAO_interface{
 	@Override
 	public void insert(PersonalDataVO personalDataVO) {
 		 Connection conn = null;
-		 PreparedStatement stmt = null;
-		
+		 PreparedStatement stmt = null;	
 		 try{
 		 
 		 conn = ds.getConnection();
 		 stmt = conn.prepareStatement(INSERT_STMT);
 
-//		 stmt.setInt(1, personalDataVO.getPlayerID());		 
-//		 stmt.setInt(2, personalDataVO.getGameID());
-//		 stmt.setInt(3, personalDataVO.getTeamID());
-		 stmt.setInt(1, personalDataVO.getGameTime());
-		 stmt.setInt(2, personalDataVO.getTwoPoint());
-		 stmt.setInt(3, personalDataVO.getTwoPointShot());
-		 stmt.setInt(4, personalDataVO.getThreePoint());
-		 stmt.setInt(5, personalDataVO.getThreePointShot());
-		 stmt.setInt(6, personalDataVO.getFg());
-		 stmt.setInt(7, personalDataVO.getFgShot());
-		 stmt.setInt(8, personalDataVO.getOffReb());
-		 stmt.setInt(9, personalDataVO.getDefReb());
-		 stmt.setInt(10, personalDataVO.getAssist());
-		 stmt.setInt(11, personalDataVO.getSteal());
-		 stmt.setInt(12, personalDataVO.getBlocks());
-		 stmt.setInt(13, personalDataVO.getTurnover());
-		 stmt.setInt(14, personalDataVO.getPersonalFouls());
-		 stmt.setInt(15, personalDataVO.getPoints());
-		 stmt.setInt(16, personalDataVO.getStartingPlayer());	 
-
+		 stmt.setInt(1, personalDataVO.getPlayerID());		 
+		 stmt.setInt(2, personalDataVO.getGameID());
+		 stmt.setInt(3, personalDataVO.getTeamID());
+		 stmt.setInt(4, personalDataVO.getGameTime());
+		 stmt.setInt(5, personalDataVO.getTwoPoint());
+		 stmt.setInt(6, personalDataVO.getTwoPointShot());
+		 stmt.setInt(7, personalDataVO.getThreePoint());
+		 stmt.setInt(8, personalDataVO.getThreePointShot());
+		 stmt.setInt(9, personalDataVO.getFg());
+		 stmt.setInt(10, personalDataVO.getFgShot());
+		 stmt.setInt(11, personalDataVO.getOffReb());
+		 stmt.setInt(12, personalDataVO.getDefReb());
+		 stmt.setInt(13, personalDataVO.getAssist());
+		 stmt.setInt(14, personalDataVO.getSteal());
+		 stmt.setInt(15, personalDataVO.getBlocks());
+		 stmt.setInt(16, personalDataVO.getTurnover());
+		 stmt.setInt(17, personalDataVO.getPersonalFouls());
+		 stmt.setInt(18, personalDataVO.getPoints());
+		 stmt.setInt(19, personalDataVO.getStartingPlayer());	 
 
 		 stmt.executeUpdate();
- 
 		 }catch(SQLException sqle){
 		 sqle.printStackTrace();
 		 }finally{
@@ -185,7 +182,6 @@ public class PersonalDataJNDIDAO implements PersonalDataDAO_interface{
 				 try {
 					stmt.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			 }
@@ -193,7 +189,6 @@ public class PersonalDataJNDIDAO implements PersonalDataDAO_interface{
 				 try {
 					conn.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			 }

@@ -320,6 +320,7 @@ video::-webkit-media-controls-panel {
 
 <jsp:include page="/footer.jsp" />
 <!-- 模太框 -->
+
 	<div class="jDialog" id="dialog-4">
 		<div class="content">
 		 <H3 style="align:'center'; valign:'middle'">修改資訊</H3>
@@ -334,7 +335,7 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
-	
+
 	<jsp:include page="/footer_css.jsp" />
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
