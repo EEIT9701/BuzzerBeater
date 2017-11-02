@@ -13,17 +13,54 @@
    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		    	
     <jsp:include page="/header_css.jsp" />
-    
-    <title>修改分組</title>
+    <style>
+        h2,h3{		
+    	  font-family:微軟正黑體;   	  
+    	  text-align:center;
+    	}
+        #pathWay {
+      	  color: #666;
+      	  height: 28px;
+      	  line-height: 28px;
+      	  border-bottom: 1px solid #c0b7b7;
+      	  text-indent: 5px;
+      	  font-size: 18px;
+      	  font-weight: normal;
+      	  margin-bottom: 10px;
+      	  font-family:微軟正黑體;
+        }
+     </style>
 </head>
 
 <body>
 	<jsp:include page="/header.jsp" />
 	
 	<div class="container">
+	<div class="jumbotron">
+		
+		<!--上層導覽列(開始) -->
+		<div id="pathWay">
+        	<span>
+            	<a href="<%=request.getContextPath() %>/index.jsp">
+            		<span>使用者功能</span>
+            	</a>
+        	</span>&gt;
+        	<span>
+            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+            		<span>賽季管理</span>
+            	</a>
+        	</span>&gt;
+        	<span>
+            	<a href="<%=request.getContextPath() %>/Season.do?action=TO_GROUPS_BACK&seasonID=1001">
+            		<span>分組列表</span>
+            	</a>
+        	</span>&gt;
+        	<span><span>修改分組</span></span>
+    	</div>
+    	<!--上層導覽列(結束) -->
 		<div class="col-md-12">
 		
-			<h1>修改分組</h1>
+			<h2>修改分組</h2>
             	<c:if test="${not empty errorMsgs}">
 					請修正以下錯誤:
                     <ul>
@@ -67,14 +104,25 @@
 			        </tbody>
 			        
 			    </table>
-			    <input type="submit" value="送出">
-			    <input type ="button" onclick="history.back()" value="取消"></input>
+			    <input type="submit" class="btn btn-success" id="submit_move" value="送出">
+			    <input type ="button" class="btn btn-danger" onclick="history.back()" value="取消"></input>
 			</form>
 		</div>
-	</div>
-	    
-	    
 	<jsp:include page="/footer.jsp" />
+	</div>
+	</div>
+		<script>
+	$(document).ready(function(){
+		var td_1={'font-family':'微軟正黑體',
+ 		 		'text-align':'center',
+ 		 		'line-height': '60px',
+	    		'font-size': '20px'}
+		var submit={'margin-left': '876px'}
+	$("tr td:first-child").css(td_1)
+	$("#submit_move").css(submit)
+	})
+	</script>
+	    
 </body>
 <jsp:include page="/footer_css.jsp" />
 </html>

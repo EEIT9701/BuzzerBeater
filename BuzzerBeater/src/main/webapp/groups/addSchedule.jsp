@@ -82,6 +82,17 @@
 			    
 			    <p>有 ${groupsVO.currentTeams} 隊，循環賽共需打 ${gamesNeeded} 場比賽</p>
 			    
+			    <br>
+			    <c:if test="${not empty errorMsgs}">
+				                        請修正以下錯誤:
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<c:if test="${not empty message}">
+								<li>${message}</li>
+							</c:if>
+						</c:forEach>
+					</ul>
+				</c:if>
 			    	
 			    <table class="table table-bordered">
 		            <thead>

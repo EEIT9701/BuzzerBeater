@@ -19,13 +19,49 @@
 		    	
         <title>Season</title>
         <jsp:include page="/header_css.jsp" />
+        <jsp:include page="/font_css.jsp" />
+        <style>
+        thead{
+	      background-color: #d62d67;
+    	  color: #e9e9e9;
+        }
+        #pathWay {
+      	  color: #666;
+      	  height: 28px;
+      	  line-height: 28px;
+      	  border-bottom: 1px solid #c0b7b7;
+      	  text-indent: 5px;
+      	  font-size: 18px;
+      	  font-weight: normal;
+      	  margin-bottom: 10px;
+      	  font-family:微軟正黑體;
+        }
+        </style>
     </head>
 
     <body>
 	    <jsp:include page="/header.jsp" />
 	
 		<div class="container">
+		<div class="jumbotron">
+		
+		<!--上層導覽列(開始) -->
+		<div id="pathWay">
+        	<span>
+            	<a href="<%=request.getContextPath() %>/index.jsp">
+            		<span>使用者功能</span>
+            	</a>
+        	</span>&gt;
+        	        	<span>
+            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+            		<span>賽季管理</span>
+            	</a>
+        	</span>&gt;
+        	<span><span>分組列表</span></span>
+    	</div>
+    	<!--上層導覽列(結束) -->
 			<div class="col-md-12">
+			<h2>分組列表</h2>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -98,14 +134,14 @@
 			        				<form action="<%=request.getContextPath()%>/Groups.do" method="post">
 			        					<input type="hidden" name="action" value="GET_ONE_TO_UPDATE">
 			        					<input type="hidden" name="groupID" value="${groupsSet.groupID}">
-			        					<input type="submit" value="修改">
+			        					<input type="submit" class="btn btn-warning updateData" value="修改">
 			        				</form>
 			        			</td>
 			        			<td>
 			        				<form action="<%=request.getContextPath()%>/Groups.do" method="post">
 			        					<input type="hidden" name="action" value="DELETE_GROUP">
 			        					<input type="hidden" name="groupID" value="${groupsSet.groupID}">
-			        					<input type="submit" value="刪除">
+			        					<input type="submit" class="btn btn-danger" value="刪除">
 			        				</form>
 			        			</td>
 			        		</tr>
@@ -115,10 +151,11 @@
 			    
 			    
 		    </div>
+	    <jsp:include page="/footer.jsp" />
+	    </div>
 	    </div>
 	    
 	    
-	    <jsp:include page="/footer.jsp" />
     </body>
 	<jsp:include page="/footer_css.jsp" />
     </html>

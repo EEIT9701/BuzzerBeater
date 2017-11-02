@@ -52,12 +52,19 @@
                                             <td>老闆 | ${teamsVO.bossName}</td>
                                         </tr>
                                         <tr>
-                                            <td>球場 | 甲骨文體育館</td>
+                                            <td>球場 | ${teamsVO.locationinfoVO.locationName}</td>
                                         </tr>
                                     </tbody>
                                 </table>
 
                             </div>
+                             <div class="col-md-12">
+                             <div class="col-md-4"></div>
+                             <div class="col-md-4">
+                             
+                             </div>
+                             <div class="col-md-4"></div>
+							</div>
                         </div>
                         <!--第二列-右邊表格-格式_.col-md-4-->
                         <div class="col-md-4">
@@ -67,7 +74,7 @@
                                 <table class="table">
 
                                     <tbody>
-                                        <tr>
+                                        <tralign='center' valign='middle'>
                                             <td>
                                                 <h2>${teamsVO.totalWin}<span>勝</span></h2>
 
@@ -114,134 +121,85 @@
                     <!--****************-->
                     <!-- 第二列(結束) -->
                     <!--****************-->
-                    <div class="row">
-                        <!--第二列-左邊表格-格式_.col-md-4-->
+                 <div class="row">
+			<!--第二列-左邊表格-格式_.col-md-4-->
 
-                        <div class="col-md-12">
-                            <!--滑鼠移入，顯示表格(開始)-->
-                            <div id="tabs">
-                                <ul>
-                                    <li><a href="#tabs-3">未來賽事</a></li>
-                                    <li><a href="#tabs-2">過去賽事</a></li>
-                                    <li><a href="#tabs-1">球員名單</a></li>
-                                    <li><a href="#tabs-4">球員數據</a></li>
-                                </ul>
-                                <div id="tabs-1">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>背號</th>
-                                                <th>照片</th>
-                                                <th>姓名</th>
-                                                <th>位置</th>
-                                                <th>身高</th>
-                                                <th>體重</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div id="tabs-2">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>比賽時間</th>
-                                                <th>比賽地點</th>
-                                                <th>對戰隊伍</th>
-                                                <th>比分</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+			<div class="col-md-12">
+				<!--滑鼠移入，顯示表格(開始)-->
+				<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">球員名單</a></li>
+						<li><a href="#tabs-2">球隊賽事</a></li>
+					</ul>
+					<div id="tabs-1">
+						<c:forEach var="teamCompositionVO"
+							items="${teamsVO.teamCompositionSet}">
+							<table class="table table-bordered respond">
+								<thead>
+									<tr align='center' valign='middle'>
+										<th>背號</th>
+										<th>照片</th>
+										<th>姓名</th>
+										<th>位置</th>
+										<th>身高</th>
+										<th>體重</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr align='center' valign='middle'>
+										<td>${teamCompositionVO.playerNo}</td>
+										<td><img id="photo"
+											src="data:image/jpeg;base64,${teamCompositionVO.playersVO.photo}"></td>
+										<td>${teamCompositionVO.playersVO.playerName}</td>
+										<td>${teamCompositionVO.playerRole}</td>
+										<td>${teamCompositionVO.playersVO.height}</td>
+										<td>${teamCompositionVO.playersVO.weights}</td>
+									</tr>
+								</tbody>
+							</table>
+						</c:forEach>
+					</div>
+					<div id="tabs-2">
+						<table class="table table-bordered" align='center' valign='middle'>
+							<thead>
+								<tr>
+									<th>比賽時間</th>
+									<th>比賽地點</th>
+									<th>對戰隊伍</th>
+									<th>比分</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="gamesVO" items="${gamesVO}">
+									<tr align='center' valign='middle'>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div id="tabs-3">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>比賽時間</th>
-                                                <th>比賽地點</th>
-                                                <th>對戰隊伍</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+										<td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value ="${gamesVO.gameBeginDate}"/></td>
+										<td>${gamesVO.locationinfoVO.locationName}</td>
+										<td>
+										<c:if test="${teamsVO.teamID == gamesVO.teamAVO.teamID}">
+							               ${gamesVO.teamBVO.teamName}
+									    </c:if>
+									    <c:if test="${teamsVO.teamID == gamesVO.teamBVO.teamID}">
+							               ${gamesVO.teamAVO.teamName}
+									    </c:if>
+									    </td>
+										<td>${gamesVO.teamAScore} - ${gamesVO.teamBScore}</td>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div id="tabs-4">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>比賽場次 </th>
-                                                <th>出場時間 </th>
-                                                <th>二分命中 </th>
-                                                <th>二分出手數 </th>
-                                                <th>三分命中 </th>
-                                                <th>三分出手數 </th>
-                                                <th>罰球命中 </th>
-                                                <th>罰球出手數 </th>
-                                                <th>進攻籃板 </th>
-                                                <th>防守籃板 </th>
-                                                <th>助攻 </th>
-                                                <th>抄截 </th>
-                                                <th>阻攻 </th>
-                                                <th>失誤 </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!--滑鼠移入，顯示表格(結束)-->
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!--滑鼠移入，顯示表格(結束)-->
 
 
 
 
-                            <jsp:include page="/footer.jsp" />
+				<jsp:include page="/footer.jsp" />
 
-                        </div>
-                    </div>
+			</div>
+		</div>
                 </div>
             </div>
             <!--主文(結束)-->

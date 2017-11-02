@@ -2,12 +2,7 @@
 <%@ page import="eeit.memberinfo.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-// 	MemberInfoService dao = new MemberInfoService();
-// 	List<MemberInfoVO> list = dao.getAll();
-// 	pageContext.setAttribute("list", list);
-%>
-<%-- <jsp:useBean id="memberInfoSvc" scope="page" class="eeit.memberinfo.model.MemberInfoService" /> --%>
+
 <!DOCTYPE >
 <html>
 <head>
@@ -22,57 +17,79 @@
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 <!-- ***套用新的模太框檔案*** -->
-<script src="<%=request.getContextPath()%>/dist/jdialog.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/jdialog.min.css">	
-
-<style>
-#st1 {
-	padding: 30px;
-	background-color: #1E90FF;
-}
-</style>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 <jsp:include page="/header_css.jsp" />
+<jsp:include page="/font_css.jsp" />
+	<style>
+	 #st1 {
+		padding: 30px;
+		background-color: #1E90FF}
+     thead{
+	      background-color: rgba(237, 125, 49, 0.8);
+    	  color: #e9e9e9;
+        }
+     #pathWay {
+      	  color: #666;
+      	  height: 28px;
+      	  line-height: 28px;
+      	  border-bottom: 1px solid #c0b7b7;
+      	  text-indent: 5px;
+      	  font-size: 18px;
+      	  font-weight: normal;
+      	  margin-bottom: 10px;
+      	  font-family:微軟正黑體;
+        }
+        
+	</style>
 </head>
 <body>
 
 	<jsp:include page="/header.jsp" />
 	<!--主文(開始)-->
 	<div class="container">
-		<div><button type="button" class="btn btn-danger" data-toggle="JDialog" data-target="dialog-4" id="button_insert">新增</button></div>
+	<div class="jumbotron">
+		
+		<!--上層導覽列(開始) -->
+		<div id="pathWay">
+        	<span>
+            	<a href="<%=request.getContextPath() %>/index.jsp">
+            		<span>使用者功能</span>
+            	</a>
+        	</span>&gt;
+        	<span><span>權限管理</span></span>
+    	</div>
+    	<!--上層導覽列(結束) -->
+		<div><button type="button"  data-toggle="JDialog" data-target="dialog-4" class="btn btn-primary">新增</button></div>
 		<br>
 		<br>
 		<!--****************-->
 		<!-- 第二列(開始) -->
 		<!--****************-->
 		<div class="row">
-			<!--第二列-左邊表格-格式_.col-md-4-->
 			<div class="col-md-12">
-				<div class="col-md-12">
 					<table class="table table-bordered" id="example">
 						<thead>
 							<tr align='center' valign='middle'>
-								<th>會員編號</th>
-								<th>會員帳號</th>
-								<th>會員名稱</th>
-								<th>權限</th>
-								<th>註冊時間</th>
-							    <th>球隊ID</th>
-								<th></th>
-								<th></th>
+								<th style="width:350px">會員編號</th>
+								<th >會員帳號</th>
+								<th style="width:720px">會員名稱</th>
+								<th >權限</th>
+								<th style="width:720px">註冊時間</th>
+							    <th style="width:120px">球隊ID</th>
+								<th style="width:10%"></th>
+								<th ></th>
 							</tr>
 						</thead>
 						<tbody id="tbody01">
 						
 						</tbody>
 					</table>
-				</div>
 			</div>
 		</div>
 	<jsp:include page="/footer.jsp" />
 	</div>
-   
+   <jsp:include page="/footer_css.jsp" />
 	<!--主文(結束)-->
 	
 	<!-- 模太框 -->
@@ -87,9 +104,12 @@
 			</div>
 		</div>
 	</div>
+	</div>
 	
-	<script type="text/javascript"
-		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	
+	
+    <script src="<%=request.getContextPath()%>/dist/jdialog.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>	
 	<script>
 	$(function(){	
 		//生成memberInfoServlet 取值, 回傳JSON格式物件,並且 指定位置生成資料
@@ -150,8 +170,8 @@
  	               maxDate = new Date(MemberInfoVO.registerTime);          //ms to data
  	               var cell5 = $('<td></td>').text(maxDate);
 	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
-	               var cell7 = $('<td><button type="button" class="btn btn-lg btn-primary" >修改</button></td>');
-	               var cell8 = $('<td><button type="button" class="btn btn-lg btn-warning" >刪除</button></td>');
+	               var cell7 = $('<td><button type="button" class="btn btn-warning updateData" >修改</button></td>');
+	               var cell8 = $('<td><button type="button" class="btn btn-danger" >刪除</button></td>');
 	               var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8]);
  	               docFrag.append(row);
  	               tb.append(docFrag);         

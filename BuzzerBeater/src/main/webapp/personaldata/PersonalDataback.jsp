@@ -73,7 +73,7 @@ font-size:2px;
 								<th>球員</th>
 								<th>賽事</th>
 								<th>球隊名稱</th>
-								<th>出場時間</th>
+								<th>出場時間(分)</th>
 								<th>二分命中</th>
 								<th>二分出手</th>
 								<th>三分命中</th>	
@@ -222,6 +222,7 @@ font-size:2px;
 				   var tb =$('#tbody01');
 				   tb.empty;
 				     $.each(data,function (idx, personalDataVO){
+		
 		               var cell1 = $('<td></td>').text(personalDataVO.playerID);
 		               var cell2 = $('<td></td>').text(personalDataVO.gameID);
 		               var cell3 = $('<td></td>').text(personalDataVO.teamID);
@@ -302,8 +303,8 @@ font-size:2px;
 			     var startingPlayer = $(this).parents('tr').find('td:nth-child(19)').text();
 		       	  
 // 			      $(this).parents('tr').find('td:nth-child(1)').html('<input placeholder="賽事"  type="text" value="'+ playerID +'" required>');
-		       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="賽事"  type="text" value="'+ gameID +'" required>');
-		       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="球隊名稱"  type="text" value="'+ teamID +'" required>');
+// 		       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="賽事"  type="text" value="'+ gameID +'" required>');
+// 		       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="球隊名稱"  type="text" value="'+ teamID +'" required>');
 		       	  $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="比賽時間"  type="text" value="'+ gameTime +'" required>');
 		          $(this).parents('tr').find('td:nth-child(5)').html('<input placeholder="二分"  type="text" value="'+ twoPoint +'" required>');
 		          $(this).parents('tr').find('td:nth-child(6)').html('<input placeholder=""  type="text" value="'+ twoPointShot +'" required>');
@@ -347,8 +348,8 @@ font-size:2px;
 			      var startingPlayer = $(this).parents('tr').find('td:nth-child(19)>input').val();
 		       	  
 // 			      $(this).parents('tr').find('td:nth-child(1)').text(playerID);	
-			      $(this).parents('tr').find('td:nth-child(2)').text(gameID);
-			      $(this).parents('tr').find('td:nth-child(3)').text(teamID);
+// 			      $(this).parents('tr').find('td:nth-child(2)').text(gameID);
+// 			      $(this).parents('tr').find('td:nth-child(3)').text(teamID);
 			      $(this).parents('tr').find('td:nth-child(4)').text(gameTime);
 			      $(this).parents('tr').find('td:nth-child(5)').text(twoPoint);
 			      $(this).parents('tr').find('td:nth-child(6)').text(twoPointShot);
