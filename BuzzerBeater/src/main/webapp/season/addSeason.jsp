@@ -81,19 +81,19 @@
 						</tr>
 						<tr>
 							<td>賽季開始日期</td>
-							<td><input type="date" name="seasonBeginDate" value="${seasonVO.seasonBeginDate}"></td>
+							<td><input type="text" id="seasonBeginDate" name="seasonBeginDate" value="${seasonVO.seasonBeginDate}"></td>
 						</tr>
 						<tr>
 							<td>賽季結束日期</td>
-							<td><input type="date" name="seasonEndDate" value="${seasonVO.seasonEndDate}"></td>
+							<td><input type="text" id="seasonEndDate" name="seasonEndDate" value="${seasonVO.seasonEndDate}"></td>
 						</tr>
 						<tr>
 							<td>報名開始時間</td>
-							<td><input type="text" name="signUpBegin" value="${seasonVO.signUpBegin}"></td>
+							<td><input type="text" id="signUpBegin" name="signUpBegin" value="<fmt:formatDate value='${seasonVO.signUpBegin}' pattern='yyyy-MM-dd HH:mm:ss'/>"></td>
 						</tr>
 						<tr>
 							<td>報名結束時間</td>
-							<td><input type="text" name="signUpEnd" value="${seasonVO.signUpEnd}"></td>
+							<td><input type="text" id="signUpEnd" name="signUpEnd" value="<fmt:formatDate value='${seasonVO.signUpEnd}' pattern='yyyy-MM-dd HH:mm:ss'/>"></td>
 						</tr>
 						<tr>
 							<td>備註</td>
@@ -113,16 +113,40 @@
 		    </div>
 	    </div>
 		<jsp:include page="/footer_css.jsp" />
+		
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+		<link href='<%=request.getContextPath()%>/css/jquery-ui-timepicker-addon.css' rel='stylesheet'>
+  		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-timepicker-addon.js"></script>
+  		<script type='text/javascript' src='<%=request.getContextPath()%>/js/jquery-ui-sliderAccess.js'></script>
+  		
 		<script>
 	$(document).ready(function(){
+		
+		
 		var td_1={'font-family':'微軟正黑體',
  		 		'text-align':'center',
  		 		'line-height': '60px',
 	    		'font-size': '20px'}
 		var submit={'margin-left': '876px'}
-	$("tr td:first-child").css(td_1)
-	$("#submit_move").css(submit)
+		$("tr td:first-child").css(td_1)
+		$("#submit_move").css(submit)
+		
+		
+		var opt={dateFormat: 'yy-mm-dd',showTime: false, timeFormat: ''};
+
+		$('#seasonBeginDate').datetimepicker(opt);
+		$('#seasonEndDate').datetimepicker(opt);
+		
+		var opttime={dateFormat: 'yy-mm-dd',timeFormat: 'HH:mm:ss'};
+
+		$('#signUpBegin').datetimepicker(opttime);
+		$('#signUpEnd').datetimepicker(opttime);
+	    
 	})
+	
+	
 	</script>
 		
     </body>

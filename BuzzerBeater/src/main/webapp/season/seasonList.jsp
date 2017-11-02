@@ -84,8 +84,8 @@
 			        			<td><fmt:formatDate value="${sVO.seasonEndDate}" pattern="yyyy-MM-dd"/></td>
 			        			<c:choose>
 			        				<c:when test="${date>sVO.signUpEnd}">
-			        					<td><del><fmt:formatDate value="${sVO.signUpBegin}" pattern="yyyy-MM-dd HH:mm"/></del>已截止</td>
-			        					<td><del><fmt:formatDate value="${sVO.signUpEnd}" pattern="yyyy-MM-dd HH:mm"/></del>已截止</td>
+			        					<td><del><fmt:formatDate value="${sVO.signUpBegin}" pattern="yyyy-MM-dd HH:mm"/></del> 已截止</td>
+			        					<td><del><fmt:formatDate value="${sVO.signUpEnd}" pattern="yyyy-MM-dd HH:mm"/></del> 已截止</td>
 			        				</c:when>
 			        				<c:otherwise>
 			        					<td><fmt:formatDate value="${sVO.signUpBegin}" pattern="yyyy-MM-dd HH:mm"/></td>
@@ -106,8 +106,10 @@
 	    
 	    <script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	    <script>
-	    $(document).ready(function() {
-	    	$('#seasonList').DataTable();
+
+
+// 	    $(document).ready(function() {
+// 	    	$('#seasonList').DataTable();
 	    	
 // 	    	var td_thead_over={'background-color':'#032f4f',
 // 	    					   'color': '#fff'};
@@ -147,7 +149,7 @@
 // 	    	function even_out(){
 // 	    		$(this).css(td_even_over); 
 // 	    	}
-	    	});
+// 	    	});
 	    </script>
     </body>
 

@@ -78,8 +78,8 @@
 			        			<td><fmt:formatDate value="${sVO.seasonEndDate}" pattern="yyyy-MM-dd"/></td>
 			        			<c:choose>
 			        				<c:when test="${date>sVO.signUpEnd}">
-			        					<td><del><fmt:formatDate value="${sVO.signUpBegin}" pattern="yyyy-MM-dd HH:mm"/></del>已截止</td>
-			        					<td><del><fmt:formatDate value="${sVO.signUpEnd}" pattern="yyyy-MM-dd HH:mm"/></del>已截止</td>
+			        					<td><del><fmt:formatDate value="${sVO.signUpBegin}" pattern="yyyy-MM-dd HH:mm"/></del> 已截止</td>
+			        					<td><del><fmt:formatDate value="${sVO.signUpEnd}" pattern="yyyy-MM-dd HH:mm"/></del> 已截止</td>
 			        				</c:when>
 			        				<c:otherwise>
 			        					<td><fmt:formatDate value="${sVO.signUpBegin}" pattern="yyyy-MM-dd HH:mm"/></td>
