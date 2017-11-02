@@ -22,7 +22,7 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
-	private static final String GET_ALL_STMT = "FROM GamesVO";
+	private static final String GET_ALL_STMT = "FROM GamesVO ORDER BY gameBeginDate desc";
 	private static final String FIND_BY_GROUPID = "FROM GamesVO WHERE groupID=?";
 	private static final String FIND_BY_TEAMID = "FROM GamesVO WHERE teamAID=? OR teamBID =?";
 
@@ -75,10 +75,10 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		
 //		 dao.delete(4003);
 
-
 		Set<GamesVO> set = new LinkedHashSet<GamesVO>(dao.findByTeamID(3001));
 		for (GamesVO gvo : set) {
 			System.out.print(gvo.getGameID() + ", ");
+			System.out.print(gvo.getGameBeginDate() + ", ");
 			System.out.print(gvo.getGroupsVO().getGroupID() + ", ");
 			System.out.print(gvo.getGroupsVO().getGroupName() + ", ");
 			System.out.print(gvo.getLocationinfoVO().getLocationName() + ", ");
@@ -86,6 +86,12 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		}
 		
 		
+		
+	}
+
+	@Override
+	public void deleteByGroupID(Integer groupID) {
+		// TODO Auto-generated method stub
 		
 	}
 

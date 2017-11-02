@@ -18,6 +18,11 @@ public class TeamsService {
 	public Set<TeamsVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public Set<TeamsVO> getTeams(){
+		dao = new TeamsDAO();
+		return dao.getAll();
+	}
 
 	public TeamsVO findByID(Integer teamID) {
 		return dao.findByID(teamID);

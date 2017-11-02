@@ -14,12 +14,18 @@ import eeit.teams.model.TeamsVO;
 public class GamesService {
 
 	private GamesDAO_interface dao;
+	private GamesDAO_interface dao_JNDI;
 
 	public GamesService() {
 		// dao = new GamesDAO_Hibernate();
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (GamesDAO_interface) context.getBean("GamesDAO");
+		dao_JNDI = new GamesDAO_JNDI();
+	}
+
+	public void deleteByGroupID(Integer groupID) {
+		dao_JNDI.deleteByGroupID(groupID);
 	}
 
 	public Set<GamesVO> getAll() {
@@ -52,8 +58,7 @@ public class GamesService {
 		gamesVO.setGameBeginDate(gameBeginDate);
 		gamesVO.setGameEndDate(gameEndDate);
 
-		dao = new GamesDAO_JDBC();
-		dao.insert(gamesVO);
+		dao_JNDI.insert(gamesVO);
 	}
 
 	public void updateGame(Integer groupID, Integer locationID, Integer teamAID, Integer teamAScore, Integer teamBID,
