@@ -35,9 +35,7 @@
 	rel="stylesheet" type="text/css" media="all" />
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
-<!-- ***套用新的模太框檔案*** -->
-<script src="<%=request.getContextPath()%>/dist/jdialog.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/dist/jdialog.min.css">	
+
 
 <style>
 #myModalLabel {
@@ -159,44 +157,6 @@ video::-webkit-media-controls-panel {
 					</c:if>
 				</div>
 			</div>
-			<div class="row">
-				<!-- 				<div class="col-md-2"> -->
-				<!-- 					<div class="dropdown"> -->
-				<!--     					<button type="button" class="btn btn-warning dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">賽季<span class="caret"></span> -->
-				<!--     					</button> -->
-				<!--     					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> -->
-				<%--         					<c:forEach var="list" items="${list}"> --%>
-				<%--         						<li>${list.seasonName}</li> --%>
-				<%--         					</c:forEach> --%>
-				<!--     					</ul> -->
-				<!-- 					</div> -->
-				<!-- 				</div> -->
-				<!-- 				<div class="col-md-2"> -->
-				<!-- 					<div class="dropdown"> -->
-				<!--     					<button type="button" class="btn btn-danger dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">賽季<span class="caret"></span> -->
-				<!--     					</button> -->
-				<!--     					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> -->
-				<%--         					<c:forEach var="set" items="${list}"> --%>
-				<%--         						<c:forEach var="g" items="${set.groupsSet}"> --%>
-				<%--         							<li>${g.groupName}</li> --%>
-				<%--         						</c:forEach> --%>
-				<%--         					</c:forEach> --%>
-				<!--     					</ul> -->
-				<!-- 					</div> -->
-				<!-- 				</div> -->
-				<!-- 				<div class="col-md-2"> -->
-				<!-- 					<div class="dropdown"> -->
-				<!--     					<button type="button" class="btn btn-primary dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">球隊<span class="caret"></span> -->
-				<!--     					</button> -->
-				<!--     					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1"> -->
-				<%--         					<c:forEach var="list" items="${list}"> --%>
-				<%--         						<li>${list.seasonName}</li> --%>
-				<%--         					</c:forEach> --%>
-				<!--     					</ul> -->
-				<!-- 					</div> -->
-				<!-- 				</div> -->
-
-			</div>
 			</br>
 			<div class="row">
 				<table class="table table-bordered" id="table" style="width:100%">
@@ -224,6 +184,7 @@ video::-webkit-media-controls-panel {
 					<h3>影片上傳</h3>
 				</div>
 			</div>
+<!-- 			模態框 -->
 			<div class="row">
 				<button class="btn btn-warning" id="789" data-toggle="modal"
 					data-target="#myModal">選擇檔案</button>
@@ -262,13 +223,13 @@ video::-webkit-media-controls-panel {
 								</br>
 								<div class=row>
     								<div class=col-md-3>
-										<input type="file" class="file" value="影片">
+										<input name="file" type="file" class="file" value="影片">
 									</div>
 								</div>
 								</br>
 								 <div class="input-group input-group">
             						<span class="input-group-addon">標題</span>
-           						 	<input type="text" class="form-control" id="insertTitle" style="margin: 0px 0;" required >
+           						 	<input type="text" class="form-control" id="insertTitle" style="margin: 0px 0;" required>
         						 </div>
 								</br>
 								<div class="input-group">
@@ -318,30 +279,33 @@ video::-webkit-media-controls-panel {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-warning" data-dismiss="modal">離開</button>
 				</div>
-<<<<<<< HEAD
-=======
 			</div>
 		</div>
 	</div>
-
-<jsp:include page="/footer.jsp" />
-<!-- 模太框 -->
-
-	<div class="jDialog" id="dialog-4">
-		<div class="content">
-		 <H3 style="align:'center'; valign:'middle'">修改資訊</H3>
-			     <input id="group" placeholder="分組" type="text" value="" required>
-			     <input id="teamA"  placeholder="分組A" type="text" value="" required>
-			     <input id="teamB"  placeholder="分組B"  type="text" value="" required>
-			     <input id="title" placeholder="標題" type="text" value="" required>
-			     <input id="descriptions"  placeholder="備註" type="text" value="" required >
-			     <input id="tag"  placeholder="標籤"  type="text" value="" required>
-			 <div>
-				<button class="button" data-dismiss="JDialog" id="jDialogButton">確定</button>
->>>>>>> branch 'branch' of https://github.com/EEIT9701/BuzzerBeater.git
-			</div>
-		</div>
-	</div>
+	 <!-- 模太框 -->
+ -	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+ -		aria-labelledby="myModalLabel2" aria-hidden="true"
+ -		data-backdrop="false">
+ -		<div class="modal-dialog">
+ -			<div class="modal-content">
+ -				<div class="modal-header">
+ -					<button type="button" class="close" data-dismiss="modal"
+ -						aria-hidden="true" id="x">&times;</button>
+ -					<h4 class="modal-title" id="deleteTitle">警告!!!</h4>
+ -				</div>
+ -				<div class="modal-body">
+ -					<div class="row">
+ -						<h4 id="deleteNote" style="align:'center'"></h4>
+ -					</div>
+ -					</br>
+ -				</div>
+ -				<div class="modal-footer">
+ -					<button type="button" class="btn btn-danger deleteConfirm" data-dismiss="modal">確定</button>
+ -					<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+ -				</div>
+ 			</div>
+ 		</div>
+ 	</div>
 
 	<jsp:include page="/footer_css.jsp" />
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
@@ -371,7 +335,7 @@ video::-webkit-media-controls-panel {
 						var gameVideo = gMVO.gameVideo;
 						var cell8 = $('<td><button type="button" class="btn btn-info testmodal" data-toggle="myModal1" data-target="dialog-4" value="'+gameVideo+'" >預覽</button></td>');
 						var cell9 = $('<td><button type="button" class="btn btn-warning updateData" id="'+id+'">修改</button></td>');
-						var cell10 = $('<td><button type="button" class="btn btn-danger" data-toggle="myModal" data-target="dialog-4" >刪除</button></td>');
+						var cell10 = $('<td><button type="button" class="btn btn-danger deleteData" data-toggle="myModal" data-target="dialog-4" value="'+id+'" >刪除</button></td>');
 						
 						var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10])				 				
 						docFrag.append(row);
@@ -449,6 +413,7 @@ video::-webkit-media-controls-panel {
 	  		 			  //把輸入在欄位上的資料經過post傳送
 	  		 	       	  $.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'Update', "mediaID":mediaID, "title":title, "descriptions":descriptions, "tag":tag}, function(datas){
 	  							console.log(mediaID)//只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
+	  							loadTable();
 	  		 	       	  })   
 	  			       	  $(this).text('修改');	       	  
 	  			       	}
@@ -466,6 +431,7 @@ video::-webkit-media-controls-panel {
 				  		//把輸入在欄位上的資料經過post傳送
 	 	       	  		$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'delete', 'mediaID':mediaID}, function(datas){
 							//刪除資料 不需回傳東西, 或做輸入與法判斷
+	 	       	  		loadTable();
 	 	       	 		})
 				  		$('.deleteData').parents('tr').empty();
 			  		}) 
@@ -502,16 +468,27 @@ video::-webkit-media-controls-panel {
 	  				})
 	  				
 	  			})
-	  			var gameID = $('#gamelist').val();
-	  			var title = $('#insertTitle').text();
-	  			var descriptions = $('#insertDescriptions').text();
-	  			var tag = $('#insertTag').text();
+		  		
+	  			
 	  			
 	  			
 	  			$('#insertConfirm').click(function(){
-	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
-						//主鍵mediaID由Identity生成、mediaType、mediaDate均在Servlet設定，其餘接收後回傳
- 	       	 			console.log('我傳出去囉')
+	  				var gameID = $('#gamelist').val();
+		  			var title = $('#insertTitle').val();
+		  			var descriptions = $('#insertDescriptions').val();
+		  			var tag = $('#insertTag').val();
+		  			var file = null;
+		  			
+	  			
+	  				
+	  				console.log('clicked')
+	  				console.log('1' + gameID)
+	  				console.log('2' +title)
+	  				console.log('3' +descriptions)
+	  				console.log('4' +tag)
+	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag,'file':file}, function(datas){
+	  					console.log(file);
+	  					loadTable();
 	  				})	
 	  			})
 	  		}
