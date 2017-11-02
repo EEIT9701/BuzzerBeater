@@ -16,19 +16,12 @@ google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
 // Draw the chart and set the chart values
- var PersonalDataVO = JSON.stringify({ 
-			    	  'playerID':playerID, 'gameID':gameID, 'teamID':teamID, 'gameTime':gameTime, 'twoPoint':twoPoint,
-			    	  'twoPointShot':twoPointShot, 'threePoint':threePoint, 'threePointShot':threePointShot, 'fg':fg, 'fgShot':fgShot,
-			    	  'offReb':offReb, 'defReb':defReb, 'assist':assist, 'steal':steal, 'blocks':blocks,
-			    	  'turnover':turnover, 'personalFouls':personalFouls, 'points':points, 'startingPlayer':startingPlayer 
-			    	  })
+
 
 function drawChart() {
   var data = google.visualization.arrayToDataTable([
   ['投籃(%)', 'Hours per Day'],
-  ['三分(%)', 8],
-  ['罰球(%)', 2],
-
+ ['55',66]
 ]);
 
   // Optional; add a title and set the width and height of the chart
