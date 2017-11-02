@@ -32,7 +32,6 @@
         }
         </style>
     
-    <title>修改賽季</title>
 </head>
 
 <body>

@@ -13,7 +13,6 @@
     	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
     	
-        <title>Season</title>
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
     </head>
@@ -30,7 +29,7 @@
 						<tr>
 							<td>賽季名稱</td>
 							<td>分組名稱</td>
-			                <td>目前球隊數量</td>
+			                <td>球隊數量</td>
 						</tr>
 					<thead>
 					<tbody>
@@ -58,9 +57,9 @@
 			        		<tr>
 			        			<td><fmt:formatDate value="${gamesSet.gameBeginDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 			        			<td><fmt:formatDate value="${gamesSet.gameEndDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-			        			<td>${gamesSet.locationinfoVO.locationName}</td>
-			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}" target="blank">${gamesSet.teamAVO.teamName}</a></td>
-			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}" target="blank">${gamesSet.teamBVO.teamName}</a></td>
+			        			<td><a href="<%=request.getContextPath()%>/Locationinfo.do?action=GET_ONE_LOCATION&locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
+			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
+			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
 			        		</tr>
 			        	</c:forEach>			        	
 			        </tbody>
@@ -72,7 +71,7 @@
 		    	<input type="hidden" name="groupID" value="${groupsVO.groupID}">
 		    	<input type="submit" value="下載Excel">
 		    </form>
-		    
+		    <br>
 			<form action="<%=request.getContextPath()%>/Games.do" method="post"  enctype="multipart/form-data">
 				<input type="hidden" name="action" value="UPLOAD_GAMES_EXCEL">
 				<input type="file" name="uploadExcel" accept=".xls,.xlsx">

@@ -7,6 +7,7 @@
 <jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService"/>
 <jsp:useBean id="gamesSvc" scope="page" class="eeit.games.model.GamesService"/>
 
+<title>Buzzer Beater</title>
 <!--標頭(開始)-->
 <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" style="font-size: larger">
 	<div class="container">
