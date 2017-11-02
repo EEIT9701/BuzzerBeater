@@ -75,18 +75,15 @@
 											<c:forEach var="groupRegVO" items="${teamsVO.groupRegSet}">
 											${TeamsVO.groupsVO.groupName}
 											</c:forEach></td>
-											<!--分組-->
+											<!--報名時間-->
 											<td></td>
-											<!--教練-->
+											<!--繳費時間-->
 											<td></td>
-											<!--老闆-->
+											<!--帳號後五碼-->
 											<td></td>
-											<!--勝場數-->
+											<!--核對-->
 									
 										</tr>
-
-
-
 									</c:forEach>
 							</table>
 
