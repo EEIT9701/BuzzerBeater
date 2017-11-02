@@ -318,10 +318,31 @@ video::-webkit-media-controls-panel {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-warning" data-dismiss="modal">離開</button>
 				</div>
+<<<<<<< HEAD
+=======
 			</div>
 		</div>
 	</div>
-	
+
+<jsp:include page="/footer.jsp" />
+<!-- 模太框 -->
+
+	<div class="jDialog" id="dialog-4">
+		<div class="content">
+		 <H3 style="align:'center'; valign:'middle'">修改資訊</H3>
+			     <input id="group" placeholder="分組" type="text" value="" required>
+			     <input id="teamA"  placeholder="分組A" type="text" value="" required>
+			     <input id="teamB"  placeholder="分組B"  type="text" value="" required>
+			     <input id="title" placeholder="標題" type="text" value="" required>
+			     <input id="descriptions"  placeholder="備註" type="text" value="" required >
+			     <input id="tag"  placeholder="標籤"  type="text" value="" required>
+			 <div>
+				<button class="button" data-dismiss="JDialog" id="jDialogButton">確定</button>
+>>>>>>> branch 'branch' of https://github.com/EEIT9701/BuzzerBeater.git
+			</div>
+		</div>
+	</div>
+
 	<jsp:include page="/footer_css.jsp" />
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>

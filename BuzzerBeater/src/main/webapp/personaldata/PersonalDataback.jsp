@@ -24,7 +24,6 @@
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 <!-- ***套用新的模太框檔案*** -->
-<script src="<%=request.getContextPath()%>/dist/jdialog.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/jdialog.min.css">	
 <style>
 #st1 {
@@ -122,32 +121,36 @@ font-size:2px;
 
 	<!--主文(結束)-->
 <!-- 模太框 -->
-	<div class="jDialog" id="dialog-4">
+
+	<div  class="jDialog" id="dialog-4">
 		<div class="content">
 		<div>
 				<button class="button" data-dismiss="JDialog" id="jDialogButton">確定</button>
 			</div>
 		 <H3>新增球員數據</H3>
-			     <input id="PersonalDataVO_gameTime" placeholder="gameTime" type="text" value="" required>
-			     <input id="PersonalDataVO_twoPoint"  placeholder="twoPoint" type="text" value="" required>
-			     <input id="PersonalDataVO_twoPointShot"  placeholder="twoPointShot"  type="text" value="" required>
-			     <input id="PersonalDataVO_threePoint" placeholder="threePoint" type="text" value="" required>
-			     <input id="PersonalDataVO_threePointShot"  placeholder="threePointShot" type="text" value="" required>
-			     <input id="PersonalDataVO_fg"  placeholder="fg"  type="text" value="" required>
-			     <input id="PersonalDataVO_fgShot" placeholder="fgShot" type="text" value="" required>
-			     <input id="PersonalDataVO_offReb"  placeholder="offReb" type="text" value="" required>
-			     <input id="PersonalDataVO_defReb"  placeholder="defReb"  type="text" value="" required>
-			     <input id="PersonalDataVO_assist" placeholder="assist" type="text" value="" required>
-			     <input id="PersonalDataVO_steal"  placeholder="steal" type="text" value="" required>
-			     <input id="PersonalDataVO_blocks"  placeholder="blocks"  type="text" value="" required>
-			     <input id="PersonalDataVO_turnover" placeholder="turnover" type="text" value="" required>
-			     <input id="PersonalDataVO_personalFouls"  placeholder="personalFouls" type="text" value="" required>
-			     <input id="PersonalDataVO_points"  placeholder="points"  type="text" value="" required>
-			     <input id="PersonalDataVO_startingPlayer" placeholder="startingPlayer" type="text" value="" required>
+		 		 <input id="PersonalDataVO_playerID" placeholder="playerID" type="text" value="0" required>
+		         <input id="PersonalDataVO_gameID" placeholder="gameID" type="text" value="0" required>
+			     <input id="PersonalDataVO_teamID"  placeholder="teamID" type="text" value="0" required>
+			     <input id="PersonalDataVO_gameTime" placeholder="gameTime" type="text" value="0" required>
+			     <input id="PersonalDataVO_twoPoint"  placeholder="twoPoint" type="text" value="0" required>
+			     <input id="PersonalDataVO_twoPointShot"  placeholder="twoPointShot"  type="text" value="0" required>
+			     <input id="PersonalDataVO_threePoint" placeholder="threePoint" type="text" value="0" required>
+			     <input id="PersonalDataVO_threePointShot"  placeholder="threePointShot" type="text" value="0" required>
+			     <input id="PersonalDataVO_fg"  placeholder="fg"  type="text" value="0" required>
+			     <input id="PersonalDataVO_fgShot" placeholder="fgShot" type="text" value="0" required>
+			     <input id="PersonalDataVO_offReb"  placeholder="offReb" type="text" value="0" required>
+			     <input id="PersonalDataVO_defReb"  placeholder="defReb"  type="text" value="0" required>
+			     <input id="PersonalDataVO_assist" placeholder="assist" type="text" value="0" required>
+			     <input id="PersonalDataVO_steal"  placeholder="steal" type="text" value="0" required>
+			     <input id="PersonalDataVO_blocks"  placeholder="blocks"  type="text" value="0" required>
+			     <input id="PersonalDataVO_turnover" placeholder="turnover" type="text" value="0" required>
+			     <input id="PersonalDataVO_personalFouls"  placeholder="personalFouls" type="text" value="0" required>
+			     <input id="PersonalDataVO_points"  placeholder="points"  type="text" value="0" required>
+			     <input id="PersonalDataVO_startingPlayer" placeholder="startingPlayer" type="text" value="0" required>
 		</div>
 	</div>
 
-
+	<script src="<%=request.getContextPath()%>/dist/jdialog.min.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
 	   $(function(){
@@ -165,6 +168,9 @@ font-size:2px;
 // 				var acc =  $('#MemberInfoVO_acc').val();
 // 				var name = $('#MemberInfoVO_name').val();
 // 				var auth = $('#MemberInfoVO_auth').val();
+                var playerID = $('#PersonalDataVO_playerID').val();
+				var gameID = $('#PersonalDataVO_gameID').val();
+				var teamID = $('#PersonalDataVO_teamID').val();
 				var gameTime = $('#PersonalDataVO_gameTime').val();
 				var twoPoint = $('#PersonalDataVO_twoPoint').val();
 				var twoPointShot = $('#PersonalDataVO_twoPointShot').val();
@@ -183,6 +189,9 @@ font-size:2px;
 				var startingPlayer = $('#PersonalDataVO_startingPlayer').val();
 				if(gameTime!= '' & twoPoint!= ''){ 
 						//把input 清空
+					$('#PersonalDataVO_playerID').val('');	
+				    $('#PersonalDataVO_gameID').val('');
+					$('#PersonalDataVO_teamID').val('');				
 					$('#PersonalDataVO_gameTime').val('');
 					$('#PersonalDataVO_twoPoint').val('');
 					$('#PersonalDataVO_twoPointShot').val('');
@@ -201,8 +210,9 @@ font-size:2px;
 					$('#PersonalDataVO_startingPlayer').val('');
 		
 					//把輸入的資料包裝成JSON格式字串, 給post傳送用
-				      var PersonalDataVO = JSON.stringify({ 
-				    	  'gameTime':gameTime, 'twoPoint':twoPoint,
+				      var PersonalDataVO = JSON.stringify({ 'playerID':playerID,
+				    	  'gameID':gameID,'teamID':teamID,
+				          'gameTime':gameTime, 'twoPoint':twoPoint,
 				    	  'twoPointShot':twoPointShot, 'threePoint':threePoint, 'threePointShot':threePointShot, 'fg':fg, 'fgShot':fgShot,
 				    	  'offReb':offReb, 'defReb':defReb, 'assist':assist, 'steal':steal, 'blocks':blocks,
 				    	  'turnover':turnover, 'personalFouls':personalFouls, 'points':points, 'startingPlayer':startingPlayer 
@@ -303,8 +313,8 @@ font-size:2px;
 			     var startingPlayer = $(this).parents('tr').find('td:nth-child(19)').text();
 		       	  
 // 			      $(this).parents('tr').find('td:nth-child(1)').html('<input placeholder="賽事"  type="text" value="'+ playerID +'" required>');
-// 		       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="賽事"  type="text" value="'+ gameID +'" required>');
-// 		       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="球隊名稱"  type="text" value="'+ teamID +'" required>');
+		       	  $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="賽事"  type="text" value="'+ gameID +'" required>');
+		       	  $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="球隊名稱"  type="text" value="'+ teamID +'" required>');
 		       	  $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="比賽時間"  type="text" value="'+ gameTime +'" required>');
 		          $(this).parents('tr').find('td:nth-child(5)').html('<input placeholder="二分"  type="text" value="'+ twoPoint +'" required>');
 		          $(this).parents('tr').find('td:nth-child(6)').html('<input placeholder=""  type="text" value="'+ twoPointShot +'" required>');
@@ -348,8 +358,8 @@ font-size:2px;
 			      var startingPlayer = $(this).parents('tr').find('td:nth-child(19)>input').val();
 		       	  
 // 			      $(this).parents('tr').find('td:nth-child(1)').text(playerID);	
-// 			      $(this).parents('tr').find('td:nth-child(2)').text(gameID);
-// 			      $(this).parents('tr').find('td:nth-child(3)').text(teamID);
+			      $(this).parents('tr').find('td:nth-child(2)').text(gameID);
+			      $(this).parents('tr').find('td:nth-child(3)').text(teamID);
 			      $(this).parents('tr').find('td:nth-child(4)').text(gameTime);
 			      $(this).parents('tr').find('td:nth-child(5)').text(twoPoint);
 			      $(this).parents('tr').find('td:nth-child(6)').text(twoPointShot);
