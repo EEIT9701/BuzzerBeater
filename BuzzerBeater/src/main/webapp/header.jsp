@@ -22,7 +22,7 @@
 					   </c:when> 
 					    <c:when test="${LoginOK.auth == 'admin'}">
 <%-- 							<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li> --%>
-								<li><h6><a href="<%=request.getContextPath() %>/memberInfo/memberInfoI_U_D.jsp">權限管理</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/memberInfo/memberInfoBack.jsp">權限管理</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">賽季管理</a></h6></li>
 <!-- 							<li><h6><a href="">分組</a></h6></li> -->
 <!-- 							<li><h6><a href="">賽程</a></h6></li> -->
