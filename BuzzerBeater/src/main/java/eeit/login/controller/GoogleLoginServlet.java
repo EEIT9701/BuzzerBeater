@@ -140,7 +140,9 @@ public class GoogleLoginServlet extends HttpServlet {
 				session.setAttribute("pictureUri", jsonOb.getString("picture")); //照片的url	
 //				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
 //				rd.forward(req, resp);
-				resp.sendRedirect(req.getContextPath()+"/index.jsp");
+//				resp.sendRedirect(req.getContextPath()+"/index.jsp");
+				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+				rd.forward(req, resp);
 				return;
 			}else{    //沒有帳號,新註冊 會員
 //				memberInfoVO.setAcc(jsonOb.getString("email"));   //Google的使用者帳號
@@ -150,9 +152,10 @@ public class GoogleLoginServlet extends HttpServlet {
 //				session.setAttribute("pictureUri", jsonOb.getString("picture")); //照片的url
 //				
 //				session.setAttribute("NewLoginOK", "NewLoginOK");
+				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+				rd.forward(req, resp);
 				
-				
-				resp.sendRedirect(req.getContextPath()+"/index.jsp");
+//				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 				return;
 //				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
 //				rd.forward(req, resp);

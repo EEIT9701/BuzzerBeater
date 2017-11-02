@@ -101,7 +101,7 @@
                 							<h4 class="modal-title" id="myModalLabel">預覽照片</h4>
             							</div>
             						<div class="modal-body">
-            							<img src="${gameMediaVO.gamePhoto}">
+            							<img src="data:image/jpeg;base64,${gameMediaVO.gamePhoto}">
             						</div>
             						<div class="modal-footer">
                 						<button type="button" class="btn btn-warning" data-dismiss="modal">離開</button>
@@ -145,6 +145,11 @@
   						</tr>
   					</tbody>
   				</table>
+  				</br>
+  				<form>
+  					<button class="btn btn-danger" type="submit">回上頁</button>
+  					<input type="hidden" name="action" value="cancel">
+  				</form>	
 			</div>
 			<jsp:include page="/footer.jsp" />
         </div>
@@ -153,7 +158,7 @@
 
 <jsp:include page="/footer_css.jsp" />
 <script>
-
+	
 </script>        
 </body>
 </html>
