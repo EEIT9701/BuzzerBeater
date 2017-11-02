@@ -13,7 +13,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>EEIT97-第一組</title>
+<title>BuzzerBeater | 球隊數據</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
@@ -53,16 +53,16 @@
 				<!--第一列-左邊表格-格式_.col-md-8-->
 				<div class="col-md-12">
 				
-			        	球季 <select>
+			        <!-- 	球季 <select>
 							<option label="2015賽季" value="object:7" >季前熱身賽</option>
 							<option label="2016賽季" value="object:8">例行賽</option>
 							<option label="2017賽季" value="object:9" selected="selected">季後賽</option>
 						</select> 組別 <select>
 							<option label="東區" value="object:7" selected="selected">季前熱身賽</option>
 							<option label="西區" value="object:8">例行賽</option>
-							<!--   <option label="少年組" value="object:9">季後賽</option>   -->
+							  <option label="少年組" value="object:9">季後賽</option>  
 						</select>
-						 <input type="submit" value="確定">
+						 <input type="submit" value="確定"> -->
 
 				
 				</div>

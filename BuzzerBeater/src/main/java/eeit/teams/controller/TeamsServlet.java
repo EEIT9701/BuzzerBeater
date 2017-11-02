@@ -170,6 +170,38 @@ public class TeamsServlet extends HttpServlet {
 			request.setAttribute("remarks", remarks);
 			request.getRequestDispatcher("/teams/updateTeam.jsp").forward(request, response);
 		}
+		
+		if ("UpdateMyTeam".equals(action)) {
+//			String base64 = request.getParameter("teamBadge");
+			Integer teamID = new Integer(request.getParameter("teamID"));
+//			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
+//			String teamName = request.getParameter("teamName");
+//			String captainEmail = request.getParameter("captainEmail");
+//			String captainPhone = request.getParameter("captainPhone");
+//			String coachName = request.getParameter("coachName");
+//			String bossName = request.getParameter("bossName");
+//			Integer totalWin = new Integer(request.getParameter("totalWin"));
+//			Integer totalLose = new Integer(request.getParameter("totalLose"));
+//			Float winRate = new Float(request.getParameter("winRate"));
+//			String remarks = request.getParameter("remarks");
+//
+//			request.setAttribute("teamBadge", teamBadge);
+//			request.setAttribute("teamID", teamID);
+//			request.setAttribute("teamName", teamName);
+//			request.setAttribute("captainEmail", captainEmail);
+//			request.setAttribute("captainPhone", captainPhone);
+//			request.setAttribute("coachName", coachName);
+//			request.setAttribute("bossName", bossName);
+//			request.setAttribute("totalWin", totalWin);
+//			request.setAttribute("totalLose", totalLose);
+//			request.setAttribute("winRate", winRate);
+//			request.setAttribute("remarks", remarks);
+			TeamsService tsvc = new TeamsService();
+			TeamsVO teamsVO = tsvc.findByID(teamID);
+			request.setAttribute("teamsVO",teamsVO);
+			
+			request.getRequestDispatcher("/teams/updateMyTeams.jsp").forward(request, response);
+		}
 
 		if ("updateCheck".equals(action)) {
 			String base64 = request.getParameter("teamBadge");

@@ -81,7 +81,7 @@ text-align: center;
 						<tbody>
 							<tr>
 								<td>球隊 | <c:forEach var="team"
-										items="${playerVO.teamCompositionSet}">${team.teamsVO.teamName}</c:forEach>
+										items="${playerVO.teamCompositionSet}"><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${team.teamsVO.teamID}">${team.teamsVO.teamName}</a></c:forEach>
 								</td>
 								<td>生日 | ${playerVO.birthday}</td>
 							</tr>

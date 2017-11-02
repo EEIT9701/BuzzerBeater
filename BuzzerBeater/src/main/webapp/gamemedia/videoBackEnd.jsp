@@ -198,6 +198,7 @@ video::-webkit-media-controls-panel {
 									aria-hidden="true" id="x">&times;</button>
 								<h4 class="modal-title" id="myModalLabel" style="text-align:'center'">檔案上傳</h4>
 							</div>
+						<form name="videoInput" method="post">
 							<div class="modal-body">
 								<div class="row">
 									<div class="col-md-3">
@@ -239,17 +240,14 @@ video::-webkit-media-controls-panel {
 								</br>
 								<div class="input-group">
 									<span class="input-group-addon">標籤</span> 
-									<input type="text" class="form-control" id="insertTag" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣" style="margin: 0px 0;" required>
+									<input type="text" name="file" class="form-control" id="insertTag" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣" style="margin: 0px 0;" required>
 								</div>
-
-
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-warning"
-									data-dismiss="modal" id="insertConfirm" >確認上傳</button>
-								<button type="button" class="btn btn-primary"
-									data-dismiss="modal">取消</button>
+									<button type="button" class="btn btn-warning" data-dismiss="modal" id="insertConfirm" >確認上傳</button>
+									<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
 							</div>
+						</form>
 						</div>
 					</div>
 				</div>
@@ -421,19 +419,20 @@ video::-webkit-media-controls-panel {
 	  		       });
 	  			
 	  			$('.deleteData').on('click',function(){
+	  				var mediaID = $(this).val();
 	  				$('#myModal2').modal('show');
 	  				var title = $(this).parents('tr').find('td:nth-child(5)').text();
 	  				$('#deleteNote').text("即將刪除影片<"+title+">，刪除後不可復原，是否確定?")
 		  		 	$('.deleteConfirm').on('click', function(){
-					  	var mediaID = $('.deleteData').val();
+// 					  	var mediaID = $('.deleteData').val();
 					  	console.log(mediaID);
 					  	//alert(memberID);
 				  		//把輸入在欄位上的資料經過post傳送
 	 	       	  		$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'delete', 'mediaID':mediaID}, function(datas){
 							//刪除資料 不需回傳東西, 或做輸入與法判斷
+				  		$('.deleteData').parents('tr').empty();
 	 	       	  		loadTable();
 	 	       	 		})
-				  		$('.deleteData').parents('tr').empty();
 			  		}) 
 	  			})
 
@@ -450,7 +449,7 @@ video::-webkit-media-controls-panel {
 	  					$('#grouplist').empty();
 	  					$('#grouplist').append($("<option></option>").text('請選擇'));
 	  					$.each(data, function(index,group){
-// 	  						console.log(group);
+ 	  					//console.log(group);
 	  						$('#grouplist').append($("<option></option>").attr("value",group.groupID).attr("id",group.groupID).text(group.groupName));
 	  					})
 	  				})
@@ -458,7 +457,7 @@ video::-webkit-media-controls-panel {
 	  			
 	  			$('#grouplist').change(function(){
 	  				group = $('select[name="group1"]').val();
-//  	  				console.log(group)
+  	  				//console.log(group)
 	  				$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getGameInformation' , 'groupID':group},function(data){
 	  					$('#gamelist').empty();
 	  					$('#gamelist').append($("<option></option>").text('請選擇'));
@@ -477,16 +476,13 @@ video::-webkit-media-controls-panel {
 		  			var title = $('#insertTitle').val();
 		  			var descriptions = $('#insertDescriptions').val();
 		  			var tag = $('#insertTag').val();
-		  			var file = null;
 		  			
-	  			
-	  				
 	  				console.log('clicked')
 	  				console.log('1' + gameID)
 	  				console.log('2' +title)
 	  				console.log('3' +descriptions)
 	  				console.log('4' +tag)
-	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag,'file':file}, function(datas){
+	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
 	  					console.log(file);
 	  					loadTable();
 	  				})	
