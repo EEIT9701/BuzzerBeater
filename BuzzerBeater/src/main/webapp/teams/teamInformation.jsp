@@ -14,41 +14,50 @@
 <!--滑鼠移入，顯示表格(jquery設定"2-1")-->
 <link href="<%=request.getContextPath()%>/css/jquery-ui-1.12.1.css"
 	rel="stylesheet">
-<style>
-#team {
-	width: 300px;
-	height: 220px;
-	margin: auto;
-}
 
-table {
-	table-layout: fixed;
-}
-
-table.respond td:before {
-	/* top/left values mimics padding */
-	top: 8px;
-	/* mimics padding top */
-	left: 6px;
-}
-</style>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/responsive-tables.css"
 	type="text/css">
-<script
-	src="<%=request.getContextPath()%>/js/jquery.responsive-tables.js"></script>
-<style>
-#photo {
-	width: 35px;
-	height: 40px;
-	margin: auto;
-}
 
-th {
-	text-align: center;
-}
+	
+<style>
+	#team {
+		width: 300px;
+		height: 220px;
+		margin: auto;
+	}
+
+	table {
+		table-layout: fixed;
+	}
+
+	table.respond td:before {
+		/* top/left values mimics padding */
+		top: 8px;
+		/* mimics padding top */
+		left: 6px;
+	}
+	#photo {
+		width: 35px;
+		height: 40px;
+		margin: auto;
+	}
+	
+	th {
+		text-align: center;
+	}
+	
+    #pathWay {
+      	color: #666;
+      	height: 28px;
+      	line-height: 28px;
+        border-bottom: 1px solid #c0b7b7;
+    	text-indent: 5px;
+    	font-size: 18px;
+        font-weight: normal;
+        margin-bottom: 10px;
+      	font-family:微軟正黑體;
+        }
 </style>
 </head>
 
@@ -57,6 +66,18 @@ th {
 	<jsp:include page="/header.jsp" />
 	<!--主文(開始)-->
 	<div class="container">
+	<div class="jumbotron">
+		
+		<!--上層導覽列(開始) -->
+		<div id="pathWay">
+        	<span>
+            	<a href="<%=request.getContextPath() %>/index.jsp">
+            		<span>使用者功能</span>
+            	</a>
+        	</span>&gt;
+        	<span><span>賽季管理</span></span>
+    	</div>
+    	<!--上層導覽列(結束) -->
 		<!-- 第二列(開始) -->
 		<!--****************-->
 		<div class="row">
@@ -223,15 +244,16 @@ th {
 
 
 
-				<jsp:include page="/footer.jsp" />
 
 			</div>
 		</div>
+				<jsp:include page="/footer.jsp" />
+	</div>
 	</div>
 	<!--主文(結束)-->
 
 	<jsp:include page="/footer_css.jsp" />
-	<!--滑鼠移入，顯示表格(jquery設定"2-2")-->
+<%-- 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script> --%>
 	<script src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 	<script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
 	<script>
@@ -242,6 +264,9 @@ th {
 			$.responsiveTables();
 		});
 	</script>
+	<script src="<%=request.getContextPath()%>/js/jquery.responsive-tables.js"></script>
+	
+	<!--滑鼠移入，顯示表格(jquery設定"2-2")-->
 </body>
 
 </html>

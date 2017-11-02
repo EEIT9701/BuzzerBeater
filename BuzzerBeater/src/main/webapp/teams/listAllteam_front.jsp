@@ -6,7 +6,7 @@
 		<html>
 
 		<head>
-			<title>BuzzerBeater-球隊</title>
+
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
