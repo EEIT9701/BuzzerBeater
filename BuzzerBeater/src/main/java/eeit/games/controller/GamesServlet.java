@@ -78,6 +78,7 @@ public class GamesServlet extends HttpServlet {
 				// 從工作表名稱取得groupID
 				String sName = sheet.getSheetName();
 				Integer groupID = Integer.valueOf(sName.substring(sName.indexOf("(") + 1, sName.indexOf(")")));
+				request.setAttribute("groupID", groupID);
 
 				// 取得該組比賽的所有gameID(等一下Excel資料新增成功才刪除)
 				List<Integer> gameIDList = new ArrayList<Integer>();
@@ -94,6 +95,7 @@ public class GamesServlet extends HttpServlet {
 						continue; // 為了跳過標題列
 					}
 
+					// 將資料寫入表格
 					String cell0 = row.getCell(0).toString();
 					Timestamp gameBeginDate = Timestamp.valueOf(cell0 + ":00");
 
@@ -112,12 +114,18 @@ public class GamesServlet extends HttpServlet {
 					gSvc.addGames(groupID, locationID, teamAID, 0, teamBID, 0, gameBeginDate, gameEndDate);
 				}
 
+				// 若無錯誤才將剛剛紀錄的比賽刪除
 				for (Integer gameID : gameIDList) {
 					gSvc.delete(gameID);
 				}
 
+				response.setContentType("text/html; charset=UTF-8");
+				response.sendRedirect(request.getContextPath()+"/Games.do?action=GET_GAMES&groupID=" + groupID);
+
 			} catch (Exception e) {
-				e.printStackTrace();
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = request.getRequestDispatcher("/games/gameList.jsp");
+				failureView.forward(request, response);
 			}
 			return;
 		}

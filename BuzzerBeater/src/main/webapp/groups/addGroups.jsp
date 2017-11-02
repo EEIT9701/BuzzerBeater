@@ -12,7 +12,6 @@
     	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
     	
-        <title>Season</title>
         <jsp:include page="/header_css.jsp" />
         <style>
         h2,h3{		

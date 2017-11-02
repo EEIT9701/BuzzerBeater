@@ -33,7 +33,6 @@
         </style>
     	
     	  	
-        <title>Season</title>
     </head>
 
     <body>
