@@ -19,15 +19,15 @@
 			margin-right:-35px;
 		}
 		#mediaplayer{
-			background-color:#BEBEBE;
+/* 			background-color:#BEBEBE; */
 			padding-left:-15px;
 			width:100%;
 			height:100%;
 		}
-		#videolist{
-			background-color:#BEBEBE;
- 			height:105%;
-		}
+/* 		#videolist{ */
+/* 			background-color:#BEBEBE; */
+/*  			height:105%; */
+/* 		} */
 		video::-internal-media-controls-download-button {
    	 		display:none;
 		}
@@ -60,35 +60,14 @@
             <!--****************-->
             <!-- 第一列(開始) -->
             <!--****************-->
-            <div class="row">
-            	
-            	
-            </div>
-            <div class="row">
-            	<div class="col-md-4"><h2>精彩賽事影音</h2></div>
-			</div>
-			<br/>
-            <div class="row" id="mediaplayer" oncontextmenu="window.event.returnValue=false">
-                <!--第一列-左邊表格-格式_.col-md-8-->                
-                <div class="col-md-8">
-                	<video controls id="video">
-            			<source src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4">
-            		</video>
-				</div>
-				<div class="col-md-4" id="videolist">
-					<h3>精選影片</h3>
-					<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}">
-						<h4 id=medias>${gameMediaSvc.mediasName}</h4>
-<!-- 						</br> -->
-					</c:forEach>
-					</br>
-					</br>
-					</br>
-					</br>
-					</br>
-					</br>
-					</br>
-					</br>
+			<h2>精彩賽事影音</h2>
+			<div class="row" style="background-color: rgba(220, 175, 171, 0.37);height: 489px;">
+                <div class="col-md-10" style="padding-left: 30px;">
+            		<div class="row" id="mediaplayer" oncontextmenu="window.event.returnValue=false">            
+                		<video controls id="video">
+            				<source src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4">
+            			</video>
+					</div>
 				</div>
                 <!--第一列-右邊表格-格式_.col-md-4-->
 <!--               	<div> -->
@@ -106,17 +85,31 @@
 <%--             			<source src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4"> --%>
 <!--             		</video> -->
 <!-- 				</div> -->
+				<div class="col-md-2" id="videolist">
+					<h3>精選影片</h3>
+					<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}">
+						<h5 id=medias>${gameMediaSvc.mediasName}</h5>
+					</c:forEach>
+<!-- 					</br> -->
+<!-- 					</br> -->
+<!-- 					</br> -->
+<!-- 					</br> -->
+<!-- 					</br> -->
+<!-- 					</br> -->
+<!-- 					</br> -->
+<!-- 					</br> -->
+				</div>
            	</div>
-           	</br>
+				
            	<div class="row">
 				<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}">
 					<div>
-						
 					</div>
 				</c:forEach>
            	</div>
 			<jsp:include page="/footer.jsp" />  
-        </div>
+        
+    </div>
     </div>
     <!--主文(結束)-->
     <script>
