@@ -47,8 +47,9 @@
                     		<td>賽事開始時間</td>
 		                    <td>賽事結束時間</td>
 		                    <td>比賽地點</td>
-		                    <td>隊伍</td>
-		                    <td>隊伍</td>
+		                    <td>主隊</td>
+		                    <td>比數</td>
+		                    <td>客隊</td>
 			            </tr>
 			        </thead>
 			
@@ -59,6 +60,7 @@
 			        			<td><fmt:formatDate value="${gamesSet.gameEndDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 			        			<td><a href="<%=request.getContextPath()%>/Locationinfo.do?action=GET_ONE_LOCATION&locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
 			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
+			        			<td><a href="<%=request.getContextPath() %>/PersonalData.do?action=Get_singlefieldData&gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a></td>
 			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
 			        		</tr>
 			        	</c:forEach>			        	

@@ -119,10 +119,8 @@
 				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">賽程</a>
 					<ul class="dropdown-menu">
-						<c:forEach var="games" items="${gamesSvc.all}">
-							<c:if test="${date<games.gameBeginDate}">
-								<li><a href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singlefieldData&gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
-							</c:if>
+						<c:forEach var="games" items="${gamesSvc.all}" begin="1" end="5">
+							<li><a href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singlefieldData&gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
 						</c:forEach>
 					</ul>
 				</li>

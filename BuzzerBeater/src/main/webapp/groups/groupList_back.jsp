@@ -99,7 +99,7 @@
 			        <tbody>
 			        	<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
 			        		<tr>
-			        			<td>${groupsSet.groupName}</td>
+			        			<td><a href="<%=request.getContextPath()%>/Games.do?action=GET_GAMES&groupID=${groupsSet.groupID}">${groupsSet.groupName}</a></td>
 			        			<td>${groupsSet.maxTeams}</td>
 			        			<td>${groupsSet.minTeams}</td>
 			        			<td>${groupsSet.currentTeams}</td>
@@ -107,6 +107,12 @@
 			        			<td>${groupsSet.minPlayers}</td>
 			        			<td>
 			        				<c:choose>
+			        					<c:when test="${groupsSet.seasonVO.seasonEndDate < date}">
+			        						賽季已結束
+			        					</c:when>
+			        					<c:when test="${groupsSet.seasonVO.seasonEndDate > date && groupsSet.seasonVO.seasonBeginDate < date}">
+			        						賽季進行中
+			        					</c:when>
 			        					<c:when test="${groupsSet.seasonVO.signUpEnd < date}">
 			        						報名已截止
 			        					</c:when>
@@ -120,7 +126,6 @@
 			        						<c:if test="${groupsSet.currentTeams == groupsSet.maxTeams}">
 			        							已額滿
 			        							<c:if test="${empty groupsSet.gamesSet}">
-<%-- 			        								<a href="<%=request.getContextPath()%>/Groups.do?action=ADD_SCHEDULE&groupID=${groupsSet.groupID}">可編排賽程</a> --%>
 			        								<br><a style="color:white;"href="<%=request.getContextPath()%>/Groups.do?action=ADD_SCHEDULE&groupID=${groupsSet.groupID}"><button class="btn btn-primary">可編排賽程</button></a>
 			        							</c:if>
 			        						</c:if>
