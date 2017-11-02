@@ -14,17 +14,55 @@
     	
         <title>Season</title>
         <jsp:include page="/header_css.jsp" />
+        <style>
+        h2,h3{		
+  		  font-family:微軟正黑體;   	  
+    	  text-align:center;
+   		  }
+        #pathWay {
+      	  color: #666;
+      	  height: 28px;
+      	  line-height: 28px;
+      	  border-bottom: 1px solid #c0b7b7;
+      	  text-indent: 5px;
+      	  font-size: 18px;
+      	  font-weight: normal;
+      	  margin-bottom: 10px;
+      	  font-family:微軟正黑體;
+        }
+        </style>
     </head>
 
     <body>
 	    <jsp:include page="/header.jsp" />
 	
 		<div class="container">
+		<div class="jumbotron">
+		
+		<!--上層導覽列(開始) -->
+		<div id="pathWay">
+        	<span>
+            	<a href="<%=request.getContextPath() %>/index.jsp">
+            		<span>使用者功能</span>
+            	</a>
+        	</span>&gt;
+        	<span>
+            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+            		<span>賽季管理</span>
+            	</a>
+        	</span>&gt;
+        	<span>
+            	<a href="<%=request.getContextPath() %>/season/addSeason.jsp">
+            		<span>新增賽季</span>
+            	</a>
+        	</span>&gt;
+        	<span><span>新增分組</span></span>
+    	</div>
 			<!-- 網頁內容 -->
-			<h3>新增分組</h3>
+			<h2>新增分組</h2>
 			<c:if test="${not empty errorMsgs}">
-				請修正以下錯誤:
-				<ul>
+				<p style="color:red">請修正以下錯誤:</p>
+				<ul style="color:red">
 					<c:forEach var="message" items="${errorMsgs}">
 						<c:if test="${not empty message}">
 							<li>${message}</li>
@@ -78,7 +116,7 @@
 				    		<form action="<%=request.getContextPath()%>/Groups.do" method="post">
 				    			<input type="hidden" name="action" value="REMOVE_GROUP_TEMP">
 				    			<input type="hidden" name="setIndex" value="<%= i++ %>">
-				    			<td><input type="submit" id="btnDelGroup" value="刪除"></td>
+				    			<td><input type="submit" id="btnDelGroup" class="btn btn-danger" value="刪除"></td>
 				    		</form>
 			    		</tr>
 		    		</c:forEach>
@@ -93,8 +131,8 @@
 					    	<td><input type="text" name="minTeams" value='<c:out value="${groupsVO.minTeams}" default="2"/>'></td>
 					    	<td><input type="text" name="maxPlayers" value='<c:out value="${groupsVO.maxPlayers}" default="15"/>'></td>
 					    	<td><input type="text" name="minPlayers" value='<c:out value="${groupsVO.minPlayers}" default="7"/>'></td>
-					    	<td><input type="submit" value="新增"></td>
-					    	<td><input type="reset" value="清除"></td>
+					    	<td><input type="submit" class="btn btn-primary" value="新增"></td>
+					    	<td><input type="reset" class="btn btn-info" value="清除"></td>
 				    	</tr>
 			    	</form>
 		    	</tfoot>
@@ -102,7 +140,7 @@
 		    
 		    <form action="<%=request.getContextPath()%>/Season.do" method="post">
 		    	<input type="hidden" name="action" value="ADD_SEASON">
-		    	<input type="submit" value="確認新增">
+		    	<input type="submit" class="btn btn-success" id="submit_move" value="確認新增">
 		    </form>
 		    
 		    
@@ -110,6 +148,7 @@
 		
 			<!-- 網頁內容END -->
 	    	<jsp:include page="/footer.jsp" />
+	    	</div>
 	    </div><!-- End of container -->
 	    
 	    
@@ -117,7 +156,8 @@
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	    <script type="text/javascript">
 			$(document).ready(function(){
-				
+				var submit={'margin-left': '935px'}
+			$("#submit_move").css(submit)
 				
 
 			})
