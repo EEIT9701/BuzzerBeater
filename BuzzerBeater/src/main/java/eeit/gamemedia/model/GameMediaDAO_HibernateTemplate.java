@@ -18,6 +18,7 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 	}
 
 	private static final String GET_ALL_STMT = "FROM GameMediaVO ORDER BY mediaID";
+	private static final String GET_ALL_VIDEO_STMT = "SELECT * FROM GameMedia WHERE MediaType = 'video'";;
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -78,6 +79,13 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 			System.out.println();
 		}
 
+	}
+
+	@Override
+	public List<GameMediaVO> getAllVideo() {
+		Object obj = hibernateTemplate.find(GET_ALL_VIDEO_STMT);
+		List<GameMediaVO> list = (List<GameMediaVO>) obj;
+		return list;
 	}
 
 }

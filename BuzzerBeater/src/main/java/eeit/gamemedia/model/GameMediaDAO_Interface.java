@@ -12,4 +12,6 @@ public interface GameMediaDAO_Interface {
 	public GameMediaVO findByPrimaryKey(Integer gameMediaVO);
 
 	public List<GameMediaVO> getAll();
+	
+	public List<GameMediaVO> getAllVideo();
 }

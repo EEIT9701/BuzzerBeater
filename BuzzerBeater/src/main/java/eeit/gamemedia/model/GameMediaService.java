@@ -71,6 +71,10 @@ public class GameMediaService {
 		return dao.getAll();
 	}
 	
+	public List<GameMediaVO> getAllVideo() {
+		return dao.getAllVideo();
+	}
+	
 	public List<HashMap<String,String>> getAllInJsonForm(){
 		
 		List<GameMediaVO> list = dao.getAll();
