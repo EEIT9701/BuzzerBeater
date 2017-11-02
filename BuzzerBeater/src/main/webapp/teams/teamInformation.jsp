@@ -175,9 +175,15 @@ th {
 								<tbody>
 									<tr align='center' valign='middle'>
 										<td>${teamCompositionVO.playerNo}</td>
-										<td><img id="photo"
-											src="data:image/jpeg;base64,${teamCompositionVO.playersVO.photo}"></td>
-										<td>${teamCompositionVO.playersVO.playerName}</td>
+										
+											<td><c:if test="${null==teamCompositionVO.playersVO.photo}">
+							              <img id="photo" src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png">
+									    </c:if>
+									    <c:if test="${null!=teamCompositionVO.playersVO.photo}">
+							               <img id="photo"
+											src="data:image/jpeg;base64,${teamCompositionVO.playersVO.photo}">
+									    </c:if></td>
+										<td><a href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singleData&playerID=${teamCompositionVO.playersVO.playerID}">${teamCompositionVO.playersVO.playerName}</a></td>
 										<td>${teamCompositionVO.playerRole}</td>
 										<td>${teamCompositionVO.playersVO.height}</td>
 										<td>${teamCompositionVO.playersVO.weights}</td>

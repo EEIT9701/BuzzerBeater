@@ -58,13 +58,27 @@
                                 </table>
 
                             </div>
-                             <div class="col-md-12">
-                             <div class="col-md-4"></div>
-                             <div class="col-md-4">
-                             
-                             </div>
-                             <div class="col-md-4"></div>
-							</div>
+                            <div class="col-md-12">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <form method="post" action="<%=request.getContextPath() %>/Teams.do">
+                                        <button type="submit" class="btn btn-info">編輯我的球隊</button>
+                                        <input type="hidden" name="action" value="UpdateMyTeam">
+                                        <input type="hidden" name="teamID" value="${teamsVO.teamID}">
+                                        <input type="hidden" name="teamBadge" value="${teamsVO.teamBadge}">
+                                        <input type="hidden" name="teamName" value="${teamsVO.teamName}">
+                                        <input type="hidden" name="captainEmail" value="${teamsVO.captainEmail}">
+                                        <input type="hidden" name="captainPhone" value="${teamsVO.captainPhone}">
+                                        <input type="hidden" name="coachName" value="${teamsVO.coachName}">
+                                        <input type="hidden" name="bossName" value="${teamsVO.bossName}">
+                                        <input type="hidden" name="totalWin" value="${teamsVO.totalWin}">
+                                        <input type="hidden" name="totalLose" value="${teamsVO.totalLose}">
+                                        <input type="hidden" name="winRate" value="${teamsVO.winRate}">
+                                        <input type="hidden" name="remarks" value="${teamsVO.remarks}">
+                                    </form>
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
                         </div>
                         <!--第二列-右邊表格-格式_.col-md-4-->
                         <div class="col-md-4">
@@ -86,7 +100,7 @@
                                                 <h2>${teamsVO.totalLose}<span>負</span></h2>
 
                                             </td>
-                                        </tr>
+                                            </tr>
                                     </tbody>
                                 </table>
 
@@ -121,85 +135,86 @@
                     <!--****************-->
                     <!-- 第二列(結束) -->
                     <!--****************-->
-                 <div class="row">
-			<!--第二列-左邊表格-格式_.col-md-4-->
+                    <div class="row">
+                        <!--第二列-左邊表格-格式_.col-md-4-->
 
-			<div class="col-md-12">
-				<!--滑鼠移入，顯示表格(開始)-->
-				<div id="tabs">
-					<ul>
-						<li><a href="#tabs-1">球員名單</a></li>
-						<li><a href="#tabs-2">球隊賽事</a></li>
-					</ul>
-					<div id="tabs-1">
-						<c:forEach var="teamCompositionVO"
-							items="${teamsVO.teamCompositionSet}">
-							<table class="table table-bordered respond">
-								<thead>
-									<tr align='center' valign='middle'>
-										<th>背號</th>
-										<th>照片</th>
-										<th>姓名</th>
-										<th>位置</th>
-										<th>身高</th>
-										<th>體重</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr align='center' valign='middle'>
-										<td>${teamCompositionVO.playerNo}</td>
-										<td><img id="photo"
-											src="data:image/jpeg;base64,${teamCompositionVO.playersVO.photo}"></td>
-										<td>${teamCompositionVO.playersVO.playerName}</td>
-										<td>${teamCompositionVO.playerRole}</td>
-										<td>${teamCompositionVO.playersVO.height}</td>
-										<td>${teamCompositionVO.playersVO.weights}</td>
-									</tr>
-								</tbody>
-							</table>
-						</c:forEach>
-					</div>
-					<div id="tabs-2">
-						<table class="table table-bordered" align='center' valign='middle'>
-							<thead>
-								<tr>
-									<th>比賽時間</th>
-									<th>比賽地點</th>
-									<th>對戰隊伍</th>
-									<th>比分</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="gamesVO" items="${gamesVO}">
-									<tr align='center' valign='middle'>
+                        <div class="col-md-12">
+                            <!--滑鼠移入，顯示表格(開始)-->
+                            <div id="tabs">
+                                <ul>
+                                    <li><a href="#tabs-1">球員名單</a></li>
+                                    <li><a href="#tabs-2">球隊賽事</a></li>
+                                </ul>
+                                <div id="tabs-1">
+                                    <c:forEach var="teamCompositionVO" items="${teamsVO.teamCompositionSet}">
+                                        <table class="table table-bordered respond">
+                                            <thead>
+                                                <tr align='center' valign='middle'>
+                                                    <th>背號</th>
+                                                    <th>照片</th>
+                                                    <th>姓名</th>
+                                                    <th>位置</th>
+                                                    <th>身高</th>
+                                                    <th>體重</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr align='center' valign='middle'>
+                                                    <td>${teamCompositionVO.playerNo}</td>
+                                                    <td><img id="photo" src="data:image/jpeg;base64,${teamCompositionVO.playersVO.photo}"></td>
+                                                    <td>${teamCompositionVO.playersVO.playerName}</td>
+                                                    <td>${teamCompositionVO.playerRole}</td>
+                                                    <td>${teamCompositionVO.playersVO.height}</td>
+                                                    <td>${teamCompositionVO.playersVO.weights}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </c:forEach>
+                                </div>
+                                <div id="tabs-2">
+                                    <table class="table table-bordered" align='center' valign='middle'>
+                                        <thead>
+                                            <tr>
+                                                <th>比賽時間</th>
+                                                <th>比賽地點</th>
+                                                <th>對戰隊伍</th>
+                                                <th>比分</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="gamesVO" items="${gamesVO}">
+                                                <tr align='center' valign='middle'>
 
-										<td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value ="${gamesVO.gameBeginDate}"/></td>
-										<td>${gamesVO.locationinfoVO.locationName}</td>
-										<td>
-										<c:if test="${teamsVO.teamID == gamesVO.teamAVO.teamID}">
-							               ${gamesVO.teamBVO.teamName}
-									    </c:if>
-									    <c:if test="${teamsVO.teamID == gamesVO.teamBVO.teamID}">
-							               ${gamesVO.teamAVO.teamName}
-									    </c:if>
-									    </td>
-										<td>${gamesVO.teamAScore} - ${gamesVO.teamBScore}</td>
+                                                    <td>
+                                                        <fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${gamesVO.gameBeginDate}"
+                                                        />
+                                                    </td>
+                                                    <td>${gamesVO.locationinfoVO.locationName}</td>
+                                                    <td>
+                                                        <c:if test="${teamsVO.teamID == gamesVO.teamAVO.teamID}">
+                                                            ${gamesVO.teamBVO.teamName}
+                                                        </c:if>
+                                                        <c:if test="${teamsVO.teamID == gamesVO.teamBVO.teamID}">
+                                                            ${gamesVO.teamAVO.teamName}
+                                                        </c:if>
+                                                    </td>
+                                                    <td>${gamesVO.teamAScore} - ${gamesVO.teamBScore}</td>
 
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!--滑鼠移入，顯示表格(結束)-->
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--滑鼠移入，顯示表格(結束)-->
 
 
 
 
-				<jsp:include page="/footer.jsp" />
+                            <jsp:include page="/footer.jsp" />
 
-			</div>
-		</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--主文(結束)-->

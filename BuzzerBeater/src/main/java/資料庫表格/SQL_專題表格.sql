@@ -255,10 +255,10 @@ GO
 )
 GO
 
-insert into Teams values('70001','GoldenStateWarriors@gmail.com','0911123456','101','玦','Steve Kerr','Joe Lacob','0x1234','','','','');
-insert into Teams values('70002','SanAntonioSpurs@gmail.com','09121222666','102','竧狥ェ而皑','Gregg Popovich','Peter Holt','0x1234','','','','');
-insert into Teams values('70003','HoustonRockets@ymail.com','0913125568','103','ヰ箉絙','Mike DAntoni','Leslie Alexander','0x1234','','','','');
-insert into Teams values('70004','LosAngelesClippers@ymail.com','0914125568','104','罠е弗','Doc Rivers','Steve Anthony Ballmer','','','','','');
+insert into Teams values('70001','GoldenStateWarriors@gmail.com','0911123456','101','玦','Steve Kerr','Joe Lacob','0x1234','1','2','0.33','');
+insert into Teams values('70002','SanAntonioSpurs@gmail.com','09121222666','102','竧狥ェ而皑','Gregg Popovich','Peter Holt','0x1234','1','2','0.33','');
+insert into Teams values('70003','HoustonRockets@ymail.com','0913125568','103','ヰ箉絙','Mike DAntoni','Leslie Alexander','0x1234','2','1','0.66','');
+insert into Teams values('70004','LosAngelesClippers@ymail.com','0914125568','104','罠е弗','Doc Rivers','Steve Anthony Ballmer','','2','1','0.66','');
 
 insert into Teams values('70005','UtahJazz@ymail.com','0915125568','105','礢里','Quin Snyder','Larry H. Miller','0x1234','','','','');
 insert into Teams values('70006','OklahomaCityThunder@ymail.com','0916125568','106','而┰颤皑カ筽綹','Billy Donovan','Clay Bennett','','','','','');
