@@ -18,7 +18,6 @@
    	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
    	<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.min.js"></script>
     
-	<title>場地列表</title>
 </head>
 
 <body>

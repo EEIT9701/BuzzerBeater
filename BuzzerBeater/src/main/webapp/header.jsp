@@ -7,6 +7,7 @@
 <jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService"/>
 <jsp:useBean id="gamesSvc" scope="page" class="eeit.games.model.GamesService"/>
 
+<title>Buzzer Beater</title>
 <!--標頭(開始)-->
 <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" style="font-size: larger">
 	<div class="container">
@@ -38,7 +39,7 @@
 						<c:when test="${LoginOK.auth == 'parttime'}">
 <%-- 							<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li> --%>
 <%-- 							<li><h6><a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">賽季管理</a></h6></li> --%>
-<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></h6></li>
@@ -73,7 +74,7 @@
 						</a>
 					</c:if>		
 				</li>
-				<li><a href="LoginOutServlet.do" class="cd-signup"" > 
+				<li><a href="<%=request.getContextPath()%>/LoginOutServlet.do" class="cd-signup"" > 
 				         <c:choose>
 							<c:when test="${empty LoginOK}">
 							</c:when>
@@ -118,10 +119,8 @@
 				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">賽程</a>
 					<ul class="dropdown-menu">
-						<c:forEach var="games" items="${gamesSvc.all}">
-							<c:if test="${date<games.gameBeginDate}">
-								<li><a href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singlefieldData&gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
-							</c:if>
+						<c:forEach var="games" items="${gamesSvc.all}" begin="1" end="5">
+							<li><a href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singlefieldData&gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
 						</c:forEach>
 					</ul>
 				</li>

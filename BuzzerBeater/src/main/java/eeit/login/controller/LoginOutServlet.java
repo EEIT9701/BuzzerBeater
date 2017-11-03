@@ -33,15 +33,16 @@ public class LoginOutServlet extends HttpServlet {
 //		response.setContentType("text/html");
 //		PrintWriter out = response.getWriter();
 //
-		request.getRequestDispatcher("header.jsp").include(request, response);
+		//request.getRequestDispatcher("header.jsp").include(request, response);
 
 		HttpSession session = request.getSession();
 		session.removeAttribute("LoginOK");
+		session.removeAttribute("memberInfoVO");
 		session.invalidate();
 
-		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-		rd.forward(request, response);
-
+//		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+//		rd.forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/index.jsp");
 //		out.close();
 	}
 }

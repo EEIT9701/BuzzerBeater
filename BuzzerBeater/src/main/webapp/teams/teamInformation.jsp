@@ -7,7 +7,7 @@
 <html>
 
 <head>
-<title>${teamsVO.teamName}</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <jsp:include page="/header_css.jsp" />
@@ -70,12 +70,17 @@
 		
 		<!--上層導覽列(開始) -->
 		<div id="pathWay">
-        	<span>
+		    <span>
             	<a href="<%=request.getContextPath() %>/index.jsp">
-            		<span>使用者功能</span>
+            		<span>首頁</span>
             	</a>
         	</span>&gt;
-        	<span><span>賽季管理</span></span>
+        	<span>
+            	<a href="<%=request.getContextPath() %>/teams/listAllteam_front.jsp">
+            		<span>球隊</span>
+            	</a>
+        	</span>&gt;
+        	<span><span>球隊資訊</span></span>
     	</div>
     	<!--上層導覽列(結束) -->
 		<!-- 第二列(開始) -->

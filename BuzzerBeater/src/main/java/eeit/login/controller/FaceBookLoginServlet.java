@@ -126,9 +126,9 @@ public class FaceBookLoginServlet extends HttpServlet {
 			LoginCheckService loginCheckflag = new LoginCheckService();
 			String acc = jsonOb.getString("email");
 			memberInfoVO = loginCheckflag.findByAcc(acc);
-            System.out.println("Acc:" + memberInfoVO.getAcc());
+            //System.out.println("Acc:" + memberInfoVO.getAcc());
 			if (memberInfoVO.getAcc() != null) { // check Email 是否有在資料庫內
-				System.out.println("email:" + jsonOb.getString("email"));
+				//System.out.println("email:" + jsonOb.getString("email"));
 				// System.out.println("name:" + jsonOb.getString("name"));
 				// System.out.println("picture:" + jsonOb.getString("picture"));
 				// System.out.println("pictureObj" +
@@ -136,16 +136,16 @@ public class FaceBookLoginServlet extends HttpServlet {
 				JSONObject pictureObj = jsonOb.getJSONObject("picture").getJSONObject("data");  //資料格式:有很多層,所以依序用key去取得value
 				// System.out.println("url" + pictureObj.getString("url"));
 
-				memberInfoVO.setAcc(jsonOb.getString("email")); // 使用者帳號
-				memberInfoVO.setName(jsonOb.getString("name")); // 使用者姓名
+				memberInfoVO.setAcc(jsonOb.getString("email")); // FaceBook使用者帳號
+				memberInfoVO.setName(jsonOb.getString("name")); // FaceBook使用者姓名
 				memberInfoVO.setRegisterTime(ts);               // 註冊時間
 				session.setAttribute("LoginOK", memberInfoVO);
 				session.setAttribute("pictureUri", pictureObj.getString("url"));
 
-				response.sendRedirect("index.jsp");
+				response.sendRedirect(request.getContextPath()+"index.jsp");
 				return;
 			} else {   // check Email 是否有在資料庫內,沒有則回首頁
-				response.sendRedirect("index.jsp");
+				response.sendRedirect(request.getContextPath()+"index.jsp");
 				return;
 			}
 		} catch (JSONException e) {

@@ -18,7 +18,6 @@
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    	
 		
-        <title>Season</title>
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
         <style>
