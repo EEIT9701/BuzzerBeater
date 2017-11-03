@@ -11,6 +11,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import eeit.memberinfo.model.MemberInfoVO;
 
 @WebFilter("/*")
 public class GlobalService implements Filter {
@@ -28,11 +31,30 @@ public class GlobalService implements Filter {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
-		String action = request.getParameter("action");
-		if (action != null)
-			System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
-
-		chain.doFilter(request, response);
+//		String action = request.getParameter("action");
+//		if (action != null)
+//			System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
+//
+//		chain.doFilter(request, response);
+		HttpSession session = request.getSession();
+		MemberInfoVO memberInfoVO  = (MemberInfoVO) session.getAttribute("LoginOK");
+	    if(memberInfoVO == null){
+	    	System.out.println("No auth.");
+	    	chain.doFilter(request, response);
+	    }
+	    else if(memberInfoVO.getAuth() == "parttime"){
+	    	System.out.println("Parttime.");
+	    	chain.doFilter(request, response);
+	    }
+	    else if(memberInfoVO.getAuth() == "admin"){
+	    	System.out.println("Admin.");
+	    	chain.doFilter(request, response);
+	    }
+	    else if(memberInfoVO.getAuth() == "teams"){
+	    	System.out.println("teams.");
+	    	chain.doFilter(request, response);
+	    }
+	    else chain.doFilter(request, response);
 	}
 
 	@Override

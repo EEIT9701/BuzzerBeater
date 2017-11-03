@@ -10,7 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>BuzzerBeater | 單場數據</title>
+<title>Buzzer Beater</title>
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
      
@@ -115,37 +115,91 @@
                         
 					  <tbody>
 						<tr>
-						  <td>得分王					  
-						    <img src="data:image/png;base64,${photoA}" height="94.5" width="63">
+						  <td><h5>得分王	</h5>					  
+						    <%-- <img src="data:image/png;base64,${photoA}" height="94.5" width="63"> --%>
+						    <c:if test="${not empty photoA}">
+											<img
+												src="data:image/png;base64,${photoA}"
+												height="94.5" width="63">
+										</c:if> <c:if test="${empty photoA}">
+											<img
+												src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png"
+												height="94.5" width="63">
+										</c:if>
 						    <c:out value="${nameA}"/>
 						    <c:out value="${pointmaxA}"/>
 						  </td>
-						  <td>
-						    <img src="data:image/png;base64,${photoB}" height="94.5" width="63">
+						  <td><h5>得分王	</h5>
+					<%-- <img src="data:image/png;base64,${photoB}" height="94.5" width="63"> --%>
+					<c:if test="${not empty photoB}">
+											<img
+												src="data:image/png;base64,${photoB}"
+												height="94.5" width="63">
+										</c:if> <c:if test="${empty photoB}">
+											<img
+												src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png"
+												height="94.5" width="63">
+										</c:if>
 						    <c:out value="${nameB}"/>
 						    <c:out value="${pointmaxB}"/>
 						  </td>
 					    </tr>
 					    <tr>
-					      <td>助功王					  
-						    <img src="data:image/png;base64,${assistphotoA}" height="94.5" width="63">
+					      <td><h5>助功王	</h5>				  
+						    <%-- <img src="data:image/png;base64,${assistphotoA}" height="94.5" width="63"> --%>
+						    <c:if test="${not empty assistphotoA}">
+											<img
+												src="data:image/png;base64,${assistphotoA}"
+												height="94.5" width="63">
+										</c:if> <c:if test="${empty assistphotoA}">
+											<img
+												src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png"
+												height="94.5" width="63">
+										</c:if>
 						    <c:out value="${assistnameA}"/>
 						    <c:out value="${assistmaxA}"/>
 						  </td>
-						  <td>
-						   <img src="data:image/png;base64,${assistphotoB}" height="94.5" width="63">
+						  <td><h5>助功王	</h5>
+						<%--    <img src="data:image/png;base64,${assistphotoB}" height="94.5" width="63"> --%>
+						                <c:if test="${not empty assistphotoB}">
+											<img
+												src="data:image/png;base64,${assistphotoB}"
+												height="94.5" width="63">
+										</c:if> <c:if test="${empty assistphotoB}">
+											<img
+												src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png"
+												height="94.5" width="63">
+										</c:if>
 						    <c:out value="${assistnameB}"/>
 						    <c:out value="${assistmaxB}"/>
 						  </td>
 					    </tr>
 					    <tr>
-					      <td>籃板王					  
-						    <img src="data:image/png;base64,${rebphotoA}" height="94.5" width="63">
+					      <td><h5>籃板王	</h5>				  
+						    <%-- <img src="data:image/png;base64,${rebphotoA}" height="94.5" width="63"> --%>
+						    <c:if test="${not empty rebphotoA}">
+											<img
+												src="data:image/png;base64,${rebphotoA}"
+												height="94.5" width="63">
+										</c:if> <c:if test="${empty rebphotoA}">
+											<img
+												src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png"
+												height="94.5" width="63">
+										</c:if>
 						    <c:out value="${rebnameA}"/>
 						    <c:out value="${rebmaxA}"/>
 						  </td>
-						  <td>
-						   <img src="data:image/png;base64,${rebphotoB}" height="94.5" width="63">
+						  <td><h5>籃板王	</h5>
+						 <%--   <img src="data:image/png;base64,${rebphotoB}" height="94.5" width="63"> --%>
+						<c:if test="${not empty rebphotoB}">
+											<img
+												src="data:image/png;base64,${rebphotoB}"
+												height="94.5" width="63">
+										</c:if> <c:if test="${empty rebphotoB}">
+											<img
+												src="<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png"
+												height="94.5" width="63">
+										</c:if>
 					        <c:out value="${rebnameB}"/>
 						    <c:out value="${rebmaxB}"/>
 						  </td>
@@ -169,14 +223,14 @@
 					<div id="tabs">
 						<ul>
 						<c:forEach var="singlefieldVO" items="${teamAList}" begin="1" end="1">
-							<li><a href="#tabs-1"><td><img
+							<li><a href="#tabs-1" style="width:481px"><td><img
 													src="data:image/png;base64,${singlefieldVO.teamsVO.teamBadge}"
 													height="60" width="60"></td>${singlefieldVO.teamsVO.teamName}</a></li>
 							
                         </c:forEach>
                         	<c:forEach var="singlefieldVO" items="${teamBList}" begin="1" end="1">
 							
-							<li><a href="#tabs-2"><td><img
+							<li><a href="#tabs-2" style="width:482px"><td><img
 													src="data:image/png;base64,${singlefieldVO.teamsVO.teamBadge}"
 													height="60" width="60"></td>${singlefieldVO.teamsVO.teamName}</a></li>
                         </c:forEach>

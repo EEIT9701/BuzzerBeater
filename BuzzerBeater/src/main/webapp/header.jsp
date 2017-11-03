@@ -7,6 +7,7 @@
 <jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService"/>
 <jsp:useBean id="gamesSvc" scope="page" class="eeit.games.model.GamesService"/>
 
+<title>Buzzer Beater</title>
 <!--標頭(開始)-->
 <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" >
 	<div class="container">
@@ -73,7 +74,7 @@
 						</a>
 					</c:if>		
 				</li>
-				<li><a href="LoginOutServlet.do" class="cd-signup"" > 
+				<li><a href="<%=request.getContextPath()%>/LoginOutServlet.do" class="cd-signup"" > 
 				         <c:choose>
 							<c:when test="${empty LoginOK}">
 							</c:when>
@@ -118,10 +119,8 @@
 				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">賽程</a>
 					<ul class="dropdown-menu">
-						<c:forEach var="games" items="${gamesSvc.all}">
-							<c:if test="${date<games.gameBeginDate}">
-								<li><a href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singlefieldData&gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
-							</c:if>
+						<c:forEach var="games" items="${gamesSvc.all}" begin="1" end="5">
+							<li><a href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singlefieldData&gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
 						</c:forEach>
 					</ul>
 				</li>

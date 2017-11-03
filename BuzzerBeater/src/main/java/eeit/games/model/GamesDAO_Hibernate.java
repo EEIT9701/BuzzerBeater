@@ -104,4 +104,16 @@ public class GamesDAO_Hibernate implements GamesDAO_interface {
 		}
 	}
 
+	@Override
+	public List<GamesVO> findByTeamID(Integer teamID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteByGroupID(Integer groupID) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EEIT97-第一組</title>
 	<jsp:include page="/header_css.jsp" />
 	
 	 <!--滑鼠移入，顯示表格("2-1")-->

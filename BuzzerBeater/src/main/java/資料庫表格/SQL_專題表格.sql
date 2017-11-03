@@ -316,9 +316,9 @@ insert into GroupRegistration values('3002','2002','1','2016-06-07 09:48','45672
 insert into GroupRegistration values('3003','2002','1','2016-06-07 12:58','45673');
 insert into GroupRegistration values('3004','2002','1','2016-06-08 15:38','45674');
 
-insert into GroupRegistration values('3001','2006','1','2016-06-06 11:58','45671');
-insert into GroupRegistration values('3002','2006','1','2016-06-07 09:48','45672');
-insert into GroupRegistration values('3003','2006','1','2016-06-07 12:58','45673');
+insert into GroupRegistration values('3001','2006','2','2016-06-06 11:58','45671');
+insert into GroupRegistration values('3002','2006','2','2016-06-07 09:48','45672');
+insert into GroupRegistration values('3003','2006','2','2016-06-07 12:58','45673');
 insert into GroupRegistration values('3004','2006','1','2016-06-08 15:38','45674');
 
 select * from GroupRegistration
@@ -641,7 +641,7 @@ teamID               int,                                                   --球
 GO 
 
 insert into MemberInfo values('admin123@gmail.com','admin01','admin','2017-09-23','');
-insert into MemberInfo values('GoldenStateWarriors@gmail.com','金州勇士','teams','2016-01-01','3001');
+insert into MemberInfo values('javaeeit97201701@gmail.com','金州勇士','teams','2016-01-01','3001');
 insert into MemberInfo values('aSnAntonioSpurs@gmail.com','聖安東尼奧馬刺','teams','2016-01-11','3002');
 insert into MemberInfo values('HoustonRockets@ymail.com','休士頓火箭','teams','2016-01-15','3003');
 insert into MemberInfo values('LosAngelesClippers@ymail.com','洛杉磯快艇','teams','2016-01-17','3004');
@@ -651,10 +651,11 @@ insert into MemberInfo values('OklahomaCityThunder@ymail.com','奧克拉荷馬雷霆','
 insert into MemberInfo values('MemphisGrizzlies@ymail.com','曼菲斯灰熊','teams','2016-02-15','3007');
 insert into MemberInfo values('PortlandTrail@ymail.com','波特蘭拓荒者','teams','2016-02-17','3008');
 
-insert into MemberInfo values('javaeeit972017@gmail.com','叡叡','parttime','2017-06-23','');
-insert into MemberInfo values('frank810618@gmail.com','資策會金城武','admin','2017-09-23','');
-insert into MemberInfo values('s988309@gmail.com','金城武','admin','2017-09-23','');
-insert into MemberInfo values('qwe020488952@gmail.com','金城武666','admin','2017-09-23','');
+insert into MemberInfo values('javaeeit972017@gmail.com','資策會隊admin','admin','2017-06-23','');
+insert into MemberInfo values('frank810618@gmail.com','賴彥誠','parttime','2017-09-23','');
+insert into MemberInfo values('s988309@gmail.com','何其偉','parttime','2017-09-23','');
+insert into MemberInfo values('qwe020488952@gmail.com','陳品維','parttime','2017-09-23','');
+
 select * from MemberInfo
 GO
 
@@ -735,7 +736,48 @@ insert into PlayerGroups values('2002','70063');
 insert into PlayerGroups values('2002','70064');
 insert into PlayerGroups values('2002','70065');
 insert into PlayerGroups values('2002','70066');
-
+insert into PlayerGroups values('2006','70001');
+insert into PlayerGroups values('2006','70002');
+insert into PlayerGroups values('2006','70003');
+insert into PlayerGroups values('2006','70004');
+insert into PlayerGroups values('2006','70005');
+insert into PlayerGroups values('2006','70006');
+insert into PlayerGroups values('2006','70007');
+insert into PlayerGroups values('2006','70008');
+insert into PlayerGroups values('2006','70009');
+insert into PlayerGroups values('2006','70010');
+insert into PlayerGroups values('2006','70011');
+insert into PlayerGroups values('2006','70021');
+insert into PlayerGroups values('2006','70022');
+insert into PlayerGroups values('2006','70023');
+insert into PlayerGroups values('2006','70024');
+insert into PlayerGroups values('2006','70025');
+insert into PlayerGroups values('2006','70026');
+insert into PlayerGroups values('2006','70027');
+insert into PlayerGroups values('2006','70028');
+insert into PlayerGroups values('2006','70029');
+insert into PlayerGroups values('2006','70030');
+insert into PlayerGroups values('2006','70031');
+insert into PlayerGroups values('2006','70039');
+insert into PlayerGroups values('2006','70040');
+insert into PlayerGroups values('2006','70041');
+insert into PlayerGroups values('2006','70042');
+insert into PlayerGroups values('2006','70043');
+insert into PlayerGroups values('2006','70044');
+insert into PlayerGroups values('2006','70045');
+insert into PlayerGroups values('2006','70046');
+insert into PlayerGroups values('2006','70047');
+insert into PlayerGroups values('2006','70048');
+insert into PlayerGroups values('2006','70057');
+insert into PlayerGroups values('2006','70058');
+insert into PlayerGroups values('2006','70059');
+insert into PlayerGroups values('2006','70060');
+insert into PlayerGroups values('2006','70061');
+insert into PlayerGroups values('2006','70062');
+insert into PlayerGroups values('2006','70063');
+insert into PlayerGroups values('2006','70064');
+insert into PlayerGroups values('2006','70065');
+insert into PlayerGroups values('2006','70066');
 
 select * from PlayerGroups
 GO
