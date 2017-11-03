@@ -8,7 +8,7 @@
 <jsp:useBean id="gamesSvc" scope="page" class="eeit.games.model.GamesService"/>
 
 <!--標頭(開始)-->
-<nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" style="font-size: larger">
+<nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav" >
 	<div class="container">
 		<div class="attr-nav" style="padding-left:40px">
 			<ul>
@@ -38,7 +38,7 @@
 						<c:when test="${LoginOK.auth == 'parttime'}">
 <%-- 							<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li> --%>
 <%-- 							<li><h6><a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">賽季管理</a></h6></li> --%>
-<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></h6></li>
@@ -61,12 +61,12 @@
 				<!--登入登出"按鈕"(開始)-->
 				<li >			
 					<c:if test="${empty LoginOK}">
-						<a href="#" class="cd-signin" onclick="document.getElementById('id01').style.display='block'">
+						<a href="#" class="cd-signin" onclick="document.getElementById('id01').style.display='block'" >
 							登入
 						</a>
 					</c:if>								
 					<c:if test="${!empty LoginOK}">		
-						<a>			
+						<a style="padding-top: 20px;">			
 							<img  src="${pictureUri}"  style="width:25px; height:25px;text-decoration:none;"> 
 							<c:set var="var01" value="${LoginOK.name}" />
 							${var01}
