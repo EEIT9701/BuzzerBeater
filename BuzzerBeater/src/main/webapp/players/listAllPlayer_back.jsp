@@ -21,6 +21,9 @@
 	height: 40px;
 	margin: auto;
 }
+table {
+	table-layout: fixed;
+}
 </style>
 
 </head>
@@ -69,7 +72,7 @@
 				<!--第一列-左邊表格-格式_.col-md-8-->
 				<div class="col-md-12">
 					<div class="col-md-12">
-						<table class="table table-bordered" id="table">
+						<table class="table table-bordered" id="table" align='center' valign='middle'>
 							<thead>
 								<tr>
 									<th>球員照片</th>

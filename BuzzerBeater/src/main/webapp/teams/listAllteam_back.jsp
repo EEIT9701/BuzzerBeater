@@ -26,10 +26,9 @@
 			<jsp:include page="/header.jsp" />
 			<jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService" />
 			<!--主文(開始)-->
-			<div class="container">
-				<div class="jumbotron">
+			<div class="container-fluid">
 
-					<div class="col-md-4">
+<!-- 					<div class="col-md-4"> -->
 <%-- 						<form class="form-inline" method="post" action="<%=request.getContextPath() %>/Teams.do"> --%>
 <!-- 							<select class="form-control" name="season"> -->
 <!-- 					<option>賽季</option> -->
@@ -55,12 +54,9 @@
 <!-- 							<input type="submit" class="btn btn-warning" value="搜尋"> -->
 <!-- 							<input type="hidden" name="action" value="GET_ONE_TEAM"> -->
 <!-- 						</form> -->
-					</div>
-					<div class="col-md-4"></div>
-					<div class="col-md-4">
-						<div class="col-md-4"></div>
-						<div class="col-md-4"></div>
-						<div class="col-md-4">
+<!-- 					</div> -->
+					
+
 							<Form method="post" action="<%=request.getContextPath() %>/Teams.do">
 								<button type="submit" class="btn btn-warning">新增球隊</button>
 								<input type="hidden" name="action" value="insertTeam">
@@ -76,8 +72,6 @@
 								<input type="hidden" name="winRate" value="0">
 								<input type="hidden" name="remarks" value="">
 							</Form>
-						</div>
-					</div>
 
 					<!--表格(開始)-->
 					<!--****************-->
@@ -165,7 +159,6 @@
 					</div>
 					<jsp:include page="/footer.jsp" />
 
-				</div>
 			</div>
 			<!--主文(結束)-->
 

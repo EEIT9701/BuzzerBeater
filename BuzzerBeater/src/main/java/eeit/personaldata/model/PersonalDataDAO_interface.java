@@ -25,6 +25,9 @@ public interface PersonalDataDAO_interface {
 	
 	public List<PersonalDataVO> findByPlayerIDAndGameID(Integer PlayerID, Integer GameID);
 
-	List<PersonalDataVO> findByPlayerID(Integer playerID);
+	public List<PersonalDataVO> findByPlayerID(Integer playerID);
+	
+	public List<PersonalDataVO> findByTeamID(Integer teamID);
+	
 
 }

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
+import eeit.personaldata.model.PersonalDataService;
+import eeit.personaldata.model.PersonalDataVO;
 import eeit.players.model.PlayersVO;
 import eeit.teamcomposition.model.TeamCompositionService;
 import eeit.teams.model.TeamsService;
@@ -123,8 +125,11 @@ public class TeamsServlet extends HttpServlet {
 			
 			TeamsService tsvc = new TeamsService();
 			GamesService gsvc = new GamesService();
+			PersonalDataService playerSvc = new PersonalDataService();
+			List<PersonalDataVO> personalDataVO = playerSvc.findByTeamID(teamID);
 			TeamsVO teamsVO = tsvc.findByID(teamID);
 			List<GamesVO> gamesVO = gsvc.findByTeamID(teamID);
+			request.setAttribute("personalDataVO", personalDataVO);
 			request.setAttribute("teamsVO",teamsVO);
 			request.setAttribute("gamesVO",gamesVO);
 			request.getRequestDispatcher("/teams/teamInformation.jsp").forward(request, response);
@@ -136,8 +141,11 @@ public class TeamsServlet extends HttpServlet {
 			
 			TeamsService tsvc = new TeamsService();
 			GamesService gsvc = new GamesService();
+			PersonalDataService playerSvc = new PersonalDataService();
+			List<PersonalDataVO> personalDataVO = playerSvc.findByTeamID(teamID);
 			TeamsVO teamsVO = tsvc.findByID(teamID);
 			List<GamesVO> gamesVO = gsvc.findByTeamID(teamID);
+			request.setAttribute("personalDataVO", personalDataVO);
 			request.setAttribute("teamsVO",teamsVO);
 			request.setAttribute("gamesVO",gamesVO);
 			request.getRequestDispatcher("/teams/myTeamInformation.jsp").forward(request, response);
