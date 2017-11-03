@@ -13,7 +13,7 @@
 <!DOCTYPE >
 <html>
 <head>
-<title>EEIT97-第一組</title>
+<title>Buzzer Beater</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="<%=request.getContextPath()%>/css/bootstrap.css"
