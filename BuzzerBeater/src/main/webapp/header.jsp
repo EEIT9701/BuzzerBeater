@@ -98,7 +98,7 @@
 			</button>
 			<!-- 縮小視窗(左列)(結束) -->
 			<!-- logo(開始) -->
-			<a class="navbar-brand" href="#brand" style="padding-top: 1px"> 
+			<a class="navbar-brand" href="<%=request.getContextPath() %>/index.jsp" style="padding-top: 1px"> 
 			<img src="<%=request.getContextPath()%>/images/700_700.png"
 				class="logo logo-display" alt="" > 
 			<img src="<%=request.getContextPath()%>/images/700_700.png"
@@ -120,7 +120,7 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">賽程</a>
 					<ul class="dropdown-menu">
 						<c:forEach var="games" items="${gamesSvc.all}" begin="1" end="5">
-							<li><a href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singlefieldData&gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
+							<li><a style="font-size: 6px;" href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singlefieldData&gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
 						</c:forEach>
 					</ul>
 				</li>
@@ -130,11 +130,11 @@
 							<li><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teams.teamID}">${teams.teamName}</a></li>
 						</c:forEach>
 					</ul>
-					</li>
-					<li class="dropdown"><a href="<%=request.getContextPath() %>/players/listAllPlayer_front.jsp" class="dropdown-toggle" data-toggle="dropdown">球員</a>
-					<ul class="dropdown-menu">
-					</ul>
-					</li>
+				</li>
+				<li class="dropdown"><a href="<%=request.getContextPath() %>/players/listAllPlayer_front.jsp" class="dropdown-toggle" data-toggle="dropdown">球員</a>
+<!-- 					<ul class="dropdown-menu"> -->
+<!-- 					</ul> -->
+				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">數據</a>
 					<ul class="dropdown-menu">

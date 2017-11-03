@@ -167,26 +167,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>金州勇士</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>聖安東尼奧馬刺</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
+                                	<tr>
                                         <td>休士頓火箭</td>
-                                        <td>0</td>
-                                        <td>0</td>
-
+                                        <td>2</td>
+                                        <td>1</td>
                                     </tr>
                                     <tr>
                                         <td>洛杉磯快艇</td>
-										<td>0</td>
-                                        <td>0</td>
+										<td>2</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>金州勇士</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>聖安東尼奧馬刺</td>
+                                        <td>1</td>
+                                        <td>2</td>
                                     </tr>
                                 </tbody>
                             </table>
