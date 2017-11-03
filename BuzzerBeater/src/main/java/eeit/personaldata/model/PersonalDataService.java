@@ -78,5 +78,9 @@ public class PersonalDataService {
 		return dao.findByPlayerID(PlayerID);
 	}
 	
+	public List<PersonalDataVO> findByTeamID(Integer TeamID) {
+		dao = new PersonalDataDAO();
+		return dao.findByTeamID(TeamID);
+	}
 	
 }
