@@ -278,6 +278,11 @@ public class GameMediaServlet extends HttpServlet {
 			return;
 		}
 		
+		if("cancel".equals(action)){
+			String url = "/BuzzerBeater/gamemedia/photoBackEnd.jsp";
+			res.sendRedirect(url);
+			
+		}
 
         if ("insertVideo".equals(action)) { // 來自addEmp.jsp的請求  
 			

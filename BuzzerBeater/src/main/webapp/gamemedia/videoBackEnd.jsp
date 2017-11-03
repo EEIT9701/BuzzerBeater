@@ -281,26 +281,26 @@ video::-webkit-media-controls-panel {
 		</div>
 	</div>
 	 <!-- 模太框 -->
- -	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
- -		aria-labelledby="myModalLabel2" aria-hidden="true"
- -		data-backdrop="false">
- -		<div class="modal-dialog">
- -			<div class="modal-content">
- -				<div class="modal-header">
- -					<button type="button" class="close" data-dismiss="modal"
- -						aria-hidden="true" id="x">&times;</button>
- -					<h4 class="modal-title" id="deleteTitle">警告!!!</h4>
- -				</div>
- -				<div class="modal-body">
- -					<div class="row">
- -						<h4 id="deleteNote" style="align:'center'"></h4>
- -					</div>
- -					</br>
- -				</div>
- -				<div class="modal-footer">
- -					<button type="button" class="btn btn-danger deleteConfirm" data-dismiss="modal">確定</button>
- -					<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
- -				</div>
+ 	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+ 		aria-labelledby="myModalLabel2" aria-hidden="true"
+ 		data-backdrop="false">
+ 		<div class="modal-dialog">
+ 			<div class="modal-content">
+ 				<div class="modal-header">
+ 					<button type="button" class="close" data-dismiss="modal"
+ 						aria-hidden="true" id="x">&times;</button>
+ 					<h4 class="modal-title" id="deleteTitle">警告!!!</h4>
+ 				</div>
+ 				<div class="modal-body">
+ 					<div class="row">
+ 						<h4 id="deleteNote" style="align:'center'"></h4>
+ 					</div>
+ 					</br>
+ 				</div>
+ 				<div class="modal-footer">
+ 					<button type="button" class="btn btn-danger deleteConfirm" data-dismiss="modal">確定</button>
+ 					<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+ 				</div>
  			</div>
  		</div>
  	</div>
@@ -372,6 +372,8 @@ video::-webkit-media-controls-panel {
 	  						}
 	  				  }
 	  			})
+	  			
+	  			$.fn.dataTable.ext.errMode = 'none'; //不显示任何错误信息
 			});
  		}
 	  		function buttons(){
@@ -477,6 +479,8 @@ video::-webkit-media-controls-panel {
 		  			var descriptions = $('#insertDescriptions').val();
 		  			var tag = $('#insertTag').val();
 		  			
+		  			
+		  			
 	  				console.log('clicked')
 	  				console.log('1' + gameID)
 	  				console.log('2' +title)
@@ -485,7 +489,9 @@ video::-webkit-media-controls-panel {
 	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
 	  					console.log(file);
 	  					loadTable();
-	  				})	
+	  				})
+	  				season = null;
+	  				group = null;
 	  			})
 	  		}
 	});

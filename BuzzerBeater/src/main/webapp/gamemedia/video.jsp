@@ -64,40 +64,19 @@
 			<div class="row" style="background-color: rgba(220, 175, 171, 0.37);height: 489px;">
                 <div class="col-md-10" style="padding-left: 30px;">
             		<div class="row" id="mediaplayer" oncontextmenu="window.event.returnValue=false">            
-                		<video controls id="video">
-            				<source src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4">
+                		<video controls id="video" src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4">
             			</video>
 					</div>
 				</div>
-                <!--第一列-右邊表格-格式_.col-md-4-->
-<!--               	<div> -->
-<!--                 	<video controls id="video1"> -->
-<%--             			<source src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4"> --%>
-<!--             		</video> -->
-<!-- 				</div> -->
-<!-- 				<div> -->
-<!--                 	<video controls id="video1"> -->
-<%--             			<source src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4"> --%>
-<!--             		</video> -->
-<!-- 				</div> -->
-<!-- 				<div> -->
-<!--                 	<video controls id="video1"> -->
-<%--             			<source src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4"> --%>
-<!--             		</video> -->
-<!-- 				</div> -->
 				<div class="col-md-2" id="videolist">
 					<h3>精選影片</h3>
 					<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}">
-						<h5 id=medias>${gameMediaSvc.mediasName}</h5>
+						<c:forEach var="gameMediaType" items="${gameMediaSvc.mediaType}">
+							<c:if test="${gameMediaType eq 'video'}">
+								<h5 id=medias value="${gameMediaSvc.gameVideo}">${gameMediaSvc.mediasName}</h5>
+							</c:if>
+						</c:forEach>
 					</c:forEach>
-<!-- 					</br> -->
-<!-- 					</br> -->
-<!-- 					</br> -->
-<!-- 					</br> -->
-<!-- 					</br> -->
-<!-- 					</br> -->
-<!-- 					</br> -->
-<!-- 					</br> -->
 				</div>
            	</div>
 				
@@ -112,10 +91,20 @@
     </div>
     </div>
     <!--主文(結束)-->
-    <script>
- 
-    </script>
 
 <jsp:include page="/footer_css.jsp" />        
+    <script>
+    $(function(){
+    	$('#medias').click(function(){
+			//抓到上方cell8讀到的gameVideo內部的值
+           
+	  		//字串串接路徑
+	  		var videoNo1 = "<%=request.getContextPath()%>/videos/"+"002.mp4";
+			$('#video').attr("src", videoNo1)
+		}) 
+    })
+	  				
+		
+    </script>
 </body>
 </html>
