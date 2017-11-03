@@ -79,6 +79,7 @@ public class memberInfoServlet extends HttpServlet {
 			memberInfoVO.setAcc(mVO.get("acc").toString());
 			memberInfoVO.setName(mVO.get("name").toString());
 			memberInfoVO.setAuth(mVO.get("auth").toString());
+			memberInfoVO.setTeamID(0);
 			//將registerTime轉成Timestamp
 			String timeTemp = mVO.getString("registerTime");
 			Timestamp registerTimeData = new Timestamp(System.currentTimeMillis()); 

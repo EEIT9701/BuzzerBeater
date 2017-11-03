@@ -97,8 +97,13 @@
 		<div class="content">
 		 <H3>新增帳號</H3>
 		  會員帳號<input id="MemberInfoVO_acc"   placeholder="會員帳號" type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
-		  會員名稱<input id="MemberInfoVO_name"  placeholder="會員名稱" type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
-			 權限<input id="MemberInfoVO_auth"  placeholder="權限"  type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+		  會員名稱<input id="MemberInfoVO_name"  placeholder="會員名稱" type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;">			 
+				<select id="MemberInfoVO_auth">
+  					<option value="admin">admin</option>
+  					<option value="parttime">parttime</option>
+  					<option value="teams">teams</option>
+				</select>
+<!-- 			 權限<input id="MemberInfoVO_auth"  placeholder="權限"  type="text" value="" required style="width:150px;padding-bottom: 5px;padding-top: 5px;"> -->
 			 <div>
 				<button class="button" data-dismiss="JDialog" id="jDialogButton">確定</button>
 			</div>
@@ -126,8 +131,9 @@
 			//抓input 的值
 			var acc =  $('#MemberInfoVO_acc').val();
 			var name = $('#MemberInfoVO_name').val();
-			var auth = $('#MemberInfoVO_auth').val();
-			if(acc!= '' & name!= '' & auth != '' ){
+			var auth = $('#MemberInfoVO_auth').select().val();
+			//輸入不得為空值
+			if(acc!= '' & name!= ''){
 				//取得目前時間
 				registerTimeToMs = Date.now() + 28800000; //台北時間+8小時
 				//alert(registerTimeToMs);
@@ -136,14 +142,17 @@
 				//把input 清空
 				$('#MemberInfoVO_acc').val('');
 				$('#MemberInfoVO_name').val('');
-				$('#MemberInfoVO_auth').val('');
+				//$('#MemberInfoVO_auth').val('');
 				
 				var dataStr = JSON.stringify({ acc:acc, name:name, auth:auth, registerTime:registerTime })
-				$.post('/BuzzerBeater/memberInfoServlet.do', {'action':'INSERT', 'data':dataStr}, function(datas){
+				 if(confirm("確定要新增嗎?")){
+					$.post('/BuzzerBeater/memberInfoServlet.do', {'action':'INSERT', 'data':dataStr}, function(datas){
 					//只是把新增資料傳回後台 不需回傳東西, 或做輸入與法判斷
-					alert("新增成功");
+					//alert("新增成功");
 					location.reload();
-		       	}) 
+					})
+				  }	
+		        
 		    }else {
 		    	alert("新增失敗");
 		    }
@@ -198,40 +207,42 @@
 		  $('.btn-warning').on('click', function(){          	    		            	
 		   //按下修改鍵 
 	       if($(this).text() == '修改'){	
-	         //可以取得acc
+	         //取得原始tr上面的 acc name auth (只有這三個欄位可以修改)
 		     var acc = $(this).parents('tr').find('td:nth-child(2)').text();
-		     //可以取得name
 		     var name = $(this).parents('tr').find('td:nth-child(3)').text();
-		     //可以取得auth
 		     var auth = $(this).parents('tr').find('td:nth-child(4)').text();
 	       	
 	       	 $(this).parents('tr').find('td:nth-child(2)').html('<input placeholder="帳號"  type="text" value="'+ acc +'" required>');
 	       	 $(this).parents('tr').find('td:nth-child(3)').html('<input placeholder="名稱"  type="text" value="'+ name +'" required>');
-	       	 $(this).parents('tr').find('td:nth-child(4)').html('<input placeholder="權限"  type="text" value="'+ auth +'" required>');
- 	  		  
-	       	  $(this).text('確定');	
+	       	 //根據auth, 選擇selected做標記生成下拉式選單
+	       	 if(auth == "admin"){
+	       	 	$(this).parents('tr').find('td:nth-child(4)').html('<select><option value="admin" selected>admin</option><option value="parttime">parttime</option><option value="teams">teams</option></select>');
+	         }else if(auth == "parttime"){
+	       	 	$(this).parents('tr').find('td:nth-child(4)').html('<select><option value="admin">admin</option><option value="parttime" selected>parttime</option><option value="teams">teams</option></select>');
+	         }else {
+	       	 	$(this).parents('tr').find('td:nth-child(4)').html('<select><option value="admin">admin</option><option value="parttime">parttime</option><option value="teams" selected>teams</option></select>');
+	         }
+        	 $(this).text('確定');	
 	       	  
            } 
 	       	else{ //按下確定鍵 
-	       	  //把input, 顯示在table欄位上的值取出	
+	       	  //把input欄位上的值取出	
 	       	  var memberID = $(this).parents('tr').find('td:nth-child(1)').text();
 	       	  var acc = $(this).parents('tr').find('td:nth-child(2)>input').val();
 	       	  var name = $(this).parents('tr').find('td:nth-child(3)>input').val();
- 	       	  var auth = $(this).parents('tr').find('td:nth-child(4)>input').val();
- 	       	  var registerTime = $(this).parents('tr').find('td:nth-child(5)').text();
+	       	  //把selected欄位上的值取出
+	       	  var auth = $(this).parents('tr').find('td:nth-child(4)>').select().val();
+	       	  var registerTime = $(this).parents('tr').find('td:nth-child(5)').text();
  	     	  var teamID = $(this).parents('tr').find('td:nth-child(6)').text();
-    
- 	          //alert(registerTime);
- 	          
  	          //把time轉成date(台北標準時間)
  	          var registerTimeToMs = new Date(registerTime);
- 	          //把輸入的資料包裝成JSON格式字串, 給post傳送用
- 	       	  var dataStr = JSON.stringify({ memberID:memberID, acc:acc, name:name, auth:auth, registerTime:registerTimeToMs, teamID:teamID})
+ 	          //把輸入的資料包裝成JSON格式字串, 要準備給post傳送到伺服器
+ 	       	  var dataStr = JSON.stringify({ 'memberID':memberID, 'acc':acc, 'name':name, 'auth':auth, 'registerTime':registerTimeToMs, 'teamID':teamID})
               //將 顯示在table欄位改回tr,並把值填入 
  	       	  $(this).parents('tr').find('td:nth-child(1)').html(memberID);
  	       	  $(this).parents('tr').find('td:nth-child(2)').html(acc);
- 			  $(this).parents('tr').find('td:nth-child(3)').html(name);
- 			  $(this).parents('tr').find('td:nth-child(4)').html(auth);
+ 			  $(this).parents('tr').find('td:nth-child(3)').html(name);	  
+ 			  $(this).parents('tr').find('td:nth-child(4)').html(auth);  
  			  $(this).parents('tr').find('td:nth-child(5)').html(registerTime);
  			  $(this).parents('tr').find('td:nth-child(6)').html(teamID);
  	       	  
@@ -239,11 +250,12 @@
  	       	  $.post('/BuzzerBeater/memberInfoServlet.do', {'action':'UPDATE', 'data':dataStr}, function(datas){
 					//只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
  	       	  })   
-	       	  $(this).text('修改');	       	  
+ 	       	  $(this).text('修改');	       	  
 	       	}
        });
           //刪除鍵
 		  $('.btn-danger').on('click', function(){
+			  //確認 或 取消
 			  if(confirm("確定要刪除嗎?")){
 				  var memberID = $(this).parents('tr').find('td:nth-child(1)').text();
 				  //alert(memberID);
@@ -251,11 +263,9 @@
 	 	       	  $.post('/BuzzerBeater/memberInfoServlet.do', {'action':'DELETE', 'MemberID':memberID}, function(datas){
 						//刪除資料 不需回傳東西, 或做輸入與法判斷
 	 	       	  })
-				  $(this).parents('tr').empty();  
-			  }else {
-				  
+				  $(this).parents('tr').empty(); 
+	 	   	      location.reload()
 			  }
- 	       	  //location.reload()
 		  }) 
 	  }
 		 		
