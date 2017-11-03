@@ -38,6 +38,7 @@ public class LoginOutServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.removeAttribute("LoginOK");
 		session.removeAttribute("memberInfoVO");
+		session.removeAttribute("pictureUri");
 		session.invalidate();
 
 //		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
