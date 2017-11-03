@@ -12,6 +12,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
+<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/datatables.min.css" />
 <jsp:include page="/header_css.jsp" />
@@ -52,14 +54,14 @@
 								<td>隊伍名稱</td>
 								<td>報名分組</td>
 								<td>報名時間</td>
-								<td>繳費時間</td>
+								<td>繳費狀態</td>
 								<td>帳號後五碼</td>
 								<td>核對</td>
 							</tr>
 						</thead>
-						<tbody>
-							<c:forEach var="groupRegVO" items="${GroupRegSvc.all}">
-								<tr align='center' valign='middle'>
+						<tbody id="test01">
+							<c:forEach var="groupRegVO" items="${GroupRegSvc.all}" >
+								<tr align='center' valign='middle' >
 									<td><a
 									href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${groupRegVO.teamsVO.teamID}">${groupRegVO.teamsVO.teamName}</a></td>
 									<td>${groupRegVO.groupsVO.seasonVO.seasonName}-
@@ -68,19 +70,24 @@
 
 									<!--報名時間-->
 									<td>${groupRegVO.registerDate}</td>
-									<!--繳費時間-->
-									<td></td>
+									<!--繳費狀態-->
+									<td>${groupRegVO.teamStat}</td>
 									<!--帳號後五碼-->
 									<td>${groupRegVO.paymentNumber}</td>
 									<!--核對-->
-									<td>
-										<Form method="post"
-											action="<%=request.getContextPath()%>/Season.do" id="update">
-											<button type="button" class="btn btn-lg btn-primary">審核</button>
+									
+<!-- 										<Form method="post" -->
+
+                                         <c:if test="${groupRegVO.teamStat==1}">
+												<td><button type="button" class="btn btn-lg btn-primary">已繳費</button></td>
+											</c:if>
+											<c:if test="${groupRegVO.teamStat==2}">
+												<td><button type="button" class="btn btn-lg btn-primary">待審核</button> </td>                                                 
+											</c:if>
 <%-- 			        			<input type="hidden" name="seasonID" value="${sVO.seasonID}">  --%>
 <!--                                     <input type="hidden" name="action" value="GET_ONE_TO_UPDATE"> -->
-										</Form>
-									</td>
+<!-- 										</Form> -->
+									
 								</tr>
 							</c:forEach>
 					</table>
@@ -94,6 +101,8 @@
 	<script type="text/javascript"
 		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	<script>
+	   $(function(){
+		   
 		$(document).ready(function() {
 			$('#example').DataTable({
 				columnDefs: [{ width: 200, targets: 6}],
@@ -115,6 +124,17 @@
 			  }
 			})
 		});
+		
+		$('.btn-primary').on('click', function(){
+ 			//var a = $(this).parents('tr').find('td:nth-child(4)').text();
+// 			alert($(this).parents('tr').find('td:nth-child(4)').text());
+            $(this).parents('tr').find('td:nth-child(4)').text('1');
+            $(this).text('已繳費');
+		})
+// 		 var a = $("#test01 > tr").find("td:nth-child(4)").text();
+// 		    alert(a);
+		    
+	   })    
 	</script>
 </body>
 </html>
