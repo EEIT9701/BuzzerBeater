@@ -82,22 +82,22 @@
 					<tr>
 						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
 						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
-						<td>${tcVO.playersVO.playerName}</td>
-						<td><input style=width:100px type="number" name="twoPoint"></td>
-						<td><input style=width:100px type="number" name="twoPointShot"></td>
-						<td><input style=width:100px type="number" name="threePoint"></td>
-						<td><input style=width:100px type="number" name="threePointShot"></td>
-						<td><input style=width:100px type="number" name="fg"></td>
-						<td><input style=width:100px type="number" name="fgShot"></td>
-						<td><input style=width:100px type="number" name="offreb"></td>
-						<td><input style=width:100px type="number" name="defreb"></td>
-						<td><input style=width:100px type="number" name="blocks"></td>
-						<td><input style=width:100px type="number" name="assist"></td>
-						<td><input style=width:100px type="number" name="steal"></td>
-						<td><input style=width:100px type="number" name="turnover"></td>
-						<td><input style=width:100px type="number" name="personalFouls"></td>
-						<td><input style=width:100px type="number" name="points"></td>
-						<td><input style=width:100px type="number" name="startingPlayer"></td>
+						<td><nobr>${tcVO.playersVO.playerName}</nobr></td>
+						<td><input style=width:100px type="number" name="twoPoint" value="0"></td>
+						<td><input style=width:100px type="number" name="twoPointShot" value="0"></td>
+						<td><input style=width:100px type="number" name="threePoint" value="0"></td>
+						<td><input style=width:100px type="number" name="threePointShot" value="0"></td>
+						<td><input style=width:100px type="number" name="fg" value="0"></td>
+						<td><input style=width:100px type="number" name="fgShot" value="0"></td>
+						<td><input style=width:100px type="number" name="offreb" value="0"></td>
+						<td><input style=width:100px type="number" name="defreb" value="0"></td>
+						<td><input style=width:100px type="number" name="blocks" value="0"></td>
+						<td><input style=width:100px type="number" name="assist" value="0"></td>
+						<td><input style=width:100px type="number" name="steal" value="0"></td>
+						<td><input style=width:100px type="number" name="turnover" value="0"></td>
+						<td><input style=width:100px type="number" name="personalFouls" value="0"></td>
+						<td><input style=width:100px type="number" name="points" readonly value="0"></td>
+						<td><input style=width:100px type="checkbox" name="startingPlayer"></td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -165,9 +165,28 @@
 			
 			$('#addGame').click(function(){
 				
-				var twoPointShot = $('#teamA tr input').val();
-				console.log(twoPointShot);
+				var JSONstr = '';
+				var teamA = $('#teamA>tbody tr');
+				
+				$.each(teamA, function(index,tr){
+					var perData = "";
+					
+					var playerID = $(this).find('input[name="playerID"]').val();
+					var twoPoint = $(this).find('input[name="twoPoint"]').val();
+					
+					perData = JSON.stringify({"playerID":playerID,"twoPoint":twoPoint});
+					JSONstr = JSONstr + perData +",";
+				})
+				
+				JSONstr ='['+ JSONstr.substring(0,JSONstr.length-1)+']';
+				
+				$.post('<%=request.getContextPath()%>/Games.do',
+						{'action':'ADD_GAME_JSON','gameData':JSONstr},function(data){
+							console.log(data);
+						})
+				
 			})
+			
 		})
 	    </script>
 	    
