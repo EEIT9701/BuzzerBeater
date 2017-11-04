@@ -110,6 +110,29 @@
   			})
   			
   			
+  			$('select[name="group"]').change(function(){
+  				var group=$('select[name="group"]').val();
+  				var docFrag = $(document.createDocumentFragment());
+	  			var tb = $('#personalData>tbody');
+	  			tb.empty();
+  				$.getJSON('<%=request.getContextPath()%>/Season.do',{'action':'GET_GAME','groupID':group},function(data){
+  					$.each(data,function(idx,gamesVO){
+  						
+  						var cell1 = $('<td></td>').text(gamesVO.twopoint);
+						var cell2 = $('<td></td>').text(gamesVO.threepoint);
+  						
+						var row = $('<tr></tr>').append([cell1, cell2]);
+						docFrag.append(row);
+						tb.append(docFrag);
+  					})
+  				})
+  				
+  				
+  				
+  				
+  				
+  			})
+  			
   			
   			
   			

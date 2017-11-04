@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
+import eeit.groups.model.GroupsService;
 import eeit.personaldata.model.PersonalDataService;
 import eeit.personaldata.model.PersonalDataVO;
 import eeit.players.model.PlayersVO;
@@ -287,6 +288,7 @@ public class TeamsServlet extends HttpServlet {
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);
 		}
+
 
 	}
 

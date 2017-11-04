@@ -31,7 +31,7 @@
 <!-- 							<li><h6><a href="">分組</a></h6></li> -->
 <!-- 							<li><h6><a href="">賽程</a></h6></li> -->
 								<li><h6><a href="<%=request.getContextPath() %>/teams/listAllteam_back.jsp">球隊</a></h6></li>
-								<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp">球員</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></h6></li>					 
@@ -39,7 +39,7 @@
 						<c:when test="${LoginOK.auth == 'parttime'}">
 <%-- 							<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li> --%>
 <%-- 							<li><h6><a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">賽季管理</a></h6></li> --%>
-								<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp"">球員</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp">球員</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></h6></li>
@@ -74,7 +74,7 @@
 						</a>
 					</c:if>		
 				</li>
-				<li><a href="<%=request.getContextPath()%>/LoginOutServlet.do" class="cd-signup"" > 
+				<li><a href="<%=request.getContextPath()%>/LoginOutServlet.do" class="cd-signup" > 
 				         <c:choose>
 							<c:when test="${empty LoginOK}">
 							</c:when>
@@ -139,7 +139,7 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">數據</a>
 					<ul class="dropdown-menu">
-						<li><a href="<%=request.getContextPath() %>/personaldata/PersonalDataindex.jsp">個人數據<!--這行的href輸入超連結頁面--></a></li>
+						<li><a href="<%=request.getContextPath() %>/personaldata/personalData.jsp">個人數據<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="<%=request.getContextPath() %>/personaldata/TeamDataindex.jsp">球隊數據<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"    

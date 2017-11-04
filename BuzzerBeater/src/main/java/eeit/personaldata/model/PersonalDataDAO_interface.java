@@ -28,6 +28,10 @@ public interface PersonalDataDAO_interface {
 	public List<PersonalDataVO> findByPlayerID(Integer playerID);
 	
 	public List<PersonalDataVO> findByTeamID(Integer teamID);
+
+	public List<PersonalDataVO> findBySeasonID(Integer seasonID);
+	
+	public List<PersonalDataVO> findByGroupID(Integer groupID);
 	
 
 }

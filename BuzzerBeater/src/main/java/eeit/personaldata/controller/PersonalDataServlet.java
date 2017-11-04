@@ -36,6 +36,25 @@ public class PersonalDataServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String action = req.getParameter("action");
+		
+		if("FIND_BY_SEASONID".equals(action)) {
+			Integer seasonID = Integer.valueOf(req.getParameter("seasonID"));
+			PersonalDataService svc = new PersonalDataService();
+			List<PersonalDataVO> list = svc.FindBySeasonID(seasonID);
+			
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonInString = mapper.writeValueAsString(list);
+			resp.getWriter().println(jsonInString);
+		}
+		
+		if("FIND_BY_GROUPID".equals(action)) {
+			Integer groupID = Integer.valueOf(req.getParameter("groupID"));
+			PersonalDataService svc = new PersonalDataService();
+			ObjectMapper mapper = new ObjectMapper();
+			String jsonInString = mapper.writeValueAsString(svc.findByGroupID(groupID));
+			resp.getWriter().println(jsonInString);
+		}
+		
 		if ("Get_All_PersonalData_JSON".equals(action)) {
 
 			// 設定Response的Header和編碼
@@ -74,11 +93,24 @@ public class PersonalDataServlet extends HttpServlet {
 
 		}
 
+		if ("Get_personalData".equals(action)) {
+			Integer seasonID = new Integer(req.getParameter("seasonID"));
+			Integer groupID = new Integer(req.getParameter("groupID"));
+			                                                  
+			PersonalDataService pdsvc = new PersonalDataService();
+			List<PersonalDataVO> list = pdsvc.getAll();
+
+			
+			req.setAttribute("list1", list);
+
+			req.getRequestDispatcher("/personaldata/PersonalDataindex.jsp").forward(req, resp);
+
+		}
 		if ("Get_singleData".equals(action)) {
 			Integer playerID = new Integer(req.getParameter("playerID"));
 
 			PersonalDataService pdsvc = new PersonalDataService();
-			List<PersonalDataVO> list = pdsvc.findByPlyerID2(playerID);
+			List<PersonalDataVO> list = pdsvc.getAll();
 
 			PlayerService psvc = new PlayerService();
 			PlayersVO playersVO = psvc.findByPlayerID(playerID);

@@ -101,4 +101,22 @@ public class PersonalDataDAO_Hibernate implements PersonalDataDAO_interface {
 		return null;
 	}
 
+	@Override
+	public List<PersonalDataVO> findByTeamID(Integer teamID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> getAllSeasonID(Integer SeasonID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> getAllGroupID(Integer GroupID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

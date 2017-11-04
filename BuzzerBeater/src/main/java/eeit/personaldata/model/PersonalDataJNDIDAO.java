@@ -319,4 +319,22 @@ public class PersonalDataJNDIDAO implements PersonalDataDAO_interface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<PersonalDataVO> findByTeamID(Integer teamID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> findBySeasonID(Integer SeasonID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> findByGroupID(Integer GroupID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

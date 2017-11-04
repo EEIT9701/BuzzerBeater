@@ -1,6 +1,7 @@
 package eeit.personaldata.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +14,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import eeit.games.model.GamesVO;
+import eeit.groups.model.GroupsVO;
 import eeit.players.model.PlayersVO;
+import eeit.season.model.SeasonVO;
 import eeit.teams.model.TeamsVO;
 
 public class PersonalDataDAO implements PersonalDataDAO_interface {
@@ -32,29 +35,35 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 	//private static final String GETALL="SELECT ROW_NUMBER() OVER(ORDER BY points DESC) AS ranking,* FROM personaldata";
 	//private static final String GETALL="SELECT * from personaldata order by points";
 	private static final String GETALL="select t.teamID,p.playerName,p.playerID,p.photo,t.teamName,gameID,gametime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
-	  		"from   (select playerID,teamID,\r\n" + 
-	  		"        count(gameID)as gameID,\r\n" + 
-	  		"        sum(gameTime)as gametime,\r\n" + 
-	  		"        sum(twoPoint)as twoPoint,\r\n" + 
-	  		"        sum(twoPointShot)as twoPointShot,\r\n" + 
-	  		"        sum(threePoint)as threePoint,\r\n" + 
-	  		"        sum(threePointShot)as threePointShot,\r\n" + 
-	  		"        sum(fg)as fg,\r\n" + 
-	  		"        sum(fgShot)as fgShot,\r\n" + 
-	  		"        sum(offReb)as offReb,\r\n" + 
-	  		"        sum(defReb)as defReb,\r\n" + 
-	  		"        sum(assist)as assist,\r\n" + 
-	  		"        sum(steal)as steal,\r\n" + 
-	  		"        sum(blocks)as blocks,\r\n" + 
-	  		"        sum(turnover)as turnover,\r\n" + 
-	  		"        sum(personalFouls)as personalFouls,\r\n" + 
-	  		"        sum(points)as points\r\n" + 
-	  		"        from PersonalData\r\n" + 
-	  		"        GROUP BY playerID,teamID)\r\n" + 
-	  		"pd join teams t\r\n" + 
-	  		"on pd.teamId=t.teamID\r\n" + 
-	  		"join players p\r\n" + 
-	  		"on pd.playerID=p.playerID" 
+			"	  		from   (select playerID,teamID,\r\n" + 
+			"	  		        count(gameID)as gameID, \r\n" + 
+			"	  		        sum(gameTime)as gametime, \r\n" + 
+			"	  		        sum(twoPoint)as twoPoint, \r\n" + 
+			"	  		        sum(twoPointShot)as twoPointShot, \r\n" + 
+			"	  		        sum(threePoint)as threePoint, \r\n" + 
+			"	  		        sum(threePointShot)as threePointShot, \r\n" + 
+			"	  		        sum(fg)as fg, \r\n" + 
+			"	  		        sum(fgShot)as fgShot, \r\n" + 
+			"	  		        sum(offReb)as offReb, \r\n" + 
+			"	  		        sum(defReb)as defReb, \r\n" + 
+			"	  		        sum(assist)as assist, \r\n" + 
+			"	  		        sum(steal)as steal, \r\n" + 
+			"	  		        sum(blocks)as blocks, \r\n" + 
+			"	  		        sum(turnover)as turnover, \r\n" + 
+			"	  		        sum(personalFouls)as personalFouls, \r\n" + 
+			"	  		        sum(points)as points \r\n" + 
+			"	  		        from PersonalData \r\n" + 
+			"	  		        GROUP BY playerID,teamID) \r\n" + 
+			"	  		pd join teams t \r\n" + 
+			"	  		on pd.teamId=t.teamID \r\n" + 
+			"	  		join players p \r\n" + 
+			"	  		on pd.playerID=p.playerID\r\n" 
+/*			"			join PlayerGroups pl\r\n" + 
+			"			on pd.playerID=pl.playerID\r\n" */
+/*			"			join Groups gr\r\n" + 
+			"			on pl.groupID=gr.groupID\r\n" + 
+			"			join Season se\r\n" + 
+			"			on gr.seasonID=se.seasonID"*/
 	  		;
 	private static final String GETALL2="select t.teamID,t.teamBadge,t.teamName,gameID,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
 			"from   (select teamID,\r\n" + 
@@ -132,6 +141,70 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 			"on pd.teamId=t.teamID"+ 
 			"\r\n" + 
 			"WHERE t.teamID=?";
+	//給下拉season用
+	private static final String GETALL6="select gr.seasonID,se.seasonName,gr.groupName,pl.groupID,t.teamID,p.playerName,p.playerID,p.photo,t.teamName,gameID,gametime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
+			"	  		from   (select playerID,teamID,\r\n" + 
+			"	  		        count(gameID)as gameID, \r\n" + 
+			"	  		        sum(gameTime)as gametime, \r\n" + 
+			"	  		        sum(twoPoint)as twoPoint, \r\n" + 
+			"	  		        sum(twoPointShot)as twoPointShot,\r\n" + 
+			"	  		        sum(threePoint)as threePoint, \r\n" + 
+			"	  		        sum(threePointShot)as threePointShot, \r\n" + 
+			"	  		        sum(fg)as fg, \r\n" + 
+			"	  		        sum(fgShot)as fgShot, \r\n" + 
+			"	  		        sum(offReb)as offReb, \r\n" + 
+			"	  		        sum(defReb)as defReb, \r\n" + 
+			"	  		        sum(assist)as assist, \r\n" + 
+			"	  		        sum(steal)as steal, \r\n" + 
+			"	  		        sum(blocks)as blocks, \r\n" + 
+			"	  		        sum(turnover)as turnover, \r\n" + 
+			"	  		        sum(personalFouls)as personalFouls, \r\n" + 
+			"	  		        sum(points)as points \r\n" + 
+			"	  		        from PersonalData \r\n" + 
+			"	  		        GROUP BY playerID,teamID) \r\n" + 
+			"	  		pd join teams t \r\n" + 
+			"	  		on pd.teamId=t.teamID \r\n" + 
+			"	  		join players p \r\n" + 
+			"	  		on pd.playerID=p.playerID\r\n" + 
+			"			join PlayerGroups pl\r\n" + 
+			"			on pd.playerID=pl.playerID\r\n" + 
+			"			join Groups gr\r\n" + 
+			"			on pl.groupID=gr.groupID\r\n" + 
+			"			join Season se\r\n" + 
+			"			on gr.seasonID=se.seasonID\r\n" + 
+			"			where gr.seasonID=?";
+	//給下拉group用
+	private static final String GETALL7="select gr.seasonID,se.seasonName,gr.groupName,pl.groupID,t.teamID,p.playerName,p.playerID,p.photo,t.teamName,gameID,gametime,twoPoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
+			"	  		from   (select playerID,teamID,\r\n" + 
+			"	  		        count(gameID)as gameID, \r\n" + 
+			"	  		        sum(gameTime)as gametime, \r\n" + 
+			"	  		        sum(twoPoint)as twoPoint, \r\n" + 
+			"	  		        sum(twoPointShot)as twoPointShot,\r\n" + 
+			"	  		        sum(threePoint)as threePoint, \r\n" + 
+			"	  		        sum(threePointShot)as threePointShot, \r\n" + 
+			"	  		        sum(fg)as fg, \r\n" + 
+			"	  		        sum(fgShot)as fgShot, \r\n" + 
+			"	  		        sum(offReb)as offReb, \r\n" + 
+			"	  		        sum(defReb)as defReb, \r\n" + 
+			"	  		        sum(assist)as assist, \r\n" + 
+			"	  		        sum(steal)as steal, \r\n" + 
+			"	  		        sum(blocks)as blocks, \r\n" + 
+			"	  		        sum(turnover)as turnover, \r\n" + 
+			"	  		        sum(personalFouls)as personalFouls, \r\n" + 
+			"	  		        sum(points)as points \r\n" + 
+			"	  		        from PersonalData \r\n" + 
+			"	  		        GROUP BY playerID,teamID) \r\n" + 
+			"	  		pd join teams t \r\n" + 
+			"	  		on pd.teamId=t.teamID \r\n" + 
+			"	  		join players p \r\n" + 
+			"	  		on pd.playerID=p.playerID\r\n" + 
+			"			join PlayerGroups pl\r\n" + 
+			"			on pd.playerID=pl.playerID\r\n" + 
+			"			join Groups gr\r\n" + 
+			"			on pl.groupID=gr.groupID\r\n" + 
+			"			join Season se\r\n" + 
+			"			on gr.seasonID=se.seasonID\r\n" + 
+			"			where pl.groupID=?";
 	
 	@Override
 	public List<PersonalDataVO> getAll() {
@@ -160,6 +233,8 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 				personalData.setGamesVO(gamesVO);
 				
 	            TeamsVO teamsVO =new TeamsVO();
+	            
+	            GroupsVO groupsVO =new GroupsVO();
 	          
 	            teamsVO.setTeamName(rs.getString("teamName"));
 	            teamsVO.setTeamID(rs.getInt("teamID"));
@@ -465,6 +540,141 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public List<PersonalDataVO> getAllSeasonID(Integer SeasonID) {
+		List<PersonalDataVO> list=new ArrayList<PersonalDataVO>(); 
+        PersonalDataVO personalDataVO=null;
+     
+		
+        Connection con=null;
+        PreparedStatement pstmt=null;
+        ResultSet rs =null;
+        
+        try {
+        	con=ds.getConnection();
+			pstmt=con.prepareStatement(GETALL6);
+			pstmt.setInt(1,SeasonID);
+			rs=pstmt.executeQuery();
+			while (rs.next()){
+			
+				SeasonVO seasonVO = new SeasonVO();
+				seasonVO.setSeasonID(rs.getInt("seasonID"));
+			    
+			    
+				GroupsVO groupsVO = new GroupsVO();
+				groupsVO.setGroupID(rs.getInt("groupID"));
+				groupsVO.setSeasonVO(seasonVO);
+				
+				GamesVO gamesVO = new GamesVO();		
+				gamesVO.setGroupsVO(groupsVO);
+				
+				personalDataVO=new PersonalDataVO();
+				personalDataVO.setGamesVO(gamesVO);
+				
+				TeamsVO teamsVO =new TeamsVO();
+	            teamsVO.setTeamBadge(rs.getString("teamBadge"));
+	            teamsVO.setTeamName(rs.getString("teamName"));
+	            teamsVO.setTeamID(rs.getInt("teamID"));
+	            personalDataVO.setTeamsVO(teamsVO);
+	            
+	            PlayersVO playersVO = new PlayersVO();
+				playersVO.setPlayerName(rs.getString("playerName"));
+				playersVO.setPhoto(rs.getString("photo"));
+				personalDataVO.setPlayersVO(playersVO);
+				
+		     	personalDataVO.setGameID(rs.getInt("gameID"));
+				personalDataVO.setGameTime(rs.getInt("gameTime"));
+				personalDataVO.setTwoPoint(rs.getInt("twoPoint"));
+				personalDataVO.setTwoPointShot(rs.getInt("twoPointShot"));
+				personalDataVO.setThreePoint(rs.getInt("threePoint"));
+				personalDataVO.setThreePointShot(rs.getInt("threePointShot"));
+				personalDataVO.setFg(rs.getInt("fg"));
+				personalDataVO.setFgShot(rs.getInt("fgShot"));
+				personalDataVO.setDefReb(rs.getInt("defReb"));
+				personalDataVO.setOffReb(rs.getInt("offReb"));
+				personalDataVO.setAssist(rs.getInt("assist"));
+				personalDataVO.setSteal(rs.getInt("steal"));
+				personalDataVO.setBlocks(rs.getInt("blocks"));
+				personalDataVO.setTurnover(rs.getInt("turnover"));
+				personalDataVO.setPersonalFouls(rs.getInt("personalFouls"));
+				personalDataVO.setPoints(rs.getInt("points"));
+				
+				list.add(personalDataVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<PersonalDataVO> getAllGroupID(Integer GroupID) {
+		List<PersonalDataVO> list=new ArrayList<PersonalDataVO>(); 
+        PersonalDataVO personalDataVO=null;
+     
+		
+        Connection con=null;
+        PreparedStatement pstmt=null;
+        ResultSet rs =null;
+        
+        try {
+        	con=ds.getConnection();
+			pstmt=con.prepareStatement(GETALL7);
+			pstmt.setInt(1,GroupID);
+			rs=pstmt.executeQuery();
+			while (rs.next()){
+			
+				SeasonVO seasonVO = new SeasonVO();
+				seasonVO.setSeasonID(rs.getInt("seasonID"));
+			    
+			    
+				GroupsVO groupsVO = new GroupsVO();
+				groupsVO.setGroupID(rs.getInt("groupID"));
+				groupsVO.setSeasonVO(seasonVO);
+				
+				GamesVO gamesVO = new GamesVO();		
+				gamesVO.setGroupsVO(groupsVO);
+				
+				personalDataVO=new PersonalDataVO();
+				personalDataVO.setGamesVO(gamesVO);
+				
+				TeamsVO teamsVO =new TeamsVO();
+	            teamsVO.setTeamBadge(rs.getString("teamBadge"));
+	            teamsVO.setTeamName(rs.getString("teamName"));
+	            teamsVO.setTeamID(rs.getInt("teamID"));
+	            personalDataVO.setTeamsVO(teamsVO);
+	            
+	            PlayersVO playersVO = new PlayersVO();
+				playersVO.setPlayerName(rs.getString("playerName"));
+				playersVO.setPhoto(rs.getString("photo"));
+				personalDataVO.setPlayersVO(playersVO);
+				
+		     	personalDataVO.setGameID(rs.getInt("gameID"));
+				personalDataVO.setGameTime(rs.getInt("gameTime"));
+				personalDataVO.setTwoPoint(rs.getInt("twoPoint"));
+				personalDataVO.setTwoPointShot(rs.getInt("twoPointShot"));
+				personalDataVO.setThreePoint(rs.getInt("threePoint"));
+				personalDataVO.setThreePointShot(rs.getInt("threePointShot"));
+				personalDataVO.setFg(rs.getInt("fg"));
+				personalDataVO.setFgShot(rs.getInt("fgShot"));
+				personalDataVO.setDefReb(rs.getInt("defReb"));
+				personalDataVO.setOffReb(rs.getInt("offReb"));
+				personalDataVO.setAssist(rs.getInt("assist"));
+				personalDataVO.setSteal(rs.getInt("steal"));
+				personalDataVO.setBlocks(rs.getInt("blocks"));
+				personalDataVO.setTurnover(rs.getInt("turnover"));
+				personalDataVO.setPersonalFouls(rs.getInt("personalFouls"));
+				personalDataVO.setPoints(rs.getInt("points"));
+				
+				list.add(personalDataVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	
 	}
 
 	
