@@ -39,6 +39,31 @@
 	
 		<div class="container">
 			<div class="jumbotron">
+			
+			<!--上層導覽列(開始) -->
+			<div id="pathWay">
+	        	<span>
+	            	<a href="<%=request.getContextPath() %>/index.jsp">
+	            		<span>使用者功能</span>
+	            	</a>
+	        	</span>
+	        	&gt;
+	        	<span>
+	            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+	            		<span>賽季管理</span>
+	            	</a>
+	        	</span>
+	        	&gt;
+	        	<span>
+	            	<a href="<%=request.getContextPath() %>/season/addSeason.jsp">
+	            		<span>新增賽季</span>
+	            	</a>
+	        	</span>
+	        	&gt;
+	        	<span>使用EXCEL新增完整賽季</span>
+	    	</div>
+	    	<!--上層導覽列(結束) -->
+	    	
 			<!-- 網頁內容 -->
 			<table class="table table-bordered" id="seasonList">
 				<thead>
@@ -55,8 +80,8 @@
 						<td>${tempSeason.seasonName}</td>
 						<td>${tempSeason.seasonBeginDate}</td>
 						<td>${tempSeason.seasonEndDate}</td>
-						<td>${tempSeason.signUpBegin}</td>
-						<td>${tempSeason.signUpEnd}</td>
+						<td><fmt:formatDate value="${tempSeason.signUpBegin}" pattern="yyyy-MM-dd HH:mm"/></td>
+						<td><fmt:formatDate value="${tempSeason.signUpEnd}" pattern="yyyy-MM-dd HH:mm"/></td>
 					</tr>
 				</tbody>
 			</table>
@@ -114,22 +139,45 @@
 					<input type="file" class="form-control-file" name="uploadExcel" id="putFullSeason">
 				</div>
 				<div class="col-md-1">
-				    <input type="submit" class="btn btn-lg btn-success" value="送出">
+				    <input type="submit" class="btn btn-lg btn-success blockUI" value="送出更改">
 			    </div>
 			</form>
 			
-			<div class="col-md-3 col-md-offset-5">
-				<form action="<%=request.getContextPath()%>/Games.do">
-					<input type="hidden" name="action" value="INSERT_TEMP_SEASON">
-					<input type="submit" class="btn btn-lg btn-success" value="確認新增">
-				</form>
-				<br><br><br><br><br><br>		
+			<div class="col-md-4 col-md-offset-4">
+				<div class="col-md-4 col-md-offset-2">
+					<form action="<%=request.getContextPath()%>/Games.do">
+						<input type="hidden" name="action" value="INSERT_TEMP_SEASON">
+						<input type="submit" class="btn btn-lg btn-success blockUI" value="確認新增">
+					</form>
+				</div>
+				<div class="col-md-1"></div>	
+				<div class="col-md-4">	
+					<form action="<%=request.getContextPath()%>/Games.do">
+						<input type="hidden" name="action" value="DELETE_TEMP_SEASON">
+						<input type="submit" class="btn btn-lg btn-warning blockUI" value="取消">
+					</form>
+				</div>
 			</div>
+			
+				<br><br><br><br><br><br>		
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />
 	    	</div>
 	    </div>    
 	    <jsp:include page="/footer_css.jsp" />
+	    
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	    <%--遮罩插件 --%>  		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+		 
+	    <script type="text/javascript">
+			$(function(){
+				// 處理中
+				$('.blockUI').click(function(){
+					$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+				})
+			})
+		</script>
     </body>
 
     </html>

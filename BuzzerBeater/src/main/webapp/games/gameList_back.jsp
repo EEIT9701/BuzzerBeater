@@ -123,7 +123,16 @@
 			        			<td><fmt:formatDate value="${gamesSet.gameEndDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 			        			<td><a href="<%=request.getContextPath()%>/Locationinfo.do?action=GET_ONE_LOCATION&locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
 			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
-			        			<td><a href="<%=request.getContextPath() %>/PersonalData.do?action=Get_singlefieldData&gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a></td>
+			        			<td>
+			        				<c:choose>
+				        				<c:when test="${gamesSet.teamAScore==0 && gamesSet.teamBScore==0}">
+				        					<a href="<%=request.getContextPath()%>/personaldata/addGame.jsp?gameID=${gamesSet.gameID}"><button type="button" class="btn btn-sm">輸入賽事資料</button></a>
+				        				</c:when>
+				        				<c:otherwise>
+				        					<a href="<%=request.getContextPath() %>/PersonalData.do?action=Get_singlefieldData&gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a>
+				        				</c:otherwise>
+			        				</c:choose>
+			        			</td>
 			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
 			        		</tr>
 			        	</c:forEach>			        	
@@ -154,7 +163,7 @@
 					$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 					setTimeout(function(){
 						$.unblockUI();
-					},1500)
+					},2000)
 				})
 			})
 		</script>
