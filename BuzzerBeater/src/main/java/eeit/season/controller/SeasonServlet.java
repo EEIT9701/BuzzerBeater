@@ -22,8 +22,10 @@ import javax.servlet.http.HttpSession;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONValue;
 
+import eeit.games.model.GamesVO;
 import eeit.groups.model.GroupsService;
 import eeit.groups.model.GroupsVO;
+import eeit.personaldata.model.PersonalDataVO;
 import eeit.season.model.SeasonService;
 import eeit.season.model.SeasonVO;
 
@@ -50,21 +52,35 @@ public class SeasonServlet extends HttpServlet {
 			SeasonService svc = new SeasonService();
 			SeasonVO seasonVO = svc.findBySeasonID(seasonID);
 
-			List<Map<String,String>> list = new ArrayList<Map<String,String>>();
-			
-			Map<String,String> map =null;
+			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+
 			for (GroupsVO groupsVO : seasonVO.getGroupsSet()) {
-				map = new HashMap<String,String>();
-				
+				Map<String, Object> map = new HashMap<String, Object>();
+
 				map.put("groupID", groupsVO.getGroupID().toString());
 				map.put("groupName", groupsVO.getGroupName());
+
+				List<Map<String,Object>> pList = new ArrayList<Map<String,Object>>();
+				
+				for(GamesVO gamesVO : groupsVO.getGamesSet()){
+					for(PersonalDataVO pvo: gamesVO.getPersonalDataSet()){
+						Map<String,Object> pmap = new HashMap<String,Object>();
+						
+						pmap.put("twoPoint", pvo.getTwoPoint().toString());
+						pmap.put("threePoint", pvo.getThreePoint().toString());
+						pmap.put("playerName", pvo.getPlayersVO().getPlayerName());
+						
+						pList.add(pmap);
+					}
+				}
+				map.put("data", pList);
 				
 				list.add(map);
 			}
-			
+
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(list);
-			
+
 			response.setHeader("Access-Control-Allow-Origin", "*");
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.getWriter().println(json);

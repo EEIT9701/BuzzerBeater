@@ -43,6 +43,7 @@
 					<tr>
 						<td>兩分球</td>
 						<td>三分球</td>
+						<td>球員姓名</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -53,6 +54,7 @@
 									<tr>
 										<td>${personalDataVO.twoPoint}</td>
 										<td>${personalDataVO.threePoint}</td>
+										<td>${personalDataVO.playersVO.playerName}</td>
 									</tr>
 								</c:forEach>
 							</c:forEach>
@@ -77,8 +79,13 @@
   			
   			$('select[name="season"]').change(function(){
   				seasonSel = $('select[name="season"]').val();
-  				$('select[name="group"]').empty();
-  				$('#personalData>tbody').empty();
+  				var select = $('select[name="group"]');
+  				select.empty();
+  				
+  				var docFrag = $(document.createDocumentFragment());
+  				var tb = $('#personalData>tbody');
+  				tb.empty();
+  				
   				
   				$.getJSON('<%=request.getContextPath()%>/Season.do',
   						{'action':'GET_GROUP','seasonID': seasonSel}, function(data){
@@ -86,9 +93,19 @@
   					$.each(data,function(idx, groupsVO){
 
   						var cell = $('<option></option>').attr('value',groupsVO.groupID).text(groupsVO.groupName);
-  						$('select[name="group"]').append(cell);
+  						select.append(cell);
+  						
+  						
+  						$.each(groupsVO.data,function(idxx,pdata){
+  							var cell1 = $('<td></td>').text(pdata.twoPoint);
+  							var cell2 = $('<td></td>').text(pdata.threePoint);
+  							var cell3 = $('<td></td>').text(pdata.playerName);
+  							
+  							var row = $('<tr></tr>').append([cell1, cell2, cell3]);
+  							docFrag.append(row);
+  							tb.append(docFrag);
+  						})
   					})
-  					
   				})
   			})
   			
