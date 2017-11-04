@@ -26,7 +26,7 @@ public class GroupRegDAO_JDBC implements GroupRegDAO_interface {
 	private static final String INSERT_STMT=
 			"INSERT INTO GroupRegistration(teamID,groupID,teamStat,registerDate,paymentNumber) VALUES(?,?,?,?,?)";
 	private static final String UPDATE_STMT=
-			"UPDATE GroupRegistration set teamStat=? where teamID=? and groupID=?";
+			"UPDATE GroupRegistration set teamStat=? ,registerDate=?, paymentNumber=? where teamID=? and groupID=?";
 	private static final String DELETE_STMT=
 			"DELETE FROM GroupRegistration WHERE teamID=? and groupID=?";
 	
@@ -149,8 +149,10 @@ public class GroupRegDAO_JDBC implements GroupRegDAO_interface {
 			pstmt=con.prepareStatement(UPDATE_STMT);
 			
 			pstmt.setInt(1, gVO.getTeamStat());
-			pstmt.setInt(2, gVO.getTeamsVO().getTeamID());
-			pstmt.setInt(3, gVO.getGroupsVO().getGroupID());
+			pstmt.setTimestamp(2, gVO.getRegisterDate());
+			pstmt.setString(3, gVO.getPaymentNumber());
+			pstmt.setInt(4, gVO.getTeamsVO().getTeamID());
+			pstmt.setInt(5, gVO.getGroupsVO().getGroupID());
 			
 			pstmt.executeUpdate();
 		}catch (ClassNotFoundException e) {
@@ -265,17 +267,22 @@ public class GroupRegDAO_JDBC implements GroupRegDAO_interface {
 		
 		//update
 		
-//		groupRegVO1.setTeamStat(2);
-//		teamsVO.setTeamID(3004);
+//		teamsVO.setTeamID(3002);
 //		groupRegVO1.setTeamsVO(teamsVO);
-//		groupsVO.setGroupID(2003);
+//		groupsVO.setGroupID(2006);
 //		groupRegVO1.setGroupsVO(groupsVO);
+//		
+//		groupRegVO1.setTeamStat(2);
+//		groupRegVO1.setPaymentNumber("00000");
+//		groupRegVO1.setRegisterDate(null);
+//
+//		
 //		dao2.update(groupRegVO1);
 
 //		delete
 		
 
-		dao2.deleteByCID(3004, 2003);
+//		dao2.deleteByCID(3004, 2003);
 		
 		
 		GroupRegDAO_interface dao = new GroupRegDAO_JDBC();

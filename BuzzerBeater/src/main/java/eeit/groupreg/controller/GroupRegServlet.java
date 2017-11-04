@@ -50,9 +50,11 @@ public class GroupRegServlet extends HttpServlet {
 			Integer teamID=Integer.valueOf(gVO.getString("teamID"));
 			Integer groupID = Integer.valueOf(gVO.getString("groupID"));
 			Integer teamStat=Integer.valueOf(gVO.getString("teamStat"));
+			Timestamp registerDate=Timestamp.valueOf(gVO.getString("registerDate"));
+			String paymentNumber=gVO.getString("paymentNumber");
 			//傳去groupregSVC的update2
-			groupregSVC.update2(teamID,groupID,teamStat);
-//			System.out.println(teamID+","+groupID+","+teamStat);
+			groupregSVC.update2(teamID,groupID,teamStat,registerDate,paymentNumber);
+//			System.out.println(teamID+","+groupID+","+teamStat+","+registerDate+","+paymentNumber);
 			
 			request.removeAttribute("action");		
 			return;
@@ -66,6 +68,9 @@ public class GroupRegServlet extends HttpServlet {
 			MemberInfoVO mVO=(MemberInfoVO) request.getSession().getAttribute("LoginOK");
 			
 			System.out.println("mVO="+mVO.getTeamID());
+			
+			
+			
 			
 //			Integer teamID=mVO.getTeamID();
 //			

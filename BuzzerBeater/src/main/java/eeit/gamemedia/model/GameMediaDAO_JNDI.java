@@ -36,7 +36,7 @@ public class GameMediaDAO_JNDI implements GameMediaDAO_Interface{
 	private static final String GET_ALL_VIDEO_STMT = 
 			  "SELECT * FROM GameMedia WHERE MediaType = 'video'";
 	private static final String QUERY_FOR_TAG =
-			  "SELECT gamePhoto FROM GameMedia WHERE tag like ?";
+			  "SELECT gamePhoto FROM GameMedia WHERE mediatype = 'photo' and tag like ?";
 	
 	@Override
 	public Integer insert(GameMediaVO gameMediaVO) {

@@ -88,7 +88,9 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 			"pd join teams t\r\n" + 
 			"on pd.teamId=t.teamID";
 	
-	private static final String GETALL3="SELECT * FROM PersonalData";
+	private static final String GETALL3="SELECT * FROM PersonalData P JOIN Teams T\r\n" + 
+			"ON P.TEAMID=T.TEAMID JOIN Players PL\r\n" + 
+			"ON PL.playerID=P.playerID";
 	
 	private static final String GETALL4="select gameID,p.playerID,t.teamid,p.playerName,t.teamName,gametime,twopoint,twoPointShot,threePoint,threePointShot,fg,fgShot,offReb,defReb,assist,steal,blocks,turnover,personalFouls,points\r\n" + 
 			"from   (select playerID,teamID,\r\n" + 
@@ -339,21 +341,20 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
         	rs=pstmt.executeQuery();
 			while (rs.next()){
 				personalData=new PersonalDataVO();
-/*				PlayersVO playersVO = new PlayersVO();
+				PlayersVO playersVO = new PlayersVO();
 				playersVO.setPlayerName(rs.getString("playerName"));
 				playersVO.setPlayerID(rs.getInt("playerID"));
-				playersVO.setPhoto(rs.getString("photo"));
+//				playersVO.setPhoto(rs.getString("photo"));
 				personalData.setPlayersVO(playersVO);
 				
-				GamesVO gamesVO = new GamesVO();
-		   //   gamesVO.setGameID(rs.getInt("gameID"));			
-				personalData.setGamesVO(gamesVO);
+//				GamesVO gamesVO = new GamesVO();
+//		        gamesVO.setGameID(rs.getInt("gameID"));			
+//				personalData.setGamesVO(gamesVO);
 				
-	            TeamsVO teamsVO =new TeamsVO();
-	          
+	            TeamsVO teamsVO =new TeamsVO();          
 	            teamsVO.setTeamName(rs.getString("teamName"));
 	            teamsVO.setTeamID(rs.getInt("teamID"));
-	            personalData.setTeamsVO(teamsVO);*/
+	            personalData.setTeamsVO(teamsVO);
 	            
 	            personalData.setPlayerID(rs.getInt("playerID"));
 		     	personalData.setGameID(rs.getInt("gameID"));
