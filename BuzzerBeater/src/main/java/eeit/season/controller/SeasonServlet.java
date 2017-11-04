@@ -60,21 +60,22 @@ public class SeasonServlet extends HttpServlet {
 				map.put("groupID", groupsVO.getGroupID().toString());
 				map.put("groupName", groupsVO.getGroupName());
 
-				List<Map<String,Object>> pList = new ArrayList<Map<String,Object>>();
-				
-				for(GamesVO gamesVO : groupsVO.getGamesSet()){
-					for(PersonalDataVO pvo: gamesVO.getPersonalDataSet()){
-						Map<String,Object> pmap = new HashMap<String,Object>();
+				List<Map<String, Object>> personalDataList = new ArrayList<Map<String, Object>>();
+
+				for (GamesVO gamesVO : groupsVO.getGamesSet()) {
+					for (PersonalDataVO pvo : gamesVO.getPersonalDataSet()) {
 						
-						pmap.put("twoPoint", pvo.getTwoPoint().toString());
-						pmap.put("threePoint", pvo.getThreePoint().toString());
-						pmap.put("playerName", pvo.getPlayersVO().getPlayerName());
-						
-						pList.add(pmap);
+						Map<String, Object> personalDataMap = new HashMap<String, Object>();
+
+						personalDataMap.put("twoPoint", pvo.getTwoPoint().toString());
+						personalDataMap.put("threePoint", pvo.getThreePoint().toString());
+						personalDataMap.put("playerName", pvo.getPlayersVO().getPlayerName());
+
+						personalDataList.add(personalDataMap);
 					}
 				}
-				map.put("data", pList);
-				
+				map.put("data", personalDataList);
+
 				list.add(map);
 			}
 

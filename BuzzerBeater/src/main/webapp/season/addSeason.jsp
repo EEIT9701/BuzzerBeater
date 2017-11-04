@@ -124,7 +124,7 @@
 				</div>
 				
 				<div class="col-md-1 col-md-offset-8">
-				    <input type="submit" id="submit_move" class="btn btn-success btn-lg" value="下一步，建立分組">
+				    <input type="submit" id="submit" class="btn btn-success btn-lg submitBlock" value="下一步，建立分組">
 				</div>
 				
 			</form>
@@ -137,6 +137,7 @@
 	    </div>
 		<jsp:include page="/footer_css.jsp" />
 		
+		
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css">
   		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
@@ -144,7 +145,9 @@
 		<link href='<%=request.getContextPath()%>/css/jquery-ui-timepicker-addon.css' rel='stylesheet'>
   		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-timepicker-addon.js"></script>
   		<script type='text/javascript' src='<%=request.getContextPath()%>/js/jquery-ui-sliderAccess.js'></script>
-  		
+		<%--遮罩插件 --%>  		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+		 
 		<script type="text/javascript">
 
 		var isChange = false;
@@ -165,7 +168,7 @@
 	        });
 	        
 			// 某些按鈕屬於正常流程便不須提示
-	        $("input:submit").click(function () {
+	        $("#submit").click(function () {
 	            $(window).unbind('beforeunload');
 	        });
 			
@@ -182,6 +185,12 @@
 			
 			$('#signUpBegin').datetimepicker(optTime);
 			$('#signUpEnd').datetimepicker(optTime);
+			
+			// 處理中
+			$('.submitBlock').click(function(){
+				$.blockUI({ message: '<h2>處理中，請稍候</h2><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+			})
+			
 	    
 		})
 	
