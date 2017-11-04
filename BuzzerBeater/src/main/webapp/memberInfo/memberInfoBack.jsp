@@ -155,8 +155,7 @@
 		        
 		    }else {
 		    	alert("新增失敗");
-		    }
-			
+		    }			
 		});
 		
 		function loadProduct(id){

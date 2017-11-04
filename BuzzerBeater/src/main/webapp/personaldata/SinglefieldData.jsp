@@ -31,6 +31,7 @@
 	padding: 30px;
 	background-color: #FFAA33;
 }
+span{float:right;} 
 </style>
 
 
@@ -127,7 +128,7 @@
 												height="94.5" width="63">
 										</c:if>
 						    <c:out value="${nameA}"/>
-						    <c:out value="${pointmaxA}"/>
+						    <span style="font-size:35px;"><c:out value="${pointmaxA}"/></span>
 						  </td>
 						  <td><h5>得分王	</h5>
 					<%-- <img src="data:image/png;base64,${photoB}" height="94.5" width="63"> --%>
@@ -141,7 +142,7 @@
 												height="94.5" width="63">
 										</c:if>
 						    <c:out value="${nameB}"/>
-						    <c:out value="${pointmaxB}"/>
+						    <span style="font-size:35px;"><c:out value="${pointmaxB}"/></span>
 						  </td>
 					    </tr>
 					    <tr>
@@ -157,7 +158,7 @@
 												height="94.5" width="63">
 										</c:if>
 						    <c:out value="${assistnameA}"/>
-						    <c:out value="${assistmaxA}"/>
+						    <span style="font-size:35px;"><c:out value="${assistmaxA}"/></span> 
 						  </td>
 						  <td><h5>助功王	</h5>
 						<%--    <img src="data:image/png;base64,${assistphotoB}" height="94.5" width="63"> --%>
@@ -171,7 +172,7 @@
 												height="94.5" width="63">
 										</c:if>
 						    <c:out value="${assistnameB}"/>
-						    <c:out value="${assistmaxB}"/>
+						    <span style="font-size:35px;"><c:out value="${assistmaxB}"/></span>
 						  </td>
 					    </tr>
 					    <tr>
@@ -187,7 +188,7 @@
 												height="94.5" width="63">
 										</c:if>
 						    <c:out value="${rebnameA}"/>
-						    <c:out value="${rebmaxA}"/>
+						    <span style="font-size:35px;"><c:out value="${rebmaxA}"/></span>
 						  </td>
 						  <td><h5>籃板王	</h5>
 						 <%--   <img src="data:image/png;base64,${rebphotoB}" height="94.5" width="63"> --%>
@@ -201,7 +202,7 @@
 												height="94.5" width="63">
 										</c:if>
 					        <c:out value="${rebnameB}"/>
-						    <c:out value="${rebmaxB}"/>
+						    <span style="font-size:35px;"><c:out value="${rebmaxB}"/></span>
 						  </td>
 					    </tr>
 					    
