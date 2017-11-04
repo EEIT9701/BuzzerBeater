@@ -65,19 +65,24 @@
 	    	
 			<!-- 網頁內容 -->
 			
-			<form action="<%=request.getContextPath()%>/Games.do" method="post">
-				<input type="hidden" name="action" value="GET_EXCEL_TEMPLATE">
-				<input type="submit" class="btn btn-info btn-lg" value="取得EXCEL範本">
-			</form>
-		
-			<form action="<%=request.getContextPath()%>/Games.do" method="post">
-				<div class="form-group">
+	
+			<div class="col-md-3">
+				<a href="<%=request.getContextPath()%>/games/Excel_Template.xlsx">
+					<input type="button" class="btn btn-info btn-lg" value="取得EXCEL範本">
+				</a>
+			</div>
+			
+			<form action="<%=request.getContextPath()%>/Games.do" method="post" enctype="multipart/form-data">
+				<div class="col-md-3 col-md-offset-3">
 					<label for="putFullSeason">上傳EXCEL建立完整賽季</label>
 					<input type="hidden" name="action" value="PUT_FULL_SEASON">
-				    <input type="file" class="form-control-file" id="putFullSeason" aria-describedby="fileHelp">
+					<input type="file" class="form-control-file" name="uploadExcel" id="putFullSeason">
+				</div>
+				<div class="col-md-1">
+				    <input type="submit" class="btn btn-lg btn-success" value="送出">
 			    </div>
-			    <input type="submit" class="btn btn-lg btn-success" value="送出">
 			</form>
+			<br><br><br><br><br><br>
 		
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />

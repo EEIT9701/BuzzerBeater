@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,11 +31,19 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
 import eeit.groups.model.GroupsService;
 import eeit.groups.model.GroupsVO;
+import eeit.locationinfo.model.LocationinfoVO;
+import eeit.season.model.SeasonService;
+import eeit.season.model.SeasonVO;
+import eeit.teams.model.TeamsVO;
 
 @WebServlet("/Games.do")
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
@@ -55,6 +64,79 @@ public class GamesServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 
+		if ("PUT_FULL_SEASON".equals(action)) {
+			// 取得上傳檔案並轉為資料流
+			Part part = request.getPart("uploadExcel");
+			FileInputStream fis = (FileInputStream) part.getInputStream();
+
+			// 用此資料流建立workbook
+			XSSFWorkbook workbook = new XSSFWorkbook(fis);
+
+			// 讀取賽季資料
+			XSSFRow seasonRow = workbook.getSheet("賽事").getRow(1);
+
+			SeasonVO seasonVO = new SeasonVO();
+			seasonVO.setSeasonName(seasonRow.getCell(0).toString());
+			seasonVO.setSeasonBeginDate(Date.valueOf(seasonRow.getCell(1).toString().replaceAll("/", "-").trim()));
+			seasonVO.setSeasonEndDate(Date.valueOf(seasonRow.getCell(2).toString().replaceAll("/", "-").trim()));
+			seasonVO.setSignUpBegin(Timestamp.valueOf(seasonRow.getCell(3).toString().replaceAll("/", "-").trim()));
+			seasonVO.setSignUpEnd(Timestamp.valueOf(seasonRow.getCell(4).toString().replaceAll("/", "-").trim()));
+
+			XSSFRow groupRow = workbook.getSheet("分組").getRow(1);
+
+			GroupsVO groupsVO = new GroupsVO();
+			groupsVO.setGroupName(groupRow.getCell(0).toString());
+			groupsVO.setMaxTeams(Integer.valueOf(groupRow.getCell(1).toString().replaceAll(".0", "")));
+			groupsVO.setMinTeams(Integer.valueOf(groupRow.getCell(2).toString().replaceAll(".0", "")));
+			groupsVO.setMaxPlayers(Integer.valueOf(groupRow.getCell(3).toString().replaceAll(".0", "")));
+			groupsVO.setMinPlayers(Integer.valueOf(groupRow.getCell(4).toString().replaceAll(".0", "")));
+
+			groupsVO.setSeasonVO(seasonVO);
+			seasonVO.getGroupsSet().add(groupsVO);
+
+			XSSFSheet sheet = workbook.getSheet("分組");
+			for (int i = 4; i < sheet.getPhysicalNumberOfRows() - 4; i++) {
+				GamesVO gamesVO = new GamesVO();
+				XSSFRow gameRow = sheet.getRow(i);
+
+				XSSFCell cell0 = gameRow.getCell(0);
+				gamesVO.setGameBeginDate(new Timestamp(cell0.getDateCellValue().getTime()));
+
+				XSSFCell cell1 = gameRow.getCell(1);
+				gamesVO.setGameEndDate(new Timestamp(cell1.getDateCellValue().getTime()));
+
+				XSSFCell cell2 = gameRow.getCell(2);
+				gamesVO.setGameEndDate(new Timestamp(cell2.getDateCellValue().getTime()));
+
+				String cell3 = gameRow.getCell(3).toString();
+				LocationinfoVO locVO = new LocationinfoVO();
+				locVO.setLocationID(Integer.valueOf(cell3.substring(cell3.indexOf("(") + 1, cell3.indexOf(")"))));
+				locVO.setLocationName(cell3.substring(0, cell3.indexOf("(")).trim());
+				gamesVO.setLocationinfoVO(locVO);
+
+				String cell4 = gameRow.getCell(4).toString();
+				TeamsVO teamAVO = new TeamsVO();
+				teamAVO.setTeamID(Integer.valueOf(cell4.substring(cell4.indexOf("(") + 1, cell4.indexOf(")"))));
+				teamAVO.setTeamName(cell4.substring(0,cell4.indexOf("(")).trim());
+				gamesVO.setTeamAVO(teamAVO);
+
+				String cell5 = gameRow.getCell(5).toString();
+				TeamsVO teamBVO = new TeamsVO();
+				teamBVO.setTeamID(Integer.valueOf(cell5.substring(cell5.indexOf("(") + 1, cell5.indexOf(")"))));
+				teamBVO.setTeamName(cell5.substring(0,cell5.indexOf("(")).trim());
+				gamesVO.setTeamBVO(teamBVO);
+
+				gamesVO.setGroupsVO(groupsVO);
+				groupsVO.getGamesSet().add(gamesVO);
+			}
+
+			// SeasonService seasonSvc = new SeasonService();
+			// seasonSvc.addFullSeason(seasonVO);
+			request.getSession().setAttribute("tempSeason", seasonVO);
+			response.sendRedirect(request.getContextPath() + "/season/addSeason_temp.jsp");
+
+		}
+
 		if ("GET_TEMP_EXCEL".equals(action)) {
 
 			// 創建excel
@@ -70,8 +152,9 @@ public class GamesServlet extends HttpServlet {
 
 			// 設定欄位樣式
 			CellStyle titleStyle = workbook.createCellStyle();
-			titleStyle.setFillForegroundColor(HSSFColor.AQUA.index); // 填滿顏色
-			titleStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
+			// titleStyle.setFillForegroundColor(HSSFColor.AQUA.index); // 填滿顏色
+			// titleStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); //
+			// 填滿顏色
 			titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 水平置中
 			titleStyle.setFont(titleFont); // 設定文字樣式
 			titleStyle.setBorderBottom((short) 1); // 設定框線
@@ -86,8 +169,9 @@ public class GamesServlet extends HttpServlet {
 
 			// 設定表格內容樣式
 			CellStyle cellStyle = workbook.createCellStyle();
-			cellStyle.setFillForegroundColor(HSSFColor.PALE_BLUE.index); // 填滿顏色
-			cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
+			// cellStyle.setFillForegroundColor(HSSFColor.PALE_BLUE.index); //
+			// 填滿顏色
+			// cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
 			cellStyle.setFont(cellFont); // 設定文字樣式
 			cellStyle.setBorderBottom((short) 1); // 設定框線
 			cellStyle.setBorderLeft((short) 1);
@@ -229,7 +313,7 @@ public class GamesServlet extends HttpServlet {
 
 				gameSvc.addGames(groupID, locationID, teamAID, 0, teamBID, 0, gameBeginDate, gameEndDate);
 			}
-			
+
 			session.removeAttribute("groupID");
 			session.removeAttribute("gameSchedule");
 			response.sendRedirect(request.getContextPath() + "/games/gameList_back.jsp?groupID=" + groupID);
@@ -330,8 +414,10 @@ public class GamesServlet extends HttpServlet {
 
 				// 設定欄位樣式
 				CellStyle titleStyle = workbook.createCellStyle();
-				titleStyle.setFillForegroundColor(HSSFColor.AQUA.index); // 填滿顏色
-				titleStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
+				// titleStyle.setFillForegroundColor(HSSFColor.AQUA.index); //
+				// 填滿顏色
+				// titleStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); //
+				// 填滿顏色
 				titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 水平置中
 				titleStyle.setFont(titleFont); // 設定文字樣式
 				titleStyle.setBorderBottom((short) 1); // 設定框線
@@ -346,8 +432,10 @@ public class GamesServlet extends HttpServlet {
 
 				// 設定表格內容樣式
 				CellStyle cellStyle = workbook.createCellStyle();
-				cellStyle.setFillForegroundColor(HSSFColor.PALE_BLUE.index); // 填滿顏色
-				cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
+				// cellStyle.setFillForegroundColor(HSSFColor.PALE_BLUE.index);
+				// // 填滿顏色
+				// cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); //
+				// 填滿顏色
 				cellStyle.setFont(cellFont); // 設定文字樣式
 				cellStyle.setBorderBottom((short) 1); // 設定框線
 				cellStyle.setBorderLeft((short) 1);
