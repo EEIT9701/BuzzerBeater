@@ -83,7 +83,11 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <div>
+				<div id="includePage">
+<%-- 	            <jsp:include page="insertmyteam.jsp" /> --%>
+<%-- 				<jsp:include page="insertmyplayer.jsp" /> --%>
+				</div>
+				<div>
 	            <button id="Button01" class="btn btn-lg btn-primary">上一步</button>
 	            <button id="Button02" class="btn btn-lg btn-primary">下一步</button>
 	            </div>
@@ -97,7 +101,7 @@
 	<script src="<%=request.getContextPath()%>/js/index_1.js"></script>
 <script>
 $(function(){
-	
+	$('#includePage').atter('<jsp:include page="insertmyteam.jsp" />');	
 
 	
 	$('#Button01').on('click', function(){
@@ -107,7 +111,7 @@ $(function(){
 		currentWidth = currentWidth - 121;
 		}
 		var currentWidth01 = currentWidth/484 *100;
-		currentWidthString = currentWidth01 + '%';
+		currentWidthString = Math.ceil(currentWidth01*1)/1 + '%';
 // 		alert(currentWidthString)
 		$("#divValue").width(currentWidth);
 		$("#divValue>div").text(currentWidthString);
@@ -120,7 +124,7 @@ $(function(){
 		currentWidth = currentWidth + 121;
 		}
 		var currentWidth01 = currentWidth/484 *100;
-		currentWidthString = currentWidth01 + '%';
+		currentWidthString = Math.ceil(currentWidth01*1)/1 + '%';
 // 		alert(currentWidthString)
 		$("#divValue").width(currentWidth);
 		$("#divValue>div").text(currentWidthString);
