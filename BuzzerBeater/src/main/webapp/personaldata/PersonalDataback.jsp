@@ -31,7 +31,8 @@
 	background-color: #FFAA33;
 }
 thead{
-font-size:2px;
+background-color: #d62d67;
+    	  color: #e9e9e9;
 }
 </style>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
@@ -385,7 +386,8 @@ font-size:2px;
 	     	   });    
 			  //刪除鍵
 			  $('.btn-warning').on('click', function(){
-				  alert("確定要刪除嗎?");
+				 // alert("確定要刪除嗎?");
+				  if(confirm("確定要刪除嗎?")){
 				  var playerID = $(this).parents('tr').find('td:nth-child(1)').text();
 		       	  var gameID =  $(this).parents('tr').find('td:nth-child(2)').text();
 		       	  var teamID =  $(this).parents('tr').find('td:nth-child(3)').text();
@@ -414,11 +416,12 @@ font-size:2px;
 			    	  'turnover':turnover, 'personalFouls':personalFouls, 'points':points, 'startingPlayer':startingPlayer 
 			    	  })
 				  //把輸入在欄位上的資料經過post傳送
-	 	       	  $.post('/BuzzerBeater/PersonalData.do', {'action':'DELETE', 'PersonalDataVO':PersonalDataVO}, function(datas){
+	 	       	  $.post('<%=request.getContextPath()%>/PersonalData.do', {'action':'DELETE', 'PersonalDataVO':PersonalDataVO}, function(datas){
 						//刪除資料 不需回傳東西, 或做輸入與法判斷
 	 	       	  })
 				  $(this).parents('tr').empty();
-	 	       	  //location.reload()
+	 	       	location.reload()
+				  }
 			  })
 			  
 		 
