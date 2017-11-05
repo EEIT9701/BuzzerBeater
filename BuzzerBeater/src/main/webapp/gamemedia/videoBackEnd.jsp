@@ -174,7 +174,7 @@ video::-webkit-media-controls-panel {
 							<td></td>
 						</tr>
 					</thead>
-					<tbody id="tbody">
+					<tbody id="tbody"><!--tbody標籤的內容由下方的jQuery作動態生成-->
 					</tbody>
 				</table>
 			</div>
@@ -184,7 +184,7 @@ video::-webkit-media-controls-panel {
 					<h3>影片上傳</h3>
 				</div>
 			</div>
-<!-- 			模態框 -->
+			<!--上傳的模態框 -->
 			<div class="row">
 				<button class="btn btn-warning" id="789" data-toggle="modal"
 					data-target="#myModal">選擇檔案</button>
@@ -201,20 +201,24 @@ video::-webkit-media-controls-panel {
 						<form name="videoInput" method="post">
 							<div class="modal-body">
 								<div class="row">
+									<!--連鎖查詢功能(1)賽季-->
 									<div class="col-md-3">
 										<select id="seasonlist" name="season1">
-											<option selected>請選擇</option>
+											<option selected>請選擇</option> <!--預設選項-->
+											<!--賽季選擇寫死，由EL生成-->
     										<c:forEach var="list" items="${list}">
     											<option value="${list.seasonID}">${list.seasonName}</option>
   											</c:forEach>
     									</select>
 									</div>
+									<!--連鎖查詢功能(2)分組  由jQuery生成-->
 									<div class="col-md-offset-1 col-md-2">
 										<select id="grouplist" name="group1">
     									</select>
 									</div>
 								</div>
 								</br>
+								<!--連鎖查詢功能(3)賽事 由jQuery生成-->
 								<div class="row">
 									<div class="col-md-4">
 										<select id="gamelist">
@@ -223,6 +227,7 @@ video::-webkit-media-controls-panel {
 								</div>
 								</br>
 								<div class=row>
+									<!--上傳影片的觸發鈕-->
     								<div class=col-md-3>
 										<input name="file" type="file" class="file" value="影片">
 									</div>
@@ -244,8 +249,9 @@ video::-webkit-media-controls-panel {
 								</div>
 							</div>
 							<div class="modal-footer">
-									<button type="button" class="btn btn-warning" data-dismiss="modal" id="insertConfirm" >確認上傳</button>
-									<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+								<!--確認按鈕觸發事件-->
+								<button type="button" class="btn btn-warning" data-dismiss="modal" id="insertConfirm" >確認上傳</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
 							</div>
 						</form>
 						</div>
@@ -256,10 +262,12 @@ video::-webkit-media-controls-panel {
 		</div>
 	</div>
 	<!--主文(結束)-->
-
+	
+	<!--預覽影片的模態框-->
 	<div class="modal fade" id="myModal1" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel1" aria-hidden="true"
 		data-backdrop="false">
+		<!-- data-backdrop屬性設為false的時候，只有點選含data-dismiss="該模態框的id"的標籤才可以跳脫模態框 -->
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -269,6 +277,7 @@ video::-webkit-media-controls-panel {
 				</div>
 				<div class="modal-body">
 					<div class="row">
+						<!--影片的標籤，內容由下方jQuery動態讀取-->
 						<video controls id="xxx" src="" oncontextmenu="return false" style="height:50%; width:100%"> 
 						</video>
 					</div>
@@ -280,7 +289,7 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
-	 <!-- 模太框 -->
+	 <!-- 刪除的模太框 -->
  	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
  		aria-labelledby="myModalLabel2" aria-hidden="true"
  		data-backdrop="false">
@@ -293,6 +302,7 @@ video::-webkit-media-controls-panel {
  				</div>
  				<div class="modal-body">
  					<div class="row">
+ 						<!--內文由下方的jQuery動態產生-->
  						<h4 id="deleteNote" style="align:'center'"></h4>
  					</div>
  					</br>
@@ -311,26 +321,26 @@ video::-webkit-media-controls-panel {
 	
 	$(function(){
 		
- 		loadTable();
- 		insert();
+ 		loadTable();     //載入tbody內容
+ 		insert();        //上傳
  		function loadTable(){
+ 			//用getJSON取得資料庫的內容，和GameMedia.do的Servlet做聯結，傳給Servlet的action參數是getAll，藉此執行Servlet中的getAll方法取得資料，傳回的物件命名為data(見下方function內容)
 			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
 				var docFrag = $(document.createDocumentFragment());
 				var tb = $('#tbody');
 				tb.empty();
-				
+				//$.each語法執行迴圈生成，由data物件中抓取資料執行迴圈，index是索引數，gMVO則是自行命名的物件名稱
 				$.each(data, function(index,gMVO){
-	  				if(gMVO.mediaType =='video'){
-	 					//console.log(data);
-						var cell1 = $('<td></td>').text(gMVO.groupName).attr('id','group');
+	  				if(gMVO.mediaType =='video'){ //因為我的表格中的含有影片及照片，所以此頁加一層if標籤僅顯示影片
+						var cell1 = $('<td></td>').text(gMVO.groupName).attr('id','group');  //抓取該筆gMVO物件中key=groupName的值，key的名稱設定請看Servlet中的getAll方法
 						var cell2 = $('<td></td>').text(gMVO.teamA).attr('id','teamA');
 						var cell3 = $('<td></td>').text(gMVO.teamB).attr('id','teamB');
 						var cell4 = $('<td></td>').text(gMVO.mediaDate).attr('id','mediaDate');
 						var cell5 = $('<td></td>').text(gMVO.mediasName).attr('id','mediasName');
 						var cell6 = $('<td></td>').text(gMVO.descriptions).attr('id','descriptions');
 						var cell7 = $('<td></td>').text(gMVO.tag).attr('id','tag');
-						var id = gMVO.mediaID;
-						var gameVideo = gMVO.gameVideo;
+						var id = gMVO.mediaID; //將單筆資料當下的mediaID存入名叫id的變數中(因為mediaID在設計上是PK，對於後面很多方法有需要用到)
+						var gameVideo = gMVO.gameVideo; //將單筆資料當下的gameVideo的存入名叫gameVideo的物件中
 						var cell8 = $('<td><button type="button" class="btn btn-info testmodal" data-toggle="myModal1" data-target="dialog-4" value="'+gameVideo+'" >預覽</button></td>');
 						var cell9 = $('<td><button type="button" class="btn btn-warning updateData" id="'+id+'">修改</button></td>');
 						var cell10 = $('<td><button type="button" class="btn btn-danger deleteData" data-toggle="myModal" data-target="dialog-4" value="'+id+'" >刪除</button></td>');
@@ -341,19 +351,16 @@ video::-webkit-media-controls-panel {
 	  				}
 	  				
 				})
-					buttons();
-	  				$(".testmodal").on('click',function(){
-	  					//事件處發顯示模態框
-	  			        $('#myModal1').modal('show');
-	  					//抓到上方cell8讀到的gameVideo內部的值
-                        var path01 = $(this).val(); 
-	  					//字串串接路徑
-	  				    var videoNo1 = "<%=request.getContextPath()%>/videos/"+ path01;
- 	  				    $('#xxx').attr("src", videoNo1)
+					buttons();  //按鈕的事件
+	  				$(".testmodal").on('click',function(){   //事件處發顯示模態框(這裡是預覽的模態框)
+	  			        $('#myModal1').modal('show');		 
+                        var path01 = $(this).val();          //抓到上方cell8讀到的gameVideo內部的值，下一行就可以用字串串接方式給讀取影片的路徑
+	  				    var videoNo1 = "<%=request.getContextPath()%>/videos/"+ path01;  
+ 	  				    $('#xxx').attr("src", videoNo1)      //給上方id=xxx的標籤新增src的屬性，值則是videoNo1變數中存取的值
 	  				})
 	  				
 					
-	  				$('#table').DataTable({
+	  				$('#table').DataTable({                  //dataTable存取的中文值
 	  					columnDefs: [{ width: 200, targets: 6}],
 	  					"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
 	  					"pagingType": "full_numbers",
@@ -373,15 +380,14 @@ video::-webkit-media-controls-panel {
 	  				  }
 	  			})
 	  			
-	  			$.fn.dataTable.ext.errMode = 'none'; //不显示任何错误信息
+	  			$.fn.dataTable.ext.errMode = 'none'; 		 //不讓dataTable重整時顯示任何錯誤訊息
 			});
  		}
-	  		function buttons(){
-	  			$('.updateData').on('click',function(){
+	  		function buttons(){                              //所有的按鈕觸發的方法都寫在這
+	  			$('.updateData').on('click',function(){      //修改鍵的事件
 	  				if($(this).text() == '修改'){	
 	  			         //取得預修改的欄位的資料
-	  				     
-	  			         
+	  				    
 	  				     var title = $(this).parents('tr').find('td:nth-child(5)').text();
 	  				     var descriptions = $(this).parents('tr').find('td:nth-child(6)').text();
 	  				 	 var tag = $(this).parents('tr').find('td:nth-child(7)').text();
@@ -390,13 +396,12 @@ video::-webkit-media-controls-panel {
 	  			       	 $(this).parents('tr').find('td:nth-child(6)').html('<input placeholder="備註" type="text" value="'+ descriptions +'">');
 	  			       	 $(this).parents('tr').find('td:nth-child(7)').html('<input placeholder="標籤" type="text" value="'+ tag +'">');
 	  			       
-	  			       	 $(this).text('確定');	
+	  			       	 $(this).text('確定');	//將原先"修改"變為"確定"
 	  			       	  
 	  		           } 
 	  			       	else{ //按下確定鍵 
 	  			       		
 	  			       	  //把input, 顯示在table欄位上的值取出	
-	  			       	 
 	  					  var mediaID = $(this).attr('id');
 	  		 	       	  var title = $(this).parents('tr').find('td:nth-child(5)>input').val();
 	  		 	       	  var descriptions = $(this).parents('tr').find('td:nth-child(6)>input').val();
@@ -405,35 +410,33 @@ video::-webkit-media-controls-panel {
 	  		 	          //把輸入的資料包裝成JSON格式字串, 給post傳送用
 	  		 	       	  var dataStr = JSON.stringify({ "mediaID":mediaID, "title":title, "descriptions":descriptions, "tag":tag})
 	  		              //將 顯示在table欄位改回tr,並把值填入 
-	  		 	       	
 	  		 			  $(this).parents('tr').find('td:nth-child(5)').html(title);
 	  		 			  $(this).parents('tr').find('td:nth-child(6)').html(descriptions);
 	  		 			  $(this).parents('tr').find('td:nth-child(7)').html(tag);
-	  		 	       	  
 	  		 			  //把輸入在欄位上的資料經過post傳送
 	  		 	       	  $.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'Update', "mediaID":mediaID, "title":title, "descriptions":descriptions, "tag":tag}, function(datas){
-	  							console.log(mediaID)//只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
-	  							loadTable();
+	  							//只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
+	  							loadTable(); //重新載入table內容
 	  		 	       	  })   
-	  			       	  $(this).text('修改');	       	  
+	  			       	  $(this).text('修改');	   //將按鈕內容改回"修改"    	  
 	  			       	}
 
 	  		       });
 	  			
-	  			$('.deleteData').on('click',function(){
-	  				var mediaID = $(this).val();
-	  				$('#myModal2').modal('show');
-	  				var title = $(this).parents('tr').find('td:nth-child(5)').text();
-	  				$('#deleteNote').text("即將刪除影片<"+title+">，刪除後不可復原，是否確定?")
-		  		 	$('.deleteConfirm').on('click', function(){
+	  			$('.deleteData').on('click',function(){         //刪除鍵的事件
+	  				var mediaID = $(this).val();                //抓到當下的mediaID，此處的this是指向cell10，裡面的value為我先放入的id，目的是為了傳值回去給Servlet藉以執行刪除方法
+	  				$('#myModal2').modal('show');               //顯示模態框
+	  				var title = $(this).parents('tr').find('td:nth-child(5)').text();    //抓到該筆資料的名稱存入title變數
+	  				$('#deleteNote').text("即將刪除影片<"+title+">，刪除後不可復原，是否確定?")       //字串串接
+		  		 	$('.deleteConfirm').on('click', function(){                          //確認刪除事件觸發
 // 					  	var mediaID = $('.deleteData').val();
 					  	console.log(mediaID);
 					  	//alert(memberID);
 				  		//把輸入在欄位上的資料經過post傳送
 	 	       	  		$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'delete', 'mediaID':mediaID}, function(datas){
 							//刪除資料 不需回傳東西, 或做輸入與法判斷
-				  		$('.deleteData').parents('tr').empty();
-	 	       	  		loadTable();
+				  		$('.deleteData').parents('tr').empty();  //把刪除的那一列移除，否則資料庫雖沒資料但網頁仍會顯現
+	 	       	  		loadTable();                             //刪除後重新載入table內容
 	 	       	 		})
 			  		}) 
 	  			})
@@ -445,11 +448,11 @@ video::-webkit-media-controls-panel {
 	  			var group = null;
 	  			
 	  			
-	  			$('#seasonlist').change(function(){
-	  				season = $('select[name="season1"]').val(); 
+	  			$('#seasonlist').change(function(){              //連鎖查詢(2)，藉由選擇完(1)以後觸發
+	  				season = $('select[name="season1"]').val();  //抓到select標籤中含有name=season1的值
 	  				$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'findGroupNameBySeasonID' , 'seasonID':season},function(data){
-	  					$('#grouplist').empty();
-	  					$('#grouplist').append($("<option></option>").text('請選擇'));
+	  					$('#grouplist').empty();                 //把grouplist中的其他選項清空，如果不這麼做的話，使用者重選賽季時，剛剛賽季底下的選項仍舊會存在
+	  					$('#grouplist').append($("<option></option>").text('請選擇'));   //載入第一選項為"請選擇"
 	  					$.each(data, function(index,group){
  	  					//console.log(group);
 	  						$('#grouplist').append($("<option></option>").attr("value",group.groupID).attr("id",group.groupID).text(group.groupName));
@@ -457,7 +460,7 @@ video::-webkit-media-controls-panel {
 	  				})
 	  			})
 	  			
-	  			$('#grouplist').change(function(){
+	  			$('#grouplist').change(function(){               //連鎖查詢(3)，藉由選擇完(2)以後觸發
 	  				group = $('select[name="group1"]').val();
   	  				//console.log(group)
 	  				$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getGameInformation' , 'groupID':group},function(data){
@@ -479,20 +482,47 @@ video::-webkit-media-controls-panel {
 		  			var descriptions = $('#insertDescriptions').val();
 		  			var tag = $('#insertTag').val();
 		  			
-		  			
-		  			
-	  				console.log('clicked')
-	  				console.log('1' + gameID)
-	  				console.log('2' +title)
-	  				console.log('3' +descriptions)
-	  				console.log('4' +tag)
 	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
-	  					console.log(file);
 	  					loadTable();
 	  				})
 	  				season = null;
 	  				group = null;
+	  				
+	  				//用來接上傳的檔案的變數
+	  				var files;
+	  				//設計事件
+	  				$('input[type=file]').on('change', prepareUpload);
+	  				//將檔案存入變數中
+	  				function prepareUpload(event){
+	  			  		files = event.target.files;
+	  				}
+	  				$("#upload_file").click(function(){   
+	  				    var preview = 1;    
+	  				    var files = $("#import_file").get(0).files;   
+	  				    var formData = new FormData();   
+	  				    formData.append("preview", preview);   
+	  				    formData.append("import_file", files[0]);   
+	  				    $.ajax({   
+	  				        url: 'api',   
+	  				        data: formData,    
+	  				        dataType: "json",   
+	  				        type: "POST",   
+	  				        cache: false,   
+	  				        contentType: false,   
+	  				        processData: false,   
+	  				        error: function(xhr) {   
+	  				            alert('Ajax request 發生錯誤');   
+	  				        },   
+	  				        success: function(json) {   
+	  				            
+	  				        },   
+	  				        complete: function(json){   
+	  				        }   
+	  				    });   
+	  				});  
 	  			})
+	  			
+	  			
 	  		}
 	});
 
