@@ -143,17 +143,15 @@ public class FaceBookLoginServlet extends HttpServlet {
 				session.setAttribute("pictureUri", pictureObj.getString("url"));
 
 				//response.sendRedirect(request.getContextPath()+"index.jsp");
-				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-				rd.forward(request, response);
-				//response.sendRedirect("/index.jsp");
+//				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+//				rd.forward(request, response);
+				response.sendRedirect(request.getContextPath()+"/index.jsp");
 				return;
 			} else {   // check Email 是否有在資料庫內,沒有則回首頁
+//				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+//				rd.forward(request, response);
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-				rd.forward(request, response);
-				
-				//response.sendRedirect(request.getContextPath()+"index.jsp");
-				//response.sendRedirect("/index.jsp");
+				response.sendRedirect(request.getContextPath()+"/index.jsp");
 				return;
 			}
 		} catch (JSONException e) {

@@ -1,7 +1,6 @@
 package eeit.gamemedia.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -290,51 +289,57 @@ public class GameMediaServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-//
+			
 //			try {
 //				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-				Integer gameID = Integer.valueOf(req.getParameter("gameID"));
-				String mediasName = req.getParameter("mediasName");
+			Integer gameID = Integer.valueOf(req.getParameter("gameID"));
+			String mediasName = req.getParameter("mediasName");
 				
-				List<GameMediaVO> gameVideoAmount = gameMediaSvc.getAllVideo();
-				int count = gameVideoAmount.size();
+			List<GameMediaVO> gameVideoAmount = gameMediaSvc.getAllVideo();
+			int count = gameVideoAmount.size();
 	
 				
-				String gamePhoto = "";
-				String mediaType = "video";
-				Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
-				String descriptions = req.getParameter("descriptions");
-				String tag = req.getParameter("tag");
-				String gameVideo = "00"+(count+1)+".mp4";
-				
-				
-//				GameMediaVO gameMediaVO = new GameMediaVO();
-//				GamesService gs = new GamesService();
-//				GamesVO gamesVO = gs.findByGameID(gameID);
-//				
-//				
-//				gameMediaVO.setGamesVO(gamesVO);
-//				gameMediaVO.setMediasName(mediasName);
-//				gameMediaVO.setGameVideo(gameVideo);
-//				gameMediaVO.setGamePhoto(gamePhoto);
-//				gameMediaVO.setMediaType(mediaType);
-//				gameMediaVO.setMediaDate(mediaDate);
-//				gameMediaVO.setDescriptions(descriptions);
-//				gameMediaVO.setTag(tag);
-				
-				Part part = req.getPart("file");
+			String gamePhoto = "";
+			String mediaType = "video";
+			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
+			String descriptions = req.getParameter("descriptions");
+			String tag = req.getParameter("tag");
+			String gameVideo = "00"+(count+1)+".mp4";
+			
+			//getPart()方法是getParameter()的檔案版
+			try{
+				Part part = req.getPart("data");
 				System.out.println(part);
 				
+				if(!part.getName().equals("")){
+					File video = new File(req.getServletContext().getRealPath("")+"\\video", part.getName());
+					video.getParentFile().mkdirs();
+					
+					InputStream ins = part.getInputStream();
+					OutputStream ous = new FileOutputStream(video);
+					System.out.println(video);
+					byte[] temp = new byte[1024];
+					int len = -1;
+
+					while ((len = ins.read(temp)) != -1) {
+						ous.write(temp, 0, len);
+					}
+
+					ous.close();
+					ins.close();
+					
+					res.getWriter().println(video);
+				}
+				
+			}catch(Exception e){
+				
+			}
+			
+			
+		
+			
 			
 
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					req.setAttribute("gameMediaVO", gameMediaVO);
-//					RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/addGameMedia.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-				
 				/***************************2.開始新增資料***************************************/
 				//System.out.println(gameMediaVO);
 				System.out.println(gameID+","+mediasName+","+gameVideo+","+gamePhoto+","+mediaType+","+mediaDate+","+descriptions+","+tag);

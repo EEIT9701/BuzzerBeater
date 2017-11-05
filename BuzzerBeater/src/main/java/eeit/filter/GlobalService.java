@@ -30,33 +30,41 @@ public class GlobalService implements Filter {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		// String action = request.getParameter("action");
+		// if (action != null)
+		// System.out.println("[Project Info] " + request.getRequestURI() + "?
+		// action= " + action);
 
-//		String action = request.getParameter("action");
-//		if (action != null)
-//			System.out.println("[Project Info] " + request.getRequestURI() + "? action= " + action);
-//
-//		chain.doFilter(request, response);
 		HttpSession session = request.getSession();
-		MemberInfoVO memberInfoVO  = (MemberInfoVO) session.getAttribute("LoginOK");
-	    if(memberInfoVO == null){
-	    	System.out.println("No auth.");
-	    	chain.doFilter(request, response);
-	    }
-	    else if(memberInfoVO.getAuth() == "parttime"){
-	    	System.out.println("Parttime.");
-	    	chain.doFilter(request, response);
-	    }
-	    else if(memberInfoVO.getAuth() == "admin"){
-	    	System.out.println("Admin.");
-	    	chain.doFilter(request, response);
-	    }
-	    else if(memberInfoVO.getAuth() == "teams"){
-	    	System.out.println("teams.");
-	    	chain.doFilter(request, response);
-	    }
-	    else chain.doFilter(request, response);
+        //session要不為空值才能執行 權限 分流
+		if (session.getAttribute("LoginOK") != null) {
+			MemberInfoVO mVO = (MemberInfoVO) session.getAttribute("LoginOK");
+			String auth = mVO.getAuth();			
+			//授權分流
+			if (auth.compareTo("admin") == 0 ) {
+//			    System.out.println("歡迎:" + mVO.getName());	
+			    chain.doFilter(request, response);
+//			    request.getRequestDispatcher("/")
+			} else if (auth.compareTo("parttime") == 0) {
+				
+//				System.out.println("歡迎:" + mVO.getName());	
+				chain.doFilter(request, response);
+			} else if (auth.compareTo("teams") == 0) {
+				
+//				System.out.println("歡迎:" + mVO.getName());	
+				chain.doFilter(request, response);
+			
+			}else{ 
+				session.removeAttribute("LoginOK"); 
+				chain.doFilter(request, response);
+			}
+		}else {
+		
+//			System.out.println("NO Auth");
+			chain.doFilter(request, response);
+		 
+		}
 	}
-
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 	}
