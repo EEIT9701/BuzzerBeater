@@ -73,7 +73,7 @@
 			        <tbody>
 			        	<c:forEach var="sVO" items="${seasonSvc.all}">
 			        		<tr>
-			        			<td><a href="<%=request.getContextPath() %>/Season.do?action=TO_GROUPS_BACK&seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
+			        			<td><a href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
 			        			<td><fmt:formatDate value="${sVO.seasonBeginDate}" pattern="yyyy-MM-dd"/></td>
 			        			<td><fmt:formatDate value="${sVO.seasonEndDate}" pattern="yyyy-MM-dd"/></td>
 			        			<c:choose>
@@ -87,11 +87,9 @@
 			        				</c:otherwise>
 			        			</c:choose>
 			        			<td>
-			        				<form action="<%=request.getContextPath() %>/Season.do" method="post">
-			        					<input type="submit" class="btn btn-warning updateData"value="修改">
-			        					<input type="hidden" name="action" value="GET_ONE_TO_UPDATE">
-			        					<input type="hidden" name="seasonID" value="${sVO.seasonID}">
-			        				</form>
+			        				<a href="<%=request.getContextPath() %>/season/updateSeason.jsp?seasonID=${sVO.seasonID}">
+			        					<input type="button" class="btn btn-warning updateData"value="修改">
+			        				</a>
 			        			</td>
 			        			<td>
 			        				<form action="<%=request.getContextPath() %>/Season.do" method="post">

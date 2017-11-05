@@ -82,7 +82,8 @@ public class SeasonServlet extends HttpServlet {
 				Timestamp signUpEnd = (Timestamp) seasonVO.get("signUpEnd");
 				String descriptions = (String) seasonVO.get("descriptions");
 
-				Integer seasonID = sSvc.addSeason(seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd, descriptions);
+				Integer seasonID = sSvc.addSeason(seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd,
+						descriptions);
 
 				// 新增分組
 				GroupsService gSvc = new GroupsService();
@@ -91,7 +92,7 @@ public class SeasonServlet extends HttpServlet {
 							gvo.getMaxPlayers(), gvo.getMinPlayers());
 				}
 
-				request.getRequestDispatcher("/season/seasonList_back.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/season/seasonList_back.jsp");
 
 			} catch (Exception e) {
 
@@ -198,11 +199,11 @@ public class SeasonServlet extends HttpServlet {
 			try {
 				// 取值以及錯誤處理
 				String seasonName = request.getParameter("seasonName");
-				if (seasonName == null || seasonName.trim().length() == 0) {
-					errorMsgs.add("請輸入賽季名稱");
-				} else if (!seasonName.trim().matches("^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,20}$")) {
-					errorMsgs.add("賽季名稱只能是中、英文字母、和數字 , 且長度必需在2到10之間");
-				}
+//				if (seasonName == null || seasonName.trim().length() == 0) {
+//					errorMsgs.add("請輸入賽季名稱");
+//				} else if (!seasonName.trim().matches("^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,20}$")) {
+//					errorMsgs.add("賽季名稱只能是中、英文字母、和數字 , 且長度必需在2到20之間");
+//				}
 
 				Date seasonBeginDate = null;
 				try {
@@ -259,8 +260,7 @@ public class SeasonServlet extends HttpServlet {
 							descriptions);
 
 					// 處理完成，準備轉交
-					RequestDispatcher successView = request.getRequestDispatcher("/season/seasonList_back.jsp");
-					successView.forward(request, response);
+					response.sendRedirect(request.getContextPath()+"/season/seasonList_back.jsp");
 
 				} else {
 
@@ -337,14 +337,14 @@ public class SeasonServlet extends HttpServlet {
 			RequestDispatcher successView = request.getRequestDispatcher("/groups/groupList.jsp");
 			successView.forward(request, response);
 		}
-		
-		if("TO_GROUPS_BACK".equals(action)){
+
+		if ("TO_GROUPS_BACK".equals(action)) {
 			Integer seasonID = Integer.parseInt(request.getParameter("seasonID"));
 			SeasonService sSvc = new SeasonService();
 			request.setAttribute("seasonVO", sSvc.findBySeasonID(seasonID));
-			
+
 			request.getRequestDispatcher("/groups/groupList_back.jsp").forward(request, response);
-			
+
 		}
 
 	}

@@ -2,6 +2,7 @@ package eeit.groups.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -20,12 +21,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import eeit.games.model.GamesService;
+import org.json.simple.JSONValue;
+
 import eeit.groupreg.model.GroupRegService;
 import eeit.groupreg.model.GroupRegVO;
 import eeit.groups.model.GroupsService;
 import eeit.groups.model.GroupsVO;
 import eeit.season.model.SeasonService;
+import eeit.teams.model.TeamsService;
 
 @WebServlet("/Groups.do")
 public class GroupsServlet extends HttpServlet {
@@ -46,6 +49,69 @@ public class GroupsServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
+
+		if ("SPLIT_LOCATIONS".equals(action)) {
+			Integer locationID = new Integer(request.getParameter("locationID").split(",")[0]);
+			String locationName = request.getParameter("locationID").split(",")[1];
+			Timestamp beginDate = Timestamp.valueOf(request.getParameter("beginDate"));
+			Timestamp endDate = Timestamp.valueOf(request.getParameter("endDate"));
+
+			Integer timeunit = Integer.parseInt(request.getParameter("timeUnit"));
+			long timeUnit = TimeUnit.MINUTES.convert(timeunit, TimeUnit.MINUTES);
+
+			// 如果session裡面原本沒有此list則創建一個
+			HttpSession session = request.getSession();
+			List<Map<String, String>> list = null;
+			if ((list = (List<Map<String, String>>) session.getAttribute("timeList")) == null) {
+				list = new ArrayList<Map<String, String>>();
+			}
+
+			// 拆解時間並加入
+			Map<String, String> map = null;
+			Timestamp beginTime = beginDate;
+			Timestamp endTime = null;
+			while (true) {
+				endTime = new Timestamp(beginTime.getTime() + timeUnit * 60 * 1000);
+				if (endTime.after(endDate)) {
+					break;
+				}
+
+				map = new HashMap<String, String>();
+				SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+				map.put("date", date.format(beginTime));
+				map.put("beginTime", time.format(beginTime));
+				map.put("endTime", time.format(endTime));
+				map.put("locationID", locationID.toString());
+				map.put("locationName", locationName.toString());
+				map.put("timeUnit", timeunit.toString());
+				list.add(map);
+				beginTime = endTime;
+			}
+
+			// 放入session並轉交
+			session.setAttribute("timeList", list);
+		}
+
+		if ("GET_TIMELIST_JSON".equals(action)) {
+			HttpSession session = request.getSession();
+			List<Map<String, String>> timeList = (List<Map<String, String>>) session.getAttribute("timeList");
+
+			String jsonString = JSONValue.toJSONString(timeList);
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().println(jsonString);
+		}
+
+		if ("REMOVE_TEMP_LIST".equals(action)) {
+			HttpSession session = request.getSession();
+			List<Map<String, String>> timeList = (List<Map<String, String>>) session.getAttribute("timeList");
+			Integer index = Integer.valueOf(request.getParameter("listIndex"));
+			timeList.remove(index - 1);
+
+			session.setAttribute("timeList", timeList);
+		}
 
 		if ("GET_ONE_TO_SIGNUP".equals(action)) {
 			Integer teamID = new Integer(request.getParameter("teamID"));
@@ -207,15 +273,6 @@ public class GroupsServlet extends HttpServlet {
 				RequestDispatcher failView = request.getRequestDispatcher("/groups/addGroups.jsp");
 				failView.forward(request, response);
 			}
-
-		}
-
-		if ("GET_ONE_TO_UPDATE".equals(action)) {
-			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
-
-			GroupsService svc = new GroupsService();
-			request.setAttribute("groupsVO", svc.findByGroupID(groupID));
-			request.getRequestDispatcher("/groups/updateGroup.jsp").forward(request, response);
 		}
 
 		if ("ADD_GROUP".equals(action)) {
@@ -286,10 +343,7 @@ public class GroupsServlet extends HttpServlet {
 				GroupsService gSvc = new GroupsService();
 				gSvc.addGroups(seasonID, groupName, maxTeams, minTeams, maxPlayers, minPlayers);
 
-				SeasonService sSvc = new SeasonService();
-				request.setAttribute("seasonVO", sSvc.findBySeasonID(seasonID));
-				RequestDispatcher successView = request.getRequestDispatcher("/groups/addGroups.jsp");
-				successView.forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/groups/groupList_back.jsp?seasonID=" + seasonID);
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
@@ -306,7 +360,6 @@ public class GroupsServlet extends HttpServlet {
 			request.setAttribute("groupsVO", gSvc.findByGroupID(groupID));
 			RequestDispatcher successView = request.getRequestDispatcher("/games/gameList.jsp");
 			successView.forward(request, response);
-
 		}
 
 		if ("DELETE_GROUP".equals(action)) {
@@ -327,9 +380,12 @@ public class GroupsServlet extends HttpServlet {
 			Integer currentTeams = groupsVO.getCurrentTeams();
 			Integer gamesNeeded = (currentTeams * (currentTeams - 1)) / 2;
 
+			request.getSession().removeAttribute("timeList");
+
 			request.getSession().setAttribute("groupsVO", groupsVO);
 			request.getSession().setAttribute("gamesNeeded", gamesNeeded);
-			request.getRequestDispatcher("/groups/addSchedule.jsp").forward(request, response);
+
+			response.sendRedirect(request.getContextPath() + "/groups/addSchedule.jsp");
 		}
 
 		if ("SPLIT_LOCATION".equals(action)) {
@@ -377,7 +433,7 @@ public class GroupsServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			int index = Integer.valueOf(request.getParameter("index"));
 
-			List<Map<String, Object>> timeList = (List<Map<String, Object>>) session.getAttribute("timeList");
+			List<Map<String, String>> timeList = (List<Map<String, String>>) session.getAttribute("timeList");
 
 			timeList.remove(index);
 
@@ -389,7 +445,7 @@ public class GroupsServlet extends HttpServlet {
 		if ("MAKE_SCHEDULE".equals(action)) {
 			Integer groupID = Integer.valueOf(request.getParameter("groupID"));
 			HttpSession session = request.getSession();
-			List<Map<String, Object>> timeList = (List<Map<String, Object>>) session.getAttribute("timeList");
+			List<Map<String, String>> timeList = (List<Map<String, String>>) session.getAttribute("timeList");
 			Integer gamesNeeded = (Integer) session.getAttribute("gamesNeeded");
 
 			// 場數不足回傳錯誤
@@ -410,6 +466,7 @@ public class GroupsServlet extends HttpServlet {
 				groupRegList.add(new GroupRegVO());
 			}
 
+			// 排列對戰組合
 			List<Integer[]> schedule = new ArrayList<Integer[]>();
 			int total = 0;
 			int count = groupRegList.size();
@@ -427,28 +484,43 @@ public class GroupsServlet extends HttpServlet {
 				groupRegList.remove(1);
 			}
 
+			// 打亂對戰組合排序
 			for (int i = 0; i < 100; i++) {
 				int rd = (int) (Math.random() * total - 1);
 				schedule.add(schedule.get(rd));
 				schedule.remove(rd);
 			}
 
-			GamesService gSvc = new GamesService();
+			// 整合對戰組合、地點、時間
+			TeamsService tsvc = new TeamsService();
+			List<Map<String, String>> gameSchedule = new ArrayList<Map<String, String>>();
+			Map<String, String> map = null;
 			for (int i = 0; i < gamesNeeded; i++) {
-				Integer locationID = (Integer) timeList.get(i).get("locationID");
-				Timestamp gameBeginDate = (Timestamp) timeList.get(i).get("beginTime");
-				Timestamp gameEndDate = (Timestamp) timeList.get(i).get("endTime");
+				map = new HashMap<String, String>();
+				map.put("locationID", timeList.get(i).get("locationID"));
+				map.put("locationName", timeList.get(i).get("locationName"));
+				map.put("date", timeList.get(i).get("date"));
+				map.put("beginTime", timeList.get(i).get("beginTime"));
+				map.put("endTime", timeList.get(i).get("endTime"));
+
 				Integer teamAID = schedule.get(i)[0];
 				Integer teamBID = schedule.get(i)[1];
+				map.put("teamAID", teamAID.toString());
+				map.put("teamBID", teamBID.toString());
 
-				gSvc.addGames(groupID, locationID, teamAID, 0, teamBID, 0, gameBeginDate, gameEndDate);
+				String teamAame = tsvc.findByID(teamAID).getTeamName();
+				String teamBame = tsvc.findByID(teamBID).getTeamName();
+				map.put("teamAName", teamAame);
+				map.put("teamBName", teamBame);
+
+				gameSchedule.add(map);
 			}
 
-			session.removeAttribute("timeList");
-			session.removeAttribute("gamesNeeded");
-			session.removeAttribute("groupsVO");
+			// 設置下個頁面要用到的session
+			session.setAttribute("gameSchedule", gameSchedule);
+			session.setAttribute("groupID", groupID);
 
-			request.getRequestDispatcher("/Games.do?action=GET_GAMES&groupID=" + groupID).forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/games/showSchedule.jsp");
 		}
 
 	}

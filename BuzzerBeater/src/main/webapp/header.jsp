@@ -110,10 +110,11 @@
 		<div class="collapse navbar-collapse" id="navbar-menu">
 			<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" style="margin-right: 15px">
 				<li><a href="<%=request.getContextPath() %>/index.jsp">首頁</a></li>
-				<li class="dropdown"><a href="<%=request.getContextPath() %>/season/seasonList.jsp" class="dropdown-toggle" data-toggle="dropdown">賽季</a>
+				<li class="dropdown">
+					<a href="<%=request.getContextPath() %>/season/seasonList.jsp" class="dropdown-toggle" data-toggle="dropdown">賽季</a>
 					<ul class="dropdown-menu">
 						<c:forEach var="seasonSet" items="${seasonSvc.season}" begin="0" end="3">
-							<li><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${seasonSet.seasonID}">${seasonSet.seasonName}</a></li>
+							<li><a href="<%=request.getContextPath() %>/groups/groupList.jsp?seasonID=${seasonSet.seasonID}">${seasonSet.seasonName}</a></li>
 						</c:forEach>
 					</ul>
 				</li>

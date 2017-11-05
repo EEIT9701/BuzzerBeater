@@ -1,14 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%-- <%@ page import="eeit.season.model.*"%> --%>
-<%-- <%@ page import="java.util.*"%> --%>
 
-<%
-// 	SeasonService dao = new SeasonService();
-// 	Set<HashMap<String,Object>> set = dao.getAll();
-// 	pageContext.setAttribute("set", set);
-%>
 <jsp:useBean id="date" scope="page" class="java.util.Date"/>
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
 
@@ -79,7 +72,7 @@
 			        <tbody>
 			        	<c:forEach var="sVO" items="${seasonSvc.all}">
 			        		<tr>
-			        			<td><a href="<%=request.getContextPath() %>/Season.do?action=GET_GROUPS&seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
+			        			<td><a href="<%=request.getContextPath() %>/groups/groupList.jsp?seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
 			        			<td><fmt:formatDate value="${sVO.seasonBeginDate}" pattern="yyyy-MM-dd"/></td>
 			        			<td><fmt:formatDate value="${sVO.seasonEndDate}" pattern="yyyy-MM-dd"/></td>
 			        			<c:choose>
