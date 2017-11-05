@@ -52,9 +52,7 @@ background-color: #d62d67;
 				<!--第一列-左邊表格-格式_.col-md-8-->
 				<div class="col-md-12">
 
-					
 
-			
 			</div>
 		</div>
 		<br> <br>
@@ -262,8 +260,10 @@ background-color: #d62d67;
 	  
 	   
 		function buttonFunction(){
+			
 			  $('.btn-primary').on('click', function(){          	    		         
 		       	if($(this).text() == '修改'){
+		       	   
 		       	//可以取得
 				 var playerID = $(this).parents('tr').find('td:nth-child(1)').text();	
 		         //可以取得
@@ -276,7 +276,7 @@ background-color: #d62d67;
 			     var twoPoint = $(this).parents('tr').find('td:nth-child(5)').text();
 			     //可以取得
 			     var twoPointShot = $(this).parents('tr').find('td:nth-child(6)').text();
-			     //可以取得
+			     
 			     var threePoint = $(this).parents('tr').find('td:nth-child(7)').text();
 			     //可以取得
 			     var threePointShot = $(this).parents('tr').find('td:nth-child(8)').text();
@@ -321,13 +321,10 @@ background-color: #d62d67;
 		          $(this).parents('tr').find('td:nth-child(16)').html('<input placeholder=""  type="text" value="'+ turnover +'" required>');
 		          $(this).parents('tr').find('td:nth-child(17)').html('<input placeholder=""  type="text" value="'+ personalFouls +'" required>');
 		          $(this).parents('tr').find('td:nth-child(18)').html('<input placeholder=""  type="text" value="'+ points +'" required>');
-		          $(this).parents('tr').find('td:nth-child(19)').html('<input placeholder=""  type="text" value="'+ startingPlayer +'" required>');
-		          
+		          $(this).parents('tr').find('td:nth-child(19)').html('<input placeholder=""  type="text" value="'+ startingPlayer +'" required>');		          
 		          $(this).text('確定');
-		       	  
-		       	 
-	           }
-		       	else{		       		
+                }  
+		       	else{
 		          var playerID = $(this).parents('tr').find('td:nth-child(1)').text();
 		       	  var gameID =  $(this).parents('tr').find('td:nth-child(2)').text();
 		       	  var teamID =  $(this).parents('tr').find('td:nth-child(3)').text();
@@ -351,38 +348,55 @@ background-color: #d62d67;
 // 			      $(this).parents('tr').find('td:nth-child(1)').text(playerID);	
 // 			      $(this).parents('tr').find('td:nth-child(2)').text(gameID);
 // 			      $(this).parents('tr').find('td:nth-child(3)').text(teamID);
-			      $(this).parents('tr').find('td:nth-child(4)').text(gameTime);
-			      $(this).parents('tr').find('td:nth-child(5)').text(twoPoint);
-			      $(this).parents('tr').find('td:nth-child(6)').text(twoPointShot);
-			      $(this).parents('tr').find('td:nth-child(7)').text(threePoint);
-			      $(this).parents('tr').find('td:nth-child(8)').text(threePointShot);
-			      $(this).parents('tr').find('td:nth-child(9)').text(fg);
-			      $(this).parents('tr').find('td:nth-child(10)').text(fgShot);
-			      $(this).parents('tr').find('td:nth-child(11)').text(offReb);
-			      $(this).parents('tr').find('td:nth-child(12)').text(defReb);
-			      $(this).parents('tr').find('td:nth-child(13)').text(assist);
-			      $(this).parents('tr').find('td:nth-child(14)').text(steal);
-			      $(this).parents('tr').find('td:nth-child(15)').text(blocks);
-			      $(this).parents('tr').find('td:nth-child(16)').text(turnover);
-			      $(this).parents('tr').find('td:nth-child(17)').text(personalFouls);
-			      $(this).parents('tr').find('td:nth-child(18)').text(points);
-			      $(this).parents('tr').find('td:nth-child(19)').text(startingPlayer);
+                  
 			      
-			      //把輸入的資料包裝成JSON格式字串, 給post傳送用
-			      var PersonalDataVO = JSON.stringify({ 
-			    	  'playerID':playerID, 'gameID':gameID, 'teamID':teamID, 'gameTime':gameTime, 'twoPoint':twoPoint,
-			    	  'twoPointShot':twoPointShot, 'threePoint':threePoint, 'threePointShot':threePointShot, 'fg':fg, 'fgShot':fgShot,
-			    	  'offReb':offReb, 'defReb':defReb, 'assist':assist, 'steal':steal, 'blocks':blocks,
-			    	  'turnover':turnover, 'personalFouls':personalFouls, 'points':points, 'startingPlayer':startingPlayer 
-			    	  })
-			    	  
+			    	if(twoPoint<=twoPointShot && threePoint<=threePointShot && fg<=fgShot){ 
+			    		$(this).parents('tr').find('td:nth-child(4)').text(gameTime);
+					     /*  var twoPointt=$(this).parents('tr').find('td:nth-child(5)').text(twoPoint); */
+					      $(this).parents('tr').find('td:nth-child(5)').text(twoPoint);			      
+					     /*  var twoPointShott=$(this).parents('tr').find('td:nth-child(6)').text(twoPointShot);
+					      if(twoPointt>twoPointShott){
+					    	  alert("投球數不能大於出手喔");
+					      } */
+					      
+					     
+						    	 
+					      $(this).parents('tr').find('td:nth-child(6)').text(twoPointShot);
+					      $(this).parents('tr').find('td:nth-child(7)').text(threePoint);
+					      $(this).parents('tr').find('td:nth-child(8)').text(threePointShot);
+					      $(this).parents('tr').find('td:nth-child(9)').text(fg);
+					      $(this).parents('tr').find('td:nth-child(10)').text(fgShot);
+					      $(this).parents('tr').find('td:nth-child(11)').text(offReb);
+					      $(this).parents('tr').find('td:nth-child(12)').text(defReb);
+					      $(this).parents('tr').find('td:nth-child(13)').text(assist);
+					      $(this).parents('tr').find('td:nth-child(14)').text(steal);
+					      $(this).parents('tr').find('td:nth-child(15)').text(blocks);
+					      $(this).parents('tr').find('td:nth-child(16)').text(turnover);
+					      $(this).parents('tr').find('td:nth-child(17)').text(personalFouls);
+					      $(this).parents('tr').find('td:nth-child(18)').text(points);
+					      $(this).parents('tr').find('td:nth-child(19)').text(startingPlayer);
+					      
+					      //把輸入的資料包裝成JSON格式字串, 給post傳送用
+					      var PersonalDataVO = JSON.stringify({ 
+					    	  'playerID':playerID, 'gameID':gameID, 'teamID':teamID, 'gameTime':gameTime, 'twoPoint':twoPoint,
+					    	  'twoPointShot':twoPointShot, 'threePoint':threePoint, 'threePointShot':threePointShot, 'fg':fg, 'fgShot':fgShot,
+					    	  'offReb':offReb, 'defReb':defReb, 'assist':assist, 'steal':steal, 'blocks':blocks,
+					    	  'turnover':turnover, 'personalFouls':personalFouls, 'points':points, 'startingPlayer':startingPlayer 
+					    	  })
 			      //把輸入在欄位上的資料經過post傳送
 		 	      $.post('/BuzzerBeater/PersonalData.do', {'action':'UPDATE', 'PersonalDataVO':PersonalDataVO}, function(datas){
 		 	              //只是把修改資料傳回後台 不需回傳東西, 或做輸入與法判斷
 		 	         })   
-			      $(this).text('修改');
-			      } 	  
-		       	  
+			  
+		 	        $(this).text('修改');
+		       	}else{
+		       		alert("數值太大了喔");
+		    		 
+		       		
+		       	} 
+			      
+			      
+		       	}
 	     	   });    
 			  //刪除鍵
 			  $('.btn-warning').on('click', function(){
@@ -391,7 +405,7 @@ background-color: #d62d67;
 				  var playerID = $(this).parents('tr').find('td:nth-child(1)').text();
 		       	  var gameID =  $(this).parents('tr').find('td:nth-child(2)').text();
 		       	  var teamID =  $(this).parents('tr').find('td:nth-child(3)').text();
-	 	       	  var gameTime = $(this).parents('tr').find('td:nth-child(4)').text();
+	 	       /* 	  var gameTime = $(this).parents('tr').find('td:nth-child(4)').text();
 	 	          var twoPoint = $(this).parents('tr').find('td:nth-child(5)').text();
 			      var twoPointShot = $(this).parents('tr').find('td:nth-child(6)').text();
 			      var threePoint = $(this).parents('tr').find('td:nth-child(7)').text();
@@ -406,21 +420,18 @@ background-color: #d62d67;
 			      var turnover = $(this).parents('tr').find('td:nth-child(16)').text();
 			      var personalFouls = $(this).parents('tr').find('td:nth-child(17)').text();
 			      var points = $(this).parents('tr').find('td:nth-child(18)').text();
-			      var startingPlayer = $(this).parents('tr').find('td:nth-child(19)').text();
+			      var startingPlayer = $(this).parents('tr').find('td:nth-child(19)').text(); */
 				  
 				  //把輸入的資料包裝成JSON格式字串, 給post傳送用
 			      var PersonalDataVO = JSON.stringify({ 
-			    	  'playerID':playerID, 'gameID':gameID, 'teamID':teamID, 'gameTime':gameTime, 'twoPoint':twoPoint,
-			    	  'twoPointShot':twoPointShot, 'threePoint':threePoint, 'threePointShot':threePointShot, 'fg':fg, 'fgShot':fgShot,
-			    	  'offReb':offReb, 'defReb':defReb, 'assist':assist, 'steal':steal, 'blocks':blocks,
-			    	  'turnover':turnover, 'personalFouls':personalFouls, 'points':points, 'startingPlayer':startingPlayer 
+			    	  'playerID':playerID, 'gameID':gameID, 'teamID':teamID,
 			    	  })
 				  //把輸入在欄位上的資料經過post傳送
 	 	       	  $.post('<%=request.getContextPath()%>/PersonalData.do', {'action':'DELETE', 'PersonalDataVO':PersonalDataVO}, function(datas){
 						//刪除資料 不需回傳東西, 或做輸入與法判斷
 	 	       	  })
 				  $(this).parents('tr').empty();
-	 	       	location.reload()
+	 	       //	location.reload()
 				  }
 			  })
 			  

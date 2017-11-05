@@ -198,7 +198,6 @@ video::-webkit-media-controls-panel {
 									aria-hidden="true" id="x">&times;</button>
 								<h4 class="modal-title" id="myModalLabel" style="text-align:'center'">檔案上傳</h4>
 							</div>
-						<form name="videoInput" method="post">
 							<div class="modal-body">
 								<div class="row">
 									<!--連鎖查詢功能(1)賽季-->
@@ -229,7 +228,7 @@ video::-webkit-media-controls-panel {
 								<div class=row>
 									<!--上傳影片的觸發鈕-->
     								<div class=col-md-3>
-										<input name="file" type="file" class="file" value="影片">
+										<input type="file" name="upload_file" id="upload_file">  
 									</div>
 								</div>
 								</br>
@@ -250,10 +249,9 @@ video::-webkit-media-controls-panel {
 							</div>
 							<div class="modal-footer">
 								<!--確認按鈕觸發事件-->
-								<button type="button" class="btn btn-warning" data-dismiss="modal" id="insertConfirm" >確認上傳</button>
+								<button type="submit" class="btn btn-warning" data-dismiss="modal" id="insertConfirm" >確認上傳</button>
 								<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
 							</div>
-						</form>
 						</div>
 					</div>
 				</div>
@@ -430,7 +428,6 @@ video::-webkit-media-controls-panel {
 	  				$('#deleteNote').text("即將刪除影片<"+title+">，刪除後不可復原，是否確定?")       //字串串接
 		  		 	$('.deleteConfirm').on('click', function(){                          //確認刪除事件觸發
 // 					  	var mediaID = $('.deleteData').val();
-					  	console.log(mediaID);
 					  	//alert(memberID);
 				  		//把輸入在欄位上的資料經過post傳送
 	 	       	  		$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'delete', 'mediaID':mediaID}, function(datas){
@@ -477,64 +474,54 @@ video::-webkit-media-controls-panel {
 	  			
 	  			
 	  			$('#insertConfirm').click(function(){
+	  				console.log("按下確定鍵")
 	  				var gameID = $('#gamelist').val();
 		  			var title = $('#insertTitle').val();
 		  			var descriptions = $('#insertDescriptions').val();
 		  			var tag = $('#insertTag').val();
-		  			
+	  				 
+					
 	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
+	  				    console.log("傳值");
 	  					loadTable();
 	  				})
 	  				season = null;
 	  				group = null;
 	  				
-	  				//用來接上傳的檔案的變數
-	  				var files;
-	  				//設計事件
-	  				$('input[type=file]').on('change', prepareUpload);
-	  				//將檔案存入變數中
-	  				function prepareUpload(event){
-	  			  		files = event.target.files;
-	  				}
-	  				$("#upload_file").click(function(){   
-	  				    var preview = 1;    
-	  				    var files = $("#import_file").get(0).files;   
-	  				    var formData = new FormData();   
-	  				    formData.append("preview", preview);   
-	  				    formData.append("import_file", files[0]);   
-	  				    $.ajax({   
-	  				        url: 'api',   
-	  				        data: formData,    
-	  				        dataType: "json",   
-	  				        type: "POST",   
-	  				        cache: false,   
-	  				        contentType: false,   
-	  				        processData: false,   
-	  				        error: function(xhr) {   
-	  				            alert('Ajax request 發生錯誤');   
-	  				        },   
-	  				        success: function(json) {   
-	  				            
-	  				        },   
-	  				        complete: function(json){   
-	  				        }   
-	  				    });   
-	  				});  
+	  				//if select file then upload 
+	  				
+	  				 
+	  			
 	  			})
-	  			
-	  			
 	  		}
 	});
 
 	
-	
 		
 	</script>
+		  			
 	<script>
-	var count = 0;
-	$('video').click(function(){
+	  				$("#upload_file").on('change', uploadVideo);   
+						function uploadVideo(event){   
+	    				//file object   
+	   					var gameVideo = event.target.files;   
+	    				var data = new FormData(gameVideo);   
+	    				
+	  					console.log("影片上傳中")
+	    				$.ajax({   
+	            			url: '/BuzzerBeater/GameMedia.do?action=insertVideo',   
+	            			type: 'POST',   
+	            			data: data,
+	            			processData: false, // Don't process the files   
+	            			contentType: 'video/mp4', // Set content type to false as jQuery will tell the server its a query string request   
+	        			});   
+	  				} 
+	</script>
+	<script>
+	var count = 0; 
+	$('video').click(function(){   //讓影片按一下就播放，再按一下就停止     
 		if(count%2==0){
-			this.play();
+			this.play();        
 			count++; 
 		}else{
 			this.pause();
