@@ -133,16 +133,13 @@ public class GoogleLoginServlet extends HttpServlet {
 			if(memberInfoVO.getAcc()!=null){ //check Email 是否有在資料庫內	
 				memberInfoVO.setAcc(jsonOb.getString("email"));   //Google的使用者帳號
 				memberInfoVO.setName(jsonOb.getString("name"));   //Google的使用者姓名
-				memberInfoVO.setRegisterTime(ts);	              //使用者註冊的時間	
+				//memberInfoVO.setRegisterTime(ts);	              //使用者註冊的時間	
 				session.setAttribute("LoginOK", memberInfoVO);
-				
-				
 				session.setAttribute("pictureUri", jsonOb.getString("picture")); //照片的url	
-//				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
+				
+//				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 //				rd.forward(req, resp);
-//				resp.sendRedirect(req.getContextPath()+"/index.jsp");
-				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
-				rd.forward(req, resp);
+				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 				return;
 			}else{    //沒有帳號,新註冊 會員
 //				memberInfoVO.setAcc(jsonOb.getString("email"));   //Google的使用者帳號
@@ -152,13 +149,12 @@ public class GoogleLoginServlet extends HttpServlet {
 //				session.setAttribute("pictureUri", jsonOb.getString("picture")); //照片的url
 //				
 //				session.setAttribute("NewLoginOK", "NewLoginOK");
-				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
-				rd.forward(req, resp);
-				
-//				resp.sendRedirect(req.getContextPath()+"/index.jsp");
-				return;
-//				RequestDispatcher rd = req.getRequestDispatcher("/page.jsp");
+
+//				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 //				rd.forward(req, resp);
+				resp.sendRedirect(req.getContextPath()+"/index.jsp");
+				return;
+
 			}
 	
 			
