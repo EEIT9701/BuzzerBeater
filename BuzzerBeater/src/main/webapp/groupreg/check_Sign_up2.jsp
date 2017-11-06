@@ -29,8 +29,8 @@
 	<jsp:include page="/header.jsp" />
 	<!--主文(開始)-->
 	<div class="container">
-		<h2 align="center">審核繳費紀錄</h2>
 		<div class="jumbotron">
+		<h2 align="center">審核繳費紀錄</h2>
 			<form class="form-inline" method="post"
 				action="<%=request.getContextPath()%>/Players.do">
 				<select class="form-control" name="groups">
@@ -62,9 +62,9 @@
 						<tbody id="test01">
 							<c:forEach var="groupRegVO" items="${GroupRegSvc.all}" >
 								<tr align='center' valign='middle' >
-									<td><a
+									<td id="${groupRegVO.teamsVO.teamID}"><a
 									href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${groupRegVO.teamsVO.teamID}">${groupRegVO.teamsVO.teamName}</a></td>
-									<td>${groupRegVO.groupsVO.seasonVO.seasonName}-
+									<td id="${groupRegVO.groupsVO.groupID}">${groupRegVO.groupsVO.seasonVO.seasonName}-
 										${groupRegVO.groupsVO.groupName}</td>
 									<!--球隊名-->
 
@@ -79,7 +79,7 @@
 <!-- 										<Form method="post" -->
 
                                          <c:if test="${groupRegVO.teamStat==1}">
-												<td><button type="button" class="btn btn-lg btn-primary">已繳費</button></td>
+												<td><button type="button" class="btn btn-lg btn-success">已繳費</button></td>
 											</c:if>
 											<c:if test="${groupRegVO.teamStat==2}">
 												<td><button type="button" class="btn btn-lg btn-primary">待審核</button> </td>                                                 
@@ -103,33 +103,54 @@
 	<script>
 	   $(function(){
 		   
-		$(document).ready(function() {
-			$('#example').DataTable({
-				columnDefs: [{ width: 200, targets: 6}],
-				"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-				"pagingType": "full_numbers",
-				"language": {
-					"lengthMenu":"每一頁顯示_MENU_ 筆資料",
-					"zeroRecords":"查無資料",
-					"info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
-					"infoEmpty":"無資料",
-					"infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
-					"search":"搜尋：",
-					"paginate":{
-						"first":"第一頁",
-						"previous":"上一頁",
-						"next":"下一頁",
-						"last":"最末頁"					
-					}
-			  }
-			})
-		});
+// 		$(document).ready(function() {
+// 			$('#example').DataTable({
+// 				columnDefs: [{ width: 200, targets: 6}],
+// 				"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+// 				"pagingType": "full_numbers",
+// 				"language": {
+// 					"lengthMenu":"每一頁顯示_MENU_ 筆資料",
+// 					"zeroRecords":"查無資料",
+// 					"info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
+// 					"infoEmpty":"無資料",
+// 					"infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
+// 					"search":"搜尋：",
+// 					"paginate":{
+// 						"first":"第一頁",
+// 						"previous":"上一頁",
+// 						"next":"下一頁",
+// 						"last":"最末頁"					
+// 					}
+// 			  }
+// 			})
+// 		});
 		
 		$('.btn-primary').on('click', function(){
  			//var a = $(this).parents('tr').find('td:nth-child(4)').text();
 // 			alert($(this).parents('tr').find('td:nth-child(4)').text());
+		if($(this).text()=='待審核')
+// 			css={}
             $(this).parents('tr').find('td:nth-child(4)').text('1');
             $(this).text('已繳費');
+            $(this).removeClass('btn btn-lg btn-primary');
+            $(this).addClass('btn btn-lg btn-success');
+            var teamID =$(this).parents('tr').find('td:nth-child(1)').attr('id');
+            var groupID =$(this).parents('tr').find('td:nth-child(2)').attr('id');
+            var registerDate =$(this).parents('tr').find('td:nth-child(3)').text();
+            var teamStat =$(this).parents('tr').find('td:nth-child(4)').text();
+            var paymentNumber =$(this).parents('tr').find('td:nth-child(5)').text();
+// 			console.log(teamID);
+// 			console.log(groupID);
+// 			console.log(registerDate);
+// 			console.log(teamStat);
+// 			console.log(paymentNumber);
+	       	var dataStr = JSON.stringify({ 'teamID':teamID, 'groupID':groupID, 'teamStat':teamStat,'registerDate':registerDate,'paymentNumber':paymentNumber})
+	       	console.log(dataStr);
+	       	$.post('<%=request.getContextPath()%>/GroupReg.do',{'action':'UPDATE','data':dataStr},function(datas){
+	       		
+	       	})
+			
+			
 		})
 // 		 var a = $("#test01 > tr").find("td:nth-child(4)").text();
 // 		    alert(a);

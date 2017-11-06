@@ -32,7 +32,7 @@
 			<one-to-many class="eeit.gamemedia.model.GameMediaVO" />
 		</set>
 		
-		<set name="personalDataSet" table="PersonalData" lazy="false">
+		<set name="personalDataSet" table="PersonalData" lazy="false" order-by="playerID asc">
 			<key>
 				<column name="gameID" />
 			</key>

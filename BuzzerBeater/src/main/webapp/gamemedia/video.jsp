@@ -19,15 +19,10 @@
 			margin-right:-35px;
 		}
 		#mediaplayer{
-/* 			background-color:#BEBEBE; */
 			padding-left:-15px;
 			width:100%;
 			height:100%;
 		}
-/* 		#videolist{ */
-/* 			background-color:#BEBEBE; */
-/*  			height:105%; */
-/* 		} */
 		video::-internal-media-controls-download-button {
    	 		display:none;
 		}
@@ -69,14 +64,8 @@
 					</div>
 				</div>
 				<div class="col-md-2" id="videolist">
-					<h3>精選影片</h3>
-					<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}">
-						<c:forEach var="gameMediaType" items="${gameMediaSvc.mediaType}">
-							<c:if test="${gameMediaType eq 'video'}">
-								<h5 id=medias value="${gameMediaSvc.gameVideo}">${gameMediaSvc.mediasName}</h5>
-							</c:if>
-						</c:forEach>
-					</c:forEach>
+<!-- 					<h3>精選影片</h3> -->
+					<h5 class="mName"></h5>
 				</div>
            	</div>
 				
@@ -91,19 +80,39 @@
     </div>
     </div>
     <!--主文(結束)-->
-
-<jsp:include page="/footer_css.jsp" />        
+	<jsp:include page="/footer_css.jsp" />        
+	
     <script>
-    $(function(){
-    	$('#medias').click(function(){
-			//抓到上方cell8讀到的gameVideo內部的值
+//     $(function(){
+//     	$('#medias').click(function(){
+// 			//抓到上方cell8讀到的gameVideo內部的值
            
-	  		//字串串接路徑
-	  		var videoNo1 = "<%=request.getContextPath()%>/videos/"+"002.mp4";
-			$('#video').attr("src", videoNo1)
-		}) 
-    })
-	  				
+// 	  		//字串串接路徑
+<%-- 	  		var videoNo1 = "<%=request.getContextPath()%>/videos/"+"002.mp4"; --%>
+// 			$('#video').attr("src", videoNo1)
+// 		}) 
+//     })
+	$(function(){
+		
+		getlist();
+		
+		function getlist(){
+			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
+				var list = $('#videolist');
+				list.empty();
+				var cell1 = $('<h3>影片列表</h3>');
+				list.append(cell1);
+				
+				$.each(data, function(index,gMVO){
+					if(gMVO.mediaType =='video'){
+						var mediaID = gMVO.mediaID;
+						var name = $('<h5 style="margin:10px 0px 10px 0px; background-color:red;"></h5>').text(gMVO.mediasName).attr('id',''+mediaID+'');
+						list.append(name);
+					}
+				})
+			})
+		}
+	})	  				
 		
     </script>
 </body>
