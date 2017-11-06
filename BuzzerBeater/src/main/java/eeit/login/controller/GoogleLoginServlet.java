@@ -12,6 +12,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import eeit.login.model.LoginCheckService;
+import eeit.mail.GmailSendMailviaTLS;
 import eeit.memberinfo.model.MemberInfoVO;
 
 import java.io.BufferedReader;
@@ -137,6 +138,10 @@ public class GoogleLoginServlet extends HttpServlet {
 				session.setAttribute("LoginOK", memberInfoVO);
 				session.setAttribute("pictureUri", jsonOb.getString("picture")); //照片的url	
 				
+				GmailSendMailviaTLS gs = new GmailSendMailviaTLS();
+				System.out.println(jsonOb.getString("email"));
+				gs.SendEmail(jsonOb.getString("email"), "Wellcome to Login");
+
 //				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 //				rd.forward(req, resp);
 				resp.sendRedirect(req.getContextPath()+"/index.jsp");
