@@ -33,8 +33,12 @@
 	rel='stylesheet' type='text/css' />
 <link href="<%=request.getContextPath()%>/css/style.css"
 	rel="stylesheet" type="text/css" media="all" />
+<link href="<%=request.getContextPath()%>/css/jquery.tagit.css" rel="stylesheet" type="text/css">
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="<%=request.getContextPath()%>/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 
 
 <style>
@@ -130,6 +134,17 @@ video::-webkit-media-controls-panel {
 #table{
 	width: 100%;
 }
+.tagit-choice{
+    color: rgba(255,255,255,.8);
+    background-color:green;
+    display: inline-block;
+	text-decoration: none;
+    white-space: nowrap;
+	border-radius:7px;
+}
+.ui-widget{	
+	border:solid 1px gray;
+}
 </style>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/datatables.min.css" />
@@ -186,8 +201,7 @@ video::-webkit-media-controls-panel {
 			</div>
 			<!--上傳的模態框 -->
 			<div class="row">
-				<button class="btn btn-warning" id="789" data-toggle="modal"
-					data-target="#myModal">選擇檔案</button>
+				<button class="btn btn-warning" data-toggle="modal" data-target="#myModal">選擇檔案</button>
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true"
 					data-backdrop="false">
@@ -232,7 +246,7 @@ video::-webkit-media-controls-panel {
 									</div>
 								</div>
 								</br>
-								 <div class="input-group input-group">
+								 <div class="input-group">
             						<span class="input-group-addon">標題</span>
            						 	<input type="text" class="form-control" id="insertTitle" style="margin: 0px 0;" required>
         						 </div>
@@ -242,9 +256,11 @@ video::-webkit-media-controls-panel {
 									<input type="text" class="form-control" id="insertDescriptions" style="margin: 0px 0;" required>
 								</div>
 								</br>
-								<div class="input-group">
-									<span class="input-group-addon">標籤</span> 
-									<input type="text" name="file" class="form-control" id="insertTag" placeholder="請用以,分格標籤     ex:張君雅,單手爆扣" style="margin: 0px 0;" required>
+								<div>
+   								<form>
+   									<label style="padding-left:8px">標籤</label> 
+            						<input name="tags" id="mySingleFieldTags" value="Curry, Harden , Paul, Leonard">            						
+       							</form>
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -287,7 +303,7 @@ video::-webkit-media-controls-panel {
 			</div>
 		</div>
 	</div>
-	 <!-- 刪除的模太框 -->
+	 <!-- 刪除的模態框 -->
  	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
  		aria-labelledby="myModalLabel2" aria-hidden="true"
  		data-backdrop="false">
@@ -312,19 +328,22 @@ video::-webkit-media-controls-panel {
  			</div>
  		</div>
  	</div>
-
-	<jsp:include page="/footer_css.jsp" />
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	<script>
+		$('#mySingleFieldTags').tagit({
+			allowSpaces:true
+		});
+	</script>
 	<script>
 	
 	$(function(){
+		
 		
  		loadTable();     //載入tbody內容
  		insert();        //上傳
  		function loadTable(){
  			//用getJSON取得資料庫的內容，和GameMedia.do的Servlet做聯結，傳給Servlet的action參數是getAll，藉此執行Servlet中的getAll方法取得資料，傳回的物件命名為data(見下方function內容)
 			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
-				var docFrag = $(document.createDocumentFragment());
+				var docFrag = $(document.createDocumentFragment());   
 				var tb = $('#tbody');
 				tb.empty();
 				//$.each語法執行迴圈生成，由data物件中抓取資料執行迴圈，index是索引數，gMVO則是自行命名的物件名稱
@@ -344,8 +363,8 @@ video::-webkit-media-controls-panel {
 						var cell10 = $('<td><button type="button" class="btn btn-danger deleteData" data-toggle="myModal" data-target="dialog-4" value="'+id+'" >刪除</button></td>');
 						
 						var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9, cell10])				 				
-						docFrag.append(row);
-						tb.append(docFrag);	
+						docFrag.append(row);       //把東西塞進docFrag裡
+						tb.append(docFrag);	       //docFrag塞進表格
 	  				}
 	  				
 				})
@@ -355,6 +374,7 @@ video::-webkit-media-controls-panel {
                         var path01 = $(this).val();          //抓到上方cell8讀到的gameVideo內部的值，下一行就可以用字串串接方式給讀取影片的路徑
 	  				    var videoNo1 = "<%=request.getContextPath()%>/videos/"+ path01;  
  	  				    $('#xxx').attr("src", videoNo1)      //給上方id=xxx的標籤新增src的屬性，值則是videoNo1變數中存取的值
+ 	  				 	$('#myModal1').empty();
 	  				})
 	  				
 					
@@ -444,6 +464,7 @@ video::-webkit-media-controls-panel {
 	  			var season = null;
 	  			var group = null;
 	  			
+	  		
 	  			
 	  			$('#seasonlist').change(function(){              //連鎖查詢(2)，藉由選擇完(1)以後觸發
 	  				season = $('select[name="season1"]').val();  //抓到select標籤中含有name=season1的值
@@ -469,16 +490,13 @@ video::-webkit-media-controls-panel {
 	  				})
 	  				
 	  			})
-		  		
-	  			
-	  			
 	  			
 	  			$('#insertConfirm').click(function(){
 	  				console.log("按下確定鍵")
 	  				var gameID = $('#gamelist').val();
 		  			var title = $('#insertTitle').val();
 		  			var descriptions = $('#insertDescriptions').val();
-		  			var tag = $('#insertTag').val();
+		  			var tag = $('#mySingleFieldTags').val();
 	  				 
 					
 	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
@@ -501,21 +519,21 @@ video::-webkit-media-controls-panel {
 	</script>
 		  			
 	<script>
-	  				$("#upload_file").on('change', uploadVideo);   
-						function uploadVideo(event){   
-	    				//file object   
-	   					var gameVideo = event.target.files;   
-	    				var data = new FormData(gameVideo);   
+// 	  				$("#upload_file").on('change', uploadVideo);   
+// 						function uploadVideo(event){   
+// 	    				//file object   
+// 	   					var gameVideo = event.target.files;   
+// 	    				var data = new FormData(gameVideo);   
 	    				
-	  					console.log("影片上傳中")
-	    				$.ajax({   
-	            			url: '/BuzzerBeater/GameMedia.do?action=insertVideo',   
-	            			type: 'POST',   
-	            			data: data,
-	            			processData: false, // Don't process the files   
-	            			contentType: 'video/mp4', // Set content type to false as jQuery will tell the server its a query string request   
-	        			});   
-	  				} 
+// 	  					console.log("影片上傳中")
+// 	    				$.ajax({   
+// 	            			url: '/BuzzerBeater/GameMedia.do?action=insertVideo',   
+// 	            			type: 'POST',   
+// 	            			data: data,
+// 	            			processData: false, // Don't process the files   
+// 	            			contentType: 'video/mp4', // Set content type to false as jQuery will tell the server its a query string request   
+// 	        			});   
+// 	  				} 
 	</script>
 	<script>
 	var count = 0; 
@@ -530,5 +548,7 @@ video::-webkit-media-controls-panel {
 	})
 	</script>
 
+	<jsp:include page="/footer_css.jsp" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 </body>
 </html>
