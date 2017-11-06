@@ -117,9 +117,9 @@
 			    <br>
 				
 				<div class="col-md-3 col-md-offset-9">
-				    <input type="submit" class="btn btn-success btn-lg" value="確認">
+				    <input type="submit" class="btn btn-success btn-lg blockUI" value="確認">
 					<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
-						<input type="button" class="btn btn-danger btn-lg" value="取消">
+						<input type="button" class="btn btn-danger btn-lg blockUI" value="取消">
 					</a>
 				</div>
 				
@@ -143,7 +143,9 @@
 	<link href='<%=request.getContextPath()%>/css/jquery-ui-timepicker-addon.css' rel='stylesheet'>
   	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-timepicker-addon.js"></script>
   	<script type='text/javascript' src='<%=request.getContextPath()%>/js/jquery-ui-sliderAccess.js'></script>
-  		
+  	<%--遮罩插件 --%>  		
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+		 	
 	<script>
 	$(document).ready(function(){
 	
@@ -157,6 +159,11 @@
 
 		$('#signUpBegin').datetimepicker(opttime);
 		$('#signUpEnd').datetimepicker(opttime);
+		
+		// 處理中
+		$('.blockUI').click(function(){
+			$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+		})
 	})
 	
 	

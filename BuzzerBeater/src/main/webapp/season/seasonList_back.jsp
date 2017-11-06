@@ -58,7 +58,7 @@
 			<!-- 網頁內容 -->
 			<div class="col-md-12">
 		        <h2>賽季列表</h2>
-		        <h4><a href="<%=request.getContextPath() %>/season/addSeason.jsp" class="btn btn-primary">新增賽季</a></h4>
+		        <h4><a href="<%=request.getContextPath() %>/season/addSeason.jsp" class="btn btn-primary blockUI">新增賽季</a></h4>
 		        <table class="table table-bordered" id="seasonList">
 		            <thead>
 			            <tr>
@@ -88,12 +88,12 @@
 			        			</c:choose>
 			        			<td>
 			        				<a href="<%=request.getContextPath() %>/season/updateSeason.jsp?seasonID=${sVO.seasonID}">
-			        					<input type="button" class="btn btn-warning updateData"value="修改">
+			        					<input type="button" class="btn btn-warning updateData blockUI"value="修改">
 			        				</a>
 			        			</td>
 			        			<td>
 			        				<form action="<%=request.getContextPath() %>/Season.do" method="post">
-			        					<input type="submit" class="btn btn-danger" value="刪除">
+			        					<input type="submit" class="btn btn-danger blockUI" value="刪除">
 			        					<input type="hidden" name="action" value="DELETE_SEASON">
 			        					<input type="hidden" name="seasonID" value="${sVO.seasonID}">
 			        				</form>
@@ -111,6 +111,18 @@
 	    
 	    
 	    <jsp:include page="/footer_css.jsp" />
+	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	    <%--遮罩插件 --%>  		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+		
+	    <script>
+	    $(function(){
+	    	$(document).on('click','a',function(){
+	    		// 處理中
+				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+	    	})
+	    })
+	    </script>
     </body>
 
     </html>

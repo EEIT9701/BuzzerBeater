@@ -119,17 +119,18 @@
 				</div>
 				
 				<br>
+				
 				<div class="col-md-1">
-					<input type="reset" class="btn btn-danger" value="重設">
+		    		<button class="btn btn-info blockUI" onclick="history.back()">取消新增</button>
+				</div>
+								
+				<div class="col-md-3 col-md-offset-8">
+				    <input type="submit" id="submit" class="btn btn-success btn-lg blockUI" value="下一步，建立分組">
 				</div>
 				
-				<div class="col-md-1 col-md-offset-8">
-				    <input type="submit" id="submit" class="btn btn-success btn-lg submitBlock" value="下一步，建立分組">
-				</div>
-				
+				    <br><br><br><br><br><br><br><br>
 			</form>
 			</div>
-		    <br><br><br><br><br><br><br><br>
 				
 		    </div>
 		    <jsp:include page="/footer.jsp" />
@@ -187,8 +188,8 @@
 			$('#signUpEnd').datetimepicker(optTime);
 			
 			// 處理中
-			$('.submitBlock').click(function(){
-				$.blockUI({ message: '<h2>處理中，請稍候</h2><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+			$('a,.blockUI').click(function(){
+				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 			})
 			
 	    

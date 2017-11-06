@@ -211,7 +211,7 @@
 					<form action="<%=request.getContextPath()%>/Groups.do" method="post">
 						<input type="hidden" name="groupID" value="${groupsVO.groupID}">
 						<input type="hidden" name="action" value="MAKE_SCHEDULE">
-						<input type="submit" class="btn btn-success btn-lg" id="submit_move" value="自動編排賽程">
+						<input type="submit" class="btn btn-success btn-lg blockUI" id="submit_move" value="自動安排賽程">
 					</form>
 				</div>
 				<br><br><br><br><br><br>
@@ -224,10 +224,12 @@
 	    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
   		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  		<%--timepicker套件，可選日期時間 --%>
 		<link href='<%=request.getContextPath()%>/css/jquery-ui-timepicker-addon.css' rel='stylesheet'>
   		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-timepicker-addon.js"></script>
   		<script type='text/javascript' src='<%=request.getContextPath()%>/js/jquery-ui-sliderAccess.js'></script>
-  		
+  		<%--遮罩插件 --%>  		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
 	    
 	<script type="text/javascript">
 	var isChange = false;
@@ -284,14 +286,25 @@
 		$('#btnAddLocation').on('click',function(){
 			var timeList = $('form[name="addLocation"]').serialize();
 			
+			$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+			setTimeout(function(){
+				$.unblockUI();
+			},500)
+			
 			$.post('<%=request.getContextPath()%>/Groups.do', timeList, function(){
 				loadList();
+				$.unblockUI();
 			})
 		})
 		
 		// 移除場地
 		$('#timeList').on('click', '#btnRemoveLocation', function(){
 			var id = $(this).parents('tr').find('td:first-child').text();
+			
+			$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+			setTimeout(function(){
+				$.unblockUI();
+			},300)
 			
 			$.post('<%=request.getContextPath()%>/Groups.do?',
 					{'listIndex':id, 'action':'REMOVE_TEMP_LIST'}, function(){
@@ -305,6 +318,11 @@
 		
 		$('#beginDate').datetimepicker(optTime);
 		$('#endDate').datetimepicker(optTime);
+		
+		// 處理中
+		$('.blockUI').click(function(){
+			$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+		})
 	})
 	</script>
     </body>
