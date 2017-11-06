@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<%--新增前先將存在session中的資料刪除 --%>
-<%request.getSession().removeAttribute("seasonVO"); %>
-<%request.getSession().removeAttribute("groupsSet"); %>
+<%
+	eeit.season.model.SeasonService sSvc = new eeit.season.model.SeasonService();
+	Integer seasonID = Integer.valueOf(request.getParameter("seasonID"));
+	request.setAttribute("seasonVO", sSvc.findBySeasonID(seasonID));
+%>
 
 <!DOCTYPE html>
     <html>
@@ -15,7 +16,6 @@
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
 		
     	<jsp:include page="/header_css.jsp" />  
-<%--     	<jsp:include page="/font_css.jsp" /> --%>
 	<style>
 		h2,h3 {		
 			font-family:微軟正黑體;   	  
@@ -61,12 +61,18 @@
             	</a>
         	</span>
         	&gt;
-        	<span>新增賽季</span>
+        	<span>
+            	<a href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${seasonVO.seasonID}">
+            		<span>${seasonVO.seasonName}</span>
+            	</a>
+        	</span>
+        	&gt;
+        	<span>新增分組</span>
     	</div>
     	<!--上層導覽列(結束) -->
 			<div class="col-md-12">
 
-			<h2>新增賽季</h2>
+			<h2>新增分組</h2>
 			<c:if test="${not empty errorMsgs}">
 				<p style="color:red">請修正以下錯誤:</p>
 				<ul style="color:red">
@@ -78,58 +84,48 @@
 				</ul>
 			</c:if>
 			
-			<div class="col-md-2 col-md-offset-9">
-				<a href="<%=request.getContextPath()%>/season/addSeason_excel.jsp">
-					<input type="submit" class="btn btn-info btn-lg" value="使用EXCEL建立完整賽季">
-				</a>
-			</div>
-			
 			<div class="col-md-12">
-			<form method="post" action="<%=request.getContextPath()%>/Season.do" id="addSeason">
-				<input type="hidden" name="action" value="TO_ADD_GROUPS">
+			<form method="post" action="<%=request.getContextPath()%>/Groups.do" id="addSeason">
+				<input type="hidden" name="action" value="ADD_GROUP">
+				<input type="hidden" name="seasonID" value="${seasonVO.seasonID}">
 				
 				<div class="form-group row">
-					<label for="seasonName" class="col-2 col-form-label">賽事名稱</label>
-					<input class="form-control" type="text" value="${seasonVO.seasonName}" id="seasonName" name="seasonName">
+					<label for="seasonName" class="col-2 col-form-label">分組名稱</label>
+					<input class="form-control" type="text" value="${groupsVO.groupName}" id="groupName" name="groupName">
 				</div>
 				
 				<div class="form-group row">
-					<label for="seasonBeginDate" class="col-2 col-form-label">賽季開始日期</label>
-					<input class="form-control" type="text" value="${seasonVO.seasonBeginDate}" id="seasonBeginDate" name="seasonBeginDate">
+					<label for="seasonBeginDate" class="col-2 col-form-label">球隊數量上限</label>
+					<input class="form-control" type="number" value="${groupsVO.maxTeams}" id="maxTeams" name="maxTeams">
 				</div>
 
 				<div class="form-group row">
-					<label for="seasonEndDate" class="col-2 col-form-label">賽季結束日期</label>
-					<input class="form-control" type="text" value="${seasonVO.seasonEndDate}" id="seasonEndDate" name="seasonEndDate">
+					<label for="seasonEndDate" class="col-2 col-form-label">球隊數量下限</label>
+					<input class="form-control" type="number" value="${groupsVO.minTeams}" id="minTeams" name="minTeams">
 				</div>
 				
 				<div class="form-group row">
-					<label for="signUpBegin" class="col-2 col-form-label">報名開始時間</label>
-					<input class="form-control" type="text" value="${seasonVO.signUpBegin}" id="signUpBegin" name="signUpBegin">
+					<label for="signUpBegin" class="col-2 col-form-label">球隊成員上限</label>
+					<input class="form-control" type="number" value="${groupsVO.maxPlayers}" id="maxPlayers" name="maxPlayers">
 				</div>
 
 				<div class="form-group row">
-					<label for="signUpEnd" class="col-2 col-form-label">報名截止時間</label>
-					<input class="form-control" type="text" value="${seasonVO.signUpEnd}" id="signUpEnd" name="signUpEnd">
-				</div>
-				
-				<div class="form-group row">
-					<label for="descriptions">備註</label>
-					<textarea class="form-control" rows="5" id="descriptions" name="descriptions">${seasonVO.descriptions}</textarea>
+					<label for="signUpEnd" class="col-2 col-form-label">球隊成員下限</label>
+					<input class="form-control" type="number" value="${groupsVO.minPlayers}" id="minPlayers" name="minPlayers">
 				</div>
 				
 				<br>
-				<div class="col-md-1">
-					<input type="reset" class="btn btn-danger" value="重設">
-				</div>
 				
-				<div class="col-md-1 col-md-offset-8">
-				    <input type="submit" id="submit" class="btn btn-success btn-lg submitBlock" value="下一步，建立分組">
+				<div class="col-md-3 col-md-offset-9">
+				    <input type="submit" id="submit_move" class="btn btn-success btn-lg" value="建立分組">
+					<a href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${seasonVO.seasonID}">
+						<input type="button" class="btn btn-danger btn-lg" value="取消">
+					</a>
 				</div>
 				
 			</form>
-			</div>
 		    <br><br><br><br><br><br><br><br>
+			</div>
 				
 		    </div>
 		    <jsp:include page="/footer.jsp" />
@@ -137,17 +133,10 @@
 	    </div>
 		<jsp:include page="/footer_css.jsp" />
 		
-		
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css">
   		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-  		<%--timepicker套件，可選日期時間 --%>
-		<link href='<%=request.getContextPath()%>/css/jquery-ui-timepicker-addon.css' rel='stylesheet'>
-  		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-ui-timepicker-addon.js"></script>
-  		<script type='text/javascript' src='<%=request.getContextPath()%>/js/jquery-ui-sliderAccess.js'></script>
-		<%--遮罩插件 --%>  		
-		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
-		 
+  		
 		<script type="text/javascript">
 
 		var isChange = false;
@@ -168,30 +157,10 @@
 	        });
 	        
 			// 某些按鈕屬於正常流程便不須提示
-	        $("#submit").click(function () {
+	        $("input:submit").click(function () {
 	            $(window).unbind('beforeunload');
 	        });
 			
-			// time-picker套件，需先匯入script上面6行
-			var opt = { dateFormat : 'yy-mm-dd',
-						showTime : false,
-						timeFormat : '' };
-		
-			$('#seasonBeginDate').datetimepicker(opt);
-			$('#seasonEndDate').datetimepicker(opt);
-			
-			var optTime = { dateFormat : 'yy-mm-dd',
-							timeFormat : 'HH:mm:ss' };
-			
-			$('#signUpBegin').datetimepicker(optTime);
-			$('#signUpEnd').datetimepicker(optTime);
-			
-			// 處理中
-			$('.submitBlock').click(function(){
-				$.blockUI({ message: '<h2>處理中，請稍候</h2><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
-			})
-			
-	    
 		})
 	
 	

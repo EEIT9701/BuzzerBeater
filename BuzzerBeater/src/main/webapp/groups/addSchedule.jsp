@@ -24,15 +24,19 @@
 /*     	  color: #e9e9e9; */
 /*         } */
         #pathWay {
-      	  color: #666;
-      	  height: 28px;
-      	  line-height: 28px;
-      	  border-bottom: 1px solid #c0b7b7;
-      	  text-indent: 5px;
-      	  font-size: 18px;
-      	  font-weight: normal;
-      	  margin-bottom: 10px;
-      	  font-family:微軟正黑體;
+      	  	color: #666;
+      	  	height: 28px;
+      	  	line-height: 28px;
+      	  	border-bottom: 1px solid #c0b7b7;
+      	  	text-indent: 5px;
+      	  	font-size: 18px;
+      	  	font-weight: normal;
+      	  	margin-bottom: 10px;
+      	  	font-family:微軟正黑體;
+        }
+        table,form[name="addLocation"] {
+        	font-size: 18px;
+        	font-family:微軟正黑體;
         }
         </style>
     </head>
@@ -120,91 +124,97 @@
 			    
 			    <p>有 ${groupsVO.currentTeams} 隊，循環賽共需打 ${gamesNeeded} 場比賽</p>
 			    
-			    <br>
-			    <c:if test="${not empty errorMsgs}">
-				                        請修正以下錯誤:
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<c:if test="${not empty message}">
-								<li>${message}</li>
-							</c:if>
-						</c:forEach>
-					</ul>
-				</c:if>
-			    	
-			    <table class="table table-bordered">
+			    <form action="<%=request.getContextPath()%>/Groups.do" method="post" name="addLocation">
+			    	<input type="hidden" name="action" value="SPLIT_LOCATIONS">
+			    
+			    	<div class="form-group col-md-5">
+			    		<label>比賽地點</label>
+						<select name="locationID" class="form-control">
+							<c:forEach var="locVO" items="${locSvc.allList}">
+								<option value="${locVO.locationID},${locVO.locationName}">${locVO.locationName}</option>
+							</c:forEach>
+						</select>
+					</div>
+					
+					<div class="form-group col-md-5">
+				    	<label>單場賽事時間</label>
+				        <select name="timeUnit" class="form-control">
+				        	<c:forEach var="time" begin="10" end="300" step="10">
+				        		<c:choose>
+					        		<c:when test="${time==90}">
+						    			<option value="${time}" selected="selected">${time} 分鐘</option>
+					        		</c:when>
+					        		<c:otherwise>
+					        			<option value="${time}">${time} 分鐘</option>
+					       			</c:otherwise>
+				        		</c:choose>
+				        	</c:forEach>
+				        </select>
+				    </div>
+					
+					<div class="form-group col-md-5">
+						<label>時間(起)</label>
+				    	<input type="text" class="form-control" name="beginDate" id="beginDate">
+				    </div>
+				    
+				    <div class="form-group col-md-5">
+				    	<label>時間(迄)</label>
+				    	<input type="text" class="form-control" name="endDate" id="endDate">
+				    </div>
+				    
+					<div class="col-md-1">
+						<br><br>
+				    	<input type="button" class="btn btn-primary" id="btnAddLocation" value="新增">
+				    </div>
+			    </form>
+			    <table class="table table-bordered" id="timeList">
 		            <thead>
-			            <tr style="background-color:#d62d67;color:#e9e9e9;">
+			       		
+			       		<tr style="background-color:#d62d67;color:#e9e9e9;">
                     		<td>#</td>
                     		<td>地點</td>
                     		<td>日期</td>
                     		<td>時間</td>
                     		<td>比賽時間</td>
 			            </tr>
-			            <form action="<%=request.getContextPath()%>/Groups.do" method="post">
-				        	<tr>
-				        		<td></td>
-				        		<td>
-				        			<select name="locationID" style="margin-top: 20px;">
-					        			<c:forEach var="locVO" items="${locSvc.allList}">
-					        				<option value="${locVO.locationID},${locVO.locationName}">${locVO.locationName}</option>
-					        			</c:forEach>
-				        			</select>
-				        		</td>
-				        		<td colspan="2">
-				        			<input type="text" name="beginDate" id="beginDate" style="width:40%" > ~ <input type="text" name="endDate" id="endDate" style="width:40%">
-				        		</td>
-				        		<td style="padding-top: 1px;">
-				        			<br>單場:<select name="timeUnit">
-				        			<c:forEach var="time" begin="10" end="300" step="10">
-				        				<c:choose>
-				        					<c:when test="${time==90}">
-					        					<option value="${time}" selected="selected">${time}</option>
-				        					</c:when>
-				        					<c:otherwise>
-				        						<option value="${time}">${time}</option>
-				        					</c:otherwise>
-				        				</c:choose>
-				        			</c:forEach>
-				        			</select>分鐘
-				        		</td>
-				        		<td style="padding-top: 20px;">
-					       			<input type="hidden" name="action" value="SPLIT_LOCATION">
-				        			<input type="submit" class="btn btn-primary" value="新增">
-				        		</td>
-				        	</tr>
-			       		</form>
+			            
 			        </thead>
 			
 			        <tbody>
-			        	<c:forEach var="timeList" items="${timeList}" varStatus="s">
-				        	<tr>
-				        		<td>${s.index+1}</td>
-				        		<td>${timeList.locationName}</td>
-	                    		<td><fmt:formatDate value="${timeList.beginTime}" pattern="yyyy-MM-dd"/></td>
-	                    		<td><fmt:formatDate value="${timeList.beginTime}" pattern="HH:mm"/> ~ <fmt:formatDate value="${timeList.endTime}" pattern="HH:mm"/></td>
-	                    		<td>${timeList.timeUnit}分鐘</td>
-	                    		<td>
-	                    			<form action="<%=request.getContextPath()%>/Groups.do" method="post">
-	                    				<input type="hidden" name="action" value="REMOVE_TIMELIST">
-	                    				<input type="hidden" name="index" value="${s.index}">
-	                    				<input type="submit" value="刪除">
-	                    			</form>
-	                    		</td>
-				        	</tr>
-			        	</c:forEach>
+<%-- 			        	<c:forEach var="timeList" items="${timeList}" varStatus="s"> --%>
+<!-- 				        	<tr> -->
+<%-- 				        		<td>${s.index+1}</td> --%>
+<%-- 				        		<td>${timeList.locationName}</td> --%>
+<%-- 	                    		<td><fmt:formatDate value="${timeList.beginTime}" pattern="yyyy-MM-dd"/></td> --%>
+<%-- 	                    		<td><fmt:formatDate value="${timeList.beginTime}" pattern="HH:mm"/> ~ <fmt:formatDate value="${timeList.endTime}" pattern="HH:mm"/></td> --%>
+<%-- 	                    		<td>${timeList.timeUnit}分鐘</td> --%>
+<!-- 	                    		<td> -->
+<%-- 	                    			<form action="<%=request.getContextPath()%>/Groups.do" method="post"> --%>
+<!-- 	                    				<input type="hidden" name="action" value="REMOVE_TIMELIST"> -->
+<%-- 	                    				<input type="hidden" name="index" value="${s.index}"> --%>
+<!-- 	                    				<input type="submit" value="刪除"> -->
+<!-- 	                    			</form> -->
+<!-- 	                    		</td> -->
+<!-- 				        	</tr> -->
+<%-- 			        	</c:forEach> --%>
 			        </tbody>
 			        <tfoot>
 		        		
 			        </tfoot>
 			    </table>
 			    
-				<form action="<%=request.getContextPath()%>/Groups.do" method="post">
-					<input type="hidden" name="groupID" value="${groupsVO.groupID}">
-					<input type="hidden" name="action" value="MAKE_SCHEDULE">
-					<input type="submit" class="btn btn-success" id="submit_move" value="送出">
-				</form>
-		
+			    <div class="col-md-1">
+		    		<button class="btn btn-info" onclick="history.back()">返回上一步</button>
+				</div>
+			    
+			    <div class="col-md-2 col-md-offset-8">
+					<form action="<%=request.getContextPath()%>/Groups.do" method="post">
+						<input type="hidden" name="groupID" value="${groupsVO.groupID}">
+						<input type="hidden" name="action" value="MAKE_SCHEDULE">
+						<input type="submit" class="btn btn-success btn-lg" id="submit_move" value="自動編排賽程">
+					</form>
+				</div>
+				<br><br><br><br><br><br>
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />
 	    	</div>
@@ -219,17 +229,82 @@
   		<script type='text/javascript' src='<%=request.getContextPath()%>/js/jquery-ui-sliderAccess.js'></script>
   		
 	    
-	<script>
-	$(document).ready(function(){
-		var submit={'margin-left': '952px'}
-		$("#submit_move").css(submit)
+	<script type="text/javascript">
+	var isChange = false;
 	
+	$(function(){
 		
+		// 定義一個全域變數在資料改變時為真
+		$("input,textarea,select").change(function () {
+            isChange = true;
+            $(this).addClass("editing");
+        });
 		
-		var opttime={dateFormat: 'yy-mm-dd',timeFormat: 'HH:mm:ss'};
-
-		$('#beginDate').datetimepicker(opttime);
-		$('#endDate').datetimepicker(opttime);
+		// 若資料有改變，離開頁面時會提示(Chrome似乎會蓋掉自訂提示?)
+        $(window).bind('beforeunload', function (e) {
+            if (isChange || $(".editing").get().length > 0) {
+                return '資料尚未存檔，確定是否要離開？';
+            }
+        });
+		
+     	// 某些按鈕屬於正常流程便不須提示
+        $("input:submit").click(function () {
+            $(window).unbind('beforeunload');
+        });
+		
+		// 讀取頁面時自動取得
+		loadList();
+		
+		// 取得JSON格式的場地列表
+		function loadList(){
+			$.getJSON("<%=request.getContextPath()%>/Groups.do",
+				{'action':'GET_TIMELIST_JSON'}, function(data) {
+				
+				var docFrag = $(document.createDocumentFragment());
+				var tb = $('#timeList>tbody');
+				tb.empty();
+				
+				$.each(data, function(index, list) {
+					var cell1 = $('<td></td>').text(index+1);
+					var cell2 = $('<td></td>').text(list.locationName);
+					var cell3 = $('<td></td>').text(list.date);
+					var cell4 = $('<td></td>').text(list.beginTime + " ~ " + list.endTime);
+					var cell5 = $('<td></td>').text(list.timeUnit);
+					var cell6 = $('<td></td>').html('<input type="button" class="btn btn-danger" id="btnRemoveLocation" value="刪除">');
+					
+					var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6]);
+					docFrag.append(row);
+					tb.append(docFrag);
+					
+				})
+			})
+		}
+		
+		// 新增場地
+		$('#btnAddLocation').on('click',function(){
+			var timeList = $('form[name="addLocation"]').serialize();
+			
+			$.post('<%=request.getContextPath()%>/Groups.do', timeList, function(){
+				loadList();
+			})
+		})
+		
+		// 移除場地
+		$('#timeList').on('click', '#btnRemoveLocation', function(){
+			var id = $(this).parents('tr').find('td:first-child').text();
+			
+			$.post('<%=request.getContextPath()%>/Groups.do?',
+					{'listIndex':id, 'action':'REMOVE_TEMP_LIST'}, function(){
+				loadList();
+			})
+		})
+		
+		// 時間選擇器
+		var optTime = { dateFormat : 'yy-mm-dd',
+						timeFormat : 'HH:mm:ss' };
+		
+		$('#beginDate').datetimepicker(optTime);
+		$('#endDate').datetimepicker(optTime);
 	})
 	</script>
     </body>

@@ -5,6 +5,15 @@
 <%
 	java.util.Date date = new java.util.Date();
 	pageContext.setAttribute("date", date);
+	
+	try {
+		eeit.season.model.SeasonService seasonSvc = new eeit.season.model.SeasonService();
+		Integer seasonID = Integer.valueOf(request.getParameter("seasonID"));
+		pageContext.setAttribute("seasonVO", seasonSvc.findBySeasonID(seasonID));
+		// 若有錯誤導向首頁可避免500
+	} catch(Exception e) {
+		response.sendRedirect(request.getContextPath());
+	}
 %>
 
 <!DOCTYPE html>
@@ -35,6 +44,10 @@
       	  margin-bottom: 10px;
       	  font-family:微軟正黑體;
         }
+        table {
+        	font-size: 15px;
+        	font-family:微軟正黑體;
+        }
         </style>
     </head>
 
@@ -60,11 +73,10 @@
     	</div>
     	<!--上層導覽列(結束) -->
 			<div class="col-md-12">
-			<h2>分組列表</h2>
+			<h2>${seasonVO.seasonName}</h2>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<td>賽季名稱</td>
 			                <td>賽季開始日期</td>
 			                <td>賽季結束日期</td>
 			                <td>報名開始日期</td>
@@ -73,7 +85,6 @@
 					<thead>
 					<tbody>
 						<tr>
-							<td>${seasonVO.seasonName}</td>
 							<td>${seasonVO.seasonBeginDate}</td>
 							<td>${seasonVO.seasonEndDate}</td>
 							<td><fmt:formatDate value="${seasonVO.signUpBegin}" pattern="yyyy-MM-dd HH:mm"/></td>
@@ -82,6 +93,11 @@
 					</tbody>
 				</table>
 				<p>${seasonVO.descriptions}</p>
+				
+				<a href="<%=request.getContextPath()%>/groups/addGroup.jsp?seasonID=${seasonVO.seasonID}">
+					<input type="button" class="btn btn-primary btn-lg" value="新增分組">
+				</a>
+					<br>
 				
 		        <table class="table table-bordered">
 		            <thead>
@@ -99,7 +115,7 @@
 			        <tbody>
 			        	<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
 			        		<tr>
-			        			<td><a href="<%=request.getContextPath()%>/Games.do?action=GET_GAMES&groupID=${groupsSet.groupID}">${groupsSet.groupName}</a></td>
+			        			<td><a href="<%=request.getContextPath()%>/games/gameList_back.jsp?groupID=${groupsSet.groupID}">${groupsSet.groupName}</a></td>
 			        			<td>${groupsSet.maxTeams}</td>
 			        			<td>${groupsSet.minTeams}</td>
 			        			<td>${groupsSet.currentTeams}</td>
@@ -136,11 +152,9 @@
 			        				</c:choose>
 			        			</td>
 			        			<td>
-			        				<form action="<%=request.getContextPath()%>/Groups.do" method="post">
-			        					<input type="hidden" name="action" value="GET_ONE_TO_UPDATE">
-			        					<input type="hidden" name="groupID" value="${groupsSet.groupID}">
+			        				<a href="<%=request.getContextPath()%>/groups/updateGroup.jsp?groupID=${groupsSet.groupID}">
 			        					<input type="submit" class="btn btn-warning updateData" value="修改">
-			        				</form>
+			        				</a>
 			        			</td>
 			        			<td>
 			        				<form action="<%=request.getContextPath()%>/Groups.do" method="post">
@@ -153,9 +167,9 @@
 			        	</c:forEach>			        	
 			        </tbody>
 			    </table>
-			    
-			    
 		    </div>
+			<br><br><br><br><br><br>
+		    
 	    <jsp:include page="/footer.jsp" />
 	    </div>
 	    </div>

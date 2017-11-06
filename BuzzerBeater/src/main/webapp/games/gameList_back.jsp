@@ -1,6 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%
+	try {
+		Integer groupID = Integer.valueOf(request.getParameter("groupID"));
+		eeit.groups.model.GroupsService groupSvc = new eeit.groups.model.GroupsService();
+		request.setAttribute("groupsVO", groupSvc.findByGroupID(groupID));
+	} catch (Exception e) {
+		response.sendRedirect(request.getContextPath());
+	}
+%>
 
 <!DOCTYPE html>
     <html lang="zh" class="no-js">
@@ -15,6 +26,23 @@
     	
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
+        <style>
+        thead{
+	      background-color: #d62d67;
+    	  color: #e9e9e9;
+        }
+        #pathWay {
+      	  color: #666;
+      	  height: 28px;
+      	  line-height: 28px;
+      	  border-bottom: 1px solid #c0b7b7;
+      	  text-indent: 5px;
+      	  font-size: 18px;
+      	  font-weight: normal;
+      	  margin-bottom: 10px;
+      	  font-family:微軟正黑體;
+        }
+        </style>
     </head>
 
     <body>
@@ -22,6 +50,31 @@
 	
 		<div class="container">
 			<div class="jumbotron">
+			
+			<!--上層導覽列(開始) -->
+			<div id="pathWay">
+	        	<span>
+	            	<a href="<%=request.getContextPath() %>/index.jsp">
+	            		<span>使用者功能</span>
+	            	</a>
+	        	</span>
+	        	&gt;
+	        	<span>
+	            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+	            		<span>賽季管理</span>
+	            	</a>
+	        	</span>
+	        	&gt;
+	        	<span>
+	        		<a href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${groupsVO.seasonVO.seasonID}">
+	            		<span>分組管理</span>
+	            	</a>
+	        	</span>
+	        	&gt;
+	        	<span>賽事管理</span>
+	    	</div>
+	    	<!--上層導覽列(結束) -->
+	    	
 			<!-- 網頁內容 -->
 			<div class="col-md-12">
 				<table class="table table-bordered">
@@ -71,14 +124,8 @@
 		    <form action="<%=request.getContextPath()%>/Games.do" method="post">
 		    	<input type="hidden" name="action" value="GET_GAMES_EXCEL">
 		    	<input type="hidden" name="groupID" value="${groupsVO.groupID}">
-		    	<input type="submit" value="下載Excel">
+		    	<input type="submit" class="btn btn-info btn-lg" value="下載Excel">
 		    </form>
-		    <br>
-			<form action="<%=request.getContextPath()%>/Games.do" method="post"  enctype="multipart/form-data">
-				<input type="hidden" name="action" value="UPLOAD_GAMES_EXCEL">
-				<input type="file" name="uploadExcel" accept=".xls,.xlsx">
-				<input type="submit" value="上傳">
-			</form>
 			
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />

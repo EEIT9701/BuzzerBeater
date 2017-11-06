@@ -2,6 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%
+	eeit.season.model.SeasonService seasonSvc = new eeit.season.model.SeasonService();
+	Integer seasonID = Integer.valueOf(request.getParameter("seasonID"));
+	request.setAttribute("seasonVO", seasonSvc.findBySeasonID(seasonID));
+%>
+
 <!DOCTYPE html>
 
 <html>
@@ -29,6 +35,10 @@
       	  font-weight: normal;
       	  margin-bottom: 10px;
       	  font-family:微軟正黑體;
+        }
+        form {
+        	font-size: 22px;
+        	font-family:微軟正黑體;
         }
         </style>
     
@@ -59,51 +69,66 @@
 		<div class="col-md-12">
 		
 			<h2>修改賽季</h2>
-            	<c:if test="${not empty errorMsgs}">
+            <c:if test="${not empty errorMsgs}">
 				<p style="color:red">請修正以下錯誤:</p>
-					<ul style="color:red">
-                        <c:forEach var="message" items="${errorMsgs}">
-                            <li>${message}</li>
-                        </c:forEach>
-                    </ul>
-                </c:if>
+				<ul style="color:red">
+					<c:forEach var="message" items="${errorMsgs}">
+						<c:if test="${not empty message}">
+							<li >${message}</li>
+						</c:if>
+					</c:forEach>
+				</ul>
+			</c:if>
 
+			<div class="col-md-12">
 		    <form method="post" action="<%=request.getContextPath()%>/Season.do">
 				<input type="hidden" name="action" value="UPDATE_SEASON">
 				<input type="hidden" name="seasonID" value="${seasonVO.seasonID}">
 				
-				<table class="table table-bordered" id="seasonList">
-			        <tbody>
-						<tr>
-							<td>賽季名稱</td>
-							<td><input type="text" id="seasonName" name="seasonName" value="${seasonVO.seasonName}"></td>
-						</tr>
-						<tr>
-							<td>賽季開始日期</td>
-							<td><input type="text" id="seasonBeginDate" name="seasonBeginDate" value="${seasonVO.seasonBeginDate}"></td>
-						</tr>
-						<tr>
-							<td>賽季結束日期</td>
-							<td><input type="text" id="seasonEndDate" name="seasonEndDate" value="${seasonVO.seasonEndDate}"></td>
-						</tr>
-						<tr>
-							<td>報名開始時間</td>
-							<td><input type="text" id="signUpBegin" name="signUpBegin" value="<fmt:formatDate value='${seasonVO.signUpBegin}' pattern='yyyy-MM-dd HH:mm:ss'/>"></td>
-						</tr>
-						<tr>
-							<td>報名結束時間</td>
-							<td><input type="text" id="signUpEnd" name="signUpEnd" value="<fmt:formatDate value='${seasonVO.signUpEnd}' pattern='yyyy-MM-dd HH:mm:ss'/>"></td>
-						</tr>
-						<tr>
-							<td>備註</td>
-							<td><textarea name="descriptions" >${seasonVO.descriptions}</textarea></td>
-						</tr>
-			        </tbody>
+				<div class="form-group row">
+					<label for="seasonName" class="col-2 col-form-label">賽事名稱</label>
+					<input class="form-control" type="text" value="${seasonVO.seasonName}" id="seasonName" name="seasonName">
+				</div>
+				
+				<div class="form-group row">
+					<label for="seasonBeginDate" class="col-2 col-form-label">賽季開始日期</label>
+					<input class="form-control" type="text" value="${seasonVO.seasonBeginDate}" id="seasonBeginDate" name="seasonBeginDate">
+				</div>
+				<div class="form-group row">
+					<label for="seasonEndDate" class="col-2 col-form-label">賽季結束日期</label>
+					<input class="form-control" type="text" value="${seasonVO.seasonEndDate}" id="seasonEndDate" name="seasonEndDate">
+				</div>
+				
+				<div class="form-group row">
+					<label for="signUpBegin" class="col-2 col-form-label">報名開始時間</label>
+					<input class="form-control" type="text" value="${seasonVO.signUpBegin}" id="signUpBegin" name="signUpBegin">
+				</div>
+
+				<div class="form-group row">
+					<label for="signUpEnd" class="col-2 col-form-label">報名截止時間</label>
+					<input class="form-control" type="text" value="${seasonVO.signUpEnd}" id="signUpEnd" name="signUpEnd">
+				</div>
+				
+				<div class="form-group row">
+					<label for="descriptions">備註</label>
+					<textarea class="form-control" rows="5" id="descriptions" name="descriptions">${seasonVO.descriptions}</textarea>
+				</div>
 			        
-			    </table>
-			    <input type="submit" class="btn btn-success" id="submit_move" value="送出" >
-			    <a href="<%=request.getContextPath()%>/season/seasonList_back.jsp"><input type ="button" class="btn btn-danger" value="取消"></a>
+			    <br>
+				
+				<div class="col-md-3 col-md-offset-9">
+				    <input type="submit" class="btn btn-success btn-lg" value="確認">
+					<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+						<input type="button" class="btn btn-danger btn-lg" value="取消">
+					</a>
+				</div>
+				
+				
 			</form>
+			
+			<br><br><br><br><br><br><br><br>
+			
+			</div>
 		</div>
 	<jsp:include page="/footer.jsp" />
 	</div>
@@ -121,13 +146,6 @@
   		
 	<script>
 	$(document).ready(function(){
-		var td_1={'font-family':'微軟正黑體',
- 		 		'text-align':'center',
- 		 		'line-height': '60px',
-	    		'font-size': '20px'}
-		var submit={'margin-left': '876px'}
-		$("tr td:first-child").css(td_1)
-		$("#submit_move").css(submit)
 	
 		
 		var opt={dateFormat: 'yy-mm-dd',showTime: false, timeFormat: ''};

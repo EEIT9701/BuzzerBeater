@@ -13,7 +13,7 @@
 			<column name="seasonID" />
 		</many-to-one>
 
-		<set name="groupRegSet" table="GroupRegistration" lazy="false">
+		<set name="groupRegSet" table="GroupRegistration" lazy="false" order-by="registerDate asc">
 			<key>
 				<column name="groupID" />
 			</key>

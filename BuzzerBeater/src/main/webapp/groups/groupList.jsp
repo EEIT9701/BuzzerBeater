@@ -1,9 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-
+<%
+	try {
+		eeit.season.model.SeasonService seasonSvc = new eeit.season.model.SeasonService();
+		Integer seasonID = Integer.valueOf(request.getParameter("seasonID"));
+		pageContext.setAttribute("seasonVO", seasonSvc.findBySeasonID(seasonID));
+		// 若有錯誤導向首頁可避免500
+	} catch(Exception e) {
+		response.sendRedirect(request.getContextPath());
+	}
+%>
 <!DOCTYPE html>
     <html>
 

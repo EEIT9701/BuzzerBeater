@@ -7,8 +7,10 @@ import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -52,12 +55,184 @@ public class GamesServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 
-		if ("GET_GAMES".equals(action)) {
-			Integer groupID = Integer.valueOf(request.getParameter("groupID"));
-			GroupsService svc = new GroupsService();
-			GroupsVO groupsVO = svc.findByGroupID(groupID);
-			request.setAttribute("groupsVO", groupsVO);
-			request.getRequestDispatcher("/games/gameList.jsp").forward(request, response);
+		if ("GET_TEMP_EXCEL".equals(action)) {
+
+			// 創建excel
+			HSSFWorkbook workbook = new HSSFWorkbook();
+			HSSFSheet sheet = workbook.createSheet("賽事資料");
+
+			// 設定欄位文字樣式
+			Font titleFont = workbook.createFont();
+			titleFont.setColor(HSSFColor.BLACK.index); // 顏色黑色
+			titleFont.setBoldweight(Font.BOLDWEIGHT_BOLD); // 粗體
+			titleFont.setFontHeightInPoints((short) 16); // 字體大小
+			titleFont.setFontName("微軟正黑體"); // 字型
+
+			// 設定欄位樣式
+			CellStyle titleStyle = workbook.createCellStyle();
+			titleStyle.setFillForegroundColor(HSSFColor.LIGHT_ORANGE.index); // 填滿顏色
+			titleStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
+			titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 水平置中
+			titleStyle.setFont(titleFont); // 設定文字樣式
+			titleStyle.setBorderBottom((short) 1); // 設定框線
+			titleStyle.setBorderLeft((short) 1);
+			titleStyle.setBorderRight((short) 1);
+			titleStyle.setBorderTop((short) 1);
+
+			// 設定表格內容文字樣式
+			Font cellFont = workbook.createFont();
+			cellFont.setFontHeightInPoints((short) 14);
+			cellFont.setFontName("微軟正黑體"); // 字型
+
+			// 設定表格內容樣式
+			CellStyle cellStyle = workbook.createCellStyle();
+			cellStyle.setFillForegroundColor(HSSFColor.TAN.index); // 填滿顏色
+			cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
+			cellStyle.setFont(cellFont); // 設定文字樣式
+			cellStyle.setBorderBottom((short) 1); // 設定框線
+			cellStyle.setBorderLeft((short) 1);
+			cellStyle.setBorderRight((short) 1);
+			cellStyle.setBorderTop((short) 1);
+
+			// 設置欄位名稱
+			HSSFRow titleRow = sheet.createRow(0); // 產生row(橫排)
+			String[] column = { "賽事日期", "開始時間", "結束時間", "比賽地點", "主隊", "客隊" };
+
+			for (int i = 0; i < column.length; i++) {
+				HSSFCell cell = titleRow.createCell(i); // Cell == 儲存格
+				cell.setCellValue(column[i]);
+				cell.setCellStyle(titleStyle);
+			}
+
+			// 取得session內資料
+			HttpSession session = request.getSession();
+			@SuppressWarnings("unchecked")
+			List<Map<String, String>> gameSchedule = (List<Map<String, String>>) session.getAttribute("gameSchedule");
+
+			// 設置表格內容
+			int rowNum = 1;
+			for (Map<String, String> map : gameSchedule) {
+				HSSFRow row = sheet.createRow(rowNum);
+
+				HSSFCell cell0 = row.createCell(0);
+				cell0.setCellValue(map.get("date").replace("-", "/"));
+				cell0.setCellStyle(cellStyle);
+
+				HSSFCell cell1 = row.createCell(1);
+				cell1.setCellValue(map.get("beginTime"));
+				cell1.setCellStyle(cellStyle);
+
+				HSSFCell cell2 = row.createCell(2);
+				cell2.setCellValue(map.get("endTime"));
+				cell2.setCellStyle(cellStyle);
+
+				HSSFCell cell3 = row.createCell(3);
+				cell3.setCellValue(map.get("locationName") + " (" + map.get("locationID") + ")");
+				cell3.setCellStyle(cellStyle);
+
+				HSSFCell cell4 = row.createCell(4);
+				cell4.setCellValue(map.get("teamAName") + " (" + map.get("teamAID") + ")");
+				cell4.setCellStyle(cellStyle);
+
+				HSSFCell cell5 = row.createCell(5);
+				cell5.setCellValue(map.get("teamBName") + " (" + map.get("teamBID") + ")");
+				cell5.setCellStyle(cellStyle);
+
+				rowNum++;
+			}
+
+			// 設置全部欄位自動調整大小
+			for (int i = 0; i < column.length; i++) {
+				sheet.autoSizeColumn(i);
+			}
+
+			// 設定header
+			response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+			response.setHeader("Content-Disposition",
+					"attachment;filename=\"" + URLEncoder.encode("賽事資料.xls", "UTF-8") + "\"");
+
+			// 回傳
+			OutputStream out = response.getOutputStream();
+			workbook.write(out);
+			out.flush();
+			out.close();
+		}
+
+		if ("UPDATE_TEMP_EXCEL".equals(action)) {
+			// 取得上傳檔案並轉為資料流
+			Part part = request.getPart("uploadExcel");
+			FileInputStream fis = (FileInputStream) part.getInputStream();
+
+			// 用此資料流建立workbook
+			HSSFWorkbook workbook = new HSSFWorkbook(fis);
+
+			// 取得第一個工作表
+			HSSFSheet sheet = workbook.getSheetAt(0);
+
+			List<Map<String, String>> gameSchedule = new ArrayList<Map<String, String>>();
+			Map<String, String> map = null;
+
+			// 取得所有row
+			for (int i = 0; i < sheet.getPhysicalNumberOfRows(); i++) {
+				HSSFRow row = sheet.getRow(i);
+
+				if (i == 0) {
+					continue; // 為了跳過標題列
+				}
+
+				map = new HashMap<String, String>();
+
+				// 讀取cell內容存入session
+				String cell0 = row.getCell(0).toString().replaceAll("/", "-");
+				map.put("date", cell0);
+
+				String cell1 = row.getCell(1).toString();
+				map.put("beginTime", cell1);
+
+				String cell2 = row.getCell(2).toString();
+				map.put("endTime", cell2);
+
+				String cell3 = row.getCell(3).toString();
+				map.put("locationName", cell3.substring(0, cell3.indexOf("(")).trim());
+				map.put("locationID", cell3.substring(cell3.indexOf("(") + 1, cell3.indexOf(")")));
+
+				String cell4 = row.getCell(4).toString();
+				map.put("teamAName", cell4.substring(0, cell4.indexOf("(")).trim());
+				map.put("teamAID", cell4.substring(cell4.indexOf("(") + 1, cell4.indexOf(")")));
+
+				String cell5 = row.getCell(5).toString();
+				map.put("teamBName", cell5.substring(0, cell5.indexOf("(")).trim());
+				map.put("teamBID", cell5.substring(cell5.indexOf("(") + 1, cell5.indexOf(")")));
+
+				gameSchedule.add(map);
+			}
+
+			request.getSession().setAttribute("gameSchedule", gameSchedule);
+
+			response.sendRedirect(request.getContextPath() + "/games/showSchedule.jsp#teamList");
+		}
+
+		if ("ADD_GAME".equals(action)) {
+			HttpSession session = request.getSession();
+			Integer groupID = (Integer) session.getAttribute("groupID");
+			@SuppressWarnings("unchecked")
+			List<Map<String, String>> gameSchedule = (List<Map<String, String>>) session.getAttribute("gameSchedule");
+
+			GamesService gameSvc = new GamesService();
+			for (Map<String, String> game : gameSchedule) {
+				Integer locationID = Integer.valueOf(game.get("locationID"));
+				Integer teamAID = Integer.valueOf(game.get("teamAID"));
+				Integer teamBID = Integer.valueOf(game.get("teamBID"));
+				String date = game.get("date");
+				Timestamp gameBeginDate = Timestamp.valueOf(date + " " + game.get("beginTime") + ":00");
+				Timestamp gameEndDate = Timestamp.valueOf(date + " " + game.get("endTime") + ":00");
+
+				gameSvc.addGames(groupID, locationID, teamAID, 0, teamBID, 0, gameBeginDate, gameEndDate);
+			}
+			
+			session.removeAttribute("groupID");
+			session.removeAttribute("gameSchedule");
+			response.sendRedirect(request.getContextPath() + "/games/gameList_back.jsp?groupID=" + groupID);
 		}
 
 		if ("UPLOAD_GAMES_EXCEL".equals(action)) {
@@ -120,7 +295,7 @@ public class GamesServlet extends HttpServlet {
 				}
 
 				response.setContentType("text/html; charset=UTF-8");
-				response.sendRedirect(request.getContextPath()+"/Games.do?action=GET_GAMES&groupID=" + groupID);
+				response.sendRedirect(request.getContextPath() + "/Games.do?action=GET_GAMES&groupID=" + groupID);
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());

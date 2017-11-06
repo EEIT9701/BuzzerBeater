@@ -1,6 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%
+	eeit.groups.model.GroupsService groupSvc = new eeit.groups.model.GroupsService();
+	Integer groupID = Integer.valueOf(request.getParameter("groupID"));
+	request.setAttribute("groupsVO", groupSvc.findByGroupID(groupID));
+%>
+
 <!DOCTYPE html>
 
 <html>
