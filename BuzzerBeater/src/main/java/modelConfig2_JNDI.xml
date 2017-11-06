@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans 
+<beans
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
@@ -12,9 +12,12 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<!-- 此處使用JNDI連線池 -->
-	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-		<property name="jndiName" value="java:/comp/env/jdbc/TestDB" />
+	<!-- 此處使用DataSource連練(單機測試用) -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url" value="jdbc:sqlserver://localhost:1433;DatabaseName=basketballdb" />
+		<property name="username" value="sa" />
+		<property name="password" value="P@ssw0rd" />
 	</bean>
 
 	<bean id="sessionFactory"
@@ -39,11 +42,10 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
 				<prop key="hibernate.transaction.coordinator_class">jdbc</prop>
-				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext
-				</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</prop>
 			</props>
 		</property>
 	</bean>
@@ -51,7 +53,7 @@
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<!-- 對應至所屬DAO -->
 	<bean id="GameMediaDAO" class="eeit.gamemedia.model.GameMediaDAO_HibernateTemplate">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
