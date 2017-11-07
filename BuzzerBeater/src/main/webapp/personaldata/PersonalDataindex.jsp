@@ -52,9 +52,7 @@
 			<!--****************-->
 			<div class="row">
 				<!--第一列-左邊表格-格式_.col-md-8-->
-				<div class="col-md-12">
-
-			
+				<div class="col-md-12">		
 					<!-- <div >
 						球季 <select>
 							<option label="2015賽季" value="object:7" >季前熱身賽</option>
@@ -67,8 +65,8 @@
 						</select>
 
 						 <input type="submit" value="確定">
-
 					</div> -->
+	
 				</div>
 			</div>
 		

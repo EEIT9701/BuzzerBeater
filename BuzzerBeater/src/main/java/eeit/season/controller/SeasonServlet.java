@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -25,7 +26,6 @@ import org.json.simple.JSONValue;
 import eeit.games.model.GamesVO;
 import eeit.groups.model.GroupsService;
 import eeit.groups.model.GroupsVO;
-import eeit.personaldata.model.PersonalDataVO;
 import eeit.season.model.SeasonService;
 import eeit.season.model.SeasonVO;
 
@@ -49,6 +49,7 @@ public class SeasonServlet extends HttpServlet {
 		/********************************************************************/
 		if ("GET_GROUP".equals(action)) {
 			Integer seasonID = Integer.valueOf(request.getParameter("seasonID"));
+
 			SeasonService svc = new SeasonService();
 			SeasonVO seasonVO = svc.findBySeasonID(seasonID);
 
@@ -60,21 +61,6 @@ public class SeasonServlet extends HttpServlet {
 				map.put("groupID", groupsVO.getGroupID().toString());
 				map.put("groupName", groupsVO.getGroupName());
 
-				List<Map<String,Object>> pList = new ArrayList<Map<String,Object>>();
-				
-				for(GamesVO gamesVO : groupsVO.getGamesSet()){
-					for(PersonalDataVO pvo: gamesVO.getPersonalDataSet()){
-						Map<String,Object> pmap = new HashMap<String,Object>();
-						
-						pmap.put("twoPoint", pvo.getTwoPoint().toString());
-						pmap.put("threePoint", pvo.getThreePoint().toString());
-						pmap.put("playerName", pvo.getPlayersVO().getPlayerName());
-						
-						pList.add(pmap);
-					}
-				}
-				map.put("data", pList);
-				
 				list.add(map);
 			}
 
@@ -84,7 +70,9 @@ public class SeasonServlet extends HttpServlet {
 			response.setHeader("Access-Control-Allow-Origin", "*");
 			response.setHeader("content-type", "text/html;charset=UTF-8");
 			response.getWriter().println(json);
+
 		}
+
 
 		/********************************************************************/
 		if ("GET_ALL_SEASON".equals(action)) {

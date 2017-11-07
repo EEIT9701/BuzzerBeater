@@ -53,16 +53,16 @@
 				<!--第一列-左邊表格-格式_.col-md-8-->
 				<div class="col-md-12">
 				
-			        <!-- 	球季 <select>
-							<option label="2015賽季" value="object:7" >季前熱身賽</option>
-							<option label="2016賽季" value="object:8">例行賽</option>
-							<option label="2017賽季" value="object:9" selected="selected">季後賽</option>
+			    	球季 <select>
+							<option label="2018-2019例行賽" value="object:7" >季前熱身賽</option>
+							<option label="2017-2018例行賽" value="object:8">例行賽</option>
+							<option label="2016-2017例行賽" value="object:9" selected="selected">季後賽</option>
 						</select> 組別 <select>
-							<option label="東區" value="object:7" selected="selected">季前熱身賽</option>
-							<option label="西區" value="object:8">例行賽</option>
-							  <option label="少年組" value="object:9">季後賽</option>  
+							<option label="西區" value="object:7" selected="selected">季前熱身賽</option>
+							<option label="東區" value="object:8">例行賽</option>
+							 
 						</select>
-						 <input type="submit" value="確定"> -->
+				
 
 				
 				</div>
