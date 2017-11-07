@@ -14,4 +14,6 @@ public interface GameMediaDAO_Interface {
 	public List<GameMediaVO> getAll();
 	
 	public List<GameMediaVO> getAllVideo();
+	
+	public List<GameMediaVO> tagFunction(String tag);
 }

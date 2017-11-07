@@ -15,6 +15,7 @@ import eeit.games.model.GamesVO;
 
 
 public class GameMediaService {
+	private static final String String = null;
 	private GameMediaDAO_Interface dao;
 	
 	public GameMediaService(){
@@ -73,6 +74,10 @@ public class GameMediaService {
 	
 	public List<GameMediaVO> getAllVideo() {
 		return dao.getAllVideo();
+	}
+	
+	public List<GameMediaVO> tagFunction(String tag){
+		return dao.tagFunction(tag);
 	}
 	
 	public List<HashMap<String,Object>> getAllInJsonForm(){

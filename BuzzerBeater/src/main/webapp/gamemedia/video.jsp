@@ -92,7 +92,7 @@
 				</div>
            	</div>
            	</br>
-           	<div class="row">
+           	<div class="row card">
            	
 				<c:forEach var="gameMediaVO" items="${gameMediaSvc.all}">	
 					<c:forEach var="gameMediaType" items="${gameMediaVO.mediaType}">
@@ -106,7 +106,7 @@
     										<p class="card-text" align="center">
     											<img src="<%=request.getContextPath()%>/images/tag.png">
     											<c:forEach var="tag" items="${gameMediaVO.tag}">
-    												<button class="tag btn btn-warning">${tag}</button>
+    												<a class="tagFunction" href="">${tag}</a>
     											</c:forEach>
     										</p>
     									</nobr>
@@ -128,6 +128,7 @@
     <script>
 	$(function(){
 		getlist();
+		tagFunction();
 		function getlist(){
 			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
 				var list = $('#videolist');
@@ -154,7 +155,15 @@
 					}
 				})
 			})
-		}	
+		}
+		function tagFunction(){
+			$('.tagFunction').click(function(){
+				var tag = $('this').text()
+				$.post('<%=request.getContextPath()%>/GameMedia.do',{'action':'searchTag','tag':tag},function(data){
+					$('.card').empty();
+				})
+			})
+		}
 	});
 
 	

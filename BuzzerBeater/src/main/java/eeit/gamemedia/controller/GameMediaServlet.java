@@ -43,13 +43,13 @@ public class GameMediaServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		GameMediaService gameMediaSvc = new GameMediaService();
 		GroupsService groupSvc = new GroupsService();
 		GamesService gameSvc = new GamesService();
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
+			GameMediaService gameMediaSvc = new GameMediaService();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -110,6 +110,7 @@ public class GameMediaServlet extends HttpServlet {
 		if ("getOnePhotoForDisplay".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
+			GameMediaService gameMediaSvc = new GameMediaService();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -171,7 +172,7 @@ public class GameMediaServlet extends HttpServlet {
 		if("getOneForUpdate".equals(action)){
 			
 			Integer mediaID = new Integer(req.getParameter("mediaID"));
-			
+			GameMediaService gameMediaSvc = new GameMediaService();
 			GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
 			
 			req.setAttribute("gameMediaVO", gameMediaVO);
@@ -184,7 +185,7 @@ public class GameMediaServlet extends HttpServlet {
 		if("getOnePhotoForUpdate".equals(action)){
 			
 			Integer mediaID = new Integer(req.getParameter("mediaID"));
-			
+			GameMediaService gameMediaSvc = new GameMediaService();
 			GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
 			
 			req.setAttribute("gameMediaVO", gameMediaVO);
@@ -194,7 +195,42 @@ public class GameMediaServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 		
-		
+		if ("searchTag".equals(action)){
+			String tag = req.getParameter("tag");
+			GameMediaService gameMediaSvc = new GameMediaService();
+			List<GameMediaVO> list = gameMediaSvc.tagFunction(tag);
+			
+			List<HashMap<String,Object>> returnlist = new ArrayList<HashMap<String, Object>>();
+			Map<String, Object> map = null;
+			
+			for(GameMediaVO gameMediaVO:list){
+				
+				String[] tag1 = gameMediaVO.getTag().split(",");
+				
+				map = new HashMap<String,Object>();
+				map.put("groupName", gameMediaVO.getGamesVO().getGroupsVO().getGroupName());
+				map.put("teamA", gameMediaVO.getGamesVO().getTeamAVO().getTeamName());
+				map.put("teamB", gameMediaVO.getGamesVO().getTeamBVO().getTeamName());
+				map.put("gameID",gameMediaVO.getGamesVO().getGameID().toString());
+				map.put("mediaID",gameMediaVO.getMediaID().toString());
+				map.put("mediasName",gameMediaVO.getMediasName());
+				map.put("gameVideo",gameMediaVO.getGameVideo());
+				map.put("gamePhoto",gameMediaVO.getGamePhoto());
+				map.put("mediaType",gameMediaVO.getMediaType());
+				map.put("mediaDate",gameMediaVO.getMediaDate().toString());
+				map.put("descriptions",gameMediaVO.getDescriptions());
+				map.put("tag", tag1);
+				
+				returnlist.add((HashMap<String, Object>) map);
+			}
+			
+			Gson gson = new Gson();
+			String jsonList = gson.toJson(returnlist); 
+			
+            PrintWriter out = res.getWriter();
+			out.println(jsonList);
+			
+		}
 		
 		if ("Update".equals(action)) { // 來自listAllEmp.jsp的請求
 			
@@ -208,7 +244,7 @@ public class GameMediaServlet extends HttpServlet {
 			String descriptions1 = req.getParameter("descriptions");
 			//JSONObject gVO = new JSONObject(jsonString);
 			//================================================		
-			
+			GameMediaService gameMediaSvc = new GameMediaService();
 			GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
 			Integer gameID = gameMediaVO.getGamesVO().getGameID();
 			String mediasName = title;
@@ -243,7 +279,8 @@ public class GameMediaServlet extends HttpServlet {
 			res.setHeader("Access-Control-Allow-Origin", "*");
 			res.setHeader("content-type", "text/html;charset=UTF-8");
 			res.setCharacterEncoding("UTF-8");
-
+			
+			GameMediaService gameMediaSvc = new GameMediaService();
 			//String jsonList = JSONValue.toJSONString(gameMediaSvc.getAllInJsonForm());
 			Gson gson = new Gson();
 			String jsonList = gson.toJson(gameMediaSvc.getAllInJsonForm());
@@ -265,6 +302,7 @@ public class GameMediaServlet extends HttpServlet {
 			res.setHeader("content-type", "text/html;charset=UTF-8");
 			res.setCharacterEncoding("UTF-8");
 			
+			GameMediaService gameMediaSvc = new GameMediaService();
 			Integer mediaID = new Integer(req.getParameter("mediaID"));
 			//String jsonList = JSONValue.toJSONString(gameMediaSvc.getAllInJsonForm());
 			//Gson gson = new Gson();
@@ -294,7 +332,8 @@ public class GameMediaServlet extends HttpServlet {
 //				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 			Integer gameID = Integer.valueOf(req.getParameter("gameID"));
 			String mediasName = req.getParameter("mediasName");
-				
+			GameMediaService gameMediaSvc = new GameMediaService();
+			
 			List<GameMediaVO> gameVideoAmount = gameMediaSvc.getAllVideo();
 			int count = gameVideoAmount.size();
 	
@@ -436,7 +475,7 @@ public class GameMediaServlet extends HttpServlet {
 			Integer mediaID = Integer.valueOf(req.getParameter("mediaID"));
 			
 			/***************************2.開始刪除資料***************************************/
-			
+			GameMediaService gameMediaSvc = new GameMediaService();
 			gameMediaSvc.deleteGameMedia(mediaID);
 			
 			/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
@@ -457,7 +496,7 @@ public class GameMediaServlet extends HttpServlet {
 				Integer mediaID = new Integer(req.getParameter("mediaID"));
 				
 				/***************************2.開始刪除資料***************************************/
-				
+				GameMediaService gameMediaSvc = new GameMediaService();
 				gameMediaSvc.deleteGameMedia(mediaID);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								

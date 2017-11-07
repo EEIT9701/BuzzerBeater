@@ -196,5 +196,11 @@ public class GameMediaDAO_JDBC implements GameMediaDAO_Interface{
 		return null;
 	}
 
+	@Override
+	public List<GameMediaVO> tagFunction(String tag) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }
