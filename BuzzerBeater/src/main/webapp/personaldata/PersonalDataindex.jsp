@@ -86,8 +86,8 @@
                          
                             </ul>
                             <div id="tabs-1">
-                                <table class="table table-bordered">
-                                   					<table class="table table-bordered" id="table">
+                                <table class="table table-bordered" id="table">
+                                   				
 						<thead>
 							<tr>
 

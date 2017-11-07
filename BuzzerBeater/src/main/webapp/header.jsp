@@ -139,7 +139,7 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">數據</a>
 					<ul class="dropdown-menu">
-						<li><a href="<%=request.getContextPath() %>/personaldata/PersonalDataindex.jsp">個人數據<!--這行的href輸入超連結頁面--></a></li>
+						<li><a href="<%=request.getContextPath() %>/personaldata/personalData.jsp">個人數據<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="<%=request.getContextPath() %>/personaldata/TeamDataindex.jsp">球隊數據<!--這行的href輸入超連結頁面--></a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"    

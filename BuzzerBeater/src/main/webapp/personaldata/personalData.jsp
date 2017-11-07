@@ -25,7 +25,7 @@
         
     	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    	<link href="<%=request.getContextPath() %>/css/jquery-ui-1.12.1.css" rel="stylesheet">
+    	
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
     </head>
@@ -47,15 +47,8 @@
 			組別:<select name="group">
 			</select>
 			
-		<div id="tabs">
-						<ul>
-							<li><a href="#tabs-1">平均</a></li>
-							<li><a href="#tabs-2">總合</a></li>
-
-						</ul>
-						<div id="tabs-1">
-						<table class="table table-bordered" id="personalData">
-		
+		<br><br>
+			<table border="1" id="personalData">
 				<thead>
 					<tr>
 						<th>球員姓名</th>
@@ -136,8 +129,8 @@
 				</tbody>
 			</table>
 		
-</div>
-
+		
+		
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />
 	    	</div>
@@ -161,8 +154,8 @@
   				//下拉選單
   				$.getJSON('<%=request.getContextPath()%>/Season.do',
   						{'action':'GET_GROUP','seasonID':seasonID},function(data){
-  					var cell1 = $('<option></option>').text("請選擇");
-  					select.append(cell1);
+  			 	var cell1 = $('<option></option>').text("請選擇"); 
+  					select.append(cell1); 
   							
   					$.each(data,function(idx,group){
   						var cell2 = $('<option></option>').attr('value',group.groupID).text(group.groupName);
@@ -283,37 +276,30 @@
   			
   			
   		})
-  		$(document).ready(function() {
-		$('#personalData').DataTable({
-			"lengthMenu": [[10, 15, 25, -1], [10, 15, 25, "All"]],
-			"pagingType": "full_numbers",
-			"language": {
-				"lengthMenu":"每一頁顯示_MENU_ 筆資料",
-				"zeroRecords":"查無資料",
-				"info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
-				"infoEmpty":"無資料",
-				"infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
-				"search":"搜尋：",
-				"paginate":{
-					"first":"第一頁",
-					"previous":"上一頁",
-					"next":"下一頁",
-					"last":"最末頁"					
-				}
-		  }
-		})
-	});
-  
   		
-  		</script>
+  		$(document).ready(function() {
+			$('#personalData').DataTable({
+				"lengthMenu": [[10, 15, 25, -1], [10, 15, 25, "All"]],
+				"pagingType": "full_numbers",
+				"language": {
+					"lengthMenu":"每一頁顯示_MENU_ 筆資料",
+					"zeroRecords":"查無資料",
+					"info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
+					"infoEmpty":"無資料",
+					"infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
+					"search":"搜尋：",
+					"paginate":{
+						"first":"第一頁",
+						"previous":"上一頁",
+						"next":"下一頁",
+						"last":"最末頁"					
+					}
+			  }
+			})
+		});
 
-            <script>
-                $(function () {
-                    $("#tabs").tabs({
-                        event: "mouseover"
-                    });
-                });
-            </script>
+  		</script>
+  		
     </body>
 
     </html>
