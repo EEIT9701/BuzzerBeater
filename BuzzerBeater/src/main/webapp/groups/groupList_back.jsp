@@ -44,10 +44,6 @@
       	  margin-bottom: 10px;
       	  font-family:微軟正黑體;
         }
-        table {
-        	font-size: 15px;
-        	font-family:微軟正黑體;
-        }
         </style>
     </head>
 
@@ -63,13 +59,15 @@
             	<a href="<%=request.getContextPath() %>/index.jsp">
             		<span>使用者功能</span>
             	</a>
-        	</span>&gt;
-        	        	<span>
+        	</span>
+        	&gt;
+        	<span>
             	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
             		<span>賽季管理</span>
             	</a>
-        	</span>&gt;
-        	<span><span>分組列表</span></span>
+        	</span>
+        	&gt;
+        	<span>${seasonVO.seasonName}</span>
     	</div>
     	<!--上層導覽列(結束) -->
 			<div class="col-md-12">
@@ -93,11 +91,6 @@
 					</tbody>
 				</table>
 				<p>${seasonVO.descriptions}</p>
-				
-				<a href="<%=request.getContextPath()%>/groups/addGroup.jsp?seasonID=${seasonVO.seasonID}">
-					<input type="button" class="btn btn-primary btn-lg" value="新增分組">
-				</a>
-					<br>
 				
 		        <table class="table table-bordered">
 		            <thead>
@@ -124,48 +117,81 @@
 			        			<td>
 			        				<c:choose>
 			        					<c:when test="${groupsSet.seasonVO.seasonEndDate < date}">
-			        						賽季已結束
+			        						<nobr>賽季已結束</nobr>
 			        					</c:when>
 			        					<c:when test="${groupsSet.seasonVO.seasonEndDate > date && groupsSet.seasonVO.seasonBeginDate < date}">
-			        						賽季進行中
+			        						<nobr>賽季進行中</nobr>
 			        					</c:when>
 			        					<c:when test="${groupsSet.seasonVO.signUpEnd < date}">
-			        						報名已截止
+			        						<nobr>報名已截止</nobr>
 			        					</c:when>
 			        					<c:when test="${groupsSet.seasonVO.signUpBegin > date}">
-			        						報名尚未開始
+			        						<nobr>報名尚未開始</nobr>
 			        					</c:when>
 			        					<c:otherwise>
 			        						<c:if test="${groupsSet.currentTeams < groupsSet.minTeams}">
-			        							未達最低隊伍數量
+			        							<nobr>未達最低隊伍數量</nobr>
 			        						</c:if>
-			        						<c:if test="${groupsSet.currentTeams == groupsSet.maxTeams}">
-			        							已額滿
-			        							<c:if test="${empty groupsSet.gamesSet}">
-			        								<br><a style="color:white;"href="<%=request.getContextPath()%>/Groups.do?action=ADD_SCHEDULE&groupID=${groupsSet.groupID}"><button class="btn btn-primary">可編排賽程</button></a>
-			        							</c:if>
+			        						<c:if test="${groupsSet.currentTeams == groupsSet.maxTeams && empty groupsSet.gamesSet}">
+			        							<a style="color:white;"href="<%=request.getContextPath()%>/Groups.do?action=ADD_SCHEDULE&groupID=${groupsSet.groupID}"><button class="btn btn-primary blockUI">前往賽程安排系統</button></a>
+			        						</c:if>
+			        						<c:if test="${groupsSet.currentTeams == groupsSet.maxTeams && not empty groupsSet.gamesSet}">
+			        							<nobr>賽程已安排完成</nobr>
 			        						</c:if>
 			        						<c:if test="${groupsSet.currentTeams < groupsSet.maxTeams && groupsSet.currentTeams >= groupsSet.minTeams}">
-			        							未額滿
+			        							<nobr>未額滿</nobr>
 			        						</c:if>
 			        					</c:otherwise>
 			        				</c:choose>
 			        			</td>
 			        			<td>
 			        				<a href="<%=request.getContextPath()%>/groups/updateGroup.jsp?groupID=${groupsSet.groupID}">
-			        					<input type="submit" class="btn btn-warning updateData" value="修改">
+			        					<input type="submit" class="btn btn-warning updateData blockUI" value="修改">
 			        				</a>
 			        			</td>
 			        			<td>
 			        				<form action="<%=request.getContextPath()%>/Groups.do" method="post">
 			        					<input type="hidden" name="action" value="DELETE_GROUP">
 			        					<input type="hidden" name="groupID" value="${groupsSet.groupID}">
-			        					<input type="submit" class="btn btn-danger" value="刪除">
+			        					<input type="hidden" name="seasonID" value="${seasonVO.seasonID}">
+			        					<input type="submit" class="btn btn-danger blockUI" value="刪除">
 			        				</form>
 			        			</td>
 			        		</tr>
 			        	</c:forEach>			        	
 			        </tbody>
+			        
+			        <tfoot>
+			        	<form action="<%=request.getContextPath()%>/Groups.do" method="post">
+			        	<tr>
+			        		<td>
+			        			<input class="form-control" type="text" value="${groupVO.groupName}" id="groupName" name="groupName">
+			        		</td>
+			        		<td>
+			        			<input class="form-control" type="number" value="${groupVO.maxTeams}" id="maxTeams" name="maxTeams">
+			        		</td>
+			        		<td>
+			        			<input class="form-control" type="number" value="${groupVO.minTeams}" id="minTeams" name="minTeams">
+			        		</td>
+			        		<td></td>
+			        		<td>
+			        			<input class="form-control" type="number" value="${groupVO.maxPlayers}" id="maxPlayers" name="maxPlayers">
+			        		</td>
+			        		<td>
+			        			<input class="form-control" type="number" value="${groupVO.minPlayers}" id="minPlayers" name="minPlayers">
+			        		</td>
+			        		<td></td>
+			        		<td>
+			        			<input type="hidden" name="action" value="ADD_GROUP">
+								<input type="hidden" name="seasonID" value="${seasonVO.seasonID}">
+			        			<input type="submit" class="btn btn-success blockUI" value="新增">
+			        		</td>
+			        		<td>
+			        			<input type="reset" class="btn btn-danger blockUI" value="重設">
+			        		</td>
+			        	</tr>
+			        	</form>
+			        </tfoot>
 			    </table>
 		    </div>
 			<br><br><br><br><br><br>
@@ -173,8 +199,21 @@
 	    <jsp:include page="/footer.jsp" />
 	    </div>
 	    </div>
+		<jsp:include page="/footer_css.jsp" />
 	    
-	    
+  		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css">
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+	    <%--遮罩插件 --%>  		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+		
+	    <script type="text/javascript">
+	    $(function(){
+	    	$(document).on('click','a ,.blockUI',function(){
+	    		// 處理中
+				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+	    	})
+	    })
+		</script>
     </body>
-	<jsp:include page="/footer_css.jsp" />
     </html>

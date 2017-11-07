@@ -54,13 +54,15 @@
             	<a href="<%=request.getContextPath() %>/index.jsp">
             		<span>首頁</span>
             	</a>
-        	</span>&gt;
+        	</span>
+        	&gt;
         	<span>
             	<a href="<%=request.getContextPath() %>/season/seasonList.jsp">
-            		<span>賽季</span>
+            		<span>賽季列表</span>
             	</a>
-        	</span>&gt;
-        	<span><span>${seasonVO.seasonName}</span></span>
+        	</span>
+        	&gt;
+        	<span>${seasonVO.seasonName}</span>
     	</div>
     	<!--上層導覽列(結束) -->
 			<div class="col-md-12">
@@ -106,38 +108,20 @@
 	    
 	    
 	    <jsp:include page="/footer_css.jsp" />
+	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	    <script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	    <%--遮罩插件 --%>  		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+		
 	    <script>
-// 	    $(document).ready(function() {
-// 	    	$('#season_cycle').DataTable();
-// 	    	});
-	    $(document).ready(function() {
-	    	$('.test').DataTable();
-	    	
-// 	    	var td_odd_over={'background-color':'#f9f9f9'};
-// 	    	var td_odd_out={'background-color':'rgb(208, 207, 207)'};
-// 	    	var td_even_over={'background-color':'#eaeaea'};
-// 	    	var td_even_out={'background-color':'rgb(197, 196, 197)'};
-// 	    	$('#season_group').children('tbody').find('tr:nth-child(odd)').css(td_odd_over);
-// 	    	$('#season_group').children('tbody').find('tr:nth-child(odd)').mouseover(odd_over);
-// 	    	$('#season_group').children('tbody').find('tr:nth-child(odd)').mouseout(odd_out);
-// 	    	$('#season_group').children('tbody').find('tr:nth-child(even)').css(td_even_over);
-// 	    	$('#season_group').children('tbody').find('tr:nth-child(even)').mouseover(even_over);
-// 	    	$('#season_group').children('tbody').find('tr:nth-child(even)').mouseout(even_out);
-// 	    	function odd_over(){
-// 	    		$(this).css(td_odd_out);
-// 	    	}
-// 	    	function odd_out(){
-// 	    		$(this).css(td_odd_over);
-// 	    	}
-// 	    	function even_over(){
-// 	    		$(this).css(td_even_out);
+	    $(function(){
+	    	$(document).on('click','a',function(){
+	    		// 處理中
+				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+	    	})
 
-// 	    	}
-// 	    	function even_out(){
-// 	    		$(this).css(td_even_over); 
-// 	    	}
-	    	});
+	    	$('.test').DataTable();
+	    });
 	    </script>
     </body>
 

@@ -70,7 +70,7 @@ public class GamesServlet extends HttpServlet {
 
 			// 設定欄位樣式
 			CellStyle titleStyle = workbook.createCellStyle();
-			titleStyle.setFillForegroundColor(HSSFColor.LIGHT_ORANGE.index); // 填滿顏色
+			titleStyle.setFillForegroundColor(HSSFColor.AQUA.index); // 填滿顏色
 			titleStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
 			titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 水平置中
 			titleStyle.setFont(titleFont); // 設定文字樣式
@@ -86,7 +86,7 @@ public class GamesServlet extends HttpServlet {
 
 			// 設定表格內容樣式
 			CellStyle cellStyle = workbook.createCellStyle();
-			cellStyle.setFillForegroundColor(HSSFColor.TAN.index); // 填滿顏色
+			cellStyle.setFillForegroundColor(HSSFColor.PALE_BLUE.index); // 填滿顏色
 			cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
 			cellStyle.setFont(cellFont); // 設定文字樣式
 			cellStyle.setBorderBottom((short) 1); // 設定框線
@@ -325,24 +325,34 @@ public class GamesServlet extends HttpServlet {
 				Font titleFont = workbook.createFont();
 				titleFont.setColor(HSSFColor.BLACK.index); // 顏色黑色
 				titleFont.setBoldweight(Font.BOLDWEIGHT_BOLD); // 粗體
-				titleFont.setFontHeightInPoints((short) 14); // 字體大小12點
+				titleFont.setFontHeightInPoints((short) 16); // 字體大小
 				titleFont.setFontName("微軟正黑體"); // 字型
 
 				// 設定欄位樣式
 				CellStyle titleStyle = workbook.createCellStyle();
-				titleStyle.setFont(titleFont); // 設定文字樣式
-				titleStyle.setFillForegroundColor(HSSFColor.LIGHT_GREEN.index); // 填滿顏色
+				titleStyle.setFillForegroundColor(HSSFColor.AQUA.index); // 填滿顏色
+				titleStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
 				titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 水平置中
+				titleStyle.setFont(titleFont); // 設定文字樣式
 				titleStyle.setBorderBottom((short) 1); // 設定框線
+				titleStyle.setBorderLeft((short) 1);
+				titleStyle.setBorderRight((short) 1);
+				titleStyle.setBorderTop((short) 1);
 
 				// 設定表格內容文字樣式
 				Font cellFont = workbook.createFont();
-				cellFont.setFontHeightInPoints((short) 12);
+				cellFont.setFontHeightInPoints((short) 14);
 				cellFont.setFontName("微軟正黑體"); // 字型
 
 				// 設定表格內容樣式
 				CellStyle cellStyle = workbook.createCellStyle();
+				cellStyle.setFillForegroundColor(HSSFColor.PALE_BLUE.index); // 填滿顏色
+				cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND); // 填滿顏色
 				cellStyle.setFont(cellFont); // 設定文字樣式
+				cellStyle.setBorderBottom((short) 1); // 設定框線
+				cellStyle.setBorderLeft((short) 1);
+				cellStyle.setBorderRight((short) 1);
+				cellStyle.setBorderTop((short) 1);
 
 				// 設置欄位名稱
 				HSSFRow titleRow = sheet.createRow(0); // 產生row(橫排)

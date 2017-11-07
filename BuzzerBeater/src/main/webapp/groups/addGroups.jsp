@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%
+	request.getSession().removeAttribute("groupsVO");
+%>
+
 <!DOCTYPE html>
     <html lang="zh" class="no-js">
 
@@ -130,12 +134,12 @@
 				    		<form action="<%=request.getContextPath()%>/Groups.do" method="post">
 				    			<input type="hidden" name="action" value="UPDATE_GROUP_TEMP">
 				    			<input type="hidden" name="setIndex" value="<%= i %>">
-				    			<td><input type="submit" id="btnDelGroup" class="btn btn-info" value="修改"></td>
+				    			<td><input type="submit" id="btnDelGroup" class="btn btn-info blockUI" value="修改"></td>
 				    		</form>
 				    		<form action="<%=request.getContextPath()%>/Groups.do" method="post">
 				    			<input type="hidden" name="action" value="REMOVE_GROUP_TEMP">
 				    			<input type="hidden" name="setIndex" value="<%= i++ %>">
-				    			<td><input type="submit" id="btnDelGroup" class="btn btn-danger" value="刪除"></td>
+				    			<td><input type="submit" id="btnDelGroup" class="btn btn-danger blockUI" value="刪除"></td>
 				    		</form>
 			    		</tr>
 		    		</c:forEach>
@@ -151,7 +155,7 @@
 					    	<td><input type="number" class="form-control" name="minTeams" min="2" value='<c:out value="${groupsVO.minTeams}" default="2"/>'></td>
 					    	<td><input type="number" class="form-control" name="maxPlayers" min="7" value='<c:out value="${groupsVO.maxPlayers}" default="15"/>'></td>
 					    	<td><input type="number" class="form-control" name="minPlayers" min="7" value='<c:out value="${groupsVO.minPlayers}" default="7"/>'></td>
-					    	<td><input type="submit" class="btn btn-primary" id="btnAddGroup" value="新增"></td>
+					    	<td><input type="submit" class="btn btn-primary blockUI" id="btnAddGroup" value="新增"></td>
 					    	<td><input type="reset" class="btn btn-info" value="清除"></td>
 				    	</tr>
 			    	</form>
@@ -160,13 +164,13 @@
 		    </table>
 		    
 		    <div class="col-md-1">
-		    	<button class="btn btn-info" onclick="history.back()">返回上一步</button>
+		    	<button class="btn btn-info blockUI" onclick="history.back()">返回上一步</button>
 			</div>
 			
 		    <div class="col-md-1 col-md-offset-9">
 			    <form action="<%=request.getContextPath()%>/Season.do" method="post">
 			    	<input type="hidden" name="action" value="ADD_SEASON">
-			    	<input type="submit" class="btn btn-success btn-lg" id="submit_move" value="確認新增">
+			    	<input type="submit" class="btn btn-success btn-lg blockUI" id="submit_move" value="確認新增">
 			    </form>
 		    </div>
 		
@@ -178,48 +182,17 @@
 	    
 	    
 	    <jsp:include page="/footer_css.jsp" />
+	    
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	    <%--遮罩插件 --%>  		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+		 
 	    <script type="text/javascript">
-			$(function() {
-				
-				
-// 				getGroups();
-// 				function getGroups() {
-<%-- 					$.getJSON('<%=request.getContextPath()%>/Groups.do', --%>
-// 						{'action':'GET_ALL_JSON'}, function(data) {
-							
-// 						var docFrag = $(document.createDocumentFragment());
-// 						var tb = $('#groupList>tbody');
-// 						tb.empty();
-						
-// 						$.each(data, function(index, vo){
-// 							var cell1 = $('<td></td>').text(vo.groupName);
-// 							var cell2 = $('<td></td>').text(vo.maxTeams);
-// 							var cell3 = $('<td></td>').text(vo.minTeams);
-// 							var cell4 = $('<td></td>').text(vo.maxPlayers);
-// 							var cell5 = $('<td></td>').text(vo.minPlayers);
-// 							var cell6 = $('<td></td>').html('<input type="button" class="btn btn-info btnDeleteGroup" value="修改">');
-// 							var cell7 = $('<td></td>').html('<input type="button" class="btn btn-danger btnDeleteGroup" value="刪除">');
-							
-// 							var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7]);
-// 							docFrag.append(row);
-// 							tb.append(docFrag);	
-// 						})
-// 					})
-// 				}
-				
-// 				$('#btnAddGroup').on('click',function(){
-// 					var group = $('form[name="addGroup"]').serialize();
-// 					console.log(group);
-					
-<%-- 					$.post('<%=request.getContextPath()%>/Groups.do', --%>
-// 						group, function(){
-						
-// 							getGroups();
-							
-// 						})
-// 				})
-
+			$(function(){
+				// 處理中
+				$('.blockUI').click(function(){
+					$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+				})
 			})
 		</script>
     </body>

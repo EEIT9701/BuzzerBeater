@@ -90,9 +90,7 @@
 									<!-- Text input-->
 									<div class="form-group">
 										<label class="col-md-4 control-label">老闆:</label>
-										<div class="col-md-4">
 											<input type="text" name="bossName" class="form-control" id="exampleInputEmail1" value="${bossName}">
-										</div>
 									</div>
 
 

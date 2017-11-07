@@ -113,55 +113,6 @@ public class GroupsServlet extends HttpServlet {
 			session.setAttribute("timeList", timeList);
 		}
 
-		if ("GET_ONE_TO_SIGNUP".equals(action)) {
-			Integer teamID = new Integer(request.getParameter("teamID"));
-			Integer groupID = new Integer(request.getParameter("groupID"));
-
-			GroupRegService grSvc = new GroupRegService();
-			grSvc.insert(groupID, teamID);
-
-			request.getRequestDispatcher("/groups/signupGroup.jsp").forward(request, response);
-		}
-
-		if ("GET_GROUP_SIGNUP".equals(action)) {
-			Integer teamID = new Integer(request.getParameter("teamID"));
-
-			GroupsService gSvc = new GroupsService();
-			Set<GroupsVO> groupsSet = gSvc.getAll();
-
-			List<Map<String, Object>> newList = new LinkedList<Map<String, Object>>();
-			Map<String, Object> newMap = null;
-
-			for (GroupsVO groupsVO : groupsSet) {
-
-				if (groupsVO.getSeasonVO().getSignUpEnd().after(Calendar.getInstance().getTime())
-						&& groupsVO.getSeasonVO().getSignUpBegin().before(Calendar.getInstance().getTime())) {
-					newMap = new HashMap<String, Object>();
-					newMap.put("seasonName", groupsVO.getSeasonVO().getSeasonName());
-					newMap.put("groupID", groupsVO.getGroupID());
-					newMap.put("groupName", groupsVO.getGroupName());
-					newMap.put("signUpBegin", groupsVO.getSeasonVO().getSignUpBegin());
-					newMap.put("signUpEnd", groupsVO.getSeasonVO().getSignUpEnd());
-					newMap.put("currentTeams", groupsVO.getCurrentTeams());
-					newMap.put("maxTeams", groupsVO.getMaxTeams());
-					newMap.put("minTeams", groupsVO.getMinTeams());
-					newMap.put("maxPlayer", groupsVO.getMaxPlayers());
-					newMap.put("minPlayer", groupsVO.getMinPlayers());
-
-					for (GroupRegVO grVO : groupsVO.getGroupRegSet()) {
-						if (grVO.getTeamsVO().getTeamID().equals(teamID)) {
-							newMap.put("teamStat", grVO.getTeamStat());
-						}
-					}
-
-					newList.add(newMap);
-				}
-			}
-
-			request.setAttribute("signUpList", newList);
-			request.getRequestDispatcher("/groups/signupGroup.jsp").forward(request, response);
-		}
-
 		if ("REMOVE_GROUP_TEMP".equals(action)) {
 			// 取得groupsSet Session
 			HttpSession session = request.getSession();
@@ -279,6 +230,7 @@ public class GroupsServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
 			GroupsVO groupsVO = null;
+			Integer seasonID = new Integer(request.getParameter("seasonID"));
 			try {
 
 				String groupName = request.getParameter("groupName");
@@ -324,8 +276,6 @@ public class GroupsServlet extends HttpServlet {
 					errorMsgs.add("球隊成員上限必須大於或等於球隊成員下限");
 				}
 
-				Integer seasonID = new Integer(request.getParameter("seasonID"));
-
 				groupsVO = new GroupsVO();
 				groupsVO.setGroupName(groupName);
 				groupsVO.setMaxPlayers(maxPlayers);
@@ -334,8 +284,8 @@ public class GroupsServlet extends HttpServlet {
 				groupsVO.setMinTeams(minTeams);
 
 				if (!errorMsgs.isEmpty()) {
-					request.setAttribute("groupsVO", groupsVO);
-					RequestDispatcher failView = request.getRequestDispatcher("/groups/addGroups.jsp");
+					request.setAttribute("groupVO", groupsVO);
+					RequestDispatcher failView = request.getRequestDispatcher("/groups/groupList_back.jsp?seasonID=" + seasonID);
 					failView.forward(request, response);
 					return;
 				}
@@ -347,8 +297,8 @@ public class GroupsServlet extends HttpServlet {
 
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				request.setAttribute("groupsVO", groupsVO);
-				RequestDispatcher failView = request.getRequestDispatcher("/groups/addGroups.jsp");
+				request.setAttribute("groupVO", groupsVO);
+				RequestDispatcher failView = request.getRequestDispatcher("/groups/groupList_back.jsp?seasonID=" + seasonID);
 				failView.forward(request, response);
 			}
 		}
@@ -365,12 +315,10 @@ public class GroupsServlet extends HttpServlet {
 		if ("DELETE_GROUP".equals(action)) {
 			GroupsService svc = new GroupsService();
 			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
-			GroupsVO groupsVO = svc.findByGroupID(groupID);
-			Integer seasonID = groupsVO.getSeasonVO().getSeasonID();
+			Integer seasonID = Integer.parseInt(request.getParameter("seasonID"));
 			svc.delete(groupID);
 
-			request.getRequestDispatcher("/Season.do?action=TO_GROUPS_BACK&seasonID=" + seasonID).forward(request,
-					response);
+			response.sendRedirect(request.getContextPath() + "/groups/groupList_back.jsp?seasonID=" + seasonID);
 		}
 
 		if ("ADD_SCHEDULE".equals(action)) {

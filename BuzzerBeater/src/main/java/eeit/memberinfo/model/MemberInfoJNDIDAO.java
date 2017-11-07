@@ -202,11 +202,9 @@ public class MemberInfoJNDIDAO implements MemberInfoDAO_interface {
 		PreparedStatement stmt = null;
 
 		try {
-			
 			conn = ds.getConnection();
 			stmt = conn.prepareStatement(GET_ALL_STMT);
 			rs = stmt.executeQuery();
-
 			while (rs.next()) {
 				memberInfoVO = new MemberInfoVO();
 				memberInfoVO.setMemberID(rs.getInt("memberID"));

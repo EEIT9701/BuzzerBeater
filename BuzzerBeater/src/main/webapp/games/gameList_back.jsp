@@ -67,11 +67,11 @@
 	        	&gt;
 	        	<span>
 	        		<a href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${groupsVO.seasonVO.seasonID}">
-	            		<span>分組管理</span>
+	            		<span>${groupsVO.seasonVO.seasonName}</span>
 	            	</a>
 	        	</span>
 	        	&gt;
-	        	<span>賽事管理</span>
+	        	<span>${groupsVO.groupName}</span>
 	    	</div>
 	    	<!--上層導覽列(結束) -->
 	    	
@@ -93,6 +93,16 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="col-md-2 col-md-offset-10">
+					<br>
+					<form action="<%=request.getContextPath()%>/Games.do" method="post">
+				    	<input type="hidden" name="action" value="GET_GAMES_EXCEL">
+				    	<input type="hidden" name="groupID" value="${groupsVO.groupID}">
+				    	<input type="submit" class="btn btn-info btn-lg" id="getExcel" value="下載Excel">
+				    </form>
+				    <br>
+			    </div>
 
 		        <table class="table table-bordered">
 		            <thead>
@@ -121,17 +131,33 @@
 			    </table>
 		    </div>
 		    
-		    <form action="<%=request.getContextPath()%>/Games.do" method="post">
-		    	<input type="hidden" name="action" value="GET_GAMES_EXCEL">
-		    	<input type="hidden" name="groupID" value="${groupsVO.groupID}">
-		    	<input type="submit" class="btn btn-info btn-lg" value="下載Excel">
-		    </form>
-			
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />
 	    	</div>
 	    </div>    
 	    <jsp:include page="/footer_css.jsp" />
+	    
+	    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css">
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+	    <%--遮罩插件 --%>  		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+		
+		<script type="text/javascript">
+			$(function(){
+				// 處理中
+				$('a').click(function(){
+					$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+				})
+				
+				$('#getExcel').click(function(){
+					$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+					setTimeout(function(){
+						$.unblockUI();
+					},1500)
+				})
+			})
+		</script>
     </body>
 
     </html>

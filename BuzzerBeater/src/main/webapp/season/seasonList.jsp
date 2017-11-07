@@ -50,7 +50,7 @@
             		<span>首頁</span>
             	</a>
         	</span>&gt;
-        	<span><span>賽季</span></span>
+        	<span><span>賽季列表</span></span>
     	</div>
     	<!--上層導覽列(結束) -->
     	
@@ -98,7 +98,18 @@
 	    <jsp:include page="/footer_css.jsp" />
 	    
 	    <script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	    <%--遮罩插件 --%>  		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+		
 	    <script>
+	    $(function(){
+	    	$(document).on('click','a',function(){
+	    		// 處理中
+				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+	    	})
+	    })
+	   
 
 
 // 	    $(document).ready(function() {
