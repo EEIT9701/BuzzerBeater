@@ -1,6 +1,5 @@
 package eeit.login.controller;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +11,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import eeit.login.model.LoginCheckService;
+import eeit.mail.GmailSendMailviaTLS;
 import eeit.memberinfo.model.MemberInfoVO;
 
 import java.io.BufferedReader;
@@ -148,6 +148,10 @@ public class FaceBookLoginServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath()+"/index.jsp");
 				return;
 			} else {   // check Email 是否有在資料庫內,沒有則回首頁
+				//新帳戶註冊,寄Email
+				GmailSendMailviaTLS gs = new GmailSendMailviaTLS();
+				System.out.println(jsonOb.getString("email"));
+				gs.SendEmail(jsonOb.getString("email"), "歡迎您的加入!");
 //				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 //				rd.forward(request, response);
 				

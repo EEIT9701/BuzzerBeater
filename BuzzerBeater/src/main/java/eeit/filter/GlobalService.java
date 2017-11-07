@@ -39,18 +39,20 @@ public class GlobalService implements Filter {
         //session要不為空值才能執行 權限 分流
 		if (session.getAttribute("LoginOK") != null) {
 			MemberInfoVO mVO = (MemberInfoVO) session.getAttribute("LoginOK");
-			String auth = mVO.getAuth();			
+			String auth = mVO.getAuth();
+			if(auth == null){
+				session.removeAttribute("LoginOK");
+				chain.doFilter(request, response);
+			}
 			//授權分流
 			if (auth.compareTo("admin") == 0 ) {
 //			    System.out.println("歡迎:" + mVO.getName());	
 			    chain.doFilter(request, response);
 //			    request.getRequestDispatcher("/")
-			} else if (auth.compareTo("parttime") == 0) {
-				
+			} else if (auth.compareTo("parttime") == 0) {			
 //				System.out.println("歡迎:" + mVO.getName());	
 				chain.doFilter(request, response);
 			} else if (auth.compareTo("teams") == 0) {
-				
 //				System.out.println("歡迎:" + mVO.getName());	
 				chain.doFilter(request, response);
 			

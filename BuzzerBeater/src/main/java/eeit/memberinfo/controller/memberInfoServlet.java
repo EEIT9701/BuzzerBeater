@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +37,9 @@ public class memberInfoServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		
+		String newMember = (String) request.getAttribute("NewMember");
+
+		//System.out.println(action);
 		// 設定Response的Header和編碼
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("content-type", "text/html;charset=UTF-8");
@@ -144,8 +147,46 @@ public class memberInfoServlet extends HttpServlet {
 			mSvc.delete(Integer.parseInt(memberID));         
 			
 			return;
-		}else System.out.println("HELLO");
-		
+		}
+        if("INSERT".equals(newMember)){
+			
+			// 設定Response的Header和編碼
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			
+			//取得service實例
+			MemberInfoService mSvc = new MemberInfoService();
+			MemberInfoVO memberInfoVO = new MemberInfoVO();
+			//取得insert 參數
+			MemberInfoVO mVO = (MemberInfoVO) request.getAttribute("data");
+						
+			memberInfoVO.setAcc(mVO.getAcc());
+			memberInfoVO.setName(mVO.getName());
+			memberInfoVO.setAuth(mVO.getAuth());
+			memberInfoVO.setTeamID(0);
+			//
+			Timestamp registerTimeData = mVO.getRegisterTime();
+//			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			String registerTimeDateString = formatter.format(registerTimeData);
+//			System.out.println(registerTimeDateString);
+//			registerTimeData = Timestamp.valueOf(registerTimeDateString); 
+			
+			memberInfoVO.setRegisterTime(registerTimeData);	
+			mSvc.insert(memberInfoVO);
+			
+			// 經由Response送往瀏覽器
+//			PrintWriter out = response.getWriter();
+//			out.println();
+			request.getSession().setAttribute("LoginOK", memberInfoVO);
+			request.removeAttribute("NewMember");
+			request.removeAttribute("data");
+//			System.out.println("歡迎新會員");
+			//System.out.println(request.getSession().getAttribute("aaa"));
+			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+			rd.forward(request, response);
+			return;
+		}
 		return;
 		
 	}
