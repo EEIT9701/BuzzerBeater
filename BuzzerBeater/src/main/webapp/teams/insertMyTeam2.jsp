@@ -88,16 +88,12 @@
 							<div class="main">
 								<div id="step"></div>
 								<div id="buildTeam"></div>
-								<div class="col-md-12">
-									<div class="col-md-4"></div>
-									<div class="col-md-4">
-										<div id="btns" class="btns"></div>
-										<div class="col-md-4"></div>
-									</div>
+								<div class="col-md-4"></div>
+								<div id="btns" class="btns col-md-4">
 								</div>
+								<div class="col-md-4"></div>
 								<div class="info">index：<span id="index"></span></div>
 							</div>
-							<div class="col-md-4"></div>
 							<jsp:include page="/footer.jsp" />
 						</div>
 					</div>
@@ -124,52 +120,27 @@
 										<div  align='center' valign='middle'>
 										<div class="form-group">
 											<label class=" control-label">球員姓名:</label>
-<!-- 											<div class=""> -->
-												<input type="text" class="form-control" id="playerName" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 										<div class="form-group"> -->
+											<input type="text" class="form-control" id="playerName" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 											<label class=" control-label">身分證ID:</label>
-<!-- 											<div class=""> -->
-												<input type="text" class="form-control" id="id" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
-<!-- 											</div> -->
+											<input type="text" class="form-control" id="id" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 										</div>
 										<div class="form-group">
 											<label class=" control-label">身高(cm):</label>
-<!-- 											<div class=""> -->
-												<input type="text" class="form-control" id="height" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 										<div class="form-group"> -->
+											<input type="text" class="form-control" id="height" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 											<label class=" control-label">體重(kg):</label>
-<!-- 											<div class=""> -->
-												<input type="text" class="form-control" id="weights" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
-<!-- 											</div> -->
+											<input type="text" class="form-control" id="weights" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 										</div>
 										<div class="form-group">
 											<label class=" control-label">背號:</label>
-<!-- 											<div class=""> -->
-												<input type="text" class="form-control" id="playerNo" value="" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 										<div class="form-group"> -->
+											<input type="text" class="form-control" id="playerNo" value="" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 											<label class=" control-label">位置:</label>
-<!-- 											<div class=""> -->
-												<input type="text" class="form-control" id="playerRole" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
-<!-- 											</div> -->
+											<input type="text" class="form-control" id="playerRole" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 										</div>
-										
 										<div class="form-group">
 											<label class=" control-label">生日:</label>
-<!-- 											<div class=""> -->
-												<input type="text" class="form-control" id="birthday" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 										<div class="form-group"> -->
+											<input type="text" class="form-control" id="birthday" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 											<label class=" control-label">國籍:</label>
-<!-- 											<div class=""> -->
-												<input type="text" class="form-control" id="nationality" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
-<!-- 											</div> -->
+											<input type="text" class="form-control" id="nationality" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 										</div>
 										</div>
 									</div>
@@ -181,7 +152,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
 					</div>
 					<!-- 模態框 -->
 					<div class="row">
@@ -203,63 +173,41 @@
 											</div>
 										</div>
 										<!-- Text input-->
+										<div  align='center' valign='middle'>
 										<div class="form-group">
 											<label class=" control-label">球員姓名:</label>
-											<div class="">
-												<input type="text" class="form-control" id="playerName">
-											</div>
-										</div>
-										<div class="form-group">
+											<input type="text" class="form-control" id="playerName" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 											<label class=" control-label">身分證ID:</label>
-											<div class="">
-												<input type="text" class="form-control" id="id">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class=" control-label">背號:</label>
-											<div class="">
-												<input type="text" class="form-control" id="playerNo" value="">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class=" control-label">位置:</label>
-											<div class="">
-												<input type="text" class="form-control" id="playerRole">
-											</div>
+											<input type="text" class="form-control" id="id" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 										</div>
 										<div class="form-group">
 											<label class=" control-label">身高(cm):</label>
-											<div class="">
-												<input type="text" class="form-control" id="height">
-											</div>
+											<input type="text" class="form-control" id="height" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+											<label class=" control-label">體重(kg):</label>
+											<input type="text" class="form-control" id="weights" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 										</div>
 										<div class="form-group">
-											<label class=" control-label">體重(kg):</label>
-											<div class="">
-												<input type="text" class="form-control" id="weights">
-											</div>
+											<label class=" control-label">背號:</label>
+											<input type="text" class="form-control" id="playerNo" value="" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+											<label class=" control-label">位置:</label>
+											<input type="text" class="form-control" id="playerRole" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 										</div>
 										<div class="form-group">
 											<label class=" control-label">生日:</label>
-											<div class="">
-												<input type="text" class="form-control" id="birthday">
-											</div>
-										</div>
-										<div class="form-group">
+											<input type="text" class="form-control" id="birthday" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
 											<label class=" control-label">國籍:</label>
-											<div class="">
-												<input type="text" class="form-control" id="nationality">
-											</div>
+											<input type="text" class="form-control" id="nationality" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+										</div>
 										</div>
 									</div>
 									<div id="iubut" class="modal-footer">
 										<!--確認按鈕觸發事件-->
-										<button type="submit" class="btn btn-warning" data-dismiss="modal" id="updateConfirm">修改</button>
+										<button type="submit" class="btn btn-warning" data-dismiss="modal" id="insertConfirm">修改</button>
 										<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+									</div>
 									</div>
 								</div>
 							</div>
-						</div>
 					</div>
 
 
@@ -267,7 +215,6 @@
 					<script type="text/javascript">
 						var $step = $("#step");
 						var $index = $("#index");
-						var tab = null;
 						$step.step({
 							index: 0,
 							time: 500,
@@ -281,39 +228,42 @@
 
 						function loadTable() {
 							var step = $step.getIndex();
-							var bt = $('#buildTeam');;
-							
+							var bt = $('#buildTeam');
+							var btns = $('#btns');
 							if (step == 0) {
 								bt.empty();
-								if (($('#btns').text()) == "") {
-									btn();
-								}
-
+								btns.empty();
 								var cell1 = $('<div class="form-group"><label class="control-label">隊徽:</label> <input type="file" id="file"></div>');
 								var cell2 = $('<img id="result" class = "teamBadge" src="<%=request.getContextPath()%>/images/700_700.png">');
-								var cell3 = $('<div class="form-group"><label class="control-label">球隊名稱:</label><div><input type="text" name="captainEmail" class="form-control" id="exampleInputEmail1"></div></div>'
+								var cell3 = $('<div class="form-group"><label class="control-label">球隊名稱:</label><div><input type="text"class="form-control" id="teamName"></div></div>'
 								);
 								var cell4 = $(
-									'<div class="form-group"><label class="control-label">隊長連絡電話:</label><div><input type="text" name="captainEmail" class="form-control" id="exampleInputEmail1"></div></div>'
+									'<div class="form-group"><label class="control-label">隊長連絡電話:</label><div><input type="text"class="form-control" id="captainPhone"></div></div>'
 								);
 								var cell5 = $(
-									'<div class="form-group"><label class="control-label">總教練:</label><div><input type="text" name="captainEmail" class="form-control" id="exampleInputEmail1"></div></div>'
+									'<div class="form-group"><label class="control-label">總教練:</label><div><input type="text" class="form-control" id="coachName"></div></div>'
 								);
 								var cell6 = $(
-									'<div class="form-group"><label class="control-label">老闆:</label><div><input type="text" name="captainEmail" class="form-control" id="exampleInputEmail1"></div></div>'
+									'<div class="form-group"><label class="control-label">老闆:</label><div><input type="text"class="form-control" id="bossName"></div></div>'
 								);
 								var cell7 = $(
-									'<div class="form-group"><label class="control-label">備註:</label><div><input type="textarea" name="captainEmail" class="form-control" id="exampleInputEmail1"></div></div>'
+									'<div class="form-group"><label class="control-label">備註:</label><div><input type="text" class="form-control" id="remarks"></div></div>'
 								);
+								var cell8=$('<div class="col-md-4"></div>');
+								var cell9=$('<button id="nextBtn">下一步</button>')
+								
+			
 								bt.append([cell1, cell2, cell3, cell4, cell5, cell6, cell7]);
+								btns.append([cell8,cell9]);
+								nextBtn();
 							}
 							if (step == 1) {
 								bt.empty();
+								btns.empty();
 								var docFrag = $(document.createDocumentFragment());
-								tab = $('<table class="table table-bordered" id="playerTable"></table>');
+								var tab = $('<table class="table table-bordered" id="playerTable"></table>');
 								var th = $('<thead></thead>');
-								var cell1 = $(
-									'<button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button>');
+								var cell1 = $('<button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button>');
 								var cell2 = $('<th></th>').text("球員照片");
 								var cell3 = $('<th></th>').text("球員姓名");
 								var cell4 = $('<th></th>').text("身分證ID");
@@ -325,6 +275,9 @@
 								var cell10 = $('<th></th>').text("國籍");
 								var cell11 = $('<th></th>');
 								var cell12 = $('<th></th>');
+								var cell13=$('<div class="col-md-4"><button id="prevBtn">上一步</button></div>')
+								var cell14=$('<div class="col-md-4"></div>');
+								var cell15=$('<div class="col-md-4"><button id="nextBtn">下一步</button></div>')
 								var row = $('<tr align="center" valign="middle"></tr>').append([cell2, cell3, cell4, cell5, cell6, cell7, cell8,
 									cell9, cell10, cell11, cell12
 								]);
@@ -332,6 +285,9 @@
 								th.append(docFrag);
 								tab.append(th);
 								bt.append([cell1, tab]);
+								btns.append([cell13,cell14,cell15]);
+								prevBtn();
+								nextBtn();
 									$("#insertConfirm").on("click", function () {
 
 										var docFrag = $(document.createDocumentFragment());
@@ -385,49 +341,125 @@
 								bt.empty();
 								$('#btns').empty()
 								var docFrag = $(document.createDocumentFragment());
-								var tab = $('<table class="table table-bordered" id="groupTable"></table>');
-								var th = $('<thead></thead>');
-								var tb = $('<tbody></tbody>');
-								var cell1 = $('<th></th>').text("分組名稱");
-								var cell2 = $('<th></th>').text("參賽球隊上限");
-								var cell3 = $('<th></th>').text("參賽球隊下限");
-								var cell4 = $('<th></th>').text("目前球隊數量");
-								var cell5 = $('<th></th>').text("球隊球員上限");
-								var cell6 = $('<th></th>').text("球隊球員下限");
-								var cell7 = $('<th></th>').text("報名狀況");
-								var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7,
-									cell8
-								]);
-								docFrag.append(row);
-								th.append(docFrag);
-								tab.append(th);
-								bt.append([tab]);
-								$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {
-									'action': 'findGroupNameBySeasonID',
-									'seasonID': 1003
-								}, function (data) {
-									$.each(data, function (index, group) {
-										var cell1 = $('<td></td>').text(group.groupName);
-										var cell2 = $('<td></td>').text(group.maxTeams);
-										var cell3 = $('<td></td>').text(group.minTeams);
-										var cell4 = $('<td></td>').text(group.currentTeams);
-										var cell5 = $('<td></td>').text(group.maxPlayers);
-										var cell6 = $('<td></td>').text(group.minPlayers);
-										var cell7 = null;
-										if (group.currentTeams >= group.maxTeams) {
-											var cell7 = $('<td></td>').text("已達報名上限");
-										}
-										if (group.currentTeams < group.maxTeams) {
-											var cell7 = $('<td></td>').html('<button id="nextBtn" class="btn btn-warning">我要報名</button>')
-										}
-										var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
-											cell7, cell8
-										]);
-										docFrag.append(row);
-										tb.append(docFrag);
+// 								var tabGroup = $('<table class="table table-bordered" id="groupTable"></table>');
+// 								var th = $('<thead></thead>');
+// 								var tb = $('<tbody></tbody>');
+// 								var cell1 = $('<th></th>').text("分組名稱");
+// 								var cell2 = $('<th></th>').text("參賽球隊上限");
+// 								var cell3 = $('<th></th>').text("參賽球隊下限");
+// 								var cell4 = $('<th></th>').text("目前球隊數量");
+// 								var cell5 = $('<th></th>').text("球隊球員上限");
+// 								var cell6 = $('<th></th>').text("球隊球員下限");
+// 								var cell7 = $('<th></th>').text("報名狀況");
+// 								var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7,
+// 									cell8
+// 								]);
+// 								docFrag.append(row);
+// 								th.append(docFrag);
+// 								tabGroup.append(th);
+// 								bt.append([tabGroup]);
+<%-- 								$.getJSON('<%=request.getContextPath()%>/GameMedia.do', { --%>
+// 									'action': 'findGroupNameBySeasonID',
+// 									'seasonID': 1003
+// 								}, function (data) {
+// 									$.each(data, function (index, group) {
+// 										var cell1 = $('<td></td>').text(group.groupName);
+// 										var cell2 = $('<td></td>').text(group.maxTeams);
+// 										var cell3 = $('<td></td>').text(group.minTeams);
+// 										var cell4 = $('<td></td>').text(group.currentTeams);
+// 										var cell5 = $('<td></td>').text(group.maxPlayers);
+// 										var cell6 = $('<td></td>').text(group.minPlayers);
+// 										var cell7 = null;
+// 										if (group.currentTeams >= group.maxTeams) {
+// 											var cell7 = $('<td></td>').text("已達報名上限");
+// 										}
+// 										if (group.currentTeams < group.maxTeams) {
+// 											var cell7 = $('<td></td>').html('<button id="nextBtn" class="btn btn-warning">我要報名</button>')
+// 										}
+// 										var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
+// 											cell7, cell8
+// 										]);
+// 										docFrag.append(row);
+// 										tb.append(docFrag);
 
-									})
-									tab.append(tb);
+// 									})
+// 									tabGroup.append(tb);
+									
+									var tab = $('<table class="table table-bordered" id="playerTable"></table>');
+									var th = $('<thead></thead>');
+									var cell1 = $(
+										'<button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button>');
+									var cell2 = $('<th></th>').text("球員照片");
+									var cell3 = $('<th></th>').text("球員姓名");
+									var cell4 = $('<th></th>').text("身分證ID");
+									var cell5 = $('<th></th>').text("背號");
+									var cell6 = $('<th></th>').text("位置");
+									var cell7 = $('<th></th>').text("身高");
+									var cell8 = $('<th></th>').text("體重");
+									var cell9 = $('<th></th>').text("生日");
+									var cell10 = $('<th></th>').text("國籍");
+									var cell11 = $('<th></th>');
+									var cell12 = $('<th></th>');
+									var cell13=$('<div class="col-md-4"><button id="prevBtn">上一步</button></div>')
+									var cell14=$('<div class="col-md-4"></div>');
+									var cell15=$('<div class="col-md-4"><button id="nextBtn">下一步</button></div>')
+									var row = $('<tr align="center" valign="middle"></tr>').append([cell2, cell3, cell4, cell5, cell6, cell7, cell8,
+										cell9, cell10, cell11, cell12
+									]);
+									docFrag.append(row);
+									th.append(docFrag);
+									tab.append(th);
+									bt.append([cell1, tab]);
+									btns.append([cell13,cell14,cell15]);
+									prevBtn();
+									nextBtn();
+										$("#insertConfirm").on("click", function () {
+
+											var docFrag = $(document.createDocumentFragment());
+											var tb = $('<tbody></tbody>');
+											var pic = $("#result").attr('src');
+											var cell2 = $('<td></td>').html('<img style = "width:50px" src="' + pic + '">');
+											var cell3 = $('<td></td>').text($("#playerName").val());
+											var cell4 = $('<td></td>').text($("#id").val());
+											var cell5 = $('<td></td>').text($("#playerNo").val());
+											var cell6 = $('<td></td>').text($("#playerRole").val());
+											var cell7 = $('<td></td>').text($("#height").val());
+											var cell8 = $('<td></td>').text($("#weights").val());
+											var cell9 = $('<td></td>').text($("#birthday").val());
+											var cell10 = $('<td></td>').text($("#nationality").val());
+											var cell11 = $('<td></td>').html($(
+												'<button id="update" type="submit"class="btn btn-info" data-toggle="modal" data-target="#myModal1">修改</button>'
+											));
+											
+											var cell12 = $('<td></td>').html($('<button type="submit"class="btn btn-danger">刪除</button>'));
+											var row = $('<tr align="center" valign="middle"></tr>').append([cell2, cell3, cell4, cell5, cell6, cell7,
+												cell8, cell9, cell10, cell11, cell12
+											]);
+											docFrag.append(row);
+											tb.append(docFrag);
+											$("#playerTable").append(tb);
+											var update = $(this).parents('tr');
+											$("#update").on("click", function () {
+											$("#playerName").val(update.find('td:nth-child(2)').text());
+											$("#id").val(update.find('td:nth-child(3)').text());
+											$("#playerNo").val(update.find('td:nth-child(4)').text());
+											$("#playerRole").val(update.find('td:nth-child(5)').text());
+											$("#height").val(update.find('td:nth-child(6)').text());
+											$("#weights").val(update.find('td:nth-child(7)').text());
+											$("#birthday").val(update.find('td:nth-child(8)').text());
+											$("#nationality").val(update.find('td:nth-child(9)').text());
+										});
+											$("#file").val('');
+											$("#result").attr('src', '<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png');
+											$("#playerName").val('');
+											$("#id").val('');
+											$("#playerNo").val('');
+											$("#playerRole").val('');
+											$("#height").val('');
+											$("#weights").val('');
+											$("#birthday").val('');
+											$("#nationality").val('');
+										});
 
 									$("#nextBtn").on("click", function () {
 										console.log("點擊觸發")
@@ -436,7 +468,7 @@
 										loadTable();
 										file();
 									});
-								})
+// 								});
 							}
 						}
 
@@ -464,24 +496,28 @@
 							var cell2 = $('<div class="col-md-4"></div>');
 							var cell3 = $('<div class="col-md-4"><button id="nextBtn"><nobr>下一步</nobr></button></div>');
 							$('#btns').append([cell1, cell2, cell3]);
-							$("#prevBtn").on("click", function () {
-								$step.prevStep();
-								$index.text($step.getIndex());
-								loadTable();
-								file();
+							prevBtn();
+							nextBtn();
 
-							});
+						}
+						function prevBtn() {
+						$("#prevBtn").on("click", function () {
+							$step.prevStep();
+							$index.text($step.getIndex());
+							loadTable();
+							file();
 
+						});
+						}
+						function nextBtn() {
 							$("#nextBtn").on("click", function () {
 								$step.nextStep();
 								$index.text($step.getIndex());
 								loadTable();
 								file();
+
 							});
-
-							
-
-						}
+							}
 					</script>
 
 					<jsp:include page="/footer_css.jsp" />
