@@ -39,35 +39,32 @@
             <div class="container">
                 <div class="jumbotron">
                     <!-- 網頁內容 -->
+                            <h2>繳費</h2>
                     <form class="form-horizontal" method="post" action="<%= request.getContextPath() %>/GroupReg.do">
                         <fieldset>
                             <!-- Form Name -->
-                            <legend>繳費</legend>
                             <!-- Text input-->
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="account">帳號後五碼</label>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    	<p>自行繳費</p>
+                                </div>
+                                <label class="col-md-3 control-label" for="account">帳號後五碼</label>
+                                <div class="col-md-3">
                                     <input id="account" name="account" placeholder="請輸入帳號後五碼" class="form-control input-md" type="text" required>
                                 </div>
-                                <div class="col-md-4" >
+                                <div class="col-md-3" >
                                     <button type="submit" id="send" name="send" class="btn btn-primary" style="margin-top: 6px;">送出</button>
                                     <input type="hidden" name="action" value="INSERT">
                                 </div>
                             </div>
+                        </fieldset>
+                    </form>
                              <div >
                                 <label class="col-md-4 control-label" for="account"><a href="https://tw.yahoo.com/">123</a></label>
                                 <div class="col-md-4">
-<!--                                     <a href="https://tw.yahoo.com/">456</a> -->
                                 </div>
- 
                             </div>
-                            
-
-
-
-                        </fieldset>
-                    </form>
                             <button type="button" class="btn btn-lg btn-danger">確認</button>
 
                     <!-- 網頁內容END -->
