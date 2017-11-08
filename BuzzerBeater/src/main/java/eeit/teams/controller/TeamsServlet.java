@@ -1,8 +1,12 @@
 package eeit.teams.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -12,13 +16,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
 import eeit.groups.model.GroupsService;
+import eeit.groups.model.GroupsVO;
 import eeit.personaldata.model.PersonalDataService;
 import eeit.personaldata.model.PersonalDataVO;
 import eeit.players.model.PlayersVO;
 import eeit.teamcomposition.model.TeamCompositionService;
+import eeit.teamcomposition.model.TeamCompositionVO;
 import eeit.teams.model.TeamsService;
 import eeit.teams.model.TeamsVO;
 
@@ -288,8 +296,55 @@ public class TeamsServlet extends HttpServlet {
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);
 		}
+		
+		if ("buildMyTeam".equals(action)) {
 
-
+			String base64 = request.getParameter("teamBadge");
+			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
+			String teamName = request.getParameter("teamName");
+			String captainEmail = request.getParameter("captainEmail");
+			String captainPhone = request.getParameter("captainPhone");
+			String coachName = request.getParameter("coachName");
+			String bossName = request.getParameter("bossName");
+			Integer totalWin = 0;
+			Integer totalLose =0;
+			Float winRate = (float) 0.0;
+			String remarks = request.getParameter("remarks");
+			TeamsService teamSvc = new TeamsService();
+			teamSvc.insert(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName, totalWin, totalLose,
+					winRate, remarks);
 	}
+		if ("findMyTeamPlayer".equals(action)) {
+			TeamsService tsvc = new TeamsService();
+			TeamCompositionService tcsvc = new TeamCompositionService();
+			Integer teamID = tsvc.findMaxID();
+			List<TeamCompositionVO> list = tcsvc.findByTeamID(teamID);
+			List<HashMap<String,String>> returnlist = new ArrayList<HashMap<String, String>>();
+			Map<String,String> map = null;
+
+			
+			for(TeamCompositionVO teamCompositionVO:list){
+				map = new HashMap<String,String>();
+				map.put("photo", teamCompositionVO.getPlayersVO().getPhoto());
+				map.put("playerName", teamCompositionVO.getPlayersVO().getPlayerName());
+				map.put("id", teamCompositionVO.getPlayersVO().getId());
+				map.put("playerNo", teamCompositionVO.getPlayerNo().toString());
+				map.put("playerRole", teamCompositionVO.getPlayerRole());
+				map.put("height", teamCompositionVO.getPlayersVO().getHeight().toString());
+				map.put("weights", teamCompositionVO.getPlayersVO().getWeights().toString());
+				map.put("nationality", teamCompositionVO.getPlayersVO().getNationality());
+				
+				returnlist.add((HashMap<String, String>) map);
+			}
+			
+			
+			Gson gson = new Gson();
+			String jsonList = gson.toJson(returnlist); 
+			
+			
+            PrintWriter out = response.getWriter();
+			out.println(jsonList);
+		}
+		}
 
 }

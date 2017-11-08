@@ -8,6 +8,8 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import eeit.games.model.GamesVO;
+
 @Transactional(readOnly = true)
 public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 
@@ -19,7 +21,7 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 
 	private static final String GET_ALL_STMT = "FROM GameMediaVO ORDER BY mediaID";
 	private static final String GET_ALL_VIDEO_STMT = "FROM GameMediaVO WHERE MediaType = 'video'";;
-	private static final String QUERY_FOR_TAG = "FROM GameMediaVO WHERE tag like ?";
+	private static final String QUERY_FOR_TAG = "FROM GameMediaVO WHERE mediatype = 'photo'and tag like ?";
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Integer insert(GameMediaVO gameMediaVO) {
@@ -69,7 +71,7 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 //		dao.insert(gameMediaVO);
 		
 		
-		List<GameMediaVO> set = dao.getAllVideo();
+		List<GameMediaVO> set = dao.tagFunction("%勇士,%");
 		
 		for (GameMediaVO vo : set) {
 			System.out.print(vo.getMediaID() + " ");
@@ -92,9 +94,9 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 
 	@Override
 	public List<GameMediaVO> tagFunction(String tag) {
-		Object obj = hibernateTemplate.find(QUERY_FOR_TAG);
+		Object obj = hibernateTemplate.find(QUERY_FOR_TAG,tag);
 		List<GameMediaVO> list = (List<GameMediaVO>) obj;
-		return null;
+		return list;
 	}
 
 }

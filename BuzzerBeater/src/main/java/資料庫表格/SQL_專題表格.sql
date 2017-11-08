@@ -613,14 +613,21 @@ tag                     nvarchar(200),                         --Tag
 )
 GO 
 
-insert into GameMedia values('4001','Curry雙手爆扣','001.mp4','','video','2016-10-25','技壓全場!!Curry連過三人單手爆扣!!','勇士,Curry,雙手爆扣');
-insert into GameMedia values('4002','哈登監視器','002.mp4','','video','2016-10-25','哈登監視器模式!!','火箭,哈登,監視器');
-insert into GameMedia values('4003','保羅船長過人','003.mp4','','video','2016-10-25','保羅船長換手過人!','快艇,保羅,運球過人');
-insert into GameMedia values('4004','Leonard 受傷','004.mp4','','video','2016-10-26','Leonard 踩到Zaza的腳翻船','馬刺, Leonard,翻船');
-insert into GameMedia values('4001','Stephen Curry','','','photo','2016-10-25','Curry手插腰','勇士,Curry,吐護齒套');
-insert into GameMedia values('4002','James Harden','','','photo','2016-10-25','炸彈超人哈登','火箭,哈登,炸彈超人');
-insert into GameMedia values('4003','Chris Paul','','','photo','2016-10-25','保羅發呆','快艇,保羅,發呆');
-insert into GameMedia values('4004','Kawhi Leonard','','','photo','2016-10-26','Leonard恐怖微笑','馬刺,Kawhi Leonard,黑幫');
+insert into GameMedia values('4001','Curry雙手爆扣','001.mp4','','video','2016-10-25','技壓全場!!Curry連過三人單手爆扣!!','勇士,Curry,雙手爆扣,');
+insert into GameMedia values('4002','哈登監視器','002.mp4','','video','2016-10-25','哈登監視器模式!!','火箭,哈登,監視器,');
+insert into GameMedia values('4003','保羅船長過人','003.mp4','','video','2016-10-25','保羅船長換手過人!','快艇,保羅,運球過人,');
+insert into GameMedia values('4004','Leonard 受傷','004.mp4','','video','2016-10-26','Leonard 踩到Zaza的腳翻船','馬刺, Leonard,翻船,');
+insert into GameMedia values('4001','Curry搞笑走步','005.mp4','','video','2016-10-29','Curry搞笑大走步','勇士,Curry,走步,');
+insert into GameMedia values('4002','哈登飛身爆扣','006.mp4','','video','2016-10-31','大鬍子小飛俠','火箭,哈登,爆扣,');
+insert into GameMedia values('4001','Stephen Curry','','','photo','2016-10-25','Curry手插腰','勇士,Curry,吐護齒套,');
+insert into GameMedia values('4002','James Harden','','','photo','2016-10-25','炸彈超人哈登','火箭,哈登,炸彈超人,');
+insert into GameMedia values('4003','Chris Paul','','','photo','2016-10-25','保羅發呆','快艇,保羅,發呆,');
+insert into GameMedia values('4004','Kawhi Leonard','','','photo','2016-10-26','Leonard恐怖微笑','馬刺,Leonard,黑幫,');
+insert into GameMedia values('4001','Curry','','','photo','2016-11-12','Curry運球','勇士,Curry,運球,');
+insert into GameMedia values('4002','Harden','','','photo','2016-11-14','Harden目瞪口呆','火箭,Harden,傻眼,');
+insert into GameMedia values('4003','Paul','','','photo','2016-11-12','Paul目視遠方','快艇,Paul,遠方,');
+insert into GameMedia values('4004','Leonard','','','photo','2016-11-14','Leonard握拳','馬刺,Leonard,握拳,');
+
 
 
 select * from GameMedia
