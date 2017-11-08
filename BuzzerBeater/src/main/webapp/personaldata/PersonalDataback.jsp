@@ -56,7 +56,7 @@ background-color: #d62d67;
 			</div>
 		</div>
 		<br> <br>
-		<div><button type="button" class="btn btn-danger" data-toggle="JDialog" data-target="dialog-4" id="button_insert">新增</button></div>
+		<!-- <div><button type="button" class="btn btn-danger" data-toggle="JDialog" data-target="dialog-4" id="button_insert">新增</button></div> -->
 		<!--****************-->
 		<!-- 第二列(開始) -->
 		<!--****************-->
@@ -145,11 +145,11 @@ background-color: #d62d67;
 		   loadProduct('Get_All_PersonalData_JSON');
 		   
 		 //模太框相關按鈕
-		  $(".JDialog").jDialog({		
+	 	  $(".JDialog").jDialog({		
 			     skinClassName : 'demo',
 			     animationType : 'flip',
 			     allowOverlay :   false
-	       });
+	       }); 
 		 
 		  $('#jDialogButton').on('click', function(){
 				//抓input 的值

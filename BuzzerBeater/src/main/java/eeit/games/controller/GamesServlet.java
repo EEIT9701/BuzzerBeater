@@ -37,6 +37,8 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
@@ -65,6 +67,18 @@ public class GamesServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
+
+		if ("ADD_GAME_JSON".equals(action)) {
+			String gameData = request.getParameter("gameData");
+			JSONArray jsonArr = new JSONArray(gameData);
+
+			for (int i = 0; i < jsonArr.length(); i++) {
+				JSONObject obj = jsonArr.getJSONObject(i);
+				System.out.println(obj.getString("twoPoint"));
+				System.out.println(obj.getString("playerID"));
+			}
+
+		}
 
 		if ("INSERT_TEMP_SEASON".equals(action)) {
 			HttpSession session = request.getSession();
@@ -146,7 +160,7 @@ public class GamesServlet extends HttpServlet {
 				teamBVO.setTeamName(cell5.substring(0, cell5.indexOf("(")).trim());
 				gamesVO.setTeamBVO(teamBVO);
 				currentTeams.add(teamBID);
-				
+
 				gamesVO.setTeamAScore(0);
 				gamesVO.setTeamBScore(0);
 
@@ -501,9 +515,9 @@ public class GamesServlet extends HttpServlet {
 					cell3.setCellValue(
 							gamesVO.getTeamAVO().getTeamName() + " (" + gamesVO.getTeamAVO().getTeamID() + ")");
 					cell3.setCellStyle(cellStyle);
-					
+
 					HSSFCell cell4 = row.createCell(4);
-					cell4.setCellValue(gamesVO.getTeamAScore()+"-"+gamesVO.getTeamBScore());
+					cell4.setCellValue(gamesVO.getTeamAScore() + "-" + gamesVO.getTeamBScore());
 					cell4.setCellStyle(cellStyle);
 
 					HSSFCell cell5 = row.createCell(5);
