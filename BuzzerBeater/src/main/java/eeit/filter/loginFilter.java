@@ -21,11 +21,11 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class loginFilter
  */
-@WebFilter(
-		//urlPatterns = { "/*" }, 
-		initParams = { 
+//@WebFilter(
+//		urlPatterns = { "/*" }, 
+//		initParams = { 
 //				@WebInitParam(name = "memberinfoweb", value = "/memberInfo/*")
-		})
+//		})
 public class loginFilter implements Filter {
 	Collection<String> url = new ArrayList<String>();
     public loginFilter() {
