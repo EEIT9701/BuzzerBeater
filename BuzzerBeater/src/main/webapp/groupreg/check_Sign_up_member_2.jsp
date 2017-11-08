@@ -71,8 +71,10 @@
 									<!--手動繳費驗證-->
 									<td class="col-xs-2"><input id="account" name="account" placeholder="輸入帳號後五碼" class="form-control input-md" type="text" required ></td>
 									<!--線上繳費驗證-->
-										<td><img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top: 5px;"
-										href="">
+										<td>
+										<a href="<%=request.getContextPath()%>/opaytest.do" id="opay">
+										<img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top: 5px;">
+										</a>
 										</td>
 									<!--按鈕-->
 										<td><button type="button" class="btn btn-lg btn-warning" >送出</button></td>
@@ -122,10 +124,8 @@
 	
 	<script>
 	   $(function(){
-		  		
 		$('.btn-warning').on('click', function(){
 			console.log(1);
-		if($(this).text()=='送出'){
 			if(confirm("確定要送出嗎?")){
             $(this).parents('tr').find('td:nth-child(7)').text('2');
             $(this).text('已送出');
@@ -142,33 +142,36 @@
 	       	$.post('<%=request.getContextPath()%>/GroupReg.do',{'action':'UPDATE','data':dataStr},function(datas){})   
 	       	$(this).parents('tr').find('td:nth-child(4)').html(paymentNumber);
 	       	$(this).parents('tr').find('td:nth-child(7)').text('系統確認中');
-            $(this).parents('tr').find('td:nth-child(5)>img').removeAttr("href");
-	       	
+            $(this).parents('tr').find('td:nth-child(5)>a').remove("a");
+			$(this).parents('tr').find('td:nth-child(5)').html('<img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top:5px;">');
 		  }
-		 }
+		 
 		})
-		
-		   $('#example').DataTable({
-				columnDefs: [{ width: 200, targets: 6}],
- 				"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-				"pagingType": "full_numbers",
-				"language": {
-					"lengthMenu":"每一頁顯示_MENU_ 筆資料",
-					"zeroRecords":"查無資料",
-					"info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
-					"infoEmpty":"無資料",
-					"infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
-					"search":"搜尋：",
-					"paginate":{
-						"first":"第一頁",
-						"previous":"上一頁",
-						"next":"下一頁",
-						"last":"最末頁"					
-					}
-			  }
-			})   		
-		
+	
+		$('#opay').on('click',function(){
+
+			console.log("3");
+			if(confirm("確定要送出嗎?")){
+			$(this).parents('tr').find('td:nth-child(7)').text('2');
+            $(this).parents('tr').find('td:nth-child(6)').text('已送出');
+            $(this).parents('tr').find('td:nth-child(6)').removeClass('btn btn-lg btn-warning');
+            $(this).parents('tr').find('td:nth-child(6)').addClass('btn btn-lg btn-danger');
+            $(this).parents('tr').find('td:nth-child(6)').attr("disabled","disabled");
+            $(this).parents('tr').find('td:nth-child(4)>input').attr('value','無');
+			var teamID =$(this).parents('tr').find('td:nth-child(1)').attr('id');
+            var groupID =$(this).parents('tr').find('td:nth-child(2)').attr('id');
+            var registerDate =$(this).parents('tr').find('td:nth-child(3)').text();
+            var teamStat =$(this).parents('tr').find('td:nth-child(7)').text();
+            var paymentNumber =$(this).parents('tr').find('td:nth-child(4)>input').val();
+	       	var dataStr = JSON.stringify({ 'teamID':teamID, 'groupID':groupID, 'teamStat':teamStat,'registerDate':registerDate,'paymentNumber':paymentNumber})
+	       	console.log(dataStr);
+	       	$.post("<%=request.getContextPath()%>/GroupReg.do", {'action':'UPDATE','data':dataStr}, function(datas){})
+			}
+		}) 
+	    
 	   })
+		
+
 	</script>
 </body>
 </html>
