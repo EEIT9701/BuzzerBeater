@@ -43,13 +43,13 @@
 				<div class="col-md-12">
 					<table class="table table-bordered" id="example">
 						<thead>
-							<tr>
-								<td>隊伍名稱</td>
-								<td>報名分組</td>
-								<td>報名時間</td>
-								<td>繳費狀態</td>
-								<td>帳號後五碼</td>
-								<td>核對</td>
+							<tr align='center' valign='middle'>
+								<th>隊伍名稱</th>
+								<th>報名分組</th>
+								<th>報名時間</th>
+								<th>繳費狀態</th>
+								<th>帳號後五碼</th>
+								<th>核對</th>
 							</tr>
 						</thead>
 						<tbody id="test01">
@@ -68,21 +68,19 @@
 									<!--帳號後五碼-->
 									<td>${groupRegVO.paymentNumber}</td>
 									<!--核對-->
-									
 <!-- 										<Form method="post" -->
-
-                                         <c:if test="${groupRegVO.teamStat==1}">
-												<td><button type="button" class="btn btn-lg btn-warning" disabled="disabled">已繳費</button></td>
+                                           <td><c:if test="${groupRegVO.teamStat==1}">
+												<button type="button" class="btn btn-lg btn-warning" disabled="disabled">已繳費</button>
 											</c:if>
 											<c:if test="${groupRegVO.teamStat==2}">
-												<td><button type="button" class="btn btn-lg btn-danger">待審核</button> </td>                                                 
-											</c:if>
+												<button type="button" class="btn btn-lg btn-danger">待審核</button>                                                
+											</c:if></td> 
 <%-- 			        			<input type="hidden" name="seasonID" value="${sVO.seasonID}">  --%>
 <!--                                     <input type="hidden" name="action" value="GET_ONE_TO_UPDATE"> -->
-<!-- 										</Form> -->
-									
+<!-- 										</Form> -->					
 								</tr>
 							</c:forEach>
+						</tbody>	
 					</table>
 
 				</div>
@@ -102,28 +100,29 @@
 	<script>
 	   $(function(){
 		   $('#example').DataTable(
-// 				   {
-// 				columnDefs: [{ width: 200, targets: 6}],
-// 				"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
-// 				"pagingType": "full_numbers",
-// 				"language": {
-// 					"lengthMenu":"每一頁顯示_MENU_ 筆資料",
-// 					"zeroRecords":"查無資料",
-// 					"info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
-// 					"infoEmpty":"無資料",
-// 					"infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
-// 					"search":"搜尋：",
-// 					"paginate":{
-// 						"first":"第一頁",
-// 						"previous":"上一頁",
-// 						"next":"下一頁",
-// 						"last":"最末頁"					
-// 					}
-// 			  }
-// 			}
+				   {
+						columnDefs: [{ width: 200, targets: 5}],
+						"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
+						"pagingType": "full_numbers",
+						"language": {
+							"lengthMenu":"每一頁顯示_MENU_ 筆資料",
+							"zeroRecords":"查無資料",
+							"info":"現在正在第_PAGE_ 頁，總共有_PAGES_ 頁",
+							"infoEmpty":"無資料",
+							"infoFiltered":"(總共搜尋了_MAX_ 筆資料)",
+							"search":"搜尋：",
+							"paginate":{
+								"first":"第一頁",
+								"previous":"上一頁",
+								"next":"下一頁",
+								"last":"最末頁"					
+							}
+					  }
+					}
 				   )   
-		  		
-		$('.btn-danger').on('click', function(){
+	   })
+	   
+	   $('.btn-danger').on('click', function(){
 			console.log(1);
 		if($(this).text()=='待審核'){
 			if(confirm("確定要修改嗎?")){
@@ -143,7 +142,6 @@
 		  }
 		 }
 		})
-	   })
 	</script>
 </body>
 </html>

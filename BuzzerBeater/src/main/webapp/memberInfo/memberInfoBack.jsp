@@ -155,8 +155,7 @@
 		        
 		    }else {
 		    	alert("新增失敗");
-		    }
-			
+		    }			
 		});
 		
 		function loadProduct(id){
@@ -173,7 +172,7 @@
  	               var cell5 = $('<td></td>').text(maxDate);
 	               var cell6 = $('<td></td>').text(MemberInfoVO.teamID);
 	               var cell7 = $('<td><button type="button" class="btn btn-warning">修改</button></td>');
-	               var cell8 = $('<td><button type="button" class="btn btn-danger" >刪除</button></td>');
+	               var cell8 = $('<td><button type="button" class="btn btn-danger" >刪除</button></td>');	               	             
 	               var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8]);
  	               docFrag.append(row);
  	               tb.append(docFrag);         
@@ -256,15 +255,22 @@
           //刪除鍵
 		  $('.btn-danger').on('click', function(){
 			  //確認 或 取消
-			  if(confirm("確定要刪除嗎?")){
-				  var memberID = $(this).parents('tr').find('td:nth-child(1)').text();
-				  //alert(memberID);
-				  //把輸入在欄位上的資料經過post傳送
+			  var memberID = $(this).parents('tr').find('td:nth-child(1)').text();
+			  var auth = $(this).parents('tr').find('td:nth-child(4)').text();
+			  var teamID = $(this).parents('tr').find('td:nth-child(6)').text();
+			  if(auth === "admin"){
+				  alert("此帳號為超級管理員,不能刪除!");
+			  }else if(teamID == 0){
+			    if(confirm("確定要刪除嗎?")){
+			  //把輸入在欄位上的資料經過post傳送
 	 	       	  $.post('/BuzzerBeater/memberInfoServlet.do', {'action':'DELETE', 'MemberID':memberID}, function(datas){
 						//刪除資料 不需回傳東西, 或做輸入與法判斷
 	 	       	  })
 				  $(this).parents('tr').empty(); 
 	 	   	      location.reload()
+			    }
+			  }else {
+				  alert("此帳號有建立球隊,不能刪除!");  
 			  }
 		  }) 
 	  }
