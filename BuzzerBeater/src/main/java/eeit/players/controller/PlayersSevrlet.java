@@ -301,6 +301,28 @@ public class PlayersSevrlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
 		}
+		
+		if ("buildPlayer".equals(action)) {
+			String base64 = req.getParameter("photo");
+			String photo = base64.substring(base64.lastIndexOf(",") + 1);
+			String playerName = req.getParameter("playerName");
+			String id = req.getParameter("id");
+			Integer playerNo = Integer.parseInt(req.getParameter("playerNo"));
+			String playerRole = req.getParameter("playerRole");
+			Double height = new Double(req.getParameter("height"));
+			Double weights = new Double(req.getParameter("weights"));
+			Date birthday = Date.valueOf(req.getParameter("birthday"));
+			String nationality = req.getParameter("nationality");
+
+			playerSvc.insertPlayer(playerName, id, height, weights, birthday, nationality, photo);
+			TeamCompositionService tcsvc =new TeamCompositionService();
+			
+			TeamsService svc = new TeamsService();
+
+			tcsvc.insert(svc.findMaxID(), playerSvc.findMaxID(), playerNo, playerRole, new Timestamp(System.currentTimeMillis()),null);
+			
+
+		}
 
 	}
 }

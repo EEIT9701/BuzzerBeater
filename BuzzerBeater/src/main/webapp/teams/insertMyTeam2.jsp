@@ -281,6 +281,7 @@
 							if (step == 0) {
 								bt.empty();
 								btns.empty();
+								
 								var cell1 = $('<div class="form-group"><label class="control-label">隊徽:</label> <input type="file" id="file"></div>');
 								var cell2 = $('<img id="result" class = "teamBadge" src="<%=request.getContextPath()%>/images/700_700.png">');
 								var cell3 = $('<div class="form-group"><label class="control-label">球隊名稱:</label><div><input type="text"class="form-control" id="teamName"></div></div>'
@@ -289,21 +290,41 @@
 									'<div class="form-group"><label class="control-label">隊長連絡電話:</label><div><input type="text"class="form-control" id="captainPhone"></div></div>'
 								);
 								var cell5 = $(
+										'<div class="form-group"><label class="control-label">隊長Email:</label><div><input type="text"class="form-control" id="captainEmail"></div></div>'
+									);
+								var cell6 = $(
 									'<div class="form-group"><label class="control-label">總教練:</label><div><input type="text" class="form-control" id="coachName"></div></div>'
 								);
-								var cell6 = $(
+								var cell7 = $(
 									'<div class="form-group"><label class="control-label">老闆:</label><div><input type="text"class="form-control" id="bossName"></div></div>'
 								);
-								var cell7 = $(
+								var cell8 = $(
 									'<div class="form-group"><label class="control-label">備註:</label><div><input type="text" class="form-control" id="remarks"></div></div>'
 								);
-								var cell8=$('<div class="col-md-4"></div>');
-								var cell9=$('<button id="nextBtn">下一步</button>')
+								var cell9=$('<div class="col-md-4"></div>');
+								var cell10=$('<button id="nextBtn">下一步</button>')
 								
 			
-								bt.append([cell1, cell2, cell3, cell4, cell5, cell6, cell7]);
-								btns.append([cell8,cell9]);
-								nextBtn();
+								bt.append([cell1, cell2, cell3, cell4, cell5, cell6, cell7,cell8]);
+								btns.append([cell9,cell10]);
+								file();
+								$("#nextBtn").on("click", function () {
+									var teamBadge = $('#result').attr('src');
+									var teamName = $('#teamName').val();
+									var captainPhone = $('#captainPhone').val();
+									var captainEmail = $('#captainEmail').val();
+									var coachName = $('#coachName').val();
+									var bossName = $('#bossName').val();
+									var remarks = $('#remarks').val();
+									$step.nextStep();
+									$index.text($step.getIndex());
+									loadTable();
+									file();
+									
+									
+									$.post('<%=request.getContextPath()%>/Teams.do', {'action':'buildMyTeam','teamBadge':teamBadge,'teamName':teamName, 'captainPhone':captainPhone, 'captainEmail':captainEmail,'coachName':coachName, 'bossName':bossName,'remarks':remarks}, function(datas){
+			  		 	       	  }) 
+								});
 							}
 							if (step == 1) {
 								bt.empty();
@@ -337,19 +358,28 @@
 								prevBtn();
 								nextBtn();
 									$("#insertConfirm").on("click", function () {
-
 										var docFrag = $(document.createDocumentFragment());
 										var tb = $('<tbody></tbody>');
-										var pic = $("#result").attr('src');
-										var cell2 = $('<td></td>').html('<img style = "width:50px" src="' + pic + '">');
-										var cell3 = $('<td></td>').text($("#playerName").val());
-										var cell4 = $('<td></td>').text($("#id").val());
-										var cell5 = $('<td></td>').text($("#playerNo").val());
-										var cell6 = $('<td></td>').text($("#playerRole").val());
-										var cell7 = $('<td></td>').text($("#height").val());
-										var cell8 = $('<td></td>').text($("#weights").val());
-										var cell9 = $('<td></td>').text($("#birthday").val());
-										var cell10 = $('<td></td>').text($("#nationality").val());
+										var photo = $("#result").attr('src');
+										var playerName = $("#playerName").val();
+										var id = $("#id").val();
+										var playerNo = $("#playerNo").val();
+										var playerRole = $("#playerRole").val();
+										var height = $("#height").val();
+										var weights = $("#weights").val();
+										var birthday = $("#birthday").val();
+										var nationality = $("#nationality").val();
+										$.post('<%=request.getContextPath()%>/Players.do', {'action':'buildPlayer','photo':photo,'playerName':playerName, 'id':id, 'playerNo':playerNo,'playerRole':playerRole, 'height':height,'weights':weights,'birthday':birthday,'nationality':nationality}, function(datas){
+					  		 	       	  }) 
+										var cell2 = $('<td></td>').html('<img style = "width:50px" src="' + photo + '">');
+										var cell3 = $('<td></td>').text(playerName);
+										var cell4 = $('<td></td>').text(id);
+										var cell5 = $('<td></td>').text(playerNo);
+										var cell6 = $('<td></td>').text(playerRole);
+										var cell7 = $('<td></td>').text(height);
+										var cell8 = $('<td></td>').text(weights);
+										var cell9 = $('<td></td>').text(birthday);
+										var cell10 = $('<td></td>').text(nationality);
 										var cell11 = $('<td></td>').html($(
 											'<button id="update" type="submit"class="btn btn-info" data-toggle="modal" data-target="#myModal1">修改</button>'
 										));
@@ -387,136 +417,95 @@
 
 							}if (step == 2) {
 								bt.empty();
-								$('#btns').empty()
+								btns.empty();
 								var docFrag = $(document.createDocumentFragment());
-// 								var tabGroup = $('<table class="table table-bordered" id="groupTable"></table>');
-// 								var th = $('<thead></thead>');
-// 								var tb = $('<tbody></tbody>');
-// 								var cell1 = $('<th></th>').text("分組名稱");
-// 								var cell2 = $('<th></th>').text("參賽球隊上限");
-// 								var cell3 = $('<th></th>').text("參賽球隊下限");
-// 								var cell4 = $('<th></th>').text("目前球隊數量");
-// 								var cell5 = $('<th></th>').text("球隊球員上限");
-// 								var cell6 = $('<th></th>').text("球隊球員下限");
-// 								var cell7 = $('<th></th>').text("報名狀況");
-// 								var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7,
-// 									cell8
-// 								]);
-// 								docFrag.append(row);
-// 								th.append(docFrag);
-// 								tabGroup.append(th);
-// 								bt.append([tabGroup]);
-<%-- 								$.getJSON('<%=request.getContextPath()%>/GameMedia.do', { --%>
-// 									'action': 'findGroupNameBySeasonID',
-// 									'seasonID': 1003
-// 								}, function (data) {
-// 									$.each(data, function (index, group) {
-// 										var cell1 = $('<td></td>').text(group.groupName);
-// 										var cell2 = $('<td></td>').text(group.maxTeams);
-// 										var cell3 = $('<td></td>').text(group.minTeams);
-// 										var cell4 = $('<td></td>').text(group.currentTeams);
-// 										var cell5 = $('<td></td>').text(group.maxPlayers);
-// 										var cell6 = $('<td></td>').text(group.minPlayers);
-// 										var cell7 = null;
-// 										if (group.currentTeams >= group.maxTeams) {
-// 											var cell7 = $('<td></td>').text("已達報名上限");
-// 										}
-// 										if (group.currentTeams < group.maxTeams) {
-// 											var cell7 = $('<td></td>').html('<button id="nextBtn" class="btn btn-warning">我要報名</button>')
-// 										}
-// 										var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
-// 											cell7, cell8
-// 										]);
-// 										docFrag.append(row);
-// 										tb.append(docFrag);
+								var tabGroup = $('<table class="table table-bordered" id="groupTable"></table>');
+								var th1 = $('<thead></thead>');
+								var tb1 = $('<tbody></tbody>');
+								var cell1 = $('<th></th>').text("分組名稱");
+								var cell2 = $('<th></th>').text("參賽球隊上限");
+								var cell3 = $('<th></th>').text("參賽球隊下限");
+								var cell4 = $('<th></th>').text("目前球隊數量");
+								var cell5 = $('<th></th>').text("球隊球員上限");
+								var cell6 = $('<th></th>').text("球隊球員下限");
+								var cell7 = $('<th></th>').text("報名狀況");
+								var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7
+								]);
+								docFrag.append(row);
+								th1.append(docFrag);
+								tabGroup.append(th1);
+								bt.append([tabGroup]);
+								$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {
+									'action': 'findGroupNameBySeasonID',
+									'seasonID': 1003
+								}, function (data) {
+									$.each(data, function (index, group) {
+										var cell1 = $('<td></td>').text(group.groupName);
+										var cell2 = $('<td></td>').text(group.maxTeams);
+										var cell3 = $('<td></td>').text(group.minTeams);
+										var cell4 = $('<td></td>').text(group.currentTeams);
+										var cell5 = $('<td></td>').text(group.maxPlayers);
+										var cell6 = $('<td></td>').text(group.minPlayers);
+										var cell7 = null;
+										if (group.currentTeams >= group.maxTeams) {
+											var cell7 = $('<td></td>').text("已達報名上限");
+										}
+										if (group.currentTeams < group.maxTeams) {
+											var cell7 = $('<td></td>').html('<button id="nextBtn" class="btn btn-warning">我要報名</button>')
+										}
+										var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
+											cell7
+										]);
+										docFrag.append(row);
+										tb1.append(docFrag);
 
-// 									})
-// 									tabGroup.append(tb);
-									
-									var tab = $('<table class="table table-bordered" id="playerTable"></table>');
-									var th = $('<thead></thead>');
-									var cell1 = $(
-										'<button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button>');
-									var cell2 = $('<th></th>').text("球員照片");
-									var cell3 = $('<th></th>').text("球員姓名");
-									var cell4 = $('<th></th>').text("身分證ID");
-									var cell5 = $('<th></th>').text("背號");
-									var cell6 = $('<th></th>').text("位置");
-									var cell7 = $('<th></th>').text("身高");
-									var cell8 = $('<th></th>').text("體重");
-									var cell9 = $('<th></th>').text("生日");
-									var cell10 = $('<th></th>').text("國籍");
-									var cell11 = $('<th></th>');
-									var cell12 = $('<th></th>');
-									var cell13=$('<div class="col-md-4"><button id="prevBtn">上一步</button></div>')
-									var cell14=$('<div class="col-md-4"></div>');
-									var cell15=$('<div class="col-md-4"><button id="nextBtn">下一步</button></div>')
-									var row = $('<tr align="center" valign="middle"></tr>').append([cell2, cell3, cell4, cell5, cell6, cell7, cell8,
-										cell9, cell10, cell11, cell12
-									]);
-									docFrag.append(row);
-									th.append(docFrag);
-									tab.append(th);
-									bt.append([cell1, tab]);
-									btns.append([cell13,cell14,cell15]);
-									prevBtn();
-									nextBtn();
-										$("#insertConfirm").on("click", function () {
+									})
+									tabGroup.append(tb1);
+								
+								});
+								var tab = $('<table class="table table-bordered" id="playerTable"></table>');
+								var th = $('<thead></thead>');
+								var cell1 = $('<th></th>').text("球員照片");
+								var cell2 = $('<th></th>').text("球員姓名");
+								var cell3 = $('<th></th>').text("身分證ID");
+								var cell4 = $('<th></th>').text("背號");
+								var cell5 = $('<th></th>').text("位置");
+								var cell6 = $('<th></th>').text("身高");
+								var cell7 = $('<th></th>').text("體重");
+								var cell8 = $('<th></th>').text("國籍");
+								var cell9 = $('<th></th>')
+								
+								var row = $('<tr align="center" valign="middle"></tr>').append([cell1,cell2, cell3, cell4, cell5, cell6, cell7, cell8,
+									cell9
+								]);
+								docFrag.append(row);
+								th.append(docFrag);
+								tab.append(th);
+								bt.append([tab]);
+								var tb = $('<tbody></tbody>');
+								$.getJSON('<%=request.getContextPath()%>/Teams.do', {
+									'action': 'findMyTeamPlayer'
+								} ,function (data) {
+									$.each(data, function (index, player) {
+										var cell1 = $('<td></td>').html('<img style = "width:50px" src="data:image/png;base64,' + player.photo + '">')
+										var cell2 = $('<td></td>').text(player.playerName);
+										var cell3 = $('<td></td>').text(player.id);
+										var cell4 = $('<td></td>').text(player.playerNo);
+										var cell5 = $('<td></td>').text(player.playerRole);
+										var cell6 = $('<td></td>').text(player.height);
+										var cell7 = $('<td></td>').text(player.weights);
+										var cell8 = $('<td></td>').text(player.nationality);
+										var cell9 = $('<td></td>').html('<input type="checkbox">');
+										var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
+											cell7,cell8,cell9
+										]);
+										docFrag.append(row);
+										tb.append(docFrag);
 
-											var docFrag = $(document.createDocumentFragment());
-											var tb = $('<tbody></tbody>');
-											var pic = $("#result").attr('src');
-											var cell2 = $('<td></td>').html('<img style = "width:50px" src="' + pic + '">');
-											var cell3 = $('<td></td>').text($("#playerName").val());
-											var cell4 = $('<td></td>').text($("#id").val());
-											var cell5 = $('<td></td>').text($("#playerNo").val());
-											var cell6 = $('<td></td>').text($("#playerRole").val());
-											var cell7 = $('<td></td>').text($("#height").val());
-											var cell8 = $('<td></td>').text($("#weights").val());
-											var cell9 = $('<td></td>').text($("#birthday").val());
-											var cell10 = $('<td></td>').text($("#nationality").val());
-											var cell11 = $('<td></td>').html($(
-												'<button id="update" type="submit"class="btn btn-info" data-toggle="modal" data-target="#myModal1">修改</button>'
-											));
-											
-											var cell12 = $('<td></td>').html($('<button type="submit"class="btn btn-danger">刪除</button>'));
-											var row = $('<tr align="center" valign="middle"></tr>').append([cell2, cell3, cell4, cell5, cell6, cell7,
-												cell8, cell9, cell10, cell11, cell12
-											]);
-											docFrag.append(row);
-											tb.append(docFrag);
-											$("#playerTable").append(tb);
-											var update = $(this).parents('tr');
-											$("#update").on("click", function () {
-											$("#playerName").val(update.find('td:nth-child(2)').text());
-											$("#id").val(update.find('td:nth-child(3)').text());
-											$("#playerNo").val(update.find('td:nth-child(4)').text());
-											$("#playerRole").val(update.find('td:nth-child(5)').text());
-											$("#height").val(update.find('td:nth-child(6)').text());
-											$("#weights").val(update.find('td:nth-child(7)').text());
-											$("#birthday").val(update.find('td:nth-child(8)').text());
-											$("#nationality").val(update.find('td:nth-child(9)').text());
-										});
-											$("#file").val('');
-											$("#result").attr('src', '<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png');
-											$("#playerName").val('');
-											$("#id").val('');
-											$("#playerNo").val('');
-											$("#playerRole").val('');
-											$("#height").val('');
-											$("#weights").val('');
-											$("#birthday").val('');
-											$("#nationality").val('');
-										});
-
-									$("#nextBtn").on("click", function () {
-										console.log("點擊觸發")
-										$step.nextStep();
-										$index.text($step.getIndex());
-										loadTable();
-										file();
-									});
-// 								});
+									})
+									tab.append(tb);
+								
+								});
 							}
 						}
 
@@ -538,16 +527,6 @@
 
 							});
 						}
-
-						function btn() {
-							var cell1 = $('<div class="col-md-4"><button id="prevBtn"><nobr>上一步</nobr></button></div>');
-							var cell2 = $('<div class="col-md-4"></div>');
-							var cell3 = $('<div class="col-md-4"><button id="nextBtn"><nobr>下一步</nobr></button></div>');
-							$('#btns').append([cell1, cell2, cell3]);
-							prevBtn();
-							nextBtn();
-
-						}
 						function prevBtn() {
 						$("#prevBtn").on("click", function () {
 							$step.prevStep();
@@ -557,15 +536,15 @@
 
 						});
 						}
+						
 						function nextBtn() {
 							$("#nextBtn").on("click", function () {
-								$step.nextStep();
-								$index.text($step.getIndex());
-								loadTable();
-								file();
-
+							$step.nextStep();
+							$index.text($step.getIndex());
+							loadTable();
+							file();
 							});
-							}
+						}
 					</script>
 
 					<jsp:include page="/footer_css.jsp" />

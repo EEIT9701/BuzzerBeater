@@ -313,6 +313,12 @@ public class PlayerJDBCDAO implements PlayerDAO_interface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Integer findMaxID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	}
 
 
