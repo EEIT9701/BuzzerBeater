@@ -23,21 +23,24 @@
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
     </head>
-
+<style>
+.st2#td{width:100px
+}
+</style>
     <body>
 	    <jsp:include page="/header.jsp" />
 	
-		<div class="container">
+		<div class="container-fluid">
 			<div class="jumbotron">
 			<!-- 網頁內容 -->
-			<table>
+			<table id="st1">
 				<thead>
 					<tr>
-						<td>分組名稱</td>
-						<td>主隊</td>
-						<td>客隊</td>
-						<td>賽事開始時間</td>
-						<td>賽事開始時間</td>
+						<td style=width:150px>分組名稱</td>
+						<td style=width:150px>主隊</td>
+						<td style=width:150px>客隊</td>
+						<td style=width:150px>賽事開始時間</td>
+						<td style=width:150px>賽事開始時間</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -57,21 +60,96 @@
 				<thead>
 					<tr>
 						<td>球員姓名</td>
+						<td>兩分球命中</td>
 						<td>兩分球出手</td>
+						<td>三分球命中</td>
+						<td>三分球出手</td>
+						<td>罰球命中</td>
+						<td>罰球出手</td>
+						<td>進攻籃板</td>
+						<td>防守籃板</td>
+						<td>助攻</td>
+						<td>抄截</td>
+						<td>阻攻</td>
+						<td>失誤</td>
+						<td>犯規</td>
+						<td>得分</td>
+						<td>先發</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="st2">
 					<c:forEach var="tcVO" items="${gamesVO.teamAVO.teamCompositionSet}">
 					<tr>
 						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
 						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
 						<td>${tcVO.playersVO.playerName}</td>
-						<td><input type="number" name="twoPointShot"></td>
+						<td><input style=width:100px type="number" name="twoPoint"></td>
+						<td><input style=width:100px type="number" name="twoPointShot"></td>
+						<td><input style=width:100px type="number" name="threePoint"></td>
+						<td><input style=width:100px type="number" name="threePointShot"></td>
+						<td><input style=width:100px type="number" name="fg"></td>
+						<td><input style=width:100px type="number" name="fgShot"></td>
+						<td><input style=width:100px type="number" name="offreb"></td>
+						<td><input style=width:100px type="number" name="defreb"></td>
+						<td><input style=width:100px type="number" name="blocks"></td>
+						<td><input style=width:100px type="number" name="assist"></td>
+						<td><input style=width:100px type="number" name="steal"></td>
+						<td><input style=width:100px type="number" name="turnover"></td>
+						<td><input style=width:100px type="number" name="personalFouls"></td>
+						<td><input style=width:100px type="number" name="points"></td>
+						<td><input style=width:100px type="number" name="startingPlayer"></td>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			
+			<h3>${gamesVO.teamBVO.teamName}</h3>
+			<table id="teamB">
+				<thead>
+					<tr>
+						<td>球員姓名</td>
+						<td>兩分球命中</td>
+						<td>兩分球出手</td>
+						<td>三分球命中</td>
+						<td>三分球出手</td>
+						<td>罰球命中</td>
+						<td>罰球出手</td>
+						<td>進攻籃板</td>
+						<td>防守籃板</td>
+						<td>助攻</td>
+						<td>抄截</td>
+						<td>阻攻</td>
+						<td>失誤</td>
+						<td>犯規</td>
+						<td>得分</td>
+						<td>先發</td>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="tcVO" items="${gamesVO.teamBVO.teamCompositionSet}">
+					<tr>
+						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
+						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
+						<td>${tcVO.playersVO.playerName}</td>
+						<td><input style=width:100px type="number" name="twoPoint"></td>
+						<td><input style=width:100px type="number" name="twoPointShot"></td>
+						<td><input style=width:100px type="number" name="threePoint"></td>
+						<td><input style=width:100px type="number" name="threePointShot"></td>
+						<td><input style=width:100px type="number" name="fg"></td>
+						<td><input style=width:100px type="number" name="fgShot"></td>
+						<td><input style=width:100px type="number" name="offreb"></td>
+						<td><input style=width:100px type="number" name="defreb"></td>
+						<td><input style=width:100px type="number" name="blocks"></td>
+						<td><input style=width:100px type="number" name="assist"></td>
+						<td><input style=width:100px type="number" name="steal"></td>
+						<td><input style=width:100px type="number" name="turnover"></td>
+						<td><input style=width:100px type="number" name="personalFouls"></td>
+						<td><input style=width:100px type="number" name="points"></td>
+						<td><input style=width:100px type="number" name="startingPlayer"></td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 			
 			<button type="button" class="btn btn-lg btn-success" id="addGame">送出</button>
 		
@@ -92,6 +170,7 @@
 			})
 		})
 	    </script>
+	    
     </body>
 
     </html>
