@@ -127,22 +127,33 @@
 		$('.btn-warning').on('click', function(){
 			console.log(1);
 			if(confirm("確定要送出嗎?")){
+			//驗證狀態欄位給2
             $(this).parents('tr').find('td:nth-child(7)').text('2');
+			//按鈕改"已送出"
             $(this).text('已送出');
+			//移除原樣式
             $(this).removeClass('btn btn-lg btn-warning');
+          	//增加新樣式
             $(this).addClass('btn btn-lg btn-danger');
+          	//增加不能點擊的屬性
             $(this).attr("disabled","disabled");
             var teamID =$(this).parents('tr').find('td:nth-child(1)').attr('id');
             var groupID =$(this).parents('tr').find('td:nth-child(2)').attr('id');
             var registerDate =$(this).parents('tr').find('td:nth-child(3)').text();
             var teamStat =$(this).parents('tr').find('td:nth-child(7)').text();
             var paymentNumber =$(this).parents('tr').find('td:nth-child(4)>input').val();
+            //把撈到的值包成JSON
 	       	var dataStr = JSON.stringify({ 'teamID':teamID, 'groupID':groupID, 'teamStat':teamStat,'registerDate':registerDate,'paymentNumber':paymentNumber})
 	       	console.log(dataStr);
-	       	$.post('<%=request.getContextPath()%>/GroupReg.do',{'action':'UPDATE','data':dataStr},function(datas){})   
+            //用POST傳名為UPDATE的action到Servlrt
+	       	$.post('<%=request.getContextPath()%>/GroupReg.do',{'action':'UPDATE','data':dataStr},function(datas){})
+	       	//讓輸入的值到手動繳費驗證欄位
 	       	$(this).parents('tr').find('td:nth-child(4)').html(paymentNumber);
+            //改變驗證狀態欄位
 	       	$(this).parents('tr').find('td:nth-child(7)').text('系統確認中');
+            //移除a標籤
             $(this).parents('tr').find('td:nth-child(5)>a').remove("a");
+            //增加圖片
 			$(this).parents('tr').find('td:nth-child(5)').html('<img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top:5px;">');
 		  }
 		 
@@ -152,19 +163,27 @@
 
 			console.log("3");
 			if(confirm("確定要送出嗎?")){
+			//驗證狀態欄位給2
 			$(this).parents('tr').find('td:nth-child(7)').text('2');
+			//按鈕改"已送出"
             $(this).parents('tr').find('td:nth-child(6)').text('已送出');
+          	//移除原樣式
             $(this).parents('tr').find('td:nth-child(6)').removeClass('btn btn-lg btn-warning');
+          	//增加新樣式
             $(this).parents('tr').find('td:nth-child(6)').addClass('btn btn-lg btn-danger');
+          	//增加不能點擊的屬性
             $(this).parents('tr').find('td:nth-child(6)').attr("disabled","disabled");
+          	//手動繳費驗證給'無'
             $(this).parents('tr').find('td:nth-child(4)>input').attr('value','無');
 			var teamID =$(this).parents('tr').find('td:nth-child(1)').attr('id');
             var groupID =$(this).parents('tr').find('td:nth-child(2)').attr('id');
             var registerDate =$(this).parents('tr').find('td:nth-child(3)').text();
             var teamStat =$(this).parents('tr').find('td:nth-child(7)').text();
             var paymentNumber =$(this).parents('tr').find('td:nth-child(4)>input').val();
+          	//把撈到的值包成JSON
 	       	var dataStr = JSON.stringify({ 'teamID':teamID, 'groupID':groupID, 'teamStat':teamStat,'registerDate':registerDate,'paymentNumber':paymentNumber})
-	       	console.log(dataStr);
+// 	       	console.log(dataStr);
+	      	//用POST傳名為UPDATE的action到Servlrt
 	       	$.post("<%=request.getContextPath()%>/GroupReg.do", {'action':'UPDATE','data':dataStr}, function(datas){})
 			}
 		}) 
