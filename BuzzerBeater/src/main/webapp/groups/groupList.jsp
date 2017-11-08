@@ -73,7 +73,7 @@
 				<c:forEach var="groupsSet" items="${seasonVO.groupsSet}">
 					<c:if test="${not empty groupsSet.gamesSet}">
 						<h2>${groupsSet.groupName}</h2>
-						<table class="table table-bordered test" id="season_group">
+						<table class="table table-bordered" id="season_group">
 							<thead>
 								<tr>
 								  <td>比賽時間</td>
@@ -120,7 +120,7 @@
 				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 	    	})
 
-	    	$('.test').DataTable();
+	    	
 	    });
 	    </script>
     </body>

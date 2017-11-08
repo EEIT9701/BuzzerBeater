@@ -4,6 +4,7 @@
 <%--新增前先將存在session中的資料刪除 --%>
 <%request.getSession().removeAttribute("seasonVO"); %>
 <%request.getSession().removeAttribute("groupsSet"); %>
+<%request.getSession().removeAttribute("tempSeason"); %>
 
 <!DOCTYPE html>
     <html>

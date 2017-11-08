@@ -117,59 +117,63 @@
 											</div>
 										</div>
 										<!-- Text input-->
+										<div  align='center' valign='middle'>
 										<div class="form-group">
 											<label class=" control-label">球員姓名:</label>
-											<div class="">
-												<input type="text" class="form-control" id="playerName">
-											</div>
-										</div>
-										<div class="form-group">
+<!-- 											<div class=""> -->
+												<input type="text" class="form-control" id="playerName" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div class="form-group"> -->
 											<label class=" control-label">身分證ID:</label>
-											<div class="">
-												<input type="text" class="form-control" id="id">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class=" control-label">背號:</label>
-											<div class="">
-												<input type="text" class="form-control" id="playerNo" value="">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class=" control-label">位置:</label>
-											<div class="">
-												<input type="text" class="form-control" id="playerRole">
-											</div>
+<!-- 											<div class=""> -->
+												<input type="text" class="form-control" id="id" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+<!-- 											</div> -->
 										</div>
 										<div class="form-group">
 											<label class=" control-label">身高(cm):</label>
-											<div class="">
-												<input type="text" class="form-control" id="height">
-											</div>
+<!-- 											<div class=""> -->
+												<input type="text" class="form-control" id="height" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div class="form-group"> -->
+											<label class=" control-label">體重(kg):</label>
+<!-- 											<div class=""> -->
+												<input type="text" class="form-control" id="weights" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+<!-- 											</div> -->
 										</div>
 										<div class="form-group">
-											<label class=" control-label">體重(kg):</label>
-											<div class="">
-												<input type="text" class="form-control" id="weights">
-											</div>
+											<label class=" control-label">背號:</label>
+<!-- 											<div class=""> -->
+												<input type="text" class="form-control" id="playerNo" value="" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div class="form-group"> -->
+											<label class=" control-label">位置:</label>
+<!-- 											<div class=""> -->
+												<input type="text" class="form-control" id="playerRole" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+<!-- 											</div> -->
 										</div>
+										
 										<div class="form-group">
 											<label class=" control-label">生日:</label>
-											<div class="">
-												<input type="text" class="form-control" id="birthday">
-											</div>
-										</div>
-										<div class="form-group">
+<!-- 											<div class=""> -->
+												<input type="text" class="form-control" id="birthday" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div class="form-group"> -->
 											<label class=" control-label">國籍:</label>
-											<div class="">
-												<input type="text" class="form-control" id="nationality">
-											</div>
+<!-- 											<div class=""> -->
+												<input type="text" class="form-control" id="nationality" style="width:150px;padding-bottom: 5px;padding-top: 5px;">
+<!-- 											</div> -->
+										</div>
 										</div>
 									</div>
 									<div id="iubut" class="modal-footer">
 										<!--確認按鈕觸發事件-->
 										<button type="submit" class="btn btn-warning" data-dismiss="modal" id="insertConfirm">新增</button>
 										<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+									</div>
 									</div>
 								</div>
 							</div>

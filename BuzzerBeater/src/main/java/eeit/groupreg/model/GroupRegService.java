@@ -19,7 +19,7 @@ public class GroupRegService {
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig2_JNDI.xml");
 		dao = (GroupRegDAO_interface) context.getBean("GroupRegDAO");
 	}
-
+	
 	public List<Map<String, Object>> findSignUpPlayer(Integer groupID, Integer teamID) {
 		dao = new GroupRegDAO_JDBC();
 		return dao.findSignUpPlayer(groupID, teamID);
@@ -46,6 +46,26 @@ public class GroupRegService {
 
 		dao.insert(vo);
 	}
+	
+	public void insert1(Integer groupID,Integer teamID,Integer teamStat,Timestamp registerDate,
+			String paymentNumber) {
+		dao=new GroupRegDAO_JDBC();
+		GroupRegVO gVO=new GroupRegVO();
+			
+		GroupsVO groupsVO=new GroupsVO();
+		groupsVO.setGroupID(groupID);
+		gVO.setGroupsVO(groupsVO);
+		
+		TeamsVO teamsVO=new TeamsVO();
+		teamsVO.setTeamID(teamID);
+		gVO.setTeamsVO(teamsVO);
+		
+		gVO.setTeamStat(teamStat);
+		gVO.setRegisterDate(registerDate);
+		gVO.setPaymentNumber(paymentNumber);
+		
+		dao.insert(gVO);
+	}
 
 	public void update(Integer groupID, Integer teamID, Integer teamStat, Timestamp registerDate,
 			String paymentNumber) {
@@ -64,6 +84,25 @@ public class GroupRegService {
 		vo.setPaymentNumber(paymentNumber);
 
 		dao.insert(vo);
+	}
+	
+	public void update2(Integer teamID,Integer groupID,Integer teamStat) {
+		
+		dao=new GroupRegDAO_JDBC();
+		GroupRegVO gVO=new GroupRegVO();
+		
+		TeamsVO teamsVO=new TeamsVO();
+		teamsVO.setTeamID(teamID);
+		gVO.setTeamsVO(teamsVO);
+		
+		GroupsVO groupsVO=new GroupsVO();
+		groupsVO.setGroupID(groupID);
+		gVO.setGroupsVO(groupsVO);
+		
+		gVO.setTeamStat(teamStat);
+		
+		dao.update(gVO);
+		
 	}
 
 	public List<GroupRegVO> findByGroupID(Integer groupID) {

@@ -10,8 +10,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import eeit.locationinfo.model.LocationinfoService;
-import eeit.teams.model.TeamsService;
+import eeit.teamcomposition.model.TeamCompositionVO;
 
 @SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
@@ -75,13 +74,9 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		
 //		 dao.delete(4003);
 
-		Set<GamesVO> set = new LinkedHashSet<GamesVO>(dao.findByTeamID(3001));
-		for (GamesVO gvo : set) {
-			System.out.print(gvo.getGameID() + ", ");
-			System.out.print(gvo.getGameBeginDate() + ", ");
-			System.out.print(gvo.getGroupsVO().getGroupID() + ", ");
-			System.out.print(gvo.getGroupsVO().getGroupName() + ", ");
-			System.out.print(gvo.getLocationinfoVO().getLocationName() + ", ");
+		GamesVO gamesVO = dao.findByGameID(4007);
+		for (TeamCompositionVO tcvo : gamesVO.getTeamAVO().getTeamCompositionSet()) {
+			System.out.print(tcvo.getPlayersVO().getPlayerName() + ", ");
 			System.out.println();
 		}
 		
