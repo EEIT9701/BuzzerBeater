@@ -42,19 +42,19 @@
 			<!--上層導覽列(開始) -->
 			<div id="pathWay">
 	        	<span>
-	            	<a href="<%=request.getContextPath() %>/index.jsp">
+	            	<a href="<%=request.getContextPath() %>/index.jsp" class="blockUI">
 	            		<span>使用者功能</span>
 	            	</a>
 	        	</span>
 	        	&gt;
 	        	<span>
-	            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+	            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp" class="blockUI">
 	            		<span>賽季管理</span>
 	            	</a>
 	        	</span>
 	        	&gt;
 	        	<span>
-	            	<a href="<%=request.getContextPath() %>/season/addSeason.jsp">
+	            	<a href="<%=request.getContextPath() %>/season/addSeason.jsp" class="blockUI">
 	            		<span>新增賽季</span>
 	            	</a>
 	        	</span>
@@ -68,7 +68,7 @@
 	
 			<div class="col-md-3">
 				<a href="<%=request.getContextPath()%>/games/Excel_Template.xlsx">
-					<input type="button" class="btn btn-info btn-lg" value="取得EXCEL範本">
+					<input type="button" class="btn btn-info btn-lg" id="getExcel" value="取得EXCEL範本">
 				</a>
 			</div>
 			
@@ -79,7 +79,7 @@
 					<input type="file" class="form-control-file" name="uploadExcel" id="putFullSeason">
 				</div>
 				<div class="col-md-1">
-				    <input type="submit" class="btn btn-lg btn-success" value="送出">
+				    <input type="submit" class="btn btn-lg btn-success blockUI" value="送出">
 			    </div>
 			</form>
 			<br><br><br><br><br><br>
@@ -89,6 +89,26 @@
 	    	</div>
 	    </div>    
 	    <jsp:include page="/footer_css.jsp" />
+	    
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	    <%--遮罩插件 --%>  		
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+		 
+	    <script type="text/javascript">
+			$(function(){
+				// 處理中
+				$('.blockUI').click(function(){
+					$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+				})
+				
+				$('#getExcel').click(function(){
+					$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+					setTimeout(function(){
+						$.unblockUI();
+					},2000)
+				})
+			})
+		</script>
     </body>
 
     </html>

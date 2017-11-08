@@ -9,9 +9,11 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -64,6 +66,22 @@ public class GamesServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 
+		if ("INSERT_TEMP_SEASON".equals(action)) {
+			HttpSession session = request.getSession();
+			SeasonVO seasonVO = (SeasonVO) session.getAttribute("tempSeason");
+			SeasonService svc = new SeasonService();
+			svc.addFullSeason(seasonVO);
+
+			session.removeAttribute("tempSeason");
+			response.sendRedirect(
+					request.getContextPath() + "/groups/groupList_back.jsp?seasonID=" + seasonVO.getSeasonID());
+		}
+
+		if ("DELETE_TEMP_SEASON".equals(action)) {
+			request.getSession().removeAttribute("tempSeason");
+			response.sendRedirect(request.getContextPath() + "/season/seasonList_back.jsp");
+		}
+
 		if ("PUT_FULL_SEASON".equals(action)) {
 			// 取得上傳檔案並轉為資料流
 			Part part = request.getPart("uploadExcel");
@@ -91,8 +109,7 @@ public class GamesServlet extends HttpServlet {
 			groupsVO.setMaxPlayers(Integer.valueOf(groupRow.getCell(3).toString().replaceAll(".0", "")));
 			groupsVO.setMinPlayers(Integer.valueOf(groupRow.getCell(4).toString().replaceAll(".0", "")));
 
-			groupsVO.setSeasonVO(seasonVO);
-			seasonVO.getGroupsSet().add(groupsVO);
+			Set<Integer> currentTeams = new HashSet<Integer>();// 為了計算隊伍數量
 
 			XSSFSheet sheet = workbook.getSheet("分組");
 			for (int i = 4; i < sheet.getPhysicalNumberOfRows() - 4; i++) {
@@ -116,22 +133,31 @@ public class GamesServlet extends HttpServlet {
 
 				String cell4 = gameRow.getCell(4).toString();
 				TeamsVO teamAVO = new TeamsVO();
-				teamAVO.setTeamID(Integer.valueOf(cell4.substring(cell4.indexOf("(") + 1, cell4.indexOf(")"))));
-				teamAVO.setTeamName(cell4.substring(0,cell4.indexOf("(")).trim());
+				Integer teamAID = Integer.valueOf(cell4.substring(cell4.indexOf("(") + 1, cell4.indexOf(")")));
+				teamAVO.setTeamID(teamAID);
+				teamAVO.setTeamName(cell4.substring(0, cell4.indexOf("(")).trim());
 				gamesVO.setTeamAVO(teamAVO);
+				currentTeams.add(teamAID);
 
 				String cell5 = gameRow.getCell(5).toString();
 				TeamsVO teamBVO = new TeamsVO();
-				teamBVO.setTeamID(Integer.valueOf(cell5.substring(cell5.indexOf("(") + 1, cell5.indexOf(")"))));
-				teamBVO.setTeamName(cell5.substring(0,cell5.indexOf("(")).trim());
+				Integer teamBID = Integer.valueOf(cell5.substring(cell5.indexOf("(") + 1, cell5.indexOf(")")));
+				teamBVO.setTeamID(teamBID);
+				teamBVO.setTeamName(cell5.substring(0, cell5.indexOf("(")).trim());
 				gamesVO.setTeamBVO(teamBVO);
+				currentTeams.add(teamBID);
+				
+				gamesVO.setTeamAScore(0);
+				gamesVO.setTeamBScore(0);
 
 				gamesVO.setGroupsVO(groupsVO);
 				groupsVO.getGamesSet().add(gamesVO);
 			}
 
-			// SeasonService seasonSvc = new SeasonService();
-			// seasonSvc.addFullSeason(seasonVO);
+			groupsVO.setCurrentTeams(currentTeams.size());
+			groupsVO.setSeasonVO(seasonVO);
+			seasonVO.getGroupsSet().add(groupsVO);
+
 			request.getSession().setAttribute("tempSeason", seasonVO);
 			response.sendRedirect(request.getContextPath() + "/season/addSeason_temp.jsp");
 
@@ -444,7 +470,7 @@ public class GamesServlet extends HttpServlet {
 
 				// 設置欄位名稱
 				HSSFRow titleRow = sheet.createRow(0); // 產生row(橫排)
-				String[] column = { "比賽開始時間", "比賽結束時間", "地點", "主隊", "客隊" };
+				String[] column = { "比賽開始時間", "比賽結束時間", "地點", "主隊", "比數", "客隊" };
 
 				for (int i = 0; i < column.length; i++) {
 					HSSFCell cell = titleRow.createCell(i); // Cell == 儲存格
@@ -475,11 +501,15 @@ public class GamesServlet extends HttpServlet {
 					cell3.setCellValue(
 							gamesVO.getTeamAVO().getTeamName() + " (" + gamesVO.getTeamAVO().getTeamID() + ")");
 					cell3.setCellStyle(cellStyle);
-
+					
 					HSSFCell cell4 = row.createCell(4);
-					cell4.setCellValue(
-							gamesVO.getTeamBVO().getTeamName() + " (" + gamesVO.getTeamBVO().getTeamID() + ")");
+					cell4.setCellValue(gamesVO.getTeamAScore()+"-"+gamesVO.getTeamBScore());
 					cell4.setCellStyle(cellStyle);
+
+					HSSFCell cell5 = row.createCell(5);
+					cell5.setCellValue(
+							gamesVO.getTeamBVO().getTeamName() + " (" + gamesVO.getTeamBVO().getTeamID() + ")");
+					cell5.setCellStyle(cellStyle);
 
 					rowNum++;
 				}

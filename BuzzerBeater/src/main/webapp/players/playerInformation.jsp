@@ -13,11 +13,11 @@
 	pageContext.setAttribute("playerVO", playerVO);
 %>
 
-<%-- <%
+<%
 	PersonalDataService psvc = new PersonalDataService();
 	List<PersonalDataVO> list = psvc.findByPlyerID2(playerID);
 	pageContext.setAttribute("list1", list);
-%> --%>
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
