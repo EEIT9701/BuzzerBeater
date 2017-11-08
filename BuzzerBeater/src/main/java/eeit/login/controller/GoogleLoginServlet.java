@@ -1,6 +1,7 @@
 package eeit.login.controller;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -131,34 +132,43 @@ public class GoogleLoginServlet extends HttpServlet {
 			LoginCheckService loginCheckflag = new LoginCheckService();
 			String acc = jsonOb.getString("email");
 			memberInfoVO = loginCheckflag.findByAcc(acc);
+			
 			if(memberInfoVO.getAcc()!=null){ //check Email 是否有在資料庫內	
 				memberInfoVO.setAcc(jsonOb.getString("email"));   //Google的使用者帳號
 				memberInfoVO.setName(jsonOb.getString("name"));   //Google的使用者姓名
 				//memberInfoVO.setRegisterTime(ts);	              //使用者註冊的時間	
 				session.setAttribute("LoginOK", memberInfoVO);
 				session.setAttribute("pictureUri", jsonOb.getString("picture")); //照片的url	
-				
-				GmailSendMailviaTLS gs = new GmailSendMailviaTLS();
-				System.out.println(jsonOb.getString("email"));
-				gs.SendEmail(jsonOb.getString("email"), "Wellcome to Login");
 
 //				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 //				rd.forward(req, resp);
 				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 				return;
 			}else{    //沒有帳號,新註冊 會員
-//				memberInfoVO.setAcc(jsonOb.getString("email"));   //Google的使用者帳號
-//				memberInfoVO.setName(jsonOb.getString("name"));   //Google的使用者姓名
-//				memberInfoVO.setRegisterTime(ts);	              //使用者註冊的時間	
-//				session.setAttribute("LoginOK", memberInfoVO);
-//				session.setAttribute("pictureUri", jsonOb.getString("picture")); //照片的url
-//				
-//				session.setAttribute("NewLoginOK", "NewLoginOK");
-
-//				RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
-//				rd.forward(req, resp);
-				resp.sendRedirect(req.getContextPath()+"/index.jsp");
-				return;
+				//新帳戶註冊,寄Email
+//				GmailSendMailviaTLS gs = new GmailSendMailviaTLS();
+//				System.out.println(jsonOb.getString("email"));
+//				gs.SendEmail(jsonOb.getString("email"), "Wellcome to Login");
+				
+				memberInfoVO.setAcc(jsonOb.getString("email"));   //Google的使用者帳號
+				memberInfoVO.setName(jsonOb.getString("name"));   //Google的使用者姓名
+				memberInfoVO.setAuth("teams");
+				memberInfoVO.setRegisterTime(ts);	              //使用者註冊的時間
+				
+				
+				req.setAttribute("pictureUri", jsonOb.getString("picture")); //照片的url
+				req.setAttribute("LoginOK", memberInfoVO);
+				req.setAttribute("data", memberInfoVO);
+				req.setAttribute("NewMember", "INSERT");
+				//交棒
+//				ServletContext context= getServletContext();
+				RequestDispatcher rd = req.getRequestDispatcher("/memberInfoServlet.do");
+				rd.forward(req, resp);
+//				resp.sendRedirect(req.getContextPath()+"/memberInfoServlet.do?action=INSERT");
+//				return;
+				//重導
+//				resp.sendRedirect(req.getContextPath()+"/index.jsp");
+//				return;
 
 			}
 	

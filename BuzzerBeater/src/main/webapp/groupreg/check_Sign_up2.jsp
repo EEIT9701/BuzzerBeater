@@ -7,16 +7,18 @@
 	class="eeit.teams.model.TeamsService" />
 <!DOCTYPE >
 <html>
+
+
 <head>
-<title>BuzzerBeater-審核繳費紀錄</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
-<!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/datatables.min.css" />
+
+<!-- ***datatables顯示設定_2-1*** -->
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
+
 <jsp:include page="/header_css.jsp" />
+
 <style>
 #img1 {
 	width: 55px;
@@ -25,23 +27,14 @@
 }
 </style>
 </head>
+
+
 <body>
 	<jsp:include page="/header.jsp" />
 	<!--主文(開始)-->
 	<div class="container">
 		<div class="jumbotron">
 		<h2 align="center">審核繳費紀錄</h2>
-			<form class="form-inline" method="post"
-				action="<%=request.getContextPath()%>/Players.do">
-				<select class="form-control" name="groups">
-					<option>分組</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-				</select> <input type="submit" class="btn btn-warning" value="搜尋"> <input
-					type="hidden" name="action" value="getOne_For_Display">
-			</form>
 			<!--表格(開始)-->
 			<!--****************-->
 			<!-- 第一列(開始) -->
@@ -79,10 +72,10 @@
 <!-- 										<Form method="post" -->
 
                                          <c:if test="${groupRegVO.teamStat==1}">
-												<td><button type="button" class="btn btn-lg btn-success">已繳費</button></td>
+												<td><button type="button" class="btn btn-lg btn-warning" disabled="disabled">已繳費</button></td>
 											</c:if>
 											<c:if test="${groupRegVO.teamStat==2}">
-												<td><button type="button" class="btn btn-lg btn-primary">待審核</button> </td>                                                 
+												<td><button type="button" class="btn btn-lg btn-danger">待審核</button> </td>                                                 
 											</c:if>
 <%-- 			        			<input type="hidden" name="seasonID" value="${sVO.seasonID}">  --%>
 <!--                                     <input type="hidden" name="action" value="GET_ONE_TO_UPDATE"> -->
@@ -97,14 +90,19 @@
 			<jsp:include page="/footer.jsp" />
 		</div>
 	</div>
+	<jsp:include page="/footer_css.jsp" />
 	<!--主文(結束)-->
-	<script type="text/javascript"
-		src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	
+	
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
+	<!-- ***datatables顯示設定_2-2*** -->
+
+	
+	
 	<script>
 	   $(function(){
-		   
-// 		$(document).ready(function() {
-// 			$('#example').DataTable({
+		   $('#example').DataTable(
+// 				   {
 // 				columnDefs: [{ width: 200, targets: 6}],
 // 				"lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "All"]],
 // 				"pagingType": "full_numbers",
@@ -122,40 +120,30 @@
 // 						"last":"最末頁"					
 // 					}
 // 			  }
-// 			})
-// 		});
-		
-		$('.btn-primary').on('click', function(){
- 			//var a = $(this).parents('tr').find('td:nth-child(4)').text();
-// 			alert($(this).parents('tr').find('td:nth-child(4)').text());
-		if($(this).text()=='待審核')
-// 			css={}
+// 			}
+				   )   
+		  		
+		$('.btn-danger').on('click', function(){
+			console.log(1);
+		if($(this).text()=='待審核'){
+			if(confirm("確定要修改嗎?")){
             $(this).parents('tr').find('td:nth-child(4)').text('1');
             $(this).text('已繳費');
-            $(this).removeClass('btn btn-lg btn-primary');
-            $(this).addClass('btn btn-lg btn-success');
+            $(this).removeClass('btn btn-lg btn-danger');
+            $(this).addClass('btn btn-lg btn-warning');
+            $(this).attr("disabled","disabled");
             var teamID =$(this).parents('tr').find('td:nth-child(1)').attr('id');
             var groupID =$(this).parents('tr').find('td:nth-child(2)').attr('id');
             var registerDate =$(this).parents('tr').find('td:nth-child(3)').text();
             var teamStat =$(this).parents('tr').find('td:nth-child(4)').text();
             var paymentNumber =$(this).parents('tr').find('td:nth-child(5)').text();
-// 			console.log(teamID);
-// 			console.log(groupID);
-// 			console.log(registerDate);
-// 			console.log(teamStat);
-// 			console.log(paymentNumber);
 	       	var dataStr = JSON.stringify({ 'teamID':teamID, 'groupID':groupID, 'teamStat':teamStat,'registerDate':registerDate,'paymentNumber':paymentNumber})
 	       	console.log(dataStr);
-	       	$.post('<%=request.getContextPath()%>/GroupReg.do',{'action':'UPDATE','data':dataStr},function(datas){
-	       		
-	       	})
-			
-			
+	       	$.post('<%=request.getContextPath()%>/GroupReg.do',{'action':'UPDATE','data':dataStr},function(datas){})    
+		  }
+		 }
 		})
-// 		 var a = $("#test01 > tr").find("td:nth-child(4)").text();
-// 		    alert(a);
-		    
-	   })    
+	   })
 	</script>
 </body>
 </html>

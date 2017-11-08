@@ -15,6 +15,7 @@ import eeit.games.model.GamesVO;
 
 
 public class GameMediaService {
+	private static final String String = null;
 	private GameMediaDAO_Interface dao;
 	
 	public GameMediaService(){
@@ -75,14 +76,21 @@ public class GameMediaService {
 		return dao.getAllVideo();
 	}
 	
-	public List<HashMap<String,String>> getAllInJsonForm(){
+	public List<GameMediaVO> tagFunction(String tag){
+		return dao.tagFunction(tag);
+	}
+	
+	public List<HashMap<String,Object>> getAllInJsonForm(){
 		
 		List<GameMediaVO> list = dao.getAll();
-		List<HashMap<String,String>> returnlist = new ArrayList<HashMap<String, String>>();
-		Map<String,String> map = null;
+		List<HashMap<String,Object>> returnlist = new ArrayList<HashMap<String, Object>>();
+		Map<String,Object> map = null;
 		
 		for(GameMediaVO gameMediaVO:list){
-			map = new HashMap<String,String>();
+			
+			String[] tag = gameMediaVO.getTag().split(",");
+			
+			map = new HashMap<String,Object>();
 			map.put("groupName", gameMediaVO.getGamesVO().getGroupsVO().getGroupName());
 			map.put("teamA", gameMediaVO.getGamesVO().getTeamAVO().getTeamName());
 			map.put("teamB", gameMediaVO.getGamesVO().getTeamBVO().getTeamName());
@@ -94,9 +102,9 @@ public class GameMediaService {
 			map.put("mediaType",gameMediaVO.getMediaType());
 			map.put("mediaDate",gameMediaVO.getMediaDate().toString());
 			map.put("descriptions",gameMediaVO.getDescriptions());
-			map.put("tag", gameMediaVO.getTag());
+			map.put("tag", tag);
 			
-			returnlist.add((HashMap<String, String>) map);
+			returnlist.add((HashMap<String, Object>) map);
 		}
 		
 		
@@ -104,10 +112,11 @@ public class GameMediaService {
 		
 	}
 	
-	public HashMap<String,String> getOneInJsonForm(Integer mediaID){
+	public HashMap<String,Object> getOneInJsonForm(Integer mediaID){
 		
 		GameMediaVO map1 = dao.findByPrimaryKey(mediaID);
-		HashMap<String,String> map = new HashMap<String, String>();
+		HashMap<String,Object> map = new HashMap<String, Object>();
+		String[] tag = map1.getTag().split(",");
 		
 		
 			map.put("groupName", map1.getGamesVO().getGroupsVO().getGroupName());
@@ -121,10 +130,9 @@ public class GameMediaService {
 			map.put("mediaType",map1.getMediaType());
 			map.put("mediaDate",map1.getMediaDate().toString());
 			map.put("descriptions",map1.getDescriptions());
-			map.put("tag", map1.getTag());
+			map.put("tag", tag);
 		
-		return map;
-		
+		return map;		
 	}
 	
 }

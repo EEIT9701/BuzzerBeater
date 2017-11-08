@@ -23,6 +23,10 @@ public class SeasonService {
 		dao = (SeasonDAO_interface) context.getBean("SeasonDAO");
 	}
 	
+	public Integer addFullSeason(SeasonVO seasonVO){
+		return dao.insert(seasonVO);
+	}
+	
 	public Set<SeasonVO> getSeason(){
 		dao = new SeasonDAO_JNDI();
 		return dao.getAll();

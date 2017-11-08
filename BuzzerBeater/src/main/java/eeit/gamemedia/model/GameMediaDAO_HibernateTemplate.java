@@ -19,7 +19,7 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 
 	private static final String GET_ALL_STMT = "FROM GameMediaVO ORDER BY mediaID";
 	private static final String GET_ALL_VIDEO_STMT = "FROM GameMediaVO WHERE MediaType = 'video'";;
-
+	private static final String QUERY_FOR_TAG = "FROM GameMediaVO WHERE tag like ?";
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public Integer insert(GameMediaVO gameMediaVO) {
@@ -88,6 +88,13 @@ public class GameMediaDAO_HibernateTemplate implements GameMediaDAO_Interface {
 		Object obj = hibernateTemplate.find(GET_ALL_VIDEO_STMT);
 		List<GameMediaVO> list = (List<GameMediaVO>) obj;
 		return list;
+	}
+
+	@Override
+	public List<GameMediaVO> tagFunction(String tag) {
+		Object obj = hibernateTemplate.find(QUERY_FOR_TAG);
+		List<GameMediaVO> list = (List<GameMediaVO>) obj;
+		return null;
 	}
 
 }

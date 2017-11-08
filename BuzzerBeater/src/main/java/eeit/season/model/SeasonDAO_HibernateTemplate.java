@@ -10,7 +10,10 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import eeit.games.model.GamesVO;
 import eeit.groups.model.GroupsVO;
+import eeit.locationinfo.model.LocationinfoVO;
+import eeit.teams.model.TeamsVO;
 
 @Transactional(readOnly = true)
 public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
@@ -78,22 +81,51 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 		/****************** insert ******************/
 
-//		SeasonVO seasonVO = new SeasonVO();
-//		GroupsVO groupsVO = new GroupsVO();
-//		GroupsVO groupsVO1 = new GroupsVO();
-//
-//		groupsVO.setGroupName("123");
-//		groupsVO.setSeasonVO(seasonVO);// 將seasonVO關聯到groupsVO
-//		seasonVO.setSeasonName("超級盃");
-//		seasonVO.getGroupsSet().add(groupsVO);// 將該筆groupsVO加進seasonVO
-//
-//		groupsVO1.setSeasonVO(seasonVO);
-//		groupsVO1.setGroupName("321");
-//		seasonVO.getGroupsSet().add(groupsVO1);
-//
-//		Integer seasonVO3 = dao.insert(seasonVO); // 結論:要互相包含
-//		
-//		System.out.println(seasonVO3);
+		SeasonVO seasonVO = new SeasonVO();
+		GroupsVO groupsVO = new GroupsVO();
+
+		seasonVO.setSeasonName("超級盃");
+
+		groupsVO.setGroupName("123");
+		groupsVO.setSeasonVO(seasonVO);// 將seasonVO關聯到groupsVO
+		seasonVO.getGroupsSet().add(groupsVO);// 將該筆groupsVO加進seasonVO
+
+		for (int i = 0; i < 5; i++) {
+			GamesVO gamesVO = new GamesVO();
+
+			TeamsVO teamAVO = new TeamsVO();
+			teamAVO.setTeamID(3001);
+			gamesVO.setTeamAVO(teamAVO);
+
+			TeamsVO teamBVO = new TeamsVO();
+			teamBVO.setTeamID(3002);
+			gamesVO.setTeamBVO(teamBVO);
+
+			LocationinfoVO locVO = new LocationinfoVO();
+			locVO.setLocationID(101);
+			gamesVO.setLocationinfoVO(locVO);
+
+			gamesVO.setGroupsVO(groupsVO);
+			groupsVO.getGamesSet().add(gamesVO);
+		}
+		// for (int i = 0; i < 5; i++) {
+		// gamesVO.setGroupsVO(groupsVO);
+		// groupsVO.getGamesSet().add(gamesVO);
+		//
+		// PersonalDataVO pvo = new PersonalDataVO();
+		// TeamsVO teamsVO = new TeamsVO();
+		// teamsVO.setTeamID(3001);
+		// pvo.setTeamsVO(teamsVO);
+		// PlayersVO playersVO = new PlayersVO();
+		// playersVO.setPlayerID(70003+i);
+		// pvo.setPlayersVO(playersVO);
+		//
+		// pvo.setGamesVO(gamesVO);
+		// gamesVO.getPersonalDataSet().add(pvo);
+		// }
+		Integer seasonVO3 = dao.insert(seasonVO); // 結論:要互相包含
+
+		System.out.println(seasonVO3);
 
 		/****************** update ******************/
 
@@ -105,25 +137,25 @@ public class SeasonDAO_HibernateTemplate implements SeasonDAO_interface {
 
 		/****************** delete ******************/
 
-//		 dao.delete(1002);
+		// dao.delete(1002);
 
 		/****************** getAll ******************/
 
-//		Set<SeasonVO> set = dao.getAll();
-//		for (SeasonVO sVO : set) {
-//			System.out.print(sVO.getSeasonID() + ", ");
-//			System.out.print(sVO.getSeasonName() + ", ");
-//			System.out.print(sVO.getSeasonBeginDate() + ", ");
-//			System.out.print(sVO.getSeasonEndDate() + ", ");
-//			System.out.print(sVO.getSignUpBegin() + ", ");
-//			System.out.print(sVO.getSignUpEnd() + ", ");
-//			System.out.print(sVO.getDescriptions());
-//			Set<GroupsVO> gVO = sVO.getGroupsSet();
-//			for (GroupsVO v : gVO) {
-//				System.out.print(v.getGroupID());
-//			}
-//			System.out.println();
-//		}
+		Set<SeasonVO> set = dao.getAll();
+		for (SeasonVO sVO : set) {
+			System.out.print(sVO.getSeasonID() + ", ");
+			System.out.print(sVO.getSeasonName() + ", ");
+			System.out.print(sVO.getSeasonBeginDate() + ", ");
+			System.out.print(sVO.getSeasonEndDate() + ", ");
+			System.out.print(sVO.getSignUpBegin() + ", ");
+			System.out.print(sVO.getSignUpEnd() + ", ");
+			System.out.print(sVO.getDescriptions());
+			Set<GroupsVO> gVO = sVO.getGroupsSet();
+			for (GroupsVO v : gVO) {
+				System.out.print(v.getGroupID());
+			}
+			System.out.println();
+		}
 
 	}
 

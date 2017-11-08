@@ -29,10 +29,8 @@
 <title>EEIT97-第一組</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="<%=request.getContextPath()%>/css/bootstrap.css"
-	rel='stylesheet' type='text/css' />
-<link href="<%=request.getContextPath()%>/css/style.css"
-	rel="stylesheet" type="text/css" media="all" />
+<link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath()%>/css/jquery.tagit.css" rel="stylesheet" type="text/css">
 <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
@@ -328,6 +326,7 @@ video::-webkit-media-controls-panel {
  			</div>
  		</div>
  	</div>
+ 	
 	<script>
 		$('#mySingleFieldTags').tagit({
 			allowSpaces:true
@@ -349,16 +348,20 @@ video::-webkit-media-controls-panel {
 				//$.each語法執行迴圈生成，由data物件中抓取資料執行迴圈，index是索引數，gMVO則是自行命名的物件名稱
 				$.each(data, function(index,gMVO){
 	  				if(gMVO.mediaType =='video'){ //因為我的表格中的含有影片及照片，所以此頁加一層if標籤僅顯示影片
+	  						  					
 						var cell1 = $('<td></td>').text(gMVO.groupName).attr('id','group');  //抓取該筆gMVO物件中key=groupName的值，key的名稱設定請看Servlet中的getAll方法
 						var cell2 = $('<td></td>').text(gMVO.teamA).attr('id','teamA');
 						var cell3 = $('<td></td>').text(gMVO.teamB).attr('id','teamB');
 						var cell4 = $('<td></td>').text(gMVO.mediaDate).attr('id','mediaDate');
 						var cell5 = $('<td></td>').text(gMVO.mediasName).attr('id','mediasName');
 						var cell6 = $('<td></td>').text(gMVO.descriptions).attr('id','descriptions');
-						var cell7 = $('<td></td>').text(gMVO.tag).attr('id','tag');
+						var cell7 = $('<td></td>');
+						$.each(gMVO.tag,function(ind,tagArray){
+							cell7.append(tagArray+' ');
+						})
 						var id = gMVO.mediaID; //將單筆資料當下的mediaID存入名叫id的變數中(因為mediaID在設計上是PK，對於後面很多方法有需要用到)
 						var gameVideo = gMVO.gameVideo; //將單筆資料當下的gameVideo的存入名叫gameVideo的物件中
-						var cell8 = $('<td><button type="button" class="btn btn-info testmodal" data-toggle="myModal1" data-target="dialog-4" value="'+gameVideo+'" >預覽</button></td>');
+						var cell8 = $('<td><button type="button" class="btn btn-info testmodal" data-toggle="myModal1" data-target="myModal1" value="'+gameVideo+'" >預覽</button></td>');
 						var cell9 = $('<td><button type="button" class="btn btn-warning updateData" id="'+id+'">修改</button></td>');
 						var cell10 = $('<td><button type="button" class="btn btn-danger deleteData" data-toggle="myModal" data-target="dialog-4" value="'+id+'" >刪除</button></td>');
 						
@@ -370,11 +373,12 @@ video::-webkit-media-controls-panel {
 				})
 					buttons();  //按鈕的事件
 	  				$(".testmodal").on('click',function(){   //事件處發顯示模態框(這裡是預覽的模態框)
-	  			        $('#myModal1').modal('show');		 
+	  					console.log("預覽")
+	  			        $('#myModal1').modal('show');
+	  					console.log("進入模態框")
                         var path01 = $(this).val();          //抓到上方cell8讀到的gameVideo內部的值，下一行就可以用字串串接方式給讀取影片的路徑
 	  				    var videoNo1 = "<%=request.getContextPath()%>/videos/"+ path01;  
- 	  				    $('#xxx').attr("src", videoNo1)      //給上方id=xxx的標籤新增src的屬性，值則是videoNo1變數中存取的值
- 	  				 	$('#myModal1').empty();
+ 	  				    $('#xxx').attr("src", videoNo1)      //給上方id=xxx的標籤新增src的屬性，值則是videoNo1變數中存取的
 	  				})
 	  				
 					
@@ -548,7 +552,7 @@ video::-webkit-media-controls-panel {
 	})
 	</script>
 
-	<jsp:include page="/footer_css.jsp" />
+	<jsp:include page="/footer_css.jsp" />  
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 </body>
 </html>
