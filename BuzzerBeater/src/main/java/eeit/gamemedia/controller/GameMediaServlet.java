@@ -196,7 +196,7 @@ public class GameMediaServlet extends HttpServlet {
 		}
 		
 		if ("searchTag".equals(action)){
-			String tag = req.getParameter("tag");
+			String tag = "%"+req.getParameter("tag")+",%";
 			GameMediaService gameMediaSvc = new GameMediaService();
 			List<GameMediaVO> list = gameMediaSvc.tagFunction(tag);
 			

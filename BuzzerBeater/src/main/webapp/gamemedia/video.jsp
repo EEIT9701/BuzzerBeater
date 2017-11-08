@@ -61,9 +61,7 @@
 			border-radius:10px;
 			object-fit:cover;
 		}
-		.card{
-			width:25%;
-		}
+
     </style>
 
 </head>
@@ -92,8 +90,7 @@
 				</div>
            	</div>
            	</br>
-           	<div class="row card">
-           	
+           	<div class="addTagPhoto">
 				<c:forEach var="gameMediaVO" items="${gameMediaSvc.all}">	
 					<c:forEach var="gameMediaType" items="${gameMediaVO.mediaType}">
 						<c:if test="${gameMediaType eq 'photo'}">
@@ -102,23 +99,24 @@
   								<div class="card-block">
     								<h4 class="card-title" align="center">${gameMediaVO.mediasName}</h4>
 <!--     								</br> -->
-    									<nobr>
-    										<p class="card-text" align="center">
-    											<img src="<%=request.getContextPath()%>/images/tag.png">
-    											<c:forEach var="tag" items="${gameMediaVO.tag}">
-    												<a class="tagFunction" href="">${tag}</a>
-    											</c:forEach>
-    										</p>
-    									</nobr>
+    									<p class="card-text" align="center">
+    										<img src="<%=request.getContextPath()%>/images/tag.png">
+    										<c:forEach var="tag" items="${gameMediaVO.tag}">
+    											<a class="tagFunction">${tag}</a>
+    										</c:forEach>
+    									</p>
 <!--     								</br> -->
   								</div>
-							<div class="card-block">
-  							</div>
-							</div>
+								<div class="card-block">
+  								</div>
+							</div>	
 						</c:if>
 					</c:forEach>
 				</c:forEach>
-				</div>
+			</div>
+			</br>
+			<div class='row'>
+			</div>
 			<jsp:include page="/footer.jsp" />  
         
     </div>
@@ -129,6 +127,7 @@
 	$(function(){
 		getlist();
 		tagFunction();
+		
 		function getlist(){
 			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
 				var list = $('#videolist');
@@ -158,9 +157,29 @@
 		}
 		function tagFunction(){
 			$('.tagFunction').click(function(){
-				var tag = $('this').text()
+				var tag = $(this).text()
 				$.post('<%=request.getContextPath()%>/GameMedia.do',{'action':'searchTag','tag':tag},function(data){
 					$('.card').empty();
+					$.each(JSON.parse(data),function(ind,taglist){
+						var cell1 = $('<div></div>').addClass("card col-md-3");
+						var cell2 = $('<img class="card-imp-top img rounded center-block">').attr("src","data:image/jpeg;base64,"+taglist.gamePhoto).css({'width':'98%','border':'solid 3px black','border-radius':'10px','object-fit':'cover'});
+						var cell3 = $('<div></div>').addClass("card-block");
+						var cell4 = $('<h4 class="card-title" align="center"></h4>').text(taglist.mediasName);
+						var cell5 = $('<p></p>').addClass("card-text").css('align','center');
+						var cell6 = $('<img src="<%=request.getContextPath()%>/images/tag.png">');
+						var cell7 = ''; 
+						$.each(taglist.tag,function(index,tagArray){
+							console.log(tagArray)
+							cell7 = cell7 + '<a class="tagFunction">'+tagArray+'</a>'+' ';
+						})
+						
+						cell5.append([cell6, cell7]);
+						cell3.append([cell4, cell5]);
+						cell1.append([cell2, cell3]);
+						
+						var row = $('<div></div>').append(cell1)
+						$('.addTagPhoto').append(row);
+					})
 				})
 			})
 		}

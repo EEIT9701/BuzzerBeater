@@ -86,7 +86,7 @@ public class GroupRegService {
 		dao.insert(vo);
 	}
 	
-	public void update2(Integer teamID,Integer groupID,Integer teamStat) {
+	public void update2(Integer teamID,Integer groupID,Integer teamStat,Timestamp registerDate,String paymentNumber) {
 		
 		dao=new GroupRegDAO_JDBC();
 		GroupRegVO gVO=new GroupRegVO();
@@ -100,7 +100,10 @@ public class GroupRegService {
 		gVO.setGroupsVO(groupsVO);
 		
 		gVO.setTeamStat(teamStat);
-		
+		gVO.setRegisterDate(registerDate);
+		gVO.setPaymentNumber(paymentNumber);
+//		System.out.println("我進來ㄌ");
+//		System.out.println(paymentNumber);	
 		dao.update(gVO);
 		
 	}
