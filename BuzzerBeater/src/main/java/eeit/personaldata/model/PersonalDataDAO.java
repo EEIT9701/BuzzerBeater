@@ -542,139 +542,18 @@ public class PersonalDataDAO implements PersonalDataDAO_interface {
 		return list;
 	}
 
+	
+
 	@Override
-	public List<PersonalDataVO> getAllSeasonID(Integer SeasonID) {
-		List<PersonalDataVO> list=new ArrayList<PersonalDataVO>(); 
-        PersonalDataVO personalDataVO=null;
-     
-		
-        Connection con=null;
-        PreparedStatement pstmt=null;
-        ResultSet rs =null;
-        
-        try {
-        	con=ds.getConnection();
-			pstmt=con.prepareStatement(GETALL6);
-			pstmt.setInt(1,SeasonID);
-			rs=pstmt.executeQuery();
-			while (rs.next()){
-			
-				SeasonVO seasonVO = new SeasonVO();
-				seasonVO.setSeasonID(rs.getInt("seasonID"));
-			    
-			    
-				GroupsVO groupsVO = new GroupsVO();
-				groupsVO.setGroupID(rs.getInt("groupID"));
-				groupsVO.setSeasonVO(seasonVO);
-				
-				GamesVO gamesVO = new GamesVO();		
-				gamesVO.setGroupsVO(groupsVO);
-				
-				personalDataVO=new PersonalDataVO();
-				personalDataVO.setGamesVO(gamesVO);
-				
-				TeamsVO teamsVO =new TeamsVO();
-	            teamsVO.setTeamBadge(rs.getString("teamBadge"));
-	            teamsVO.setTeamName(rs.getString("teamName"));
-	            teamsVO.setTeamID(rs.getInt("teamID"));
-	            personalDataVO.setTeamsVO(teamsVO);
-	            
-	            PlayersVO playersVO = new PlayersVO();
-				playersVO.setPlayerName(rs.getString("playerName"));
-				playersVO.setPhoto(rs.getString("photo"));
-				personalDataVO.setPlayersVO(playersVO);
-				
-		     	personalDataVO.setGameID(rs.getInt("gameID"));
-				personalDataVO.setGameTime(rs.getInt("gameTime"));
-				personalDataVO.setTwoPoint(rs.getInt("twoPoint"));
-				personalDataVO.setTwoPointShot(rs.getInt("twoPointShot"));
-				personalDataVO.setThreePoint(rs.getInt("threePoint"));
-				personalDataVO.setThreePointShot(rs.getInt("threePointShot"));
-				personalDataVO.setFg(rs.getInt("fg"));
-				personalDataVO.setFgShot(rs.getInt("fgShot"));
-				personalDataVO.setDefReb(rs.getInt("defReb"));
-				personalDataVO.setOffReb(rs.getInt("offReb"));
-				personalDataVO.setAssist(rs.getInt("assist"));
-				personalDataVO.setSteal(rs.getInt("steal"));
-				personalDataVO.setBlocks(rs.getInt("blocks"));
-				personalDataVO.setTurnover(rs.getInt("turnover"));
-				personalDataVO.setPersonalFouls(rs.getInt("personalFouls"));
-				personalDataVO.setPoints(rs.getInt("points"));
-				
-				list.add(personalDataVO);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
+	public List<PersonalDataVO> findBySeasonID(Integer seasonID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public List<PersonalDataVO> getAllGroupID(Integer GroupID) {
-		List<PersonalDataVO> list=new ArrayList<PersonalDataVO>(); 
-        PersonalDataVO personalDataVO=null;
-     
-		
-        Connection con=null;
-        PreparedStatement pstmt=null;
-        ResultSet rs =null;
-        
-        try {
-        	con=ds.getConnection();
-			pstmt=con.prepareStatement(GETALL7);
-			pstmt.setInt(1,GroupID);
-			rs=pstmt.executeQuery();
-			while (rs.next()){
-			
-				SeasonVO seasonVO = new SeasonVO();
-				seasonVO.setSeasonID(rs.getInt("seasonID"));
-			    
-			    
-				GroupsVO groupsVO = new GroupsVO();
-				groupsVO.setGroupID(rs.getInt("groupID"));
-				groupsVO.setSeasonVO(seasonVO);
-				
-				GamesVO gamesVO = new GamesVO();		
-				gamesVO.setGroupsVO(groupsVO);
-				
-				personalDataVO=new PersonalDataVO();
-				personalDataVO.setGamesVO(gamesVO);
-				
-				TeamsVO teamsVO =new TeamsVO();
-	            teamsVO.setTeamBadge(rs.getString("teamBadge"));
-	            teamsVO.setTeamName(rs.getString("teamName"));
-	            teamsVO.setTeamID(rs.getInt("teamID"));
-	            personalDataVO.setTeamsVO(teamsVO);
-	            
-	            PlayersVO playersVO = new PlayersVO();
-				playersVO.setPlayerName(rs.getString("playerName"));
-				playersVO.setPhoto(rs.getString("photo"));
-				personalDataVO.setPlayersVO(playersVO);
-				
-		     	personalDataVO.setGameID(rs.getInt("gameID"));
-				personalDataVO.setGameTime(rs.getInt("gameTime"));
-				personalDataVO.setTwoPoint(rs.getInt("twoPoint"));
-				personalDataVO.setTwoPointShot(rs.getInt("twoPointShot"));
-				personalDataVO.setThreePoint(rs.getInt("threePoint"));
-				personalDataVO.setThreePointShot(rs.getInt("threePointShot"));
-				personalDataVO.setFg(rs.getInt("fg"));
-				personalDataVO.setFgShot(rs.getInt("fgShot"));
-				personalDataVO.setDefReb(rs.getInt("defReb"));
-				personalDataVO.setOffReb(rs.getInt("offReb"));
-				personalDataVO.setAssist(rs.getInt("assist"));
-				personalDataVO.setSteal(rs.getInt("steal"));
-				personalDataVO.setBlocks(rs.getInt("blocks"));
-				personalDataVO.setTurnover(rs.getInt("turnover"));
-				personalDataVO.setPersonalFouls(rs.getInt("personalFouls"));
-				personalDataVO.setPoints(rs.getInt("points"));
-				
-				list.add(personalDataVO);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	
+	public List<PersonalDataVO> findByGroupID(Integer groupID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
