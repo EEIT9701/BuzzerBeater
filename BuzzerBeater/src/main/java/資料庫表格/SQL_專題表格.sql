@@ -647,8 +647,7 @@ teamID               int,                                                   --球
 )
 GO 
 
-insert into MemberInfo values('admin123@gmail.com','admin01','admin','2017-09-23','');
-insert into MemberInfo values('javaeeit97201701@gmail.com','金州勇士','teams','2016-01-01','3001');
+insert into MemberInfo values('javaeeit972017@gmail.com','金州勇士','teams','2016-01-01','3001');
 insert into MemberInfo values('aSnAntonioSpurs@gmail.com','聖安東尼奧馬刺','teams','2016-01-11','3002');
 insert into MemberInfo values('HoustonRockets@ymail.com','休士頓火箭','teams','2016-01-15','3003');
 insert into MemberInfo values('LosAngelesClippers@ymail.com','洛杉磯快艇','teams','2016-01-17','3004');
@@ -658,10 +657,9 @@ insert into MemberInfo values('OklahomaCityThunder@ymail.com','奧克拉荷馬雷霆','
 insert into MemberInfo values('MemphisGrizzlies@ymail.com','曼菲斯灰熊','teams','2016-02-15','3007');
 insert into MemberInfo values('PortlandTrail@ymail.com','波特蘭拓荒者','teams','2016-02-17','3008');
 
-insert into MemberInfo values('javaeeit972017@gmail.com','資策會隊admin','admin','2017-06-23','');
-insert into MemberInfo values('frank810618@gmail.com','賴彥誠','parttime','2017-09-23','');
-insert into MemberInfo values('s988309@gmail.com','何其偉','parttime','2017-09-23','');
-insert into MemberInfo values('qwe020488952@gmail.com','陳品維','parttime','2017-09-23','');
+insert into MemberInfo values('s988309@gmail.com','EEIT97第一組','admin','2017-06-23','');
+insert into MemberInfo values('frank810618@gmail.com','賴彥誠','admin','2017-09-25','');
+insert into MemberInfo values('qwe020488952@gmail.com','陳品維','admin','2017-09-23','');
 
 select * from MemberInfo
 GO
@@ -674,8 +672,6 @@ create table PlayerGroups      --球員分組表
  playerID             int references Players(playerID ),    --球員ID
  primary key(groupID,playerID)
 )
-
-
 
 insert into PlayerGroups values('2002','70001');
 insert into PlayerGroups values('2002','70002');
