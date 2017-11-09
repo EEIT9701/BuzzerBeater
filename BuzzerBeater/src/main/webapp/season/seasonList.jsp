@@ -46,7 +46,7 @@
 		<!--上層導覽列(開始) -->
 		<div id="pathWay">
         	<span>
-            	<a href="<%=request.getContextPath() %>/index.jsp">
+            	<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
             		<span>首頁</span>
             	</a>
         	</span>&gt;
@@ -72,7 +72,7 @@
 			        <tbody>
 			        	<c:forEach var="sVO" items="${seasonSvc.all}">
 			        		<tr>
-			        			<td><a href="<%=request.getContextPath() %>/groups/groupList.jsp?seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
+			        			<td><a class="blockUI" href="<%=request.getContextPath() %>/groups/groupList.jsp?seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
 			        			<td><fmt:formatDate value="${sVO.seasonBeginDate}" pattern="yyyy-MM-dd"/></td>
 			        			<td><fmt:formatDate value="${sVO.seasonEndDate}" pattern="yyyy-MM-dd"/></td>
 			        			<c:choose>
@@ -104,7 +104,7 @@
 		
 	    <script>
 	    $(function(){
-	    	$(document).on('click','a',function(){
+	    	$(document).on('click','.blockUI',function(){
 	    		// 處理中
 				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 	    	})
