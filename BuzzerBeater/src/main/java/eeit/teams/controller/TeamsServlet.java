@@ -48,7 +48,7 @@ public class TeamsServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String action = request.getParameter("action");
-		
+
 		if ("listMyPlayer".equals(action)) {
 			String base64 = request.getParameter("teamBadge");
 			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
@@ -64,14 +64,13 @@ public class TeamsServlet extends HttpServlet {
 			TeamsService teamSvc = new TeamsService();
 			teamSvc.insert(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName, totalWin, totalLose,
 					winRate, remarks);
-			
-			
+
 			request.setAttribute("teamsVO", teamSvc.findByID(teamSvc.findMaxID()));
 			String url = "/players/listMyPlayer.jsp";
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);
 		}
-		
+
 		if ("insertTeam".equals(action)) {
 			String base64 = request.getParameter("teamBadge");
 			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
@@ -130,8 +129,7 @@ public class TeamsServlet extends HttpServlet {
 
 		if ("GET_ONE_TEAM".equals(action)) {
 			Integer teamID = Integer.parseInt(request.getParameter("teamID"));
-			
-			
+
 			TeamsService tsvc = new TeamsService();
 			GamesService gsvc = new GamesService();
 			PersonalDataService playerSvc = new PersonalDataService();
@@ -139,15 +137,14 @@ public class TeamsServlet extends HttpServlet {
 			TeamsVO teamsVO = tsvc.findByID(teamID);
 			List<GamesVO> gamesVO = gsvc.findByTeamID(teamID);
 			request.setAttribute("personalDataVO", personalDataVO);
-			request.setAttribute("teamsVO",teamsVO);
-			request.setAttribute("gamesVO",gamesVO);
+			request.setAttribute("teamsVO", teamsVO);
+			request.setAttribute("gamesVO", gamesVO);
 			request.getRequestDispatcher("/teams/teamInformation.jsp").forward(request, response);
 		}
-		
+
 		if ("GET_MY_TEAM".equals(action)) {
 			Integer teamID = Integer.parseInt(request.getParameter("teamID"));
-			
-			
+
 			TeamsService tsvc = new TeamsService();
 			GamesService gsvc = new GamesService();
 			PersonalDataService playerSvc = new PersonalDataService();
@@ -155,8 +152,8 @@ public class TeamsServlet extends HttpServlet {
 			TeamsVO teamsVO = tsvc.findByID(teamID);
 			List<GamesVO> gamesVO = gsvc.findByTeamID(teamID);
 			request.setAttribute("personalDataVO", personalDataVO);
-			request.setAttribute("teamsVO",teamsVO);
-			request.setAttribute("gamesVO",gamesVO);
+			request.setAttribute("teamsVO", teamsVO);
+			request.setAttribute("gamesVO", gamesVO);
 			request.getRequestDispatcher("/teams/myTeamInformation.jsp").forward(request, response);
 		}
 
@@ -187,36 +184,37 @@ public class TeamsServlet extends HttpServlet {
 			request.setAttribute("remarks", remarks);
 			request.getRequestDispatcher("/teams/updateTeam.jsp").forward(request, response);
 		}
-		
+
 		if ("UpdateMyTeam".equals(action)) {
-//			String base64 = request.getParameter("teamBadge");
+			// String base64 = request.getParameter("teamBadge");
 			Integer teamID = new Integer(request.getParameter("teamID"));
-//			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
-//			String teamName = request.getParameter("teamName");
-//			String captainEmail = request.getParameter("captainEmail");
-//			String captainPhone = request.getParameter("captainPhone");
-//			String coachName = request.getParameter("coachName");
-//			String bossName = request.getParameter("bossName");
-//			Integer totalWin = new Integer(request.getParameter("totalWin"));
-//			Integer totalLose = new Integer(request.getParameter("totalLose"));
-//			Float winRate = new Float(request.getParameter("winRate"));
-//			String remarks = request.getParameter("remarks");
-//
-//			request.setAttribute("teamBadge", teamBadge);
-//			request.setAttribute("teamID", teamID);
-//			request.setAttribute("teamName", teamName);
-//			request.setAttribute("captainEmail", captainEmail);
-//			request.setAttribute("captainPhone", captainPhone);
-//			request.setAttribute("coachName", coachName);
-//			request.setAttribute("bossName", bossName);
-//			request.setAttribute("totalWin", totalWin);
-//			request.setAttribute("totalLose", totalLose);
-//			request.setAttribute("winRate", winRate);
-//			request.setAttribute("remarks", remarks);
+			// String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
+			// String teamName = request.getParameter("teamName");
+			// String captainEmail = request.getParameter("captainEmail");
+			// String captainPhone = request.getParameter("captainPhone");
+			// String coachName = request.getParameter("coachName");
+			// String bossName = request.getParameter("bossName");
+			// Integer totalWin = new Integer(request.getParameter("totalWin"));
+			// Integer totalLose = new
+			// Integer(request.getParameter("totalLose"));
+			// Float winRate = new Float(request.getParameter("winRate"));
+			// String remarks = request.getParameter("remarks");
+			//
+			// request.setAttribute("teamBadge", teamBadge);
+			// request.setAttribute("teamID", teamID);
+			// request.setAttribute("teamName", teamName);
+			// request.setAttribute("captainEmail", captainEmail);
+			// request.setAttribute("captainPhone", captainPhone);
+			// request.setAttribute("coachName", coachName);
+			// request.setAttribute("bossName", bossName);
+			// request.setAttribute("totalWin", totalWin);
+			// request.setAttribute("totalLose", totalLose);
+			// request.setAttribute("winRate", winRate);
+			// request.setAttribute("remarks", remarks);
 			TeamsService tsvc = new TeamsService();
 			TeamsVO teamsVO = tsvc.findByID(teamID);
-			request.setAttribute("teamsVO",teamsVO);
-			
+			request.setAttribute("teamsVO", teamsVO);
+
 			request.getRequestDispatcher("/teams/updateMyTeams.jsp").forward(request, response);
 		}
 
@@ -296,9 +294,9 @@ public class TeamsServlet extends HttpServlet {
 			RequestDispatcher successView = request.getRequestDispatcher(url);
 			successView.forward(request, response);
 		}
-		
-		if ("buildMyTeam".equals(action)) {
 
+		if ("buildMyTeam".equals(action)) {
+			request.getSession().setAttribute("teamID", 3006);
 			String base64 = request.getParameter("teamBadge");
 			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
 			String teamName = request.getParameter("teamName");
@@ -307,24 +305,22 @@ public class TeamsServlet extends HttpServlet {
 			String coachName = request.getParameter("coachName");
 			String bossName = request.getParameter("bossName");
 			Integer totalWin = 0;
-			Integer totalLose =0;
+			Integer totalLose = 0;
 			Float winRate = (float) 0.0;
 			String remarks = request.getParameter("remarks");
 			TeamsService teamSvc = new TeamsService();
 			teamSvc.insert(teamBadge, teamName, captainEmail, captainPhone, coachName, bossName, totalWin, totalLose,
 					winRate, remarks);
-	}
+		}
 		if ("findMyTeamPlayer".equals(action)) {
 			TeamsService tsvc = new TeamsService();
 			TeamCompositionService tcsvc = new TeamCompositionService();
-			Integer teamID = tsvc.findMaxID();
-			List<TeamCompositionVO> list = tcsvc.findByTeamID(teamID);
-			List<HashMap<String,String>> returnlist = new ArrayList<HashMap<String, String>>();
-			Map<String,String> map = null;
+			List<TeamCompositionVO> list = tcsvc.findByTeamID(3006);
+			List<HashMap<String, String>> returnlist = new ArrayList<HashMap<String, String>>();
+			Map<String, String> map = null;
 
-			
-			for(TeamCompositionVO teamCompositionVO:list){
-				map = new HashMap<String,String>();
+			for (TeamCompositionVO teamCompositionVO : list) {
+				map = new HashMap<String, String>();
 				map.put("photo", teamCompositionVO.getPlayersVO().getPhoto());
 				map.put("playerName", teamCompositionVO.getPlayersVO().getPlayerName());
 				map.put("id", teamCompositionVO.getPlayersVO().getId());
@@ -333,18 +329,16 @@ public class TeamsServlet extends HttpServlet {
 				map.put("height", teamCompositionVO.getPlayersVO().getHeight().toString());
 				map.put("weights", teamCompositionVO.getPlayersVO().getWeights().toString());
 				map.put("nationality", teamCompositionVO.getPlayersVO().getNationality());
-				
+
 				returnlist.add((HashMap<String, String>) map);
 			}
-			
-			
+
 			Gson gson = new Gson();
-			String jsonList = gson.toJson(returnlist); 
-			
-			
-            PrintWriter out = response.getWriter();
+			String jsonList = gson.toJson(returnlist);
+
+			PrintWriter out = response.getWriter();
 			out.println(jsonList);
 		}
-		}
+	}
 
 }
