@@ -27,7 +27,7 @@
 body input{width:100px
 }
 #st1{
-width:200px
+width:380px
 }
 
 </style>
@@ -91,7 +91,7 @@ width:200px
 						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
 						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
 						<td><nobr>${tcVO.playersVO.playerName}</nobr></td>
-						<td><input type="text" name="gameTime" value="0"></td>
+						<td><input type="number" name="gameTime" value="0"></td>
 						<td><input type="number" name="twoPoint" value="0"></td>
 						<td><input type="number" name="twoPointShot" value="0"></td>
 						<td><input type="number" name="threePoint" value="0"></td>
@@ -141,7 +141,7 @@ width:200px
 						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
 						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
 						<td><nobr>${tcVO.playersVO.playerName}</nobr></td>
-						<td><input type="text" name="gameTime" value="0"></td>
+						<td><input type="number" name="gameTime" value="0"></td>
 						<td><input type="number" name="twoPoint" value="0"></td>
 						<td><input type="number" name="twoPointShot" value="0"></td>
 						<td><input type="number" name="threePoint" value="0"></td>
@@ -262,9 +262,7 @@ width:200px
 			})
 			
 		})
-		$('a,.blockUI').click(function(){
-				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
-			})
+		
 	    </script>
 
 
