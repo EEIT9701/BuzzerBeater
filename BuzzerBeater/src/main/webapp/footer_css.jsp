@@ -7,6 +7,7 @@
     <script src="<%=request.getContextPath() %>/js/jquery-1.11.0.min.js"></script>
     <script src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath() %>/js/bootsnav.js"></script>
+
     <script>
     $(document).ready(function(){
     	var x1={'background-color':'#e3a727',
