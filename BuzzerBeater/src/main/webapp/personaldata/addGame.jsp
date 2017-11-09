@@ -41,6 +41,7 @@ width:200px
 			<table class="table table-bordered" >
 				<thead>
 					<tr>
+		
 						<td>分組名稱</td>
 						<td>主隊</td>
 						<td>客隊</td>
@@ -50,6 +51,7 @@ width:200px
 				</thead>
 				<tbody>
 					<tr>
+			
 						<td>${gamesVO.groupsVO.groupName}</td>
 						<td>${gamesVO.teamAVO.teamName}</td>
 						<td>${gamesVO.teamBVO.teamName}</td>
@@ -156,9 +158,11 @@ width:200px
 				</tbody>
 			</table>
 			
-			<button type="button" class="btn btn-lg btn-success" id="addGame">送出</button>
-		
-		
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do" name="action">
+<input type="hidden" name="action" value="from1">
+<input type="submit" value="送出新增"></FORM>
+
+		</FORM>
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />
 	    	</div>
@@ -209,6 +213,9 @@ width:200px
 			})
 			
 		})
+		$('a,.blockUI').click(function(){
+				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+			})
 	    </script>
 
 
