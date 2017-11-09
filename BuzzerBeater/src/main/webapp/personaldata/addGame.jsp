@@ -27,7 +27,7 @@
 body input{width:100px
 }
 #st1{
-width:200px
+width:380px
 }
 
 </style>
@@ -41,6 +41,7 @@ width:200px
 			<table class="table table-bordered" >
 				<thead>
 					<tr>
+		
 						<td>分組名稱</td>
 						<td>主隊</td>
 						<td>客隊</td>
@@ -50,6 +51,7 @@ width:200px
 				</thead>
 				<tbody>
 					<tr>
+			
 						<td>${gamesVO.groupsVO.groupName}</td>
 						<td>${gamesVO.teamAVO.teamName}</td>
 						<td>${gamesVO.teamBVO.teamName}</td>
@@ -89,7 +91,7 @@ width:200px
 						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
 						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
 						<td><nobr>${tcVO.playersVO.playerName}</nobr></td>
-						<td><input type="text" name="gameTime" value="0"></td>
+						<td><input type="number" name="gameTime" value="0"></td>
 						<td><input type="number" name="twoPoint" value="0"></td>
 						<td><input type="number" name="twoPointShot" value="0"></td>
 						<td><input type="number" name="threePoint" value="0"></td>
@@ -139,7 +141,7 @@ width:200px
 						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
 						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
 						<td><nobr>${tcVO.playersVO.playerName}</nobr></td>
-						<td><input type="text" name="gameTime" value="0"></td>
+						<td><input type="number" name="gameTime" value="0"></td>
 						<td><input type="number" name="twoPoint" value="0"></td>
 						<td><input type="number" name="twoPointShot" value="0"></td>
 						<td><input type="number" name="threePoint" value="0"></td>
@@ -160,9 +162,11 @@ width:200px
 				</tbody>
 			</table>
 			
-			<button type="button" class="btn btn-lg btn-success" id="addGame">送出</button>
-		
-		
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do" name="action">
+<input type="hidden" name="action" value="from1">
+<input type="submit" value="送出新增"></FORM>
+
+		</FORM>
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />
 	    	</div>
@@ -258,6 +262,7 @@ width:200px
 			})
 			
 		})
+		
 	    </script>
 
 
