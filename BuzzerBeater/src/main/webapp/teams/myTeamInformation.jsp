@@ -67,7 +67,7 @@ th {
 				<!--第二列-左邊表格-格式_.col-md-4-->
 				<div class="col-md-4">
 					<div class="col-md-12">
-						<img id="img1" src="data:image/png;base64,${teamsVO.teamBadge}">
+						<img id="team" src="data:image/png;base64,${teamsVO.teamBadge}">
 						<!--球員照片-->
 					</div>
 				</div>

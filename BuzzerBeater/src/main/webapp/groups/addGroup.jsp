@@ -50,19 +50,19 @@
 		<!--上層導覽列(開始) -->
 		<div id="pathWay">
         	<span>
-            	<a href="<%=request.getContextPath() %>/index.jsp">
+            	<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
             		<span>使用者功能</span>
             	</a>
         	</span>
         	&gt;
         	<span>
-            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+            	<a class="blockUI" href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
             		<span>賽季管理</span>
             	</a>
         	</span>
         	&gt;
         	<span>
-            	<a href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${seasonVO.seasonID}">
+            	<a class="blockUI" href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${seasonVO.seasonID}">
             		<span>${seasonVO.seasonName}</span>
             	</a>
         	</span>
@@ -119,7 +119,7 @@
 				<div class="col-md-3 col-md-offset-9">
 				    <input type="submit" id="submit_move" class="btn btn-success btn-lg" value="建立分組">
 					<a href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${seasonVO.seasonID}">
-						<input type="button" class="btn btn-danger btn-lg" value="取消">
+						<input type="button" class="btn btn-danger btn-lg blockUI" value="取消">
 					</a>
 				</div>
 				
@@ -160,6 +160,10 @@
 	        $("input:submit").click(function () {
 	            $(window).unbind('beforeunload');
 	        });
+			
+	        $('.blockUI').click(function(){
+				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+			})
 			
 		})
 	

@@ -10,7 +10,9 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import eeit.teamcomposition.model.TeamCompositionVO;
+import eeit.personaldata.model.PersonalDataVO;
+import eeit.players.model.PlayersVO;
+import eeit.teams.model.TeamsVO;
 
 @SuppressWarnings("unchecked")
 @Transactional(readOnly = true)
@@ -28,7 +30,7 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 	@Override
 	public Set<GamesVO> getAll() {
 		Object obj = hibernateTemplate.find(GET_ALL_STMT);
-		Set<GamesVO> set = new LinkedHashSet<GamesVO>((List<GamesVO>)obj);
+		Set<GamesVO> set = new LinkedHashSet<GamesVO>((List<GamesVO>) obj);
 		return set;
 	}
 
@@ -50,48 +52,58 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		GamesVO gamesVO = (GamesVO) hibernateTemplate.get(GamesVO.class, gameID);
 		hibernateTemplate.delete(gamesVO);
 	}
-	
+
 	@Override
 	public GamesVO findByGameID(Integer gameID) {
 		return (GamesVO) hibernateTemplate.get(GamesVO.class, gameID);
 	}
-	
+
 	@Override
 	public List<GamesVO> findByTeamID(Integer teamID) {
-		return (List<GamesVO>) hibernateTemplate.find(FIND_BY_TEAMID, teamID,teamID);
+		return (List<GamesVO>) hibernateTemplate.find(FIND_BY_TEAMID, teamID, teamID);
 	}
-	
+
 	@Override
 	public List<GamesVO> findByGroupID(Integer groupID) {
 		return (List<GamesVO>) hibernateTemplate.find(FIND_BY_GROUPID, groupID);
 	}
 
 	public static void main(String[] args) {
-		
+
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("modelConfig1_DataSource.xml");
 		GamesDAO_interface dao = (GamesDAO_interface) context.getBean("GamesDAO");
-		
-//		 dao.delete(4003);
 
-		GamesVO gamesVO = dao.findByGameID(4007);
-		for (TeamCompositionVO tcvo : gamesVO.getTeamAVO().getTeamCompositionSet()) {
-			System.out.print(tcvo.getPlayersVO().getPlayerName() + ", ");
-			System.out.println();
+		// dao.delete(4003);
+
+		GamesVO gamesVO = new GamesVO();
+		gamesVO.setGameID(4007);
+
+		for (int i = 0; i < 10; i++) {
+			PersonalDataVO pvo = new PersonalDataVO();
+			pvo.setTwoPoint(i + 1);
+			pvo.setThreePoint(i * 2);
+			
+			TeamsVO teamsVO = new TeamsVO();
+			teamsVO.setTeamID(3001);
+			pvo.setTeamsVO(teamsVO);
+			
+			PlayersVO playersVO = new PlayersVO();
+			playersVO.setPlayerID(70001+i);
+			pvo.setPlayersVO(playersVO);
+			
+			pvo.setGamesVO(gamesVO);
+			gamesVO.getPersonalDataSet().add(pvo);
 		}
-		
-		
-		
+
+		dao.update(gamesVO);
+
 	}
 
 	@Override
 	public void deleteByGroupID(Integer groupID) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
-
-
 
 }

@@ -45,7 +45,7 @@
 								<li><h6><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></h6></li>
 						</c:when>
 						<c:when test="${LoginOK.auth == 'teams'}">
-								<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li>
+<%-- 								<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li> --%>
 								<li><h6><a href="<%=request.getContextPath() %>/Teams.do?action=GET_MY_TEAM&teamID=${LoginOK.teamID}">我的球隊</a></h6></li>
 								<li><h6><a href="<%=request.getContextPath() %>/Groups.do?action=GET_GROUP_SINGUP">分組報名</a></h6></li>
 								<li><h6><a href="#">繳費</a></h6></li>
@@ -74,8 +74,11 @@
 						</a>
 					</c:if>		
 				</li>
-				<li><a href="<%=request.getContextPath()%>/LoginOutServlet.do" class="cd-signup" > 
-				         <c:choose>
+				<li>
+<%-- 				<a href="<%=request.getContextPath()%>/LoginOutServlet.do" onclick="signOut();"> --%>
+				<a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/BuzzerBeater/LoginOutServlet.do" >
+<%-- 				<a href="<%=request.getContextPath()%>/LoginOutServlet.do" class="cd-signup" > --%>
+			         <c:choose>
 							<c:when test="${empty LoginOK}">
 							</c:when>
 							<c:otherwise>
@@ -83,7 +86,7 @@
 							</c:otherwise>
 						</c:choose> ${var02}
 				 </a></li>
-
+		
 				<!--登入登出"按鈕"(結束)-->
 			</ul>
 		</div>
@@ -163,7 +166,6 @@
 </div>
 <!--至頂空白(結束)-->
 <div class="clearfix"></div>
-
 
 
 
