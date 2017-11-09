@@ -275,8 +275,6 @@
 									$index.text($step.getIndex());
 									loadTable();
 									file();
-									
-									
 <%-- 									$.post('<%=request.getContextPath()%>/Teams.do', {'action':'buildMyTeam','teamBadge':teamBadge,'teamName':teamName, 'captainPhone':captainPhone, 'captainEmail':captainEmail,'coachName':coachName, 'bossName':bossName,'remarks':remarks}, function(datas){ --%>
 // 			  		 	       	  }) 
 								});

@@ -297,6 +297,7 @@ public class TeamsServlet extends HttpServlet {
 
 		if ("buildMyTeam".equals(action)) {
 			request.getSession().setAttribute("teamID", 3006);
+			request.getSession().setAttribute("groupID", 3006);
 			String base64 = request.getParameter("teamBadge");
 			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
 			String teamName = request.getParameter("teamName");
