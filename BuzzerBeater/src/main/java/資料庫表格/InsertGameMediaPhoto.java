@@ -12,11 +12,11 @@ public class InsertGameMediaPhoto {
 		String url = "jdbc:sqlserver://localhost:1433;DatabaseName=basketballdb";
 		String user = "sa";
 		String pswd = "P@ssw0rd";
-		String path = "GameMedia Photo";
+		String path = "C:/TeamProject/Repository/BuzzerBeater/BuzzerBeater/src/main/java/資料庫表格/GameMedia Photo";
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		int count = 6007;
+		int count = 6001;
 		int count1 = 0;
 		
 		try{
@@ -25,6 +25,7 @@ public class InsertGameMediaPhoto {
 			pstmt = conn.prepareStatement("update GameMedia SET gamePhoto=? where mediaID=?");
 			
 			File[] photoPath = new File(path).listFiles();
+			System.out.println(photoPath);
 			
 			for(File photo:photoPath){
 				
