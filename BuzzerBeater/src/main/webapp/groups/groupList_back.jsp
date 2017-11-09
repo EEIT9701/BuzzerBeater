@@ -56,13 +56,13 @@
 		<!--上層導覽列(開始) -->
 		<div id="pathWay">
         	<span>
-            	<a href="<%=request.getContextPath() %>/index.jsp">
+            	<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
             		<span>使用者功能</span>
             	</a>
         	</span>
         	&gt;
         	<span>
-            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+            	<a class="blockUI" href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
             		<span>賽季管理</span>
             	</a>
         	</span>
@@ -209,7 +209,7 @@
 		
 	    <script type="text/javascript">
 	    $(function(){
-	    	$(document).on('click','a ,.blockUI',function(){
+	    	$(document).on('click','.blockUI',function(){
 	    		// 處理中
 				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 	    	})

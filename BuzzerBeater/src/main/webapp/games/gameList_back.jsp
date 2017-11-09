@@ -54,19 +54,19 @@
 			<!--上層導覽列(開始) -->
 			<div id="pathWay">
 	        	<span>
-	            	<a href="<%=request.getContextPath() %>/index.jsp">
+	            	<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
 	            		<span>使用者功能</span>
 	            	</a>
 	        	</span>
 	        	&gt;
 	        	<span>
-	            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+	            	<a class="blockUI" href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
 	            		<span>賽季管理</span>
 	            	</a>
 	        	</span>
 	        	&gt;
 	        	<span>
-	        		<a href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${groupsVO.seasonVO.seasonID}">
+	        		<a class="blockUI" href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${groupsVO.seasonVO.seasonID}">
 	            		<span>${groupsVO.seasonVO.seasonName}</span>
 	            	</a>
 	        	</span>
@@ -121,19 +121,19 @@
 			        		<tr>
 			        			<td><fmt:formatDate value="${gamesSet.gameBeginDate}" pattern="yyyy-MM-dd HH:mm"/></td>
 			        			<td><fmt:formatDate value="${gamesSet.gameEndDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-			        			<td><a href="<%=request.getContextPath()%>/Locationinfo.do?action=GET_ONE_LOCATION&locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
-			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
+			        			<td><a class="blockUI" href="<%=request.getContextPath()%>/Locationinfo.do?action=GET_ONE_LOCATION&locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
+			        			<td><a class="blockUI" href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
 			        			<td>
 			        				<c:choose>
 				        				<c:when test="${gamesSet.teamAScore==0 && gamesSet.teamBScore==0}">
-				        					<a href="<%=request.getContextPath()%>/personaldata/addGame.jsp?gameID=${gamesSet.gameID}"><button type="button" class="btn btn-sm">輸入賽事資料</button></a>
+				        					<a href="<%=request.getContextPath()%>/personaldata/addGame.jsp?gameID=${gamesSet.gameID}"><button type="button" class="btn btn-sm blockUI">輸入賽事資料</button></a>
 				        				</c:when>
 				        				<c:otherwise>
-				        					<a href="<%=request.getContextPath() %>/PersonalData.do?action=Get_singlefieldData&gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a>
+				        					<a class="blockUI" href="<%=request.getContextPath() %>/PersonalData.do?action=Get_singlefieldData&gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a>
 				        				</c:otherwise>
 			        				</c:choose>
 			        			</td>
-			        			<td><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
+			        			<td><a class="blockUI" href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
 			        		</tr>
 			        	</c:forEach>			        	
 			        </tbody>
@@ -155,7 +155,7 @@
 		<script type="text/javascript">
 			$(function(){
 				// 處理中
-				$('a').click(function(){
+				$('blockUI').click(function(){
 					$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 				})
 				

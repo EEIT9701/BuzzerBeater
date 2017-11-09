@@ -57,7 +57,7 @@ public class opayServlet extends HttpServlet {
 		creditCardCheck.setReturnURL("http://211.23.128.214:5000");
 		//creditCardCheck.setReturnURL("http://localhost:8080/BuzzerBeater/opayReturnCheckServlet.do");
 		//付款完成後"返回商城"鍵
-		creditCardCheck.setClientBackURL("http://localhost:8080/opay/123.jsp");
+		creditCardCheck.setClientBackURL("http://localhost:8080/BuzzerBeater/groupreg/check_Sign_up_member_2.jsp");
 		creditCardCheck.setRedeem("Y");
 		
 		String b = allInOne.aioCheckOut(creditCardCheck, null);

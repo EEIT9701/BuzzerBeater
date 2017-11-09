@@ -76,4 +76,10 @@ public class PlayersDAO_HibernateTemplate implements PlayerDAO_interface {
 
 	}
 
+	@Override
+	public Integer findMaxID() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -404,6 +404,14 @@ insert into TeamComposition values ('3004','70063','4','SG','2016/6/8','');
 insert into TeamComposition values ('3004','70064','25','SG','2016/6/8','');
 insert into TeamComposition values ('3004','70065','5','C','2016/6/8','');
 insert into TeamComposition values ('3004','70066','0','C','2016/6/8','');
+insert into TeamComposition values ('3006','70092','77','PF','2016/6/8','');
+insert into TeamComposition values ('3006','70093','20','SF','2016/6/8','');
+insert into TeamComposition values ('3006','70094','2','SG','2016/6/8','');
+insert into TeamComposition values ('3006','70095','4','PG','2016/6/8','');
+insert into TeamComposition values ('3006','70096','22','PG','2016/6/8','');
+insert into TeamComposition values ('3006','70097','21','SG','2016/6/8','');
+insert into TeamComposition values ('3006','70098','11','SF','2016/6/8','');
+insert into TeamComposition values ('3006','70099','15','SF','2016/6/8','');
 
 
 
@@ -613,14 +621,21 @@ tag                     nvarchar(200),                         --Tag
 )
 GO 
 
-insert into GameMedia values('4001','Curry雙手爆扣','001.mp4','','video','2016-10-25','技壓全場!!Curry連過三人單手爆扣!!','勇士,Curry,雙手爆扣');
-insert into GameMedia values('4002','哈登監視器','002.mp4','','video','2016-10-25','哈登監視器模式!!','火箭,哈登,監視器');
-insert into GameMedia values('4003','保羅船長過人','003.mp4','','video','2016-10-25','保羅船長換手過人!','快艇,保羅,運球過人');
-insert into GameMedia values('4004','Leonard 受傷','004.mp4','','video','2016-10-26','Leonard 踩到Zaza的腳翻船','馬刺, Leonard,翻船');
-insert into GameMedia values('4001','Stephen Curry','','','photo','2016-10-25','Curry手插腰','勇士,Curry,吐護齒套');
-insert into GameMedia values('4002','James Harden','','','photo','2016-10-25','炸彈超人哈登','火箭,哈登,炸彈超人');
-insert into GameMedia values('4003','Chris Paul','','','photo','2016-10-25','保羅發呆','快艇,保羅,發呆');
-insert into GameMedia values('4004','Kawhi Leonard','','','photo','2016-10-26','Leonard恐怖微笑','馬刺,Kawhi Leonard,黑幫');
+insert into GameMedia values('4001','Curry雙手爆扣','001.mp4','','video','2016-10-25','技壓全場!!Curry連過三人單手爆扣!!','勇士,Curry,雙手爆扣,');
+insert into GameMedia values('4002','哈登監視器','002.mp4','','video','2016-10-25','哈登監視器模式!!','火箭,哈登,監視器,');
+insert into GameMedia values('4003','保羅船長過人','003.mp4','','video','2016-10-25','保羅船長換手過人!','快艇,保羅,運球過人,');
+insert into GameMedia values('4004','Leonard 受傷','004.mp4','','video','2016-10-26','Leonard 踩到Zaza的腳翻船','馬刺, Leonard,翻船,');
+insert into GameMedia values('4001','Curry搞笑走步','005.mp4','','video','2016-10-29','Curry搞笑大走步','勇士,Curry,走步,');
+insert into GameMedia values('4002','哈登飛身爆扣','006.mp4','','video','2016-10-31','大鬍子小飛俠','火箭,哈登,爆扣,');
+insert into GameMedia values('4001','Stephen Curry','','','photo','2016-10-25','Curry手插腰','勇士,Curry,吐護齒套,');
+insert into GameMedia values('4002','James Harden','','','photo','2016-10-25','炸彈超人哈登','火箭,哈登,炸彈超人,');
+insert into GameMedia values('4003','Chris Paul','','','photo','2016-10-25','保羅發呆','快艇,保羅,發呆,');
+insert into GameMedia values('4004','Kawhi Leonard','','','photo','2016-10-26','Leonard恐怖微笑','馬刺,Leonard,黑幫,');
+insert into GameMedia values('4001','Curry','','','photo','2016-11-12','Curry運球','勇士,Curry,運球,');
+insert into GameMedia values('4002','Harden','','','photo','2016-11-14','Harden目瞪口呆','火箭,Harden,傻眼,');
+insert into GameMedia values('4003','Paul','','','photo','2016-11-12','Paul目視遠方','快艇,Paul,遠方,');
+insert into GameMedia values('4004','Leonard','','','photo','2016-11-14','Leonard握拳','馬刺,Leonard,握拳,');
+
 
 
 select * from GameMedia
@@ -640,22 +655,21 @@ teamID               int,                                                   --球
 )
 GO 
 
-insert into MemberInfo values('admin123@gmail.com','admin01','admin','2017-09-23','');
-insert into MemberInfo values('javaeeit97201701@gmail.com','金州勇士','teams','2016-01-01','3001');
+insert into MemberInfo values('GoldenStateWarriors@gmail.com','金州勇士','teams','2016-01-01','3001');
 insert into MemberInfo values('aSnAntonioSpurs@gmail.com','聖安東尼奧馬刺','teams','2016-01-11','3002');
 insert into MemberInfo values('HoustonRockets@ymail.com','休士頓火箭','teams','2016-01-15','3003');
 insert into MemberInfo values('LosAngelesClippers@ymail.com','洛杉磯快艇','teams','2016-01-17','3004');
 
 insert into MemberInfo values('UtahJazz@ymail.com','猶他爵士','teams','2016-02-01','3005');
-insert into MemberInfo values('OklahomaCityThunder@ymail.com','奧克拉荷馬雷霆','teams','2016-02-11','3006');
+insert into MemberInfo values('javaeeit972017@gmail.com','奧克拉荷馬雷霆','teams','2016-02-11','3006');
 insert into MemberInfo values('MemphisGrizzlies@ymail.com','曼菲斯灰熊','teams','2016-02-15','3007');
 insert into MemberInfo values('PortlandTrail@ymail.com','波特蘭拓荒者','teams','2016-02-17','3008');
 
-insert into MemberInfo values('javaeeit972017@gmail.com','資策會隊admin','admin','2017-06-23','');
-insert into MemberInfo values('frank810618@gmail.com','賴彥誠','parttime','2017-09-23','');
-insert into MemberInfo values('s988309@gmail.com','何其偉','parttime','2017-09-23','');
-insert into MemberInfo values('qwe020488952@gmail.com','陳品維','parttime','2017-09-23','');
-
+insert into MemberInfo values('s988309@gmail.com','EEIT97第一組','admin','2017-06-23','');
+insert into MemberInfo values('frank810618@gmail.com','賴彥誠','admin','2017-09-25','');
+insert into MemberInfo values('qwe020488952@gmail.com','陳品維','admin','2017-09-23','');
+insert into MemberInfo values('homeway1993@gmail.com','紘瑋','admin','2017-09-23','');
+insert into MemberInfo values('zxcvbnm82062@gmail.com','紘瑋','admin','2017-09-23','');
 select * from MemberInfo
 GO
 
@@ -667,8 +681,6 @@ create table PlayerGroups      --球員分組表
  playerID             int references Players(playerID ),    --球員ID
  primary key(groupID,playerID)
 )
-
-
 
 insert into PlayerGroups values('2002','70001');
 insert into PlayerGroups values('2002','70002');

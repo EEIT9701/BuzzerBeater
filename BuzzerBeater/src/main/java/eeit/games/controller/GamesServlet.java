@@ -45,6 +45,8 @@ import eeit.games.model.GamesVO;
 import eeit.groups.model.GroupsService;
 import eeit.groups.model.GroupsVO;
 import eeit.locationinfo.model.LocationinfoVO;
+import eeit.personaldata.model.PersonalDataVO;
+import eeit.players.model.PlayersVO;
 import eeit.season.model.SeasonService;
 import eeit.season.model.SeasonVO;
 import eeit.teams.model.TeamsVO;
@@ -69,14 +71,64 @@ public class GamesServlet extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if ("ADD_GAME_JSON".equals(action)) {
-			String gameData = request.getParameter("gameData");
-			JSONArray jsonArr = new JSONArray(gameData);
+			Integer gameID = Integer.valueOf(request.getParameter("gameID"));
+			GamesService gsvc = new GamesService();
+			GamesVO gamesVO = gsvc.findByGameID(gameID);
+			Integer teamAID = gamesVO.getTeamAVO().getTeamID();
+			Integer teamBID = gamesVO.getTeamBVO().getTeamID();
 
-			for (int i = 0; i < jsonArr.length(); i++) {
-				JSONObject obj = jsonArr.getJSONObject(i);
-				System.out.println(obj.getString("twoPoint"));
-				System.out.println(obj.getString("playerID"));
+			JSONArray gameData = new JSONArray(request.getParameter("gameData"));
+			gamesVO.setGameID(gameID);
+			Integer teamAScore = 0;
+			Integer teamBScore = 0;
+			for (int i = 0; i < gameData.length(); i++) {
+				JSONObject obj = gameData.getJSONObject(i);
+				PersonalDataVO pvo = new PersonalDataVO();
+
+				PlayersVO playersVO = new PlayersVO();
+				playersVO.setPlayerID(Integer.valueOf(obj.getString("playerID")));
+				pvo.setPlayersVO(playersVO);
+
+				TeamsVO teamsVO = new TeamsVO();
+				Integer teamID = Integer.valueOf(obj.getString("teamID"));
+				teamsVO.setTeamID(teamID);
+				pvo.setTeamsVO(teamsVO);
+
+				pvo.setGameTime(Integer.valueOf(obj.getString("gameTime")));
+				pvo.setTwoPoint(Integer.valueOf(obj.getString("twoPoint")));
+				pvo.setTwoPointShot(Integer.valueOf(obj.getString("twoPointShot")));
+				pvo.setThreePoint(Integer.valueOf(obj.getString("threePoint")));
+				pvo.setThreePointShot(Integer.valueOf(obj.getString("threePointShot")));
+				pvo.setFg(Integer.valueOf(obj.getString("fg")));
+				pvo.setFgShot(Integer.valueOf(obj.getString("fgShot")));
+				pvo.setOffReb(Integer.valueOf(obj.getString("offReb")));
+				pvo.setDefReb(Integer.valueOf(obj.getString("defReb")));
+				pvo.setAssist(Integer.valueOf(obj.getString("assist")));
+				pvo.setSteal(Integer.valueOf(obj.getString("steal")));
+				pvo.setBlocks(Integer.valueOf(obj.getString("blocks")));
+				pvo.setTurnover(Integer.valueOf(obj.getString("turnover")));
+				pvo.setPersonalFouls(Integer.valueOf(obj.getString("personalFouls")));
+				pvo.setStartingPlayer(Integer.valueOf(obj.getString("startingPlayer")));
+
+				Integer points = Integer.valueOf(obj.getString("twoPoint")) * 2
+						+ Integer.valueOf(obj.getString("threePoint")) * 3 + Integer.valueOf(obj.getString("fg")) * 1;
+
+				pvo.setPoints(points);
+				
+				if (teamID == teamAID) {
+					teamAScore += points;
+				} else if (teamID == teamBID) {
+					teamBScore += points;
+				}
+
+				pvo.setGamesVO(gamesVO);
+				gamesVO.getPersonalDataSet().add(pvo);
 			}
+			
+			gamesVO.setTeamAScore(teamAScore);
+			gamesVO.setTeamBScore(teamBScore);
+			
+			gsvc.updateWithPersonalData(gamesVO);
 
 		}
 

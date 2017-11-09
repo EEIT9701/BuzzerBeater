@@ -98,4 +98,8 @@ public class GamesService {
 	public List<GamesVO> findByTeamID(Integer teamID) {
 		return dao.findByTeamID(teamID);
 	}
+	
+	public void updateWithPersonalData(GamesVO gamesVO){
+		dao.update(gamesVO);
+	}
 }
