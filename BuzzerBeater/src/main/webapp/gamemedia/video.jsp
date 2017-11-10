@@ -10,9 +10,7 @@
     <link href="<%=request.getContextPath()%>/css/jquery.tagit.css" rel="stylesheet" type="text/css">
 	<jsp:include page="/header_css.jsp" />
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="<%=request.getContextPath()%>/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+	
 
     <!-- ***縮小視窗的置頂動態Menu顯示設定_2-1*** -->
     
@@ -49,11 +47,6 @@
 		}
 		.videolist{
 			 overflow-y: hidden;
-		}
-		.item { 
-			width: 220px; 
-			margin: 10px; 
-			float: left; 
 		}
 		.card-img-top{
 			width:98%;
@@ -93,9 +86,9 @@
            	<div class="addTagPhoto">
 				<c:forEach var="gameMediaVO" items="${gameMediaSvc.all}">	
 					<c:forEach var="gameMediaType" items="${gameMediaVO.mediaType}">
-						<c:if test="${gameMediaType eq 'photo'}">
+						<c:if test="${gameMediaType eq 'video'}">
 							<div class="card col-md-3">
-								<img class="card-img-top img-rounded center-block" src="data:image/jpeg;base64,${gameMediaVO.gamePhoto}">
+								<img class="card-img-top img-rounded center-block" id="${gameMediaVO.gameVideo}" src="data:image/jpeg;base64,${gameMediaVO.gamePhoto}">
   								<div class="card-block">
     								<h4 class="card-title" align="center">${gameMediaVO.mediasName}</h4>
 <!--     								</br> -->
@@ -118,15 +111,16 @@
 			<div class='row'>
 			</div>
 			<jsp:include page="/footer.jsp" />  
-        
+        <jsp:include page="/footer_css.jsp" /> 
     </div>
     </div>
     <!--主文(結束)-->
-	
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
     <script>
 	$(function(){
 		getlist();
 		tagFunction();
+		clickAndPlay();
 		
 		function getlist(){
 			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
@@ -156,13 +150,14 @@
 			})
 		}
 		function tagFunction(){
-			$('.tagFunction').click(function(){
+			$(document).on('click','.tagFunction',function(){
 				var tag = $(this).text()
 				$.post('<%=request.getContextPath()%>/GameMedia.do',{'action':'searchTag','tag':tag},function(data){
-					$('.card').empty();
+					$('.addTagPhoto').empty();
+						console.log(data)
 					$.each(JSON.parse(data),function(ind,taglist){
 						var cell1 = $('<div></div>').addClass("card col-md-3");
-						var cell2 = $('<img class="card-imp-top img rounded center-block">').attr("src","data:image/jpeg;base64,"+taglist.gamePhoto).css({'width':'98%','border':'solid 3px black','border-radius':'10px','object-fit':'cover'});
+						var cell2 = $('<img class="card-imp-top img rounded center-block">').attr("src","data:image/jpeg;base64,"+taglist.gamePhoto).attr("id", taglist.gameVideo).css({'width':'98%','border':'solid 3px black','border-radius':'10px','object-fit':'cover'});
 						var cell3 = $('<div></div>').addClass("card-block");
 						var cell4 = $('<h4 class="card-title" align="center"></h4>').text(taglist.mediasName);
 						var cell5 = $('<p></p>').addClass("card-text").css('align','center');
@@ -183,6 +178,19 @@
 				})
 			})
 		}
+		function clickAndPlay(){
+			$('.card-imp-top').on('click',function(){
+				event.preventDefault();
+				var playVideo = $(this).attr('id');
+				$('#video').attr("src",'<%=request.getContextPath()%>/videos/'+playVideo+'.mp4');
+			})
+		}
+		$(document).on('click','.tagFunction',function(){
+			$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+			setTimeout(function(){
+				$.unblockUI()
+			},500);
+		})
 	});
 
 	
@@ -200,6 +208,6 @@
 		}
 	})
 	</script>
-	<jsp:include page="/footer_css.jsp" />        
+	       
 </body>
 </html>
