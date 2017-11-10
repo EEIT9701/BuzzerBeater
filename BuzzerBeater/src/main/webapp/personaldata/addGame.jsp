@@ -164,9 +164,12 @@ width:380px
 			
 <FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do" name="action">
 <input type="hidden" name="action" value="from1">
-<input type="submit" value="送出新增"></FORM>
+<input type="file" name="updatefile" style="width:200px">
+<input type="hidden" name="gameID" value="${gamesVO.gameID}">
+<input type="hidden" name="seasonID" value="${gamesVO.groupsVO.seasonVO.seasonID}">
+<input type="submit" value="上傳檔案"></FORM>
 
-		</FORM>
+
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />
 	    	</div>
