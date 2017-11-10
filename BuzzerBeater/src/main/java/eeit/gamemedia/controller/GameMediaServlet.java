@@ -11,18 +11,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.JSONObject;
-import org.json.simple.JSONValue;
 
 import com.google.gson.Gson;
 
 import eeit.gamemedia.model.GameMediaService;
 import eeit.gamemedia.model.GameMediaVO;
-import eeit.games.model.GamesDAO_HibernateTemplate;
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
 import eeit.groups.model.GroupsService;
@@ -338,12 +334,14 @@ public class GameMediaServlet extends HttpServlet {
 			int count = gameVideoAmount.size();
 	
 				
-			String gamePhoto = "";
+			String base64 = req.getParameter("gamePhoto");
+			String photo =base64.substring(base64.lastIndexOf(",")+1);
 			String mediaType = "video";
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = req.getParameter("descriptions");
 			String tag = req.getParameter("tag");
 			String gameVideo = "00"+(count+1)+".mp4";
+			
 			
 			//getPart()方法是getParameter()的檔案版
 			try{
@@ -381,8 +379,8 @@ public class GameMediaServlet extends HttpServlet {
 
 				/***************************2.開始新增資料***************************************/
 				//System.out.println(gameMediaVO);
-				System.out.println(gameID+","+mediasName+","+gameVideo+","+gamePhoto+","+mediaType+","+mediaDate+","+descriptions+","+tag);
-				gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, gamePhoto, mediaType, mediaDate, descriptions, tag);
+				System.out.println(gameID+","+mediasName+","+gameVideo+","+photo+","+mediaType+","+mediaDate+","+descriptions+","+tag);
+				gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, photo, mediaType, mediaDate, descriptions, tag);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 //				String url = "/gamemedia/videoBackEnd.jsp";
