@@ -59,7 +59,7 @@ public class GoogleLoginServlet extends HttpServlet {
 				// 設定此connection使用POST
 				connectionObtainToken.setRequestMethod("POST");
 				connectionObtainToken.setDoOutput(true);
-
+				
 				// 開始傳送參數
 				OutputStreamWriter writer = new OutputStreamWriter(connectionObtainToken.getOutputStream());
 				writer.write("code=" + req.getParameter("code") + "&"); // 取得Google回傳的參數code

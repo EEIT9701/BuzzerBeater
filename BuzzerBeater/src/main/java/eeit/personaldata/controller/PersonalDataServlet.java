@@ -1,6 +1,8 @@
 package eeit.personaldata.controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
@@ -217,6 +220,26 @@ public class PersonalDataServlet extends HttpServlet {
             pSvc.delete(personalDataVO);			
 		
 		}
+		if ("from1".equals(action)) {
+			 String gameID=req.getParameter("gameID");
+			Integer game=Integer.valueOf(gameID);
+			
+			String seasonID=req.getParameter("seasonID");
+			
+	
+			
+			
+			
+			jdbc jd=new jdbc();
+		    jd.main(game);
+		    
+		    String url ="/groups/groupList.jsp?seasonID="+seasonID;
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, resp);
+		}
+		
+		
+		
 	}
 
 }

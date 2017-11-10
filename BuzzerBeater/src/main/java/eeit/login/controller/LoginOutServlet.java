@@ -2,6 +2,9 @@ package eeit.login.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,16 +35,27 @@ public class LoginOutServlet extends HttpServlet {
 			throws ServletException, IOException {
 //		response.setContentType("text/html");
 //		PrintWriter out = response.getWriter();
-//
+// 		
+		
 		//request.getRequestDispatcher("header.jsp").include(request, response);
+//		https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/BuzzerBeater/LoginOutServlet.do
 		HttpSession session = request.getSession();
 		session.removeAttribute("LoginOK");
 		session.removeAttribute("memberInfoVO");
 		session.removeAttribute("pictureUri");
 		session.invalidate();
+//		URL url = new URL("https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/BuzzerBeater/index.jsp");
+//		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+
+			
+//		 URL url = new URL("https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=" + request.getContextPath()+"/index.jsp");
+//		 URLConnection conn = url.openConnection();
+//         conn.connect();
+		 //	   document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://www.example.com";
+	    
 //		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 //		rd.forward(request, response);
-		response.sendRedirect(request.getContextPath()+"/index.jsp");
+		response.sendRedirect("https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/BuzzerBeater/index.jsp");
 //		out.close();
 	}
 }

@@ -25,29 +25,6 @@
 			width:100%;
 			height:100%;
 		}
-		#videolist{
-			background-color:#BEBEBE;
- 			height:105%;
-		}
-		video::-internal-media-controls-download-button {
-   	 		display:none;
-		}
-
-		video::-webkit-media-controls-enclosure {
-    		overflow:hidden;
-		}
-
-		video::-webkit-media-controls-panel {
-    		width: calc(100% + 30px); 
-		}
-		#medias{
-			height:100%;
-			width:100%;
-			text-align:left;
-		}
-		h3{
-			text-align:center;
-		}
     </style>
 
 </head>
@@ -66,7 +43,7 @@
             	
             </div>
             <div class="row">
-            	<div class="col-md-4"><h2>精采賽事照片</h2></div>	
+            	<div class="col-md-4" style="font-family:'DFKai-sb'"><h2>精采賽事照片</h2></div>	
 			</div>
 		
 			<br/>
@@ -103,20 +80,31 @@
             <!--廣告輪播(結束)-->
            	</div>
            	</br>
-           	</br>
-           	<div class="row">
-           		<c:forEach var="gameMediaSvc" items="${gameMediaSvc.all}" varStatus="loop">
-                	<c:forEach var="gameMediaType" items="${gameMediaSvc.mediaType}">
-                		<c:if test="${gameMediaType eq 'photo'}">
-                			<c:if test="${loop.count<5}">
-                    			<div class='item'>
-                   					<img src="data:image/jpeg;base64,${gameMediaSvc.gamePhoto}">
-                    			</div>
-                    		</c:if>
-                    	</c:if>
-                    </c:forEach>
-                </c:forEach>   
-           	</div>
+           	<div class="addTagPhoto">
+				<c:forEach var="gameMediaVO" items="${gameMediaSvc.all}">	
+					<c:forEach var="gameMediaType" items="${gameMediaVO.mediaType}">
+						<c:if test="${gameMediaType eq 'photo'}">
+							<div class="card col-md-3">
+								<img class="card-img-top img-rounded center-block" src="data:image/jpeg;base64,${gameMediaVO.gamePhoto}">
+  								<div class="card-block">
+    								<h4 class="card-title" align="center">${gameMediaVO.mediasName}</h4>
+    									<p class="card-text" align="center">
+    										<img src="<%=request.getContextPath()%>/images/tag.png">
+    										<c:forEach var="tag" items="${gameMediaVO.tag}">
+    											<a class="tagFunction">${tag}</a>
+    										</c:forEach>
+    									</p>
+  								</div>
+								<div class="card-block">
+  								</div>
+							</div>	
+						</c:if>
+					</c:forEach>
+				</c:forEach>
+			</div>
+			</br>
+			<div class='row'>
+			</div>
 			<jsp:include page="/footer.jsp" />  
         </div>
     </div>

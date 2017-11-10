@@ -54,15 +54,15 @@
 			<!--上層導覽列(開始) -->
 			<div id="pathWay">
 	        	<span>
-	            	<a href="<%=request.getContextPath() %>/index.jsp">
+	            	<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
 	            		<span>使用者功能</span>
 	            	</a>
 	        	</span>&gt;<span>
-	            	<a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
+	            	<a class="blockUI" href="<%=request.getContextPath() %>/season/seasonList_back.jsp">
 	            		<span>賽季管理</span>
 	            	</a>
 	        	</span>&gt;<span>
-	            	<a href="<%=request.getContextPath() %>/Season.do?action=TO_GROUPS_BACK&seasonID=1003">
+	            	<a class="blockUI" href="<%=request.getContextPath() %>/Season.do?action=TO_GROUPS_BACK&seasonID=1003">
 	            		<span>分組列表</span>
 	            	</a>
 	        	</span>&gt;

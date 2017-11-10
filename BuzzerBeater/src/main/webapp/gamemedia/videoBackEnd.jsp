@@ -6,8 +6,6 @@
 <%@ page import="eeit.gamemedia.model.*"%>
 <%@ page import="java.util.*"%>
 <%
-	// 	SeasonService seasonSvc = new SeasonService();
-	// 	Set<HashMap<String, Object>> list = seasonSvc.getAll();
 	SeasonDAO_Hibernate dao = new SeasonDAO_Hibernate();
 	Set<SeasonVO> list = dao.getAll();
 	request.setAttribute("list", list);
@@ -15,11 +13,6 @@
 	SeasonVO seasonVO = new SeasonVO();
 	Set<GroupsVO> groupSet = seasonVO.getGroupsSet();
 	request.setAttribute("groupSet", groupSet);
-
-	// 	GameMediaService gameMediaSvc = new GameMediaService();
-	// 	List<GameMediaVO> media = gameMediaSvc.getAll();
-
-	// 	request.setAttribute("gameMediaSvc", media);
 %>
 <jsp:useBean id="gameMediaSvc" scope="page" class="eeit.gamemedia.model.GameMediaService" />
 <!DOCTYPE>
@@ -29,6 +22,7 @@
 <title>EEIT97-第一組</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/iEdit.css">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath()%>/css/jquery.tagit.css" rel="stylesheet" type="text/css">
@@ -37,7 +31,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=request.getContextPath()%>/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
-
+<script src="<%=request.getContextPath() %>/js/iEdit.js"></script>
 
 <style>
 #myModalLabel {
@@ -239,8 +233,17 @@ video::-webkit-media-controls-panel {
 								</br>
 								<div class=row>
 									<!--上傳影片的觸發鈕-->
-    								<div class=col-md-3>
+									<div class="col-md-3">
+										<p>上傳影片</p>
 										<input type="file" name="upload_file" id="upload_file">  
+									</div>
+								</div>
+								</br>
+								<div class="row">
+									<div class="col-md-3">
+										<p>上傳相片</p>
+										<input type="file" id="file">
+										<img id="result" type="hidden" >
 									</div>
 								</div>
 								</br>
@@ -336,6 +339,19 @@ video::-webkit-media-controls-panel {
 	
 	$(function(){
 		
+		$("#file").change(function (e) {
+				var img = e.target.files[0];
+
+			if (!img.type.match('image.*')) {
+   				alert("Whoops! That is not an image.");
+   				return;
+			}
+			iEdit.open(img, true, function (res) {
+   				$("#result").attr("src", res).css('width','100');
+   				$("#result").show();
+			});
+
+      	});
 		
  		loadTable();     //載入tbody內容
  		insert();        //上傳
@@ -497,13 +513,15 @@ video::-webkit-media-controls-panel {
 	  			
 	  			$('#insertConfirm').click(function(){
 	  				console.log("按下確定鍵")
+	  				
+	  				
 	  				var gameID = $('#gamelist').val();
 		  			var title = $('#insertTitle').val();
 		  			var descriptions = $('#insertDescriptions').val();
 		  			var tag = $('#mySingleFieldTags').val();
-	  				 
+	  				var gamePhoto = $('#result').attr('src');
 					
-	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
+	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag, 'gamePhoto':gamePhoto}, function(datas){
 	  				    console.log("傳值");
 	  					loadTable();
 	  				})
