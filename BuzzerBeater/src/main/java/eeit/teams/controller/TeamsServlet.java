@@ -296,8 +296,8 @@ public class TeamsServlet extends HttpServlet {
 		}
 
 		if ("buildMyTeam".equals(action)) {
-			request.getSession().setAttribute("teamID", 3006);
-			request.getSession().setAttribute("groupID", 3006);
+//			request.getSession().setAttribute("teamID", 3006);
+//			request.getSession().setAttribute("groupID", 3006);
 			String base64 = request.getParameter("teamBadge");
 			String teamBadge = base64.substring(base64.lastIndexOf(",") + 1);
 			String teamName = request.getParameter("teamName");
@@ -316,7 +316,7 @@ public class TeamsServlet extends HttpServlet {
 		if ("findMyTeamPlayer".equals(action)) {
 			TeamsService tsvc = new TeamsService();
 			TeamCompositionService tcsvc = new TeamCompositionService();
-			List<TeamCompositionVO> list = tcsvc.findByTeamID(3006);
+			List<TeamCompositionVO> list = tcsvc.findByTeamID(3009);
 			List<HashMap<String, String>> returnlist = new ArrayList<HashMap<String, String>>();
 			Map<String, String> map = null;
 

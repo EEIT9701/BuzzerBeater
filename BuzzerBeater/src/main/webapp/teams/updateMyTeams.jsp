@@ -23,6 +23,10 @@
 	height: 220px;
 	margin: auto;
 }
+#photo {
+	width: 100px;
+	margin: auto;
+}
 .img {
 	position: relative;
 	background-position: center;

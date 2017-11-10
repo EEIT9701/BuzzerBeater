@@ -47,7 +47,7 @@
 						<c:when test="${LoginOK.auth == 'teams'}">
 <%-- 								<li><h6><a href="#">${LoginOK.auth}登入使用</a></h6></li> --%>
 								<li><h6><a href="<%=request.getContextPath() %>/Teams.do?action=GET_MY_TEAM&teamID=${LoginOK.teamID}">我的球隊</a></h6></li>
-								<li><h6><a href="<%=request.getContextPath() %>/Groups.do?action=GET_GROUP_SINGUP">分組報名</a></h6></li>
+								<li><h6><a href="<%=request.getContextPath() %>/teams/insertMyTeam.jsp">分組報名</a></h6></li>
 								<li><h6><a href="#">繳費</a></h6></li>
 						</c:when>
 						<c:otherwise>
