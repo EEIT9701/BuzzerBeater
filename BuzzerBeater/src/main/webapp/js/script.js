@@ -4,7 +4,7 @@ $(function () {
     var note = $('#note'),
         //����ɶ�
 		//OutTime = new Date("2017/11/17"),
-        ts = new Date("2017/11/17").getTime(),
+        ts = new Date("2017/11/18").getTime(),
         newYear = true;
 
 	$('#countdown').countdown({
