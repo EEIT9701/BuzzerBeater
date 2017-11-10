@@ -217,6 +217,14 @@ public class PersonalDataServlet extends HttpServlet {
             pSvc.delete(personalDataVO);			
 		
 		}
+		if ("from1".equals(action)) {
+			jdbc jd=new jdbc();
+		    jd.main(null);
+		    
+		    String url ="/groups/groupList.jsp?seasonID=1004";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, resp);
+		}
 	}
 
 }

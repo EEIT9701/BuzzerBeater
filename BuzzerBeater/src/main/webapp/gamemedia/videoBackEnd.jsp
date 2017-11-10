@@ -6,8 +6,6 @@
 <%@ page import="eeit.gamemedia.model.*"%>
 <%@ page import="java.util.*"%>
 <%
-	// 	SeasonService seasonSvc = new SeasonService();
-	// 	Set<HashMap<String, Object>> list = seasonSvc.getAll();
 	SeasonDAO_Hibernate dao = new SeasonDAO_Hibernate();
 	Set<SeasonVO> list = dao.getAll();
 	request.setAttribute("list", list);
@@ -15,11 +13,6 @@
 	SeasonVO seasonVO = new SeasonVO();
 	Set<GroupsVO> groupSet = seasonVO.getGroupsSet();
 	request.setAttribute("groupSet", groupSet);
-
-	// 	GameMediaService gameMediaSvc = new GameMediaService();
-	// 	List<GameMediaVO> media = gameMediaSvc.getAll();
-
-	// 	request.setAttribute("gameMediaSvc", media);
 %>
 <jsp:useBean id="gameMediaSvc" scope="page" class="eeit.gamemedia.model.GameMediaService" />
 <!DOCTYPE>

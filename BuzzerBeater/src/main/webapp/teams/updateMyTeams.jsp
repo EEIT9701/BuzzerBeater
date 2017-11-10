@@ -18,6 +18,11 @@
 <jsp:include page="/header_css.jsp" />
 <script src="<%=request.getContextPath()%>/js/jquery-3.1.1.min.js"></script>
 <style>
+#result {
+	width: 300px;
+	height: 220px;
+	margin: auto;
+}
 .img {
 	position: relative;
 	background-position: center;

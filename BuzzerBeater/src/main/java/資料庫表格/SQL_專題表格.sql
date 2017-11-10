@@ -404,6 +404,14 @@ insert into TeamComposition values ('3004','70063','4','SG','2016/6/8','');
 insert into TeamComposition values ('3004','70064','25','SG','2016/6/8','');
 insert into TeamComposition values ('3004','70065','5','C','2016/6/8','');
 insert into TeamComposition values ('3004','70066','0','C','2016/6/8','');
+insert into TeamComposition values ('3006','70092','77','PF','2016/6/8','');
+insert into TeamComposition values ('3006','70093','20','SF','2016/6/8','');
+insert into TeamComposition values ('3006','70094','2','SG','2016/6/8','');
+insert into TeamComposition values ('3006','70095','4','PG','2016/6/8','');
+insert into TeamComposition values ('3006','70096','22','PG','2016/6/8','');
+insert into TeamComposition values ('3006','70097','21','SG','2016/6/8','');
+insert into TeamComposition values ('3006','70098','11','SF','2016/6/8','');
+insert into TeamComposition values ('3006','70099','15','SF','2016/6/8','');
 
 
 
@@ -647,13 +655,13 @@ teamID               int,                                                   --²y
 )
 GO 
 
-insert into MemberInfo values('javaeeit972017@gmail.com','ª÷¦{«i¤h','teams','2016-01-01','3001');
+insert into MemberInfo values('GoldenStateWarriors@gmail.com','ª÷¦{«i¤h','teams','2016-01-01','3001');
 insert into MemberInfo values('aSnAntonioSpurs@gmail.com','¸t¦wªF¥§¶ø°¨¨ë','teams','2016-01-11','3002');
 insert into MemberInfo values('HoustonRockets@ymail.com','¥ð¤h¹y¤õ½b','teams','2016-01-15','3003');
 insert into MemberInfo values('LosAngelesClippers@ymail.com','¬¥§üÁF§Ö¸¥','teams','2016-01-17','3004');
 
 insert into MemberInfo values('UtahJazz@ymail.com','µS¥LÀï¤h','teams','2016-02-01','3005');
-insert into MemberInfo values('OklahomaCityThunder@ymail.com','¶ø§J©Ô²ü°¨¹p¾^','teams','2016-02-11','3006');
+insert into MemberInfo values('javaeeit972017@gmail.com','¶ø§J©Ô²ü°¨¹p¾^','teams','2016-02-11','3006');
 insert into MemberInfo values('MemphisGrizzlies@ymail.com','°Òµá´µ¦Çºµ','teams','2016-02-15','3007');
 insert into MemberInfo values('PortlandTrail@ymail.com','ªi¯SÄõ©Ý¯îªÌ','teams','2016-02-17','3008');
 
