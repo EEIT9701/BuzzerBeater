@@ -234,7 +234,7 @@ public class GameMediaServlet extends HttpServlet {
 			res.setHeader("content-type", "text/html;charset=UTF-8");
 			res.setCharacterEncoding("UTF-8");
 			
-			String tag1 = req.getParameter("tag");
+			String tag1 = req.getParameter("tag")+",";
 			Integer mediaID = Integer.valueOf(req.getParameter("mediaID"));
 			String title = req.getParameter("title");
 			String descriptions1 = req.getParameter("descriptions");
@@ -250,7 +250,7 @@ public class GameMediaServlet extends HttpServlet {
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = descriptions1;
 			String tag = tag1;
-				
+			System.out.println(tag);	
 				
 				
 			gameMediaSvc.updateGameMedia(gameID, mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag);				
@@ -339,7 +339,7 @@ public class GameMediaServlet extends HttpServlet {
 			String mediaType = "video";
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = req.getParameter("descriptions");
-			String tag = req.getParameter("tag");
+			String tag = req.getParameter("tag")+",";
 			String gameVideo = "00"+(count+1)+".mp4";
 			
 			
