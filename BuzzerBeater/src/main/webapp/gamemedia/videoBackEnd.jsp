@@ -154,14 +154,6 @@ video::-webkit-media-controls-panel {
 				<div class="col-md-4" id="topic">
 					<h1>影片專區</h1>
 					</br>
-					<c:if test="${not empty errorMsgs}">
-					請修正以下錯誤:
-                    <ul>
-							<c:forEach var="message" items="${errorMsgs}">
-								<li>${message}</li>
-							</c:forEach>
-						</ul>
-					</c:if>
 				</div>
 			</div>
 			</br>
@@ -260,14 +252,14 @@ video::-webkit-media-controls-panel {
 								<div>
    								<form>
    									<label style="padding-left:8px">標籤</label> 
-            						<input name="tags" id="mySingleFieldTags" value="Curry, Harden , Paul, Leonard">            						
+            						<input name="tags" id="mySingleFieldTags" value="請自訂Tag">            						
        							</form>
 								</div>
 							</div>
 							<div class="modal-footer">
 								<!--確認按鈕觸發事件-->
 								<button type="submit" class="btn btn-warning" data-dismiss="modal" id="insertConfirm" >確認上傳</button>
-								<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" id="insertCancel">取消</button>
 							</div>
 						</div>
 					</div>
@@ -532,6 +524,12 @@ video::-webkit-media-controls-panel {
 	  				
 	  				 
 	  			
+	  			})
+	  			$('#insertCancel').click(function(){
+	  				console.log("移除")
+	  				$('#insertTitle').val("");
+	  				$('#insertDescriptions').val("");
+	  				$('#result').hide().value("");	
 	  			})
 	  		}
 	});

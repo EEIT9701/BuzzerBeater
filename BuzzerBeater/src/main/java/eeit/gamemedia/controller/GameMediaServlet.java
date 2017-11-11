@@ -335,7 +335,7 @@ public class GameMediaServlet extends HttpServlet {
 	
 				
 			String base64 = req.getParameter("gamePhoto");
-			String photo =base64.substring(base64.lastIndexOf(",")+1);
+			String photo = base64.substring(base64.lastIndexOf(",")+1);
 			String mediaType = "video";
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = req.getParameter("descriptions");
@@ -372,14 +372,7 @@ public class GameMediaServlet extends HttpServlet {
 				
 			}
 			
-			
-		
-			
-			
-
 				/***************************2.開始新增資料***************************************/
-				//System.out.println(gameMediaVO);
-				System.out.println(gameID+","+mediasName+","+gameVideo+","+photo+","+mediaType+","+mediaDate+","+descriptions+","+tag);
 				gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, photo, mediaType, mediaDate, descriptions, tag);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
