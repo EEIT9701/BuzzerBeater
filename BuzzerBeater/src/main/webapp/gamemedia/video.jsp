@@ -120,7 +120,7 @@
 	$(function(){
 		getlist();
 		tagFunction();
-		clickAndPlay();
+		
 		
 		function getlist(){
 			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
@@ -157,7 +157,7 @@
 						console.log(data)
 					$.each(JSON.parse(data),function(ind,taglist){
 						var cell1 = $('<div></div>').addClass("card col-md-3");
-						var cell2 = $('<img class="card-imp-top img rounded center-block">').attr("src","data:image/jpeg;base64,"+taglist.gamePhoto).attr("id", taglist.gameVideo).css({'width':'98%','border':'solid 3px black','border-radius':'10px','object-fit':'cover'});
+						var cell2 = $('<img class="card-imp-top img rounded center-block changeVideo">').attr("src","data:image/jpeg;base64,"+taglist.gamePhoto).attr("id", taglist.gameVideo).css({'width':'98%','border':'solid 3px black','border-radius':'10px','object-fit':'cover'});
 						var cell3 = $('<div></div>').addClass("card-block");
 						var cell4 = $('<h4 class="card-title" align="center"></h4>').text(taglist.mediasName);
 						var cell5 = $('<p></p>').addClass("card-text").css('align','center');
@@ -172,19 +172,25 @@
 						cell3.append([cell4, cell5]);
 						cell1.append([cell2, cell3]);
 						
+						$('.card-imp-top').on('click',function(){
+							console.log('聯捷')
+							var video = $(this).attr('id');
+							$('#video').attr('src','<%=request.getContextPath()%>/videos/'+video);
+						})
+						
 						var row = $('<div></div>').append(cell1)
 						$('.addTagPhoto').append(row);
+						
+					
 					})
 				})
-			})
+			})	
+			
+			
 		}
-		function clickAndPlay(){
-			$('.card-imp-top').on('click',function(){
-				event.preventDefault();
-				var playVideo = $(this).attr('id');
-				$('#video').attr("src",'<%=request.getContextPath()%>/videos/'+playVideo+'.mp4');
-			})
-		}
+	
+	
+		
 		$(document).on('click','.tagFunction',function(){
 			$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 			setTimeout(function(){
