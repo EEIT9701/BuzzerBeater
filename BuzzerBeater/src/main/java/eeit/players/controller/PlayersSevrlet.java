@@ -319,7 +319,7 @@ public class PlayersSevrlet extends HttpServlet {
 			
 			TeamsService svc = new TeamsService();
 			Integer teamID = 3006;
-			tcsvc.insert(teamID, playerSvc.findMaxID(), playerNo, playerRole, new Timestamp(System.currentTimeMillis()),null);
+			tcsvc.insert(svc.findMaxID(), playerSvc.findMaxID(), playerNo, playerRole, new Timestamp(System.currentTimeMillis()),null);
 			
 
 		}
