@@ -331,7 +331,7 @@ public class GameMediaServlet extends HttpServlet {
 			GameMediaService gameMediaSvc = new GameMediaService();
 			
 			List<GameMediaVO> gameVideoAmount = gameMediaSvc.getAllVideo();
-			int count = gameVideoAmount.size();
+			int count = (gameVideoAmount.size()+8);
 	
 				
 			String base64 = req.getParameter("gamePhoto");
@@ -340,7 +340,7 @@ public class GameMediaServlet extends HttpServlet {
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = req.getParameter("descriptions");
 			String tag = req.getParameter("tag")+",";
-			String gameVideo = "00"+(count+1)+".mp4";
+			String gameVideo = "0"+(count+1)+".mp4";
 			
 			
 			//getPart()方法是getParameter()的檔案版
