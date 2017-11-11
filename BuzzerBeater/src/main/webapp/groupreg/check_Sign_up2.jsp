@@ -41,7 +41,7 @@
 			<!--****************-->
 			<div class="row">
 				<div class="col-md-12">
-					<table class="table table-bordered" id="example">
+					<table class="table table-bordered" >
 						<thead>
 							<tr align='center' valign='middle'>
 								<th>隊伍名稱</th>
