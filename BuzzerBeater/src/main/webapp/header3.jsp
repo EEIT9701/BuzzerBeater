@@ -35,7 +35,8 @@
 								<li><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp">球員</a></li>
 								<li><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></li>
 								<li><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></li>
-								<li><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></li>					 
+								<li><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></li>
+								<li><a href="<%=request.getContextPath() %>/groupreg/check_Sign_up2.jsp">繳費</a></li>				 
 						</c:when>
 						<c:when test="${LoginOK.auth == 'parttime'}">
 <%-- 							<li><a href="#">${LoginOK.auth}登入使用</a></li> --%>
@@ -49,7 +50,7 @@
 <%-- 								<li><a href="#">${LoginOK.auth}登入使用</a></li> --%>
 								<li><a href="<%=request.getContextPath() %>/Teams.do?action=GET_MY_TEAM&teamID=${LoginOK.teamID}">我的球隊</a></li>
 								<li><a href="<%=request.getContextPath() %>/teams/insertMyTeam.jsp">分組報名</a></li>
-								<li><a href="#">繳費</a></li>
+								<li><a href="<%=request.getContextPath() %>/groupreg/check_Sign_up_member_3.jsp">繳費</a></li>
 						</c:when>
 						<c:otherwise>
 						   <li>
@@ -119,7 +120,7 @@
 				<li class="dropdown">
 					<a href="<%=request.getContextPath() %>/season/seasonList.jsp" class="dropdown-toggle" data-toggle="dropdown">賽季</a>
 					<ul class="dropdown-menu">
-						<c:forEach var="seasonSet" items="${seasonSvc.season}" begin="0" end="5">
+						<c:forEach var="seasonSet" items="${seasonSvc.season}" begin="0" end="3">
 							<li><a href="<%=request.getContextPath() %>/groups/groupList.jsp?seasonID=${seasonSet.seasonID}">${seasonSet.seasonName}</a></li>
 						</c:forEach>
 					</ul>
