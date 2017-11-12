@@ -517,10 +517,10 @@
 
 							    console.log(Str_date)
 								var cell8=$('<td></td>').text("EEIT97");
-								var cell9=$('<td></td>').text("2016-17例行賽-東區");
+								var cell9=$('<td></td>').text("測試A區");
 								var cell10=$('<td></td>').text(Str_date);
 								var cell11=$('<td><input id="account" name="account" placeholder="輸入帳號後五碼" class="form-control input-md" type="text" required ></td>');
-								var cell12=$('<td><a href="" id="opay"><img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top:5px;"></a></td>');
+								var cell12=$('<td><a href="<%=request.getContextPath()%>/opaytest.do" id="opay"><img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top:5px;"></a></td>');
 								var cell13=$('<td><button type="button" class="btn btn-lg btn-warning" id="click">送出</button></td>');
 								var cell15=$('<div class="col-md-4"><button id="prevBtn"><nobr>上一步</nobr></button></div>')
 								var cell16=$('<div class="col-md-4"></div>');
@@ -623,7 +623,7 @@
 						}
 						function clickBtn(){
 							console.log(1);
-							$('#click').on('click', function(){
+							$('#opay').on('click', function(){
 								console.log(2);
 								if(confirm("確定要送出嗎?")){
 								//驗證狀態欄位給2
@@ -636,17 +636,21 @@
 					            $(this).addClass('btn btn-lg btn-danger');
 					          	//增加不能點擊的屬性
 					            $(this).attr("disabled","disabled");
-					            var teamID =$(this).parents('tr').find('td:nth-child(1)').attr('id');
-					            var groupID =$(this).parents('tr').find('td:nth-child(2)').attr('id');
+// 					            var teamID =$(this).parents('tr').find('td:nth-child(1)').attr('id');
+					            var teamID ="3009";
+// 					            var groupID =$(this).parents('tr').find('td:nth-child(2)').attr('id');
+								var groupID ="2005";
 					            var registerDate =$(this).parents('tr').find('td:nth-child(3)').text();
-					            var teamStat =$(this).parents('tr').find('td:nth-child(7)').text();
-					            console.log(teamStat);
-					            var paymentNumber =$(this).parents('tr').find('td:nth-child(4)>input').val();
+// 					            var teamStat =$(this).parents('tr').find('td:nth-child(7)').text();
+					            var teamStat ="1";
+// 					            console.log(teamStat);
+// 					            var paymentNumber =$(this).parents('tr').find('td:nth-child(4)>input').val();
+					            var paymentNumber ="無";
 					            //把撈到的值包成JSON
 						       	var dataStr = JSON.stringify({ 'teamID':teamID, 'groupID':groupID, 'teamStat':teamStat,'registerDate':registerDate,'paymentNumber':paymentNumber})
 						       	console.log(dataStr);
 					            //用POST傳名為UPDATE的action到Servlrt
-						       	$.post('<%=request.getContextPath()%>/GroupReg.do',{'action':'UPDATE','data':dataStr},function(datas){})
+						       	$.post('<%=request.getContextPath()%>/GroupReg.do',{'action':'INSERT','data':dataStr},function(datas){})
 						       	//讓輸入的值到手動繳費驗證欄位
 						       	$(this).parents('tr').find('td:nth-child(4)').html(paymentNumber);
 					            //改變驗證狀態欄位

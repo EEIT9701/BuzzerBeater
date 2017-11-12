@@ -264,6 +264,7 @@ insert into Teams values('70005','UtahJazz@ymail.com','0915125568','105','µS¥LÀï
 insert into Teams values('70006','OklahomaCityThunder@ymail.com','0916125568','106','¶ø§J©Ô²ü°¨¥«¹p¾^','Billy Donovan','Clay Bennett','','','','','');
 insert into Teams values('70007','MemphisGrizzlies@ymail.com','0917125568','107','°Ò´´´µ¦Çºµ','David Fizdale','Robert Pera','','','','','');
 insert into Teams values('70008','PortlandTrail@ymail.com','0917125568','108','ªi¯SÄõ©Ý¯îªÌ','Terry Stotts','Paul Gardner Allen','','','','','');
+--insert into Teams values('70009','','','108','EEIT97','','','','','','','');
 
 
 select * from Teams
@@ -312,14 +313,14 @@ GO
 GO  
 
 insert into GroupRegistration values('3001','2002','1','2016-06-06 11:58','45671');
-insert into GroupRegistration values('3002','2002','1','2016-06-07 09:48','45672');
-insert into GroupRegistration values('3003','2002','1','2016-06-07 12:58','45673');
+insert into GroupRegistration values('3002','2002','1','2016-06-07 09:48','95852');
+insert into GroupRegistration values('3003','2002','1','2016-06-07 12:58','86854');
 insert into GroupRegistration values('3004','2002','1','2016-06-08 15:38','45674');
 
-insert into GroupRegistration values('3001','2006','2','2016-06-06 11:58','45671');
-insert into GroupRegistration values('3002','2006','2','2016-06-07 09:48','45672');
-insert into GroupRegistration values('3003','2006','2','2016-06-07 12:58','45673');
-insert into GroupRegistration values('3004','2006','1','2016-06-08 15:38','45674');
+insert into GroupRegistration values('3001','2006','2','2016-06-06 11:58','05671');
+insert into GroupRegistration values('3002','2006','2','2016-06-07 09:48','62507');
+insert into GroupRegistration values('3003','2006','2','2016-06-07 12:58','75215');
+insert into GroupRegistration values('3004','2006','1','2016-06-08 15:38','00581');
 
 select * from GroupRegistration
 GO
