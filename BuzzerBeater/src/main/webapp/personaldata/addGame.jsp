@@ -24,10 +24,10 @@
         <jsp:include page="/font_css.jsp" />
     </head>
 <style>
-body input{width:100px
+ td input{width:80%
 }
 #st1{
-width:380px
+
 }
 
 </style>
