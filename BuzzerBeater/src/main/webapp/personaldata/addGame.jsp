@@ -22,15 +22,16 @@
     	
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
+        
+		<style>
+		
+		td input{
+		 	width:90%;
+		 	text-align:left;
+		}
+		</style>
+		
     </head>
-<style>
-body input{width:100px
-}
-#st1{
-width:380px
-}
-
-</style>
     <body>
     
 	    <jsp:include page="/header.jsp" />
@@ -63,7 +64,7 @@ width:380px
 			
 			<input type="hidden" name="gameID" value="${gamesVO.gameID}">
 			<h3>${gamesVO.teamAVO.teamName}</h3>
-			<table id="teamA">
+			<table id="teamA" class="table table-bordered">
 				<thead>
 					<tr>
 						<td id="st1">球員姓名</td>
@@ -91,29 +92,29 @@ width:380px
 						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
 						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
 						<td><nobr>${tcVO.playersVO.playerName}</nobr></td>
-						<td><input type="number" name="gameTime" value="0"></td>
-						<td><input type="number" name="twoPoint" value="0"></td>
-						<td><input type="number" name="twoPointShot" value="0"></td>
-						<td><input type="number" name="threePoint" value="0"></td>
-						<td><input type="number" name="threePointShot" value="0"></td>
-						<td><input type="number" name="fg" value="0"></td>
-						<td><input type="number" name="fgShot" value="0"></td>
-						<td><input type="number" name="offreb" value="0"></td>
-						<td><input type="number" name="defreb" value="0"></td>
-						<td><input type="number" name="blocks" value="0"></td>
-						<td><input type="number" name="assist" value="0"></td>
-						<td><input type="number" name="steal" value="0"></td>
-						<td><input type="number" name="turnover" value="0"></td>
-						<td><input type="number" name="personalFouls" value="0"></td>
-						<td><input type="number" name="points" readonly value="0"></td>
-						<td><input type="checkbox" name="startingPlayer"></td>
+						<td><input type="number" class="form-control" name="gameTime" value="0"></td>
+						<td><input type="number" class="form-control" name="twoPoint" value="0"></td>
+						<td><input type="number" class="form-control" name="twoPointShot" value="0"></td>
+						<td><input type="number" class="form-control" name="threePoint" value="0"></td>
+						<td><input type="number" class="form-control" name="threePointShot" value="0"></td>
+						<td><input type="number" class="form-control" name="fg" value="0"></td>
+						<td><input type="number" class="form-control" name="fgShot" value="0"></td>
+						<td><input type="number" class="form-control" name="offreb" value="0"></td>
+						<td><input type="number" class="form-control" name="defreb" value="0"></td>
+						<td><input type="number" class="form-control" name="blocks" value="0"></td>
+						<td><input type="number" class="form-control" name="assist" value="0"></td>
+						<td><input type="number" class="form-control" name="steal" value="0"></td>
+						<td><input type="number" class="form-control" name="turnover" value="0"></td>
+						<td><input type="number" class="form-control" name="personalFouls" value="0"></td>
+						<td><input type="number" class="form-control" name="points" readonly value="0"></td>
+						<td><input type="checkbox" class="form-control" name="startingPlayer"></td>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			
+			<br><br><br><br>
 			<h3>${gamesVO.teamBVO.teamName}</h3>
-			<table id="teamB">
+			<table id="teamB" class="table table-bordered">
 				<thead>
 					<tr>
 						<td id="st1">球員姓名</td>
@@ -141,33 +142,37 @@ width:380px
 						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
 						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
 						<td><nobr>${tcVO.playersVO.playerName}</nobr></td>
-						<td><input type="number" name="gameTime" value="0"></td>
-						<td><input type="number" name="twoPoint" value="0"></td>
-						<td><input type="number" name="twoPointShot" value="0"></td>
-						<td><input type="number" name="threePoint" value="0"></td>
-						<td><input type="number" name="threePointShot" value="0"></td>
-						<td><input type="number" name="fg" value="0"></td>
-						<td><input type="number" name="fgShot" value="0"></td>
-						<td><input type="number" name="offreb" value="0"></td>
-						<td><input type="number" name="defreb" value="0"></td>
-						<td><input type="number" name="blocks" value="0"></td>
-						<td><input type="number" name="assist" value="0"></td>
-						<td><input type="number" name="steal" value="0"></td>
-						<td><input type="number" name="turnover" value="0"></td>
-						<td><input type="number" name="personalFouls" value="0"></td>
-						<td><input type="number" name="points" readonly value="0"></td>
-						<td><input type="checkbox" name="startingPlayer"></td>
+						<td><input type="number" class="form-control" name="gameTime" value="0"></td>
+						<td><input type="number" class="form-control" name="twoPoint" value="0"></td>
+						<td><input type="number" class="form-control" name="twoPointShot" value="0"></td>
+						<td><input type="number" class="form-control" name="threePoint" value="0"></td>
+						<td><input type="number" class="form-control" name="threePointShot" value="0"></td>
+						<td><input type="number" class="form-control" name="fg" value="0"></td>
+						<td><input type="number" class="form-control" name="fgShot" value="0"></td>
+						<td><input type="number" class="form-control" name="offreb" value="0"></td>
+						<td><input type="number" class="form-control" name="defreb" value="0"></td>
+						<td><input type="number" class="form-control" name="blocks" value="0"></td>
+						<td><input type="number" class="form-control" name="assist" value="0"></td>
+						<td><input type="number" class="form-control" name="steal" value="0"></td>
+						<td><input type="number" class="form-control" name="turnover" value="0"></td>
+						<td><input type="number" class="form-control" name="personalFouls" value="0"></td>
+						<td><input type="number" class="form-control" name="points" readonly value="0"></td>
+						<td><input type="checkbox" class="form-control" name="startingPlayer"></td>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do" name="action">
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do" name="action" enctype="multipart/form-data">
 <input type="hidden" name="action" value="from1">
-<input type="file" name="updatefile" style="width:200px">
 <input type="hidden" name="gameID" value="${gamesVO.gameID}">
 <input type="hidden" name="seasonID" value="${gamesVO.groupsVO.seasonVO.seasonID}">
-<input type="submit" value="上傳檔案"></FORM>
+<div>
+<input type="file" name="updatefile" class="col-md-2">
+<input type="submit" value="上傳檔案" class="btn btn-info">
+<input type="submit" value="送出" class="btn btn-success btn-lg col-md-offset-8">
+</div>
+</FORM>
 
 
 			<!-- 網頁內容END -->

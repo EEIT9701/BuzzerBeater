@@ -331,16 +331,16 @@ public class GameMediaServlet extends HttpServlet {
 			GameMediaService gameMediaSvc = new GameMediaService();
 			
 			List<GameMediaVO> gameVideoAmount = gameMediaSvc.getAllVideo();
-			int count = gameVideoAmount.size();
+			int count = (gameVideoAmount.size()+8);
 	
 				
 			String base64 = req.getParameter("gamePhoto");
-			String photo =base64.substring(base64.lastIndexOf(",")+1);
+			String photo = base64.substring(base64.lastIndexOf(",")+1);
 			String mediaType = "video";
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = req.getParameter("descriptions");
 			String tag = req.getParameter("tag")+",";
-			String gameVideo = "00"+(count+1)+".mp4";
+			String gameVideo = "0"+(count+1)+".mp4";
 			
 			
 			//getPart()方法是getParameter()的檔案版
@@ -372,14 +372,7 @@ public class GameMediaServlet extends HttpServlet {
 				
 			}
 			
-			
-		
-			
-			
-
 				/***************************2.開始新增資料***************************************/
-				//System.out.println(gameMediaVO);
-				System.out.println(gameID+","+mediasName+","+gameVideo+","+photo+","+mediaType+","+mediaDate+","+descriptions+","+tag);
 				gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, photo, mediaType, mediaDate, descriptions, tag);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/

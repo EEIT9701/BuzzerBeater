@@ -1,8 +1,10 @@
 package eeit.personaldata.controller;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -226,8 +228,19 @@ public class PersonalDataServlet extends HttpServlet {
 			
 			String seasonID=req.getParameter("seasonID");
 			
-	
+			/*Part updatafile=req.getPart("updatefile");
+			InputStream fie=updatafile.getInputStream();
 			
+			BufferedReader br=new BufferedReader(new InputStreamReader(fie));
+			StringBuilder sb=new StringBuilder();
+			
+			String line;
+			while((line=br.readLine())!=null) {
+				sb.append(line);
+				System.out.println(line);
+			}
+			System.out.println("123");
+			System.out.println(sb);*/
 			
 			
 			jdbc jd=new jdbc();
