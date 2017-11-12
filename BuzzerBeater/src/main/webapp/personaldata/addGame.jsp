@@ -162,7 +162,7 @@ width:380px
 				</tbody>
 			</table>
 			
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do" name="action">
+<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do" name="action" enctype="multipart/form-data">
 <input type="hidden" name="action" value="from1">
 <input type="file" name="updatefile" style="width:200px">
 <input type="hidden" name="gameID" value="${gamesVO.gameID}">

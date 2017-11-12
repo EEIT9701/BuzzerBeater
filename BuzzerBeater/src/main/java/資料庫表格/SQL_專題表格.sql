@@ -412,7 +412,16 @@ insert into TeamComposition values ('3006','70096','22','PG','2016/6/8','');
 insert into TeamComposition values ('3006','70097','21','SG','2016/6/8','');
 insert into TeamComposition values ('3006','70098','11','SF','2016/6/8','');
 insert into TeamComposition values ('3006','70099','15','SF','2016/6/8','');
-
+insert into TeamComposition values ('3007','70100','77','PF','2016/6/8','');
+insert into TeamComposition values ('3007','70101','20','SF','2016/6/8','');
+insert into TeamComposition values ('3007','70102','2','SG','2016/6/8','');
+insert into TeamComposition values ('3007','70103','4','PG','2016/6/8','');
+insert into TeamComposition values ('3007','70104','22','PG','2016/6/8','');
+insert into TeamComposition values ('3008','70105','77','C','2016/6/8','');
+insert into TeamComposition values ('3008','70106','20','SF','2016/6/8','');
+insert into TeamComposition values ('3008','70107','2','SG','2016/6/8','');
+insert into TeamComposition values ('3008','70108','4','SG','2016/6/8','');
+insert into TeamComposition values ('3008','70109','22','PG','2016/6/8','');
 
 
 select * from TeamComposition
@@ -665,7 +674,6 @@ insert into MemberInfo values('javaeeit972017@gmail.com','奧克拉荷馬雷霆','teams
 insert into MemberInfo values('MemphisGrizzlies@ymail.com','曼菲斯灰熊','teams','2016-02-15','3007');
 insert into MemberInfo values('PortlandTrail@ymail.com','波特蘭拓荒者','teams','2016-02-17','3008');
 
-insert into MemberInfo values('javaeeit972017@gmail.com','EEIT9701','teams','2016-02-11','3009');
 insert into MemberInfo values('s988309@gmail.com','EEIT97第一組','admin','2017-06-23','');
 insert into MemberInfo values('frank810618@gmail.com','賴彥誠','admin','2017-09-25','');
 insert into MemberInfo values('qwe020488952@gmail.com','陳品維','admin','2017-09-23','');
