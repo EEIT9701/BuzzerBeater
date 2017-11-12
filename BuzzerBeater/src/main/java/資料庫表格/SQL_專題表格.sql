@@ -413,16 +413,16 @@ insert into TeamComposition values ('3006','70096','22','PG','2016/6/8','');
 insert into TeamComposition values ('3006','70097','21','SG','2016/6/8','');
 insert into TeamComposition values ('3006','70098','11','SF','2016/6/8','');
 insert into TeamComposition values ('3006','70099','15','SF','2016/6/8','');
-insert into TeamComposition values ('3007','70100','77','PF','2016/6/8','');
-insert into TeamComposition values ('3007','70101','20','SF','2016/6/8','');
-insert into TeamComposition values ('3007','70102','2','SG','2016/6/8','');
-insert into TeamComposition values ('3007','70103','4','PG','2016/6/8','');
-insert into TeamComposition values ('3007','70104','22','PG','2016/6/8','');
-insert into TeamComposition values ('3008','70105','77','C','2016/6/8','');
-insert into TeamComposition values ('3008','70106','20','SF','2016/6/8','');
-insert into TeamComposition values ('3008','70107','2','SG','2016/6/8','');
-insert into TeamComposition values ('3008','70108','4','SG','2016/6/8','');
-insert into TeamComposition values ('3008','70109','22','PG','2016/6/8','');
+insert into TeamComposition values ('3007','70104','77','PF','2016/6/8','');
+insert into TeamComposition values ('3007','70106','20','SF','2016/6/8','');
+insert into TeamComposition values ('3007','70108','2','SG','2016/6/8','');
+insert into TeamComposition values ('3007','70109','4','PG','2016/6/8','');
+insert into TeamComposition values ('3007','70117','22','PG','2016/6/8','');
+insert into TeamComposition values ('3008','70118','77','C','2016/6/8','');
+insert into TeamComposition values ('3008','70121','20','SF','2016/6/8','');
+insert into TeamComposition values ('3008','70122','2','SG','2016/6/8','');
+insert into TeamComposition values ('3008','70125','4','SG','2016/6/8','');
+insert into TeamComposition values ('3008','70126','22','PG','2016/6/8','');
 
 
 select * from TeamComposition
