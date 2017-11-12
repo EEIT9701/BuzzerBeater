@@ -61,7 +61,7 @@
 					</tr>
 				</tbody>
 			</table>
-			
+			<br><br>
 			<input type="hidden" name="gameID" value="${gamesVO.gameID}">
 			<h3>${gamesVO.teamAVO.teamName}</h3>
 			<table id="teamA" class="table table-bordered">
@@ -112,7 +112,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<br><br><br><br>
+			<br><br>
 			<h3>${gamesVO.teamBVO.teamName}</h3>
 			<table id="teamB" class="table table-bordered">
 				<thead>
@@ -163,16 +163,16 @@
 				</tbody>
 			</table>
 			
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do" name="action" enctype="multipart/form-data">
-<input type="hidden" name="action" value="from1">
-<input type="hidden" name="gameID" value="${gamesVO.gameID}">
-<input type="hidden" name="seasonID" value="${gamesVO.groupsVO.seasonVO.seasonID}">
-<div>
-<input type="file" name="updatefile" class="col-md-2">
-<input type="submit" value="上傳檔案" class="btn btn-info">
-<input type="submit" value="送出" class="btn btn-success btn-lg col-md-offset-8">
-</div>
-</FORM>
+			<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do">
+				<input type="hidden" name="action" value="ADD_FAKE_GAME">
+				<input type="hidden" name="gameID" value="${gamesVO.gameID}">
+				<input type="hidden" name="seasonID" value="${gamesVO.groupsVO.seasonVO.seasonID}">
+				<div>
+					<input type="file" name="updatefile" class="col-md-2">
+					<input type="submit" value="上傳檔案" class="btn btn-info">
+					<input type="button" value="送出" class="btn btn-success btn-lg col-md-offset-8">
+				</div>
+			</FORM>
 
 
 			<!-- 網頁內容END -->

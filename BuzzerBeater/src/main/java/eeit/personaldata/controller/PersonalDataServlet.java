@@ -1,14 +1,9 @@
 package eeit.personaldata.controller;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +20,6 @@ import eeit.personaldata.model.PersonalDataService;
 import eeit.personaldata.model.PersonalDataVO;
 import eeit.players.model.PlayerService;
 import eeit.players.model.PlayersVO;
-import eeit.season.model.SeasonService;
 
 @WebServlet("/PersonalData.do")
 public class PersonalDataServlet extends HttpServlet {
@@ -222,14 +216,14 @@ public class PersonalDataServlet extends HttpServlet {
             pSvc.delete(personalDataVO);			
 		
 		}
-		if ("from1".equals(action)) {
+		if ("ADD_FAKE_GAME".equals(action)) {
 			 String gameID=req.getParameter("gameID");
 			Integer game=Integer.valueOf(gameID);
 			
 			String seasonID=req.getParameter("seasonID");
 			
-			/*Part updatafile=req.getPart("updatefile");
-			InputStream fie=updatafile.getInputStream();
+			Part updatafile=req.getPart("updatefile");
+			/*InputStream fie=updatafile.getInputStream();
 			
 			BufferedReader br=new BufferedReader(new InputStreamReader(fie));
 			StringBuilder sb=new StringBuilder();
@@ -246,9 +240,7 @@ public class PersonalDataServlet extends HttpServlet {
 			jdbc jd=new jdbc();
 		    jd.main(game);
 		    
-		    String url ="/groups/groupList.jsp?seasonID="+seasonID;
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, resp);
+		    resp.sendRedirect(req.getContextPath()+"/groups/groupList.jsp?seasonID="+seasonID);
 		}
 		
 		
