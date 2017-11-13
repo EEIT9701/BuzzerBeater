@@ -250,7 +250,6 @@ public class GameMediaServlet extends HttpServlet {
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = descriptions1;
 			String tag = tag1;
-			System.out.println(tag);	
 				
 				
 			gameMediaSvc.updateGameMedia(gameID, mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag);				
