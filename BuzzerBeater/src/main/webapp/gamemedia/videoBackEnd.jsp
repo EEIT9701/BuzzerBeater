@@ -224,10 +224,13 @@ video::-webkit-media-controls-panel {
 							</div>
 							<div class="modal-body">
 								<div class="row">
+									<h5 style="margin-left:18px">請依序選擇賽季、分組及賽事</h5>
+								</div>
+								<div class="row">
 									<!--連鎖查詢功能(1)賽季-->
 									<div class="col-md-3">
 										<select id="seasonlist" name="season1">
-											<option selected>請選擇</option> <!--預設選項-->
+											<option id="seasondefault" selected>請選擇</option> <!--預設選項-->
 											<!--賽季選擇寫死，由EL生成-->
     										<c:forEach var="list" items="${list}">
     											<option value="${list.seasonID}">${list.seasonName}</option>
@@ -502,7 +505,6 @@ video::-webkit-media-controls-panel {
 	  			var season = null;
 	  			var group = null;
 	  			
-	  		
 	  			
 	  			$('#seasonlist').change(function(){              //連鎖查詢(2)，藉由選擇完(1)以後觸發
 	  				season = $('select[name="season1"]').val();  //抓到select標籤中含有name=season1的值
