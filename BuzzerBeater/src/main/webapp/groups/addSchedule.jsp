@@ -64,11 +64,11 @@
             		<span>分組列表</span>
             	</a>
         	</span>&gt;
-        	<span><span>新增賽程</span></span>
+        	<span><span>自動賽程安排系統</span></span>
     	</div>
     	<!--上層導覽列(結束) -->
 			<!-- 網頁內容 -->
-			<h2>新增賽程</h2>
+			<h2>自動賽程安排系統</h2>
 				<table class="table table-bordered">
 		            <thead style="background-color:#d62d67;color:#e9e9e9;">
 			            <tr>
@@ -122,7 +122,17 @@
 			        </tbody>
 			    </table>
 			    
-			    <p>有 ${groupsVO.currentTeams} 隊，循環賽共需打 ${gamesNeeded} 場比賽</p>
+			    <div class="form-group row">
+			    	<div class="col-md-2 col-md-offset-1">
+					    <select class="form-control" id="gameSelect">
+					    	<option>請選擇賽制</option>
+					    	<option>單淘汰賽</option>
+					    	<option>雙淘汰賽</option>
+					    	<option>循環賽</option>
+					    </select>
+				    </div>
+				    <span id="gamesNeeded" style="font-size:18px"></span>
+			    </div>
 			    
 			    <form action="<%=request.getContextPath()%>/Groups.do" method="post" name="addLocation">
 			    	<input type="hidden" name="action" value="SPLIT_LOCATIONS">
@@ -253,6 +263,10 @@
         $("input:submit").click(function () {
             $(window).unbind('beforeunload');
         });
+     	
+     	$('#gameSelect').change(function(){
+     		$('#gamesNeeded').text('需要安排 ${gamesNeeded} 場賽事');
+     	})
 		
 		// 讀取頁面時自動取得
 		loadList();
