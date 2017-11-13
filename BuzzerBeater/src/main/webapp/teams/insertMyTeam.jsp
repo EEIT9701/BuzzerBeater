@@ -311,18 +311,19 @@
 								nextBtn();
 
 								$("#insert").on("click", function () {
-									$("#file").val('');
-									$("#result").attr('src', '<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png');
-									$('#playerName').attr('value', '');
-									$("#id").attr('value', '');
-									$("#playerNo").attr('value', '');
-									$("#playerRole").attr('value', '');
-									$("#height").attr('value', '');
-									$("#weights").attr('value', '');
-									$("#birthday").attr('value', '');
-									$("#nationality").attr('value', '');
-									console.log(count);
 									file1();
+										$("#file").val("");
+										$("#result").attr('src', '<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png');
+										$('#playerName').val("");
+										$("#id").val("");
+										$("#playerNo").val("");
+										$("#playerRole").val("");
+										$("#height").val("");
+										$("#weights").val("");
+										$("#birthday").val("");
+										$("#nationality").val("");
+									console.log(count);
+									
 								})
 								$("#insertConfirm").on("click", function () {
 									count++;
@@ -350,6 +351,7 @@
 										'birthday': birthday,
 										'nationality': nationality
 									}, function (datas) {})
+									
 									var cell2 = $('<td></td>').html('<img style = "width:50px" src="' + photo + '">');
 									var cell3 = $('<td></td>').text(playerName);
 									var cell4 = $('<td></td>').text(id);
@@ -559,7 +561,7 @@
 						}
 
 						function file1() {
-
+							
 							$("#file").change(function (e) {
 
 								var img = e.target.files[0];
@@ -574,85 +576,75 @@
 
 								});
 								console.log(count);
-								if (count == 0) {
-									$('#playerName').attr('value', '朱奕叡');
-									$("#id").attr('value', 'F123456789');
-									$("#playerNo").attr('value', '9');
-									$("#playerRole").attr('value', '');
-									$("#height").attr('value', '171');
-									$("#weights").attr('value', '65');
-									$("#birthday").attr('value', '1991-12-26');
-									$("#nationality").attr('value', 'roc');
-
-								}
 								if (count == 1) {
-									$('#playerName').attr('value', '賴彥誠');
-									$("#id").attr('value', 'F123456788');
-									$("#playerNo").attr('value', '19');
-									$("#playerRole").attr('value', 'PG');
-									$("#height").attr('value', '171');
-									$("#weights").attr('value', '65');
-									$("#birthday").attr('value', '1991-12-27');
-									$("#nationality").attr('value', 'roc');
+									
+									$('#playerName').val('賴彥誠');
+									$("#id").val('F123456788');
+									$("#playerNo").val('19');
+									$("#playerRole").val('PG');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
 
 								}
 								if (count == 2) {
-									$('#playerName').attr('value', '張紘瑋');
-									$("#id").attr('value', 'F123456788');
-									$("#playerNo").attr('value', '19');
-									$("#playerRole").attr('value', 'PG');
-									$("#height").attr('value', '171');
-									$("#weights").attr('value', '65');
-									$("#birthday").attr('value', '1991-12-27');
-									$("#nationality").attr('value', 'roc');
+									$('#playerName').val('張紘瑋');
+									$("#id").val('F123456788');
+									$("#playerNo").val('18');
+									$("#playerRole").val('SG');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
 
 								}
 								if (count == 3) {
-									$('#playerName').attr('value', '何其偉');
-									$("#id").attr('value', 'F123456788');
-									$("#playerNo").attr('value', '19');
-									$("#playerRole").attr('value', 'PG');
-									$("#height").attr('value', '171');
-									$("#weights").attr('value', '65');
-									$("#birthday").attr('value', '1991-12-27');
-									$("#nationality").attr('value', 'roc');
+									$('#playerName').val('何其偉');
+									$("#id").val('F123456788');
+									$("#playerNo").val('30');
+									$("#playerRole").val('PF');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
 
 								}
 								if (count == 4) {
-									$('#playerName').attr('value', '陳品維');
-									$("#id").attr('value', 'F123456788');
-									$("#playerNo").attr('value', '19');
-									$("#playerRole").attr('value', 'PG');
-									$("#height").attr('value', '171');
-									$("#weights").attr('value', '65');
-									$("#birthday").attr('value', '1991-12-27');
-									$("#nationality").attr('value', 'roc');
+									$('#playerName').val('陳品維');
+									$("#id").val('F123456788');
+									$("#playerNo").val('19');
+									$("#playerRole").val('C');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
 
 								}
 								if (count == 5) {
-									$('#playerName').attr('value', '李紹群');
-									$("#id").attr('value', 'F123456788');
-									$("#playerNo").attr('value', '19');
-									$("#playerRole").attr('value', 'PG');
-									$("#height").attr('value', '171');
-									$("#weights").attr('value', '65');
-									$("#birthday").attr('value', '1991-12-27');
-									$("#nationality").attr('value', 'roc');
+									$('#playerName').val('李紹群');
+									$("#id").val('F123456788');
+									$("#playerNo").val('19');
+									$("#playerRole").val('PG');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
 
 								}
-								if (count == 7) {
-									$('#playerName').attr('value', '高承桓');
-									$("#id").attr('value', 'F123456788');
-									$("#playerNo").attr('value', '19');
-									$("#playerRole").attr('value', 'PG');
-									$("#height").attr('value', '171');
-									$("#weights").attr('value', '65');
-									$("#birthday").attr('value', '1991-12-27');
-									$("#nationality").attr('value', 'roc');
+								if (count == 6) {
+									$('#playerName').val('高承桓');
+									$("#id").val('F123456788');
+									$("#playerNo").val('19');
+									$("#playerRole").val('PG');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
 
 								}
 								
-
+								
 							});
 
 						}
