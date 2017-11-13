@@ -18,12 +18,30 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
 
 <jsp:include page="/header_css.jsp" />
-
+<jsp:include page="/font_css.jsp" />
 <style>
 #img1 {
 	width: 55px;
 	height: 40px;
 	margin: auto;
+}
+thead{
+	background-color: #d62d67;
+	color: #e9e9e9;
+}
+th{
+text-align:center;
+}
+#pathWay {
+	color: #666;
+	height: 28px;
+	line-height: 28px;
+	border-bottom: 1px solid #c0b7b7;
+	text-indent: 5px;
+	font-size: 18px;
+	font-weight: normal;
+	margin-bottom: 10px;
+	font-family:微軟正黑體;
 }
 </style>
 </head>
@@ -34,7 +52,19 @@
 	<!--主文(開始)-->
 	<div class="container">
 		<div class="jumbotron">
-		<h2 align="center">審核繳費紀錄</h2>
+		
+		<!--上層導覽列(開始) -->
+		<div id="pathWay">
+        	<span>
+            	<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
+            		<span>使用者功能</span>
+            	</a>
+        	</span>&gt;
+        	<span><span>繳費</span></span>
+    	</div>
+    	<!--上層導覽列(結束) -->
+		
+		<h2 align="center">各球隊繳費紀錄</h2>
 			<!--表格(開始)-->
 			<!--****************-->
 			<!-- 第一列(開始) -->
@@ -44,7 +74,7 @@
 					<table class="table table-bordered" >
 						<thead>
 							<tr align='center' valign='middle'>
-								<th>隊伍名稱</th>
+								<th >隊伍名稱</th>
 								<th>報名分組</th>
 								<th>報名時間</th>
 

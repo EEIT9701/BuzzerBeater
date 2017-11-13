@@ -6,6 +6,7 @@
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService"/>
 <jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService"/>
 <jsp:useBean id="gamesSvc" scope="page" class="eeit.games.model.GamesService"/>
+<%-- <jsp:useBean id="groupsSvc" scope="page" class="eeit.groups.model.GroupsService"/> --%>
 
 <title>Buzzer Beater</title>
 <!--標頭(開始)-->
