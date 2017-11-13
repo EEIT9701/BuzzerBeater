@@ -400,9 +400,10 @@ $("#insertAll").on("click", function () {
 			var cell5 = $('<td></td>').text(player.playerRole);
 			var cell6 = $('<td></td>').text(player.height);
 			var cell7 = $('<td></td>').text(player.weights);
-			var cell8 = $('<td></td>').text(player.nationality);
+			var cell8 = $('<td></td>').text(player.weights);
+			var cell9 = $('<td></td>').text(player.nationality);
 			var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
-				cell7, cell8
+				cell7, cell8, cell9
 			]);
 			docFrag.append(row);
 			tb.append(docFrag);

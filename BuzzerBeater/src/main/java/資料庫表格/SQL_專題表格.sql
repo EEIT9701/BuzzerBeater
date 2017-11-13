@@ -273,7 +273,7 @@ insert into Teams values('70005','UtahJazz@ymail.com','0915125568','105','猶他爵
 insert into Teams values('70006','OklahomaCityThunder@ymail.com','0916125568','106','奧克拉荷馬市雷霆','Billy Donovan','Clay Bennett','','','','','');
 insert into Teams values('70007','MemphisGrizzlies@ymail.com','0917125568','107','曼斐斯灰熊','David Fizdale','Robert Pera','','','','','');
 insert into Teams values('70008','PortlandTrail@ymail.com','0917125568','108','波特蘭拓荒者','Terry Stotts','Paul Gardner Allen','','','','','');
-insert into Teams values('70136','javaeeit972017@gmail.com','0266316666','','EEIT97','Mark','資策會','','0','0','0','提供多一點礦泉水');
+insert into Teams values('70136','javaeeit972017@gmail.com','0266316666',null,'EEIT97','Mark','資策會','','0','0','0','提供多一點礦泉水');
 
 
 select * from Teams
@@ -690,7 +690,7 @@ insert into MemberInfo values('HoustonRockets@ymail.com','休士頓火箭','teams','2
 insert into MemberInfo values('LosAngelesClippers@ymail.com','洛杉磯快艇','teams','2016-01-17','3004');
 
 insert into MemberInfo values('UtahJazz@ymail.com','猶他爵士','teams','2016-02-01','3005');
-insert into MemberInfo values('OKC@gmail.com','奧克拉荷馬雷霆','teams','2016-02-11','3006');
+insert into MemberInfo values('OklahomaCityThunder@ymail.com','奧克拉荷馬雷霆','teams','2016-02-11','3006');
 insert into MemberInfo values('MemphisGrizzlies@ymail.com','曼菲斯灰熊','teams','2016-02-15','3007');
 insert into MemberInfo values('PortlandTrail@ymail.com','波特蘭拓荒者','teams','2016-02-17','3008');
 insert into MemberInfo values('javaeeit972017@gmail.com','EEIT97','teams','2016-02-11','3009');
