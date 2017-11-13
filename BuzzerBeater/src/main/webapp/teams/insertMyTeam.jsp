@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-		<%@ page import="java.util.*"%>
-			<%@ page import="eeit.teams.model.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="eeit.teams.model.*"%>
 				<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 				<html>
 
@@ -262,18 +261,18 @@
 									
 									
 									
-									$.post('<%=request.getContextPath()%>/Teams.do', {
-										'action': 'buildMyTeam',
-										'teamBadge': teamBadge,
-										'teamName': teamName,
-										'captainPhone': captainPhone,
-										'captainEmail': captainEmail,
-										'coachName': coachName,
-										'bossName': bossName,
-										'remarks': remarks
-									}, function (datas) {
+<%-- 									$.post('<%=request.getContextPath()%>/Teams.do', { --%>
+// 										'action': 'buildMyTeam',
+// 										'teamBadge': teamBadge,
+// 										'teamName': teamName,
+// 										'captainPhone': captainPhone,
+// 										'captainEmail': captainEmail,
+// 										'coachName': coachName,
+// 										'bossName': bossName,
+// 										'remarks': remarks
+// 									}, function (datas) {
 
-									});
+// 									});
 									$step.nextStep();
 									$index.text($step.getIndex());
 									loadTable();
@@ -286,8 +285,10 @@
 								var docFrag = $(document.createDocumentFragment());
 								var tab = $('<table class="table table-bordered" id="playerTable"></table>');
 								var th = $('<thead></thead>');
+								var tb = $('<tbody></tbody>');
 								var cell1 = $(
-									'<button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button>');
+									'<div class="col-md-12" style="margin-bottom:30px"><div class="col-md-4"><button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button></div><div class="col-md-4"></div><div class="col-md-4"><div class="col-md-4"><input type="file"></div><div class="col-md-4"></div><button class="btn btn-warning" id="insertAll">一鍵新增</button></div></div><div></div>');
+								
 								var cell2 = $('<th></th>').text("球員照片");
 								var cell3 = $('<th></th>').text("球員姓名");
 								var cell4 = $('<th></th>').text("身分證ID");
@@ -308,28 +309,27 @@
 								tab.append(th);
 								bt.append([cell1, tab]);
 								btns.append([cell11, cell12, cell13]);
+								
 								prevBtn();
 								nextBtn();
 
 								$("#insert").on("click", function () {
-									$("#file").val('');
-									$("#result").attr('src', '<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png');
-									$('#playerName').attr('value', '');
-									$("#id").attr('value', '');
-									$("#playerNo").attr('value', '');
-									$("#playerRole").attr('value', '');
-									$("#height").attr('value', '');
-									$("#weights").attr('value', '');
-									$("#birthday").attr('value', '');
-									$("#nationality").attr('value', '');
-									console.log(count);
 									file1();
+										$("#file").val("");
+										$("#result").attr('src', '<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png');
+										$('#playerName').val("");
+										$("#id").val("");
+										$("#playerNo").val("");
+										$("#playerRole").val("");
+										$("#height").val("");
+										$("#weights").val("");
+										$("#birthday").val("");
+										$("#nationality").val("");
+									console.log(count);
+									
 								})
 								$("#insertConfirm").on("click", function () {
-									count++;
-									console.log(count);
 									var docFrag = $(document.createDocumentFragment());
-									var tb = $('<tbody></tbody>');
 									var photo = $("#result").attr('src');
 									var playerName = $("#playerName").val();
 									var id = $("#id").val();
@@ -339,18 +339,19 @@
 									var weights = $("#weights").val();
 									var birthday = $("#birthday").val();
 									var nationality = $("#nationality").val();
-									$.post('<%=request.getContextPath()%>/Players.do', {
-										'action': 'buildPlayer',
-										'photo': photo,
-										'playerName': playerName,
-										'id': id,
-										'playerNo': playerNo,
-										'playerRole': playerRole,
-										'height': height,
-										'weights': weights,
-										'birthday': birthday,
-										'nationality': nationality
-									}, function (datas) {})
+<%-- 									$.post('<%=request.getContextPath()%>/Players.do', { --%>
+// 										'action': 'buildPlayer',
+// 										'photo': photo,
+// 										'playerName': playerName,
+// 										'id': id,
+// 										'playerNo': playerNo,
+// 										'playerRole': playerRole,
+// 										'height': height,
+// 										'weights': weights,
+// 										'birthday': birthday,
+// 										'nationality': nationality
+// 									}, function (datas) {})
+									
 									var cell2 = $('<td></td>').html('<img style = "width:50px" src="' + photo + '">');
 									var cell3 = $('<td></td>').text(playerName);
 									var cell4 = $('<td></td>').text(id);
@@ -384,6 +385,34 @@
 									});
 
 								});
+$("#insertAll").on("click", function () {
+	tb.empty;
+	
+	$.getJSON('<%=request.getContextPath()%>/Teams.do', {
+		'action': 'findMyTeamPlayer'
+	}, function (data) {
+		$.each(data, function (index, player) {
+			var cell1 = $('<td></td>').html('<img style = "width:50px" src="data:image/png;base64,' + player.photo +
+				'">')
+			var cell2 = $('<td></td>').text(player.playerName);
+			var cell3 = $('<td></td>').text(player.id);
+			var cell4 = $('<td></td>').text(player.playerNo);
+			var cell5 = $('<td></td>').text(player.playerRole);
+			var cell6 = $('<td></td>').text(player.height);
+			var cell7 = $('<td></td>').text(player.weights);
+			var cell8 = $('<td></td>').text(player.weights);
+			var cell9 = $('<td></td>').text(player.nationality);
+			var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
+				cell7, cell8, cell9
+			]);
+			docFrag.append(row);
+			tb.append(docFrag);
+
+		})
+		tab.append(tb);
+
+	});
+});
 
 
 							}
@@ -560,7 +589,7 @@
 						}
 
 						function file1() {
-
+							
 							$("#file").change(function (e) {
 
 								var img = e.target.files[0];
@@ -575,29 +604,75 @@
 
 								});
 								console.log(count);
-								if (count == 0) {
-									$('#playerName').attr('value', '朱奕叡');
-									$("#id").attr('value', 'F123456789');
-									$("#playerNo").attr('value', '9');
-									$("#playerRole").attr('value', '');
-									$("#height").attr('value', '171');
-									$("#weights").attr('value', '65');
-									$("#birthday").attr('value', '1991-12-26');
-									$("#nationality").attr('value', 'roc');
-
-								}
 								if (count == 1) {
-									$('#playerName').attr('value', '賴彥誠');
-									$("#id").attr('value', 'F123456788');
-									$("#playerNo").attr('value', '19');
-									$("#playerRole").attr('value', 'PG');
-									$("#height").attr('value', '171');
-									$("#weights").attr('value', '65');
-									$("#birthday").attr('value', '1991-12-27');
-									$("#nationality").attr('value', 'roc');
+									
+									$('#playerName').val('賴彥誠');
+									$("#id").val('F123456788');
+									$("#playerNo").val('19');
+									$("#playerRole").val('PG');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
 
 								}
+								if (count == 2) {
+									$('#playerName').val('張紘瑋');
+									$("#id").val('F123456788');
+									$("#playerNo").val('18');
+									$("#playerRole").val('SG');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
 
+								}
+								if (count == 3) {
+									$('#playerName').val('何其偉');
+									$("#id").val('F123456788');
+									$("#playerNo").val('30');
+									$("#playerRole").val('PF');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
+
+								}
+								if (count == 4) {
+									$('#playerName').val('陳品維');
+									$("#id").val('F123456788');
+									$("#playerNo").val('19');
+									$("#playerRole").val('C');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
+
+								}
+								if (count == 5) {
+									$('#playerName').val('李紹群');
+									$("#id").val('F123456788');
+									$("#playerNo").val('19');
+									$("#playerRole").val('PG');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
+
+								}
+								if (count == 6) {
+									$('#playerName').val('高承桓');
+									$("#id").val('F123456788');
+									$("#playerNo").val('19');
+									$("#playerRole").val('PG');
+									$("#height").val('171');
+									$("#weights").val('65');
+									$("#birthday").val('1991-12-27');
+									$("#nationality").val('roc');
+
+								}
+								
+								
 							});
 
 						}

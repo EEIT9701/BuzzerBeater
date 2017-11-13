@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -51,8 +50,7 @@ th {
 	font-family: 微軟正黑體;
 }
 </style>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.1.1.min.js"></script>
 </head>
 
 <body>
@@ -267,7 +265,7 @@ th {
 
 	<jsp:include page="/footer_css.jsp" />
 	<!--滑鼠移入，顯示表格(jquery設定"2-2")-->
-	<script src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
+<%-- 	<script src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script> --%>
 	<script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
 	<script>
 		$(function() {

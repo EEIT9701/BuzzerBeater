@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -27,7 +26,6 @@ import eeit.groupreg.model.GroupRegService;
 import eeit.groupreg.model.GroupRegVO;
 import eeit.groups.model.GroupsService;
 import eeit.groups.model.GroupsVO;
-import eeit.season.model.SeasonService;
 import eeit.teams.model.TeamsService;
 
 @WebServlet("/Groups.do")
@@ -50,6 +48,17 @@ public class GroupsServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 
+		// SPLIT_LOCATIONS 分割時間地點資料
+		// GET_TIMELIST_JSON 取得存在session內的時間地點資料
+		// REMOVE_TEMP_LIST 移除存在session內的時間地點資料
+		// REMOVE_GROUP_TEMP 移除存在session內的分組
+		// CHECK_GROUP 在session內加入分組
+		// ADD_GROUP 新增分組
+		// GET_GAMES 前往賽事
+		// DELETE_GROUP 刪除分組
+		// MAKE_SCHEDULE 根據暫存時間地點資料安排賽程
+
+		/********************************************************************/
 		if ("SPLIT_LOCATIONS".equals(action)) {
 			Integer locationID = new Integer(request.getParameter("locationID").split(",")[0]);
 			String locationName = request.getParameter("locationID").split(",")[1];
@@ -93,6 +102,7 @@ public class GroupsServlet extends HttpServlet {
 			session.setAttribute("timeList", list);
 		}
 
+		/********************************************************************/
 		if ("GET_TIMELIST_JSON".equals(action)) {
 			HttpSession session = request.getSession();
 			List<Map<String, String>> timeList = (List<Map<String, String>>) session.getAttribute("timeList");
@@ -104,6 +114,7 @@ public class GroupsServlet extends HttpServlet {
 			response.getWriter().println(jsonString);
 		}
 
+		/********************************************************************/
 		if ("REMOVE_TEMP_LIST".equals(action)) {
 			HttpSession session = request.getSession();
 			List<Map<String, String>> timeList = (List<Map<String, String>>) session.getAttribute("timeList");
@@ -113,6 +124,7 @@ public class GroupsServlet extends HttpServlet {
 			session.setAttribute("timeList", timeList);
 		}
 
+		/********************************************************************/
 		if ("REMOVE_GROUP_TEMP".equals(action)) {
 			// 取得groupsSet Session
 			HttpSession session = request.getSession();
@@ -139,6 +151,7 @@ public class GroupsServlet extends HttpServlet {
 			successView.forward(request, response);
 		}
 
+		/********************************************************************/
 		if ("CHECK_GROUP".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -226,6 +239,7 @@ public class GroupsServlet extends HttpServlet {
 			}
 		}
 
+		/********************************************************************/
 		if ("ADD_GROUP".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -285,7 +299,8 @@ public class GroupsServlet extends HttpServlet {
 
 				if (!errorMsgs.isEmpty()) {
 					request.setAttribute("groupVO", groupsVO);
-					RequestDispatcher failView = request.getRequestDispatcher("/groups/groupList_back.jsp?seasonID=" + seasonID);
+					RequestDispatcher failView = request
+							.getRequestDispatcher("/groups/groupList_back.jsp?seasonID=" + seasonID);
 					failView.forward(request, response);
 					return;
 				}
@@ -298,11 +313,13 @@ public class GroupsServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				request.setAttribute("groupVO", groupsVO);
-				RequestDispatcher failView = request.getRequestDispatcher("/groups/groupList_back.jsp?seasonID=" + seasonID);
+				RequestDispatcher failView = request
+						.getRequestDispatcher("/groups/groupList_back.jsp?seasonID=" + seasonID);
 				failView.forward(request, response);
 			}
 		}
 
+		/********************************************************************/
 		if ("GET_GAMES".equals(action)) {
 			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
 			GroupsService gSvc = new GroupsService();
@@ -312,6 +329,7 @@ public class GroupsServlet extends HttpServlet {
 			successView.forward(request, response);
 		}
 
+		/********************************************************************/
 		if ("DELETE_GROUP".equals(action)) {
 			GroupsService svc = new GroupsService();
 			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
@@ -321,6 +339,7 @@ public class GroupsServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/groups/groupList_back.jsp?seasonID=" + seasonID);
 		}
 
+		/********************************************************************/
 		if ("ADD_SCHEDULE".equals(action)) {
 			Integer groupID = Integer.parseInt(request.getParameter("groupID"));
 			GroupsService gsvc = new GroupsService();
@@ -328,68 +347,16 @@ public class GroupsServlet extends HttpServlet {
 			Integer currentTeams = groupsVO.getCurrentTeams();
 			Integer gamesNeeded = (currentTeams * (currentTeams - 1)) / 2;
 
-			request.getSession().removeAttribute("timeList");
+			HttpSession session = request.getSession();
+			session.removeAttribute("timeList");
 
-			request.getSession().setAttribute("groupsVO", groupsVO);
-			request.getSession().setAttribute("gamesNeeded", gamesNeeded);
+			session.setAttribute("groupsVO", groupsVO);
+			session.setAttribute("gamesNeeded", gamesNeeded);
 
 			response.sendRedirect(request.getContextPath() + "/groups/addSchedule.jsp");
 		}
 
-		if ("SPLIT_LOCATION".equals(action)) {
-			HttpSession session = request.getSession();
-			Integer locationID = new Integer(request.getParameter("locationID").split(",")[0]);
-			String locationName = request.getParameter("locationID").split(",")[1];
-			Timestamp beginDate = Timestamp.valueOf(request.getParameter("beginDate"));
-			Timestamp endDate = Timestamp.valueOf(request.getParameter("endDate"));
-
-			Integer timeunit = Integer.parseInt(request.getParameter("timeUnit"));
-			long timeUnit = TimeUnit.MINUTES.convert(timeunit, TimeUnit.MINUTES);
-
-			// 如果session裡面原本沒有此list則創建一個
-			List<Map<String, Object>> list = null;
-			if ((list = (List<Map<String, Object>>) session.getAttribute("timeList")) == null) {
-				list = new ArrayList<Map<String, Object>>();
-			}
-
-			// 拆解時間並加入
-			Map<String, Object> map = null;
-			Timestamp beginTime = beginDate;
-			Timestamp endTime = null;
-			while (true) {
-				endTime = new Timestamp(beginTime.getTime() + timeUnit * 60 * 1000);
-				if (endTime.after(endDate)) {
-					break;
-				}
-
-				map = new HashMap<String, Object>();
-				map.put("beginTime", beginTime);
-				map.put("endTime", endTime);
-				map.put("locationID", locationID);
-				map.put("locationName", locationName);
-				map.put("timeUnit", timeunit);
-				list.add(map);
-				beginTime = endTime;
-			}
-
-			// 放入session並轉交
-			session.setAttribute("timeList", list);
-			request.getRequestDispatcher("/groups/addSchedule.jsp").forward(request, response);
-		}
-
-		if ("REMOVE_TIMELIST".equals(action)) {
-			HttpSession session = request.getSession();
-			int index = Integer.valueOf(request.getParameter("index"));
-
-			List<Map<String, String>> timeList = (List<Map<String, String>>) session.getAttribute("timeList");
-
-			timeList.remove(index);
-
-			session.removeAttribute("timeList");
-			session.setAttribute("timeList", timeList);
-			request.getRequestDispatcher("/groups/addSchedule.jsp").forward(request, response);
-		}
-
+		/********************************************************************/
 		if ("MAKE_SCHEDULE".equals(action)) {
 			Integer groupID = Integer.valueOf(request.getParameter("groupID"));
 			HttpSession session = request.getSession();

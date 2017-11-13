@@ -206,6 +206,15 @@ insert into Players values ('Mason Plumlee','A122968760','211 ','111 ','1990/3/5
 insert into Players values ('Tim Quarterman','A122968761','198 ','89 ','1994/10/27','us',null);
 insert into Players values ('Evan Turner','A122968762','201 ','100 ','1988/10/27','us',null);
 insert into Players values ('Noah Vonleh','A122968763','208 ','109 ','1995/8/24','us',null);
+insert into Players values ('朱奕叡','A123456789','171 ','65 ','1991/12/26','roc',null);
+insert into Players values ('賴彥誠','A123456788','208 ','109 ','1995/8/24','us',null);
+insert into Players values ('張紘瑋','A123456787','208 ','109 ','1995/8/24','us',null);
+insert into Players values ('何其偉','A123456786','208 ','109 ','1995/8/24','us',null);
+insert into Players values ('陳品維','A123456785','208 ','109 ','1995/8/24','us',null);
+insert into Players values ('李紹群','A123456784','208 ','109 ','1995/8/24','us',null);
+insert into Players values ('高承桓','A123456783','208 ','109 ','1995/8/24','us',null);
+insert into Players values ('櫻木花道','A123456782','208 ','109 ','1995/8/24','us',null);
+insert into Players values ('流川風','A123456781','208 ','109 ','1995/8/24','us',null);
  
  select * from Players 
  GO
@@ -264,7 +273,7 @@ insert into Teams values('70005','UtahJazz@ymail.com','0915125568','105','猶他爵
 insert into Teams values('70006','OklahomaCityThunder@ymail.com','0916125568','106','奧克拉荷馬市雷霆','Billy Donovan','Clay Bennett','','','','','');
 insert into Teams values('70007','MemphisGrizzlies@ymail.com','0917125568','107','曼斐斯灰熊','David Fizdale','Robert Pera','','','','','');
 insert into Teams values('70008','PortlandTrail@ymail.com','0917125568','108','波特蘭拓荒者','Terry Stotts','Paul Gardner Allen','','','','','');
---insert into Teams values('70009','','','108','EEIT97','','','','','','','');
+insert into Teams values('70136','javaeeit972017@gmail.com','0266316666',null,'EEIT97','Mark','資策會','','0','0','0','提供多一點礦泉水');
 
 
 select * from Teams
@@ -423,6 +432,15 @@ insert into TeamComposition values ('3008','70121','20','SF','2016/6/8','');
 insert into TeamComposition values ('3008','70122','2','SG','2016/6/8','');
 insert into TeamComposition values ('3008','70125','4','SG','2016/6/8','');
 insert into TeamComposition values ('3008','70126','22','PG','2016/6/8','');
+insert into TeamComposition values ('3009','70133','9','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70134','19','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70135','18','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70136','30','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70137','22','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70138','22','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70139','22','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70140','22','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70141','22','PG','2017/11/17','');
 
 
 select * from TeamComposition
@@ -637,6 +655,7 @@ insert into GameMedia values('4003','保羅船長過人','003.mp4','','video','2016-10
 insert into GameMedia values('4004','Leonard 受傷','004.mp4','','video','2016-10-26','Leonard 踩到Zaza的腳翻船','馬刺, Leonard,翻船,');
 insert into GameMedia values('4001','Curry搞笑走步','005.mp4','','video','2016-10-29','Curry搞笑大走步','勇士,Curry,走步,');
 insert into GameMedia values('4002','哈登飛身爆扣','006.mp4','','video','2016-10-31','大鬍子小飛俠','火箭,哈登,爆扣,');
+insert into GameMedia values('4003','Durant 扣球被犯規','007.mp4','','video','2016-11-01','KD扣球被犯規','勇士,Durant,犯規,');
 insert into GameMedia values('4001','Stephen Curry','','','photo','2016-10-25','Curry手插腰','勇士,Curry,吐護齒套,');
 insert into GameMedia values('4002','James Harden','','','photo','2016-10-25','炸彈超人哈登','火箭,哈登,炸彈超人,');
 insert into GameMedia values('4003','Chris Paul','','','photo','2016-10-25','保羅發呆','快艇,保羅,發呆,');
@@ -671,9 +690,10 @@ insert into MemberInfo values('HoustonRockets@ymail.com','休士頓火箭','teams','2
 insert into MemberInfo values('LosAngelesClippers@ymail.com','洛杉磯快艇','teams','2016-01-17','3004');
 
 insert into MemberInfo values('UtahJazz@ymail.com','猶他爵士','teams','2016-02-01','3005');
-insert into MemberInfo values('javaeeit972017@gmail.com','奧克拉荷馬雷霆','teams','2016-02-11','3006');
+insert into MemberInfo values('OklahomaCityThunder@ymail.com','奧克拉荷馬雷霆','teams','2016-02-11','3006');
 insert into MemberInfo values('MemphisGrizzlies@ymail.com','曼菲斯灰熊','teams','2016-02-15','3007');
 insert into MemberInfo values('PortlandTrail@ymail.com','波特蘭拓荒者','teams','2016-02-17','3008');
+insert into MemberInfo values('javaeeit972017@gmail.com','EEIT97','teams','2016-02-11','3009');
 
 insert into MemberInfo values('s988309@gmail.com','EEIT97第一組','admin','2017-06-23','');
 insert into MemberInfo values('frank810618@gmail.com','賴彥誠','admin','2017-09-25','');

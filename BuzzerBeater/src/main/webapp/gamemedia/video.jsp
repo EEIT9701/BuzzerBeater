@@ -198,6 +198,7 @@
 						var cell5 = $('<p></p>').addClass("card-text").css('align','center');
 						var cell6 = $('<img src="<%=request.getContextPath()%>/images/tag.png">');
 						var cell7 = ''; 
+	
 						$.each(taglist.tag,function(index,tagArray){
 							console.log(tagArray)
 							cell7 = cell7 + '<a class="tagFunction">'+tagArray+'</a>'+' ';
@@ -207,16 +208,15 @@
 						cell3.append([cell4, cell5]);
 						cell1.append([cell2, cell3]);
 						
-						$('.changeVideo').on('click',function(){
-							console.log('連結')
-							var video = $(this).attr('id');
-							$('#video').attr('src','<%=request.getContextPath()%>/videos/'+video);
-						})
+						
 						
 						var row = $('<div></div>').append(cell1)
 						$('.addTagPhoto').append(row);
-						
-					
+					})
+					$('.changeVideo').on('click',function(){
+						console.log('連結')
+						var video = $(this).attr('id');
+						$('#video').attr('src','<%=request.getContextPath()%>/videos/'+video);
 					})
 				})
 			})	
