@@ -22,15 +22,15 @@
     	
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
-    </head>
-<style>
-body input{width:100px
-}
-#st1{
-width:380px
-}
 
-</style>
+		 <style>
+		td input{
+		 	width:90%;
+		 	text-align:left;
+		}
+		</style>
+		
+    </head>
     <body>
     
 	    <jsp:include page="/header.jsp" />
@@ -60,10 +60,10 @@ width:380px
 					</tr>
 				</tbody>
 			</table>
-			
+			<br><br>
 			<input type="hidden" name="gameID" value="${gamesVO.gameID}">
 			<h3>${gamesVO.teamAVO.teamName}</h3>
-			<table id="teamA">
+			<table id="teamA" class="table table-bordered">
 				<thead>
 					<tr>
 						<td id="st1">球員姓名</td>
@@ -91,29 +91,29 @@ width:380px
 						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
 						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
 						<td><nobr>${tcVO.playersVO.playerName}</nobr></td>
-						<td><input type="number" name="gameTime" value="0"></td>
-						<td><input type="number" name="twoPoint" value="0"></td>
-						<td><input type="number" name="twoPointShot" value="0"></td>
-						<td><input type="number" name="threePoint" value="0"></td>
-						<td><input type="number" name="threePointShot" value="0"></td>
-						<td><input type="number" name="fg" value="0"></td>
-						<td><input type="number" name="fgShot" value="0"></td>
-						<td><input type="number" name="offreb" value="0"></td>
-						<td><input type="number" name="defreb" value="0"></td>
-						<td><input type="number" name="blocks" value="0"></td>
-						<td><input type="number" name="assist" value="0"></td>
-						<td><input type="number" name="steal" value="0"></td>
-						<td><input type="number" name="turnover" value="0"></td>
-						<td><input type="number" name="personalFouls" value="0"></td>
-						<td><input type="number" name="points" readonly value="0"></td>
-						<td><input type="checkbox" name="startingPlayer"></td>
+						<td><input type="number" class="form-control" name="gameTime" value="0"></td>
+						<td><input type="number" class="form-control" name="twoPoint" value="0"></td>
+						<td><input type="number" class="form-control" name="twoPointShot" value="0"></td>
+						<td><input type="number" class="form-control" name="threePoint" value="0"></td>
+						<td><input type="number" class="form-control" name="threePointShot" value="0"></td>
+						<td><input type="number" class="form-control" name="fg" value="0"></td>
+						<td><input type="number" class="form-control" name="fgShot" value="0"></td>
+						<td><input type="number" class="form-control" name="offreb" value="0"></td>
+						<td><input type="number" class="form-control" name="defreb" value="0"></td>
+						<td><input type="number" class="form-control" name="blocks" value="0"></td>
+						<td><input type="number" class="form-control" name="assist" value="0"></td>
+						<td><input type="number" class="form-control" name="steal" value="0"></td>
+						<td><input type="number" class="form-control" name="turnover" value="0"></td>
+						<td><input type="number" class="form-control" name="personalFouls" value="0"></td>
+						<td><input type="number" class="form-control" name="points" readonly value="0"></td>
+						<td><input type="checkbox" class="form-control" name="startingPlayer"></td>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			
+			<br><br>
 			<h3>${gamesVO.teamBVO.teamName}</h3>
-			<table id="teamB">
+			<table id="teamB" class="table table-bordered">
 				<thead>
 					<tr>
 						<td id="st1">球員姓名</td>
@@ -141,129 +141,145 @@ width:380px
 						<input type="hidden" name="teamID" value="${tcVO.teamsVO.teamID}">
 						<input type="hidden" name="playerID" value="${tcVO.playersVO.playerID}">
 						<td><nobr>${tcVO.playersVO.playerName}</nobr></td>
-						<td><input type="number" name="gameTime" value="0"></td>
-						<td><input type="number" name="twoPoint" value="0"></td>
-						<td><input type="number" name="twoPointShot" value="0"></td>
-						<td><input type="number" name="threePoint" value="0"></td>
-						<td><input type="number" name="threePointShot" value="0"></td>
-						<td><input type="number" name="fg" value="0"></td>
-						<td><input type="number" name="fgShot" value="0"></td>
-						<td><input type="number" name="offreb" value="0"></td>
-						<td><input type="number" name="defreb" value="0"></td>
-						<td><input type="number" name="blocks" value="0"></td>
-						<td><input type="number" name="assist" value="0"></td>
-						<td><input type="number" name="steal" value="0"></td>
-						<td><input type="number" name="turnover" value="0"></td>
-						<td><input type="number" name="personalFouls" value="0"></td>
-						<td><input type="number" name="points" readonly value="0"></td>
-						<td><input type="checkbox" name="startingPlayer"></td>
+						<td><input type="number" class="form-control" name="gameTime" value="0"></td>
+						<td><input type="number" class="form-control" name="twoPoint" value="0"></td>
+						<td><input type="number" class="form-control" name="twoPointShot" value="0"></td>
+						<td><input type="number" class="form-control" name="threePoint" value="0"></td>
+						<td><input type="number" class="form-control" name="threePointShot" value="0"></td>
+						<td><input type="number" class="form-control" name="fg" value="0"></td>
+						<td><input type="number" class="form-control" name="fgShot" value="0"></td>
+						<td><input type="number" class="form-control" name="offreb" value="0"></td>
+						<td><input type="number" class="form-control" name="defreb" value="0"></td>
+						<td><input type="number" class="form-control" name="blocks" value="0"></td>
+						<td><input type="number" class="form-control" name="assist" value="0"></td>
+						<td><input type="number" class="form-control" name="steal" value="0"></td>
+						<td><input type="number" class="form-control" name="turnover" value="0"></td>
+						<td><input type="number" class="form-control" name="personalFouls" value="0"></td>
+						<td><input type="number" class="form-control" name="points" readonly value="0"></td>
+						<td><input type="checkbox" class="form-control" name="startingPlayer"></td>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			
-<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do" name="action">
-<input type="hidden" name="action" value="from1">
-<input type="submit" value="送出新增"></FORM>
+			<FORM METHOD="post" ACTION="<%=request.getContextPath() %>/PersonalData.do">
+				<input type="hidden" name="action" value="ADD_FAKE_GAME">
+				<input type="hidden" name="gameID" value="${gamesVO.gameID}">
+				<input type="hidden" name="seasonID" value="${gamesVO.groupsVO.seasonVO.seasonID}">
+				<div>
+					<input type="file" name="updatefile" class="col-md-2">
+					<input type="submit" value="上傳檔案" class="btn btn-info" id="file">
+					<input type="button" value="送出" class="btn btn-success btn-lg col-md-offset-8">
+				</div>
+			</FORM>
 
-		</FORM>
+
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />
 	    	</div>
 	    </div>    
 	    <jsp:include page="/footer_css.jsp" />
-	    
-	    <script type="text/javascript">
-		$(function(){
-			
-			$('#addGame').click(function(){
-				
-				var JSONstr = '';
-				
-				var teamA = $('#teamA>tbody tr');
-				$.each(teamA, function(index,tr){
-					var perData = "";
-					
-					var gameTime = $(this).find('input[name="gameTime"]').val();
-					var teamID = $(this).find('input[name="teamID"]').val();
-					var playerID = $(this).find('input[name="playerID"]').val();
-					var twoPoint = $(this).find('input[name="twoPoint"]').val();
-					var twoPointShot = $(this).find('input[name="twoPointShot"]').val();
-					var threePoint = $(this).find('input[name="threePoint"]').val();
-					var threePointShot = $(this).find('input[name="threePointShot"]').val();
-					var fg = $(this).find('input[name="fg"]').val();
-					var fgShot = $(this).find('input[name="fgShot"]').val();
-					var offreb = $(this).find('input[name="offreb"]').val();
-					var defreb = $(this).find('input[name="defreb"]').val();
-					var blocks = $(this).find('input[name="blocks"]').val();
-					var assist = $(this).find('input[name="assist"]').val();
-					var steal = $(this).find('input[name="steal"]').val();
-					var turnover = $(this).find('input[name="turnover"]').val();
-					var personalFouls = $(this).find('input[name="personalFouls"]').val();
-					
-					if( $(this).find('input[name="startingPlayer"]').prop('checked')) {
-						var startingPlayer = "1";
-					} else {
-						var startingPlayer = "0";
-					}
-					
-					perData = JSON.stringify({"gameTime":gameTime,"teamID":teamID,"playerID":playerID,"twoPoint":twoPoint,"twoPointShot":twoPointShot,"threePoint":threePoint,"threePointShot":threePointShot,"fg":fg,"fgShot":fgShot,"offReb":offreb,"defReb":defreb,
-						"blocks":blocks,"assist":assist,"steal":steal,"turnover":turnover,"personalFouls":personalFouls,"startingPlayer":startingPlayer
-					});
-					JSONstr = JSONstr + perData +",";
-				})
-				
-				var teamB = $('#teamB>tbody tr');
-				$.each(teamB, function(index,tr){
-					var perData = "";
-					
-					var gameTime = $(this).find('input[name="gameTime"]').val();
-					var teamID = $(this).find('input[name="teamID"]').val();
-					var playerID = $(this).find('input[name="playerID"]').val();
-					var twoPoint = $(this).find('input[name="twoPoint"]').val();
-					var twoPointShot = $(this).find('input[name="twoPointShot"]').val();
-					var threePoint = $(this).find('input[name="threePoint"]').val();
-					var threePointShot = $(this).find('input[name="threePointShot"]').val();
-					var fg = $(this).find('input[name="fg"]').val();
-					var fgShot = $(this).find('input[name="fgShot"]').val();
-					var offreb = $(this).find('input[name="offreb"]').val();
-					var defreb = $(this).find('input[name="defreb"]').val();
-					var blocks = $(this).find('input[name="blocks"]').val();
-					var assist = $(this).find('input[name="assist"]').val();
-					var steal = $(this).find('input[name="steal"]').val();
-					var turnover = $(this).find('input[name="turnover"]').val();
-					var personalFouls = $(this).find('input[name="personalFouls"]').val();
-					if( $(this).find('input[name="startingPlayer"]').prop('checked')) {
-						var startingPlayer = "1";
-					} else {
-						var startingPlayer = "0";
-					}
-					
-					perData = JSON.stringify({"gameTime":gameTime,"teamID":teamID,"playerID":playerID,"twoPoint":twoPoint,"twoPointShot":twoPointShot,"threePoint":threePoint,"threePointShot":threePointShot,"fg":fg,"fgShot":fgShot,"offReb":offreb,"defReb":defreb,
-						"blocks":blocks,"assist":assist,"steal":steal,"turnover":turnover,"personalFouls":personalFouls,"startingPlayer":startingPlayer
-					});
-					JSONstr = JSONstr + perData +",";
-				})
-				
-				
-				JSONstr ='['+ JSONstr.substring(0,JSONstr.length-1)+']';
-				console.log(JSONstr);
-				
-				var gameID = $('input[name="gameID"]').val();
-				
-				$.post('<%=request.getContextPath()%>/Games.do',
-						{'action':'ADD_GAME_JSON','gameID':gameID,'gameData':JSONstr},function(data){
-					
-						
-						
-						
-				})
-				
+	    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css">
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+        <script>
+   	     $('#file').click(function(){
+				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 			})
+		</script>
+	    
+<!-- 	    <script type="text/javascript"> -->
+// 		$(function(){
 			
-		})
+// 			$('#addGame').click(function(){
+				
+// 				var JSONstr = '';
+				
+// 				var teamA = $('#teamA>tbody tr');
+// 				$.each(teamA, function(index,tr){
+// 					var perData = "";
+					
+// 					var gameTime = $(this).find('input[name="gameTime"]').val();
+// 					var teamID = $(this).find('input[name="teamID"]').val();
+// 					var playerID = $(this).find('input[name="playerID"]').val();
+// 					var twoPoint = $(this).find('input[name="twoPoint"]').val();
+// 					var twoPointShot = $(this).find('input[name="twoPointShot"]').val();
+// 					var threePoint = $(this).find('input[name="threePoint"]').val();
+// 					var threePointShot = $(this).find('input[name="threePointShot"]').val();
+// 					var fg = $(this).find('input[name="fg"]').val();
+// 					var fgShot = $(this).find('input[name="fgShot"]').val();
+// 					var offreb = $(this).find('input[name="offreb"]').val();
+// 					var defreb = $(this).find('input[name="defreb"]').val();
+// 					var blocks = $(this).find('input[name="blocks"]').val();
+// 					var assist = $(this).find('input[name="assist"]').val();
+// 					var steal = $(this).find('input[name="steal"]').val();
+// 					var turnover = $(this).find('input[name="turnover"]').val();
+// 					var personalFouls = $(this).find('input[name="personalFouls"]').val();
+					
+// 					if( $(this).find('input[name="startingPlayer"]').prop('checked')) {
+// 						var startingPlayer = "1";
+// 					} else {
+// 						var startingPlayer = "0";
+// 					}
+					
+// 					perData = JSON.stringify({"gameTime":gameTime,"teamID":teamID,"playerID":playerID,"twoPoint":twoPoint,"twoPointShot":twoPointShot,"threePoint":threePoint,"threePointShot":threePointShot,"fg":fg,"fgShot":fgShot,"offReb":offreb,"defReb":defreb,
+// 						"blocks":blocks,"assist":assist,"steal":steal,"turnover":turnover,"personalFouls":personalFouls,"startingPlayer":startingPlayer
+// 					});
+// 					JSONstr = JSONstr + perData +",";
+// 				})
+				
+// 				var teamB = $('#teamB>tbody tr');
+// 				$.each(teamB, function(index,tr){
+// 					var perData = "";
+					
+// 					var gameTime = $(this).find('input[name="gameTime"]').val();
+// 					var teamID = $(this).find('input[name="teamID"]').val();
+// 					var playerID = $(this).find('input[name="playerID"]').val();
+// 					var twoPoint = $(this).find('input[name="twoPoint"]').val();
+// 					var twoPointShot = $(this).find('input[name="twoPointShot"]').val();
+// 					var threePoint = $(this).find('input[name="threePoint"]').val();
+// 					var threePointShot = $(this).find('input[name="threePointShot"]').val();
+// 					var fg = $(this).find('input[name="fg"]').val();
+// 					var fgShot = $(this).find('input[name="fgShot"]').val();
+// 					var offreb = $(this).find('input[name="offreb"]').val();
+// 					var defreb = $(this).find('input[name="defreb"]').val();
+// 					var blocks = $(this).find('input[name="blocks"]').val();
+// 					var assist = $(this).find('input[name="assist"]').val();
+// 					var steal = $(this).find('input[name="steal"]').val();
+// 					var turnover = $(this).find('input[name="turnover"]').val();
+// 					var personalFouls = $(this).find('input[name="personalFouls"]').val();
+// 					if( $(this).find('input[name="startingPlayer"]').prop('checked')) {
+// 						var startingPlayer = "1";
+// 					} else {
+// 						var startingPlayer = "0";
+// 					}
+					
+// 					perData = JSON.stringify({"gameTime":gameTime,"teamID":teamID,"playerID":playerID,"twoPoint":twoPoint,"twoPointShot":twoPointShot,"threePoint":threePoint,"threePointShot":threePointShot,"fg":fg,"fgShot":fgShot,"offReb":offreb,"defReb":defreb,
+// 						"blocks":blocks,"assist":assist,"steal":steal,"turnover":turnover,"personalFouls":personalFouls,"startingPlayer":startingPlayer
+// 					});
+// 					JSONstr = JSONstr + perData +",";
+// 				})
+				
+				
+// 				JSONstr ='['+ JSONstr.substring(0,JSONstr.length-1)+']';
+// 				console.log(JSONstr);
+				
+// 				var gameID = $('input[name="gameID"]').val();
+				
+<%-- 				$.post('<%=request.getContextPath()%>/Games.do', --%>
+// 						{'action':'ADD_GAME_JSON','gameID':gameID,'gameData':JSONstr},function(data){
+					
+						
+						
+						
+// 				})
+				
+// 			})
+			
+// 		})
 		
-	    </script>
+<!-- 	    </script> -->
 
 
 

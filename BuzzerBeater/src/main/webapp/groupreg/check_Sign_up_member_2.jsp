@@ -72,7 +72,8 @@
 									<td class="col-xs-2"><input id="account" name="account" placeholder="輸入帳號後五碼" class="form-control input-md" type="text" required ></td>
 									<!--線上繳費驗證-->
 										<td>
-										<a href="<%=request.getContextPath()%>/opaytest.do" id="opay">
+<%-- 										href="<%=request.getContextPath()%>/opaytest.do" --%>
+										<a href="" id="opay">
 										<img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top: 5px;">
 										</a>
 										</td>

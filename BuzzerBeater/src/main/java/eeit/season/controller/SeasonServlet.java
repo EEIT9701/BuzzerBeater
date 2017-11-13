@@ -43,8 +43,13 @@ public class SeasonServlet extends HttpServlet {
 		// 取得請求參數"action"，此為自行設定的回傳參數，判斷將要執行的動作
 		String action = request.getParameter("action");
 
+		// GET_GROUP 以JSON格式取得所有分組
 		// GET_ALL_SEASON 以JSON格式取得所有賽季
-		//
+		// ADD_SEASON 從session取出暫存的賽季+分組並新增到資料庫
+		// TO_ADD_GROUPS 增加新的分組到session
+		// UPDATE_SEASON 更新賽季
+		// DELETE_SEASON 刪除賽季
+		
 
 		/********************************************************************/
 		if ("GET_GROUP".equals(action)) {
@@ -315,26 +320,6 @@ public class SeasonServlet extends HttpServlet {
 		}
 
 		/********************************************************************/
-		if ("GET_ONE_TO_UPDATE".equals(action)) {
-			try {
-				Integer seasonID = Integer.parseInt(request.getParameter("seasonID"));
-
-				// 呼叫永續層
-				SeasonService sSvc = new SeasonService();
-				request.setAttribute("seasonVO", sSvc.findBySeasonID(seasonID));
-
-				// 轉交
-				RequestDispatcher successView = request.getRequestDispatcher("/season/updateSeason.jsp");
-				successView.forward(request, response);
-
-				// 其他可能的錯誤處理
-			} catch (Exception e) {
-				RequestDispatcher failureView = request.getRequestDispatcher("/season/seasonList_back.jsp");
-				failureView.forward(request, response);
-			}
-		}
-
-		/********************************************************************/
 		if ("DELETE_SEASON".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -360,25 +345,6 @@ public class SeasonServlet extends HttpServlet {
 				RequestDispatcher failureView = request.getRequestDispatcher("/season/seasonList_back.jsp");
 				failureView.forward(request, response);
 			}
-		}
-
-		/********************************************************************/
-		if ("GET_GROUPS".equals(action)) {
-			Integer seasonID = Integer.parseInt(request.getParameter("seasonID"));
-			SeasonService sSvc = new SeasonService();
-			request.setAttribute("seasonVO", sSvc.findBySeasonID(seasonID));
-
-			RequestDispatcher successView = request.getRequestDispatcher("/groups/groupList.jsp");
-			successView.forward(request, response);
-		}
-
-		if ("TO_GROUPS_BACK".equals(action)) {
-			Integer seasonID = Integer.parseInt(request.getParameter("seasonID"));
-			SeasonService sSvc = new SeasonService();
-			request.setAttribute("seasonVO", sSvc.findBySeasonID(seasonID));
-
-			request.getRequestDispatcher("/groups/groupList_back.jsp").forward(request, response);
-
 		}
 
 	}

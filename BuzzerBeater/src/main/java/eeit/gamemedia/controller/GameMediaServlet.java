@@ -11,18 +11,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.JSONObject;
-import org.json.simple.JSONValue;
 
 import com.google.gson.Gson;
 
 import eeit.gamemedia.model.GameMediaService;
 import eeit.gamemedia.model.GameMediaVO;
-import eeit.games.model.GamesDAO_HibernateTemplate;
 import eeit.games.model.GamesService;
 import eeit.games.model.GamesVO;
 import eeit.groups.model.GroupsService;
@@ -238,7 +234,7 @@ public class GameMediaServlet extends HttpServlet {
 			res.setHeader("content-type", "text/html;charset=UTF-8");
 			res.setCharacterEncoding("UTF-8");
 			
-			String tag1 = req.getParameter("tag");
+			String tag1 = req.getParameter("tag")+",";
 			Integer mediaID = Integer.valueOf(req.getParameter("mediaID"));
 			String title = req.getParameter("title");
 			String descriptions1 = req.getParameter("descriptions");
@@ -254,7 +250,6 @@ public class GameMediaServlet extends HttpServlet {
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = descriptions1;
 			String tag = tag1;
-				
 				
 				
 			gameMediaSvc.updateGameMedia(gameID, mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag);				
@@ -335,15 +330,17 @@ public class GameMediaServlet extends HttpServlet {
 			GameMediaService gameMediaSvc = new GameMediaService();
 			
 			List<GameMediaVO> gameVideoAmount = gameMediaSvc.getAllVideo();
-			int count = gameVideoAmount.size();
+			int count = (gameVideoAmount.size()+8);
 	
 				
-			String gamePhoto = "";
+			String base64 = req.getParameter("gamePhoto");
+			String photo = base64.substring(base64.lastIndexOf(",")+1);
 			String mediaType = "video";
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = req.getParameter("descriptions");
-			String tag = req.getParameter("tag");
-			String gameVideo = "00"+(count+1)+".mp4";
+			String tag = req.getParameter("tag")+",";
+			String gameVideo = "0"+(count+1)+".mp4";
+			
 			
 			//getPart()方法是getParameter()的檔案版
 			try{
@@ -374,15 +371,8 @@ public class GameMediaServlet extends HttpServlet {
 				
 			}
 			
-			
-		
-			
-			
-
 				/***************************2.開始新增資料***************************************/
-				//System.out.println(gameMediaVO);
-				System.out.println(gameID+","+mediasName+","+gameVideo+","+gamePhoto+","+mediaType+","+mediaDate+","+descriptions+","+tag);
-				gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, gamePhoto, mediaType, mediaDate, descriptions, tag);
+				gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, photo, mediaType, mediaDate, descriptions, tag);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 //				String url = "/gamemedia/videoBackEnd.jsp";

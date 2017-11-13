@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
@@ -20,7 +20,6 @@ import eeit.personaldata.model.PersonalDataService;
 import eeit.personaldata.model.PersonalDataVO;
 import eeit.players.model.PlayerService;
 import eeit.players.model.PlayersVO;
-import eeit.season.model.SeasonService;
 
 @WebServlet("/PersonalData.do")
 public class PersonalDataServlet extends HttpServlet {
@@ -217,14 +216,35 @@ public class PersonalDataServlet extends HttpServlet {
             pSvc.delete(personalDataVO);			
 		
 		}
-		if ("from1".equals(action)) {
+		if ("ADD_FAKE_GAME".equals(action)) {
+			 String gameID=req.getParameter("gameID");
+			Integer game=Integer.valueOf(gameID);
+			
+			String seasonID=req.getParameter("seasonID");
+			
+			Part updatafile=req.getPart("updatefile");
+			/*InputStream fie=updatafile.getInputStream();
+			
+			BufferedReader br=new BufferedReader(new InputStreamReader(fie));
+			StringBuilder sb=new StringBuilder();
+			
+			String line;
+			while((line=br.readLine())!=null) {
+				sb.append(line);
+				System.out.println(line);
+			}
+			System.out.println("123");
+			System.out.println(sb);*/
+			
+			
 			jdbc jd=new jdbc();
-		    jd.main(null);
+		    jd.main(game);
 		    
-		    String url ="/groups/groupList.jsp?seasonID=1004";
-			RequestDispatcher successView = req.getRequestDispatcher(url);
-			successView.forward(req, resp);
+		    resp.sendRedirect(req.getContextPath()+"/groups/groupList.jsp?seasonID="+seasonID);
 		}
+		
+		
+		
 	}
 
 }

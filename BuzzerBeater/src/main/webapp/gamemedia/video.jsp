@@ -4,7 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>EEIT97-第一組</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="<%=request.getContextPath()%>/css/jquery.tagit.css" rel="stylesheet" type="text/css">
@@ -42,8 +41,16 @@
 			width:100%;
 			text-align:left;
 		}
-		h3{
+		#h3{
 			text-align:center;
+			font-family: DFKai-sb;
+			background-color: #f34c2a;
+			width: 115%;
+			margin-left: -21px;
+			border-top-right-radius: 10px;
+			border-top-left-radius: 10px;
+			color: white;
+			box-shadow: inset 0 0 20px 1px #eb0000;
 		}
 		.videolist{
 			 overflow-y: hidden;
@@ -54,7 +61,17 @@
 			border-radius:10px;
 			object-fit:cover;
 		}
-
+		#pathWay {
+			color: #666;
+			height: 28px;
+			line-height: 28px;
+			border-bottom: 1px solid #c0b7b7;
+			text-indent: 5px;
+			font-size: 18px;
+			font-weight: normal;
+			margin-bottom: 10px;
+			font-family:微軟正黑體;
+		}
     </style>
 
 </head>
@@ -64,14 +81,31 @@
     <!--主文(開始)-->
     <div class="container">
         <div class="jumbotron">
+        
+        	<!--上層導覽列(開始) -->
+			<div id="pathWay">
+        		<span>
+            		<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
+            			<span>首頁</span>
+            		</a>
+        		</span>&gt;
+        		<span>
+            		<span>影音</span>
+        		</span>&gt;
+        		<span>
+        			<span>影片</span>
+        		</span>
+    		</div>
+    		<!--上層導覽列(結束) -->
+
             <!--表格(開始)-->
             <!--****************-->
             <!-- 第一列(開始) -->
             <!--****************-->
             <div class='row'>           	
-				<h2 style="font-family:'DFKai-sb'">精彩賽事影音</h2>
+				<h2 style="font-family:'DFKai-sb';text-align:center;">精彩賽事影音</h2>
 			</div>
-			<div class="row" style="background-color:#d0d0d0;height: 100%;">
+			<div class="row" style="background-color:#d6aaaa42;height: 100%;">
                 <div class="col-md-9" style="padding-left: 30px;">
             		<div class="row" id="mediaplayer" oncontextmenu="window.event.returnValue=false">            
                 		<video controls id="video" src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4">
@@ -120,13 +154,13 @@
 	$(function(){
 		getlist();
 		tagFunction();
-		clickAndPlay();
+		
 		
 		function getlist(){
 			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
 				var list = $('#videolist');
 				list.empty();
-				var cell1 = $('<h3 style="font-family:DFKai-sb">影片列表</h3>');
+				var cell1 = $('<h3 id="h3" style="font-family:DFKai-sb">影片列表</h3>');
 				list.append(cell1);
 				
 				$.each(data, function(index,gMVO){
@@ -157,12 +191,13 @@
 						console.log(data)
 					$.each(JSON.parse(data),function(ind,taglist){
 						var cell1 = $('<div></div>').addClass("card col-md-3");
-						var cell2 = $('<img class="card-imp-top img rounded center-block">').attr("src","data:image/jpeg;base64,"+taglist.gamePhoto).attr("id", taglist.gameVideo).css({'width':'98%','border':'solid 3px black','border-radius':'10px','object-fit':'cover'});
+						var cell2 = $('<img class="card-imp-top img rounded center-block changeVideo">').attr("src","data:image/jpeg;base64,"+taglist.gamePhoto).attr("id", taglist.gameVideo).css({'width':'98%','border':'solid 3px black','border-radius':'10px','object-fit':'cover'});
 						var cell3 = $('<div></div>').addClass("card-block");
 						var cell4 = $('<h4 class="card-title" align="center"></h4>').text(taglist.mediasName);
 						var cell5 = $('<p></p>').addClass("card-text").css('align','center');
 						var cell6 = $('<img src="<%=request.getContextPath()%>/images/tag.png">');
 						var cell7 = ''; 
+	
 						$.each(taglist.tag,function(index,tagArray){
 							console.log(tagArray)
 							cell7 = cell7 + '<a class="tagFunction">'+tagArray+'</a>'+' ';
@@ -172,19 +207,24 @@
 						cell3.append([cell4, cell5]);
 						cell1.append([cell2, cell3]);
 						
+						
+						
 						var row = $('<div></div>').append(cell1)
 						$('.addTagPhoto').append(row);
 					})
+					$('.changeVideo').on('click',function(){
+						console.log('連結')
+						var video = $(this).attr('id');
+						$('#video').attr('src','<%=request.getContextPath()%>/videos/'+video);
+					})
 				})
-			})
+			})	
+			
+			
 		}
-		function clickAndPlay(){
-			$('.card-imp-top').on('click',function(){
-				event.preventDefault();
-				var playVideo = $(this).attr('id');
-				$('#video').attr("src",'<%=request.getContextPath()%>/videos/'+playVideo+'.mp4');
-			})
-		}
+	
+	
+		
 		$(document).on('click','.tagFunction',function(){
 			$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 			setTimeout(function(){

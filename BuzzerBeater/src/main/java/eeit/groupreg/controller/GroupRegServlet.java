@@ -61,31 +61,26 @@ public class GroupRegServlet extends HttpServlet {
 			
 		}
 		if("INSERT".equals(action)) {
-//			HttpSession session=request.getSession(false);
-//			System.out.println("session="+session);
-			request.getParameter("account");
-			System.out.println(request.getParameter("account"));
-			MemberInfoVO mVO=(MemberInfoVO) request.getSession().getAttribute("LoginOK");
+			GroupRegService groupregSVC =new GroupRegService();
+			//取得INSERT 參數
+			String jsonStr=request.getParameter("data");
+			JSONObject gVO = new JSONObject(jsonStr);
+//			System.out.println("gVO="+gVO);
+			//轉型態
+			Integer teamID=Integer.valueOf(gVO.getString("teamID"));
+			Integer groupID = Integer.valueOf(gVO.getString("groupID"));
+			Integer teamStat=Integer.valueOf(gVO.getString("teamStat"));
+			Timestamp registerDate=Timestamp.valueOf(gVO.getString("registerDate"));
+			String paymentNumber=gVO.getString("paymentNumber");
+			//傳去groupregSVC的insert1
+			System.out.println(teamID+","+groupID+","+teamStat+","+registerDate+","+paymentNumber);
+			groupregSVC.insert1(teamID,groupID,teamStat,registerDate,paymentNumber);
 			
-			System.out.println("mVO="+mVO.getTeamID());
+			request.getSession().setAttribute("RegisterDate", registerDate);
 			
+//			request.removeAttribute("action");	
 			
-			
-			
-//			Integer teamID=mVO.getTeamID();
-//			
-//			
-//			System.out.println(teamID);
-			
-			
-//			if (session == null) { // 使用逾時
-//				request.setAttribute("Errors", "使用逾時，請重新登入");
-//				RequestDispatcher rd = request.getRequestDispatcher("<%=request.getContextPath() %>/index.jsp");
-//				rd.forward(request, response);
-//				return;
-//			}
-			
-//			GroupRegService groupregSVC=new GroupRegService();
+			return;
 			
 			
 		}

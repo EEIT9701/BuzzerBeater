@@ -23,6 +23,10 @@
 	height: 220px;
 	margin: auto;
 }
+#photo {
+	width: 100px;
+	margin: auto;
+}
 .img {
 	position: relative;
 	background-position: center;
@@ -68,7 +72,7 @@
 	<div class="container">
 		<div class="jumbotron">
 			<!-- 網頁內容 -->
-			<form class="form-horizontal">
+			
 				<fieldset>
 					<!-- Form Name -->
 					<legend>編輯我的球隊</legend>
@@ -175,36 +179,28 @@
 												<td>${teamCompositionVO.playersVO.nationality}</td>
 
 												<td>
-													<Form method="post"action="<%=request.getContextPath()%>/Teams.do">
-														<button type="submit" class="btn btn-info">修改</button>
-														<input type="hidden" name="action" value="updateMyPlayer">
-														<input type="hidden" name="teamID"
-															value="${teamsVO.teamID}"> <input type="hidden"
-															name="teamBadge" value="${teamsVO.teamBadge}"> <input
-															type="hidden" name="teamName" value="${teamsVO.teamName}">
-														<input type="hidden" name="captainEmail"
-															value="${teamsVO.captainEmail}"> <input
-															type="hidden" name="captainPhone"
-															value="${teamsVO.captainPhone}"> <input
-															type="hidden" name="coachName"
-															value="${teamsVO.coachName}"> <input
-															type="hidden" name="bossName" value="${teamsVO.bossName}">
-														<input type="hidden" name="totalWin"
-															value="${teamsVO.totalWin}"> <input type="hidden"
-															name="totalLose" value="${teamsVO.totalLose}"> <input
-															type="hidden" name="winRate" value="${teamsVO.winRate}">
-														<input type="hidden" name="remarks"
-															value="${teamsVO.remarks}">
-													</Form>
+												<Form method="post"action="<%=request.getContextPath()%>/Players.do">
+												<button type="submit" class="btn btn-info">修改</button>
+												<input type="hidden" name="action" value="updateMyPlayer">
+												<input type="hidden" name="photo" value="${teamCompositionVO.playersVO.photo}">
+												<input type="hidden" name="playerID"
+													value="${playersVO.playerID}"> <input type="hidden"
+													name="playerName" value="${teamCompositionVO.playersVO.playerName}">
+												<input type="hidden" name="id" value="${teamCompositionVO.playersVO.id}">
+												<input type="hidden" name="height"
+													value="${teamCompositionVO.playersVO.height}"> <input type="hidden"
+													name="weights" value="${teamCompositionVO.playersVO.weights}"> <input
+													type="hidden" name="birthday" value="${teamCompositionVO.playersVO.birthday}">
+												<input type="hidden" name="nationality"
+													value="${teamCompositionVO.playersVO.nationality}">
+											</Form>
 												</td>
 												<td>
-													<Form method="post"
-														action="<%=request.getContextPath()%>/Teams.do">
-														<button type="submit" class="btn btn-danger">刪除</button>
-														<input type="hidden" name="teamID"
-															value="${teamsVO.teamID}"> <input type="hidden"
-															name="action" value="delete">
-													</Form>
+											<Form method="post"action="<%=request.getContextPath()%>/Players.do">
+												<button type="submit" class="btn btn-danger">刪除</button>
+												<input type="hidden" name="playerID" value="${teamCompositionVO.playersVO.playerID}"> 
+													<input type="hidden" name="action" value="delete">
+											</Form>
 												</td>
 											</tr>
 
@@ -217,15 +213,17 @@
 					</div>
 
 					<!-- Button -->
+					<form class="form-horizontal">
 					<div class="form-group">
 						<label class="col-md-4 control-label" for="send"></label>
 						<div class="col-md-4">
 							<button id="send" name="send" class="btn btn-primary">送出</button>
 						</div>
 					</div>
+					</form>
 
 				</fieldset>
-			</form>
+		
 
 			<!-- 網頁內容END -->
 			<jsp:include page="/footer.jsp" />

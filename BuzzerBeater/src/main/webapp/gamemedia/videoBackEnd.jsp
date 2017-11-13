@@ -19,9 +19,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>EEIT97-第一組</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/iEdit.css">
 <link href="<%=request.getContextPath()%>/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath()%>/css/jquery.tagit.css" rel="stylesheet" type="text/css">
@@ -30,7 +30,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="<%=request.getContextPath()%>/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
-
+<script src="<%=request.getContextPath() %>/js/iEdit.js"></script>
 
 <style>
 #myModalLabel {
@@ -136,6 +136,17 @@ video::-webkit-media-controls-panel {
 .ui-widget{	
 	border:solid 1px gray;
 }
+#pathWay {
+	color: #666;
+	height: 28px;
+	line-height: 28px;
+	border-bottom: 1px solid #c0b7b7;
+	text-indent: 5px;
+	font-size: 18px;
+	font-weight: normal;
+	margin-bottom: 10px;
+	font-family:微軟正黑體;
+}
 </style>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/datatables.min.css" />
@@ -149,18 +160,25 @@ video::-webkit-media-controls-panel {
 	<!--主文(開始)-->
 	<div class="container">
 		<div class="jumbotron">
+		
+			<!--上層導覽列(開始) -->
+			<div id="pathWay">
+        		<span>
+            		<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
+            		<span>使用者功能</span>
+            		</a>
+        		</span>&gt;
+        		<span>
+        			<span>影片</span>
+        		</span>
+    		</div>
+    		<!--上層導覽列(結束) -->
+		
 			<div class="row">
 				<div class="col-md-4" id="topic">
-					<h1>影片專區</h1>
+					<h2 style="font-family:微軟正黑體;text-align:center;padding-left: 250px;
+    					width: 800px;">影片專區</h2>
 					</br>
-					<c:if test="${not empty errorMsgs}">
-					請修正以下錯誤:
-                    <ul>
-							<c:forEach var="message" items="${errorMsgs}">
-								<li>${message}</li>
-							</c:forEach>
-						</ul>
-					</c:if>
 				</div>
 			</div>
 			</br>
@@ -184,7 +202,7 @@ video::-webkit-media-controls-panel {
 					</tbody>
 				</table>
 			</div>
-
+			<hr>
 			<div class="row">
 				<div class="col-md-3">
 					<h3>影片上傳</h3>
@@ -192,7 +210,7 @@ video::-webkit-media-controls-panel {
 			</div>
 			<!--上傳的模態框 -->
 			<div class="row">
-				<button class="btn btn-warning" data-toggle="modal" data-target="#myModal">選擇檔案</button>
+				<button class="btn btn-warning" data-toggle="modal" data-target="#myModal" style="margin-left: 25px;">選擇檔案</button>
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true"
 					data-backdrop="false">
@@ -205,10 +223,13 @@ video::-webkit-media-controls-panel {
 							</div>
 							<div class="modal-body">
 								<div class="row">
+									<h5 style="margin-left:18px">請依序選擇賽季、分組及賽事</h5>
+								</div>
+								<div class="row">
 									<!--連鎖查詢功能(1)賽季-->
 									<div class="col-md-3">
 										<select id="seasonlist" name="season1">
-											<option selected>請選擇</option> <!--預設選項-->
+											<option id="seasondefault" selected>請選擇</option> <!--預設選項-->
 											<!--賽季選擇寫死，由EL生成-->
     										<c:forEach var="list" items="${list}">
     											<option value="${list.seasonID}">${list.seasonName}</option>
@@ -232,8 +253,17 @@ video::-webkit-media-controls-panel {
 								</br>
 								<div class=row>
 									<!--上傳影片的觸發鈕-->
-    								<div class=col-md-3>
+									<div class="col-md-3">
+										<p>上傳影片</p>
 										<input type="file" name="upload_file" id="upload_file">  
+									</div>
+								</div>
+								</br>
+								<div class="row">
+									<div class="col-md-3">
+										<p>上傳相片</p>
+										<input type="file" id="file">
+										<img id="result" type="hidden" >
 									</div>
 								</div>
 								</br>
@@ -250,14 +280,14 @@ video::-webkit-media-controls-panel {
 								<div>
    								<form>
    									<label style="padding-left:8px">標籤</label> 
-            						<input name="tags" id="mySingleFieldTags" value="Curry, Harden , Paul, Leonard">            						
+            						<input name="tags" id="mySingleFieldTags" value="請自訂Tag">            						
        							</form>
 								</div>
 							</div>
 							<div class="modal-footer">
 								<!--確認按鈕觸發事件-->
 								<button type="submit" class="btn btn-warning" data-dismiss="modal" id="insertConfirm" >確認上傳</button>
-								<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" id="insertCancel">取消</button>
 							</div>
 						</div>
 					</div>
@@ -329,6 +359,19 @@ video::-webkit-media-controls-panel {
 	
 	$(function(){
 		
+		$("#file").change(function (e) {
+				var img = e.target.files[0];
+
+			if (!img.type.match('image.*')) {
+   				alert("Whoops! That is not an image.");
+   				return;
+			}
+			iEdit.open(img, true, function (res) {
+   				$("#result").attr("src", res).css('width','100');
+   				$("#result").show();
+			});
+
+      	});
 		
  		loadTable();     //載入tbody內容
  		insert();        //上傳
@@ -461,7 +504,6 @@ video::-webkit-media-controls-panel {
 	  			var season = null;
 	  			var group = null;
 	  			
-	  		
 	  			
 	  			$('#seasonlist').change(function(){              //連鎖查詢(2)，藉由選擇完(1)以後觸發
 	  				season = $('select[name="season1"]').val();  //抓到select標籤中含有name=season1的值
@@ -490,13 +532,15 @@ video::-webkit-media-controls-panel {
 	  			
 	  			$('#insertConfirm').click(function(){
 	  				console.log("按下確定鍵")
+	  				
+	  				
 	  				var gameID = $('#gamelist').val();
 		  			var title = $('#insertTitle').val();
 		  			var descriptions = $('#insertDescriptions').val();
 		  			var tag = $('#mySingleFieldTags').val();
-	  				 
+	  				var gamePhoto = $('#result').attr('src');
 					
-	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag}, function(datas){
+	  				$.post('<%=request.getContextPath()%>/GameMedia.do', {'action':'insertVideo','gameID':gameID,'mediasName':title,'descriptions':descriptions,'tag':tag, 'gamePhoto':gamePhoto}, function(datas){
 	  				    console.log("傳值");
 	  					loadTable();
 	  				})
@@ -507,6 +551,12 @@ video::-webkit-media-controls-panel {
 	  				
 	  				 
 	  			
+	  			})
+	  			$('#insertCancel').click(function(){
+	  				console.log("移除")
+	  				$('#insertTitle').val("");
+	  				$('#insertDescriptions').val("");
+	  				$('#result').hide().value("");	
 	  			})
 	  		}
 	});

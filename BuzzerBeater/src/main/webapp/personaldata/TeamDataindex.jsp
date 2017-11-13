@@ -33,18 +33,50 @@
 #st2 {
 	
 }
+thead{
+	background-color: rgba(237, 125, 49, 0.8);
+	color: #e9e9e9;
+}
+#pathWay {
+	color: #666;
+	height: 28px;
+	line-height: 28px;
+	border-bottom: 1px solid #c0b7b7;
+	text-indent: 5px;
+	font-size: 18px;
+	font-weight: normal;
+	margin-bottom: 10px;
+	font-family:微軟正黑體;
+}
 </style>
 <link rel="stylesheet" type="text/css" href="../css/datatables.min.css" />
 <jsp:include page="/header_css.jsp" />
 <link href="<%=request.getContextPath()%>/css/jquery-ui-1.12.1.css"
 	rel="stylesheet">
+<jsp:include page="/font_css.jsp" />
 </head>
 <body>
 
 	<jsp:include page="/header.jsp" />
 	<!--主文(開始)-->
-	<div class="container">
+	<div class="container-fluid">
 		<div class="jumbotron">
+			<!--上層導覽列(開始) -->
+			<div id="pathWay">
+        		<span>
+            		<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
+            			<span>首頁</span>
+            		</a>
+        		</span>&gt;
+        		<span>
+            		<span>數據</span>
+        		</span>&gt;
+        		<span>
+        			<span>球隊數據</span>
+        		</span>
+    		</div>
+    		<!--上層導覽列(結束) -->
+    				<h2>球隊數據</h2>
 			<!--表格(開始)-->
 			<!--****************-->
 			<!-- 第一列(開始) -->
@@ -269,9 +301,12 @@
 					</div>
 				</div>
 			</div>
-			<jsp:include page="/footer_css.jsp" />
 		</div>
 	</div>
+		<jsp:include page="/footer.jsp" />
+	</div>
+	</div>
+			<jsp:include page="/footer_css.jsp" />
 
 	<!--主文(結束)-->
 	<script src="<%=request.getContextPath()%>/js/jquery-ui.js"></script>
@@ -333,6 +368,5 @@
 			});
 		});
 	</script>
-	<jsp:include page="/footer.jsp" />
 </body>
 </html>
