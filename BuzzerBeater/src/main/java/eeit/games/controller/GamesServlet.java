@@ -70,6 +70,16 @@ public class GamesServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 
+		// ADD_GAME_JSON 接收JSON並新增賽事
+		// INSERT_TEMP_SEASON 將session內的賽季整筆新增
+		// DELETE_TEMP_SEASON 移除session內的賽季
+		// PUT_FULL_SEASON 讀取EXCEL內的整筆賽季
+		// GET_TEMP_EXCEL 以EXCEL取得session內的賽季及賽程
+		// UPDATE_TEMP_EXCEL 更新session內的賽季及賽程
+		// GET_GAMES_EXCEL 取得賽事EXCEL
+		// ADD_GAME 新增賽事
+
+		/********************************************************************/
 		if ("ADD_GAME_JSON".equals(action)) {
 			Integer gameID = Integer.valueOf(request.getParameter("gameID"));
 			GamesService gsvc = new GamesService();
@@ -114,7 +124,7 @@ public class GamesServlet extends HttpServlet {
 						+ Integer.valueOf(obj.getString("threePoint")) * 3 + Integer.valueOf(obj.getString("fg")) * 1;
 
 				pvo.setPoints(points);
-				
+
 				if (teamID == teamAID) {
 					teamAScore += points;
 				} else if (teamID == teamBID) {
@@ -124,14 +134,15 @@ public class GamesServlet extends HttpServlet {
 				pvo.setGamesVO(gamesVO);
 				gamesVO.getPersonalDataSet().add(pvo);
 			}
-			
+
 			gamesVO.setTeamAScore(teamAScore);
 			gamesVO.setTeamBScore(teamBScore);
-			
+
 			gsvc.updateWithPersonalData(gamesVO);
 
 		}
 
+		/********************************************************************/
 		if ("INSERT_TEMP_SEASON".equals(action)) {
 			HttpSession session = request.getSession();
 			SeasonVO seasonVO = (SeasonVO) session.getAttribute("tempSeason");
@@ -143,11 +154,13 @@ public class GamesServlet extends HttpServlet {
 					request.getContextPath() + "/groups/groupList_back.jsp?seasonID=" + seasonVO.getSeasonID());
 		}
 
+		/********************************************************************/
 		if ("DELETE_TEMP_SEASON".equals(action)) {
 			request.getSession().removeAttribute("tempSeason");
 			response.sendRedirect(request.getContextPath() + "/season/seasonList_back.jsp");
 		}
 
+		/********************************************************************/
 		if ("PUT_FULL_SEASON".equals(action)) {
 			// 取得上傳檔案並轉為資料流
 			Part part = request.getPart("uploadExcel");
@@ -226,9 +239,9 @@ public class GamesServlet extends HttpServlet {
 
 			request.getSession().setAttribute("tempSeason", seasonVO);
 			response.sendRedirect(request.getContextPath() + "/season/addSeason_temp.jsp");
-
 		}
 
+		/********************************************************************/
 		if ("GET_TEMP_EXCEL".equals(action)) {
 
 			// 創建excel
@@ -334,6 +347,7 @@ public class GamesServlet extends HttpServlet {
 			out.close();
 		}
 
+		/********************************************************************/
 		if ("UPDATE_TEMP_EXCEL".equals(action)) {
 			// 取得上傳檔案並轉為資料流
 			Part part = request.getPart("uploadExcel");
@@ -388,6 +402,7 @@ public class GamesServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/games/showSchedule.jsp#teamList");
 		}
 
+		/********************************************************************/
 		if ("ADD_GAME".equals(action)) {
 			HttpSession session = request.getSession();
 			Integer groupID = (Integer) session.getAttribute("groupID");
@@ -411,6 +426,7 @@ public class GamesServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/games/gameList_back.jsp?groupID=" + groupID);
 		}
 
+		/********************************************************************/
 		if ("UPLOAD_GAMES_EXCEL".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -478,9 +494,9 @@ public class GamesServlet extends HttpServlet {
 				RequestDispatcher failureView = request.getRequestDispatcher("/games/gameList.jsp");
 				failureView.forward(request, response);
 			}
-			return;
 		}
 
+		/********************************************************************/
 		if ("GET_GAMES_EXCEL".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -604,7 +620,6 @@ public class GamesServlet extends HttpServlet {
 				RequestDispatcher failureView = request.getRequestDispatcher("/games/WebTemplate.jsp");
 				failureView.forward(request, response);
 			}
-			return;
 		}
 
 	}
