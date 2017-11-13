@@ -189,7 +189,7 @@
 			$('#signUpEnd').datetimepicker(optTime);
 			
 			// 處理中
-			$('a,.blockUI').click(function(){
+			$('.blockUI').click(function(){
 				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 			})
 			
