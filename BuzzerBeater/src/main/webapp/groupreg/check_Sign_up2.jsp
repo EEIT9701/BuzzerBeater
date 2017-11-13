@@ -41,13 +41,13 @@
 			<!--****************-->
 			<div class="row">
 				<div class="col-md-12">
-					<table class="table table-bordered" id="example">
+					<table class="table table-bordered" >
 						<thead>
 							<tr align='center' valign='middle'>
 								<th>隊伍名稱</th>
 								<th>報名分組</th>
 								<th>報名時間</th>
-								<th>繳費狀態</th>
+
 								<th>帳號後五碼</th>
 								<th>核對</th>
 							</tr>
@@ -63,8 +63,7 @@
 
 									<!--報名時間-->
 									<td>${groupRegVO.registerDate}</td>
-									<!--繳費狀態-->
-									<td>${groupRegVO.teamStat}</td>
+
 									<!--帳號後五碼-->
 									<td>${groupRegVO.paymentNumber}</td>
 									<!--核對-->

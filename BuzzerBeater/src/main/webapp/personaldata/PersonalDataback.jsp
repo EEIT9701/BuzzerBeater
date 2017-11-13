@@ -25,18 +25,30 @@
 	src="<%=request.getContextPath()%>/js/jquery-1.12.4.js"></script>
 <!-- ***套用新的模太框檔案*** -->
 <link rel="stylesheet" href="<%=request.getContextPath()%>/dist/jdialog.min.css">	
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
+<jsp:include page="/header_css.jsp" />
+<jsp:include page="/font_css.jsp" />
 <style>
 #st1 {
 	padding: 30px;
 	background-color: #FFAA33;
 }
 thead{
-background-color: #d62d67;
-    	  color: #e9e9e9;
+	background-color: #d62d67;
+	color: #e9e9e9;
+}
+#pathWay {
+	color: #666;
+	height: 28px;
+	line-height: 28px;
+	border-bottom: 1px solid #c0b7b7;
+	text-indent: 5px;
+	font-size: 18px;
+	font-weight: normal;
+	margin-bottom: 10px;
+	font-family:微軟正黑體;
 }
 </style>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
-<jsp:include page="/header_css.jsp" />
 </head>
 <body style="line-height: 12px;">
 
@@ -44,6 +56,21 @@ background-color: #d62d67;
 	<!--主文(開始)-->
 	<div class="container-fluid">
 		<div class="jumbotron">
+		
+			<!--上層導覽列(開始) -->
+			<div id="pathWay">
+        		<span>
+            		<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
+            		<span>使用者功能</span>
+            		</a>
+        		</span>&gt;
+        		<span>
+        			<span>數據</span>
+        		</span>
+    		</div>
+    		<!--上層導覽列(結束) -->
+    		
+    		<h2>數據</h2>
 			<!--表格(開始)-->
 			<!--****************-->
 			<!-- 第一列(開始) -->

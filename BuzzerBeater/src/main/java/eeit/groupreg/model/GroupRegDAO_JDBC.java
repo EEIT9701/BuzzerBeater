@@ -90,11 +90,12 @@ public class GroupRegDAO_JDBC implements GroupRegDAO_interface {
 
 	@Override
 	public void insert(GroupRegVO gVO) {
+		System.out.println("9");
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		
 		try{
-			
+			System.out.println("10");
 			Class.forName(driver);
 			con=DriverManager.getConnection(url, user, pswd);
 			pstmt=con.prepareStatement(INSERT_STMT);
@@ -104,7 +105,8 @@ public class GroupRegDAO_JDBC implements GroupRegDAO_interface {
 			pstmt.setInt(3, gVO.getTeamStat());
 			pstmt.setTimestamp(4, gVO.getRegisterDate());
 			pstmt.setString(5, gVO.getPaymentNumber());
-			
+			System.out.println(gVO.getTeamsVO().getTeamID());
+			System.out.println(gVO.getGroupsVO().getGroupID());
 			pstmt.executeUpdate();
 			
 			
@@ -247,22 +249,22 @@ public class GroupRegDAO_JDBC implements GroupRegDAO_interface {
 		return null;
 	}
 
-	public static void main(String[] args) {
-		GroupRegDAO_JDBC dao2 =new GroupRegDAO_JDBC();
-		
-		//insert
-		GroupRegVO groupRegVO1=new GroupRegVO();
-		TeamsVO teamsVO=new TeamsVO();
-		GroupsVO groupsVO=new GroupsVO();
-		
-//		teamsVO.setTeamID(3004);
+//	public static void main(String[] args) {
+//		GroupRegDAO_JDBC dao2 =new GroupRegDAO_JDBC();
+//		
+//		//insert
+//		GroupRegVO groupRegVO1=new GroupRegVO();
+//		TeamsVO teamsVO=new TeamsVO();
+//		GroupsVO groupsVO=new GroupsVO();
+//		
+//		teamsVO.setTeamID(3002);
 //		groupRegVO1.setTeamsVO(teamsVO);
 //				
-//		groupsVO.setGroupID(2003);
+//		groupsVO.setGroupID(2001);
 //		groupRegVO1.setGroupsVO(groupsVO);
 //		groupRegVO1.setTeamStat(1);
-//		groupRegVO1.setRegisterDate(null);
-//		groupRegVO1.setPaymentNumber("66666");
+//		groupRegVO1.setRegisterDate(Timestamp.valueOf("2017-11-12 11:45:52.0"));
+//		groupRegVO1.setPaymentNumber("無");
 //		dao2.insert(groupRegVO1);
 		
 		//update
@@ -285,16 +287,16 @@ public class GroupRegDAO_JDBC implements GroupRegDAO_interface {
 //		dao2.deleteByCID(3004, 2003);
 		
 		
-		GroupRegDAO_interface dao = new GroupRegDAO_JDBC();
-
-		List<Map<String, Object>> list = dao.findSignUpPlayer(2006, 3001);
-		for (Map<String, Object> map : list) {
-			System.out.print(map.get("teamID") + ", ");
-			System.out.print(map.get("playerID") + ", ");
-			System.out.println();
-		}
-		System.out.println(list.size());
-
-	}
+//		GroupRegDAO_interface dao = new GroupRegDAO_JDBC();
+//
+//		List<Map<String, Object>> list = dao.findSignUpPlayer(2006, 3001);
+//		for (Map<String, Object> map : list) {
+//			System.out.print(map.get("teamID") + ", ");
+//			System.out.print(map.get("playerID") + ", ");
+//			System.out.println();
+//		}
+//		System.out.println(list.size());
+//
+//	}
 
 }

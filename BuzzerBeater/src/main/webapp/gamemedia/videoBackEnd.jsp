@@ -137,6 +137,17 @@ video::-webkit-media-controls-panel {
 .ui-widget{	
 	border:solid 1px gray;
 }
+#pathWay {
+	color: #666;
+	height: 28px;
+	line-height: 28px;
+	border-bottom: 1px solid #c0b7b7;
+	text-indent: 5px;
+	font-size: 18px;
+	font-weight: normal;
+	margin-bottom: 10px;
+	font-family:微軟正黑體;
+}
 </style>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/datatables.min.css" />
@@ -150,18 +161,25 @@ video::-webkit-media-controls-panel {
 	<!--主文(開始)-->
 	<div class="container">
 		<div class="jumbotron">
+		
+			<!--上層導覽列(開始) -->
+			<div id="pathWay">
+        		<span>
+            		<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
+            		<span>使用者功能</span>
+            		</a>
+        		</span>&gt;
+        		<span>
+        			<span>影片</span>
+        		</span>
+    		</div>
+    		<!--上層導覽列(結束) -->
+		
 			<div class="row">
 				<div class="col-md-4" id="topic">
-					<h1>影片專區</h1>
+					<h2 style="font-family:微軟正黑體;text-align:center;padding-left: 250px;
+    					width: 800px;">影片專區</h2>
 					</br>
-					<c:if test="${not empty errorMsgs}">
-					請修正以下錯誤:
-                    <ul>
-							<c:forEach var="message" items="${errorMsgs}">
-								<li>${message}</li>
-							</c:forEach>
-						</ul>
-					</c:if>
 				</div>
 			</div>
 			</br>
@@ -185,7 +203,7 @@ video::-webkit-media-controls-panel {
 					</tbody>
 				</table>
 			</div>
-
+			<hr>
 			<div class="row">
 				<div class="col-md-3">
 					<h3>影片上傳</h3>
@@ -193,7 +211,7 @@ video::-webkit-media-controls-panel {
 			</div>
 			<!--上傳的模態框 -->
 			<div class="row">
-				<button class="btn btn-warning" data-toggle="modal" data-target="#myModal">選擇檔案</button>
+				<button class="btn btn-warning" data-toggle="modal" data-target="#myModal" style="margin-left: 25px;">選擇檔案</button>
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true"
 					data-backdrop="false">
@@ -260,14 +278,14 @@ video::-webkit-media-controls-panel {
 								<div>
    								<form>
    									<label style="padding-left:8px">標籤</label> 
-            						<input name="tags" id="mySingleFieldTags" value="Curry, Harden , Paul, Leonard">            						
+            						<input name="tags" id="mySingleFieldTags" value="請自訂Tag">            						
        							</form>
 								</div>
 							</div>
 							<div class="modal-footer">
 								<!--確認按鈕觸發事件-->
 								<button type="submit" class="btn btn-warning" data-dismiss="modal" id="insertConfirm" >確認上傳</button>
-								<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" id="insertCancel">取消</button>
 							</div>
 						</div>
 					</div>
@@ -532,6 +550,12 @@ video::-webkit-media-controls-panel {
 	  				
 	  				 
 	  			
+	  			})
+	  			$('#insertCancel').click(function(){
+	  				console.log("移除")
+	  				$('#insertTitle').val("");
+	  				$('#insertDescriptions').val("");
+	  				$('#result').hide().value("");	
 	  			})
 	  		}
 	});

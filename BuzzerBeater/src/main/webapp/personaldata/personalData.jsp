@@ -28,15 +28,49 @@
     	
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
+        <style>
+        thead{
+		  background-color: rgba(237, 125, 49, 0.8);
+		  color: #e9e9e9;
+		}
+        #pathWay {
+      	  color: #666;
+      	  height: 28px;
+      	  line-height: 28px;
+      	  border-bottom: 1px solid #c0b7b7;
+      	  text-indent: 5px;
+      	  font-size: 18px;
+      	  font-weight: normal;
+      	  margin-bottom: 10px;
+      	  font-family:微軟正黑體;
+        }
+        </style>
     </head>
 
     <body>
 	    <jsp:include page="/header.jsp" />
 	
-		<div class="container">
+		<div class="container-fluid">
 			<div class="jumbotron">
 			<!-- 網頁內容 -->
 			
+			<!--上層導覽列(開始) -->
+				<div id="pathWay">
+        			<span>
+            			<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
+            				<span>首頁</span>
+            			</a>
+        			</span>&gt;
+        			<span>
+            			<span>數據</span>
+        			</span>&gt;
+        			<span>
+        				<span>個人數據</span>
+        			</span>
+    			</div>
+    		<!--上層導覽列(結束) -->
+    				<h2>個人數據</h2>
+    	
 			賽季:<select name="season" >
 				<option>請選擇</option>
 				<c:forEach var="season" items="${seasonSet}">
