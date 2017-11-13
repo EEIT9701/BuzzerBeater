@@ -10,7 +10,7 @@
 	//關閉視窗
 	function closeWin () {
 	//呼叫window物件的close()函數,關閉視窗
-		window.location.replace('<%=request.getContextPath() %>/index.jsp');
+		window.location.replace('<%=request.getContextPath() %>/jumpPage.jsp');
 }
 	//許多秒後不詢問自動關閉視窗
 	//定義一個是否關閉的全域變數
@@ -29,7 +29,7 @@
 			//如果點擊過,重新開始計算
 			willClose = true;
 		}
-	},20000);
+	},2000);
     </script>
     
     

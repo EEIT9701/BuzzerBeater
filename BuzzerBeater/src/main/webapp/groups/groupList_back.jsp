@@ -96,11 +96,11 @@
 		            <thead>
 			            <tr>
                     		<td>分組名稱</td>
-		                    <td>隊伍數量上限</td>
-		                    <td>隊伍數量下限</td>
-		                    <td>目前隊伍數量</td>
-		                    <td>球隊成員上限</td>
-		                    <td>球隊成員下限</td>
+		                    <td>隊伍數量<br>上限</td>
+		                    <td>隊伍數量<br>下限</td>
+		                    <td><nobr>目前隊伍數量</nobr></td>
+		                    <td>球隊成員<br>上限</td>
+		                    <td>球隊成員<br>下限</td>
 		                    <td>狀態</td>
 			            </tr>
 			        </thead>

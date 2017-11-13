@@ -45,7 +45,7 @@
 <body id="home">
 
 	<!--標頭(開始)-->
-	<jsp:include page="/header.jsp" />
+	<jsp:include page="/header3.jsp" />
 	<!--標頭(結束)-->
 	
 	

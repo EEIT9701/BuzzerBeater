@@ -126,7 +126,7 @@
 			<div class="col-md-2 col-md-offset-1">
 				<form action="<%=request.getContextPath()%>/Games.do" method="post">
 					<input type="hidden" name="action" value="GET_TEMP_EXCEL">
-					<input type="submit" class="btn btn-primary" value="下載賽程EXCEL">
+					<input type="submit" class="btn btn-primary" id="downloadExcel" value="下載賽程EXCEL">
 				</form>
 			</div>
 			
@@ -136,7 +136,7 @@
 				    <input type="file" class="form-control-file" name="uploadExcel" id="putFullSeason" aria-describedby="fileHelp">
 			    </div>
 				<div class="col-md-2 col-md-offset-1">
-			    	<input type="submit" class="btn btn-primary" value="上傳賽程EXCEL">
+			    	<input type="submit" class="btn btn-primary blockUI" value="上傳賽程EXCEL">
 			    </div>
 			</form>
 			
@@ -165,13 +165,13 @@
 			</table>
 			
 			<div class="col-md-1 col-md-offset-1">
-		    	<button class="btn btn-info" onclick="history.back()">返回上一步</button>
+		    	<button class="btn btn-info blockUI" onclick="history.back()">返回上一步</button>
 			</div>
 			    
 			<div class="col-md-2 col-md-offset-7">
 				<form action="<%=request.getContextPath()%>/Games.do" method="post">
 					<input type="hidden" name="action" value="ADD_GAME">
-					<input type="submit" class="btn btn-success btn-lg" id="submit_move" value="確認新增賽程">
+					<input type="submit" class="btn btn-success btn-lg blockUI" id="submit_move" value="確認新增賽程">
 				</form>
 			</div>
 			<br><br><br><br><br><br>
@@ -181,6 +181,25 @@
 	    	</div>
 	    </div>    
 	    <jsp:include page="/footer_css.jsp" />
+	    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+  		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+  		<script type="text/javascript">
+  		$(function(){
+  			$('.blockUI').click(function(){
+  				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+  			})
+  			
+  			$('#downloadExcel').click(function(){
+  				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+  				setTimeout(function(){
+  					$.unblockUI();
+  				},1500)
+  				
+  			})
+  		})
+  		</script>
     </body>
 
     </html>

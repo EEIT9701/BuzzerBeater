@@ -47,8 +47,9 @@ public class GroupRegService {
 		dao.insert(vo);
 	}
 	
-	public void insert1(Integer groupID,Integer teamID,Integer teamStat,Timestamp registerDate,
+	public void insert1(Integer teamID,Integer groupID,Integer teamStat,Timestamp registerDate,
 			String paymentNumber) {
+
 		dao=new GroupRegDAO_JDBC();
 		GroupRegVO gVO=new GroupRegVO();
 			
@@ -59,15 +60,17 @@ public class GroupRegService {
 		TeamsVO teamsVO=new TeamsVO();
 		teamsVO.setTeamID(teamID);
 		gVO.setTeamsVO(teamsVO);
-		
+
 		gVO.setTeamStat(teamStat);
 		gVO.setRegisterDate(registerDate);
 		gVO.setPaymentNumber(paymentNumber);
 		
+
 		dao.insert(gVO);
+		
 	}
 
-	public void update(Integer groupID, Integer teamID, Integer teamStat, Timestamp registerDate,
+	public void update(Integer teamID, Integer groupID, Integer teamStat, Timestamp registerDate,
 			String paymentNumber) {
 		GroupRegVO vo = new GroupRegVO();
 
