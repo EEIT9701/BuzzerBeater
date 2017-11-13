@@ -261,18 +261,18 @@
 									
 									
 									
-									$.post('<%=request.getContextPath()%>/Teams.do', {
-										'action': 'buildMyTeam',
-										'teamBadge': teamBadge,
-										'teamName': teamName,
-										'captainPhone': captainPhone,
-										'captainEmail': captainEmail,
-										'coachName': coachName,
-										'bossName': bossName,
-										'remarks': remarks
-									}, function (datas) {
+<%-- 									$.post('<%=request.getContextPath()%>/Teams.do', { --%>
+// 										'action': 'buildMyTeam',
+// 										'teamBadge': teamBadge,
+// 										'teamName': teamName,
+// 										'captainPhone': captainPhone,
+// 										'captainEmail': captainEmail,
+// 										'coachName': coachName,
+// 										'bossName': bossName,
+// 										'remarks': remarks
+// 									}, function (datas) {
 
-									});
+// 									});
 									$step.nextStep();
 									$index.text($step.getIndex());
 									loadTable();
@@ -285,8 +285,10 @@
 								var docFrag = $(document.createDocumentFragment());
 								var tab = $('<table class="table table-bordered" id="playerTable"></table>');
 								var th = $('<thead></thead>');
+								var tb = $('<tbody></tbody>');
 								var cell1 = $(
-									'<button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button>');
+									'<div class="col-md-12" style="margin-bottom:30px"><div class="col-md-4"><button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button></div><div class="col-md-4"></div><div class="col-md-4"><div class="col-md-4"><input type="file"></div><div class="col-md-4"></div><button class="btn btn-warning" id="insertAll">一鍵新增</button></div></div><div></div>');
+								
 								var cell2 = $('<th></th>').text("球員照片");
 								var cell3 = $('<th></th>').text("球員姓名");
 								var cell4 = $('<th></th>').text("身分證ID");
@@ -307,6 +309,7 @@
 								tab.append(th);
 								bt.append([cell1, tab]);
 								btns.append([cell11, cell12, cell13]);
+								
 								prevBtn();
 								nextBtn();
 
@@ -326,10 +329,7 @@
 									
 								})
 								$("#insertConfirm").on("click", function () {
-									count++;
-									console.log(count);
 									var docFrag = $(document.createDocumentFragment());
-									var tb = $('<tbody></tbody>');
 									var photo = $("#result").attr('src');
 									var playerName = $("#playerName").val();
 									var id = $("#id").val();
@@ -339,18 +339,18 @@
 									var weights = $("#weights").val();
 									var birthday = $("#birthday").val();
 									var nationality = $("#nationality").val();
-									$.post('<%=request.getContextPath()%>/Players.do', {
-										'action': 'buildPlayer',
-										'photo': photo,
-										'playerName': playerName,
-										'id': id,
-										'playerNo': playerNo,
-										'playerRole': playerRole,
-										'height': height,
-										'weights': weights,
-										'birthday': birthday,
-										'nationality': nationality
-									}, function (datas) {})
+<%-- 									$.post('<%=request.getContextPath()%>/Players.do', { --%>
+// 										'action': 'buildPlayer',
+// 										'photo': photo,
+// 										'playerName': playerName,
+// 										'id': id,
+// 										'playerNo': playerNo,
+// 										'playerRole': playerRole,
+// 										'height': height,
+// 										'weights': weights,
+// 										'birthday': birthday,
+// 										'nationality': nationality
+// 									}, function (datas) {})
 									
 									var cell2 = $('<td></td>').html('<img style = "width:50px" src="' + photo + '">');
 									var cell3 = $('<td></td>').text(playerName);
@@ -385,6 +385,33 @@
 									});
 
 								});
+$("#insertAll").on("click", function () {
+	tb.empty;
+	
+	$.getJSON('<%=request.getContextPath()%>/Teams.do', {
+		'action': 'findMyTeamPlayer'
+	}, function (data) {
+		$.each(data, function (index, player) {
+			var cell1 = $('<td></td>').html('<img style = "width:50px" src="data:image/png;base64,' + player.photo +
+				'">')
+			var cell2 = $('<td></td>').text(player.playerName);
+			var cell3 = $('<td></td>').text(player.id);
+			var cell4 = $('<td></td>').text(player.playerNo);
+			var cell5 = $('<td></td>').text(player.playerRole);
+			var cell6 = $('<td></td>').text(player.height);
+			var cell7 = $('<td></td>').text(player.weights);
+			var cell8 = $('<td></td>').text(player.nationality);
+			var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
+				cell7, cell8
+			]);
+			docFrag.append(row);
+			tb.append(docFrag);
+
+		})
+		tab.append(tb);
+
+	});
+});
 
 
 							}
