@@ -637,6 +637,7 @@ insert into GameMedia values('4003','保羅船長過人','003.mp4','','video','2016-10
 insert into GameMedia values('4004','Leonard 受傷','004.mp4','','video','2016-10-26','Leonard 踩到Zaza的腳翻船','馬刺, Leonard,翻船,');
 insert into GameMedia values('4001','Curry搞笑走步','005.mp4','','video','2016-10-29','Curry搞笑大走步','勇士,Curry,走步,');
 insert into GameMedia values('4002','哈登飛身爆扣','006.mp4','','video','2016-10-31','大鬍子小飛俠','火箭,哈登,爆扣,');
+insert into GameMedia values('4003','Durant 扣球被犯規','007.mp4','','video','2016-11-01','KD扣球被犯規','勇士,Durant,犯規,');
 insert into GameMedia values('4001','Stephen Curry','','','photo','2016-10-25','Curry手插腰','勇士,Curry,吐護齒套,');
 insert into GameMedia values('4002','James Harden','','','photo','2016-10-25','炸彈超人哈登','火箭,哈登,炸彈超人,');
 insert into GameMedia values('4003','Chris Paul','','','photo','2016-10-25','保羅發呆','快艇,保羅,發呆,');
