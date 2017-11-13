@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-		<%@ page import="java.util.*"%>
-			<%@ page import="eeit.teams.model.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="eeit.teams.model.*"%>
 				<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 				<html>
 
@@ -597,6 +596,62 @@
 									$("#nationality").attr('value', 'roc');
 
 								}
+								if (count == 2) {
+									$('#playerName').attr('value', '張紘瑋');
+									$("#id").attr('value', 'F123456788');
+									$("#playerNo").attr('value', '19');
+									$("#playerRole").attr('value', 'PG');
+									$("#height").attr('value', '171');
+									$("#weights").attr('value', '65');
+									$("#birthday").attr('value', '1991-12-27');
+									$("#nationality").attr('value', 'roc');
+
+								}
+								if (count == 3) {
+									$('#playerName').attr('value', '何其偉');
+									$("#id").attr('value', 'F123456788');
+									$("#playerNo").attr('value', '19');
+									$("#playerRole").attr('value', 'PG');
+									$("#height").attr('value', '171');
+									$("#weights").attr('value', '65');
+									$("#birthday").attr('value', '1991-12-27');
+									$("#nationality").attr('value', 'roc');
+
+								}
+								if (count == 4) {
+									$('#playerName').attr('value', '陳品維');
+									$("#id").attr('value', 'F123456788');
+									$("#playerNo").attr('value', '19');
+									$("#playerRole").attr('value', 'PG');
+									$("#height").attr('value', '171');
+									$("#weights").attr('value', '65');
+									$("#birthday").attr('value', '1991-12-27');
+									$("#nationality").attr('value', 'roc');
+
+								}
+								if (count == 5) {
+									$('#playerName').attr('value', '李紹群');
+									$("#id").attr('value', 'F123456788');
+									$("#playerNo").attr('value', '19');
+									$("#playerRole").attr('value', 'PG');
+									$("#height").attr('value', '171');
+									$("#weights").attr('value', '65');
+									$("#birthday").attr('value', '1991-12-27');
+									$("#nationality").attr('value', 'roc');
+
+								}
+								if (count == 7) {
+									$('#playerName').attr('value', '高承桓');
+									$("#id").attr('value', 'F123456788');
+									$("#playerNo").attr('value', '19');
+									$("#playerRole").attr('value', 'PG');
+									$("#height").attr('value', '171');
+									$("#weights").attr('value', '65');
+									$("#birthday").attr('value', '1991-12-27');
+									$("#nationality").attr('value', 'roc');
+
+								}
+								
 
 							});
 
