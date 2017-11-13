@@ -42,8 +42,16 @@
 			width:100%;
 			text-align:left;
 		}
-		h3{
+		#h3{
 			text-align:center;
+			font-family: DFKai-sb;
+			background-color: #f34c2a;
+			width: 115%;
+			margin-left: -21px;
+			border-top-right-radius: 10px;
+			border-top-left-radius: 10px;
+			color: white;
+			box-shadow: inset 0 0 20px 1px #eb0000;
 		}
 		.videolist{
 			 overflow-y: hidden;
@@ -54,7 +62,17 @@
 			border-radius:10px;
 			object-fit:cover;
 		}
-
+		#pathWay {
+			color: #666;
+			height: 28px;
+			line-height: 28px;
+			border-bottom: 1px solid #c0b7b7;
+			text-indent: 5px;
+			font-size: 18px;
+			font-weight: normal;
+			margin-bottom: 10px;
+			font-family:微軟正黑體;
+		}
     </style>
 
 </head>
@@ -64,14 +82,31 @@
     <!--主文(開始)-->
     <div class="container">
         <div class="jumbotron">
+        
+        	<!--上層導覽列(開始) -->
+			<div id="pathWay">
+        		<span>
+            		<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
+            			<span>首頁</span>
+            		</a>
+        		</span>&gt;
+        		<span>
+            		<span>影音</span>
+        		</span>&gt;
+        		<span>
+        			<span>影片</span>
+        		</span>
+    		</div>
+    		<!--上層導覽列(結束) -->
+
             <!--表格(開始)-->
             <!--****************-->
             <!-- 第一列(開始) -->
             <!--****************-->
             <div class='row'>           	
-				<h2 style="font-family:'DFKai-sb'">精彩賽事影音</h2>
+				<h2 style="font-family:'DFKai-sb';text-align:center;">精彩賽事影音</h2>
 			</div>
-			<div class="row" style="background-color:#d0d0d0;height: 100%;">
+			<div class="row" style="background-color:#d6aaaa42;height: 100%;">
                 <div class="col-md-9" style="padding-left: 30px;">
             		<div class="row" id="mediaplayer" oncontextmenu="window.event.returnValue=false">            
                 		<video controls id="video" src="<%=request.getContextPath()%>/videos/${gameMediaSvc.getOneGameMedia(6001).gameVideo}" type="video/mp4">
@@ -126,7 +161,7 @@
 			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
 				var list = $('#videolist');
 				list.empty();
-				var cell1 = $('<h3 style="font-family:DFKai-sb">影片列表</h3>');
+				var cell1 = $('<h3 id="h3" style="font-family:DFKai-sb">影片列表</h3>');
 				list.append(cell1);
 				
 				$.each(data, function(index,gMVO){
@@ -172,8 +207,8 @@
 						cell3.append([cell4, cell5]);
 						cell1.append([cell2, cell3]);
 						
-						$('.card-imp-top').on('click',function(){
-							console.log('聯捷')
+						$('.changeVideo').on('click',function(){
+							console.log('連結')
 							var video = $(this).attr('id');
 							$('#video').attr('src','<%=request.getContextPath()%>/videos/'+video);
 						})
