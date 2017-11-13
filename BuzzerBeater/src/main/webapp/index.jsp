@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh" class="no-js">
 <head>
@@ -52,14 +51,73 @@
     <!--主文(開始)-->
     
     <div class="container">
-        <div class="jumbotron">
-        <!--計時器(開始)-->
-			<div class="row">          
-				<div id="countdown">
-					<div>賽季報名日期倒數 :</div>
+        <div class="jumbotron">          
+            <div class="row">
+  				<div class="col-md-6">
+					<div id="countdown">
+						<div>2017-18例行賽&nbsp;&nbsp;報名倒數 :</div>
+					</div>
+					<p style="color:#303030" id="note"></p>
 				</div>
-				<p style="color:#303030" id="note"></p>
-            </div>
+  				<div class="col-md-6">
+<!-- 				<h2 style="font-family: 微軟正黑體;text-align: center;font-size: 3em;">2016-17例行賽</h2><br> -->
+                 <h2 style="text-align: center;font-size: 2em;">報名現況</h2><br>
+
+                    <!--滑鼠移入，顯示表格(開始)-->
+                    <div id="tabs">
+                        <ul>
+                            <!--<h3>戰績排行</h3>-->
+                            <li><a href="#tabs-1">測試A區</a></li>
+                            <li><a href="#tabs-2">測試B區</a></li>
+                        </ul>
+                        <div id="tabs-1">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>目前球隊數量</th>
+                                        <th>參賽球隊上線</th>
+                                        <th>報名狀況</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	<tr>
+                                        <td>6</td>
+                                        <td>8</td>
+                                        <td><a href="#" class="btn btn-warning" onclick="document.getElementById('id01').style.display='block'" style="color:#f7f5f4" >
+										可報名
+										</a></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="tabs-2">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>目前球隊數量</th>
+                                        <th>參賽球隊上線</th>
+                                        <th>報名狀況</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>4</td>
+                                        <td>已達報名上限</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--滑鼠移入，顯示表格(結束)-->
+                    <!--表格(結束)-->
+
+				</div>
+			</div>
+            
+            
+            
            <!--*****************-->
             <!--廣告輪播(開始)-->
             <!--800x600(50萬像素),1024x768(80萬像素),1280x960(130萬像素)-->
@@ -147,87 +205,7 @@
     		
     
                 </div>
-                 <h2 style="font-family: 微軟正黑體;text-align: center;font-size: 3em;">2016-17例行賽</h2><br>
-                 <h2 style="font-family: 微軟正黑體;text-align: center;font-size: 2em;">戰績排行</h2><br>
-                <div class="col-md-12">
-                    <!--滑鼠移入，顯示表格(開始)-->
-                    <div id="tabs">
-                        <ul>
-                            <!--<h3>戰績排行</h3>-->
-                            <li><a href="#tabs-1">東區</a></li>
-                            <li><a href="#tabs-2">西區</a></li>
-                        </ul>
-                        <div id="tabs-1">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>隊伍名稱</th>
-                                        <th>勝場</th>
-                                        <th>敗場</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<tr>
-                                        <td>休士頓火箭</td>
-                                        <td>2</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>洛杉磯快艇</td>
-										<td>2</td>
-                                        <td>1</td>
-                                    </tr>
-                                    <tr>
-                                        <td>金州勇士</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                    </tr>
-                                    <tr>
-                                        <td>聖安東尼奧馬刺</td>
-                                        <td>1</td>
-                                        <td>2</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="tabs-2">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>隊伍名稱</th>
-                                        <th>勝場</th>
-                                        <th>敗場</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>猶他爵士</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>奧克拉荷馬市雷霆</td>
-                                        <td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                    <tr>
-                                        <td>曼斐斯灰熊</td>
-                                        <td>0</td>
-                                        <td>0</td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>波特蘭拓荒者</td>
-										<td>0</td>
-                                        <td>0</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!--滑鼠移入，顯示表格(結束)-->
-                    <!--表格(結束)-->
-                </div>
             </div>
 
             <!--表格(結束)-->
@@ -251,15 +229,15 @@
     <script type="text/javascript" src="js/posterTvGrid.js"></script>
     <script type="text/javascript">
                 var posterTvGrid = new posterTvGrid('posterTvGrid', { className: "posterTvGrid" }, [
-                        { "img": "images\/1.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
-                        { "img": "images\/2.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
-                        { "img": "images\/3.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
-                        { "img": "images\/4.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
-                        { "img": "images\/5.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
-                        { "img": "images\/6.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
-                        { "img": "images\/7.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
-                        { "img": "images\/8.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" },
-                        { "img": "images\/9.jpg", "title": "Lorem ipsum dolor sit amet", "url": "http:\/\/www.htmleaf.com\/" }
+                        { "img": "images\/1.jpg", "title": "Lorem ipsum dolor sit amet", "url": "<%=request.getContextPath() %>/index.jsp" },
+                        { "img": "images\/2.jpg", "title": "Lorem ipsum dolor sit amet", "url": "<%=request.getContextPath() %>/index.jsp" },
+                        { "img": "images\/3.jpg", "title": "Lorem ipsum dolor sit amet", "url": "<%=request.getContextPath() %>/index.jsp" },
+                        { "img": "images\/4.jpg", "title": "Lorem ipsum dolor sit amet", "url": "<%=request.getContextPath() %>/index.jsp" },
+                        { "img": "images\/5.jpg", "title": "Lorem ipsum dolor sit amet", "url": "<%=request.getContextPath() %>/index.jsp" },
+                        { "img": "images\/6.jpg", "title": "Lorem ipsum dolor sit amet", "url": "<%=request.getContextPath() %>/index.jsp" },
+                        { "img": "images\/7.jpg", "title": "Lorem ipsum dolor sit amet", "url": "<%=request.getContextPath() %>/index.jsp" },
+                        { "img": "images\/8.jpg", "title": "Lorem ipsum dolor sit amet", "url": "<%=request.getContextPath() %>/index.jsp" },
+                        { "img": "images\/9.jpg", "title": "Lorem ipsum dolor sit amet", "url": "<%=request.getContextPath() %>/index.jsp" }
                 ]
                 );
      </script>
