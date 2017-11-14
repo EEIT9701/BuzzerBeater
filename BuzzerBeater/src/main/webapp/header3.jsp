@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/favicon1.ico" type="image/x-icon">
+<link rel="icon" href="<%=request.getContextPath()%>/images/favicon1.ico" type="image/x-icon" /> 
 <jsp:useBean id="date" scope="page" class="java.util.Date"/>
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService"/>
 <jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService"/>
