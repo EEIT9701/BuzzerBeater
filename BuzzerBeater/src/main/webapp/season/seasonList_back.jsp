@@ -58,7 +58,13 @@
 			<!-- 網頁內容 -->
 			<div class="col-md-12">
 		        <h2>賽季列表</h2>
-		        <h4><a href="<%=request.getContextPath() %>/season/addSeason.jsp" class="btn btn-primary blockUI">新增賽季</a></h4>
+		        <nobr>
+			        <a href="<%=request.getContextPath() %>/season/addSeason.jsp" class="btn btn-primary blockUI">新增賽季</a>
+			        
+					<a href="<%=request.getContextPath()%>/season/addSeason_excel.jsp" class="btn btn-primary blockUI">使用EXCEL建立完整賽季</a>
+				</nobr>
+				<br>
+				
 		        <table class="table table-bordered" id="seasonList">
 		            <thead>
 			            <tr>

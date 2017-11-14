@@ -43,14 +43,6 @@ public class SeasonServlet extends HttpServlet {
 		// 取得請求參數"action"，此為自行設定的回傳參數，判斷將要執行的動作
 		String action = request.getParameter("action");
 
-		// GET_GROUP 以JSON格式取得所有分組
-		// GET_ALL_SEASON 以JSON格式取得所有賽季
-		// ADD_SEASON 從session取出暫存的賽季+分組並新增到資料庫
-		// TO_ADD_GROUPS 增加新的分組到session
-		// UPDATE_SEASON 更新賽季
-		// DELETE_SEASON 刪除賽季
-		
-
 		/********************************************************************/
 		if ("GET_GROUP".equals(action)) {
 			Integer seasonID = Integer.valueOf(request.getParameter("seasonID"));
@@ -78,7 +70,6 @@ public class SeasonServlet extends HttpServlet {
 
 		}
 
-
 		/********************************************************************/
 		if ("GET_ALL_SEASON".equals(action)) {
 
@@ -102,47 +93,6 @@ public class SeasonServlet extends HttpServlet {
 
 		/********************************************************************/
 		if ("ADD_SEASON".equals(action)) {
-			List<String> errorMsgs = new LinkedList<String>();
-			request.setAttribute("errorMsgs", errorMsgs);
-
-			try {
-				HttpSession session = request.getSession();
-				Map<String, Object> seasonVO = (Map<String, Object>) session.getAttribute("seasonVO");
-				Set<GroupsVO> groupsSet = (Set<GroupsVO>) session.getAttribute("groupsSet");
-
-				SeasonService sSvc = new SeasonService();
-
-				String seasonName = (String) seasonVO.get("seasonName");
-				Date seasonBeginDate = (Date) seasonVO.get("seasonBeginDate");
-				Date seasonEndDate = (Date) seasonVO.get("seasonEndDate");
-				Timestamp signUpBegin = (Timestamp) seasonVO.get("signUpBegin");
-				Timestamp signUpEnd = (Timestamp) seasonVO.get("signUpEnd");
-				String descriptions = (String) seasonVO.get("descriptions");
-
-				Integer seasonID = sSvc.addSeason(seasonName, seasonBeginDate, seasonEndDate, signUpBegin, signUpEnd,
-						descriptions);
-
-				// 新增分組
-				GroupsService gSvc = new GroupsService();
-				for (GroupsVO gvo : groupsSet) {
-					gSvc.addGroups(seasonID, gvo.getGroupName(), gvo.getMaxTeams(), gvo.getMinTeams(),
-							gvo.getMaxPlayers(), gvo.getMinPlayers());
-				}
-
-				response.sendRedirect(request.getContextPath() + "/season/seasonList_back.jsp");
-
-			} catch (Exception e) {
-
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = request.getRequestDispatcher("/season/addSeason.jsp");
-				failureView.forward(request, response);
-			}
-			return;
-
-		}
-
-		/********************************************************************/
-		if ("TO_ADD_GROUPS".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			request.setAttribute("errorMsgs", errorMsgs);
@@ -209,13 +159,13 @@ public class SeasonServlet extends HttpServlet {
 					request.setAttribute("seasonVO", sVO);
 					RequestDispatcher failView = request.getRequestDispatcher("/season/addSeason.jsp");
 					failView.forward(request, response);
-					return;
 				}
 
 				// 成功處理
-				request.getSession().setAttribute("seasonVO", sVO);
-				RequestDispatcher successView = request.getRequestDispatcher("/groups/addGroups.jsp");
-				successView.forward(request, response);
+				SeasonService seasonSvc = new SeasonService();
+				Integer seasonID = seasonSvc.addSeason(seasonName, seasonBeginDate, seasonEndDate, signUpBegin,
+						signUpEnd, descriptions);
+				response.sendRedirect(request.getContextPath() + "/groups/groupList_back.jsp?seasonID=" + seasonID);
 
 				// 其他可能的錯誤處理
 			} catch (Exception e) {
