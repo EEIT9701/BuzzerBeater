@@ -75,28 +75,29 @@ public class GamesDAO_HibernateTemplate implements GamesDAO_interface {
 		GamesDAO_interface dao = (GamesDAO_interface) context.getBean("GamesDAO");
 
 		// dao.delete(4003);
+		dao.getAll();
 
-		GamesVO gamesVO = new GamesVO();
-		gamesVO.setGameID(4007);
-
-		for (int i = 0; i < 10; i++) {
-			PersonalDataVO pvo = new PersonalDataVO();
-			pvo.setTwoPoint(i + 1);
-			pvo.setThreePoint(i * 2);
-			
-			TeamsVO teamsVO = new TeamsVO();
-			teamsVO.setTeamID(3001);
-			pvo.setTeamsVO(teamsVO);
-			
-			PlayersVO playersVO = new PlayersVO();
-			playersVO.setPlayerID(70001+i);
-			pvo.setPlayersVO(playersVO);
-			
-			pvo.setGamesVO(gamesVO);
-			gamesVO.getPersonalDataSet().add(pvo);
-		}
-
-		dao.update(gamesVO);
+//		GamesVO gamesVO = new GamesVO();
+//		gamesVO.setGameID(4007);
+//
+//		for (int i = 0; i < 10; i++) {
+//			PersonalDataVO pvo = new PersonalDataVO();
+//			pvo.setTwoPoint(i + 1);
+//			pvo.setThreePoint(i * 2);
+//			
+//			TeamsVO teamsVO = new TeamsVO();
+//			teamsVO.setTeamID(3001);
+//			pvo.setTeamsVO(teamsVO);
+//			
+//			PlayersVO playersVO = new PlayersVO();
+//			playersVO.setPlayerID(70001+i);
+//			pvo.setPlayersVO(playersVO);
+//			
+//			pvo.setGamesVO(gamesVO);
+//			gamesVO.getPersonalDataSet().add(pvo);
+//		}
+//
+//		dao.update(gamesVO);
 
 	}
 

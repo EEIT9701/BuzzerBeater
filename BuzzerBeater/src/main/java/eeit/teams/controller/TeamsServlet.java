@@ -329,6 +329,7 @@ public class TeamsServlet extends HttpServlet {
 				map.put("playerRole", teamCompositionVO.getPlayerRole());
 				map.put("height", teamCompositionVO.getPlayersVO().getHeight().toString());
 				map.put("weights", teamCompositionVO.getPlayersVO().getWeights().toString());
+				map.put("birthday", teamCompositionVO.getPlayersVO().getBirthday().toString());
 				map.put("nationality", teamCompositionVO.getPlayersVO().getNationality());
 
 				returnlist.add((HashMap<String, String>) map);

@@ -16,6 +16,8 @@
 					<script src="<%=request.getContextPath()%>/js/jquery-3.1.1.min.js"></script>
 					<script src="<%=request.getContextPath()%>/js/iEdit.js"></script>
 					<script src="<%=request.getContextPath()%>/js/jquery.step.min.js"></script>
+					
+					
 					<jsp:include page="/header_css.jsp" />
 					
 
@@ -193,7 +195,6 @@
 						</div>
 					</div>
 
-
 					<!--主文(結束)-->
 					<script type="text/javascript">
 						var $step = $("#step");
@@ -287,7 +288,7 @@
 								var th = $('<thead></thead>');
 								var tb = $('<tbody></tbody>');
 								var cell1 = $(
-									'<div class="col-md-12" style="margin-bottom:30px"><div class="col-md-4"><button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button></div><div class="col-md-4"></div><div class="col-md-4"><div class="col-md-4"><input type="file"></div><div class="col-md-4"></div><button class="btn btn-warning" id="insertAll">一鍵新增</button></div></div><div></div>');
+									'<div class="col-md-12" style="margin-bottom:30px"><div class="col-md-4"><button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button></div><div class="col-md-4"><div class="col-md-4"></div><div class="col-md-4"></div><div class="col-md-4"><input type="file"></div></div><div class="col-md-4"><div class="col-md-4"></div><div class="col-md-4"></div><button class="btn btn-warning" id="insertAll">匯入Excel</button></div></div><div></div>');
 								
 								var cell2 = $('<th></th>').text("球員照片");
 								var cell3 = $('<th></th>').text("球員姓名");
@@ -298,17 +299,19 @@
 								var cell8 = $('<th></th>').text("體重");
 								var cell9 = $('<th></th>').text("生日");
 								var cell10 = $('<th></th>').text("國籍");
-								var cell11 = $('<div class="col-md-4"><button id="prevBtn"><nobr>上一步</nobr></button></div>')
-								var cell12 = $('<div class="col-md-4"></div>');
-								var cell13 = $('<div class="col-md-4"><button id="nextBtn"><nobr>下一步</nobr></button></div>')
+								var cell11 = $('<th></th>')
+								var cell12 = $('<th></th>')
+								var cell13 = $('<div class="col-md-4"><button id="prevBtn"><nobr>上一步</nobr></button></div>')
+								var cell14 = $('<div class="col-md-4"></div>');
+								var cell15 = $('<div class="col-md-4"><button id="nextBtn"><nobr>下一步</nobr></button></div>')
 								var row = $('<tr align="center" valign="middle"></tr>').append([cell2, cell3, cell4, cell5, cell6, cell7, cell8,
-									cell9, cell10
+									cell9, cell10, cell11, cell12
 								]);
 								docFrag.append(row);
 								th.append(docFrag);
 								tab.append(th);
 								bt.append([cell1, tab]);
-								btns.append([cell11, cell12, cell13]);
+								btns.append([cell13, cell14, cell15]);
 								
 								prevBtn();
 								nextBtn();
@@ -386,32 +389,43 @@
 
 								});
 $("#insertAll").on("click", function () {
-	tb.empty;
-	
-	$.getJSON('<%=request.getContextPath()%>/Teams.do', {
-		'action': 'findMyTeamPlayer'
-	}, function (data) {
-		$.each(data, function (index, player) {
-			var cell1 = $('<td></td>').html('<img style = "width:50px" src="data:image/png;base64,' + player.photo +
-				'">')
-			var cell2 = $('<td></td>').text(player.playerName);
-			var cell3 = $('<td></td>').text(player.id);
-			var cell4 = $('<td></td>').text(player.playerNo);
-			var cell5 = $('<td></td>').text(player.playerRole);
-			var cell6 = $('<td></td>').text(player.height);
-			var cell7 = $('<td></td>').text(player.weights);
-			var cell8 = $('<td></td>').text(player.weights);
-			var cell9 = $('<td></td>').text(player.nationality);
-			var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
-				cell7, cell8, cell9
-			]);
-			docFrag.append(row);
-			tb.append(docFrag);
+	$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
+	setTimeout(function(){
+		tb.empty();
+		
+		$.getJSON('<%=request.getContextPath()%>/Teams.do', {
+			'action': 'findMyTeamPlayer'
+		}, function (data) {
+			$.each(data, function (index, player) {
+				var cell1 = $('<td></td>').html('<img style = "width:50px" src="data:image/png;base64,' + player.photo +
+					'">')
+				var cell2 = $('<td></td>').text(player.playerName);
+				var cell3 = $('<td></td>').text(player.id);
+				var cell4 = $('<td></td>').text(player.playerNo);
+				var cell5 = $('<td></td>').text(player.playerRole);
+				var cell6 = $('<td></td>').text(player.height);
+				var cell7 = $('<td></td>').text(player.weights);
+				var cell8 = $('<td></td>').text(player.birthday);
+				var cell9 = $('<td></td>').text(player.nationality);
+				var cell10 = $('<td></td>').html($(
+						'<button id="update" type="submit"class="btn btn-info" data-toggle="modal" data-target="#myModal1">修改</button>'
+					));
 
-		})
-		tab.append(tb);
+					var cell11 = $('<td></td>').html($('<button type="submit"class="btn btn-danger">刪除</button>'));
+				var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
+					cell7, cell8, cell9,cell10,cell11
+				]);
+				docFrag.append(row);
+				tb.append(docFrag);
 
-	});
+			})
+			tab.append(tb);
+
+		});
+		$.unblockUI()
+		
+	},1500)
+
 });
 
 
@@ -720,7 +734,7 @@ $("#insertAll").on("click", function () {
 					            var teamStat ="1";
 // 					            console.log(teamStat);
 // 					            var paymentNumber =$(this).parents('tr').find('td:nth-child(4)>input').val();
-					            var paymentNumber ="無";
+					            var paymentNumber ="歐富寶繳費";
 					            //把撈到的值包成JSON
 						       	var dataStr = JSON.stringify({ 'teamID':teamID, 'groupID':groupID, 'teamStat':teamStat,'registerDate':registerDate,'paymentNumber':paymentNumber})
 						       	console.log(dataStr);
@@ -741,6 +755,8 @@ $("#insertAll").on("click", function () {
 					</script>
 
 					<jsp:include page="/footer_css.jsp" />
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+
 
 
 				</body>

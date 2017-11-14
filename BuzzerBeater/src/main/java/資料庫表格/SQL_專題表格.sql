@@ -53,8 +53,8 @@ create table Groups			--分組
  insert into Groups values ('1002','東區','8','4','0','15','7');
  insert into Groups values ('1002','西區','8','4','0','15','7');
 
- insert into Groups values ('1003','測試A區','8','4','6','15','7');
- insert into Groups values ('1003','測試B區','4','4','4','15','7');
+ insert into Groups values ('1003','A組','8','4','6','15','7');
+ insert into Groups values ('1003','B組','4','4','4','15','7');
  
  select * from Groups
  GO
@@ -316,7 +316,7 @@ GO
   groupID                      int references Groups(groupID ),          --分組ID
   teamStat                     int,                                      --球隊報名狀態
   registerDate                 datetime,                                 --球隊報名時間
-  paymentNumber                char(5),                                  --繳費後五碼
+  paymentNumber                varchar(10),                                  --繳費後五碼
   primary key(teamID,groupID)
  )
 GO  
