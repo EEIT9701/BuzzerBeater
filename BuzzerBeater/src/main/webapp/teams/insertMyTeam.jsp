@@ -288,7 +288,7 @@
 								var th = $('<thead></thead>');
 								var tb = $('<tbody></tbody>');
 								var cell1 = $(
-									'<div class="col-md-12" style="margin-bottom:30px"><div class="col-md-4"><button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button></div><div class="col-md-4"></div><div class="col-md-4"><div class="col-md-4"><input type="file"></div><div class="col-md-4"></div><button class="btn btn-warning" id="insertAll">一鍵新增</button></div></div><div></div>');
+									'<div class="col-md-12" style="margin-bottom:30px"><div class="col-md-4"><button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button></div><div class="col-md-4"><div class="col-md-4"></div><div class="col-md-4"></div><div class="col-md-4"><input type="file"></div></div><div class="col-md-4"><div class="col-md-4"></div><div class="col-md-4"></div><button class="btn btn-warning" id="insertAll">匯入Excel</button></div></div><div></div>');
 								
 								var cell2 = $('<th></th>').text("球員照片");
 								var cell3 = $('<th></th>').text("球員姓名");
