@@ -44,6 +44,10 @@
       	  margin-bottom: 10px;
       	  font-family:微軟正黑體;
         }
+        #calendar thead{
+        	background-color: rgba(237, 125, 49, 0.8);
+        	font-size: 18px;
+        }
         </style>
     </head>
 
@@ -240,8 +244,33 @@
 	    <%--遮罩插件 --%>  		
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
 		
+		<link href='<%=request.getContextPath()%>/fullcalendar-3.7.0/fullcalendar.css' rel='stylesheet' />
+		<link href='<%=request.getContextPath()%>/fullcalendar-3.7.0/fullcalendar.print.css' rel='stylesheet' media='print' />
+		<script src='<%=request.getContextPath()%>/fullcalendar-3.7.0/lib/moment.min.js'></script>
+		<script src='<%=request.getContextPath()%>/fullcalendar-3.7.0/lib/jquery.min.js'></script>
+		<script src='<%=request.getContextPath()%>/fullcalendar-3.7.0/fullcalendar.min.js'></script>
+		<script src="<%=request.getContextPath()%>/fullcalendar-3.7.0/locale/zh-tw.js"></script>
+		<script src='<%=request.getContextPath()%>/fullcalendar-3.7.0/gcal.js'></script>
+		
 	    <script type="text/javascript">
 	    $(function(){
+	    	
+	    	$('#calendar').fullCalendar({
+	    		header:{
+	                right: 'prev,next today',
+	                left: 'month,agendaWeek,agendaDay'
+	            },
+    			events: function(start, end, timezone, callback){
+    				$.get('<%=request.getContextPath()%>/Games.do',
+    					{'action':'GET_CALENDAR','seasonID':'${seasonVO.seasonID}'}, function(data){
+    						callback(JSON.parse(data));
+    				});
+    			},
+    			defaultDate: "${seasonVO.seasonBeginDate}",
+    			defaultView: "agendaWeek",
+    			height: 500
+    		});
+	    	
 	    	$(document).on('click','.blockUI',function(){
 	    		// 處理中
 				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
