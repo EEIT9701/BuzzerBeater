@@ -240,7 +240,7 @@ public class PersonalDataServlet extends HttpServlet {
 			jdbc jd=new jdbc();
 		    jd.main(game);
 		    
-		    resp.sendRedirect(req.getContextPath()+"/groups/groupList_back.jsp?seasonID="+seasonID);
+		    resp.sendRedirect(req.getContextPath()+"/groups/gameList_back.jsp?gameID="+seasonID);
 		}
 		
 		
