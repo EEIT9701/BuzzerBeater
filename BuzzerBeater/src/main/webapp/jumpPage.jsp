@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,26 +7,26 @@
 <title>Buzzer Beater</title>
 
     <script type="text/javascript">
-	//Ãö³¬µøµ¡
+	//é—œé–‰è¦–çª—
 	function closeWin () {
-	//©I¥swindowª«¥óªºclose()¨ç¼Æ,Ãö³¬µøµ¡
+	//å‘¼å«windowç‰©ä»¶çš„close()å‡½æ•¸,é—œé–‰è¦–çª—
 		window.location.replace('<%=request.getContextPath() %>/groupreg/check_Sign_up_member_3.jsp');
 }
-	//³\¦h¬í«á¤£¸ß°İ¦Û°ÊÃö³¬µøµ¡
-	//©w¸q¤@­Ó¬O§_Ãö³¬ªº¥ş°ìÅÜ¼Æ
+	//è¨±å¤šç§’å¾Œä¸è©¢å•è‡ªå‹•é—œé–‰è¦–çª—
+	//å®šç¾©ä¸€å€‹æ˜¯å¦é—œé–‰çš„å…¨åŸŸè®Šæ•¸
 	var willClose = true;
-	//ÂIÀ»ºô­¶
+	//é»æ“Šç¶²é 
 	function clickBody () {
-		//¨åÄyºô­¶«á,«h§âÅÜ¼Æ¸m¬°false
+		//å…¸ç±ç¶²é å¾Œ,å‰‡æŠŠè®Šæ•¸ç½®ç‚ºfalse
 		willClose = false;
 	}
 	setInterval (function() {
-		//§PÂ_¬O§_»İ­nÃö³¬
+		//åˆ¤æ–·æ˜¯å¦éœ€è¦é—œé–‰
 		if(willClose) {
-			//Ãö³¬µøµ¡
+			//é—œé–‰è¦–çª—
 		    window.location.replace('<%=request.getContextPath() %>/groupreg/check_Sign_up_member_3.jsp');
 		} else {
-			//¦pªGÂIÀ»¹L,­«·s¶}©l­pºâ
+			//å¦‚æœé»æ“Šé,é‡æ–°é–‹å§‹è¨ˆç®—
 			willClose = true;
 		}
 	},2000);
@@ -37,15 +37,15 @@
 <body style="text-align:center" onclick="clickBody()">
 
     <div style="text-align:center">
-    <h1>±z¤wÃº¶O¦¨¥\!</h1>
-        <h2>­Y2¬íÄÁ¤£ÂIÀ»ºô­¶,¨t²Î±N¦Û°Ê¾É¦VÃº¶O­¶­±</h2>
+    <h1>æ‚¨å·²ç¹³è²»æˆåŠŸ!</h1>
+        <h2>è‹¥2ç§’é˜ä¸é»æ“Šç¶²é ,ç³»çµ±å°‡è‡ªå‹•å°å‘ç¹³è²»é é¢</h2>
     </div>
 
     <span id="ad"></span>
 
-    <!-- ÂIÀ»«ö¶s©I¥sÃö³¬µøµ¡  -->
+    <!-- é»æ“ŠæŒ‰éˆ•å‘¼å«é—œé–‰è¦–çª—  -->
     <div style="text-align:center">
-        <input type="button" value="ÂIÀ»¸õÂàÃº¶O­¶­±" onclick="closeWin()" />
+        <input type="button" value="é»æ“Šè·³è½‰ç¹³è²»é é¢" onclick="closeWin()" />
     </div>
 
 
