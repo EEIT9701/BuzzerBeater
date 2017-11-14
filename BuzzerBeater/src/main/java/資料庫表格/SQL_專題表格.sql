@@ -316,7 +316,7 @@ GO
   groupID                      int references Groups(groupID ),          --分組ID
   teamStat                     int,                                      --球隊報名狀態
   registerDate                 datetime,                                 --球隊報名時間
-  paymentNumber                char(5),                                  --繳費後五碼
+  paymentNumber                varchar(10),                                  --繳費後五碼
   primary key(teamID,groupID)
  )
 GO  

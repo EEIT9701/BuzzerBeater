@@ -734,7 +734,7 @@ $("#insertAll").on("click", function () {
 					            var teamStat ="1";
 // 					            console.log(teamStat);
 // 					            var paymentNumber =$(this).parents('tr').find('td:nth-child(4)>input').val();
-					            var paymentNumber ="無";
+					            var paymentNumber ="歐富寶繳費";
 					            //把撈到的值包成JSON
 						       	var dataStr = JSON.stringify({ 'teamID':teamID, 'groupID':groupID, 'teamStat':teamStat,'registerDate':registerDate,'paymentNumber':paymentNumber})
 						       	console.log(dataStr);
