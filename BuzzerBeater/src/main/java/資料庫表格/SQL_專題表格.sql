@@ -695,9 +695,8 @@ insert into MemberInfo values('MemphisGrizzlies@ymail.com','曼菲斯灰熊','teams',
 insert into MemberInfo values('PortlandTrail@ymail.com','波特蘭拓荒者','teams','2016-02-17','3008');
 insert into MemberInfo values('javaeeit972017@gmail.com','EEIT97','teams','2016-02-11','3009');
 
-insert into MemberInfo values('javaeeit97201701@gmail.com','FB官方社團','admin','2017-06-23','');
-insert into MemberInfo values('javaeeit97201702@gmail.com','FB籃球隊','teams','2017-06-23','');
-insert into MemberInfo values('s988309@gmail.com','EEIT97第一組','admin','2017-06-23','');
+insert into MemberInfo values('javaeeit97201701@gmail.com','主辦方','admin','2017-06-23','');
+insert into MemberInfo values('javaeeit97201702@gmail.com','BZ球隊','teams','2017-06-23','');
 insert into MemberInfo values('frank810618@gmail.com','賴彥誠','admin','2017-09-25','');
 insert into MemberInfo values('qwe020488952@gmail.com','陳品維','admin','2017-09-23','');
 insert into MemberInfo values('homeway1993@gmail.com','紘瑋','admin','2017-09-23','');
