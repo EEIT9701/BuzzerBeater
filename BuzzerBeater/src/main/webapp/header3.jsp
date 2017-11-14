@@ -19,7 +19,7 @@
 					<!--  新刪修"按鈕"(開始)-->
 					
 					<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-pencil"></i></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<%=request.getContextPath()%>/images/favicon4.ico"></a>
 					<ul class="dropdown-menu cart-list">
 											<c:choose>
 					   <c:when test="${empty LoginOK}">
@@ -74,7 +74,7 @@
 					</c:if>								
 					<c:if test="${!empty LoginOK}">		
 						<a style="padding-top: 20px;">			
-							<img  src="${pictureUri}"  style="width:25px; height:25px;text-decoration:none;"> 
+							<img  src="${pictureUri}"  style="width:40px; height:40px;text-decoration:none;margin-bottom: -5px;"> 
 							<c:set var="var01" value="${LoginOK.name}" />
 							${var01}
 						</a>
