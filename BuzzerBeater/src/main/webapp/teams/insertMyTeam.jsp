@@ -19,6 +19,7 @@
 					
 					
 					<jsp:include page="/header_css.jsp" />
+					<jsp:include page="/font_css.jsp" />
 					
 
 					<style>
@@ -74,6 +75,21 @@
 							height: 200px;
 							margin: auto;
 						}
+						thead{
+							background-color: #d62d67;
+							color: #e9e9e9;
+						}
+						#pathWay {
+							color: #666;
+							height: 28px;
+							line-height: 28px;
+							border-bottom: 1px solid #c0b7b7;
+							text-indent: 5px;
+							font-size: 18px;
+							font-weight: normal;
+							margin-bottom: 10px;
+							font-family:微軟正黑體;
+						}
 					</style>
 
 				</head>
@@ -87,6 +103,19 @@
 
 					<div class="container">
 						<div class="jumbotron">
+						
+						<!--上層導覽列(開始) -->
+						<div id="pathWay">
+        					<span>
+            					<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
+            						<span>使用者功能</span>
+            					</a>
+        					</span>&gt;
+        					<span><span>分組報名</span></span>
+    					</div>
+    					<h2>分組報名</h2>
+    					<!--上層導覽列(結束) -->
+    	
 							<div class="main">
 								<div id="step"></div>
 								<div id="buildTeam"></div>
@@ -288,7 +317,7 @@
 								var th = $('<thead></thead>');
 								var tb = $('<tbody></tbody>');
 								var cell1 = $(
-									'<div class="col-md-12" style="margin-bottom:30px"><div class="col-md-4"><button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button></div><div class="col-md-4"></div><div class="col-md-4"><div class="col-md-4"><input type="file"></div><div class="col-md-4"></div><button class="btn btn-warning" id="insertAll">一鍵新增</button></div></div><div></div>');
+									'<div class="col-md-12" style="margin-bottom:30px"><div class="col-md-4"><button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button></div><div class="col-md-4"><div class="col-md-4"></div><div class="col-md-4"></div><div class="col-md-4"><input type="file"></div></div><div class="col-md-4"><div class="col-md-4"></div><div class="col-md-4"></div><button class="btn btn-warning" id="insertAll">匯入Excel</button></div></div><div></div>');
 								
 								var cell2 = $('<th></th>').text("球員照片");
 								var cell3 = $('<th></th>').text("球員姓名");
@@ -560,7 +589,7 @@ $("#insertAll").on("click", function () {
 
 							    console.log(Str_date)
 								var cell8=$('<td></td>').text("EEIT97");
-								var cell9=$('<td></td>').text("測試A區");
+								var cell9=$('<td></td>').text("A區");
 								var cell10=$('<td></td>').text(Str_date);
 								var cell11=$('<td><input id="account" name="account" placeholder="輸入帳號後五碼" class="form-control input-md" type="text" required ></td>');
 								var cell12=$('<td><a href="<%=request.getContextPath()%>/opaytest.do" id="opay"><img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top:5px;"></a></td>');
@@ -734,7 +763,7 @@ $("#insertAll").on("click", function () {
 					            var teamStat ="1";
 // 					            console.log(teamStat);
 // 					            var paymentNumber =$(this).parents('tr').find('td:nth-child(4)>input').val();
-					            var paymentNumber ="無";
+					            var paymentNumber ="歐付寶繳費";
 					            //把撈到的值包成JSON
 						       	var dataStr = JSON.stringify({ 'teamID':teamID, 'groupID':groupID, 'teamStat':teamStat,'registerDate':registerDate,'paymentNumber':paymentNumber})
 						       	console.log(dataStr);

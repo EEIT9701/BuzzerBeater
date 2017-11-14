@@ -13,7 +13,7 @@
 			<column name="locationID" />
 		</many-to-one>
 		
-		<set name="teamCompositionSet" table="TeamComposition" lazy="false">			
+		<set name="teamCompositionSet" table="TeamComposition" lazy="false" order-by="playerID asc">			
 			<key><column name="teamID"/></key>
 			<one-to-many class="eeit.teamcomposition.model.TeamCompositionVO" />
 		</set>

@@ -53,8 +53,8 @@ create table Groups			--分組
  insert into Groups values ('1002','東區','8','4','0','15','7');
  insert into Groups values ('1002','西區','8','4','0','15','7');
 
- insert into Groups values ('1003','測試A區','8','4','6','15','7');
- insert into Groups values ('1003','測試B區','4','4','4','15','7');
+ insert into Groups values ('1003','A組','8','4','6','15','7');
+ insert into Groups values ('1003','B組','4','4','4','15','7');
  
  select * from Groups
  GO
@@ -207,14 +207,14 @@ insert into Players values ('Tim Quarterman','A122968761','198 ','89 ','1994/10/
 insert into Players values ('Evan Turner','A122968762','201 ','100 ','1988/10/27','us',null);
 insert into Players values ('Noah Vonleh','A122968763','208 ','109 ','1995/8/24','us',null);
 insert into Players values ('朱奕叡','A123456789','171 ','65 ','1991/12/26','roc',null);
-insert into Players values ('賴彥誠','A123456788','208 ','109 ','1995/8/24','us',null);
-insert into Players values ('張紘瑋','A123456787','208 ','109 ','1995/8/24','us',null);
-insert into Players values ('何其偉','A123456786','208 ','109 ','1995/8/24','us',null);
-insert into Players values ('陳品維','A123456785','208 ','109 ','1995/8/24','us',null);
-insert into Players values ('李紹群','A123456784','208 ','109 ','1995/8/24','us',null);
-insert into Players values ('高承桓','A123456783','208 ','109 ','1995/8/24','us',null);
-insert into Players values ('櫻木花道','A123456782','208 ','109 ','1995/8/24','us',null);
-insert into Players values ('流川風','A123456781','208 ','109 ','1995/8/24','us',null);
+insert into Players values ('賴彥誠','A123456788','171 ','63 ','1992/6/18','roc',null);
+insert into Players values ('張紘瑋','A123456787','172 ','58 ','1992/6/22','roc',null);
+insert into Players values ('何其偉','A123456786','180 ','70 ','1987/1/25','roc',null);
+insert into Players values ('陳品維','A123456785','175 ','75 ','1990/5/26','roc',null);
+insert into Players values ('李紹群','A123456784','170 ','65 ','1985/4/20','roc',null);
+insert into Players values ('高承桓','A123456783','171 ','62 ','1990/2/15','roc',null);
+insert into Players values ('櫻木花道','A123456782','190 ','80 ','1985/5/10','jap',null);
+insert into Players values ('流川風','A123456781','192 ','85 ','1988/11/24','jap',null);
  
  select * from Players 
  GO
@@ -316,7 +316,7 @@ GO
   groupID                      int references Groups(groupID ),          --分組ID
   teamStat                     int,                                      --球隊報名狀態
   registerDate                 datetime,                                 --球隊報名時間
-  paymentNumber                char(5),                                  --繳費後五碼
+  paymentNumber                varchar(10),                                  --繳費後五碼
   primary key(teamID,groupID)
  )
 GO  
@@ -432,15 +432,15 @@ insert into TeamComposition values ('3008','70121','20','SF','2016/6/8','');
 insert into TeamComposition values ('3008','70122','2','SG','2016/6/8','');
 insert into TeamComposition values ('3008','70125','4','SG','2016/6/8','');
 insert into TeamComposition values ('3008','70126','22','PG','2016/6/8','');
-insert into TeamComposition values ('3009','70133','9','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70133','9','SF','2017/11/17','');
 insert into TeamComposition values ('3009','70134','19','PG','2017/11/17','');
-insert into TeamComposition values ('3009','70135','18','PG','2017/11/17','');
-insert into TeamComposition values ('3009','70136','30','PG','2017/11/17','');
-insert into TeamComposition values ('3009','70137','22','PG','2017/11/17','');
-insert into TeamComposition values ('3009','70138','22','PG','2017/11/17','');
-insert into TeamComposition values ('3009','70139','22','PG','2017/11/17','');
-insert into TeamComposition values ('3009','70140','22','PG','2017/11/17','');
-insert into TeamComposition values ('3009','70141','22','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70135','18','SG','2017/11/17','');
+insert into TeamComposition values ('3009','70136','30','PF','2017/11/17','');
+insert into TeamComposition values ('3009','70137','8','C','2017/11/17','');
+insert into TeamComposition values ('3009','70138','20','SG','2017/11/17','');
+insert into TeamComposition values ('3009','70139','29','PG','2017/11/17','');
+insert into TeamComposition values ('3009','70140','10','PF','2017/11/17','');
+insert into TeamComposition values ('3009','70141','11','SF','2017/11/17','');
 
 
 select * from TeamComposition

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/favicon1.ico" type="image/x-icon">
+<link rel="icon" href="<%=request.getContextPath()%>/images/favicon1.ico" type="image/x-icon" /> 
 <jsp:useBean id="date" scope="page" class="java.util.Date"/>
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService"/>
 <jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService"/>
@@ -18,7 +19,7 @@
 					<!--  新刪修"按鈕"(開始)-->
 					
 					<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-pencil"></i></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<%=request.getContextPath()%>/images/favicon4.ico"></a>
 					<ul class="dropdown-menu cart-list">
 											<c:choose>
 					   <c:when test="${empty LoginOK}">
@@ -73,7 +74,7 @@
 					</c:if>								
 					<c:if test="${!empty LoginOK}">		
 						<a style="padding-top: 20px;">			
-							<img  src="${pictureUri}"  style="width:25px; height:25px;text-decoration:none;"> 
+							<img  src="${pictureUri}"  style="width:40px; height:40px;text-decoration:none;margin-bottom: -5px;"> 
 							<c:set var="var01" value="${LoginOK.name}" />
 							${var01}
 						</a>
