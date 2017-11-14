@@ -122,14 +122,14 @@
 					<c:forEach var="gameMediaType" items="${gameMediaVO.mediaType}">
 						<c:if test="${gameMediaType eq 'video'}">
 							<div class="card col-md-3">
-								<img class="card-img-top img-rounded center-block" id="${gameMediaVO.gameVideo}" src="data:image/jpeg;base64,${gameMediaVO.gamePhoto}">
+								<img class="card-img-top img-rounded center-block changeVideo" id="${gameMediaVO.gameVideo}" src="data:image/jpeg;base64,${gameMediaVO.gamePhoto}">
   								<div class="card-block">
     								<h4 class="card-title" align="center">${gameMediaVO.mediasName}</h4>
 <!--     								</br> -->
-    									<p class="card-text" align="center">
+    									<p class="card-text">
     										<img src="<%=request.getContextPath()%>/images/tag.png">
     										<c:forEach var="tag" items="${gameMediaVO.tag}">
-    											<a class="tagFunction">${tag}</a>
+    											<button class="btn-success btn-sm tagFunction" style="border-radius:5px;">${tag}</button>
     										</c:forEach>
     									</p>
 <!--     								</br> -->
@@ -150,6 +150,12 @@
     </div>
     <!--主文(結束)-->
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+	<script>
+		$('.changeVideo').on('click',function(){
+			var video = $(this).attr('id');
+			$('#video').attr('src','<%=request.getContextPath()%>/videos/'+video);
+		})
+	</script>
     <script>
 	$(function(){
 		getlist();
@@ -193,16 +199,16 @@
 						var cell1 = $('<div></div>').addClass("card col-md-3");
 						var cell2 = $('<img class="card-imp-top img rounded center-block changeVideo">').attr("src","data:image/jpeg;base64,"+taglist.gamePhoto).attr("id", taglist.gameVideo).css({'width':'98%','border':'solid 3px black','border-radius':'10px','object-fit':'cover'});
 						var cell3 = $('<div></div>').addClass("card-block");
-						var cell4 = $('<h4 class="card-title" align="center"></h4>').text(taglist.mediasName);
+						var cell4 = $('<h4 class="card-title"></h4>').text(taglist.mediasName);
 						var cell5 = $('<p></p>').addClass("card-text").css('align','center');
 						var cell6 = $('<img src="<%=request.getContextPath()%>/images/tag.png">');
 						var cell7 = ''; 
 	
 						$.each(taglist.tag,function(index,tagArray){
 							console.log(tagArray)
-							cell7 = cell7 + '<a class="tagFunction">'+tagArray+'</a>'+' ';
+							cell7 = cell7 + '<button class="btn-success btn-sm tagFunction" style="border-radius:5px; margin-left:3px">'+tagArray+'</button>'+' ';
 						})
-						
+
 						cell5.append([cell6, cell7]);
 						cell3.append([cell4, cell5]);
 						cell1.append([cell2, cell3]);
@@ -213,7 +219,7 @@
 						$('.addTagPhoto').append(row);
 					})
 					$('.changeVideo').on('click',function(){
-						console.log('連結')
+
 						var video = $(this).attr('id');
 						$('#video').attr('src','<%=request.getContextPath()%>/videos/'+video);
 					})
