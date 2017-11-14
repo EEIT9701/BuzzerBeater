@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 
 	//Inserting required elements.
-	var iEditHTML = '<div class="iEdit-img-edit"><canvas class="iEdit-img-edit-can"></canvas><canvas class="iEdit-img-edit-process-can"></canvas><div class="iEdit-img-edit-select"><div class="iEdit-img-edit-select-resize"></div></div><div class="iEdit-img-edit-act iEdit-img-edit-save"> Done </div><div class="iEdit-img-edit-act iEdit-img-edit-cancel"> Cancel </div></div>';
+	var iEditHTML = '<div class="iEdit-img-edit"><canvas class="iEdit-img-edit-can"></canvas><canvas class="iEdit-img-edit-process-can"></canvas><div class="iEdit-img-edit-select"><div class="iEdit-img-edit-select-resize"></div></div><div class="iEdit-img-edit-act iEdit-img-edit-save"> 確認 </div><div class="iEdit-img-edit-act iEdit-img-edit-cancel"> 取消 </div></div>';
 	$("body").append(iEditHTML);
 	
 	

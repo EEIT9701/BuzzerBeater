@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.jettison.json.JSONObject;
+
 import allPay.payment.integration.AllInOne;
 import allPay.payment.integration.domain.AioCheckOutATM;
 import allPay.payment.integration.domain.AioCheckOutOneTime;
+import eeit.mail.GmailSendMailviaTLS;
+import eeit.memberinfo.model.MemberInfoVO;
 
 /**
  * Servlet implementation class opaytest
@@ -27,7 +31,14 @@ public class opayServlet extends HttpServlet {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    //取得opay實例
+		
+		//新帳戶註冊,寄Email
+		GmailSendMailviaTLS gs = new GmailSendMailviaTLS();
+		MemberInfoVO mVO = (MemberInfoVO) request.getSession().getAttribute("LoginOK");
+		gs.SendEmail(mVO.getAcc(), "恭喜!"+mVO.getName()+"球隊，繳費成功." + "回首頁:http://localhost:8080/BuzzerBeater/index.jsp");
+		
+		
+		//取得opay實例
 		AllInOne allInOne = new AllInOne("");
 		//信用卡現上付款函數
 		AioCheckOutOneTime creditCardCheck = new AioCheckOutOneTime();
@@ -61,10 +72,10 @@ public class opayServlet extends HttpServlet {
 		creditCardCheck.setRedeem("Y");
 		
 		String b = allInOne.aioCheckOut(creditCardCheck, null);
-		System.out.println(b);
+//		System.out.println(b);
 		response.setHeader("content-type", "text/html;charset=UTF-8");		
 		PrintWriter outPrint = response.getWriter();
-	
+		
 		outPrint.write("<html>");
 		outPrint.write("<body>");
 		outPrint.write(b);

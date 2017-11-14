@@ -1,7 +1,6 @@
 package eeit.login.controller;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,21 +12,19 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 import eeit.login.model.LoginCheckService;
-import eeit.mail.GmailSendMailviaTLS;
+
 import eeit.memberinfo.model.MemberInfoVO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @WebServlet("/GoogleLogin.do")
 public class GoogleLoginServlet extends HttpServlet {
@@ -164,15 +161,11 @@ public class GoogleLoginServlet extends HttpServlet {
 //				ServletContext context= getServletContext();
 				RequestDispatcher rd = req.getRequestDispatcher("/memberInfoServlet.do");
 				rd.forward(req, resp);
-//				resp.sendRedirect(req.getContextPath()+"/memberInfoServlet.do?action=INSERT");
-//				return;
 				//重導
 //				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 //				return;
-
 			}
-	
-			
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
