@@ -89,21 +89,18 @@
   				<!--臉書分享("2-1")-->
   				<div>
 
-    <button class="buttonStyle button2 " style="background:rgb(59, 89, 152)">
-        <i class="fa fa-facebook-f fa-lg"></i>
-    &nbsp;&nbsp;Facebook</button>
-    <button class="buttonStyle button2 " style="background:rgb(29, 161, 242)">
-        <i class="fa fa-twitter fa-lg"></i>
-        &nbsp;&nbsp;Twitter
-    </button>
-    <button class="buttonStyle button2 " style="background:#00b900">
-        <!--<i class="fa fa-facebook-f fa-lg"></i>-->
-
-    <img src="<%=request.getContextPath()%>/images//share-b.png" style="margin-bottom: -10px;width: 25px;"/>
-        &nbsp;&nbsp;Line
-    </button>
-
-
+    			<button class="buttonStyle button2 " style="background:rgb(59, 89, 152)">
+        			<i class="fa fa-facebook-f fa-lg"></i>
+   					 &nbsp;&nbsp;Facebook
+    			</button>
+    			<button class="buttonStyle button2 " style="background:rgb(29, 161, 242)">
+        			<i class="fa fa-twitter fa-lg"></i>
+        			&nbsp;&nbsp;Twitter
+    			</button>
+    			<button class="buttonStyle button2 " style="background:#00b900">
+    			<img src="<%=request.getContextPath()%>/images//share-b.png" style="margin-bottom: -10px;width: 25px;"/>
+    			&nbsp;&nbsp;Line
+    			</button>
 
   				</div>
 				<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fbeater.buzzer.562%2Fposts%2F103332380444755&width=500" width="500" height="171" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>  
