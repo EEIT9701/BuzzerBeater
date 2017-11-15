@@ -12,6 +12,8 @@
  data-type="share-b" 
  data-url="http://localhost:8080/BuzzerBeater/index.jsp" 
  style="display: none;"></div>
- <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+ <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer">$('.MdTextarea01>textarea').attr('placeholder','');
+ $('.MdTextarea01>textarea').val('快來跟我一起報名吧');</script>
+
 </body>
 </html>
