@@ -571,7 +571,7 @@ video::-webkit-media-controls-panel {
 //  	    	//file object   
 //  	   		var gameVideo = event.target.files;   
 //  	    	var data = new FormData(gameVideo);   
-	    		
+// 	    	console.log(data);	
 //  	  		console.log("影片上傳中")
 //  	    	$.ajax({   
 //  	        	url: '/BuzzerBeater/GameMedia.do?action=insertVideo',   
