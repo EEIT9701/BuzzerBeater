@@ -26,10 +26,21 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
-
+		.Login_button {
+            background-color: #4CAF50 !important;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
         button:hover {
                 opacity: 0.5;
             }
+        a:hover {
+                opacity: 0.5;
+            }            
 
         /* Extra styles for the cancel button */
         .cancelbtn {

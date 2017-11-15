@@ -168,9 +168,7 @@ public class PlayersSevrlet extends HttpServlet {
 			successView.forward(req, resp);
 		}
 
-		if ("updatePlayer".equals(action))
-
-		{
+		if ("updatePlayer".equals(action)){
 			String base64 = req.getParameter("photo");
 			String photo = base64.substring(base64.lastIndexOf(",") + 1);
 			String playerID = req.getParameter("playerID");
@@ -191,6 +189,31 @@ public class PlayersSevrlet extends HttpServlet {
 			req.setAttribute("nationality", nationality);
 
 			String url = "/players/updatePlayer.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, resp);
+
+		}
+		if ("updateMyPlayer".equals(action)){
+			 
+			String photo = req.getParameter("photo");
+			String playerID = req.getParameter("playerID");
+			String playerName = req.getParameter("playerName");
+			String id = req.getParameter("id");
+			Double height = new Double(req.getParameter("height"));
+			Double weights = new Double(req.getParameter("weights"));
+			String birthday = req.getParameter("birthday");
+			String nationality = req.getParameter("nationality");
+
+			req.setAttribute("photo", photo);
+			req.setAttribute("playerID", playerID);
+			req.setAttribute("playerName", playerName);
+			req.setAttribute("id", id);
+			req.setAttribute("height", height);
+			req.setAttribute("weights", weights);
+			req.setAttribute("birthday", birthday);
+			req.setAttribute("nationality", nationality);
+
+			String url = "/players/updateMyPlayer.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, resp);
 
