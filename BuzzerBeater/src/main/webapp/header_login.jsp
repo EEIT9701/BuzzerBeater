@@ -32,9 +32,11 @@
 					response_type=code&
 					state=/profile&
 					client_id=879939044143-sfo5p4l1nmd7ndrpdjhg8fh07ass3akm.apps.googleusercontent.com">
-			<p style="font-size: large;margin-top: 7px;">G-mail</p>
+<!-- 			<i class="fa fa-facebook-f fa-lg"></i> -->
+			<p style="font-size: large;margin-top: 7px;"><i class="fa fa-google-plus fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Google</p>
 			</a>
 			<br><br>
+			
 			<a class="btn btn-default" style="background-color:#4267b2;width:660px;height:50px;color: white;"
 			 href="https://www.facebook.com/v2.5/dialog/oauth?
              client_id=144809318927994&
@@ -42,7 +44,8 @@
              state=/profile&
              response_type=code&
              scope=email,public_profile">
-			<p style="font-size: large;margin-top: 7px;">Facebook</p>
+<!--              <i class="fa fa-facebook-f fa-lg"></i> -->
+			<p style="font-size: large;margin-top: 7px;"><i class="fa fa-facebook-f fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Facebook</p>
 			</a>
 			</div>   
         </form>
