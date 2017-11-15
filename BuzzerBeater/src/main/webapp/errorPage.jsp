@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+		isErrorPage="true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +10,7 @@
 	//關閉視窗
 	function closeWin () {
 	//呼叫window物件的close()函數,關閉視窗
-		window.location.replace('<%=request.getContextPath() %>/groupreg/check_Sign_up_member_3.jsp');
+		window.location.replace('<%=request.getContextPath() %>/index.jsp');
 }
 	//許多秒後不詢問自動關閉視窗
 	//定義一個是否關閉的全域變數
@@ -24,12 +24,12 @@
 		//判斷是否需要關閉
 		if(willClose) {
 			//關閉視窗
-		    window.location.replace('<%=request.getContextPath() %>/groupreg/check_Sign_up_member_3.jsp');
+		    window.location.replace('<%=request.getContextPath() %>/index.jsp');
 		} else {
 			//如果點擊過,重新開始計算
 			willClose = true;
 		}
-	},2000);
+	},1000);
     </script>
     
     
@@ -37,15 +37,14 @@
 <body style="text-align:center" onclick="clickBody()">
 
     <div style="text-align:center">
-    <h1>您已繳費成功!</h1>
-        <h2>若2秒鐘不點擊網頁,系統將自動導向繳費頁面</h2>
+        <h2>系統將自動導向首頁</h2>
     </div>
 
     <span id="ad"></span>
 
     <!-- 點擊按鈕呼叫關閉視窗  -->
     <div style="text-align:center">
-        <input type="button" value="點擊跳轉繳費頁面" onclick="closeWin()" />
+        <input type="button" value="點擊跳轉頁面" onclick="closeWin()" />
     </div>
 
 

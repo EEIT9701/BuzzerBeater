@@ -151,6 +151,9 @@
         .jumbotron{
         background-color: rgb(243, 242, 241);
         }
+        #footer{
+        font-family:微軟正黑體;
+        }
     </style>
 
 
