@@ -35,25 +35,25 @@ public class PersonalDataServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String action = req.getParameter("action");
-		
-		if("FIND_BY_SEASONID".equals(action)) {
+
+		if ("FIND_BY_SEASONID".equals(action)) {
 			Integer seasonID = Integer.valueOf(req.getParameter("seasonID"));
 			PersonalDataService svc = new PersonalDataService();
 			List<PersonalDataVO> list = svc.FindBySeasonID(seasonID);
-			
+
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonInString = mapper.writeValueAsString(list);
 			resp.getWriter().println(jsonInString);
 		}
-		
-		if("FIND_BY_GROUPID".equals(action)) {
+
+		if ("FIND_BY_GROUPID".equals(action)) {
 			Integer groupID = Integer.valueOf(req.getParameter("groupID"));
 			PersonalDataService svc = new PersonalDataService();
 			ObjectMapper mapper = new ObjectMapper();
 			String jsonInString = mapper.writeValueAsString(svc.findByGroupID(groupID));
 			resp.getWriter().println(jsonInString);
 		}
-		
+
 		if ("Get_All_PersonalData_JSON".equals(action)) {
 
 			// 設定Response的Header和編碼
@@ -95,11 +95,10 @@ public class PersonalDataServlet extends HttpServlet {
 		if ("Get_personalData".equals(action)) {
 			Integer seasonID = new Integer(req.getParameter("seasonID"));
 			Integer groupID = new Integer(req.getParameter("groupID"));
-			                                                  
+
 			PersonalDataService pdsvc = new PersonalDataService();
 			List<PersonalDataVO> list = pdsvc.getAll();
 
-			
 			req.setAttribute("list1", list);
 
 			req.getRequestDispatcher("/personaldata/PersonalDataindex.jsp").forward(req, resp);
@@ -127,124 +126,120 @@ public class PersonalDataServlet extends HttpServlet {
 			resp.setHeader("Access-Control-Allow-Origin", "*");
 			resp.setHeader("content-type", "text/html;charset=UTF-8");
 			resp.setCharacterEncoding("UTF-8");
-			//取得service實體
+			// 取得service實體
 			PersonalDataService pSvc = new PersonalDataService();
 			PersonalDataVO personalDataVO = new PersonalDataVO();
-			//取得UPDATE 參數
+			// 取得UPDATE 參數
 			String pDVOStr = req.getParameter("PersonalDataVO");
-		    System.out.println(pDVOStr);
-		    JSONObject pVO = new JSONObject(pDVOStr);
-	
-		    personalDataVO.setPlayerID(Integer.parseInt(pVO.get("playerID").toString()));
-     	    personalDataVO.setGameID(Integer.parseInt(pVO.get("gameID").toString()));
-		    personalDataVO.setTeamID(Integer.parseInt(pVO.get("teamID").toString()));
-		    personalDataVO.setGameTime(Integer.parseInt(pVO.get("gameTime").toString()));
-		    personalDataVO.setTwoPoint(Integer.parseInt(pVO.get("twoPoint").toString()));
-		    personalDataVO.setTwoPointShot(Integer.parseInt(pVO.get("twoPointShot").toString()));
-		    personalDataVO.setThreePoint(Integer.parseInt(pVO.get("threePoint").toString()));
-		    personalDataVO.setThreePointShot(Integer.parseInt(pVO.get("threePointShot").toString()));
-		    personalDataVO.setFg(Integer.parseInt(pVO.get("fg").toString()));
-		    personalDataVO.setFgShot(Integer.parseInt(pVO.get("fgShot").toString()));
-		    personalDataVO.setOffReb(Integer.parseInt(pVO.get("offReb").toString()));
-		    personalDataVO.setDefReb(Integer.parseInt(pVO.get("defReb").toString()));
-		    personalDataVO.setAssist(Integer.parseInt(pVO.get("assist").toString()));
-		    personalDataVO.setSteal(Integer.parseInt(pVO.get("steal").toString()));
-		    personalDataVO.setBlocks(Integer.parseInt(pVO.get("blocks").toString()));
-		    personalDataVO.setTurnover(Integer.parseInt(pVO.get("turnover").toString()));
-		    personalDataVO.setPersonalFouls(Integer.parseInt(pVO.get("personalFouls").toString()));
-		    personalDataVO.setPoints(Integer.parseInt(pVO.get("points").toString()));
-		    personalDataVO.setStartingPlayer(Integer.parseInt(pVO.get("startingPlayer").toString()));
-		    	
-            pSvc.update(personalDataVO);			
-		
-		}  
-		
+			System.out.println(pDVOStr);
+			JSONObject pVO = new JSONObject(pDVOStr);
+
+			personalDataVO.setPlayerID(Integer.parseInt(pVO.get("playerID").toString()));
+			personalDataVO.setGameID(Integer.parseInt(pVO.get("gameID").toString()));
+			personalDataVO.setTeamID(Integer.parseInt(pVO.get("teamID").toString()));
+			personalDataVO.setGameTime(Integer.parseInt(pVO.get("gameTime").toString()));
+			personalDataVO.setTwoPoint(Integer.parseInt(pVO.get("twoPoint").toString()));
+			personalDataVO.setTwoPointShot(Integer.parseInt(pVO.get("twoPointShot").toString()));
+			personalDataVO.setThreePoint(Integer.parseInt(pVO.get("threePoint").toString()));
+			personalDataVO.setThreePointShot(Integer.parseInt(pVO.get("threePointShot").toString()));
+			personalDataVO.setFg(Integer.parseInt(pVO.get("fg").toString()));
+			personalDataVO.setFgShot(Integer.parseInt(pVO.get("fgShot").toString()));
+			personalDataVO.setOffReb(Integer.parseInt(pVO.get("offReb").toString()));
+			personalDataVO.setDefReb(Integer.parseInt(pVO.get("defReb").toString()));
+			personalDataVO.setAssist(Integer.parseInt(pVO.get("assist").toString()));
+			personalDataVO.setSteal(Integer.parseInt(pVO.get("steal").toString()));
+			personalDataVO.setBlocks(Integer.parseInt(pVO.get("blocks").toString()));
+			personalDataVO.setTurnover(Integer.parseInt(pVO.get("turnover").toString()));
+			personalDataVO.setPersonalFouls(Integer.parseInt(pVO.get("personalFouls").toString()));
+			personalDataVO.setPoints(Integer.parseInt(pVO.get("points").toString()));
+			personalDataVO.setStartingPlayer(Integer.parseInt(pVO.get("startingPlayer").toString()));
+
+			pSvc.update(personalDataVO);
+
+		}
+
 		if ("INSERT".equals(action)) {
 			// 設定Response的Header和編碼
 			resp.setHeader("Access-Control-Allow-Origin", "*");
 			resp.setHeader("content-type", "text/html;charset=UTF-8");
 			resp.setCharacterEncoding("UTF-8");
-			//取得service實體
+			// 取得service實體
 			PersonalDataService pSvc = new PersonalDataService();
 			PersonalDataVO personalDataVO = new PersonalDataVO();
-			//取得UPDATE 參數
+			// 取得UPDATE 參數
 			String pDVOStr = req.getParameter("PersonalDataVO");
-		    System.out.println(pDVOStr);
-		    JSONObject pVO = new JSONObject(pDVOStr);
-	
-		    personalDataVO.setPlayerID(Integer.parseInt(pVO.get("playerID").toString()));
-     	    personalDataVO.setGameID(Integer.parseInt(pVO.get("gameID").toString()));
-		    personalDataVO.setTeamID(Integer.parseInt(pVO.get("teamID").toString()));
-		    personalDataVO.setGameTime(Integer.parseInt(pVO.get("gameTime").toString()));
-		    personalDataVO.setTwoPoint(Integer.parseInt(pVO.get("twoPoint").toString()));
-		    personalDataVO.setTwoPointShot(Integer.parseInt(pVO.get("twoPointShot").toString()));
-		    personalDataVO.setThreePoint(Integer.parseInt(pVO.get("threePoint").toString()));
-		    personalDataVO.setThreePointShot(Integer.parseInt(pVO.get("threePointShot").toString()));
-		    personalDataVO.setFg(Integer.parseInt(pVO.get("fg").toString()));
-		    personalDataVO.setFgShot(Integer.parseInt(pVO.get("fgShot").toString()));
-		    personalDataVO.setOffReb(Integer.parseInt(pVO.get("offReb").toString()));
-		    personalDataVO.setDefReb(Integer.parseInt(pVO.get("defReb").toString()));
-		    personalDataVO.setAssist(Integer.parseInt(pVO.get("assist").toString()));
-		    personalDataVO.setSteal(Integer.parseInt(pVO.get("steal").toString()));
-		    personalDataVO.setBlocks(Integer.parseInt(pVO.get("blocks").toString()));
-		    personalDataVO.setTurnover(Integer.parseInt(pVO.get("turnover").toString()));
-		    personalDataVO.setPersonalFouls(Integer.parseInt(pVO.get("personalFouls").toString()));
-		    personalDataVO.setPoints(Integer.parseInt(pVO.get("points").toString()));
-		    personalDataVO.setStartingPlayer(Integer.parseInt(pVO.get("startingPlayer").toString()));
-		    	
-            pSvc.insert(personalDataVO);			
-		
+			System.out.println(pDVOStr);
+			JSONObject pVO = new JSONObject(pDVOStr);
+
+			personalDataVO.setPlayerID(Integer.parseInt(pVO.get("playerID").toString()));
+			personalDataVO.setGameID(Integer.parseInt(pVO.get("gameID").toString()));
+			personalDataVO.setTeamID(Integer.parseInt(pVO.get("teamID").toString()));
+			personalDataVO.setGameTime(Integer.parseInt(pVO.get("gameTime").toString()));
+			personalDataVO.setTwoPoint(Integer.parseInt(pVO.get("twoPoint").toString()));
+			personalDataVO.setTwoPointShot(Integer.parseInt(pVO.get("twoPointShot").toString()));
+			personalDataVO.setThreePoint(Integer.parseInt(pVO.get("threePoint").toString()));
+			personalDataVO.setThreePointShot(Integer.parseInt(pVO.get("threePointShot").toString()));
+			personalDataVO.setFg(Integer.parseInt(pVO.get("fg").toString()));
+			personalDataVO.setFgShot(Integer.parseInt(pVO.get("fgShot").toString()));
+			personalDataVO.setOffReb(Integer.parseInt(pVO.get("offReb").toString()));
+			personalDataVO.setDefReb(Integer.parseInt(pVO.get("defReb").toString()));
+			personalDataVO.setAssist(Integer.parseInt(pVO.get("assist").toString()));
+			personalDataVO.setSteal(Integer.parseInt(pVO.get("steal").toString()));
+			personalDataVO.setBlocks(Integer.parseInt(pVO.get("blocks").toString()));
+			personalDataVO.setTurnover(Integer.parseInt(pVO.get("turnover").toString()));
+			personalDataVO.setPersonalFouls(Integer.parseInt(pVO.get("personalFouls").toString()));
+			personalDataVO.setPoints(Integer.parseInt(pVO.get("points").toString()));
+			personalDataVO.setStartingPlayer(Integer.parseInt(pVO.get("startingPlayer").toString()));
+
+			pSvc.insert(personalDataVO);
+
 		}
-		
+
 		if ("DELETE".equals(action)) {
 			// 設定Response的Header和編碼
 			resp.setHeader("Access-Control-Allow-Origin", "*");
 			resp.setHeader("content-type", "text/html;charset=UTF-8");
 			resp.setCharacterEncoding("UTF-8");
-			//取得service實體
+			// 取得service實體
 			PersonalDataService pSvc = new PersonalDataService();
 			PersonalDataVO personalDataVO = new PersonalDataVO();
-			//取得UPDATE 參數
+			// 取得UPDATE 參數
 			String pDVOStr = req.getParameter("PersonalDataVO");
-		    System.out.println(pDVOStr);
-		    JSONObject pVO = new JSONObject(pDVOStr);
-	
-		    personalDataVO.setPlayerID(Integer.parseInt(pVO.get("playerID").toString()));
-     	    personalDataVO.setGameID(Integer.parseInt(pVO.get("gameID").toString()));
-		    personalDataVO.setTeamID(Integer.parseInt(pVO.get("teamID").toString()));
-	
-            pSvc.delete(personalDataVO);			
-		
+			System.out.println(pDVOStr);
+			JSONObject pVO = new JSONObject(pDVOStr);
+
+			personalDataVO.setPlayerID(Integer.parseInt(pVO.get("playerID").toString()));
+			personalDataVO.setGameID(Integer.parseInt(pVO.get("gameID").toString()));
+			personalDataVO.setTeamID(Integer.parseInt(pVO.get("teamID").toString()));
+
+			pSvc.delete(personalDataVO);
+
 		}
 		if ("ADD_FAKE_GAME".equals(action)) {
-			 String gameID=req.getParameter("gameID");
-			Integer game=Integer.valueOf(gameID);
+			String gameID = req.getParameter("gameID");
+			Integer game = Integer.valueOf(gameID);
 			
-			String seasonID=req.getParameter("seasonID");
-			
-			Part updatafile=req.getPart("updatefile");
-			/*InputStream fie=updatafile.getInputStream();
-			
-			BufferedReader br=new BufferedReader(new InputStreamReader(fie));
-			StringBuilder sb=new StringBuilder();
-			
-			String line;
-			while((line=br.readLine())!=null) {
-				sb.append(line);
-				System.out.println(line);
-			}
-			System.out.println("123");
-			System.out.println(sb);*/
-			
-			
-			jdbc jd=new jdbc();
-		    jd.main(game);
-		    
-		    resp.sendRedirect(req.getContextPath()+"/groups/groupList.jsp?seasonID="+seasonID);
+			// Part updatafile=req.getPart("updatefile");
+			// InputStream fie=updatafile.getInputStream();
+			//
+			// BufferedReader br=new BufferedReader(new InputStreamReader(fie));
+			// StringBuilder sb=new StringBuilder();
+			//
+			// String line;
+			// while((line=br.readLine())!=null) {
+			// sb.append(line);
+			// System.out.println(line);
+			// }
+			// System.out.println("123");
+			// System.out.println(sb);
+
+			jdbc jd = new jdbc();
+			jd.main(game);
+
+			resp.sendRedirect(
+					req.getContextPath() + "/PersonalData.do?action=Get_singlefieldData&gameID=" + game);
 		}
-		
-		
-		
+
 	}
 
 }

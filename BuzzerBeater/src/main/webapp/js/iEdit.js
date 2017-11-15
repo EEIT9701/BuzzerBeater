@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 
 	//Inserting required elements.
-	var iEditHTML = '<div class="iEdit-img-edit"><canvas class="iEdit-img-edit-can"></canvas><canvas class="iEdit-img-edit-process-can"></canvas><div class="iEdit-img-edit-select"><div class="iEdit-img-edit-select-resize"></div></div><div class="iEdit-img-edit-act iEdit-img-edit-save"> Done </div><div class="iEdit-img-edit-act iEdit-img-edit-cancel"> Cancel </div></div>';
+	var iEditHTML = '<div class="iEdit-img-edit"><canvas class="iEdit-img-edit-can"></canvas><canvas class="iEdit-img-edit-process-can"></canvas><div class="iEdit-img-edit-select"><div class="iEdit-img-edit-select-resize"></div></div><div class="iEdit-img-edit-act iEdit-img-edit-save"> 確認 </div><div class="iEdit-img-edit-act iEdit-img-edit-cancel"> 取消 </div></div>';
 	$("body").append(iEditHTML);
 	
 	
@@ -260,32 +260,32 @@ $(document).ready(function(){
 			var nHeight = rcy;
 
 			if(iEdit.square){
-				if(nWidth >= nHeight){//Width is the dominating dimension; 
-					nHeight = nWidth;
-					if(nWidth < 100){
-						nWidth = 100;
-						nHeight = 100;						
+
+//					nHeight = nWidth;
+					if(nWidth < 50){
+						nWidth = 50;					
 					}
-				}else{//Height is the dominating dimension; 
-					nWidth = nHeight;
-					if(nHeight < 100){
-						nWidth = 100;
-						nHeight = 100;
+				
+//					nWidth = nHeight;
+					if(nHeight < 50){
+						nHeight = 50;
 					}
-				}				
+								
 
 				if((nWidth + windowOffset(iEdit.selectionBox).left) >= $(iEdit.can).width() + windowOffset($(iEdit.can)).left){
 					nWidth = (windowOffset($(iEdit.can)).left + $(iEdit.can).width()) - (windowOffset(iEdit.selectionBox).left);
 					if(windowOffset(iEdit.selectionBox).top + nWidth > $(iEdit.can).height() + windowOffset($(iEdit.can)).top){
-						nWidth = (windowOffset($(iEdit.can)).top + $(iEdit.can).height()) - (windowOffset(iEdit.selectionBox).top);
+						nWidth = $(iEdit.can).width();
 					}
-					nHeight = nWidth;
+					nHeight =nHeight;
+//					nWidth = $(iEdit.can).width();
 				}else if((nHeight + windowOffset(iEdit.selectionBox).top) >= $(iEdit.can).height() + windowOffset($(iEdit.can)).top){
-					nHeight = (windowOffset($(iEdit.can)).top + $(iEdit.can).height()) - (windowOffset(iEdit.selectionBox).top);
+					nHeight = $(iEdit.can).height();
 					if(windowOffset(iEdit.selectionBox).left + nHeight > $(iEdit.can).width() + windowOffset($(iEdit.can)).left){
-						nHeight = (windowOffset($(iEdit.can)).left + $(iEdit.can).width()) - (windowOffset(iEdit.selectionBox).left);
+						nHeight =$(iEdit.can).height();
 					}
-					nWidth = nHeight;
+//					nHeight =$(iEdit.can).height();
+					nWidth = nWidth;
 				}
 
 

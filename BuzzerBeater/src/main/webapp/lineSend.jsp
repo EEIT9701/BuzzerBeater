@@ -13,5 +13,6 @@
  data-url="http://localhost:8080/BuzzerBeater/index.jsp" 
  style="display: none;"></div>
  <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+
 </body>
 </html>

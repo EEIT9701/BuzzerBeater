@@ -27,7 +27,7 @@
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
         <style>
-        thead{
+        .season thead, .game thead{
 	      background-color: #d62d67;
     	  color: #e9e9e9;
         }
@@ -41,6 +41,11 @@
       	  font-weight: normal;
       	  margin-bottom: 10px;
       	  font-family:微軟正黑體;
+        }
+        #calendar thead{
+        	background-color: rgba(237, 125, 49, 0.8);
+        	font-size: 18px;
+        	color: #e9e9e9;
         }
         </style>
     </head>
@@ -77,7 +82,7 @@
 	    	
 			<!-- 網頁內容 -->
 			<div class="col-md-12">
-				<table class="table table-bordered">
+				<table class="table table-bordered season">
 					<thead>
 						<tr>
 							<td>賽季名稱</td>
@@ -94,6 +99,9 @@
 					</tbody>
 				</table>
 				
+				<div id="calendar"></div>
+				<br><br><br>
+				
 				<div class="col-md-2 col-md-offset-10">
 					<br>
 					<form action="<%=request.getContextPath()%>/Games.do" method="post">
@@ -104,7 +112,7 @@
 				    <br>
 			    </div>
 
-		        <table class="table table-bordered">
+		        <table class="table table-bordered game">
 		            <thead>
 			            <tr>
                     		<td>賽事開始時間</td>
@@ -152,8 +160,35 @@
 	    <%--遮罩插件 --%>  		
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
 		
+		<link href='<%=request.getContextPath()%>/fullcalendar-3.7.0/fullcalendar.css' rel='stylesheet' />
+		<link href='<%=request.getContextPath()%>/fullcalendar-3.7.0/fullcalendar.print.css' rel='stylesheet' media='print' />
+		<script src='<%=request.getContextPath()%>/fullcalendar-3.7.0/lib/moment.min.js'></script>
+		<script src='<%=request.getContextPath()%>/fullcalendar-3.7.0/lib/jquery.min.js'></script>
+		<script src='<%=request.getContextPath()%>/fullcalendar-3.7.0/fullcalendar.min.js'></script>
+		<script src="<%=request.getContextPath()%>/fullcalendar-3.7.0/locale/zh-tw.js"></script>
+		<script src='<%=request.getContextPath()%>/fullcalendar-3.7.0/gcal.js'></script>
+		
 		<script type="text/javascript">
 			$(function(){
+				
+				var calendarBegin = $(".game tbody td:first").text();
+				
+				$('#calendar').fullCalendar({
+		    		header:{
+		                right: 'prev,next today',
+		                left: 'month,agendaWeek,agendaDay'
+		            },
+	    			events: function(start, end, timezone, callback){
+	    				$.get('<%=request.getContextPath()%>/Games.do',
+	    					{'action':'GET_CALENDAR','seasonID':'${groupsVO.seasonVO.seasonID}'}, function(data){
+	    						callback(JSON.parse(data));
+	    				});
+	    			},
+	    			defaultDate: calendarBegin,
+	    			defaultView: "agendaWeek",
+	    			height: 400
+	    		});
+				
 				// 處理中
 				$('blockUI').click(function(){
 					$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});

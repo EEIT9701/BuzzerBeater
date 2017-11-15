@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/favicon1.ico" type="image/x-icon">
+<link rel="icon" href="<%=request.getContextPath()%>/images/favicon1.ico" type="image/x-icon" /> 
 <jsp:useBean id="date" scope="page" class="java.util.Date"/>
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService"/>
 <jsp:useBean id="teamsSvc" scope="page" class="eeit.teams.model.TeamsService"/>
 <jsp:useBean id="gamesSvc" scope="page" class="eeit.games.model.GamesService"/>
+<%-- <jsp:useBean id="groupsSvc" scope="page" class="eeit.groups.model.GroupsService"/> --%>
 
 <title>Buzzer Beater</title>
 <!--標頭(開始)-->
@@ -17,7 +19,7 @@
 					<!--  新刪修"按鈕"(開始)-->
 					
 					<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-pencil"></i></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<%=request.getContextPath()%>/images/favicon4.ico"></a>
 					<ul class="dropdown-menu cart-list">
 											<c:choose>
 					   <c:when test="${empty LoginOK}">
@@ -35,7 +37,8 @@
 								<li><a href="<%=request.getContextPath() %>/players/listAllPlayer_back.jsp">球員</a></li>
 								<li><a href="<%=request.getContextPath() %>/personaldata/PersonalDataback.jsp">數據</a></li>
 								<li><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></li>
-								<li><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></li>					 
+								<li><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></li>
+								<li><a href="<%=request.getContextPath() %>/groupreg/check_Sign_up2.jsp">繳費</a></li>				 
 						</c:when>
 						<c:when test="${LoginOK.auth == 'parttime'}">
 <%-- 							<li><a href="#">${LoginOK.auth}登入使用</a></li> --%>
@@ -49,7 +52,7 @@
 <%-- 								<li><a href="#">${LoginOK.auth}登入使用</a></li> --%>
 								<li><a href="<%=request.getContextPath() %>/Teams.do?action=GET_MY_TEAM&teamID=${LoginOK.teamID}">我的球隊</a></li>
 								<li><a href="<%=request.getContextPath() %>/teams/insertMyTeam.jsp">分組報名</a></li>
-								<li><a href="#">繳費</a></li>
+								<li><a href="<%=request.getContextPath() %>/groupreg/check_Sign_up_member_3.jsp">繳費</a></li>
 						</c:when>
 						<c:otherwise>
 						   <li>
@@ -71,7 +74,7 @@
 					</c:if>								
 					<c:if test="${!empty LoginOK}">		
 						<a style="padding-top: 20px;">			
-							<img  src="${pictureUri}"  style="width:25px; height:25px;text-decoration:none;"> 
+							<img  src="${pictureUri}"  style="width:40px; height:40px;text-decoration:none;margin-bottom: -5px;"> 
 							<c:set var="var01" value="${LoginOK.name}" />
 							${var01}
 						</a>
@@ -105,10 +108,10 @@
 			<!-- 縮小視窗(左列)(結束) -->
 			<!-- logo(開始) -->
 			<a class="navbar-brand" href="<%=request.getContextPath() %>/index.jsp" style="padding-top: 1px"> 
-			<img src="<%=request.getContextPath()%>/images/700_700.png"
-				class="logo logo-display" alt="" > 
-			<img src="<%=request.getContextPath()%>/images/700_700.png"
-				class="logo logo-scrolled" alt="" >
+			<img src="<%=request.getContextPath()%>/images/250_80_B.png"
+				class="logo logo-display" alt="" style="width:100%"> 
+			<img src="<%=request.getContextPath()%>/images/250_80_B.png"
+				class="logo logo-scrolled" alt="" style="width:100%">
 			</a>
 			<!-- logo(結束) -->
 		</div>
@@ -119,7 +122,7 @@
 				<li class="dropdown">
 					<a href="<%=request.getContextPath() %>/season/seasonList.jsp" class="dropdown-toggle" data-toggle="dropdown">賽季</a>
 					<ul class="dropdown-menu">
-						<c:forEach var="seasonSet" items="${seasonSvc.season}" begin="0" end="5">
+						<c:forEach var="seasonSet" items="${seasonSvc.season}" begin="0" end="3">
 							<li><a href="<%=request.getContextPath() %>/groups/groupList.jsp?seasonID=${seasonSet.seasonID}">${seasonSet.seasonName}</a></li>
 						</c:forEach>
 					</ul>

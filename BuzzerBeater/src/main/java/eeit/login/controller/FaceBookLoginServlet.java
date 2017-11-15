@@ -128,33 +128,26 @@ public class FaceBookLoginServlet extends HttpServlet {
 			memberInfoVO = loginCheckflag.findByAcc(acc);
             //System.out.println("Acc:" + memberInfoVO.getAcc());
 			if (memberInfoVO.getAcc() != null) { // check Email 是否有在資料庫內
-				//System.out.println("email:" + jsonOb.getString("email"));
-				// System.out.println("name:" + jsonOb.getString("name"));
-				// System.out.println("picture:" + jsonOb.getString("picture"));
-				// System.out.println("pictureObj" +
-				// jsonOb.getJSONObject("picture"));
 				JSONObject pictureObj = jsonOb.getJSONObject("picture").getJSONObject("data");  //資料格式:有很多層,所以依序用key去取得value
-				// System.out.println("url" + pictureObj.getString("url"));
 
-				memberInfoVO.setAcc(jsonOb.getString("email")); // FaceBook使用者帳號
-				memberInfoVO.setName(jsonOb.getString("name")); // FaceBook使用者姓名
+//				memberInfoVO.setAcc(jsonOb.getString("email")); // FaceBook使用者帳號
+//				memberInfoVO.setName(jsonOb.getString("name")); // FaceBook使用者姓名
 				memberInfoVO.setRegisterTime(ts);               // 註冊時間
 				session.setAttribute("LoginOK", memberInfoVO);
 				session.setAttribute("pictureUri", pictureObj.getString("url"));
 
-				//response.sendRedirect(request.getContextPath()+"index.jsp");
+//              response.sendRedirect(request.getContextPath()+"index.jsp");
 //				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 //				rd.forward(request, response);
 				response.sendRedirect(request.getContextPath()+"/index.jsp");
 				return;
 			} else {   // check Email 是否有在資料庫內,沒有則回首頁
 				//新帳戶註冊,寄Email
-				GmailSendMailviaTLS gs = new GmailSendMailviaTLS();
-				System.out.println(jsonOb.getString("email"));
-				gs.SendEmail(jsonOb.getString("email"), "歡迎您的加入!");
+//				GmailSendMailviaTLS gs = new GmailSendMailviaTLS();
+//				System.out.println(jsonOb.getString("email"));
+//				gs.SendEmail(jsonOb.getString("email"), "歡迎您的加入!");
 //				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-//				rd.forward(request, response);
-				
+//				rd.forward(request, response);				
 				response.sendRedirect(request.getContextPath()+"/index.jsp");
 				return;
 			}

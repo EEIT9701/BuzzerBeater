@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="eeit.teams.model.*"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+		<%@ page import="java.util.*"%>
+			<%@ page import="eeit.teams.model.*"%>
 				<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 				<html>
 
@@ -16,11 +16,11 @@
 					<script src="<%=request.getContextPath()%>/js/jquery-3.1.1.min.js"></script>
 					<script src="<%=request.getContextPath()%>/js/iEdit.js"></script>
 					<script src="<%=request.getContextPath()%>/js/jquery.step.min.js"></script>
-					
-					
+
+
 					<jsp:include page="/header_css.jsp" />
 					<jsp:include page="/font_css.jsp" />
-					
+
 
 					<style>
 						button {
@@ -75,10 +75,12 @@
 							height: 200px;
 							margin: auto;
 						}
-						thead{
+
+						thead {
 							background-color: #d62d67;
 							color: #e9e9e9;
 						}
+
 						#pathWay {
 							color: #666;
 							height: 28px;
@@ -88,7 +90,13 @@
 							font-size: 18px;
 							font-weight: normal;
 							margin-bottom: 10px;
-							font-family:微軟正黑體;
+							font-family: 微軟正黑體;
+						}
+
+						.player {
+							width: 50px;
+							height: 70px;
+							margin: auto;
 						}
 					</style>
 
@@ -103,19 +111,19 @@
 
 					<div class="container">
 						<div class="jumbotron">
-						
-						<!--上層導覽列(開始) -->
-						<div id="pathWay">
-        					<span>
+
+							<!--上層導覽列(開始) -->
+							<div id="pathWay">
+								<span>
             					<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
             						<span>使用者功能</span>
-            					</a>
-        					</span>&gt;
-        					<span><span>分組報名</span></span>
-    					</div>
-    					<h2>分組報名</h2>
-    					<!--上層導覽列(結束) -->
-    	
+								</a>
+								</span>&gt;
+								<span><span>分組報名</span></span>
+							</div>
+							<h2>分組報名</h2>
+							<!--上層導覽列(結束) -->
+
 							<div class="main">
 								<div id="step"></div>
 								<div id="buildTeam"></div>
@@ -288,21 +296,21 @@
 									var coachName = $('#coachName').val();
 									var bossName = $('#bossName').val();
 									var remarks = $('#remarks').val();
-									
-									
-									
-<%-- 									$.post('<%=request.getContextPath()%>/Teams.do', { --%>
-// 										'action': 'buildMyTeam',
-// 										'teamBadge': teamBadge,
-// 										'teamName': teamName,
-// 										'captainPhone': captainPhone,
-// 										'captainEmail': captainEmail,
-// 										'coachName': coachName,
-// 										'bossName': bossName,
-// 										'remarks': remarks
-// 									}, function (datas) {
 
-// 									});
+
+
+									<%-- 									$.post('<%=request.getContextPath()%> / Teams.do ', { --%>
+									// 										'action': 'buildMyTeam',
+									// 										'teamBadge': teamBadge,
+									// 										'teamName': teamName,
+									// 										'captainPhone': captainPhone,
+									// 										'captainEmail': captainEmail,
+									// 										'coachName': coachName,
+									// 										'bossName': bossName,
+									// 										'remarks': remarks
+									// 									}, function (datas) {
+
+									// 									});
 									$step.nextStep();
 									$index.text($step.getIndex());
 									loadTable();
@@ -317,8 +325,9 @@
 								var th = $('<thead></thead>');
 								var tb = $('<tbody></tbody>');
 								var cell1 = $(
-									'<div class="col-md-12" style="margin-bottom:30px"><div class="col-md-4"><button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button></div><div class="col-md-4"><div class="col-md-4"></div><div class="col-md-4"></div><div class="col-md-4"><input type="file"></div></div><div class="col-md-4"><div class="col-md-4"></div><div class="col-md-4"></div><button class="btn btn-warning" id="insertAll">匯入Excel</button></div></div><div></div>');
-								
+									'<div class="col-md-12" style="margin-bottom:30px"><div class="col-md-4"><button class="btn btn-warning" id="insert" data-toggle="modal" data-target="#myModal">新增球員</button></div><div class="col-md-4"><div class="col-md-4"></div><div class="col-md-4"></div><div class="col-md-4"><input type="file"></div></div><div class="col-md-4"><div class="col-md-4"></div><div class="col-md-4"></div><button class="btn btn-warning" id="insertAll">匯入Excel</button></div></div><div></div>'
+								);
+
 								var cell2 = $('<th></th>').text("球員照片");
 								var cell3 = $('<th></th>').text("球員姓名");
 								var cell4 = $('<th></th>').text("身分證ID");
@@ -341,24 +350,24 @@
 								tab.append(th);
 								bt.append([cell1, tab]);
 								btns.append([cell13, cell14, cell15]);
-								
+
 								prevBtn();
 								nextBtn();
 
 								$("#insert").on("click", function () {
 									file1();
-										$("#file").val("");
-										$("#result").attr('src', '<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png');
-										$('#playerName').val("");
-										$("#id").val("");
-										$("#playerNo").val("");
-										$("#playerRole").val("");
-										$("#height").val("");
-										$("#weights").val("");
-										$("#birthday").val("");
-										$("#nationality").val("");
+									$("#file").val("");
+									$("#result").attr('src', '<%=request.getContextPath()%>/images/placholder_testimonial-180x180.png');
+									$('#playerName').val("");
+									$("#id").val("");
+									$("#playerNo").val("");
+									$("#playerRole").val("");
+									$("#height").val("");
+									$("#weights").val("");
+									$("#birthday").val("");
+									$("#nationality").val("");
 									console.log(count);
-									
+
 								})
 								$("#insertConfirm").on("click", function () {
 									var docFrag = $(document.createDocumentFragment());
@@ -371,20 +380,20 @@
 									var weights = $("#weights").val();
 									var birthday = $("#birthday").val();
 									var nationality = $("#nationality").val();
-<%-- 									$.post('<%=request.getContextPath()%>/Players.do', { --%>
-// 										'action': 'buildPlayer',
-// 										'photo': photo,
-// 										'playerName': playerName,
-// 										'id': id,
-// 										'playerNo': playerNo,
-// 										'playerRole': playerRole,
-// 										'height': height,
-// 										'weights': weights,
-// 										'birthday': birthday,
-// 										'nationality': nationality
-// 									}, function (datas) {})
-									
-									var cell2 = $('<td></td>').html('<img style = "width:50px" src="' + photo + '">');
+									<%-- 									$.post('<%=request.getContextPath()%> / Players.do ', { --%>
+									// 										'action': 'buildPlayer',
+									// 										'photo': photo,
+									// 										'playerName': playerName,
+									// 										'id': id,
+									// 										'playerNo': playerNo,
+									// 										'playerRole': playerRole,
+									// 										'height': height,
+									// 										'weights': weights,
+									// 										'birthday': birthday,
+									// 										'nationality': nationality
+									// 									}, function (datas) {})
+
+									var cell2 = $('<td></td>').html('<img class="player" src="' + photo + '">');
 									var cell3 = $('<td></td>').text(playerName);
 									var cell4 = $('<td></td>').text(id);
 									var cell5 = $('<td></td>').text(playerNo);
@@ -417,45 +426,48 @@
 									});
 
 								});
-$("#insertAll").on("click", function () {
-	$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
-	setTimeout(function(){
-		tb.empty();
-		
-		$.getJSON('<%=request.getContextPath()%>/Teams.do', {
-			'action': 'findMyTeamPlayer'
-		}, function (data) {
-			$.each(data, function (index, player) {
-				var cell1 = $('<td></td>').html('<img style = "width:50px" src="data:image/png;base64,' + player.photo +
-					'">')
-				var cell2 = $('<td></td>').text(player.playerName);
-				var cell3 = $('<td></td>').text(player.id);
-				var cell4 = $('<td></td>').text(player.playerNo);
-				var cell5 = $('<td></td>').text(player.playerRole);
-				var cell6 = $('<td></td>').text(player.height);
-				var cell7 = $('<td></td>').text(player.weights);
-				var cell8 = $('<td></td>').text(player.birthday);
-				var cell9 = $('<td></td>').text(player.nationality);
-				var cell10 = $('<td></td>').html($(
-						'<button id="update" type="submit"class="btn btn-info" data-toggle="modal" data-target="#myModal1">修改</button>'
-					));
+								$("#insertAll").on("click", function () {
+									$.blockUI({
+										message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'
+									});
+									setTimeout(function () {
+										tb.empty();
 
-					var cell11 = $('<td></td>').html($('<button type="submit"class="btn btn-danger">刪除</button>'));
-				var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6,
-					cell7, cell8, cell9,cell10,cell11
-				]);
-				docFrag.append(row);
-				tb.append(docFrag);
+										$.getJSON('<%=request.getContextPath()%>/Teams.do', {
+											'action': 'findMyTeamPlayer'
+										}, function (data) {
+											$.each(data, function (index, player) {
+												var cell1 = $('<td></td>').html('<img  class="player" src="data:image/png;base64,' + player.photo +
+													'">')
+												var cell2 = $('<td></td>').text(player.playerName);
+												var cell3 = $('<td></td>').text(player.id);
+												var cell4 = $('<td></td>').text(player.playerNo);
+												var cell5 = $('<td></td>').text(player.playerRole);
+												var cell6 = $('<td></td>').text(player.height);
+												var cell7 = $('<td></td>').text(player.weights);
+												var cell8 = $('<td></td>').text(player.birthday);
+												var cell9 = $('<td></td>').text(player.nationality);
+												var cell10 = $('<td></td>').html($(
+													'<button id="update" type="submit"class="btn btn-info" data-toggle="modal" data-target="#myModal1">修改</button>'
+												));
 
-			})
-			tab.append(tb);
+												var cell11 = $('<td></td>').html($('<button type="submit"class="btn btn-danger">刪除</button>'));
+												var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5,
+													cell6,
+													cell7, cell8, cell9, cell10, cell11
+												]);
+												docFrag.append(row);
+												tb.append(docFrag);
 
-		});
-		$.unblockUI()
-		
-	},1500)
+											})
+											tab.append(tb);
 
-});
+										});
+										$.unblockUI()
+
+									}, 1500)
+
+								});
 
 
 							}
@@ -501,7 +513,7 @@ $("#insertAll").on("click", function () {
 										]);
 										docFrag.append(row);
 										tb1.append(docFrag);
-										
+
 									})
 									tabGroup.append(tb1);
 									nextBtn();
@@ -518,7 +530,7 @@ $("#insertAll").on("click", function () {
 								var cell8 = $('<th></th>').text("國籍");
 								var cell9 = $('<th></th>');
 								var cell11 = $('<div class="col-md-4"></div><button id="prevBtn">上一步</button>');
-								
+
 								var row = $('<tr align="center" valign="middle"></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6, cell7,
 									cell8,
 									cell9
@@ -534,7 +546,7 @@ $("#insertAll").on("click", function () {
 									'action': 'findMyTeamPlayer'
 								}, function (data) {
 									$.each(data, function (index, player) {
-										var cell1 = $('<td></td>').html('<img style = "width:50px" src="data:image/png;base64,' + player.photo +
+										var cell1 = $('<td></td>').html('<img  class="player" src="data:image/png;base64,' + player.photo +
 											'">')
 										var cell2 = $('<td></td>').text(player.playerName);
 										var cell3 = $('<td></td>').text(player.id);
@@ -554,14 +566,14 @@ $("#insertAll").on("click", function () {
 									tab.append(tb);
 
 								});
-								
+
 							}
-							if(step==3){
+							if (step == 3) {
 								bt.empty();
 								btns.empty();
-								var docFrag=$(document.createDocumentFragment());
-								var tabGroup=$('<table class="table table-bordered"></table>');
-								var thead=$('<thead></thead>');
+								var docFrag = $(document.createDocumentFragment());
+								var tabGroup = $('<table class="table table-bordered"></table>');
+								var thead = $('<thead></thead>');
 								var tbody = $('<tbody></tbody>');
 								var cell1 = $('<th></th>').text("隊伍名稱");
 								var cell2 = $('<th></th>').text("報名分組");
@@ -575,34 +587,39 @@ $("#insertAll").on("click", function () {
 								tabGroup.append(thead);
 								bt.append([tabGroup]);
 								//抓日期
-							    var dt = new Date();
-// 							    console.log(dt);
-// 							    console.log(dt.getFullYear());
-// 							    console.log(dt.getMonth()+1);
-// 							    console.log(dt.getDate());
-// 							    console.log(dt.getHours());
-// 							    console.log(dt.getMinutes());
-// 							    console.log(dt.getSeconds());
-							    var Month = dt.getMonth() + 1;
-							    //轉成SQL相對應的字串
-							    var Str_date = dt.getFullYear() + "-" + Month + "-" + dt.getDate() + " " + dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+								var dt = new Date();
+								// 							    console.log(dt);
+								// 							    console.log(dt.getFullYear());
+								// 							    console.log(dt.getMonth()+1);
+								// 							    console.log(dt.getDate());
+								// 							    console.log(dt.getHours());
+								// 							    console.log(dt.getMinutes());
+								// 							    console.log(dt.getSeconds());
+								var Month = dt.getMonth() + 1;
+								//轉成SQL相對應的字串
+								var Str_date = dt.getFullYear() + "-" + Month + "-" + dt.getDate() + " " + dt.getHours() + ":" + dt.getMinutes() +
+									":" + dt.getSeconds();
 
-							    console.log(Str_date)
-								var cell8=$('<td></td>').text("EEIT97");
-								var cell9=$('<td></td>').text("A區");
-								var cell10=$('<td></td>').text(Str_date);
-								var cell11=$('<td><input id="account" name="account" placeholder="輸入帳號後五碼" class="form-control input-md" type="text" required ></td>');
-								var cell12=$('<td><a href="<%=request.getContextPath()%>/opaytest.do" id="opay"><img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top:5px;"></a></td>');
-								var cell13=$('<td><button type="button" class="btn btn-lg btn-warning" id="click">送出</button></td>');
-								var cell15=$('<div class="col-md-4"><button id="prevBtn"><nobr>上一步</nobr></button></div>')
-								var cell16=$('<div class="col-md-4"></div>');
-								var row_tbody=$('<tr></tr>').append([cell8, cell9, cell10, cell11, cell12, cell13]);
+								console.log(Str_date)
+								var cell8 = $('<td></td>').text("EEIT97");
+								var cell9 = $('<td></td>').text("A區");
+								var cell10 = $('<td></td>').text(Str_date);
+								var cell11 = $(
+									'<td><input id="account" name="account" placeholder="輸入帳號後五碼" class="form-control input-md" type="text" required ></td>'
+								);
+								var cell12 = $(
+									'<td><a href="<%=request.getContextPath()%>/opaytest.do" id="opay"><img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top:5px;"></a></td>'
+								);
+								var cell13 = $('<td><button type="button" class="btn btn-lg btn-warning" id="click">送出</button></td>');
+								var cell15 = $('<div class="col-md-4"><button id="prevBtn"><nobr>上一步</nobr></button></div>')
+								var cell16 = $('<div class="col-md-4"></div>');
+								var row_tbody = $('<tr></tr>').append([cell8, cell9, cell10, cell11, cell12, cell13]);
 								docFrag.append(row_tbody);
 								tbody.append(docFrag);
 								tabGroup.append(tbody);
 								bt.append([tabGroup]);
-								
-								btns.append([cell15,cell16]);
+
+								btns.append([cell15, cell16]);
 								prevBtn();
 
 								clickBtn();
@@ -632,7 +649,7 @@ $("#insertAll").on("click", function () {
 						}
 
 						function file1() {
-							
+
 							$("#file").change(function (e) {
 
 								var img = e.target.files[0];
@@ -648,7 +665,7 @@ $("#insertAll").on("click", function () {
 								});
 								console.log(count);
 								if (count == 1) {
-									
+
 									$('#playerName').val('賴彥誠');
 									$("#id").val('F123456788');
 									$("#playerNo").val('19');
@@ -714,8 +731,8 @@ $("#insertAll").on("click", function () {
 									$("#nationality").val('roc');
 
 								}
-								
-								
+
+
 							});
 
 						}
@@ -739,52 +756,63 @@ $("#insertAll").on("click", function () {
 								file();
 							});
 						}
-						function clickBtn(){
+
+						function clickBtn() {
 							console.log(1);
-							$('#opay').on('click', function(){
+							$('#opay').on('click', function () {
 								console.log(2);
-								if(confirm("確定要送出嗎?")){
-								//驗證狀態欄位給2
-					            $(this).parents('tr').find('td:nth-child(7)').text('2');
-								//按鈕改"已送出"
-					            $(this).text('已送出');
-								//移除原樣式
-					            $(this).removeClass('btn btn-lg btn-warning');
-					          	//增加新樣式
-					            $(this).addClass('btn btn-lg btn-danger');
-					          	//增加不能點擊的屬性
-					            $(this).attr("disabled","disabled");
-// 					            var teamID =$(this).parents('tr').find('td:nth-child(1)').attr('id');
-					            var teamID ="3009";
-// 					            var groupID =$(this).parents('tr').find('td:nth-child(2)').attr('id');
-								var groupID ="2005";
-					            var registerDate =$(this).parents('tr').find('td:nth-child(3)').text();
-// 					            var teamStat =$(this).parents('tr').find('td:nth-child(7)').text();
-					            var teamStat ="1";
-// 					            console.log(teamStat);
-// 					            var paymentNumber =$(this).parents('tr').find('td:nth-child(4)>input').val();
-					            var paymentNumber ="歐付寶繳費";
-					            //把撈到的值包成JSON
-						       	var dataStr = JSON.stringify({ 'teamID':teamID, 'groupID':groupID, 'teamStat':teamStat,'registerDate':registerDate,'paymentNumber':paymentNumber})
-						       	console.log(dataStr);
-					            //用POST傳名為UPDATE的action到Servlrt
-						       	$.post('<%=request.getContextPath()%>/GroupReg.do',{'action':'INSERT','data':dataStr},function(datas){})
-						       	//讓輸入的值到手動繳費驗證欄位
-						       	$(this).parents('tr').find('td:nth-child(4)').html(paymentNumber);
-					            //改變驗證狀態欄位
-						       	$(this).parents('tr').find('td:nth-child(7)').text('系統確認中');
-					            //移除a標籤
-					            $(this).parents('tr').find('td:nth-child(5)>a').remove("a");
-					            //增加圖片
-								$(this).parents('tr').find('td:nth-child(5)').html('<img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top:5px;">');
-							  }
-							 
+								if (confirm("確定要送出嗎?")) {
+									//驗證狀態欄位給2
+									$(this).parents('tr').find('td:nth-child(7)').text('2');
+									//按鈕改"已送出"
+									$(this).text('已送出');
+									//移除原樣式
+									$(this).removeClass('btn btn-lg btn-warning');
+									//增加新樣式
+									$(this).addClass('btn btn-lg btn-danger');
+									//增加不能點擊的屬性
+									$(this).attr("disabled", "disabled");
+									// 					            var teamID =$(this).parents('tr').find('td:nth-child(1)').attr('id');
+									var teamID = "3009";
+									// 					            var groupID =$(this).parents('tr').find('td:nth-child(2)').attr('id');
+									var groupID = "2005";
+									var registerDate = $(this).parents('tr').find('td:nth-child(3)').text();
+									// 					            var teamStat =$(this).parents('tr').find('td:nth-child(7)').text();
+									var teamStat = "1";
+									// 					            console.log(teamStat);
+									// 					            var paymentNumber =$(this).parents('tr').find('td:nth-child(4)>input').val();
+									var paymentNumber = "歐付寶繳費";
+									//把撈到的值包成JSON
+									var dataStr = JSON.stringify({
+										'teamID': teamID,
+										'groupID': groupID,
+										'teamStat': teamStat,
+										'registerDate': registerDate,
+										'paymentNumber': paymentNumber
+									})
+									console.log(dataStr);
+									//用POST傳名為UPDATE的action到Servlrt
+									$.post('<%=request.getContextPath()%>/GroupReg.do', {
+										'action': 'INSERT',
+										'data': dataStr
+									}, function (datas) {})
+									//讓輸入的值到手動繳費驗證欄位
+									$(this).parents('tr').find('td:nth-child(4)').html(paymentNumber);
+									//改變驗證狀態欄位
+									$(this).parents('tr').find('td:nth-child(7)').text('系統確認中');
+									//移除a標籤
+									$(this).parents('tr').find('td:nth-child(5)>a').remove("a");
+									//增加圖片
+									$(this).parents('tr').find('td:nth-child(5)').html(
+										'<img src="<%=request.getContextPath() %>/images/logo_pay200x55.png" style="width:80%;padding-top:5px;">');
+								}
+
 							})
 						}
 					</script>
 
 					<jsp:include page="/footer_css.jsp" />
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
+					<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
 
 
 
