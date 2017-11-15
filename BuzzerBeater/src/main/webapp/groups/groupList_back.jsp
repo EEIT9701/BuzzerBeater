@@ -164,31 +164,64 @@
 			        <tfoot>
 			        	<form action="<%=request.getContextPath()%>/Groups.do" method="post">
 			        	<tr>
-			        		<td>
-			        			<input class="form-control" type="text" value="${groupVO.groupName}" id="groupName" name="groupName">
-			        		</td>
-			        		<td>
-			        			<input class="form-control" type="number" value="${groupVO.maxTeams}" id="maxTeams" name="maxTeams">
-			        		</td>
-			        		<td>
-			        			<input class="form-control" type="number" value="${groupVO.minTeams}" id="minTeams" name="minTeams">
-			        		</td>
-			        		<td></td>
-			        		<td>
-			        			<input class="form-control" type="number" value="${groupVO.maxPlayers}" id="maxPlayers" name="maxPlayers">
-			        		</td>
-			        		<td>
-			        			<input class="form-control" type="number" value="${groupVO.minPlayers}" id="minPlayers" name="minPlayers">
-			        		</td>
-			        		<td></td>
-			        		<td>
-			        			<input type="hidden" name="action" value="ADD_GROUP">
-								<input type="hidden" name="seasonID" value="${seasonVO.seasonID}">
-			        			<input type="submit" class="btn btn-success blockUI" value="新增">
-			        		</td>
-			        		<td>
-			        			<input type="reset" class="btn btn-danger blockUI" value="重設">
-			        		</td>
+			        		<c:choose>
+			        			<c:when test="${empty groupVO}">
+			        				<td>
+				        				<input class="form-control" type="text" id="groupName" name="groupName">
+					        		</td>
+					        		<td>
+					        			<input class="form-control" type="number" value="8" id="maxTeams" name="maxTeams">
+					        		</td>
+					        		<td>
+					        			<input class="form-control" type="number" value="4" id="minTeams" name="minTeams">
+					        		</td>
+					        		<td></td>
+					        		<td>
+					        			<input class="form-control" type="number" value="16" id="maxPlayers" name="maxPlayers">
+					        		</td>
+					        		<td>
+					        			<input class="form-control" type="number" value="7" id="minPlayers" name="minPlayers">
+					        		</td>
+					        		<td></td>
+					        		<td>
+					        			<input type="hidden" name="action" value="ADD_GROUP">
+										<input type="hidden" name="seasonID" value="${seasonVO.seasonID}">
+					        			<input type="submit" class="btn btn-success blockUI" value="新增">
+					        		</td>
+					        		<td>
+					        			<input type="reset" class="btn btn-danger blockUI" value="重設">
+					        		</td>
+			        			
+			        			</c:when>
+			        			<c:otherwise>
+				        			<td>
+				        				<input class="form-control" type="text" value="${groupVO.groupName}" id="groupName" name="groupName">
+					        		</td>
+					        		<td>
+					        			<input class="form-control" type="number" value="${groupVO.maxTeams}" id="maxTeams" name="maxTeams">
+					        		</td>
+					        		<td>
+					        			<input class="form-control" type="number" value="${groupVO.minTeams}" id="minTeams" name="minTeams">
+					        		</td>
+					        		<td></td>
+					        		<td>
+					        			<input class="form-control" type="number" value="${groupVO.maxPlayers}" id="maxPlayers" name="maxPlayers">
+					        		</td>
+					        		<td>
+					        			<input class="form-control" type="number" value="${groupVO.minPlayers}" id="minPlayers" name="minPlayers">
+					        		</td>
+					        		<td></td>
+					        		<td>
+					        			<input type="hidden" name="action" value="ADD_GROUP">
+										<input type="hidden" name="seasonID" value="${seasonVO.seasonID}">
+					        			<input type="submit" class="btn btn-success blockUI" value="新增">
+					        		</td>
+					        		<td>
+					        			<input type="reset" class="btn btn-danger blockUI" value="重設">
+					        		</td>
+			        			</c:otherwise>
+			        		</c:choose>
+			        		
 			        	</tr>
 			        	</form>
 			        </tfoot>

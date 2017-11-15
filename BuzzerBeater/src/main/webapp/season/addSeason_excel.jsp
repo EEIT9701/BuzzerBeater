@@ -53,12 +53,6 @@
 	            	</a>
 	        	</span>
 	        	&gt;
-	        	<span>
-	            	<a href="<%=request.getContextPath() %>/season/addSeason.jsp" class="blockUI">
-	            		<span>新增賽季</span>
-	            	</a>
-	        	</span>
-	        	&gt;
 	        	<span>使用EXCEL新增完整賽季</span>
 	    	</div>
 	    	<!--上層導覽列(結束) -->

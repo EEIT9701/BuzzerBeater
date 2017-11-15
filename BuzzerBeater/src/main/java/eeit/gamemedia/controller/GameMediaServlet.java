@@ -348,7 +348,7 @@ public class GameMediaServlet extends HttpServlet {
 				System.out.println(part);
 				
 				if(!part.getName().equals("")){
-					File video = new File(req.getServletContext().getRealPath("")+"\\video", part.getName());
+					File video = new File(req.getServletContext().getRealPath("")+"\\videos", part.getName());
 					video.getParentFile().mkdirs();
 					
 					InputStream ins = part.getInputStream();

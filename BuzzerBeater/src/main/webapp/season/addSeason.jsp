@@ -79,15 +79,9 @@
 				</ul>
 			</c:if>
 			
-			<div class="col-md-2 col-md-offset-9">
-				<a href="<%=request.getContextPath()%>/season/addSeason_excel.jsp">
-					<input type="submit" class="btn btn-info btn-lg" value="使用EXCEL建立完整賽季">
-				</a>
-			</div>
-			
 			<div class="col-md-12">
 			<form method="post" action="<%=request.getContextPath()%>/Season.do" id="addSeason">
-				<input type="hidden" name="action" value="TO_ADD_GROUPS">
+				<input type="hidden" name="action" value="ADD_SEASON">
 				
 				<div class="form-group row">
 					<label for="seasonName" class="col-2 col-form-label">賽事名稱</label>
