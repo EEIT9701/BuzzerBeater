@@ -21,6 +21,8 @@
 	<!--數據王("2-1")-->
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/style_1.css">
+	<!--icon載入-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="js/modernizr.js"></script>
 	<style>
 	body {
@@ -39,12 +41,36 @@
     	font-family:微軟正黑體;  
 /*     	text-align:center; */
     }
+    .buttonStyle {
+     /* Green */
+    /*background-color: #4CAF50;*/
+    	border: none;
+    	color: white;
+    	padding: 10px 15px;
+    	text-align: center;
+    	text-decoration: none;
+    	display: inline-block;
+    	font-size: 15px;
+    	margin: 4px 2px;
+    	cursor: pointer;
+    	-webkit-transition-duration: 0.4s;
+    	transition-duration: 0.4s;
+    	border-radius: 10px;
+    }
+
+    .button1 {
+    	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+
+    .button2:hover {
+    	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
 	</style>
 </head>
 <body id="home">
 
 	<!--標頭(開始)-->
-	<jsp:include page="/header3.jsp" />
+	<jsp:include page="/header.jsp" />
 	<!--標頭(結束)-->
 	
 	
@@ -60,58 +86,27 @@
 					<p style="color:#303030" id="note"></p>
 				</div>
   				<div class="col-md-6">
-<!-- 				<h2 style="font-family: 微軟正黑體;text-align: center;font-size: 3em;">2016-17例行賽</h2><br> -->
-                 <h2 style="text-align: center;font-size: 2em;">報名現況</h2><br>
+  				<!--臉書分享("2-1")-->
+  				<div>
 
-                    <!--滑鼠移入，顯示表格(開始)-->
-                    <div id="tabs">
-                        <ul>
-                            <!--<h3>戰績排行</h3>-->
-                            <li><a href="#tabs-1">測試A區</a></li>
-                            <li><a href="#tabs-2">測試B區</a></li>
-                        </ul>
-                        <div id="tabs-1">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>目前球隊數量</th>
-                                        <th>參賽球隊上線</th>
-                                        <th>報名狀況</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<tr>
-                                        <td>6</td>
-                                        <td>8</td>
-                                        <td><a href="#" class="btn btn-warning" onclick="document.getElementById('id01').style.display='block'" style="color:#f7f5f4" >
-										可報名
-										</a></td>
-                                    </tr>
+    <button class="buttonStyle button2 " style="background:rgb(59, 89, 152)">
+        <i class="fa fa-facebook-f fa-lg"></i>
+    &nbsp;&nbsp;Facebook</button>
+    <button class="buttonStyle button2 " style="background:rgb(29, 161, 242)">
+        <i class="fa fa-twitter fa-lg"></i>
+        &nbsp;&nbsp;Twitter
+    </button>
+    <button class="buttonStyle button2 " style="background:#00b900">
+        <!--<i class="fa fa-facebook-f fa-lg"></i>-->
 
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="tabs-2">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>目前球隊數量</th>
-                                        <th>參賽球隊上線</th>
-                                        <th>報名狀況</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>4</td>
-                                        <td>已達報名上限</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!--滑鼠移入，顯示表格(結束)-->
-                    <!--表格(結束)-->
+    <img src="<%=request.getContextPath()%>/images//share-b.png" style="margin-bottom: -10px;width: 25px;"/>
+        &nbsp;&nbsp;Line
+    </button>
+
+
+
+  				</div>
+				<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fbeater.buzzer.562%2Fposts%2F103332380444755&width=500" width="500" height="171" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>  
 
 				</div>
 			</div>
@@ -257,6 +252,15 @@
     <!--計時器("2-2")-->
     <script src="js/jquery.countdown.js"></script>
     <script src="js/script.js" charset="big5" type="text/javascript" ></script>
-
+	<!--臉書分享("2-2")-->
+	<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 </body>
 </html>
