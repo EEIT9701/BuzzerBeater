@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="zh" class="no-js">
 <head>
@@ -141,7 +141,7 @@
                                 </header> <!-- .cd-pricing-header -->
                                 <div class="cd-pricing-body">
                                     <ul class="cd-pricing-features">
-                                        <li><em>得分王</em></li>
+                                        <li style="font-size: x-large;"><em>得分王</em></li>
                                         <!--<li><em>1</em> User</li>-->
                                     </ul>
                                 </div>
@@ -162,7 +162,7 @@
                                 </header> <!-- .cd-pricing-header -->
                                 <div class="cd-pricing-body">
                                     <ul class="cd-pricing-features">
-                                        <li><em>助攻王</em> </li>
+                                        <li style="font-size: x-large;"><em>助攻王</em> </li>
                                         <!--<li><em>3</em> Users</li>
                                         <li><em>24/7</em> Support</li>-->
                                     </ul>
@@ -184,7 +184,7 @@
                                 </header> <!-- .cd-pricing-header -->
                                 <div class="cd-pricing-body">
                                     <ul class="cd-pricing-features">
-                                        <li><em>籃板王</em></li>
+                                        <li style="font-size: x-large;"><em>籃板王</em></li>
                                         <!--<li><em>5</em> Users</li>-->
                                     </ul>
                                 </div> <!-- .cd-pricing-body -->

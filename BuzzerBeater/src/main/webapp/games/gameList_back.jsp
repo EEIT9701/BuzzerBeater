@@ -27,7 +27,7 @@
         <jsp:include page="/header_css.jsp" />
         <jsp:include page="/font_css.jsp" />
         <style>
-        thead{
+        .season thead, .game thead{
 	      background-color: #d62d67;
     	  color: #e9e9e9;
         }
@@ -45,6 +45,7 @@
         #calendar thead{
         	background-color: rgba(237, 125, 49, 0.8);
         	font-size: 18px;
+        	color: #e9e9e9;
         }
         </style>
     </head>
@@ -81,7 +82,7 @@
 	    	
 			<!-- 網頁內容 -->
 			<div class="col-md-12">
-				<table class="table table-bordered">
+				<table class="table table-bordered season">
 					<thead>
 						<tr>
 							<td>賽季名稱</td>
@@ -111,7 +112,7 @@
 				    <br>
 			    </div>
 
-		        <table class="table table-bordered">
+		        <table class="table table-bordered game">
 		            <thead>
 			            <tr>
                     		<td>賽事開始時間</td>
@@ -169,6 +170,9 @@
 		
 		<script type="text/javascript">
 			$(function(){
+				
+				var calendarBegin = $(".game tbody td:first").text();
+				
 				$('#calendar').fullCalendar({
 		    		header:{
 		                right: 'prev,next today',
@@ -180,9 +184,9 @@
 	    						callback(JSON.parse(data));
 	    				});
 	    			},
-	    			defaultDate: "${groupsVO.seasonVO.seasonBeginDate}",
+	    			defaultDate: calendarBegin,
 	    			defaultView: "agendaWeek",
-	    			height: 500
+	    			height: 400
 	    		});
 				
 				// 處理中

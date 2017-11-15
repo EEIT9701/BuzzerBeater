@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/favicon1.ico" type="image/x-icon">
 <link rel="icon" href="<%=request.getContextPath()%>/images/favicon1.ico" type="image/x-icon" /> 

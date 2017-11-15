@@ -32,6 +32,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -69,7 +70,7 @@ public class GamesServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-		
+
 		// ADD_GAME_JSON 接收JSON並新增賽事
 		// INSERT_TEMP_SEASON 將session內的賽季整筆新增
 		// DELETE_TEMP_SEASON 移除session內的賽季
@@ -215,19 +216,26 @@ public class GamesServlet extends HttpServlet {
 
 			Set<Integer> currentTeams = new HashSet<Integer>();// 為了計算隊伍數量
 
+			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss.0");
+
 			XSSFSheet sheet = workbook.getSheet("分組");
 			for (int i = 4; i < sheet.getPhysicalNumberOfRows() - 4; i++) {
 				GamesVO gamesVO = new GamesVO();
 				XSSFRow gameRow = sheet.getRow(i);
 
 				XSSFCell cell0 = gameRow.getCell(0);
-				gamesVO.setGameBeginDate(new Timestamp(cell0.getDateCellValue().getTime()));
+				String dat = date.format(DateUtil.getJavaDate(cell0.getNumericCellValue()));
 
 				XSSFCell cell1 = gameRow.getCell(1);
-				gamesVO.setGameEndDate(new Timestamp(cell1.getDateCellValue().getTime()));
+				String begin = time.format(DateUtil.getJavaDate(cell1.getNumericCellValue()));
+				Timestamp gameBeginDate = Timestamp.valueOf(dat + " " + begin);
+				gamesVO.setGameBeginDate(gameBeginDate);
 
 				XSSFCell cell2 = gameRow.getCell(2);
-				gamesVO.setGameEndDate(new Timestamp(cell2.getDateCellValue().getTime()));
+				String end = time.format(DateUtil.getJavaDate(cell2.getNumericCellValue()));
+				Timestamp gameEndDate = Timestamp.valueOf(dat + " " + end);
+				gamesVO.setGameEndDate(gameEndDate);
 
 				String cell3 = gameRow.getCell(3).toString();
 				LocationinfoVO locVO = new LocationinfoVO();
