@@ -44,6 +44,7 @@
         #calendar thead{
         	background-color: rgba(237, 125, 49, 0.8);
         	font-size: 18px;
+        	color: #e9e9e9;
         }
         </style>
     </head>
@@ -133,6 +134,8 @@
 	    <script>
 	    $(function(){
 	    	
+	    	var calendarBegin = $("#season_group tbody td:first").text();
+	    	
 	    	$('#calendar').fullCalendar({
 	    		header:{
 	                right: 'prev,next today',
@@ -144,9 +147,9 @@
     						callback(JSON.parse(data));
     				});
     			},
-    			defaultDate: "${seasonVO.seasonBeginDate}",
+    			defaultDate: calendarBegin,
     			defaultView: "agendaWeek",
-    			height: 500
+    			height: 400
     		});
 	    			
 	    	
