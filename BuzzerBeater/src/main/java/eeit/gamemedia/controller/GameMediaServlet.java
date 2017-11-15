@@ -316,15 +316,8 @@ public class GameMediaServlet extends HttpServlet {
 			
 		}
 
-        if ("insertVideo".equals(action)) { // 來自addEmp.jsp的請求  
+        if ("insertVideo".equals(action)) {   
 			
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-			
-//			try {
-//				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 			Integer gameID = Integer.valueOf(req.getParameter("gameID"));
 			String mediasName = req.getParameter("mediasName");
 			GameMediaService gameMediaSvc = new GameMediaService();
@@ -339,7 +332,8 @@ public class GameMediaServlet extends HttpServlet {
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = req.getParameter("descriptions");
 			String tag = req.getParameter("tag")+",";
-			String gameVideo = "0"+(count+1)+".mp4";
+			String gameVideo = "";
+			gameVideo = String.format("%03d", (count+1))+".mp4";
 			
 			
 			//getPart()方法是getParameter()的檔案版
