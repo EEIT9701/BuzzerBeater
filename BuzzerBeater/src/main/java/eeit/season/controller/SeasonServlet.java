@@ -101,11 +101,6 @@ public class SeasonServlet extends HttpServlet {
 
 				// 取值以及錯誤處理
 				String seasonName = request.getParameter("seasonName").trim();
-				if (seasonName.trim().equals(null) || seasonName.trim().length() == 0) {
-					errorMsgs.add("請輸入賽季名稱");
-				} else if (!seasonName.trim().matches("^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,20}$")) {
-					errorMsgs.add("賽季名稱只能是中、英文字母、和數字 , 且長度必需在2到20之間");
-				}
 
 				Date seasonBeginDate = null;
 				try {

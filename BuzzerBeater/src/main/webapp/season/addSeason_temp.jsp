@@ -65,6 +65,8 @@
 	    	<!--上層導覽列(結束) -->
 	    	
 			<!-- 網頁內容 -->
+			<h3>※請再度確認資料是否正確</h3>
+			
 			<table class="table table-bordered" id="seasonList">
 				<thead>
 					<tr>

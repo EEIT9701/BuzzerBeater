@@ -226,8 +226,8 @@
 			        	</form>
 			        </tfoot>
 			    </table>
-		    </div>
 			<br><br><br><br><br><br>
+		    </div>
 		    
 	    <jsp:include page="/footer.jsp" />
 	    </div>

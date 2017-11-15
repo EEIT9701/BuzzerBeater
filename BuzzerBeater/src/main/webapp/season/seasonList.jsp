@@ -89,6 +89,7 @@
 			        	</c:forEach>
 			        </tbody>
 			    </table>
+			    <br><br><br><br>
 		    </div>
 	    	<jsp:include page="/footer.jsp" />
 	    </div>

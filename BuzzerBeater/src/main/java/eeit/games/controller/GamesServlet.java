@@ -188,90 +188,94 @@ public class GamesServlet extends HttpServlet {
 
 		/********************************************************************/
 		if ("PUT_FULL_SEASON".equals(action)) {
-			// 取得上傳檔案並轉為資料流
-			Part part = request.getPart("uploadExcel");
-			FileInputStream fis = (FileInputStream) part.getInputStream();
+			try {
+				// 取得上傳檔案並轉為資料流
+				Part part = request.getPart("uploadExcel");
+				FileInputStream fis = (FileInputStream) part.getInputStream();
 
-			// 用此資料流建立workbook
-			XSSFWorkbook workbook = new XSSFWorkbook(fis);
+				// 用此資料流建立workbook
+				XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-			// 讀取賽季資料
-			XSSFRow seasonRow = workbook.getSheet("賽事").getRow(1);
+				// 讀取賽季資料
+				XSSFRow seasonRow = workbook.getSheet("賽事").getRow(1);
 
-			SeasonVO seasonVO = new SeasonVO();
-			seasonVO.setSeasonName(seasonRow.getCell(0).toString());
-			seasonVO.setSeasonBeginDate(Date.valueOf(seasonRow.getCell(1).toString().replaceAll("/", "-").trim()));
-			seasonVO.setSeasonEndDate(Date.valueOf(seasonRow.getCell(2).toString().replaceAll("/", "-").trim()));
-			seasonVO.setSignUpBegin(Timestamp.valueOf(seasonRow.getCell(3).toString().replaceAll("/", "-").trim()));
-			seasonVO.setSignUpEnd(Timestamp.valueOf(seasonRow.getCell(4).toString().replaceAll("/", "-").trim()));
+				SeasonVO seasonVO = new SeasonVO();
+				seasonVO.setSeasonName(seasonRow.getCell(0).toString());
+				seasonVO.setSeasonBeginDate(Date.valueOf(seasonRow.getCell(1).toString().replaceAll("/", "-").trim()));
+				seasonVO.setSeasonEndDate(Date.valueOf(seasonRow.getCell(2).toString().replaceAll("/", "-").trim()));
+				seasonVO.setSignUpBegin(Timestamp.valueOf(seasonRow.getCell(3).toString().replaceAll("/", "-").trim()));
+				seasonVO.setSignUpEnd(Timestamp.valueOf(seasonRow.getCell(4).toString().replaceAll("/", "-").trim()));
 
-			XSSFRow groupRow = workbook.getSheet("分組").getRow(1);
+				XSSFRow groupRow = workbook.getSheet("分組").getRow(1);
 
-			GroupsVO groupsVO = new GroupsVO();
-			groupsVO.setGroupName(groupRow.getCell(0).toString());
-			groupsVO.setMaxTeams(Integer.valueOf(groupRow.getCell(1).toString().replaceAll(".0", "")));
-			groupsVO.setMinTeams(Integer.valueOf(groupRow.getCell(2).toString().replaceAll(".0", "")));
-			groupsVO.setMaxPlayers(Integer.valueOf(groupRow.getCell(3).toString().replaceAll(".0", "")));
-			groupsVO.setMinPlayers(Integer.valueOf(groupRow.getCell(4).toString().replaceAll(".0", "")));
+				GroupsVO groupsVO = new GroupsVO();
+				groupsVO.setGroupName(groupRow.getCell(0).toString());
+				groupsVO.setMaxTeams(Integer.valueOf(groupRow.getCell(1).toString().replaceAll(".0", "")));
+				groupsVO.setMinTeams(Integer.valueOf(groupRow.getCell(2).toString().replaceAll(".0", "")));
+				groupsVO.setMaxPlayers(Integer.valueOf(groupRow.getCell(3).toString().replaceAll(".0", "")));
+				groupsVO.setMinPlayers(Integer.valueOf(groupRow.getCell(4).toString().replaceAll(".0", "")));
 
-			Set<Integer> currentTeams = new HashSet<Integer>();// 為了計算隊伍數量
+				Set<Integer> currentTeams = new HashSet<Integer>();// 為了計算隊伍數量
 
-			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-			SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss.0");
+				SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss.0");
 
-			XSSFSheet sheet = workbook.getSheet("分組");
-			for (int i = 4; i < sheet.getPhysicalNumberOfRows() - 4; i++) {
-				GamesVO gamesVO = new GamesVO();
-				XSSFRow gameRow = sheet.getRow(i);
+				XSSFSheet sheet = workbook.getSheet("分組");
+				for (int i = 4; i < sheet.getPhysicalNumberOfRows() - 4; i++) {
+					GamesVO gamesVO = new GamesVO();
+					XSSFRow gameRow = sheet.getRow(i);
 
-				XSSFCell cell0 = gameRow.getCell(0);
-				String dat = date.format(DateUtil.getJavaDate(cell0.getNumericCellValue()));
+					XSSFCell cell0 = gameRow.getCell(0);
+					String dat = date.format(DateUtil.getJavaDate(cell0.getNumericCellValue()));
 
-				XSSFCell cell1 = gameRow.getCell(1);
-				String begin = time.format(DateUtil.getJavaDate(cell1.getNumericCellValue()));
-				Timestamp gameBeginDate = Timestamp.valueOf(dat + " " + begin);
-				gamesVO.setGameBeginDate(gameBeginDate);
+					XSSFCell cell1 = gameRow.getCell(1);
+					String begin = time.format(DateUtil.getJavaDate(cell1.getNumericCellValue()));
+					Timestamp gameBeginDate = Timestamp.valueOf(dat + " " + begin);
+					gamesVO.setGameBeginDate(gameBeginDate);
 
-				XSSFCell cell2 = gameRow.getCell(2);
-				String end = time.format(DateUtil.getJavaDate(cell2.getNumericCellValue()));
-				Timestamp gameEndDate = Timestamp.valueOf(dat + " " + end);
-				gamesVO.setGameEndDate(gameEndDate);
+					XSSFCell cell2 = gameRow.getCell(2);
+					String end = time.format(DateUtil.getJavaDate(cell2.getNumericCellValue()));
+					Timestamp gameEndDate = Timestamp.valueOf(dat + " " + end);
+					gamesVO.setGameEndDate(gameEndDate);
 
-				String cell3 = gameRow.getCell(3).toString();
-				LocationinfoVO locVO = new LocationinfoVO();
-				locVO.setLocationID(Integer.valueOf(cell3.substring(cell3.indexOf("(") + 1, cell3.indexOf(")"))));
-				locVO.setLocationName(cell3.substring(0, cell3.indexOf("(")).trim());
-				gamesVO.setLocationinfoVO(locVO);
+					String cell3 = gameRow.getCell(3).toString();
+					LocationinfoVO locVO = new LocationinfoVO();
+					locVO.setLocationID(Integer.valueOf(cell3.substring(cell3.indexOf("(") + 1, cell3.indexOf(")"))));
+					locVO.setLocationName(cell3.substring(0, cell3.indexOf("(")).trim());
+					gamesVO.setLocationinfoVO(locVO);
 
-				String cell4 = gameRow.getCell(4).toString();
-				TeamsVO teamAVO = new TeamsVO();
-				Integer teamAID = Integer.valueOf(cell4.substring(cell4.indexOf("(") + 1, cell4.indexOf(")")));
-				teamAVO.setTeamID(teamAID);
-				teamAVO.setTeamName(cell4.substring(0, cell4.indexOf("(")).trim());
-				gamesVO.setTeamAVO(teamAVO);
-				currentTeams.add(teamAID);
+					String cell4 = gameRow.getCell(4).toString();
+					TeamsVO teamAVO = new TeamsVO();
+					Integer teamAID = Integer.valueOf(cell4.substring(cell4.indexOf("(") + 1, cell4.indexOf(")")));
+					teamAVO.setTeamID(teamAID);
+					teamAVO.setTeamName(cell4.substring(0, cell4.indexOf("(")).trim());
+					gamesVO.setTeamAVO(teamAVO);
+					currentTeams.add(teamAID);
 
-				String cell5 = gameRow.getCell(5).toString();
-				TeamsVO teamBVO = new TeamsVO();
-				Integer teamBID = Integer.valueOf(cell5.substring(cell5.indexOf("(") + 1, cell5.indexOf(")")));
-				teamBVO.setTeamID(teamBID);
-				teamBVO.setTeamName(cell5.substring(0, cell5.indexOf("(")).trim());
-				gamesVO.setTeamBVO(teamBVO);
-				currentTeams.add(teamBID);
+					String cell5 = gameRow.getCell(5).toString();
+					TeamsVO teamBVO = new TeamsVO();
+					Integer teamBID = Integer.valueOf(cell5.substring(cell5.indexOf("(") + 1, cell5.indexOf(")")));
+					teamBVO.setTeamID(teamBID);
+					teamBVO.setTeamName(cell5.substring(0, cell5.indexOf("(")).trim());
+					gamesVO.setTeamBVO(teamBVO);
+					currentTeams.add(teamBID);
 
-				gamesVO.setTeamAScore(0);
-				gamesVO.setTeamBScore(0);
+					gamesVO.setTeamAScore(0);
+					gamesVO.setTeamBScore(0);
 
-				gamesVO.setGroupsVO(groupsVO);
-				groupsVO.getGamesSet().add(gamesVO);
+					gamesVO.setGroupsVO(groupsVO);
+					groupsVO.getGamesSet().add(gamesVO);
+				}
+
+				groupsVO.setCurrentTeams(currentTeams.size());
+				groupsVO.setSeasonVO(seasonVO);
+				seasonVO.getGroupsSet().add(groupsVO);
+
+				request.getSession().setAttribute("tempSeason", seasonVO);
+				response.sendRedirect(request.getContextPath() + "/season/addSeason_temp.jsp");
+			} catch (Exception e) {
+				response.sendRedirect(request.getContextPath() + "/season/addSeason_temp.jsp");
 			}
-
-			groupsVO.setCurrentTeams(currentTeams.size());
-			groupsVO.setSeasonVO(seasonVO);
-			seasonVO.getGroupsSet().add(groupsVO);
-
-			request.getSession().setAttribute("tempSeason", seasonVO);
-			response.sendRedirect(request.getContextPath() + "/season/addSeason_temp.jsp");
 		}
 
 		/********************************************************************/

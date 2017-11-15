@@ -264,6 +264,7 @@
             $(window).unbind('beforeunload');
         });
      	
+     	// 彈出需安排賽事場數
      	$('#gameSelect').change(function(){
      		$('#gamesNeeded').text('需要安排 ${gamesNeeded} 場賽事');
      	})
@@ -281,6 +282,7 @@
 				tb.empty();
 				
 				$.each(data, function(index, list) {
+
 					var cell1 = $('<td></td>').text(index+1);
 					var cell2 = $('<td></td>').text(list.locationName);
 					var cell3 = $('<td></td>').text(list.date);
@@ -288,7 +290,16 @@
 					var cell5 = $('<td></td>').text(list.timeUnit);
 					var cell6 = $('<td></td>').html('<input type="button" class="btn btn-danger" id="btnRemoveLocation" value="刪除">');
 					
+					if(index < ${gamesNeeded}){
+						cell1.css('background-color','#CDEDF6');
+						cell2.css('background-color','#CDEDF6');
+						cell3.css('background-color','#CDEDF6');
+						cell4.css('background-color','#CDEDF6');
+						cell5.css('background-color','#CDEDF6');
+					}
 					var row = $('<tr></tr>').append([cell1, cell2, cell3, cell4, cell5, cell6]);
+					
+					
 					docFrag.append(row);
 					tb.append(docFrag);
 					

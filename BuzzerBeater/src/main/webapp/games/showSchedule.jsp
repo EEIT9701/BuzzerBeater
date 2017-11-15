@@ -126,7 +126,7 @@
 			<div class="col-md-2 col-md-offset-1">
 				<form action="<%=request.getContextPath()%>/Games.do" method="post">
 					<input type="hidden" name="action" value="GET_TEMP_EXCEL">
-					<input type="submit" class="btn btn-primary" id="downloadExcel" value="下載賽程EXCEL">
+					<input type="submit" class="btn btn-primary" id="downloadExcel" value="匯出賽程EXCEL">
 				</form>
 			</div>
 			
@@ -136,7 +136,7 @@
 				    <input type="file" class="form-control-file" name="uploadExcel" id="putFullSeason" aria-describedby="fileHelp">
 			    </div>
 				<div class="col-md-2 col-md-offset-1">
-			    	<input type="submit" class="btn btn-primary blockUI" value="上傳賽程EXCEL">
+			    	<input type="submit" class="btn btn-primary blockUI" value="匯入賽程EXCEL">
 			    </div>
 			</form>
 			

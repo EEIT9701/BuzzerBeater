@@ -30,6 +30,12 @@
 	      	  	margin-bottom: 10px;
 	      	  	font-family:微軟正黑體;
 	        }
+	        .excelTutorial{
+	        	display: block;
+	        	width: 80%;
+	        	margin: auto;
+	        	margin-bottom: 40px;
+	        }
 		</style>    
         
     </head>
@@ -59,8 +65,15 @@
 	    	
 			<!-- 網頁內容 -->
 			
+			<img class="excelTutorial" src="<%=request.getContextPath() %>/images/ExcelTutorial01.jpg">
+			
+			<br>
+			
+			<img class="excelTutorial" src="<%=request.getContextPath() %>/images/ExcelTutorial02.png">
+			
+			<br><br>
 	
-			<div class="col-md-3">
+			<div class="col-md-3 col-md-offset-1">
 				<a href="<%=request.getContextPath()%>/games/Excel_Template.xlsx">
 					<input type="button" class="btn btn-info btn-lg" id="getExcel" value="取得EXCEL範本">
 				</a>
