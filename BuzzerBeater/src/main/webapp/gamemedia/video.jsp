@@ -215,7 +215,7 @@
 						var cell1 = $('<div></div>').addClass("card col-md-3");
 						var cell2 = $('<img class="card-imp-top img rounded center-block changeVideo">').attr("src","data:image/jpeg;base64,"+taglist.gamePhoto).attr("id", taglist.gameVideo).css({'width':'98%','border':'solid 3px black','border-radius':'10px','object-fit':'cover'});
 						var cell3 = $('<div></div>').addClass("card-block");
-						var cell4 = $('<h4 class="card-title"></h4>').text(taglist.mediasName);
+						var cell4 = $('<h4 class="card-title" align="center"></h4>').text(taglist.mediasName);
 						var cell5 = $('<p></p>').addClass("card-text").css('align','center');
 						var cell6 = $('<img src="<%=request.getContextPath()%>/images/tag.png">');
 						var cell7 = ''; 

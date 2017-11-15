@@ -565,23 +565,23 @@ video::-webkit-media-controls-panel {
 		
 	</script>
 		  			
-<!-- 	<script> -->
-<!--  	  	$("#upload_file").change(uploadVideo);    -->
-<!--  			function uploadVideo(event){    -->
-<!--  	    	//file object    -->
-<!--  	   		var gameVideo = event.target.files;    -->
-<!--  	    	var data = new FormData(gameVideo);    -->
+    <script> 
+//  	  	$("#upload_file").change(uploadVideo);   
+//  			function uploadVideo(event){   
+//  	    	//file object   
+//  	   		var gameVideo = event.target.files;   
+//  	    	var data = new FormData(gameVideo);   
 	    		
-<!--  	  		console.log("影片上傳中") -->
-<!--  	    	$.ajax({    -->
-<!--  	        	url: '/BuzzerBeater/GameMedia.do?action=insertVideo',    -->
-<!--  	           	type: 'POST',    -->
-<!--  	           	data: data, -->
-<!--  	           	processData: true, // Don't process the files    -->
-<!--  	           	contentType: 'video/mp4', // Set content type to false as jQuery will tell the server its a query string request    -->
-<!--  	        	});    -->
-<!--  	  		}  -->
-<!-- 	</script> -->
+//  	  		console.log("影片上傳中")
+//  	    	$.ajax({   
+//  	        	url: '/BuzzerBeater/GameMedia.do?action=insertVideo',   
+//  	           	type: 'POST',   
+//  	           	data: data,
+//  	           	processData: true, // Don't process the files   
+//  	           	contentType: 'video/mp4', // Set content type to false as jQuery will tell the server its a query string request   
+//  	        	});   
+//  	  		} 
+ 	</script> 
 	<script>
 	var count = 0; 
 	$('video').click(function(){   //讓影片按一下就播放，再按一下就停止     
