@@ -161,8 +161,6 @@ public class GoogleLoginServlet extends HttpServlet {
 //				ServletContext context= getServletContext();
 				RequestDispatcher rd = req.getRequestDispatcher("/memberInfoServlet.do");
 				rd.forward(req, resp);
-//				resp.sendRedirect(req.getContextPath()+"/memberInfoServlet.do?action=INSERT");
-//				return;
 				//重導
 //				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 //				return;

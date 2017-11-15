@@ -69,7 +69,7 @@ public class GamesServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-
+		
 		// ADD_GAME_JSON 接收JSON並新增賽事
 		// INSERT_TEMP_SEASON 將session內的賽季整筆新增
 		// DELETE_TEMP_SEASON 移除session內的賽季
@@ -78,6 +78,31 @@ public class GamesServlet extends HttpServlet {
 		// UPDATE_TEMP_EXCEL 更新session內的賽季及賽程
 		// GET_GAMES_EXCEL 取得賽事EXCEL
 		// ADD_GAME 新增賽事
+
+		/********************************************************************/
+		if ("GET_CALENDAR".equals(action)) {
+			Integer seasonID = Integer.valueOf(request.getParameter("seasonID"));
+			SeasonVO seasonVO = new SeasonService().findBySeasonID(seasonID);
+
+			List<Object> list = new ArrayList<Object>();
+			Map<String, Object> map = null;
+			for (GroupsVO gvo : seasonVO.getGroupsSet()) {
+				for (GamesVO vo : gvo.getGamesSet()) {
+					map = new HashMap<String, Object>();
+					map.put("title", vo.getTeamAVO().getTeamName() + " vs " + vo.getTeamBVO().getTeamName() + " 地點: "
+							+ vo.getLocationinfoVO().getLocationName());
+					map.put("start", vo.getGameBeginDate());
+					map.put("end", vo.getGameEndDate());
+					list.add(map);
+				}
+			}
+
+			String jsonStr = new JSONArray(list).toString();
+
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("content-type", "text/html;charset=UTF-8");
+			response.getWriter().println(jsonStr);
+		}
 
 		/********************************************************************/
 		if ("ADD_GAME_JSON".equals(action)) {

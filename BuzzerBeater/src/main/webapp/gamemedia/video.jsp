@@ -76,6 +76,16 @@
 
 </head>
 <body>
+<div id="fb-root"></div>
+<script>
+	(function(d, s, id) {
+  		var js, fjs = d.getElementsByTagName(s)[0];
+  		if (d.getElementById(id)) return;
+  		js = d.createElement(s); js.id = id;
+  		js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.11';
+  		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
 <jsp:useBean id="gameMediaSvc" scope="page" class="eeit.gamemedia.model.GameMediaService" />
 <jsp:include page="/header.jsp"/>
     <!--主文(開始)-->
@@ -117,7 +127,7 @@
 				</div>
            	</div>
            	</br>
-           	<div class="addTagPhoto">
+           	<div class="addTagPhoto row">
 				<c:forEach var="gameMediaVO" items="${gameMediaSvc.all}">	
 					<c:forEach var="gameMediaType" items="${gameMediaVO.mediaType}">
 						<c:if test="${gameMediaType eq 'video'}">
@@ -141,8 +151,14 @@
 					</c:forEach>
 				</c:forEach>
 			</div>
+			
 			</br>
-			<div class='row'>
+			<div class='row'>           	
+				<h2 style="font-family:'DFKai-sb'; margin:10px; text-align:center;" >Facebook精彩影片</h2>
+			</div>
+			<div class="row" align="center">
+			<div style="margin-right:30px;" class="fb-video" data-href="https://www.facebook.com/beater.buzzer.562/videos/104365737008086/" data-width="450" data-show-text="false"><blockquote cite="https://www.facebook.com/beater.buzzer.562/videos/104365737008086/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/beater.buzzer.562/videos/104365737008086/"></a><p>關鍵時刻就是要球給老大!!!</p>由 <a href="#" role="button">Buzzer Beater</a> 貼上了 2017年11月14日</blockquote></div>
+			<div class="fb-video" data-href="https://www.facebook.com/beater.buzzer.562/videos/104142513697075/" data-width="450" data-show-text="false"><blockquote cite="https://www.facebook.com/beater.buzzer.562/videos/104142513697075/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/beater.buzzer.562/videos/104142513697075/"></a><p>最新賽事影片</p>由 <a href="#" role="button">Buzzer Beater</a> 貼上了 2017年11月14日</blockquote></div>
 			</div>
 			<jsp:include page="/footer.jsp" />  
         <jsp:include page="/footer_css.jsp" /> 
@@ -213,8 +229,6 @@
 						cell3.append([cell4, cell5]);
 						cell1.append([cell2, cell3]);
 						
-						
-						
 						var row = $('<div></div>').append(cell1)
 						$('.addTagPhoto').append(row);
 					})
@@ -228,9 +242,7 @@
 			
 			
 		}
-	
-	
-		
+			
 		$(document).on('click','.tagFunction',function(){
 			$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 			setTimeout(function(){
@@ -239,8 +251,6 @@
 		})
 	});
 
-	
-		
     </script>
     <script>
 	var count = 0; 
