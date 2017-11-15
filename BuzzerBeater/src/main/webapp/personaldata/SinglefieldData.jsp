@@ -146,7 +146,7 @@ span{float:right;}
 						  </td>
 					    </tr>
 					    <tr>
-					      <td><h5>助功王	</h5>				  
+					      <td><h5>助攻王	</h5>				  
 						    <%-- <img src="data:image/png;base64,${assistphotoA}" height="94.5" width="63"> --%>
 						    <c:if test="${not empty assistphotoA}">
 											<img
@@ -160,7 +160,7 @@ span{float:right;}
 						    <c:out value="${assistnameA}"/>
 						    <span style="font-size:35px;"><c:out value="${assistmaxA}"/></span> 
 						  </td>
-						  <td><h5>助功王	</h5>
+						  <td><h5>助攻王	</h5>
 						<%--    <img src="data:image/png;base64,${assistphotoB}" height="94.5" width="63"> --%>
 						                <c:if test="${not empty assistphotoB}">
 											<img
