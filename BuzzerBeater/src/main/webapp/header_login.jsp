@@ -6,7 +6,7 @@
 
 
     <div id="id01" class="modal">
-        <form class="modal-content animate" style="width: 700px;">
+        <form class="modal-content animate" style="width: 700px;" method="post" action="<%=request.getContextPath()%>/LoginCheckService/checkAcc.mvc">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
             </div>
