@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+	<link rel="shortcut icon" href="<%=request.getContextPath()%>/images/favicon5.ico" type="image/x-icon">
+	<link rel="icon" href="<%=request.getContextPath()%>/images/favicon5.ico" type="image/x-icon" /> 
 <!--標頭樣式2-1-->
     <link href="<%=request.getContextPath() %>/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=request.getContextPath() %>/fonts/FontAwesome/font-awesome.css" rel="stylesheet">

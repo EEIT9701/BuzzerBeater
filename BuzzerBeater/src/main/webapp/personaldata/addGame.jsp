@@ -28,6 +28,10 @@
 		 	width:90%;
 		 	text-align:left;
 		}
+		        thead{
+	      background-color: #d62d67;
+    	  color: #e9e9e9;
+        }
 		</style>
 		
     </head>

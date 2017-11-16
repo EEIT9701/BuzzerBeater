@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<%--     <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/favicon5.ico" type="image/x-icon"> --%>
+<%-- 	<link rel="icon" href="<%=request.getContextPath()%>/images/favicon5.ico" type="image/x-icon" />  --%>
 	<jsp:include page="/header_css.jsp" />
 	
 	 <!--滑鼠移入，顯示表格("2-1")-->
@@ -81,7 +83,7 @@
             <div class="row">
   				<div class="col-md-6">
 					<div id="countdown">
-						<div>2017-18例行賽&nbsp;&nbsp;報名倒數 :</div>
+						<div>2018-19例行賽&nbsp;&nbsp;報名倒數 :</div>
 					</div>
 					<p style="color:#303030" id="note"></p>
 				</div>
