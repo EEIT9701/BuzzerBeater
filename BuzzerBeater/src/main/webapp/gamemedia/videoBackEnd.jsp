@@ -253,10 +253,12 @@ video::-webkit-media-controls-panel {
 								</br>
 								<div class=row>
 									<!--上傳影片的觸發鈕-->
+									<form enctype="multipart/form-data" method="post">
 									<div class="col-md-3">
 										<p>上傳影片</p>
 										<input type="file" name="upload_file" id="upload_file">  
 									</div>
+									</form>
 								</div>
 								</br>
 								<div class="row">
@@ -565,24 +567,23 @@ video::-webkit-media-controls-panel {
 		
 	</script>
 		  			
-    <script> 
-//  	  	$("#upload_file").change(uploadVideo);   
-//  			function uploadVideo(event){   
-//  	    	//file object   
-//  	   		var gameVideo = event.target.files;   
-//  	    	var data = new FormData(gameVideo);   
-// 	    	console.log(data);	
-//  	  		console.log("影片上傳中")
-//  	    	$.ajax({   
-//  	        	url: '/BuzzerBeater/GameMedia.do?action=insertVideo',   
-//  	           	type: 'POST',   
-//  	           	data: data,
-//  	           	processData: true, // Don't process the files   
-//  	           	contentType: 'video/mp4', // Set content type to false as jQuery will tell the server its a query string request   
-//  	        	});   
-//  	  		} 
- 	</script> 
 	<script>
+ 	  				$("#upload_file").change(uploadVideo);   
+ 						function uploadVideo(event){   
+ 	    					//file object   
+ 	   						var gameVideo = event.target.files;
+ 	    					console.log(gameVideo);
+ 	    					var data = new FormData($('form')[1]);   
+	    					console.log(data);	
+ 	  						console.log("影片上傳中")
+ 	    					$.ajax({   
+ 	        					url: '/BuzzerBeater/GameMedia.do?action=uploadVideo',   
+ 	           					type: 'POST',   
+ 	           					data: data,
+ 	           					processData: false, // Don't process the files   
+ 	           					contentType: false, // Set content type to false as jQuery will tell the server its a query string request   
+ 	    					});   
+ 	  					} 
 	var count = 0; 
 	$('video').click(function(){   //讓影片按一下就播放，再按一下就停止     
 		if(count%2==0){

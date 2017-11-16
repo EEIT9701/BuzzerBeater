@@ -187,7 +187,7 @@
 				
 				$.each(data, function(index,gMVO){
 					if(gMVO.mediaType =='video'){
-						var id = gMVO.mediaID.substr(1,4);
+						var id = gMVO.gameVideo.substr(0,3);
 						
 						var name = $('<h4 class="videolist1" style="fontfamily:"DFKai-sb" margin:10px 0px 10px 0px; background-color:white;"></h4>').text(gMVO.mediasName).attr('id',''+id+'');
 						list.append(name);

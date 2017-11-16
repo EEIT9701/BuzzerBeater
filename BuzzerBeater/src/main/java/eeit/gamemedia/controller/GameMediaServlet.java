@@ -7,6 +7,7 @@ import java.util.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import eeit.groups.model.GroupsVO;
 
 
 @WebServlet("/GameMedia.do")
+@MultipartConfig(location = "C:\\TeamProject\\Repository\\BuzzerBeater\\BuzzerBeater\\src\\main\\webapp\\videos",maxFileSize=1000*1024*1024,maxRequestSize=1000*1024*1024,fileSizeThreshold=1000*1024*1024)
 public class GameMediaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -315,6 +317,61 @@ public class GameMediaServlet extends HttpServlet {
 			res.sendRedirect(url);
 			
 		}
+		
+		if ("uploadVideo".equals(action)){
+			
+			GameMediaService gameMediaSvc = new GameMediaService();
+			List<GameMediaVO> gameVideoAmount = gameMediaSvc.getAllVideo();
+			int count = (gameVideoAmount.size()+8);
+			String gameVideo = "";
+			gameVideo = String.format("%03d", (count+1))+".mp4";
+			
+			//getPart()方法是getParameter()的檔案版
+			try{
+				Part part = req.getPart("upload_file");
+				String fileName = gameVideo;
+//				System.out.println(part.getSize());
+//				System.out.println(req.getServletContext().getRealPath("")+"\\videos\\"+fileName);
+//				System.out.println(req.getSession().getServletContext().getRealPath("")+"\\videos\\"+fileName);
+//				System.out.println(req.getServletContext());
+//				System.out.println(req.getServletPath());
+				FileOutputStream fos=new FileOutputStream(req.getSession().getServletContext().getRealPath("")+"\\videos\\"+fileName);
+				InputStream is= part.getInputStream();
+
+				int data=0;
+				while((data=is.read())!=-1){
+					fos.write(data);
+				}
+				fos.flush();
+				fos.close();
+				//part.write(fileName);
+				
+				
+//				if(!part.getName().equals("")){
+//					File video = new File(req.getServletContext().getRealPath("")+"\\videos", part.getName());
+//					video.getParentFile().mkdirs();
+//					
+//					InputStream ins = part.getInputStream();
+//					OutputStream ous = new FileOutputStream(video);
+//					System.out.println(video);
+//					byte[] temp = new byte[1024];
+//					int len = -1;
+//
+//					while ((len = ins.read(temp)) != -1) {
+//						ous.write(temp, 0, len);
+//					}
+//
+//					ous.close();
+//					ins.close();
+//					
+//					res.getWriter().println(video);
+//				}
+				
+			}catch(Exception e){
+				e.printStackTrace();
+				
+			}
+		}
 
         if ("insertVideo".equals(action)) {   
 			
@@ -336,34 +393,7 @@ public class GameMediaServlet extends HttpServlet {
 			gameVideo = String.format("%03d", (count+1))+".mp4";
 			
 			
-			//getPart()方法是getParameter()的檔案版
-			try{
-				Part part = req.getPart("data");
-				System.out.println(part);
-				
-				if(!part.getName().equals("")){
-					File video = new File(req.getServletContext().getRealPath("")+"\\videos", part.getName());
-					video.getParentFile().mkdirs();
-					
-					InputStream ins = part.getInputStream();
-					OutputStream ous = new FileOutputStream(video);
-					System.out.println(video);
-					byte[] temp = new byte[1024];
-					int len = -1;
-
-					while ((len = ins.read(temp)) != -1) {
-						ous.write(temp, 0, len);
-					}
-
-					ous.close();
-					ins.close();
-					
-					res.getWriter().println(video);
-				}
-				
-			}catch(Exception e){
-				
-			}
+			
 			
 				/***************************2.開始新增資料***************************************/
 				gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, photo, mediaType, mediaDate, descriptions, tag);
