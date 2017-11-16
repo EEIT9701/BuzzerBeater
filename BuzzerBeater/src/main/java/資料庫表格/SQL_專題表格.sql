@@ -27,7 +27,7 @@ GO
 --insert into Season values ('2015-16例行賽','2015-10-28','2016-04-13','2015-01-01','2015-9-30',null);
 insert into Season values ('2016-17例行賽','2016-10-25','2017-04-12','2016-01-01','2016-9-30',null);
 insert into Season values ('2017-18例行賽','2017-10-18','2018-04-12','2017-01-01','2017-9-30',null);
-insert into Season values ('2018-19例行賽','2018-10-18','2019-04-12','2017-11-01','2018-9-30',null);
+insert into Season values ('2018-19例行賽','2018-10-19','2019-04-12','2017-11-01','2018-9-30',null);
 
 select * from Season
 GO
@@ -696,7 +696,7 @@ insert into MemberInfo values('PortlandTrail@ymail.com','波特蘭拓荒者','teams','
 insert into MemberInfo values('javaeeit972017@gmail.com','EEIT97','teams','2016-02-11','3009');
 
 insert into MemberInfo values('javaeeit97201701@gmail.com','主辦方','admin','2017-06-23','');
-insert into MemberInfo values('javaeeit97201702@gmail.com','BZ球隊','teams','2017-06-23','');
+insert into MemberInfo values('javaeeit97201702@gmail.com','BZ球隊','teams','2017-06-23','3009');
 insert into MemberInfo values('frank810618@gmail.com','賴彥誠','admin','2017-09-25','');
 insert into MemberInfo values('qwe020488952@gmail.com','陳品維','admin','2017-09-23','');
 insert into MemberInfo values('homeway1993@gmail.com','紘瑋','admin','2017-09-23','');
