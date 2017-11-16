@@ -20,7 +20,8 @@ public class LoginCheckService {
 			System.out.println("帳號:"+ uname);
 			System.out.println("密碼:"+ psw);
 			return uname;
-		}
+	}
+	
 	public MemberInfoVO findByAcc(String acc){
 		MemberInfoService dao = new MemberInfoService();
 		

@@ -79,7 +79,7 @@ public class FaceBookLoginServlet extends HttpServlet {
 					new InputStreamReader(connectionObtainToken.getInputStream(), "utf-8"));
 			String strLine = "";
 			while ((strLine = reader.readLine()) != null) {
-				System.out.println(strLine);
+//				System.out.println(strLine);
 				sbLines.append(strLine);
 			}
 			try {
@@ -110,7 +110,7 @@ public class FaceBookLoginServlet extends HttpServlet {
 			sb = new StringBuilder(); // 準備stringBuilder容器接收
 			// bufferReader一行一行讀取資料到stringBuilder容器中
 			while ((inputLine = in.readLine()) != null) {
-				System.out.println(inputLine);
+//				System.out.println(inputLine);
 				sb.append(inputLine);
 			}
 			in.close();

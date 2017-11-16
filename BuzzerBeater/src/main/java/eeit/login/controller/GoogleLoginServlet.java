@@ -111,14 +111,14 @@ public class GoogleLoginServlet extends HttpServlet {
 			  
 			  //bufferReader一行一行讀取資料到stringBuilder容器中
 			  while ((inputLine = in.readLine()) != null){   
-				  System.out.println(inputLine);
+//				  System.out.println(inputLine);
 				  sb.append(inputLine);
 			  }
 			  in.close();
 			}catch(MalformedURLException me){
 				me.printStackTrace();
 			}
-			System.out.println(sb.toString());
+//			System.out.println(sb.toString());
 		/***google回傳JSON格式,取資料***/			
 		try {
 			Timestamp ts = new Timestamp(System.currentTimeMillis());  
