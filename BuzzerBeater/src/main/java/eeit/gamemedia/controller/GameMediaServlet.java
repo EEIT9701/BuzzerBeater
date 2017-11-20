@@ -27,7 +27,7 @@ import eeit.groups.model.GroupsVO;
 
 
 @WebServlet("/GameMedia.do")
-@MultipartConfig(location = "C:\\TeamProject\\Repository\\BuzzerBeater\\BuzzerBeater\\src\\main\\webapp\\videos",maxFileSize=1000*1024*1024,maxRequestSize=1000*1024*1024,fileSizeThreshold=1000*1024*1024)
+@MultipartConfig(location = "C:\\Users\\Frank Lai\\git\\BuzzerBeater\\BuzzerBeater\\src\\main\\webapp",maxFileSize=1000*1024*1024,maxRequestSize=1000*1024*1024,fileSizeThreshold=1000*1024*1024)
 public class GameMediaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -192,17 +192,66 @@ public class GameMediaServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 		}
+		if ("getOneForJSON".equals(action)) {
+			res.setHeader("Access-Control-Allow-Origin", "*");
+			res.setHeader("content-type", "text/html;charset=UTF-8");
+			res.setCharacterEncoding("UTF-8");
+			
+			GameMediaService gameMediaSvc = new GameMediaService();
+			ObjectMapper jsonMapper = new ObjectMapper();
+			String jsonString = jsonMapper.writeValueAsString(gameMediaSvc.getAllInJsonForm()); 
+			
+			PrintWriter out = res.getWriter();
+			out.println(jsonString);
+			return;
+		}
 		
+		if("cancel".equals(action)){
+			String url = "/BuzzerBeater/gamemedia/photoBackEnd.jsp";
+			res.sendRedirect(url);	
+		}
+		
+		if ("deletePhoto".equals(action)) { 
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try {
+				/***************************1.接收請求參數***************************************/
+				Integer mediaID = new Integer(req.getParameter("mediaID"));
+				
+				/***************************2.開始刪除資料***************************************/
+				GameMediaService gameMediaSvc = new GameMediaService();
+				gameMediaSvc.deleteGameMedia(mediaID);
+				
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+				String url = "/gamemedia/photoBackEnd.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:"+e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/PhotoBackEnd.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		//影片部分由下開始
 		if ("searchTag".equals(action)){
+			//前後加入%為配合SQL查詢語法，找出所有相關聯的tag
 			String tag = "%"+req.getParameter("tag")+",%";
 			GameMediaService gameMediaSvc = new GameMediaService();
+			//實作Service、DAO中寫好的方法
 			List<GameMediaVO> list = gameMediaSvc.tagFunction(tag);
-			
+			//包成{字串:物件}的形式以利轉型做Json物件回傳前端
 			List<HashMap<String,Object>> returnlist = new ArrayList<HashMap<String, Object>>();
 			Map<String, Object> map = null;
 			
 			for(GameMediaVO gameMediaVO:list){
-				
+				//getTag()會抓到VO裡面的字串(tag設計時定義為字串，以逗號隔開)
+				//以逗號為區隔做切割並將抓到的每一筆tag存入陣列tag1中
 				String[] tag1 = gameMediaVO.getTag().split(",");
 				
 				map = new HashMap<String,Object>();
@@ -221,7 +270,7 @@ public class GameMediaServlet extends HttpServlet {
 				
 				returnlist.add((HashMap<String, Object>) map);
 			}
-			
+			//轉成Json
 			Gson gson = new Gson();
 			String jsonList = gson.toJson(returnlist); 
 			
@@ -230,7 +279,7 @@ public class GameMediaServlet extends HttpServlet {
 			
 		}
 		
-		if ("Update".equals(action)) { // 來自listAllEmp.jsp的請求
+		if ("Update".equals(action)) { 
 			
 			res.setHeader("Access-Control-Allow-Origin", "*");
 			res.setHeader("content-type", "text/html;charset=UTF-8");
@@ -251,25 +300,12 @@ public class GameMediaServlet extends HttpServlet {
 			String mediaType = gameMediaVO.getMediaType();
 			Timestamp mediaDate = new Timestamp(System.currentTimeMillis());
 			String descriptions = descriptions1;
-			String tag = tag1;
-				
+			String tag = tag1;				
 				
 			gameMediaSvc.updateGameMedia(gameID, mediaID,mediasName,gameVideo,gamePhoto,mediaType,mediaDate,descriptions,tag);				
-				
-//			GameMediaVO gameMediaVO = gameMediaSvc.getOneGameMedia(mediaID);
-				
-//			ObjectMapper jsonMapper = new ObjectMapper();
-//	        String jsonString = jsonMapper.writeValueAsString(gameMediaVO); 
-			
+						
 			return;	
-//			req.setAttribute("gameMediaVO", gameMediaVO);         // 資料庫取出的gameMediaVO物件,存入req
-//			String url = "/gamemedia/displayOneVideo.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);
-//			successView.forward(req, res);
-
-//	        PrintWriter out = res.getWriter();
-//			out.println(jsonString);
-//	         
+       
 		}
 		
 		if ("getAll".equals(action)) {
@@ -285,38 +321,9 @@ public class GameMediaServlet extends HttpServlet {
 			PrintWriter out = res.getWriter();
 			out.println(jsonList);
 			
-//			HttpSession session = req.getSession();
-//			session.setAttribute("jsonList", jsonList);    // 資料庫取出的list物件,存入session
-//			// Send the Success view
-//			String url = "/gamemedia/video.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);  // 成功轉交listAllEmp2_getFromSession.jsp
-//			successView.forward(req, res);
 			return;
 		}
 		
-		if ("getOneForJSON".equals(action)) {
-			res.setHeader("Access-Control-Allow-Origin", "*");
-			res.setHeader("content-type", "text/html;charset=UTF-8");
-			res.setCharacterEncoding("UTF-8");
-			
-			GameMediaService gameMediaSvc = new GameMediaService();
-			Integer mediaID = new Integer(req.getParameter("mediaID"));
-			//String jsonList = JSONValue.toJSONString(gameMediaSvc.getAllInJsonForm());
-			//Gson gson = new Gson();
-			//String jsonList = gson.toJson(gameMediaSvc.getOneInJsonForm(mediaID));
-			ObjectMapper jsonMapper = new ObjectMapper();
-            String jsonString = jsonMapper.writeValueAsString(gameMediaSvc.getAllInJsonForm()); 
-			
-			PrintWriter out = res.getWriter();
-			out.println(jsonString);
-			return;
-		}
-		
-		if("cancel".equals(action)){
-			String url = "/BuzzerBeater/gamemedia/photoBackEnd.jsp";
-			res.sendRedirect(url);
-			
-		}
 		
 		if ("uploadVideo".equals(action)){
 			
@@ -344,9 +351,7 @@ public class GameMediaServlet extends HttpServlet {
 				}
 				fos.flush();
 				fos.close();
-				//part.write(fileName);
-				
-				
+			
 //				if(!part.getName().equals("")){
 //					File video = new File(req.getServletContext().getRealPath("")+"\\videos", part.getName());
 //					video.getParentFile().mkdirs();
@@ -392,23 +397,8 @@ public class GameMediaServlet extends HttpServlet {
 			String gameVideo = "";
 			gameVideo = String.format("%03d", (count+1))+".mp4";
 			
-			
-			
-			
-				/***************************2.開始新增資料***************************************/
-				gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, photo, mediaType, mediaDate, descriptions, tag);
+			gameMediaSvc.insertGameMedia(gameID, mediasName, gameVideo, photo, mediaType, mediaDate, descriptions, tag);
 				
-				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-//				String url = "/gamemedia/videoBackEnd.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); 
-//				successView.forward(req, res);				
-				
-				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add(e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/addGameMedia.jsp");
-//				failureView.forward(req, res);
-//			}
 		}
 		if ("findGroupNameBySeasonID".equals(action)){
 			res.setHeader("Access-Control-Allow-Origin", "*");
@@ -496,34 +486,6 @@ public class GameMediaServlet extends HttpServlet {
 			
 			return;
 			
-		}
-		
-		if ("deletePhoto".equals(action)) { 
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-	
-			try {
-				/***************************1.接收請求參數***************************************/
-				Integer mediaID = new Integer(req.getParameter("mediaID"));
-				
-				/***************************2.開始刪除資料***************************************/
-				GameMediaService gameMediaSvc = new GameMediaService();
-				gameMediaSvc.deleteGameMedia(mediaID);
-				
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/gamemedia/photoBackEnd.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
-				successView.forward(req, res);
-				
-				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e) {
-				errorMsgs.add("刪除資料失敗:"+e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/gamemedia/PhotoBackEnd.jsp");
-				failureView.forward(req, res);
-			}
 		}
 	}
 }

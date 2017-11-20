@@ -265,6 +265,7 @@ video::-webkit-media-controls-panel {
 									<div class="col-md-3">
 										<p>上傳相片</p>
 										<input type="file" id="file">
+										<!-- 影藏的圖片框，作為使用者選擇後預覽用 -->
 										<img id="result" type="hidden" >
 									</div>
 								</div>
@@ -281,7 +282,8 @@ video::-webkit-media-controls-panel {
 								</br>
 								<div>
    								<form>
-   									<label style="padding-left:8px">標籤</label> 
+   									<label style="padding-left:8px">標籤</label>
+   									<!-- tag功能框，預設值為value內容 --> 
             						<input name="tags" id="mySingleFieldTags" value="請自訂Tag">            						
        							</form>
 								</div>
@@ -351,7 +353,7 @@ video::-webkit-media-controls-panel {
  			</div>
  		</div>
  	</div>
- 	
+ 	<!-- tagit api -->
 	<script>
 		$('#mySingleFieldTags').tagit({
 			allowSpaces:true
@@ -360,7 +362,7 @@ video::-webkit-media-controls-panel {
 	<script>
 	
 	$(function(){
-		
+		//iedit api
 		$("#file").change(function (e) {
 				var img = e.target.files[0];
 
@@ -532,11 +534,10 @@ video::-webkit-media-controls-panel {
 	  				
 	  			})
 	  			
-	  			$('#insertConfirm').click(function(){
+	  			$('#insertConfirm').click(function(){            //確認上傳按鈕
 	  				console.log("按下確定鍵")
-	  				
-	  				
-	  				var gameID = $('#gamelist').val();
+	  				// 抓到各項使用者輸入的值
+	  				var gameID = $('#gamelist').val();           
 		  			var title = $('#insertTitle').val();
 		  			var descriptions = $('#insertDescriptions').val();
 		  			var tag = $('#mySingleFieldTags').val();
@@ -549,16 +550,13 @@ video::-webkit-media-controls-panel {
 	  				season = null;
 	  				group = null;
 	  				
-	  				//if select file then upload 
-	  				
-	  				 
 	  			
 	  			})
-	  			$('#insertCancel').click(function(){
+	  			$('#insertCancel').click(function(){             //取消時清空使用者輸入的欄位
 	  				console.log("移除")
 	  				$('#insertTitle').val("");
 	  				$('#insertDescriptions').val("");
-	  				$('#result').hide().value("");	
+	  				$('#result').hide().value("");
 	  			})
 	  		}
 	});
@@ -568,22 +566,24 @@ video::-webkit-media-controls-panel {
 	</script>
 		  			
 	<script>
- 	  				$("#upload_file").change(uploadVideo);   
- 						function uploadVideo(event){   
- 	    					//file object   
- 	   						var gameVideo = event.target.files;
- 	    					console.log(gameVideo);
- 	    					var data = new FormData($('form')[1]);   
-	    					console.log(data);	
- 	  						console.log("影片上傳中")
- 	    					$.ajax({   
- 	        					url: '/BuzzerBeater/GameMedia.do?action=uploadVideo',   
- 	           					type: 'POST',   
- 	           					data: data,
- 	           					processData: false, // Don't process the files   
- 	           					contentType: false, // Set content type to false as jQuery will tell the server its a query string request   
- 	    					});   
- 	  					} 
+ 	$("#upload_file").change(uploadVideo);   
+ 		function uploadVideo(event){   
+ 	   		//file object   
+ 	   		var gameVideo = event.target.files;
+ 	    	console.log(gameVideo);
+ 	    	var data = new FormData($('form')[1]);   
+	 		console.log(data);	
+ 	  		console.log("影片上傳中")
+ 	  		//用ajax標籤回傳值給servlet的uploadVideo action
+ 	    	$.ajax({   
+ 	    		url: '/BuzzerBeater/GameMedia.do?action=uploadVideo',   
+ 	        	type: 'POST',   
+ 	          	data: data,
+ 	           	processData: false,   
+ 	           	contentType: false,  
+ 	    	});   
+ 	 	}
+ 		
 	var count = 0; 
 	$('video').click(function(){   //讓影片按一下就播放，再按一下就停止     
 		if(count%2==0){

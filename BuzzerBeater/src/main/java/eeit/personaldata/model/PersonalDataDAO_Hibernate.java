@@ -107,14 +107,24 @@ public class PersonalDataDAO_Hibernate implements PersonalDataDAO_interface {
 		return null;
 	}
 
-	@Override
 	public List<PersonalDataVO> getAllSeasonID(Integer SeasonID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public List<PersonalDataVO> getAllGroupID(Integer GroupID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> findBySeasonID(Integer seasonID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<PersonalDataVO> findByGroupID(Integer groupID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
