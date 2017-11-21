@@ -78,6 +78,7 @@
 <body>
 <div id="fb-root"></div>
 <script>
+    //facebook api
 	(function(d, s, id) {
   		var js, fjs = d.getElementsByTagName(s)[0];
   		if (d.getElementById(id)) return;
@@ -127,6 +128,7 @@
 				</div>
            	</div>
            	</br>
+           	<!-- EL語法產生影片截圖及tag樣式 -->
            	<div class="addTagPhoto row">
 				<c:forEach var="gameMediaVO" items="${gameMediaSvc.all}">	
 					<c:forEach var="gameMediaType" items="${gameMediaVO.mediaType}">
@@ -135,14 +137,12 @@
 								<img class="card-img-top img-rounded center-block changeVideo" id="${gameMediaVO.gameVideo}" src="data:image/jpeg;base64,${gameMediaVO.gamePhoto}">
   								<div class="card-block">
     								<h4 class="card-title" align="center">${gameMediaVO.mediasName}</h4>
-<!--     								</br> -->
-    									<p class="card-text">
-    										<img src="<%=request.getContextPath()%>/images/tag.png">
-    										<c:forEach var="tag" items="${gameMediaVO.tag}">
-    											<button class="btn-success btn-sm tagFunction" style="border-radius:5px;">${tag}</button>
-    										</c:forEach>
-    									</p>
-<!--     								</br> -->
+    								<p class="card-text">
+    									<img src="<%=request.getContextPath()%>/images/tag.png">
+    									<c:forEach var="tag" items="${gameMediaVO.tag}">
+    										<button class="btn-warning btn-sm tagFunction" style="border-radius:5px;">${tag}</button>
+    									</c:forEach>
+    								</p>
   								</div>
 								<div class="card-block">
   								</div>
@@ -156,6 +156,7 @@
 			<div class='row'>           	
 				<h2 style="font-family:'DFKai-sb'; margin:10px; text-align:center;" >Facebook精彩影片</h2>
 			</div>
+			<!-- Facebook api -->
 			<div class="row" align="center">
 			<div style="margin-right:30px;" class="fb-video" data-href="https://www.facebook.com/beater.buzzer.562/videos/104365737008086/" data-width="450" data-show-text="false"><blockquote cite="https://www.facebook.com/beater.buzzer.562/videos/104365737008086/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/beater.buzzer.562/videos/104365737008086/"></a><p>關鍵時刻就是要球給老大!!!</p>由 <a href="#" role="button">Buzzer Beater</a> 貼上了 2017年11月14日</blockquote></div>
 			<div class="fb-video" data-href="https://www.facebook.com/beater.buzzer.562/videos/104142513697075/" data-width="450" data-show-text="false"><blockquote cite="https://www.facebook.com/beater.buzzer.562/videos/104142513697075/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/beater.buzzer.562/videos/104142513697075/"></a><p>最新賽事影片</p>由 <a href="#" role="button">Buzzer Beater</a> 貼上了 2017年11月14日</blockquote></div>
@@ -167,6 +168,7 @@
     <!--主文(結束)-->
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
 	<script>
+		//點選截圖改變撥放器當前影片
 		$('.changeVideo').on('click',function(){
 			var video = $(this).attr('id');
 			$('#video').attr('src','<%=request.getContextPath()%>/videos/'+video);
@@ -179,6 +181,7 @@
 		
 		
 		function getlist(){
+			//產生撥放器右方的影片清單
 			$.getJSON('<%=request.getContextPath()%>/GameMedia.do', {'action':'getAll'},function(data){
 				var list = $('#videolist');
 				list.empty();
@@ -189,9 +192,11 @@
 					if(gMVO.mediaType =='video'){
 						var id = gMVO.gameVideo.substr(0,3);
 						
+						//抓取資料表中的mediasName，同時將表格PK MediaID放入該筆資料的id中
 						var name = $('<h4 class="videolist1" style="fontfamily:"DFKai-sb" margin:10px 0px 10px 0px; background-color:white;"></h4>').text(gMVO.mediasName).attr('id',''+id+'');
 						list.append(name);
 						
+						//點擊改變影片連結與字體動態效果
 						$('.videolist1').on('click',function(){
 							var videoId = $(this).attr('id')
 							$('#video').attr('src','<%=request.getContextPath()%>/videos/'+videoId+'.mp4');
@@ -206,32 +211,42 @@
 			})
 		}
 		function tagFunction(){
+			//tag功能實作
 			$(document).on('click','.tagFunction',function(){
+				//抓到目前tag的內容
 				var tag = $(this).text()
+				//回傳至Servlet searchTag方法
 				$.post('<%=request.getContextPath()%>/GameMedia.do',{'action':'searchTag','tag':tag},function(data){
+					//清空截圖區域
 					$('.addTagPhoto').empty();
 						console.log(data)
+					//只取相關連tag重新生成截圖區域
 					$.each(JSON.parse(data),function(ind,taglist){
 						var cell1 = $('<div></div>').addClass("card col-md-3");
+						//在截圖圖片中放入動態生成的id(gameVideo)，之後要變更撥放器內容時較方便取用
 						var cell2 = $('<img class="card-imp-top img rounded center-block changeVideo">').attr("src","data:image/jpeg;base64,"+taglist.gamePhoto).attr("id", taglist.gameVideo).css({'width':'98%','border':'solid 3px black','border-radius':'10px','object-fit':'cover'});
 						var cell3 = $('<div></div>').addClass("card-block");
 						var cell4 = $('<h4 class="card-title" align="center"></h4>').text(taglist.mediasName);
 						var cell5 = $('<p></p>').addClass("card-text").css('align','center');
 						var cell6 = $('<img src="<%=request.getContextPath()%>/images/tag.png">');
 						var cell7 = ''; 
-	
+						
+						//內迴圈將taglist.tag抓到的陣列生成一個一個的tag
 						$.each(taglist.tag,function(index,tagArray){
 							console.log(tagArray)
-							cell7 = cell7 + '<button class="btn-success btn-sm tagFunction" style="border-radius:5px; margin-left:3px">'+tagArray+'</button>'+' ';
+							cell7 = cell7 + '<button class="btn-warning btn-sm tagFunction" style="border-radius:5px; margin-left:3px">'+tagArray+'</button>'+' ';
 						})
-
+						
+						//參考132~153行的樣式，此處僅為生成同樣樣式的截圖
 						cell5.append([cell6, cell7]);
 						cell3.append([cell4, cell5]);
 						cell1.append([cell2, cell3]);
 						
+						//將重新生成的相關連截圖塞回剛才清空的截圖區域中
 						var row = $('<div></div>').append(cell1)
 						$('.addTagPhoto').append(row);
 					})
+					//點選截圖改變撥放器當前影片
 					$('.changeVideo').on('click',function(){
 
 						var video = $(this).attr('id');
@@ -242,7 +257,7 @@
 			
 			
 		}
-			
+		//針對tag功能點即時觸發請稍後標籤0.5秒	
 		$(document).on('click','.tagFunction',function(){
 			$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 			setTimeout(function(){
