@@ -19,16 +19,16 @@
 					<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<%=request.getContextPath()%>/images/favicon4.ico"></a>
 					<ul class="dropdown-menu cart-list">
-											<c:choose>
-					   <c:when test="${empty LoginOK}">
-						<li>
-							<a href="#">未登入使用</a>	
-						</li>
-					   </c:when> 
+					<c:choose>
+						<c:when test="${empty LoginOK}">
+							<li>
+								<a href="#">未登入使用</a>	
+							</li>
+					   	</c:when> 
 					    <c:when test="${LoginOK.auth == 'admin'}">
 <%-- 							<li><a href="#">${LoginOK.auth}登入使用</a></li> --%>
 								<li><a href="<%=request.getContextPath() %>/memberInfo/memberInfoBack.jsp">權限管理</a></li>
-								<li><a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">賽季管理</a></li>
+								<li><a href="<%=request.getContextPath() %>/season/seasonList_back.mvc">賽季管理</a></li>
 <!-- 							<li><a href="">分組</a></li> -->
 <!-- 							<li><a href="">賽程</a></li> -->
 								<li><a href="<%=request.getContextPath() %>/teams/listAllteam_back.jsp">球隊</a></li>
@@ -38,6 +38,7 @@
 								<li><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></li>
 								<li><a href="<%=request.getContextPath() %>/groupreg/check_Sign_up2.jsp">繳費</a></li>				 
 						</c:when>
+						
 						<c:when test="${LoginOK.auth == 'parttime'}">
 <%-- 							<li><a href="#">${LoginOK.auth}登入使用</a></li> --%>
 <%-- 							<li><a href="<%=request.getContextPath() %>/season/seasonList_back.jsp">賽季管理</a></li> --%>
@@ -46,6 +47,7 @@
 								<li><a href="<%=request.getContextPath() %>/gamemedia/videoBackEnd.jsp">影片</a></li>
 								<li><a href="<%=request.getContextPath() %>/gamemedia/photoBackEnd.jsp">照片</a></li>
 						</c:when>
+						
 						<c:when test="${LoginOK.auth == 'teams'}">
 <%-- 								<li><a href="#">${LoginOK.auth}登入使用</a></li> --%>
 								<li><a href="<%=request.getContextPath() %>/Teams.do?action=GET_MY_TEAM&teamID=${LoginOK.teamID}">我的球隊</a></li>
@@ -113,52 +115,71 @@
 			</a>
 			<!-- logo(結束) -->
 		</div>
+		
 		<!-- 選單列表(開始) -->
 		<div class="collapse navbar-collapse" id="navbar-menu">
 			<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" style="margin-right: 15px">
+			
 				<li><a href="<%=request.getContextPath() %>/index.jsp">首頁</a></li>
+				
+				<!-- 賽季 -->
 				<li class="dropdown">
-					<a href="<%=request.getContextPath() %>/season/seasonList.jsp" class="dropdown-toggle" data-toggle="dropdown">賽季</a>
+					<a href="<%=request.getContextPath() %>/season/seasonList.mvc" class="dropdown-toggle" data-toggle="dropdown">賽季</a>
 					<ul class="dropdown-menu">
 						<c:forEach var="seasonSet" items="${seasonSvc.season}" begin="0" end="3">
-							<li><a href="<%=request.getContextPath() %>/groups/groupList.jsp?seasonID=${seasonSet.seasonID}">${seasonSet.seasonName}</a></li>
+							<li><a href="<%=request.getContextPath() %>/groups/groupList.mvc?seasonID=${seasonSet.seasonID}">${seasonSet.seasonName}</a></li>
 						</c:forEach>
 					</ul>
 				</li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">賽程</a>
+				
+				<!-- 賽事 -->
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">賽程</a>
 					<ul class="dropdown-menu">
 						<c:forEach var="games" items="${gamesSvc.all}" begin="1" end="5">
-							<li><a style="font-size: 6px;" href="<%=request.getContextPath()%>/PersonalData.do?action=Get_singlefieldData&gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
+							<li><a style="font-size: 6px;" href="<%=request.getContextPath()%>/games/gameinfo.mvc?gameID=${games.gameID}">${games.teamAVO.teamName} vs ${games.teamBVO.teamName}</a></li>
 						</c:forEach>
 					</ul>
 				</li>
-				<li class="dropdown"><a href="<%=request.getContextPath() %>/teams/listAllteam_front.jsp" class="dropdown-toggle" data-toggle="dropdown">球隊</a>
+				
+				<!-- 球隊 -->
+				<li class="dropdown">
+					<a href="<%=request.getContextPath() %>/teams/teamList.mvc" class="dropdown-toggle" data-toggle="dropdown">球隊</a>
 					<ul class="dropdown-menu">
 						<c:forEach var="teams" items="${teamsSvc.teams}">
-							<li><a href="<%=request.getContextPath()%>/Teams.do?action=GET_ONE_TEAM&teamID=${teams.teamID}">${teams.teamName}</a></li>
+							<li><a href="<%=request.getContextPath()%>/teams/teaminfo.mvc?teamID=${teams.teamID}">${teams.teamName}</a></li>
 						</c:forEach>
 					</ul>
 				</li>
-				<li class="dropdown"><a href="<%=request.getContextPath() %>/players/listAllPlayer_front.jsp" class="dropdown-toggle" data-toggle="dropdown">球員</a>
+				
+				<!-- 球員 -->
+				<li class="dropdown">
+					<a href="<%=request.getContextPath() %>/players/playerList.mvc" class="dropdown-toggle" data-toggle="dropdown">球員</a>
 <!-- 					<ul class="dropdown-menu"> -->
 <!-- 					</ul> -->
 				</li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">數據</a>
+				
+				<!-- 數據 -->
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">數據</a>
 					<ul class="dropdown-menu">
-						<li><a href="<%=request.getContextPath() %>/personaldata/personalData.jsp">個人數據<!--這行的href輸入超連結頁面--></a></li>
-						<li><a href="<%=request.getContextPath() %>/personaldata/TeamDataindex.jsp">球隊數據<!--這行的href輸入超連結頁面--></a></li>
-					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"    
-					data-toggle="dropdown">影音<!--這行的href輸入超連結頁面--></a>
+						<li><a href="<%=request.getContextPath() %>/personalData/personalData.mvc">個人數據<!--這行的href輸入超連結頁面--></a></li>
+						<li><a href="<%=request.getContextPath() %>/personalData/teamData.mvc">球隊數據<!--這行的href輸入超連結頁面--></a></li>
+					</ul>
+				</li>
+					
+				<!-- 影音 -->	
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">影音<!--這行的href輸入超連結頁面--></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=request.getContextPath() %>/gamemedia/photo.jsp">照片<!--這行的href輸入超連結頁面--></a></li>
 						<li><a href="<%=request.getContextPath() %>/gamemedia/video.jsp">影片<!--這行的href輸入超連結頁面--></a></li>
 					</ul>
 				</li>
+				
 			</ul>
 		</div>
 		<!-- 選單列表(結束) -->
+		
 	</div>
 </nav>
 <!--標頭(結束)-->

@@ -26,21 +26,21 @@
     	<jsp:include page="/font_css.jsp" />
     	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
        	<style>
-        thead{
-	      background-color: rgba(237, 125, 49, 0.8);
-    	  color: #e9e9e9;
-        }
-        #pathWay {
-      	  color: #666;
-      	  height: 28px;
-      	  line-height: 28px;
-      	  border-bottom: 1px solid #c0b7b7;
-      	  text-indent: 5px;
-      	  font-size: 18px;
-      	  font-weight: normal;
-      	  margin-bottom: 10px;
-      	  font-family:微軟正黑體;
-        }
+	        thead{
+		      background-color: rgba(237, 125, 49, 0.8);
+	    	  color: #e9e9e9;
+	        }
+	        #pathWay {
+	      	  color: #666;
+	      	  height: 28px;
+	      	  line-height: 28px;
+	      	  border-bottom: 1px solid #c0b7b7;
+	      	  text-indent: 5px;
+	      	  font-size: 18px;
+	      	  font-weight: normal;
+	      	  margin-bottom: 10px;
+	      	  font-family:微軟正黑體;
+	        }
         </style>
     </head>
 
@@ -57,7 +57,7 @@
         	</span>
         	&gt;
         	<span>
-            	<a class="blockUI" href="<%=request.getContextPath() %>/season/seasonList.jsp">
+            	<a class="blockUI" href="<%=request.getContextPath() %>/season/seasonList.mvc">
             		<span>賽季列表</span>
             	</a>
         	</span>
@@ -87,10 +87,10 @@
 								<c:forEach var="gamesSet" items="${groupsSet.gamesSet}">
 									<tr>
 										<td><fmt:formatDate value="${gamesSet.gameBeginDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-										<td><a class="blockUI" href="<%=request.getContextPath() %>/groups/toLocation.mvc?locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
-										<td><a class="blockUI" href="<%=request.getContextPath() %>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
-										<td><a class="blockUI" href="<%=request.getContextPath() %>/PersonalData.do?action=Get_singlefieldData&gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a></td>
-										<td><a class="blockUI" href="<%=request.getContextPath() %>/Teams.do?action=GET_ONE_TEAM&teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
+										<td><a class="blockUI" href="<%=request.getContextPath() %>/location/locationinfo.mvc?locationID=${gamesSet.locationinfoVO.locationID}">${gamesSet.locationinfoVO.locationName}</a></td>
+										<td><a class="blockUI" href="<%=request.getContextPath() %>/teams/teaminfo.mvc?teamID=${gamesSet.teamAVO.teamID}">${gamesSet.teamAVO.teamName}</a></td>
+										<td><a class="blockUI" href="<%=request.getContextPath() %>/games/gameinfo.mvc?gameID=${gamesSet.gameID}">${gamesSet.teamAScore} - ${gamesSet.teamBScore}</a></td>
+										<td><a class="blockUI" href="<%=request.getContextPath() %>/teams/teaminfo.mvc?teamID=${gamesSet.teamBVO.teamID}">${gamesSet.teamBVO.teamName}</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

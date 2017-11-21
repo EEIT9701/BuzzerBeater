@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.*"%>
 
-<jsp:useBean id="date" scope="page" class="java.util.Date"/>
 <jsp:useBean id="seasonSvc" scope="page" class="eeit.season.model.SeasonService" />
+<jsp:useBean id="date" scope="page" class="java.util.Date"/>
 
 <!DOCTYPE html>
     <html lang="zh" class="no-js">
@@ -15,12 +16,13 @@
         
     	<link href="<%=request.getContextPath() %>/css/bootstrap.css" rel='stylesheet' type='text/css' />
     	<link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    	<jsp:include page="/header_css.jsp" />
-   		<jsp:include page="/font_css.jsp" />
-    	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/datatables.min.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    	
+		
+        <jsp:include page="/header_css.jsp" />
+        <jsp:include page="/font_css.jsp" />
         <style>
         thead{
-	      background-color: rgba(237, 125, 49, 0.8);
+	      background-color: #d62d67;
     	  color: #e9e9e9;
         }
         #pathWay {
@@ -35,8 +37,8 @@
       	  font-family:微軟正黑體;
         }
         </style>
-        
     </head>
+
     <body>
 	    <jsp:include page="/header.jsp" />
 	
@@ -47,18 +49,23 @@
 		<div id="pathWay">
         	<span>
             	<a class="blockUI" href="<%=request.getContextPath() %>/index.jsp">
-            		<span>首頁</span>
+            		<span>使用者功能</span>
             	</a>
         	</span>&gt;
-        	<span><span>賽季列表</span></span>
+        	<span><span>賽季管理</span></span>
     	</div>
     	<!--上層導覽列(結束) -->
-    	
+			<!-- 網頁內容 -->
 			<div class="col-md-12">
 		        <h2>賽季列表</h2>
-
+		        <nobr>
+			        <a href="<%=request.getContextPath() %>/season/addSeason.jsp" class="btn btn-primary blockUI">新增賽季</a>
+			        
+					<a href="<%=request.getContextPath()%>/season/addSeason_excel.jsp" class="btn btn-primary blockUI">使用EXCEL建立完整賽季</a>
+				</nobr>
+				<br>
+				
 		        <table class="table table-bordered" id="seasonList">
-
 		            <thead>
 			            <tr>
 			                <td>賽季名稱</td>
@@ -72,7 +79,7 @@
 			        <tbody>
 			        	<c:forEach var="sVO" items="${seasonSvc.all}">
 			        		<tr>
-			        			<td><a class="blockUI" href="<%=request.getContextPath() %>/groups/groupList.mvc?seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
+			        			<td><a class="blockUI" href="<%=request.getContextPath() %>/groups/groupList_back.jsp?seasonID=${sVO.seasonID}">${sVO.seasonName}</a></td>
 			        			<td><fmt:formatDate value="${sVO.seasonBeginDate}" pattern="yyyy-MM-dd"/></td>
 			        			<td><fmt:formatDate value="${sVO.seasonEndDate}" pattern="yyyy-MM-dd"/></td>
 			        			<c:choose>
@@ -85,19 +92,32 @@
 			        					<td><fmt:formatDate value="${sVO.signUpEnd}" pattern="yyyy-MM-dd HH:mm"/></td>
 			        				</c:otherwise>
 			        			</c:choose>
+			        			<td>
+			        				<a href="<%=request.getContextPath() %>/season/updateSeason.jsp?seasonID=${sVO.seasonID}">
+			        					<input type="button" class="btn btn-warning updateData blockUI"value="修改">
+			        				</a>
+			        			</td>
+			        			<td>
+			        				<form action="<%=request.getContextPath() %>/Season.do" method="post">
+			        					<input type="submit" class="btn btn-danger blockUI" value="刪除">
+			        					<input type="hidden" name="action" value="DELETE_SEASON">
+			        					<input type="hidden" name="seasonID" value="${sVO.seasonID}">
+			        				</form>
+			        			</td>
 			        		</tr>
 			        	</c:forEach>
 			        </tbody>
 			    </table>
+			    <br><br><br><br>
 		    </div>
+		
+			<!-- 網頁內容END -->
 	    	<jsp:include page="/footer.jsp" />
-	    </div>
-	    </div>
+	    	</div>
+	    </div><!-- End of container -->
 	    
 	    
 	    <jsp:include page="/footer_css.jsp" />
-	    
-	    <script type="text/javascript" src="<%=request.getContextPath()%>/js/datatables.min.js"></script>
 	    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	    <%--遮罩插件 --%>  		
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-blockUI-1.33.js"></script>
@@ -109,51 +129,6 @@
 				$.blockUI({ message: '<h3>處理中，請稍候</h3><img src="<%=request.getContextPath()%>/images/loading01.gif">'});
 	    	})
 	    })
-	   
-
-
-// 	    $(document).ready(function() {
-// 	    	$('#seasonList').DataTable();
-	    	
-// 	    	var td_thead_over={'background-color':'#032f4f',
-// 	    					   'color': '#fff'};
-// 	    	var td_thead_out={'background-color':'#006bb6',
-// 	    		    		  'box-shadow': 'inset 0 20px 0 -16px #efaa10'};
-// 	    	$('#seasonList').children('thead').find('tr').css(td_thead_over);
-// 	    	$('#seasonList').children('thead').find('tr').mouseover(thead_over);
-// 	    	$('#seasonList').children('thead').find('tr').mouseout(thead_out);
-// 	    	function thead_over(){
-// 	    		$(this).css(td_thead_out);
-// 	    	}
-// 	    	function thead_out(){
-// 	    		$(this).css(td_thead_over);
-// 	    	}
-	    	
-	    	
-// 	    	var td_odd_over={'background-color':'rgba(237, 125, 49, 0.18)'};
-// 	    	var td_odd_out={'background-color':'rgba(202, 108, 44, 0.52)'};
-// 	    	var td_even_over={'background-color':'rgba(237, 125, 49, 0.41)'};
-// 	    	var td_even_out={'background-color':'rgba(223, 109, 32, 0.56)'};
-// 	    	$('#seasonList').children('tbody').find('tr:nth-child(odd)').css(td_odd_over);
-// 	    	$('#seasonList').children('tbody').find('tr:nth-child(odd)').mouseover(odd_over);
-// 	    	$('#seasonList').children('tbody').find('tr:nth-child(odd)').mouseout(odd_out);
-// 	    	$('#seasonList').children('tbody').find('tr:nth-child(even)').css(td_even_over);
-// 	    	$('#seasonList').children('tbody').find('tr:nth-child(even)').mouseover(even_over);
-// 	    	$('#seasonList').children('tbody').find('tr:nth-child(even)').mouseout(even_out);
-// 	    	function odd_over(){
-// 	    		$(this).css(td_odd_out);
-// 	    	}
-// 	    	function odd_out(){
-// 	    		$(this).css(td_odd_over);
-// 	    	}
-// 	    	function even_over(){
-// 	    		$(this).css(td_even_out);
-
-// 	    	}
-// 	    	function even_out(){
-// 	    		$(this).css(td_even_over); 
-// 	    	}
-// 	    	});
 	    </script>
     </body>
 
